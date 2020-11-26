@@ -2,10 +2,7 @@ package com.dalbit.clip.service;
 
 import com.dalbit.clip.dao.Cli_ClipHistoryDao;
 import com.dalbit.clip.vo.*;
-import com.dalbit.clip.vo.procedure.P_ClipHistoryDetailInfoEditHistoryVo;
-import com.dalbit.clip.vo.procedure.P_ClipHistoryDetailInfoEditVo;
-import com.dalbit.clip.vo.procedure.P_ClipHistoryDetailInfoInputVo;
-import com.dalbit.clip.vo.procedure.P_ClipHistoryDetailInfoOutPutVo;
+import com.dalbit.clip.vo.procedure.*;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
@@ -15,14 +12,17 @@ import com.dalbit.content.vo.procedure.P_pushInsertVo;
 import com.dalbit.member.dao.Mem_MemberDao;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.member.vo.procedure.P_MemberAdminMemoAddVo;
+import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Slf4j
 @Service
@@ -440,5 +440,45 @@ public class Cli_ClipHistoryService {
         ClipMemberSummaryVo outVo = cliClipHistoryDao.getClipListenMemberSummary(clipMemberSummaryVo);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, outVo));
+    }
+
+    /**
+     * 클립 저작권 청취내역 조회
+     */
+    public String callClipCopyright(P_ClipCopyrightInputVo pClipCopyrightInputVo) {
+        ProcedureVo procedureVo = new ProcedureVo(pClipCopyrightInputVo);
+        ArrayList<P_ClipCopyrightOutputVo> list = cliClipHistoryDao.callClipCopyright(procedureVo);
+        P_ClipCopyrightSummaryVo summaryVo = new Gson().fromJson(procedureVo.getExt(), P_ClipCopyrightSummaryVo.class);
+        String result;
+
+        HashMap copyrightList = new HashMap();
+        if(DalbitUtil.isEmpty(list) || list.size() == 0) {
+            copyrightList.put("list", new ArrayList<>());
+            copyrightList.put("summary", summaryVo);
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, copyrightList));
+        }
+        if(Integer.parseInt(procedureVo.getRet()) > 0) {
+            copyrightList.put("list", list);
+            copyrightList.put("summary", summaryVo);
+
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, copyrightList));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+
+        return result;
+    }
+
+    /**
+     * 클립 저작권 청취내역 커버 곡명(관리자), 커버 가수(관리자) 편집
+     */
+    public String updateClipCopyrightCover(ClipCopyrightUpdateVo clipCopyrightUpdateVo) {
+        int result = cliClipHistoryDao.updateClipCopyrightCover(clipCopyrightUpdateVo);
+
+        if(result > 0) {
+            return gsonUtil.toJson(new JsonOutputVo(Status.수정));
+        } else {
+            return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
     }
 }

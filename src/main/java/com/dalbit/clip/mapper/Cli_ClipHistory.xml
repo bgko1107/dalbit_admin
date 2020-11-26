@@ -525,4 +525,17 @@
                   AND listen.mem_no = #{memNo}
           ) a
     </select>
+
+    <!-- 클립 저작권 청취 내역 -->
+    <select id="callClipCopyright" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.clip.vo.procedure.P_ClipCopyrightOutputVo">
+        call rd_admin.sp_admin_clip_copyright(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <!-- 클립 저작권 청취내역 커버 곡명(관리자), 커버 가수(관리자) 편집 -->
+    <update id="updateClipCopyrightCover" parameterType="com.dalbit.clip.vo.ClipCopyrightUpdateVo">
+        update rd_data.tb_cast_room
+            set admin_cover_title = #{admin_cover_title}
+            , admin_cover_singer = #{admin_cover_singer}
+        where idx = #{idx}
+    </update>
 </mapper>

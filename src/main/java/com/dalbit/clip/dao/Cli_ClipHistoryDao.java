@@ -1,6 +1,7 @@
 package com.dalbit.clip.dao;
 
 import com.dalbit.clip.vo.*;
+import com.dalbit.clip.vo.procedure.P_ClipCopyrightOutputVo;
 import com.dalbit.clip.vo.procedure.P_ClipHistoryDetailInfoEditHistoryVo;
 import com.dalbit.common.vo.ProcedureVo;
 import org.springframework.stereotype.Repository;
@@ -66,4 +67,9 @@ public interface Cli_ClipHistoryDao {
 
     @Transactional(readOnly = true)
     ClipMemberSummaryVo getClipListenMemberSummary(ClipMemberSummaryVo clipMemberSummaryVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<P_ClipCopyrightOutputVo> callClipCopyright(ProcedureVo procedureVo);
+
+    int updateClipCopyrightCover(ClipCopyrightUpdateVo clipCopyrightUpdateVo);
 }

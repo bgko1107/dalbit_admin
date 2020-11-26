@@ -15,6 +15,7 @@
                         <li><a href="#listen" role="tab" data-toggle="tab" id="tab_listen">클립 청취내역</a></li>
                         <li><a href="#gift" role="tab" data-toggle="tab" id="tab_gift">클립 선물내역</a></li>
                         <li><a href="#remove" role="tab" data-toggle="tab" id="tab_remove">클립 삭제내역</a></li>
+                        <li><a href="#copyright" role="tab" data-toggle="tab" id="tab_copyright">저작권 청취내역</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3" id="headerInfo">
@@ -26,6 +27,7 @@
                     <div class="tab-pane fade" id="listen"><jsp:include page="listen.jsp"/></div>    <!-- 클립 청취 -->
                     <div class="tab-pane fade" id="gift"><jsp:include page="gift.jsp"/></div>    <!-- 클립 선물 -->
                     <div class="tab-pane fade" id="remove"><jsp:include page="remove.jsp"/></div>    <!-- 클립 삭제 -->
+                    <div class="tab-pane fade" id="copyright"><jsp:include page="copyright.jsp"/></div>    <!-- 저작권 청취 내역 -->
                 </div>
             </div>
         </div>
@@ -108,6 +110,8 @@
             $("._todaySearch").show();
             $("._nextSearch").show();
             $("#isChoiceDateArea").show();
+        }else if(tabId == 'tab_copyright'){
+            slctType = 3;
         }
         dateType();
 
@@ -131,6 +135,8 @@
             getHistoryGift();
         }else if(tabId == 'tab_remove'){
             getHistoryRemove();
+        }else if(tabId == 'tab_copyright') {
+            getHistoryCopyright();
         }
     });
 

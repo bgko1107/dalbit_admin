@@ -2,6 +2,7 @@ package com.dalbit.clip.controller.rest;
 
 import com.dalbit.clip.service.Cli_ClipHistoryService;
 import com.dalbit.clip.vo.*;
+import com.dalbit.clip.vo.procedure.P_ClipCopyrightInputVo;
 import com.dalbit.clip.vo.procedure.P_ClipHistoryDetailInfoEditHistoryVo;
 import com.dalbit.clip.vo.procedure.P_ClipHistoryDetailInfoEditVo;
 import com.dalbit.clip.vo.procedure.P_ClipHistoryDetailInfoInputVo;
@@ -183,6 +184,24 @@ public class Cli_ClipHistoryRestController {
     @PostMapping("listen/member/list/summary")
     public String getClipListenMemberSummary(ClipMemberSummaryVo clipMemberSummaryVo){
         String result = cliClipHistoryService.getClipListenMemberSummary(clipMemberSummaryVo);
+        return result;
+    }
+
+    /**
+     * 클립 저작권 청취내역 조회
+     */
+    @PostMapping("/copyright/list")
+    public String callClipCopyright(P_ClipCopyrightInputVo pClipCopyrightInputVo) {
+        String result = cliClipHistoryService.callClipCopyright(pClipCopyrightInputVo);
+        return result;
+    }
+
+    /**
+     * 클립 저작권 청취내역 커버 곡명(관리자), 커버 가수(관리자) 편집
+     */
+    @PostMapping("/copyright/cover/edit")
+    public String updateClipCopyrightCover(ClipCopyrightUpdateVo clipCopyrightUpdateVo) {
+        String result = cliClipHistoryService.updateClipCopyrightCover(clipCopyrightUpdateVo);
         return result;
     }
 
