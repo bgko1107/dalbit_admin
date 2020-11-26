@@ -246,3 +246,16 @@ var clip_reply_stateType_clipDetail = [
     , new COMMON_CODE('2', '2', '삭제')
 ]
 
+var clip_copyright_subjectType =[
+    new COMMON_CODE(null, 'subjectType', '클립 주제')
+    , new COMMON_CODE('1', '1', '커버/노래')
+    , new COMMON_CODE('2', '2', '작사/작곡')
+    , new COMMON_CODE('3', '3', '더빙')
+    , new COMMON_CODE('4', '4', '수다/대화')
+    , new COMMON_CODE('5', '5', '고민/사연')
+    , new COMMON_CODE('6', '6', '힐링')
+    , new COMMON_CODE('8', '8', 'ASMR')
+    , new COMMON_CODE('7', '7', '성우')
+    , new COMMON_CODE('9', '9', '연주')
+]
+
