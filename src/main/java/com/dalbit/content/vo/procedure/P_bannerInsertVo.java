@@ -4,11 +4,10 @@ import com.dalbit.common.vo.BaseVo;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 public class P_bannerInsertVo extends BaseVo {
+    private int idx;
     private String title;       		//배너제목
     private int view_type;           //배너구분(0:전체, 1:로그인, 2:비로그인)
     private int sex;         		//성별(0:전체, 1:남자, 2:여자, 3:알수없음)

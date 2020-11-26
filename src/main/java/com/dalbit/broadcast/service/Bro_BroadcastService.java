@@ -145,11 +145,11 @@ public class Bro_BroadcastService {
 
         String[] headers = {"No", "방송주제", "방송제목", "프로필이미지", "태그부분"
                             , "DJID", "User 닉네임", "방송시작일시", "방송종료일시" , "진행시간"
-                            , "실시간청취자", "누적청취자","좋아요", "부스터", "선물", "팬수"
+                            , "실시간청취자", "누적청취자","좋아요", "부스터", "선물", "받은 별", "사연", "팬수"
                             , "강제퇴장", "방송연장", "이어하기"};
         int[] headerWidths = {3000, 3000, 6000, 6000, 6000
                             , 6000, 6000, 6000, 6000, 3000
-                            , 3000, 3000, 3000, 3000, 3000, 3000
+                            , 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000
                             , 3000, 3000, 3000};
 
         List<Object[]> bodies = new ArrayList<>();
@@ -175,6 +175,8 @@ public class Bro_BroadcastService {
             hm.put("mem16", DalbitUtil.isEmpty(list.get(i).getGoodCnt()) ? "" : list.get(i).getGoodCnt());
             hm.put("mem17", DalbitUtil.isEmpty(list.get(i).getBoosterCnt()) ? "" : list.get(i).getBoosterCnt());
             hm.put("mem18", DalbitUtil.isEmpty(list.get(i).getGiftCnt()) ? "" : list.get(i).getGiftCnt());
+            hm.put("mem18_1", DalbitUtil.isEmpty(list.get(i).getByeolCnt()) ? "" : list.get(i).getByeolCnt());
+            hm.put("mem19_1", DalbitUtil.isEmpty(list.get(i).getStoryCnt()) ? "" : list.get(i).getStoryCnt());
             hm.put("mem19", DalbitUtil.isEmpty(list.get(i).getFanCnt()) ? "" : list.get(i).getFanCnt());
             hm.put("mem20", DalbitUtil.isEmpty(list.get(i).getForcedCnt()) ? "" : list.get(i).getForcedCnt());
             hm.put("mem21", DalbitUtil.isEmpty(list.get(i).getExtend_time_count()) ? "" : list.get(i).getExtend_time_count());

@@ -698,3 +698,27 @@ var content_scheduleWeekTime = [
     , new COMMON_CODE('0', '0', '종일')
     , new COMMON_CODE('1', '1', '시간 선택')
 ];
+
+//타임이벤트
+var time_event_event_time = [
+    new COMMON_CODE(null, 'event_time', '이벤트 시간')
+    , new COMMON_CODE('60', '60', '1시간')
+    , new COMMON_CODE('30', '30', '30분')
+];
+
+var time_event_rate = [
+    new COMMON_CODE(null, 'rate', '지급 비율')
+    , new COMMON_CODE('5', '5', '5%')
+    , new COMMON_CODE('3', '3', '3%')
+];
+
+var time_event_rate = [
+    new COMMON_CODE(null, 'rate', '지급 비율')
+    , new COMMON_CODE('5', '5', '5%')
+    , new COMMON_CODE('3', '3', '3%')
+];
+
+var time_event_link_yn = [
+    new COMMON_CODE(null, 'rate', '링크적용여부')
+    , new COMMON_CODE('1', '1', '링크 적용')
+];
