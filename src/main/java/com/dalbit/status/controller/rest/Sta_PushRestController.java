@@ -2,6 +2,7 @@ package com.dalbit.status.controller.rest;
 
 import com.dalbit.status.service.Sta_PushService;
 import com.dalbit.status.vo.procedure.P_PushHistoryInputVo;
+import com.dalbit.status.vo.procedure.P_PushStatusInPutVo;
 import com.dalbit.status.vo.procedure.P_StatVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
@@ -74,4 +75,70 @@ public class Sta_PushRestController {
         return result;
     }
 
+
+    /**
+     * push 현황 시간대 현황
+     * @param pPushStatusInPutVo
+     * @return
+     */
+    @PostMapping("time")
+    public String pushTime(P_PushStatusInPutVo pPushStatusInPutVo){
+        String result = sta_PushService.callPushTime(pPushStatusInPutVo);
+        return result;
+    }
+
+    /**
+     * push 현황 일별 현황
+     * @param pPushStatusInPutVo
+     * @return
+     */
+    @PostMapping("day")
+    public String pushDay(P_PushStatusInPutVo pPushStatusInPutVo){
+        String result = sta_PushService.callPushDay(pPushStatusInPutVo);
+        return result;
+    }
+
+    /**
+     * push 현황 월간 현황
+     * @param pPushStatusInPutVo
+     * @return
+     */
+    @PostMapping("month")
+    public String pushMonth(P_PushStatusInPutVo pPushStatusInPutVo){
+        String result = sta_PushService.callPushMonth(pPushStatusInPutVo);
+        return result;
+    }
+
+    /**
+     * push 현황 연간 현황
+     * @param pPushStatusInPutVo
+     * @return
+     */
+    @PostMapping("year")
+    public String pushYear(P_PushStatusInPutVo pPushStatusInPutVo){
+        String result = sta_PushService.callPushYear(pPushStatusInPutVo);
+        return result;
+    }
+
+    /**
+     * push 수신 걸정 현황 현황
+     * @param pPushStatusInPutVo
+     * @return
+     */
+    @PostMapping("newNotice")
+    public String newNotice(P_PushStatusInPutVo pPushStatusInPutVo){
+        String result = sta_PushService.callNewNotice(pPushStatusInPutVo);
+        return result;
+    }
+
+    /**
+     * push 일간 상게 목록
+     * @param pPushStatusInPutVo
+     * @return
+     */
+    @PostMapping("day/detail/popup")
+    public String dayDetailPopup(P_PushStatusInPutVo pPushStatusInPutVo){
+        String result = sta_PushService.callDayDetailPopup(pPushStatusInPutVo);
+        return result;
+    }
 }

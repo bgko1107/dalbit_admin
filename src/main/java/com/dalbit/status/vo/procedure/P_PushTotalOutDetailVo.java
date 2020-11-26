@@ -17,21 +17,22 @@ public class P_PushTotalOutDetailVo{
     private String month;
     private String day;
     private String year;
-    private String male_send_cnt;
-    private String male_succ_cnt;
-    private String male_fail_cnt;
-    private String male_succ_rate;
-    private String female_send_cnt;
-    private String female_succ_cnt;
-    private String female_succ_rate;
-    private String none_send_cnt;
-    private String none_succ_cnt;
-    private String none_fail_cnt;
-    private String none_succ_rate;
-    private String total_send_cnt;
-    private String total_succ_cnt;
-    private String total_fail_cnt;
-    private String total_succ_rate;
+    private int male_send_cnt;
+    private int male_succ_cnt;
+    private int male_fail_cnt;
+    private int male_succ_rate;
+    private int female_send_cnt;
+    private int female_succ_cnt;
+    private int female_succ_rate;
+    private int none_send_cnt;
+    private int none_succ_cnt;
+    private int none_fail_cnt;
+    private int none_succ_rate;
+    private int total_send_cnt;
+    private int total_succ_cnt;
+    private int accum_total_succ_cnt;
+    private int total_fail_cnt;
+    private int total_succ_rate;
 }
 
 

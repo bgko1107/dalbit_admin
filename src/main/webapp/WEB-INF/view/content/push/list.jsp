@@ -26,8 +26,26 @@
         </form>
         <!-- //serachBox -->
 
-        <div id="headerTab">
-            <div id="pushList"><jsp:include page="/WEB-INF/view/content/push/pushList.jsp"/></div>          <!-- 푸시 -->
+        <div class="row col-lg-12 form-inline" style="padding-top: 2px; padding-bottom: 0px;">
+            <div class="widget-content">
+                <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
+                    <li><a href="/status/newPush/info?tabType=0" id="tab_time">시간대 현황</a></li>
+                    <li><a href="/status/newPush/info?tabType=1" id="tab_day">일별 현황</a></li>
+                    <li><a href="/status/newPush/info?tabType=2" id="tab_month">월간 현황</a></li>
+                    <li><a href="/status/newPush/info?tabType=3" id="tab_year">연간 현황</a></li>
+                    <li><a href="/status/newPush/info?tabType=4" id="tab_notice">알림 수신 설정현황</a></li>
+                    <li><a href="/status/newPush/info?tabType=5" id="tab_history">Push발송내역</a></li>
+                    <li class="active"><a href="#push" role="tab" data-toggle="tab" id="tab_push">알림/Push 운영자 직접발송</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <div id="headerTab">
+                        <div class="tab-pane fade in active" id="push">
+                            <div id="pushList"><jsp:include page="/WEB-INF/view/content/push/pushList.jsp"/></div>          <!-- 푸시 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
