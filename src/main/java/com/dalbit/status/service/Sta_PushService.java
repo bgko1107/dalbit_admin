@@ -187,7 +187,6 @@ public class Sta_PushService {
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
     }
 
-
     public String callPushMonth(P_PushStatusInPutVo pPushStatusInPutVo){
         String startDate = pPushStatusInPutVo.getStartDate();
         String endDate = pPushStatusInPutVo.getEndDate();
@@ -390,6 +389,20 @@ public class Sta_PushService {
         }
         var result = new HashMap<String, Object>();
         result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
+
+    public String callDayDetailPopup(P_PushStatusInPutVo pPushStatusInPutVo){
+        ProcedureVo procedureVo = new ProcedureVo(pPushStatusInPutVo);
+        sta_PushDao.callDayDetailPopup(procedureVo);
+
+        P_PushStatusOutVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_PushStatusOutVo.class);
+//        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+//            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+//        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
     }

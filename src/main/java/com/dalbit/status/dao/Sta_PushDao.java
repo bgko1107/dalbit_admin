@@ -34,5 +34,7 @@ public interface Sta_PushDao {
 
     @Transactional(readOnly = true)
     ArrayList<P_PushStatusOutPutVo> callPushStatus(ProcedureVo procedureVo);
+    @Transactional(readOnly = true)
+    P_PushStatusOutVo callDayDetailPopup(ProcedureVo procedureVo);
 
 }

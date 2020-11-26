@@ -130,4 +130,15 @@ public class Sta_PushRestController {
         String result = sta_PushService.callNewNotice(pPushStatusInPutVo);
         return result;
     }
+
+    /**
+     * push 일간 상게 목록
+     * @param pPushStatusInPutVo
+     * @return
+     */
+    @PostMapping("day/detail/popup")
+    public String dayDetailPopup(P_PushStatusInPutVo pPushStatusInPutVo){
+        String result = sta_PushService.callDayDetailPopup(pPushStatusInPutVo);
+        return result;
+    }
 }

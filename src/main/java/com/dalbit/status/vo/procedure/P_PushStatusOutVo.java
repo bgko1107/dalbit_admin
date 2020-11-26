@@ -109,6 +109,16 @@ public class P_PushStatusOutVo {
     private int bnoneAlim_n;
     private int btotalAlim_n;
 
+    /*popup data*/
+    private int sendmCnt;
+    private int sendfCnt;
+    private int sendnCnt;
+    private int succmCnt;
+    private int succfCnt;
+    private int succnCnt;
+    private int failmCnt;
+    private int failfCnt;
+    private int failnCnt;
 
 
 }
