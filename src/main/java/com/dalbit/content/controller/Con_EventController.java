@@ -79,4 +79,9 @@ public class Con_EventController {
     public String rouletteGiftconList() {
         return "content/event/roulette/giftManage";
     }
+
+    @GetMapping("time/timeList")
+    public String timeEventList() {
+        return "content/event/time/timeList";
+    }
 }

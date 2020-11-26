@@ -104,8 +104,11 @@
     </select>
 
     <insert id="callContentsBannerAdd" parameterType="com.dalbit.content.vo.procedure.P_bannerInsertVo">
-          /* Con_BannerDao.xml - callContentsBannerAdd */
-          INSERT INTO rd_admin.tb_admin_banner
+        /* Con_BannerDao.xml - callContentsBannerAdd */
+        <selectKey resultType="int" keyProperty="idx" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO rd_admin.tb_admin_banner
           (
                 title
                 ,view_type

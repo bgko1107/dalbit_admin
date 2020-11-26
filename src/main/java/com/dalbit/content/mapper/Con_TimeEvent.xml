@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dalbit.content.dao.Con_TimeEventDao" >
+
+    <select id="selectTimeList" parameterType="com.dalbit.content.vo.TimeEventVo" resultType="com.dalbit.content.vo.TimeEventVo">
+        /* Con_TimeEventDao.xml - selectTimeList */
+        select
+            @rownum := @rownum + 1 as rowNum
+            , idx
+            , date_format(start_date,'%Y-%m-%d %H:%i') start_date
+            , date_format(end_date,'%Y-%m-%d %H:%i') end_date
+            , event_time
+            , rate
+            , date_format(reg_date,'%Y-%m-%d %H:%i') reg_date
+            , pay_cnt
+            , pay_cmt
+            , pay_amt
+            , pay_dal
+            , event_dal
+            , `state`
+        from rd_data.tbl_time_event
+            , (select @rownum := 0 ) rowNum
+        where `state` != 2
+        order by idx desc
+    </select>
+
+    <select id="selectTimeListCnt" parameterType="com.dalbit.content.vo.TimeEventVo" resultType="integer">
+        /* Con_TimeEventDao.xml - selectTimeListCnt */
+        select
+          count(*)
+        from rd_data.tbl_time_event
+        where `state` != 2
+    </select>
+
+    <select id="selectTimeDetail" parameterType="com.dalbit.content.vo.TimeEventVo" resultType="com.dalbit.content.vo.TimeEventVo">
+        /* Con_TimeEventDao.xml - selectTimeList */
+        select
+            event.idx
+            , date_format(event.start_date,'%Y-%m-%d %H:%i') as start_date
+            , date_format(event.end_date,'%Y-%m-%d %H:%i') as end_date
+            , event.event_time
+            , event.rate
+            , date_format(event.reg_date,'%Y-%m-%d %H:%i') as reg_date
+            , event.pay_cnt
+            , event.pay_cmt
+            , event.pay_amt
+            , event.pay_dal
+            , event.event_dal
+            , event.state
+
+            , main_top_banner_idx
+            , 0 <![CDATA[<]]> ifnull(length(top_banner.pc_img_url), 0) as main_top_banner_link_yn
+            , top_banner.platform
+            , top_banner.ios_judge_view_on
+            , top_banner.pc_img_url as main_top_pc_image_url
+            , top_banner.mobile_img_url as main_top_mobile_image_url
+            , top_banner.pc_link_url as main_top_pc_link_url
+            , top_banner.mobile_link_url as main_top_mobile_link_url
+
+            , main_center_banner_idx
+            , 0 <![CDATA[<]]> ifnull(length(center_banner.pc_img_url), 0) as main_center_banner_link_yn
+            , center_banner.pc_img_url as main_center_pc_image_url
+            , center_banner.mobile_img_url as main_center_mobile_image_url
+            , center_banner.pc_link_url as main_center_pc_link_url
+            , center_banner.mobile_link_url as main_center_mobile_link_url
+
+            , store_banner_idx
+            , 0 <![CDATA[<]]> ifnull(length(store_banner.pc_img_url), 0) as store_banner_link_yn
+            , store_banner.pc_img_url as store_pc_image_url
+            , store_banner.mobile_img_url as store_mobile_image_url
+            , store_banner.pc_link_url as store_pc_link_url
+            , store_banner.mobile_link_url as store_mobile_link_url
+
+            , ifnull(ifnull(top_banner.pc_link_url, center_banner.pc_link_url), store_banner.pc_link_url) as pc_link_url
+            , ifnull(ifnull(top_banner.mobile_link_url, center_banner.mobile_link_url), store_banner.mobile_link_url) as mobile_link_url
+
+        from rd_data.tbl_time_event event
+            left join rd_admin.tb_admin_banner top_banner on event.main_top_banner_idx = top_banner.idx
+            left join rd_admin.tb_admin_banner center_banner on event.main_top_banner_idx = center_banner.idx
+            left join rd_admin.tb_admin_banner store_banner on event.main_top_banner_idx = store_banner.idx
+        where event.idx = #{idx}
+    </select>
+
+    <insert id="insertTimeEvent" parameterType="com.dalbit.content.vo.TimeEventVo">
+        /* Con_TimeEventDao.xml - insertTimeEvent */
+        insert into rd_data.tbl_time_event (
+            start_date
+            , end_date
+            , event_time
+            , rate
+            , pay_cnt
+            , pay_cmt
+            , pay_amt
+            , pay_dal
+            , event_dal
+            , view_yn
+            , reg_date
+            , op_name
+            , main_top_banner_idx
+            , main_top_banner_link_yn
+            , main_center_banner_idx
+            , main_center_banner_link_yn
+            , store_banner_idx
+            , store_banner_link_yn
+            , `state`
+        ) values (
+            #{start_date}
+            , #{end_date}
+            , #{event_time}
+            , #{rate}
+            , #{pay_cnt}
+            , #{pay_cmt}
+            , #{pay_amt}
+            , #{pay_dal}
+            , #{event_dal}
+            , #{view_yn}
+            , now()
+            , #{op_name}
+            , #{main_top_banner_idx}
+            , #{main_top_banner_link_yn}
+            , #{main_center_banner_idx}
+            , #{main_center_banner_link_yn}
+            , #{store_banner_idx}
+            , #{store_banner_link_yn}
+            , #{state}
+        )
+    </insert>
+</mapper>
+
+
