@@ -448,7 +448,7 @@
             var data = {};
             data.mem_no = mem_no;
             data.room_no = room_no;
-            util.getAjaxData("forcedEnd", "/rest/member/broadcast/forcedEnd",data, forced_success);
+            util.getAjaxData("forcedEnd", "/rest/member/broadcast/forcedEnd_room",data, forced_success);
         }else return false
     }
     function forced_success(dst_id, response) {

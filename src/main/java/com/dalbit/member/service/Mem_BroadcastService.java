@@ -130,4 +130,46 @@ public class Mem_BroadcastService {
 
         return result;
     }
+
+    /**
+     * 회원 방송 강제 종료
+     */
+    public String forcedEnd_room(MemberVo MemberVo) {
+        String room_no;
+        String forceExitResult ="";
+        //for (int i=0; i<list.size();i++) {
+            room_no = "91606363992391";
+            // 방송 시작시간
+            P_MemberBroadcastInputVo pMemberBroadcastInputVo = new P_MemberBroadcastInputVo();
+            pMemberBroadcastInputVo.setRoom_no(room_no);
+            ProcedureVo procedureVo2 = new ProcedureVo(pMemberBroadcastInputVo);
+            bro_BroadcastDao.callBroadcastInfo(procedureVo2);
+
+            P_BroadcastDetailOutputVo broadcastDetail = new Gson().fromJson(procedureVo2.getExt(), P_BroadcastDetailOutputVo.class);
+
+            // 방송 강제종료 api 호출
+            P_BroadcastEditInputVo pBroadcastEditInputVo = new P_BroadcastEditInputVo();
+            pBroadcastEditInputVo.setMem_no(MemberVo.getMem_no());
+            pBroadcastEditInputVo.setRoom_no(room_no);
+            pBroadcastEditInputVo.setStart_date(broadcastDetail.getStartDate());
+            pBroadcastEditInputVo.setOpName(MemberVo.getMyMemNo());
+            pBroadcastEditInputVo.setRoomExit("Y");
+            forceExitResult = DalbitUtil.broadcastForceExit(pBroadcastEditInputVo);
+            log.info(forceExitResult);
+            /*if(forceExitResult.equals("error") || forceExitResult.equals("noAuth")){
+                break;
+            }*/
+        //}
+
+        String result;
+        if(forceExitResult.equals("error")){
+            return gsonUtil.toJson(new JsonOutputVo(Status.회원방송강제종료시도_실패));
+        }else if (forceExitResult.equals("noAuth")){
+            return gsonUtil.toJson(new JsonOutputVo(Status.회원방송강제종료시도_권한없음));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.회원방송강제종료시도_성공));
+        }
+
+        return result;
+    }
 }
