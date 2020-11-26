@@ -3,10 +3,7 @@ package com.dalbit.status.dao;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.vo.procedure.P_pushDetailOutputVo;
 import com.dalbit.member.vo.procedure.P_MemberListOutputVo;
-import com.dalbit.status.vo.procedure.P_NoticeOutDetailVo;
-import com.dalbit.status.vo.procedure.P_PushHistoryInputVo;
-import com.dalbit.status.vo.procedure.P_PushHistoryOutputVo;
-import com.dalbit.status.vo.procedure.P_PushTotalOutDetailVo;
+import com.dalbit.status.vo.procedure.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,4 +30,9 @@ public interface Sta_PushDao {
     P_pushDetailOutputVo callPushHistoryDetail(P_PushHistoryInputVo pPushHistoryInputVo);
     @Transactional(readOnly = true)
     List<P_MemberListOutputVo> selectTargetMemInfo(P_PushHistoryInputVo pPushHistoryInputVo);
+
+
+    @Transactional(readOnly = true)
+    ArrayList<P_PushStatusOutPutVo> callPushStatus(ProcedureVo procedureVo);
+
 }

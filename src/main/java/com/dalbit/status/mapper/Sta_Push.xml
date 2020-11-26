@@ -120,6 +120,7 @@
                 ,history.admin_idx
                 ,history.ins_date
                 ,history.last_upd_date
+                ,ifnull(admin.op_name,'자동') AS opName
             FROM
                 rd_stmp.smtp_push_history AS history
             LEFT JOIN
@@ -144,25 +145,23 @@
                 <if test='push_slct != null and push_slct != "" and push_slct != "-1"'>
                     AND history.push_slct = #{push_slct}
                 </if>
+
+                <if test='push_send_user == "1"'>
+                  AND admin.op_name is not null
+                </if>
+                <if test='push_send_user == "2"'>
+                  AND admin.op_name is null
+                </if>
             </where>
         ) AS a,
         (select @rownum := #{pageStart}) AS b
         <where>
             <if test='searchText != null and searchText != ""'>
-                <choose>
-                    <when test='searchType == 1'>
-                        AND a.send_title like concat ('%', #{searchText}, '%')
-                    </when>
-                    <when test='searchType == 2'>
-                        AND a.send_cont like concat ('%', #{searchText}, '%')
-                    </when>
-                    <when test='searchType == 3'>
-                        AND (a.mem_no like concat ('%', #{searchText}, '%') OR a.mem_nick like concat ('%', #{searchText}, '%'))
-                    </when>
-                    <otherwise>
-                        AND (a.send_title like concat ('%', #{searchText}, '%') OR a.send_cont like concat ('%', #{searchText}, '%') OR (a.mem_no like concat ('%', #{searchText}, '%') OR a.mem_nick like concat ('%', #{searchText}, '%')))
-                    </otherwise>
-                </choose>
+                    AND (a.send_title like concat ('%', #{searchText}, '%')
+                        OR a.send_cont like concat ('%', #{searchText}, '%')
+                        OR (a.mem_no like concat ('%', #{searchText}, '%')
+                        OR a.mem_nick like concat ('%', #{searchText}, '%'))
+                        OR ifnull(admin.op_name,'자동') like like concat ('%', #{searchText}, '%'))
             </if>
         </where>
         <trim prefix="ORDER BY">
@@ -311,6 +310,13 @@
                 push.mem_no = mem.mem_no
             WHERE
                 push.idx = #{idx}
+    </select>
+
+
+
+    <select id="callPushStatus" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.status.vo.procedure.P_PushStatusOutPutVo">
+        /* Sta_Push.xml - callPushStatus */
+        call rd_admin.sp_admin_stat_push_time(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
 </mapper>

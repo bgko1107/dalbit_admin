@@ -57,6 +57,7 @@ var PushDataTableSource = {
             ,{'title': '클릭율', 'data' : 'click_rate', 'render' : function(data, type, row, meta){
                     return data + "%";
                 }}
+            ,{'title': '발송자', 'data' : 'opName'}
         ]
     },
 }

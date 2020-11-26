@@ -1,0 +1,69 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+</style>
+
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="row col-lg-12 form-inline" style="padding-top: 2px; padding-bottom: 0px;">
+            <div class="widget-content">
+                <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
+                    <li class="active"><a href="#time" role="tab" data-toggle="tab" id="tab_time">시간대 현황</a></li>
+                    <li><a href="#day" role="tab" data-toggle="tab" id="tab_day">일별 현황</a></li>
+                    <li><a href="#month" role="tab" data-toggle="tab" id="tab_month">월간 현황</a></li>
+                    <li><a href="#year" role="tab" data-toggle="tab" id="tab_year">연간 현황</a></li>
+                    <li><a href="#notice" role="tab" data-toggle="tab" id="tab_notice">알림 수신 설정현황</a></li>
+                    <li><a href="#history" role="tab" data-toggle="tab" id="tab_history">Push발송내역</a></li>
+                    <li><a href="/content/push/list" id="tab_push">알림/Push 운영자 직접발송</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="time"><jsp:include page="time.jsp"/></div>
+                    <div class="tab-pane fade" id="day"><jsp:include page="day.jsp"/></div>
+                    <div class="tab-pane fade" id="month"><jsp:include page="month.jsp"/></div>
+                    <div class="tab-pane fade" id="year"><jsp:include page="year.jsp"/></div>
+                    <div class="tab-pane fade" id="notice"><jsp:include page="notice.jsp"/></div>
+                    <div class="tab-pane fade" id="history"><jsp:include page="history.jsp"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+<script type="text/javascript">
+    var tabId = 'tab_time';
+    $("#tablist_con li a").on('click', function(){
+        tabId = $(this).prop('id');
+        $("#searchText").hide();
+        if(tabId == 'tab_time' || tabId == 'tab_history'){
+            slctType = 0;
+            if(tabId == 'tab_history'){
+                $("#searchText").show();
+            }
+        }else if(tabId == 'tab_day' || tabId == 'tab_month' || tabId == 'tab_notice'){
+            slctType = 1;
+        }else if(tabId == 'tab_year'){
+            slctType = 2;
+        }
+
+        dateType(slctType);
+    });
+
+    $("#bt_search").on('click', function(){
+        if(tabId == 'tab_time') {
+            getTotal();
+        }else if(tabId == 'tab_day'){
+            getDay();
+        }else if(tabId == 'tab_month'){
+            getMonth();
+        }else if(tabId == 'tab_year'){
+            getYear();
+        }else if(tabId == 'tab_notice'){
+            getNotice();
+        }else if(tabId == 'tab_history'){
+            getHistory();
+        }
+    });
+</script>

@@ -65,11 +65,11 @@
     }
 
     function monthClick(id, paramYear, paramMonth, paramDay){
-        console.log("----------------- monthClick");
-        console.log(id);
-        console.log(paramYear);
-        console.log(paramMonth);
-        console.log(paramDay);
+        // console.log("----------------- monthClick");
+        // console.log(id);
+        // console.log(paramYear);
+        // console.log(paramMonth);
+        // console.log(paramDay);
 
          $(".dayButton").empty();
         year = paramYear;
@@ -98,12 +98,12 @@
     }
 
     function dayClick(id, paramYear, paramMonth, paramDay){
-        console.log("----------------- dayClick");
-        console.log(id);
-        console.log(paramYear);
-        console.log(paramMonth);
-        console.log(paramDay);
-        console.log(day);
+        // console.log("----------------- dayClick");
+        // console.log(id);
+        // console.log(paramYear);
+        // console.log(paramMonth);
+        // console.log(paramDay);
+        // console.log(day);
 
         var lastDay = new Date(paramYear,paramMonth,-1).getDate() + 1;
 

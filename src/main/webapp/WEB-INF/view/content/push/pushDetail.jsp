@@ -753,8 +753,8 @@
     <div class="row col-md-12">
         <div class="row col-md-12" style="padding-bottom: 15px">
             <div class="pull-left">
-                ㆍ <b>*</b> 는 필수 입력사항 입니다. <br>
-                ㆍ 발송 상태를 확인하시고 미발송 또는 발송오류 시 해당 정보가 맞는지 확인한 후 수정완료를 하시면 재발송이 가능합니다.
+                ㆍ알림/Push 발송 내역에서 메시지 내용을 선택하시면 해당 발송 정보를 확인할 수 있고,<br/>
+                ㆍ[재발송]버튼을 통해 해당 동일 정보로 재발송 할 수 있습니다.
             </div>
             <div class="pull-right">
                 {{^push_idx}}<button class="btn btn-default" type="button" id="insertBtn">등록하기</button>{{/push_idx}}
