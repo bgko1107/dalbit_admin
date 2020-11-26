@@ -78,8 +78,8 @@
 
                 from rd_data.tb_log_error_data
                 <include refid="condition"/>
-                order by idx desc
             )a, (select @RNUM := #{pageStart}) r
+        order by idx desc
         limit #{pageStart}, #{pageCnt}
 
     </select>
