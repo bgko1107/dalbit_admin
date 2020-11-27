@@ -18,7 +18,7 @@
                 <th colspan="4" class="_sex_male">남성</th>
                 <th colspan="4" class="_sex_female">여성</th>
                 <th colspan="4" class="_sex_none">알수없음</th>
-                <th colspan="5">합계</th>
+                <th colspan="4">합계</th>
             </tr>
 
             <tr class="_stateSubTh">
@@ -36,7 +36,7 @@
                 <th>성공율</th>
                 <th>발송건수</th>
                 <th>성공건수</th>
-                <th>성공누적건수</th>
+                <%--<th>성공누적건수</th>--%>
                 <th>실패건수</th>
                 <th>성공율</th>
             </tr>
@@ -229,7 +229,7 @@
         <td>{{sum_none_succ_rate}}%</td>
         <td>{{addComma sum_total_send_cnt}}</td>
         <td>{{addComma sum_total_succ_cnt}}</td>
-        <td>{{addComma sum_total_succ_cnt}}</td>
+        <%--<td>{{addComma sum_total_succ_cnt}}</td>--%>
         <td>{{addComma sum_total_fail_cnt}}</td>
         <td>{{sum_total_succ_rate}}%</td>
     </tr>
@@ -261,7 +261,7 @@
         <td>{{none_succ_rate}}%</td>
         <td>{{addComma total_send_cnt}}</td>
         <td>{{addComma total_succ_cnt}}</td>
-        <td>{{addComma accum_total_succ_cnt}}</td>
+        <%--<td>{{addComma accum_total_succ_cnt}}</td>--%>
         <td>{{addComma total_fail_cnt}}</td>
         <td>{{total_succ_rate}}%</td>
     </tr>
