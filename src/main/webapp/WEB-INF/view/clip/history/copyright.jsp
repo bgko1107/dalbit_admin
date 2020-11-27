@@ -6,12 +6,16 @@
     <div class="widget-content mt10">
         <span class="_searchDate" style="display: none;"></span>
 
-        <span id="search_clipStateType" name="search_clipStateType" class="pull-left ml5"></span>
-        <select id="search_clipSubjectType" name="search_clipSubjectType" class="form-control pull-left ml5"></select>
-        <span id="search_clipOrderByType" name="search_clipOrderByType" class="pull-left ml5"></span>
+        <div class="row  col-lg-12 mb10">
+            <span id="search_clipStateType" name="search_clipStateType" class="pull-left ml5"></span>
+            <select id="search_clipSubjectType" name="search_clipSubjectType" class="form-control pull-left ml5"></select>
+            <span id="search_clipOrderByType" name="search_clipOrderByType" class="pull-left ml5"></span>
+        </div>
+        <div class="row  col-lg-12">
             <div class="dataTables_paginate paging_full_numbers" id="copyrightList_paginate_top"></div>
-                <div id="clipCopyrightList"></div>
+            <div id="clipCopyrightList"></div>
             <div class="dataTables_paginate paging_full_numbers" id="copyrightList_paginate"></div>
+        </div>
     </div>
     <div class="widget-footer">
         <span>
@@ -34,9 +38,6 @@
         beforeClipSubjectType = $("#search_clipSubjectType").val();
         beforeOrderByType = $("#orderByType").val();
 
-        console.log($("#stateType_select").val())
-        console.log($("#search_clipSubjectType").val())
-        console.log($("#orderByType").val())
         initDataTable_clipCopyright();
     });
 
@@ -45,7 +46,7 @@
 
     function getHistoryCopyright() {
 
-        $("#search_clipStateType").html(util.getCommonCodeSelect(beforeClipStateType, clip_stateType_select, 'N', 'stateType_select'));
+        $("#search_clipStateType").html(util.getCommonCodeSelect(beforeClipStateType, clip_copyright_searchStateType, 'N', 'stateType_select'));
         $("#search_clipOrderByType").html(util.getCommonCodeSelect(beforeOrderByType, clip_orderByType, 'N', 'orderByType'));
         getClipSubjectCodeDefine();
 
@@ -65,11 +66,11 @@
 
     function initDataTable_clipCopyright() {
         var data = {
-            searchDate : '2020-10-10 00:00:00'
+            searchDate : moment($('#startDate').val()).format("YYYY-MM-01")
             , stateType : Number($("#stateType_select").val())
             , subjectType : Number(common.isEmpty($("#search_clipSubjectType").val()) ? "-1" : $("#search_clipSubjectType").val())
             , orderType : Number($("#orderByType").val())
-            , inner : 1
+            , inner : 1 // todo - 기획서에 inner조건이 없으나, 프로시저에는 검색 조건에 있어서 추가해두었습니다.
             , pageNo : copyrightPagingInfo.pageNo
             , pageCnt : copyrightPagingInfo.pageCnt
         }
@@ -217,10 +218,10 @@
                 <td>{{convertToDate regDate "YYYY-MM-DD"}}</td>
                 <td>{{userCoverTitle}}</td>
                 <td>{{userCoverSinger}}</td>
-                <td><input type="text" class="form-control" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" /></td>
-                <td><input type="text" class="form-control" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" /></td>
+                <td><input type="text" class="form-control" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" maxlength="50" /></td>
+                <td><input type="text" class="form-control" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" maxlength="50" /></td>
                 <td><button type="button" class="_adminCover btn btn-primary" data-idx="{{clipIdx}}">저장</button></td>
-                <td><a href="javascript://" class="_openClipDetailPop" data-clipno="{{cast_no}}">{{addComma playCnt}}</a></td>
+                <td><a href="javascript://" class="_openClipCopyrightDetailPop" data-clipno="{{cast_no}}">{{addComma playCnt}}</a></td>
                 <td>
                     {{#dalbit_if state '==' '1'}} 정상
                         {{#equal ../hide '1'}} (숨김) {{/equal}}

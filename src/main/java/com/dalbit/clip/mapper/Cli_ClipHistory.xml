@@ -538,4 +538,9 @@
             , admin_cover_singer = #{admin_cover_singer}
         where idx = #{idx}
     </update>
+
+    <!-- 클립 저작권 청취 내역 상세보기 -->
+    <select id="callClipCopyrightDetail" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.clip.vo.procedure.P_ClipCopyrightDetailOutputVo">
+        call rd_admin.sp_admin_clip_copyright_detail(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
 </mapper>

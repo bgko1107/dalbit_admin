@@ -24,4 +24,9 @@ public class Cli_ClipHistoryController {
     public String clipInfoPopup() {
         return "clip/detail/info";
     }
+
+    @GetMapping("/popup/clipCopyrightDetailPopup")
+    public String clipPlayCntInfoPopup() {
+        return "clip/popup/copyrightDetailPopup";
+    }
 }
