@@ -244,9 +244,9 @@ var clip_reply_stateType_clipDetail = [
     new COMMON_CODE(null, 'stateType', '공개여부')
     , new COMMON_CODE('1', '1', '정상')
     , new COMMON_CODE('2', '2', '삭제')
-]
+];
 
-var clip_copyright_subjectType =[
+var clip_copyright_subjectType = [
     new COMMON_CODE(null, 'subjectType', '클립 주제')
     , new COMMON_CODE('1', '1', '커버/노래')
     , new COMMON_CODE('2', '2', '작사/작곡')
@@ -257,5 +257,25 @@ var clip_copyright_subjectType =[
     , new COMMON_CODE('8', '8', 'ASMR')
     , new COMMON_CODE('7', '7', '성우')
     , new COMMON_CODE('9', '9', '연주')
-]
+];
+
+var clip_copyright_searchStateType = [
+    new COMMON_CODE(null, 'stateType', '공개여부')
+    , new COMMON_CODE('-1', '-1', '클립상태(전체)')
+    , new COMMON_CODE('1', '1', '정상')
+    , new COMMON_CODE('2', '2', '삭제(본인+운영자)')
+    , new COMMON_CODE('3', '3', '삭제(본인)')
+    , new COMMON_CODE('4', '4', '삭제(운영자)')
+    , new COMMON_CODE('5', '5', '숨기기')
+];
+
+var clip_copyrightDetail_searchType = [
+    new COMMON_CODE(null, 'searchType', '검색 조건')
+    , new COMMON_CODE('all', '0', '회원검색(전체)')
+    , new COMMON_CODE('memNo', '1', '회원번호')
+    , new COMMON_CODE('memNick', '2', '닉네임')
+    , new COMMON_CODE('userId', '3', 'userId')
+    , new COMMON_CODE('memNick', '4', '전화번호')
+    , new COMMON_CODE('ip', '5', 'ip')
+];
 

@@ -81,6 +81,13 @@ $(document).on('click', '._openClipInfoPop', function(){
     util.windowOpen(url, 1050, 730, 'clipInfo');
 });
 
+/*클립 청취 횟수 상세 팝업*/
+$(document).on('click', '._openClipCopyrightDetailPop', function(){
+    var url = "/clip/history/popup/clipCopyrightDetailPopup?clipNo=" + encodeURIComponent($(this).data('clipno'));
+
+    util.windowOpen(url, 1050, 730, 'clipPlayCntInfo');
+});
+
 /*문자 발송 팝업*/
 $(document).on('click', '._openSmsSendPop', function(){
     var url = "/customer/sms/popup/smsSendPopup?cmid="+encodeURIComponent($(this).data('cmid'))+"&rownum="+encodeURIComponent($(this).data('rownum'))+"&logtable="+encodeURIComponent($(this).data('logtable'));;

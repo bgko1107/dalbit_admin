@@ -481,4 +481,31 @@ public class Cli_ClipHistoryService {
             return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
         }
     }
+
+    /**
+     * 클립 저작권 청취내역 상세 조회
+     */
+    public String callClipCopyrightDetail(P_ClipCopyrightDetailInputVo pClipCopyrightDetailInputVo) {
+        ProcedureVo procedureVo = new ProcedureVo(pClipCopyrightDetailInputVo);
+        ArrayList<P_ClipCopyrightDetailOutputVo> list = cliClipHistoryDao.callClipCopyrightDetail(procedureVo);
+        P_ClipCopyrightDetailSummaryVo summaryVo = new Gson().fromJson(procedureVo.getExt(), P_ClipCopyrightDetailSummaryVo.class);
+        HashMap detailList = new HashMap();
+        String result;
+
+        if(DalbitUtil.isEmpty(list) || list.size() == 0) {
+            detailList.put("list", new ArrayList<>());
+            detailList.put("summary", summaryVo);
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+
+        if(Integer.parseInt(procedureVo.getRet()) > 0) {
+            detailList.put("list", list);
+            detailList.put("summary", summaryVo);
+
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, detailList));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+        return result;
+    }
 }
