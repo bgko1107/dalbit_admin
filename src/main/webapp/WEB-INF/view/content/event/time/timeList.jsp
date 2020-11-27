@@ -353,6 +353,12 @@
          }
      });
 
+     $(document).on('click', '._previewBtn', function(){
+         var image_url = $(this).parent().find('.form-control').val();
+         var html = '<img src="'+ image_url +'" width="100%" height="auto" />'
+         $(this).parent().parent().find('._prevArea').html(html);
+     });
+
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_timeList">
@@ -473,10 +479,10 @@
                             <th>PC 이미지</th>
                             <td>
                                 <input type="text" class="form-control" id="main_top_pc_image_url" style="width:70%" value="{{main_top_pc_image_url}}" maxlength="150" />
-                                <button class="btn btn-sm btn-default" type="button">미리보기</button>
+                                <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
                             </td>
                             <td>
-                                <div>미리보기영역</div>
+                                <div class="_prevArea"></div>
                             </td>
                             <td rowspan="2">
                                 {{{getCommonCodeHorizontalCheck main_top_banner_link_yn 'time_event_link_yn' 'Y' 'main_top_banner_link_yn'}}}
@@ -486,10 +492,10 @@
                             <th>모바일 이미지</th>
                             <td>
                                 <input type="text" class="form-control" id="main_top_mobile_image_url" style="width:70%" value="{{main_top_mobile_image_url}}" maxlength="150" />
-                                <button class="btn btn-sm btn-default" type="button">미리보기</button>
+                                <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
                             </td>
                             <td>
-                                <div>미리보기영역</div>
+                                <div class="_prevArea"></div>
                             </td>
                         </tr>
                         <tr>
@@ -497,10 +503,10 @@
                             <th>PC 이미지 링크</th>
                             <td>
                                 <input type="text" class="form-control" id="main_center_pc_image_url" style="width:70%" value="{{main_center_pc_image_url}}" maxlength="150" />
-                                <button class="btn btn-sm btn-default" type="button">미리보기</button>
+                                <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
                             </td>
                             <td>
-                                <div>미리보기영역</div>
+                                <div class="_prevArea"></div>
                             </td>
                             <td rowspan="2">
                                 {{{getCommonCodeHorizontalCheck main_center_banner_link_yn 'time_event_link_yn' 'Y' 'main_center_banner_link_yn'}}}
@@ -510,10 +516,10 @@
                             <th>모바일 링크</th>
                             <td>
                                 <input type="text" class="form-control" id="main_center_mobile_image_url" style="width:70%" value="{{main_center_mobile_image_url}}" maxlength="150" />
-                                <button class="btn btn-sm btn-default" type="button">미리보기</button>
+                                <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
                             </td>
                             <td>
-                                <div>미리보기영역</div>
+                                <div class="_prevArea"></div>
                             </td>
                         </tr>
 
@@ -522,10 +528,10 @@
                             <th>PC 이미지 링크</th>
                             <td>
                                 <input type="text" class="form-control" id="store_pc_image_url" style="width:70%" value="{{store_pc_image_url}}" maxlength="150" />
-                                <button class="btn btn-sm btn-default" type="button">미리보기</button>
+                                <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
                             </td>
                             <td>
-                                <div>미리보기영역</div>
+                                <div class="_prevArea"></div>
                             </td>
                             <td rowspan="2">
                                 {{{getCommonCodeHorizontalCheck store_banner_link_yn 'time_event_link_yn' 'Y' 'store_banner_link_yn'}}}
@@ -535,13 +541,12 @@
                             <th>모바일 링크</th>
                             <td>
                                 <input type="text" class="form-control" id="store_mobile_image_url" style="width:70%" value="{{store_mobile_image_url}}" maxlength="150" />
-                                <button class="btn btn-sm btn-default" type="button">미리보기</button>
+                                <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
                             </td>
                             <td>
-                                <div>미리보기영역</div>
+                                <div class="_prevArea"></div>
                             </td>
                         </tr>
-
 
                         <tr>
                             <th colspan="2">PC 링크</th>
