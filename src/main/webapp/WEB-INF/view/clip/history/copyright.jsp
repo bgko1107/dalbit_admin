@@ -30,10 +30,10 @@
     var copyrightPagingInfo = new PAGING_INFO(0,1,50);
 
     var beforeClipStateType = 0;
-    var beforeClipSubjectType = 0;
+    var beforeClipSubjectType = -1;
     var beforeOrderByType = 3;
 
-    $(document).on('change', "#stateType_select, #search_clipSubjectType, #orderByType", function(){
+    $(document).on('change', "#stateType_select, #search_clipSubjectType, #orderByType, #search_testId", function(){
         beforeClipStateType = $("#stateType_select").val();
         beforeClipSubjectType = $("#search_clipSubjectType").val();
         beforeOrderByType = $("#orderByType").val();
@@ -70,7 +70,7 @@
             , stateType : Number($("#stateType_select").val())
             , subjectType : Number(common.isEmpty($("#search_clipSubjectType").val()) ? "-1" : $("#search_clipSubjectType").val())
             , orderType : Number($("#orderByType").val())
-            , inner : 1 // todo - 기획서에 inner조건이 없으나, 프로시저에는 검색 조건에 있어서 추가해두었습니다.
+            , inner : $('input[name="search_testId"]').is(":checked") ? "0" : "1" // todo - 기획서에 inner조건이 없으나, 프로시저에는 검색 조건에 있어서 추가해두었습니다.
             , pageNo : copyrightPagingInfo.pageNo
             , pageCnt : copyrightPagingInfo.pageCnt
         }
@@ -157,7 +157,7 @@
         var allData = {
             sel: ""
             , type: "clip_type"
-            , value: "0"
+            , value: "-1"
             , code: "주제(전체)"
             , order: "0"
             , is_use: "1"
@@ -238,9 +238,7 @@
                 <td><button type="button" class="_adminCover btn btn-primary" data-idx="{{clipIdx}}">저장</button></td>
                 <td><a href="javascript://" class="_openClipCopyrightDetailPop" data-clipno="{{cast_no}}">{{addComma playCnt}}</a></td>
                 <td>
-                    {{#dalbit_if state '==' '1'}} 정상
-                        {{#equal ../hide '1'}} (숨김) {{/equal}}
-                    {{/dalbit_if}}
+                    {{#dalbit_if state '==' '1'}} 정상 {{/dalbit_if}}
                     {{#dalbit_if state '==' '4'}} <span style="color:red;font-weight:bold">삭제</span> {{/dalbit_if}}
                     {{#dalbit_if state '==' '5'}} <span style="color:red;font-weight:bold">삭제</span> <br /> ({{opName}}) {{/dalbit_if}}
                 </td>
