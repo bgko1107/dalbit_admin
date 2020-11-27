@@ -61,7 +61,7 @@
     });
 
     function getNotice(){
-        $(".thisMonth").text(moment($("#startDate").val()).add('months', 0).format('YYYY년 MM일'));
+        $(".thisMonth").text(moment($("#startDate").val()).add('months', 0).format('YYYY년 MM월'));
 
         var data = {
             startDate : $("#startDate").val()
