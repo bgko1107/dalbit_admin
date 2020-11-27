@@ -1,5 +1,6 @@
 package com.dalbit.member.dao;
 
+import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.member.vo.procedure.P_MemberExchangeInputVo;
 import com.dalbit.money.vo.Mon_ExchangeOutputVo;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,9 @@ public interface Mem_ExchangeDao {
     int getExchangeHistory_totalCnt(P_MemberExchangeInputVo pMemberExchangeInputVo);
     @Transactional(readOnly = true)
     Mon_ExchangeOutputVo getExchangeHistory_detail(P_MemberExchangeInputVo pMemberExchangeInputVo);
+
+
+    @Transactional(readOnly = true)
+    ArrayList<Mon_ExchangeOutputVo> callExchangeHistory(ProcedureVo procedureVo);
 
 }

@@ -30,10 +30,10 @@
     var copyrightPagingInfo = new PAGING_INFO(0,1,50);
 
     var beforeClipStateType = 0;
-    var beforeClipSubjectType = 0;
+    var beforeClipSubjectType = -1;
     var beforeOrderByType = 3;
 
-    $(document).on('change', "#stateType_select, #search_clipSubjectType, #orderByType", function(){
+    $(document).on('change', "#stateType_select, #search_clipSubjectType, #orderByType, #search_testId", function(){
         beforeClipStateType = $("#stateType_select").val();
         beforeClipSubjectType = $("#search_clipSubjectType").val();
         beforeOrderByType = $("#orderByType").val();
@@ -70,7 +70,7 @@
             , stateType : Number($("#stateType_select").val())
             , subjectType : Number(common.isEmpty($("#search_clipSubjectType").val()) ? "-1" : $("#search_clipSubjectType").val())
             , orderType : Number($("#orderByType").val())
-            , inner : 1 // todo - 기획서에 inner조건이 없으나, 프로시저에는 검색 조건에 있어서 추가해두었습니다.
+            , inner : $('input[name="search_testId"]').is(":checked") ? "0" : "1" // todo - 기획서에 inner조건이 없으나, 프로시저에는 검색 조건에 있어서 추가해두었습니다.
             , pageNo : copyrightPagingInfo.pageNo
             , pageCnt : copyrightPagingInfo.pageCnt
         }
@@ -113,16 +113,31 @@
         var idx = $(this).data('idx');
         var admin_cover_title = $("#coverTitle_" + idx).val()
         var admin_cover_singer = $("#coverSinger_" + idx).val()
-        if(confirm('수정하시겠습니까?')) {
-            var data = {
-                idx: idx
-                , admin_cover_title: admin_cover_title
-                , admin_cover_singer: admin_cover_singer
+
+        function valid() {
+            if(common.isEmpty(admin_cover_title)) {
+                alert('수정할 커버 곡명을 입력해주세요.');
+                return false;
             }
-            util.getAjaxData("editAdminCover", "/rest/clip/history/copyright/cover/edit", data, function fn_editAdminCover_success(dst_id, response) {
-                alert(response.message);
-                getHistoryCopyright();
-            });
+            if(common.isEmpty(admin_cover_singer)) {
+                alert('수정할 커버 가수를 입력해주세요.');
+                return false;
+            }
+            return true;
+        }
+
+        if(valid()) {
+            if (confirm('수정하시겠습니까?')) {
+                var data = {
+                    idx: idx
+                    , admin_cover_title: admin_cover_title
+                    , admin_cover_singer: admin_cover_singer
+                }
+                util.getAjaxData("editAdminCover", "/rest/clip/history/copyright/cover/edit", data, function fn_editAdminCover_success(dst_id, response) {
+                    alert(response.message);
+                    getHistoryCopyright();
+                });
+            }
         }
     });
 
@@ -142,7 +157,7 @@
         var allData = {
             sel: ""
             , type: "clip_type"
-            , value: "0"
+            , value: "-1"
             , code: "주제(전체)"
             , order: "0"
             , is_use: "1"
@@ -205,7 +220,7 @@
         <tbody>
             {{#each this as |data|}}
             <tr>
-                <td>{{rowNum}}</td> <!-- todo - rowNum이 내림차순인데, 그대로 써도 될까요 -->
+                <td>{{rowNum}}</td>
                 <td>{{{memNoLink mem_no mem_no}}} <br />{{nickName}}</td>
                 <td>{{{getCommonCodeLabel subjectType 'clip_copyright_subjectType'}}}</td>
                 <td>{{playTime}}
@@ -218,14 +233,12 @@
                 <td>{{convertToDate regDate "YYYY-MM-DD"}}</td>
                 <td>{{userCoverTitle}}</td>
                 <td>{{userCoverSinger}}</td>
-                <td><input type="text" class="form-control" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" maxlength="50" /></td>
-                <td><input type="text" class="form-control" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" maxlength="50" /></td>
+                <td><input type="text" class="form-control _trim" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" maxlength="50" /></td>
+                <td><input type="text" class="form-control _trim" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" maxlength="50" /></td>
                 <td><button type="button" class="_adminCover btn btn-primary" data-idx="{{clipIdx}}">저장</button></td>
                 <td><a href="javascript://" class="_openClipCopyrightDetailPop" data-clipno="{{cast_no}}">{{addComma playCnt}}</a></td>
                 <td>
-                    {{#dalbit_if state '==' '1'}} 정상
-                        {{#equal ../hide '1'}} (숨김) {{/equal}}
-                    {{/dalbit_if}}
+                    {{#dalbit_if state '==' '1'}} 정상 {{/dalbit_if}}
                     {{#dalbit_if state '==' '4'}} <span style="color:red;font-weight:bold">삭제</span> {{/dalbit_if}}
                     {{#dalbit_if state '==' '5'}} <span style="color:red;font-weight:bold">삭제</span> <br /> ({{opName}}) {{/dalbit_if}}
                 </td>

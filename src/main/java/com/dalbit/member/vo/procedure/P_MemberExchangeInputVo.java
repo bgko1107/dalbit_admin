@@ -11,4 +11,8 @@ public class P_MemberExchangeInputVo extends SearchVo {
     private String mem_no;
     private int slctDate;
     private int idx;
+    private int djType;
+    private String startDate;
+    private String endDate;
+
 }

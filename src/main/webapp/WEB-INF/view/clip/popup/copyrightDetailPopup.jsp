@@ -179,7 +179,7 @@
                 <br /> {{nickName}}
             </td>
             <td>
-                IP 자리 <!-- todo -->
+                {{ip}}
             </td>
             <td>{{repeatCnt}}</td>
         </tr>
