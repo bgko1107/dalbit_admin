@@ -107,17 +107,10 @@
     }
 
     function exchangeSummary_table(response){
-
-        console.log("----------------------------------------");
-        console.log(response);
         var template = $('#tmp_exchangeSummary').html();
         var templateScript = Handlebars.compile(template);
         var context = response.summary;
         var html = templateScript(context);
-        // var html = templateScript();
-
-        console.log(context);
-        console.log(html);
         $("#exchangeSummary").html(html);
         ui.paintColor();
     }
