@@ -278,6 +278,26 @@ var slctWalletDateType = [
     , new COMMON_CODE('1', '1', '선물 일시')
 ];
 
+
+var slctExchangeStatus = [
+    new COMMON_CODE('', 'exchangeStatus', '처리상태')
+    , new COMMON_CODE('0', '0', '처리상태(전체)')
+    , new COMMON_CODE('1', '1', '승인완료')
+    , new COMMON_CODE('2', '2', '승인취소')
+    , new COMMON_CODE('3', '3', '미처리')
+];
+var slctExchangeMemberType = [
+    new COMMON_CODE('', 'exchangeMemberType', '회원구분')
+    , new COMMON_CODE('0', '0', '회원구분(전체)')
+    , new COMMON_CODE('1', '1', '일반회원')
+    , new COMMON_CODE('2', '2', '스패셜DJ')
+];
+var slctExchangeDateType = [
+    new COMMON_CODE('', 'slctExchangeDateType', '환전내역 기간선택')
+    , new COMMON_CODE('0', '0', '기간(전체)')
+    , new COMMON_CODE('1', '1', '기간선택')
+];
+
 var member_item_type = [
     new COMMON_CODE('', 'item_type', '회원 아이템코드')
     , new COMMON_CODE('1', '1', '부스터')
