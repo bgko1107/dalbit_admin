@@ -4,8 +4,25 @@
 
 <div class="col-lg-12 no-padding">
     <div class="widget widget-table" id="main_table">
-        <span id="exchange_summaryArea"></span>
         <div class="widget-content">
+            <div class="col-md-6 no-padding mt5">
+                <span name="slctExchangeStatus" id="slctExchangeStatus" onchange="exchangeTable_reload();"></span>
+                <span name="slctExchangeMemberType" id="slctExchangeMemberType" onchange="exchangeTable_reload();"></span>
+                <span name="slctExchangeDateType" id="slctExchangeDateType" onchange="exchangeTable_reload();"></span>
+                <input type="hidden" name="startExchangeDate" id="startExchangeDate">
+                <input type="hidden" name="endExchangeDate" id="endExchangeDate" />
+                <div class="input-group date mr5" id="rangeExchangeDatepicker" style="display: none">
+                    <label for="displayExchangeDate" class="input-group-addon">
+                        <span><i class="fa fa-calendar"></i></span>
+                    </label>
+                    <input type="text" name="displayDate" id="displayExchangeDate" class="form-control" />
+                </div>
+                <button type="button" class="btn btn-success mr5" id="bt_searchExchange" onclick="exchangeTable_reload();">검색</button>
+            </div>
+            <div class="col-md-6 no-padding pull-right">
+                <span id="exchangeSummary"></span>
+            </div>
+
             <table id="list_info_detail" class="table table-sorting table-hover table-bordered datatable">
                 <thead id="tableTop_detail">
                 </thead>
@@ -21,18 +38,41 @@
 
 <script>
     $(document).ready(function() {
+
+        $("#slctExchangeStatus").html(util.getCommonCodeSelect(-1, slctExchangeStatus));
+        $("#slctExchangeMemberType").html(util.getCommonCodeSelect(-1, slctExchangeMemberType));
+        $("#slctExchangeDateType").html(util.getCommonCodeSelect(-1, slctExchangeDateType));
+        $("#displayExchangeDate").statsDaterangepicker(
+            function(start, end, t1) {
+                $("#startExchangeDate").val(start.format('YYYY.MM.DD'));
+                $("#endExchangeDate").val(end.format('YYYY.MM.DD'));
+            }
+        );
+
+        var dateTime = new Date();
+        dateTime = moment(dateTime).format("YYYY.MM.DD");
+        $("#startExchangeDate").val(dateTime);
+        $("#endExchangeDate").val(dateTime);
+
     });
 
     function getHistory_exchangeDetail(tmp) {     // 상세보기
+        sDate = "1900.01.01";
+        eDate = "2999.12.31";
+
         if(tmp.indexOf("_") > 0){ tmp = tmp.split("_"); tmp = tmp[1]; }
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
-        }
+            data.startDate = sDate;
+            data.endDate = eDate;
+            data.slctType = $("#exchangeStatus").val();
+            data.djType = $("#exchangeMemberType").val();
+        };
         dtList_info_detail = new DalbitDataTable($("#"+tmp).find("#list_info_detail"), dtList_info_detail_data, MemberDataTableSource.exchangeList);
         dtList_info_detail.useCheckBox(false);
         dtList_info_detail.useIndex(true);
         dtList_info_detail.setPageLength(50);
-        dtList_info_detail.createDataTable();
+        dtList_info_detail.createDataTable(exchangeSummary_table);
     }
 
     $(document).on('click', '._layerOpen', function(title, content){
@@ -53,7 +93,76 @@
         showModal();
     }
 
+    function exchangeTable_reload(){
+        if($("#slctExchangeDateType").find("select").val() == 0){
+            sDate = "1900.01.01";
+            eDate = "2999.12.31";
+            $("#rangeExchangeDatepicker").hide();
+        }else{
+            sDate = $("#startExchangeDate").val();
+            eDate = $("#endExchangeDate").val();
+            $("#rangeExchangeDatepicker").show();
+        }
+        dtList_info_detail.reload();
+    }
+
+    function exchangeSummary_table(response){
+
+        console.log("----------------------------------------");
+        console.log(response);
+        var template = $('#tmp_exchangeSummary').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response.summary;
+        var html = templateScript(context);
+        // var html = templateScript();
+
+        console.log(context);
+        console.log(html);
+        $("#exchangeSummary").html(html);
+        ui.paintColor();
+    }
+
 </script>
+
+<script id="tmp_exchangeSummary" type="text/x-handlebars-template">
+    <table class="table table-bordered table-summary pull-right" style="margin-right: 0px;width: 100%">
+        <tr>
+            <th rowspan="2" class="_bgColor" data-bgcolor="#d9d9d9">구분</th>
+            <th colspan="3" class="_bgColor" data-bgcolor="#b4c7e7">승인 완료</th>
+            <th colspan="3" class="_bgColor" data-bgcolor="#d9d9d9">승인 취소</th>
+            <th colspan="3" class="_bgColor" data-bgcolor="#d9d9d9">미처리</th>
+            <th colspan="2" class="_bgColor" data-bgcolor="#b4c7e7">현재 보유 별</th>
+        </tr>
+        <tr>
+            <th class="_bgColor" data-bgcolor="#dae3f3">건</th>
+            <th class="_bgColor" data-bgcolor="#dae3f3">별</th>
+            <th class="_bgColor" data-bgcolor="#dae3f3">금액</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">건</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">별</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">금액</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">건</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">별</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">금액</th>
+            <th class="_bgColor" data-bgcolor="#dae3f3">별</th>
+            <th class="_bgColor" data-bgcolor="#dae3f3">환전가치금액</th>
+        </tr>
+        <tr>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">총합</th>
+            <td>{{addComma confirm_cnt}} 건</td>
+            <td>{{addComma confirm_byeol}} 별</td>
+            <td>{{addComma confirm_amt}} 원</td>
+            <td>{{addComma cancel_cnt}} 건</td>
+            <td>{{addComma cancel_byeol}} 별</td>
+            <td>{{addComma cancel_amt}} 원</td>
+            <td>{{addComma ready_cnt}} 건</td>
+            <td>{{addComma ready_byeol}} 별</td>
+            <td>{{addComma ready_amt}} 원</td>
+            <td>{{addComma now_byeol}} 별</td>
+            <td>{{addComma now_amt}} 원</td>
+        </tr>
+    </table>
+</script>
+
 
 <script type="text/x-handlebars-template" id="tmp_exchange_detail">
     <form id="exchangeForm">
@@ -331,3 +440,5 @@
         </div>
     </form>
 </script>
+
+
