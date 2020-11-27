@@ -113,16 +113,31 @@
         var idx = $(this).data('idx');
         var admin_cover_title = $("#coverTitle_" + idx).val()
         var admin_cover_singer = $("#coverSinger_" + idx).val()
-        if(confirm('수정하시겠습니까?')) {
-            var data = {
-                idx: idx
-                , admin_cover_title: admin_cover_title
-                , admin_cover_singer: admin_cover_singer
+
+        function valid() {
+            if(common.isEmpty(admin_cover_title)) {
+                alert('수정할 커버 곡명을 입력해주세요.');
+                return false;
             }
-            util.getAjaxData("editAdminCover", "/rest/clip/history/copyright/cover/edit", data, function fn_editAdminCover_success(dst_id, response) {
-                alert(response.message);
-                getHistoryCopyright();
-            });
+            if(common.isEmpty(admin_cover_singer)) {
+                alert('수정할 커버 가수를 입력해주세요.');
+                return false;
+            }
+            return true;
+        }
+
+        if(valid()) {
+            if (confirm('수정하시겠습니까?')) {
+                var data = {
+                    idx: idx
+                    , admin_cover_title: admin_cover_title
+                    , admin_cover_singer: admin_cover_singer
+                }
+                util.getAjaxData("editAdminCover", "/rest/clip/history/copyright/cover/edit", data, function fn_editAdminCover_success(dst_id, response) {
+                    alert(response.message);
+                    getHistoryCopyright();
+                });
+            }
         }
     });
 
@@ -205,7 +220,7 @@
         <tbody>
             {{#each this as |data|}}
             <tr>
-                <td>{{rowNum}}</td> <!-- todo - rowNum이 내림차순인데, 그대로 써도 될까요 -->
+                <td>{{rowNum}}</td>
                 <td>{{{memNoLink mem_no mem_no}}} <br />{{nickName}}</td>
                 <td>{{{getCommonCodeLabel subjectType 'clip_copyright_subjectType'}}}</td>
                 <td>{{playTime}}
@@ -218,8 +233,8 @@
                 <td>{{convertToDate regDate "YYYY-MM-DD"}}</td>
                 <td>{{userCoverTitle}}</td>
                 <td>{{userCoverSinger}}</td>
-                <td><input type="text" class="form-control" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" maxlength="50" /></td>
-                <td><input type="text" class="form-control" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" maxlength="50" /></td>
+                <td><input type="text" class="form-control _trim" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" maxlength="50" /></td>
+                <td><input type="text" class="form-control _trim" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" maxlength="50" /></td>
                 <td><button type="button" class="_adminCover btn btn-primary" data-idx="{{clipIdx}}">저장</button></td>
                 <td><a href="javascript://" class="_openClipCopyrightDetailPop" data-clipno="{{cast_no}}">{{addComma playCnt}}</a></td>
                 <td>
