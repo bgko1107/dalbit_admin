@@ -25,7 +25,7 @@
             · 푸시 성공 수신거부, 거부비율 건에 대한 수치 현황입니다.<br/>
             · 푸시 초기화 매달 초 00시 이고, 30분 단위 리로드됩니다.
         </span><br/>
-        <button type="button" class="btn btn-default btn-xs pull-left" id="bt_tableSw" onclick="tableSwich();">전체보기</button>
+        <button type="button" class="btn btn-success btn-ms pull-left" id="bt_tableSw" onclick="tableSwich();">전체보기</button>
         <div id="div_daySimpleTable">
             <table class="table table-bordered _tableHeight" data-height="23px" id="simpleDayTable">
                 <colgroup>
