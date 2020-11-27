@@ -43,7 +43,7 @@
             <%--<div class="col-md-3 no-padding">--%>
                 <%--<span>--%>
                     <%--<select id="changeAutoSettingFilter" name="changeAutoSettingFilter" class="form-control searchType" style="width: 100%" onchange="changeAutoSetting_change();">--%>
-                        <%--<option value="0">자동설정 전체</option>--%> checked="true"
+                        <%--<option value="0">자동설정 전체</option>--%>
                         <%--<option class="font-bold" style="color: #7030a0;" value="1">ON</option>--%>
                     <%--</select>--%>
                 <%--</span>--%>
