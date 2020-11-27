@@ -852,6 +852,8 @@ public enum Status {
     청취자유도메시지삭제_성공("0", "delete.success", "청취 유도 메시지 삭제 성공 시"),
     청취자유도메시지삭제_실패("C006", "server.error", "청취 유도 메시지 삭제 실패 시"),
 
+    타임이벤트_이벤트시간중복("1", "time.event.duplicate", "타임이벤트 이벤트 시간 중복 시"),
+
     ;
 
     final private String RESULT_SUCCESS = "success";

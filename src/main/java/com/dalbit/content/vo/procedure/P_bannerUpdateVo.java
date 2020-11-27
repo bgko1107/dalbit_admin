@@ -9,6 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class P_bannerUpdateVo extends BaseVo {
+    private int idx;
     private String banner_idx;          //번호
     private String title;       		//배너제목
     private String view_type;           //배너구분(0:전체, 1:로그인, 2:비로그인)

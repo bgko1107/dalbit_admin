@@ -21,7 +21,7 @@
         from rd_data.tbl_time_event
             , (select @rownum := 0 ) rowNum
         where `state` != 2
-        order by idx desc
+        order by start_date desc, idx desc
     </select>
 
     <select id="selectTimeListCnt" parameterType="com.dalbit.content.vo.TimeEventVo" resultType="integer">
@@ -49,7 +49,7 @@
             , event.state
 
             , main_top_banner_idx
-            , 0 <![CDATA[<]]> ifnull(length(top_banner.pc_img_url), 0) as main_top_banner_link_yn
+            , main_top_banner_link_yn
             , top_banner.platform
             , top_banner.ios_judge_view_on
             , top_banner.pc_img_url as main_top_pc_image_url
@@ -58,26 +58,23 @@
             , top_banner.mobile_link_url as main_top_mobile_link_url
 
             , main_center_banner_idx
-            , 0 <![CDATA[<]]> ifnull(length(center_banner.pc_img_url), 0) as main_center_banner_link_yn
+            , main_center_banner_link_yn
             , center_banner.pc_img_url as main_center_pc_image_url
             , center_banner.mobile_img_url as main_center_mobile_image_url
             , center_banner.pc_link_url as main_center_pc_link_url
             , center_banner.mobile_link_url as main_center_mobile_link_url
 
             , store_banner_idx
-            , 0 <![CDATA[<]]> ifnull(length(store_banner.pc_img_url), 0) as store_banner_link_yn
+            , store_banner_link_yn
             , store_banner.pc_img_url as store_pc_image_url
             , store_banner.mobile_img_url as store_mobile_image_url
             , store_banner.pc_link_url as store_pc_link_url
             , store_banner.mobile_link_url as store_mobile_link_url
 
-            , ifnull(ifnull(top_banner.pc_link_url, center_banner.pc_link_url), store_banner.pc_link_url) as pc_link_url
-            , ifnull(ifnull(top_banner.mobile_link_url, center_banner.mobile_link_url), store_banner.mobile_link_url) as mobile_link_url
-
         from rd_data.tbl_time_event event
             left join rd_admin.tb_admin_banner top_banner on event.main_top_banner_idx = top_banner.idx
-            left join rd_admin.tb_admin_banner center_banner on event.main_top_banner_idx = center_banner.idx
-            left join rd_admin.tb_admin_banner store_banner on event.main_top_banner_idx = store_banner.idx
+            left join rd_admin.tb_admin_banner center_banner on event.main_center_banner_idx = center_banner.idx
+            left join rd_admin.tb_admin_banner store_banner on event.store_banner_idx = store_banner.idx
         where event.idx = #{idx}
     </select>
 
@@ -124,6 +121,171 @@
             , #{store_banner_link_yn}
             , #{state}
         )
+    </insert>
+
+    <update id="updateTimeEvent" parameterType="com.dalbit.content.vo.TimeEventVo">
+        /* Con_TimeEventDao.xml - updateTimeEvent */
+        update rd_data.tbl_time_event
+        set
+            start_date = #{start_date}
+            , end_date = #{end_date}
+            , event_time = #{event_time}
+            , rate = #{rate}
+            , main_top_banner_link_yn = #{main_top_banner_link_yn}
+            , main_center_banner_link_yn = #{main_center_banner_link_yn}
+            , store_banner_link_yn = #{store_banner_link_yn}
+            , last_upd_date = now()
+            , op_name = #{op_name}
+        where idx = #{idx}
+    </update>
+
+    <update id="stopTimeEvent" parameterType="com.dalbit.content.vo.TimeEventVo">
+        /* Con_TimeEventDao.xml - stopTimeEvent */
+        update rd_data.tbl_time_event
+        set
+            view_yn = #{view_yn}
+            , `state` = #{state}
+            , last_upd_date = now()
+            , op_name = #{op_name}
+        where idx = #{idx}
+    </update>
+
+    <update id="stopTimeEventBanner" parameterType="com.dalbit.content.vo.procedure.P_bannerUpdateVo">
+        /* Con_TimeEventDao.xml - stopTimeEventBanner */
+        delete from rd_admin.tb_admin_banner
+        where idx = (select main_center_banner_idx from rd_data.tbl_time_event where idx = #{idx})
+            or idx = (select main_top_banner_idx from rd_data.tbl_time_event where idx = #{idx})
+            or idx = (select store_banner_idx from rd_data.tbl_time_event where idx = #{idx})
+    </update>
+
+    <select id="selectTimeEventDuplTimeCheck" parameterType="com.dalbit.content.vo.TimeEventVo" resultType="int">
+        /* Con_TimeEventDao.xml - stopTimeEventBanner */
+        select count(*)
+        from rd_data.tbl_time_event
+        where idx != #{idx}
+            and (
+                start_date <![CDATA[<=]]> #{start_date} and #{start_date} <![CDATA[<=]]> end_date
+                or start_date <![CDATA[<=]]> #{end_date} and #{end_date} <![CDATA[<=]]> end_date
+            )
+            and start_date != '9999.12.31 00:00:00'
+            and state != 2
+    </select>
+
+    <insert id="copyTimeEvent" parameterType="com.dalbit.content.vo.TimeEventVo">
+        /* copyTimeEvent.xml - stopTimeEventBanner */
+        insert into rd_data.tbl_time_event(
+            start_date
+            , end_date
+            , event_time
+            , rate
+            , pay_cnt
+            , pay_cmt
+            , pay_amt
+            , pay_dal
+            , event_dal
+            , view_yn
+            , reg_date
+            , op_name
+            , main_top_banner_idx
+            , main_top_banner_link_yn
+            , main_center_banner_idx
+            , main_center_banner_link_yn
+            , store_banner_idx
+            , store_banner_link_yn
+            , `state`
+        )
+        SELECT
+            #{start_date}
+            , #{end_date}
+            , event_time
+            , rate
+            , 0
+            , 0
+            , 0
+            , 0
+            , 0
+            , #{view_yn}
+            , now()
+            , #{op_name}
+            , #{main_top_banner_idx}
+            , main_top_banner_link_yn
+            , #{main_center_banner_idx}
+            , main_center_banner_link_yn
+            , #{store_banner_idx}
+            , store_banner_link_yn
+            , #{state}
+        FROM rd_data.tbl_time_event
+        where idx = #{idx}
+    </insert>
+
+    <insert id="copyBanner" parameterType="com.dalbit.content.vo.procedure.P_bannerUpdateVo">
+        /* copyTimeEvent.xml - copyBanner */
+        <selectKey resultType="int" keyProperty="idx" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO rd_admin.tb_admin_banner(
+            title
+            , view_type
+            , sex
+            , frequency_rate
+            , term_type
+            , start_datetime
+            , end_datetime
+            , is_pop
+            , is_view
+            , `position`
+            , pc_img_url
+            , pc_link_url
+            , mobile_img_url
+            , mobile_link_url
+            , thumb_img_url
+            , platform
+            , popup_type
+            , is_cookie
+            , contents
+            , is_title_view
+            , is_button_view
+            , `desc`
+            , ios_judge_view_on
+            , reg_date
+            , op_name
+            , day_of_the_week
+            , week_time_type
+            , week_start_datetime
+            , week_end_datetime
+        )
+        select
+            concat('[copy]', title)
+            , view_type
+            , sex
+            , frequency_rate
+            , term_type
+            , #{start_datetime}
+            , #{end_datetime}
+            , is_pop
+            , #{is_view}
+            , `position`
+            , pc_img_url
+            , pc_link_url
+            , mobile_img_url
+            , mobile_link_url
+            , thumb_img_url
+            , platform
+            , popup_type
+            , is_cookie
+            , contents
+            , is_title_view
+            , is_button_view
+            , `desc`
+            , ios_judge_view_on
+            , now()
+            , #{op_name}
+            , day_of_the_week
+            , week_time_type
+            , week_start_datetime
+            , week_end_datetime
+        from rd_admin.tb_admin_banner
+        where idx = #{banner_idx}
     </insert>
 </mapper>
 

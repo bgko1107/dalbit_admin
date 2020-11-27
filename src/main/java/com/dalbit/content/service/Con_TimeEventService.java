@@ -15,6 +15,7 @@ import com.dalbit.util.GsonUtil;
 import com.dalbit.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
+import org.apache.poi.ss.formula.ptg.MemErrPtg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +52,25 @@ public class Con_TimeEventService {
     public String selectTimeDetail(TimeEventVo timeEventVo){
         TimeEventVo detail = conTimeEventDao.selectTimeDetail(timeEventVo);
 
+        String pc_link_url = detail.getMain_top_pc_link_url();
+        if(DalbitUtil.isEmpty(pc_link_url)){
+            pc_link_url = detail.getMain_center_pc_link_url();
+        }
+        if(DalbitUtil.isEmpty(pc_link_url)){
+            pc_link_url = detail.getStore_pc_link_url();
+        }
+        detail.setPc_link_url(pc_link_url);
+
+
+        String mobile_link_url = detail.getMain_top_mobile_link_url();
+        if(DalbitUtil.isEmpty(mobile_link_url)){
+            mobile_link_url = detail.getMain_center_mobile_link_url();
+        }
+        if(DalbitUtil.isEmpty(mobile_link_url)){
+            mobile_link_url = detail.getStore_mobile_link_url();
+        }
+        detail.setMobile_link_url(mobile_link_url);
+
         String result = "";
         if(DalbitUtil.isEmpty(detail)){
             result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
@@ -62,6 +82,12 @@ public class Con_TimeEventService {
     }
 
     public String saveTimeEvent(TimeEventVo timeEventVo){
+
+        //등록 / 수정 할 시간에 겹치는 이벤트가 있는지 체크
+        int duplCheck = conTimeEventDao.selectTimeEventDuplTimeCheck(timeEventVo);
+        if(0 < duplCheck){
+            return gsonUtil.toJson(new JsonOutputVo(Status.타임이벤트_이벤트시간중복));
+        }
 
         //배너 공통 파라메터
         String banner_title = "[타임이벤트]"+timeEventVo.getStart_date() + " ~ " + timeEventVo.getEnd_date();
@@ -171,26 +197,169 @@ public class Con_TimeEventService {
             conTimeEventDao.insertTimeEvent(timeEventVo);
 
         }else{
-           /* //메인탑 배너 수정
-            conBannerService.callContentsBannerEdit(mainTopBanner);
-            timeEventVo.setMain_top_banner_idx(mainTopBanner.getIdx());
+            //메인 탑 배너 수정
+            var mainTopBanner = new P_bannerUpdateVo();
+            mainTopBanner.setBanner_idx(timeEventVo.getMain_top_banner_idx() + "");
+            mainTopBanner.setTitle(banner_title);
+            mainTopBanner.setPlatform(banner_platform);
+            mainTopBanner.setIosJudgeViewOn(banner_ios_judge_view_on);
+            mainTopBanner.setView_type(banner_view_type + "");
+            mainTopBanner.setSex(banner_sex + "");
+            mainTopBanner.setFrequency_rate(banner_frequency_rate + "");
+            mainTopBanner.setTerm_type(banner_term_type + "");
+            mainTopBanner.setStart_datetime(banner_start_datetime);
+            mainTopBanner.setEnd_datetime(banner_end_datetime);
+            mainTopBanner.setIs_pop(banner_is_pop + "");
+            mainTopBanner.setIs_view(banner_is_view + "");
+            mainTopBanner.setPosition(1 + ""); //메인 탑
+            mainTopBanner.setPc_img_url(timeEventVo.getMain_top_pc_image_url());
+            mainTopBanner.setMobile_img_url(timeEventVo.getMain_top_mobile_image_url());
+            //링크 적용 시에만 url 등록
+            mainTopBanner.setPc_link_url(timeEventVo.getMain_top_banner_link_yn() == 1 ? timeEventVo.getPc_link_url() : "");
+            mainTopBanner.setMobile_link_url(timeEventVo.getMain_top_banner_link_yn() == 1 ? timeEventVo.getMobile_link_url() : "");
+            mainTopBanner.setIosJudgeViewOn(timeEventVo.getIos_judge_view_on());
 
-            //메인센터 배너 수정
-            conBannerService.callContentsBannerAdd(mainCenterBanner);
-            timeEventVo.setMain_center_banner_idx(mainCenterBanner.getIdx());
+            mainTopBanner.setLastOpName(MemberVo.getMyMemNo());
+            mainTopBanner.setDesc(banner_desc);
+            mainTopBanner.setContent_scheduleWeekTime(week_time_type);
+
+
+            //메인 센터 배너 수정
+            var mainCenterBanner = new P_bannerUpdateVo();
+            mainCenterBanner.setBanner_idx(timeEventVo.getMain_center_banner_idx() + "");
+            mainCenterBanner.setTitle(banner_title);
+            mainCenterBanner.setPlatform(banner_platform);
+            mainCenterBanner.setIosJudgeViewOn(banner_ios_judge_view_on);
+            mainCenterBanner.setView_type(banner_view_type + "");
+            mainCenterBanner.setSex(banner_sex + "");
+            mainCenterBanner.setFrequency_rate(banner_frequency_rate + "");
+            mainCenterBanner.setTerm_type(banner_term_type + "");
+            mainCenterBanner.setStart_datetime(banner_start_datetime);
+            mainCenterBanner.setEnd_datetime(banner_end_datetime);
+            mainCenterBanner.setIs_pop(banner_is_pop + "");
+            mainCenterBanner.setIs_view(banner_is_view + "");
+            mainCenterBanner.setPosition(9 + ""); //메인 센터
+            mainCenterBanner.setPc_img_url(timeEventVo.getMain_center_pc_image_url());
+            mainCenterBanner.setMobile_img_url(timeEventVo.getMain_center_mobile_image_url());
+            //링크 적용 시에만 url 등록
+            mainCenterBanner.setPc_link_url(timeEventVo.getMain_center_banner_link_yn() == 1 ? timeEventVo.getPc_link_url() : "");
+            mainCenterBanner.setMobile_link_url(timeEventVo.getMain_center_banner_link_yn() == 1 ? timeEventVo.getMobile_link_url() : "");
+            mainCenterBanner.setIosJudgeViewOn(timeEventVo.getIos_judge_view_on());
+
+            mainCenterBanner.setLastOpName(MemberVo.getMyMemNo());
+            mainCenterBanner.setDesc(banner_desc);
+            mainCenterBanner.setContent_scheduleWeekTime(week_time_type);
 
             //스토어 배너 수정
-            conBannerService.callContentsBannerAdd(storeBanner);
-            timeEventVo.setStore_banner_idx(storeBanner.getIdx());*/
+            var storeBanner = new P_bannerUpdateVo();
+            storeBanner.setBanner_idx(timeEventVo.getStore_banner_idx() + "");
+            storeBanner.setTitle(banner_title);
+            storeBanner.setPlatform(banner_platform);
+            storeBanner.setIosJudgeViewOn(banner_ios_judge_view_on);
+            storeBanner.setView_type(banner_view_type + "");
+            storeBanner.setSex(banner_sex + "");
+            storeBanner.setFrequency_rate(banner_frequency_rate + "");
+            storeBanner.setTerm_type(banner_term_type + "");
+            storeBanner.setStart_datetime(banner_start_datetime);
+            storeBanner.setEnd_datetime(banner_end_datetime);
+            storeBanner.setIs_pop(banner_is_pop + "");
+            storeBanner.setIs_view(banner_is_view + "");
+            storeBanner.setPosition(4 + ""); //스토어
+            storeBanner.setPc_img_url(timeEventVo.getStore_pc_image_url());
+            storeBanner.setMobile_img_url(timeEventVo.getStore_mobile_image_url());
+            //링크 적용 시에만 url 등록
+            storeBanner.setPc_link_url(timeEventVo.getStore_banner_link_yn() == 1 ? timeEventVo.getPc_link_url() : "");
+            storeBanner.setMobile_link_url(timeEventVo.getStore_banner_link_yn() == 1 ? timeEventVo.getMobile_link_url() : "");
+            storeBanner.setIosJudgeViewOn(timeEventVo.getIos_judge_view_on());
+
+            storeBanner.setLastOpName(MemberVo.getMyMemNo());
+            storeBanner.setDesc(banner_desc);
+            storeBanner.setContent_scheduleWeekTime(week_time_type);
+
+            //메인탑 배너 수정
+            conBannerService.callContentsBannerEdit(mainTopBanner);
+
+            //메인센터 배너 수정
+            conBannerService.callContentsBannerEdit(mainCenterBanner);
+
+            //스토어 배너 수정
+            conBannerService.callContentsBannerEdit(storeBanner);
 
             //타임 이벤트 수정
-            timeEventVo.setView_yn(1);
-            timeEventVo.setState(0);
-            conTimeEventDao.insertTimeEvent(timeEventVo);
+            conTimeEventDao.updateTimeEvent(timeEventVo);
         }
 
 
         return gsonUtil.toJson(new JsonOutputVo(Status.수정));
+    }
+
+    public String stopTimeEvent(TimeEventVo timeEventVo){
+
+        timeEventVo.setView_yn(0);
+        timeEventVo.setState(1);
+        timeEventVo.setOp_name(MemberVo.getMyMemNo());
+        conTimeEventDao.stopTimeEvent(timeEventVo);
+
+        P_bannerUpdateVo pBannerUpdateVo = new P_bannerUpdateVo();
+        pBannerUpdateVo.setIdx(timeEventVo.getIdx());
+        pBannerUpdateVo.setIs_view("0");
+        pBannerUpdateVo.setLastOpName(MemberVo.getMyMemNo());
+        conTimeEventDao.stopTimeEventBanner(pBannerUpdateVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.수정));
+    }
+
+    public String deleteTimeEvent(TimeEventVo timeEventVo){
+
+        timeEventVo.setView_yn(0);
+        timeEventVo.setState(2);
+        timeEventVo.setOp_name(MemberVo.getMyMemNo());
+        conTimeEventDao.stopTimeEvent(timeEventVo);
+
+        P_bannerUpdateVo pBannerUpdateVo = new P_bannerUpdateVo();
+        pBannerUpdateVo.setIdx(timeEventVo.getIdx());
+        pBannerUpdateVo.setIs_view("0");
+        pBannerUpdateVo.setLastOpName(MemberVo.getMyMemNo());
+        conTimeEventDao.stopTimeEventBanner(pBannerUpdateVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.삭제));
+    }
+
+    public String copyTimeEvent(TimeEventVo timeEventVo){
+
+        String copyDate = "9999.12.31 00:00:00";
+        String opName = MemberVo.getMyMemNo();
+        String is_view = "1";
+
+        //메인 탑 배너 복사
+        var bannerVo = new P_bannerUpdateVo();
+        bannerVo.setBanner_idx(timeEventVo.getMain_top_banner_idx() + "");
+        bannerVo.setStart_datetime(copyDate);
+        bannerVo.setEnd_datetime(copyDate);
+        bannerVo.setOp_name(opName);
+        bannerVo.setIs_view(is_view);
+        conTimeEventDao.copyBanner(bannerVo);
+        timeEventVo.setMain_top_banner_idx(bannerVo.getIdx());
+
+        //메인 센터 배너 복사
+        bannerVo.setBanner_idx(timeEventVo.getMain_center_banner_idx() + "");
+        conTimeEventDao.copyBanner(bannerVo);
+        timeEventVo.setMain_center_banner_idx(bannerVo.getIdx());
+
+        //스토어 배너 복사
+        bannerVo.setBanner_idx(timeEventVo.getStore_banner_idx() + "");
+        conTimeEventDao.copyBanner(bannerVo);
+        timeEventVo.setStore_banner_idx(bannerVo.getIdx());
+
+        //타임이벤트 복사
+        timeEventVo.setStart_date(copyDate);
+        timeEventVo.setEnd_date(copyDate);
+        timeEventVo.setOp_name(opName);
+        timeEventVo.setView_yn(1);
+        timeEventVo.setState(0);
+        conTimeEventDao.copyTimeEvent(timeEventVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.삭제));
     }
 
 }

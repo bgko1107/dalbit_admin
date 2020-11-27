@@ -41,4 +41,22 @@ public class Con_TimeEventRestController {
         return result;
     }
 
+    @PostMapping("/stop")
+    public String stopTimeEvent(TimeEventVo timeEventVo) {
+        String result = con_timeEventService.stopTimeEvent(timeEventVo);
+        return result;
+    }
+
+    @PostMapping("/delete")
+    public String deleteTimeEvent(TimeEventVo timeEventVo) {
+        String result = con_timeEventService.deleteTimeEvent(timeEventVo);
+        return result;
+    }
+
+    @PostMapping("/copy")
+    public String copyTimeEvent(TimeEventVo timeEventVo) {
+        String result = con_timeEventService.copyTimeEvent(timeEventVo);
+        return result;
+    }
+
 }

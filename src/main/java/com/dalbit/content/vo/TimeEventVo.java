@@ -31,18 +31,24 @@ public class TimeEventVo extends PagingVo {
     private String main_top_pc_image_url;
     private String main_top_mobile_image_url;
     private int main_top_banner_link_yn;
+    private String main_top_pc_link_url;
+    private String main_top_mobile_link_url;
 
     //메인센터 배너
     private int main_center_banner_idx;
     private String main_center_pc_image_url;
     private String main_center_mobile_image_url;
     private int main_center_banner_link_yn;
+    private String main_center_pc_link_url;
+    private String main_center_mobile_link_url;
 
     //스토어 배너
     private int store_banner_idx;
     private String store_pc_image_url;
     private String store_mobile_image_url;
     private int store_banner_link_yn;
+    private String store_pc_link_url;
+    private String store_mobile_link_url;
 
     //링크
     private String pc_link_url;

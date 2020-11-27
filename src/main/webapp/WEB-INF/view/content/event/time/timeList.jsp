@@ -80,6 +80,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="/js/handlebars/contentHelper.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
      shotListPagingInfo = new PAGING_INFO(0, 1, 30);
@@ -112,26 +113,6 @@
         init();
     }
 
-     $(document).on('click', '.onoffswitch-checkbox' , function(event){
-         var me = $(this);
-         var msg = '채택을 취소 하시겠습니까?';
-         if(me.prop('checked')){
-             msg = '채택 하시겠습니까?';
-         }
-
-         if(confirm(msg)){
-             var data = {
-                 idx : me.prop('name')
-                 , is_check : me.prop('checked') ? 1 : 0
-             }
-             util.getAjaxData('good', "/rest/content/event/knowhow/good", data, function(dist_id, response){
-
-             });
-         }else{
-             event.preventDefault();
-         }
-     });
-
      $(document).on('click', '._timeDetail', function(){
          var me = $(this);
          var data = {
@@ -143,6 +124,10 @@
                  alert(response.message);
                  return;
              }
+
+             response.data.start_hour = moment(response.data.start_date).format('HH');
+             response.data.start_minute = moment(response.data.start_date).format('mm');
+
              var template = $('#tmp_timeDetail').html();
              var templateScript = Handlebars.compile(template);
              var context = response.data;
@@ -169,7 +154,7 @@
                  }
              }
 
-             $('#start_date').datepicker("setDate", new Date());
+             $('#start_date').datepicker("setDate", moment(response.data.start_date).format('YYYY.MM.DD'));
              ui.bottomScroll();
          });
      });
@@ -183,8 +168,13 @@
      $(document).on('click', '#regBtn', function(){
          var template = $('#tmp_timeDetail').html();
          var templateScript = Handlebars.compile(template);
-         //var context = response.data;
-         var html = templateScript();
+         var context = {
+             idx : 0
+             , main_center_banner_idx : 0
+             , main_top_banner_idx : 0
+             , store_banner_idx : 0
+         };
+         var html = templateScript(context);
          $("#timeDetailArea").html(html).show();
 
          $('#start_date').datepicker("setDate", new Date());
@@ -197,8 +187,22 @@
              util.getAjaxData('saveTimeEvent', "/rest/content/event/time/save", data, function(dst_id, response, params){
 
                  alert(response.message);
+                 if(response.result == 'success'){
+                     $("#timeDetailArea").empty();
+                     init();
+                 }
+             });
+         }
+     });
 
-                 //$("#timeDetailArea").empty();
+     $(document).on('click', '#detailCopyBtn', function(){
+         var data = generateTimeEventParam();
+         if(data && confirm('복사하시겠습니까?')){
+             util.getAjaxData('saveTimeEvent', "/rest/content/event/time/copy", data, function(dst_id, response, params){
+
+                 alert('복사 되었습니다.');
+
+                 $("#timeDetailArea").empty();
                  init();
              });
          }
@@ -258,6 +262,9 @@
          if(common.isEmpty(event_time)){
              alert('이벤트 시간을 선택해주세요.');
              return false;
+         }else if(moment(start_datetime).format('YYYYMMDDHHmmss') < moment(new Date()).format('YYYYMMDDHHmmss')){
+             alert('이벤트 시간이 현재 시간보다 작습니다.');
+             return false;
          }
 
          var rate = $('input[name="rate"]:checked').val();
@@ -298,13 +305,16 @@
              , rate : rate
 
              , platform : platform
-             , iosJudgeViewOn : detail_iosJudgeViewOn
+             , ios_judge_view_on : detail_iosJudgeViewOn
+             , main_top_banner_idx : $("#main_top_banner_idx").val()
              , main_top_pc_image_url : $("#main_top_pc_image_url").val()
              , main_top_mobile_image_url : $("#main_top_mobile_image_url").val()
              , main_top_banner_link_yn : $('input[name="main_top_banner_link_yn"]').prop('checked') ? 1 : 0
+             , main_center_banner_idx : $("#main_center_banner_idx").val()
              , main_center_pc_image_url : $("#main_center_pc_image_url").val()
              , main_center_mobile_image_url : $("#main_center_mobile_image_url").val()
              , main_center_banner_link_yn : $('input[name="main_center_banner_link_yn"]').prop('checked') ? 1 : 0
+             , store_banner_idx : $("#store_banner_idx").val()
              , store_pc_image_url : $("#store_pc_image_url").val()
              , store_mobile_image_url : $("#store_mobile_image_url").val()
              , store_banner_link_yn : $('input[name="store_banner_link_yn"]').prop('checked') ? 1 : 0
@@ -314,6 +324,34 @@
 
          return data;
      }
+
+     $(document).on('click', '._timeEventStopBtn', function(){
+        if(confirm('진행 중지할 경우\n현재 시각 기준으로 완료 처리됩니다.\n진행 중지하시겠습니까?')){
+            var data = {
+                idx : $(this).data('idx')
+            }
+            util.getAjaxData('timeEventStop', '/rest/content/event/time/stop', data, function(){
+                $("#timeDetailArea").empty();
+                init();
+            });
+        }
+     });
+
+     $(document).on('click', '._timeEventDelBtn', function(){
+         console.log($(this).data('idx'));
+         if(confirm('예정된 이벤트를 취소할 경우\n자동으로 삭제됩니다.\n진행 중지하시겠습니까?')){
+             var data = {
+                 idx : $(this).data('idx')
+             }
+             util.getAjaxData('timeEventStop', '/rest/content/event/time/delete', data, function(){
+
+                 alert('삭제 되었습니다.');
+
+                 $("#timeDetailArea").empty();
+                 init();
+             });
+         }
+     });
 
 </script>
 
@@ -337,8 +375,8 @@
         <td>{{addComma item.pay_amt}}원</td>
         <td>{{addComma item.pay_dal}}달</td>
         <td>{{addComma item.event_dal}}달</td>
-        <td>진행중</td>
-        <td>진행중지/취소</td>
+        <td>{{timeEventStatus item.start_date item.end_date item.state}}</td>
+        <td>{{{timeEventStatusButton item.start_date item.end_date item.state item.idx}}}</td>
     </tr>
 
     {{else}}
@@ -382,13 +420,13 @@
                                 <tr>
                                     <td>
                                         <div class="input-group date" id="date_startSel">
-                                            <input type="text" class="form-control " id="start_date" name="start_date"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar" id="i_startSel"></i></span>
+                                            <input type="text" class="form-control " id="start_date" name="start_date" value="{{start_date}}"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar" id="i_startSel"></i></span>
                                         </div>
                                     </td>
                                     <td>
-                                        {{{getCommonCodeSelect 00 'timeHour' 'Y' 'start_hour'}}}
+                                        {{{getCommonCodeSelect start_hour 'timeHour' 'Y' 'start_hour'}}}
                                         <span> : </span>
-                                        {{{getCommonCodeSelect 00 'timeMinute' 'Y' 'start_minute'}}}
+                                        {{{getCommonCodeSelect start_minute 'timeMinute' 'Y' 'start_minute'}}}
                                     </td>
                                     <td>
                                         {{{getCommonCodeRadio event_time 'time_event_event_time'}}}
@@ -396,15 +434,15 @@
                                     <td>
                                         {{{getCommonCodeRadio rate 'time_event_rate'}}}
                                     </td>
-                                    <td>
-                                        <button class="btn btn-sm btn-danger print-btn" type="button"><i class="fa fa-print"></i> 복사하기</button>
-                                    </td>
+                                    <td>{{{timeEventStatusButton start_date end_date state idx}}}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="col-sm-5">
-                        <button class="btn btn-sm btn-warning" type="button" id="detailCopyBtn"> 복사하기</button>
+                        {{^equal idx 0}}
+                            <button class="btn btn-sm btn-primary" type="button" id="detailCopyBtn"> 복사하기</button>
+                        {{/equal}}
                         <button class="btn btn-sm btn-success" type="button" id="detailSaveBtn"> 저장</button>
                     </div>
                 </div>
@@ -434,7 +472,7 @@
                             <th rowspan="2">Main Top</th>
                             <th>PC 이미지</th>
                             <td>
-                                <input type="text" class="form-control" id="main_top_pc_image_url" style="width:70%" value="{{main_top_pc_image_url}}" />
+                                <input type="text" class="form-control" id="main_top_pc_image_url" style="width:70%" value="{{main_top_pc_image_url}}" maxlength="150" />
                                 <button class="btn btn-sm btn-default" type="button">미리보기</button>
                             </td>
                             <td>
@@ -447,7 +485,7 @@
                         <tr>
                             <th>모바일 이미지</th>
                             <td>
-                                <input type="text" class="form-control" id="main_top_mobile_image_url" style="width:70%" value="{{main_top_mobile_image_url}}" />
+                                <input type="text" class="form-control" id="main_top_mobile_image_url" style="width:70%" value="{{main_top_mobile_image_url}}" maxlength="150" />
                                 <button class="btn btn-sm btn-default" type="button">미리보기</button>
                             </td>
                             <td>
@@ -458,7 +496,7 @@
                             <th rowspan="2">Main Center</th>
                             <th>PC 이미지 링크</th>
                             <td>
-                                <input type="text" class="form-control" id="main_center_pc_image_url" style="width:70%" value="{{main_center_pc_image_url}}" />
+                                <input type="text" class="form-control" id="main_center_pc_image_url" style="width:70%" value="{{main_center_pc_image_url}}" maxlength="150" />
                                 <button class="btn btn-sm btn-default" type="button">미리보기</button>
                             </td>
                             <td>
@@ -471,7 +509,7 @@
                         <tr>
                             <th>모바일 링크</th>
                             <td>
-                                <input type="text" class="form-control" id="main_center_mobile_image_url" style="width:70%" value="{{main_center_mobile_image_url}}" />
+                                <input type="text" class="form-control" id="main_center_mobile_image_url" style="width:70%" value="{{main_center_mobile_image_url}}" maxlength="150" />
                                 <button class="btn btn-sm btn-default" type="button">미리보기</button>
                             </td>
                             <td>
@@ -483,7 +521,7 @@
                             <th rowspan="2">스토어 배너</th>
                             <th>PC 이미지 링크</th>
                             <td>
-                                <input type="text" class="form-control" id="store_pc_image_url" style="width:70%" value="{{store_pc_image_url}}" />
+                                <input type="text" class="form-control" id="store_pc_image_url" style="width:70%" value="{{store_pc_image_url}}" maxlength="150" />
                                 <button class="btn btn-sm btn-default" type="button">미리보기</button>
                             </td>
                             <td>
@@ -496,7 +534,7 @@
                         <tr>
                             <th>모바일 링크</th>
                             <td>
-                                <input type="text" class="form-control" id="store_mobile_image_url" style="width:70%" value="{{store_mobile_image_url}}" />
+                                <input type="text" class="form-control" id="store_mobile_image_url" style="width:70%" value="{{store_mobile_image_url}}" maxlength="150" />
                                 <button class="btn btn-sm btn-default" type="button">미리보기</button>
                             </td>
                             <td>
@@ -508,13 +546,13 @@
                         <tr>
                             <th colspan="2">PC 링크</th>
                             <td colspan="3">
-                                <input type="text" class="form-control" id="pc_link_url" style="width:100%" value="{{pc_link_url}}" />
+                                <input type="text" class="form-control" id="pc_link_url" style="width:100%" value="{{pc_link_url}}" maxlength="150" />
                             </td>
                         </tr>
                         <tr>
                             <th colspan="2">모바일 링크</th>
                             <td colspan="3">
-                                <input type="text" class="form-control" id="mobile_link_url" style="width:100%" value="{{mobile_link_url}}" />
+                                <input type="text" class="form-control" id="mobile_link_url" style="width:100%" value="{{mobile_link_url}}" maxlength="150" />
                             </td>
                         </tr>
                     </tbody>

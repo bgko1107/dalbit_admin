@@ -91,6 +91,7 @@ var room_state = [
     , new COMMON_CODE('3', '3', '통화중')
     , new COMMON_CODE('4', '4', '방송종료')
     , new COMMON_CODE('5', '5', 'DJ비정상종료')
+    , new COMMON_CODE('6', '6', '방송준비중(미디어서버 접속 전)')
 ];
 
 var searchRoom_state = [
