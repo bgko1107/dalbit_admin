@@ -256,7 +256,6 @@
             $("#monthDate").show();
             $("#exchangeCheckArea").attr('style', 'display:none !important;');
             $("#searchStateArea").show();
-            $("#searchCheck").hide();
             $("#summaryArea").show();
             $("#div_testIdTable").hide();
             $("#th_bottonList").show();
@@ -271,7 +270,6 @@
             $("#exchangeCheckArea").attr('style', 'display:none !important;');
             $("#searchStateArea").show();
             $("#summaryArea").hide();
-            $("#searchCheck").show();
             $("#div_testIdTable").show();
             $("#th_bottonList").show();
             $("#searchText").show();
@@ -283,7 +281,6 @@
 
         }else if(targetAnchor.prop('id') == 'enableList') {
             $("#monthDate").hide();
-            $("#searchCheck").show();
             $("#th_bottonList").hide();
             $("#searchText").show();
             $("#exchangeCheckArea").show();
