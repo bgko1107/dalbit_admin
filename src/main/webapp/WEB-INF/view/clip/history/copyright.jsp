@@ -256,7 +256,7 @@
         </colgroup>
         <thead>
         <tr>
-            <th colspan="6" class="_bgColor _fontColor" data-bgcolor="black" data-fontcolor="white">총 예상 지불 금액 : 원 </th>
+            <th colspan="5" class="_bgColor _fontColor" data-bgcolor="black" data-fontcolor="white">총 예상 지불 금액 : 원 </th>
         </tr>
         <tr>
             <th class="_bgColor" data-bgcolor="#dae3f3">등록자 수</th>
