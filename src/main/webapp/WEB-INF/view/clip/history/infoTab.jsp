@@ -111,7 +111,7 @@
             $("._nextSearch").show();
             $("#isChoiceDateArea").show();
         }else if(tabId == 'tab_copyright'){
-            slctType = 3;
+            slctType = 1;
         }
         dateType();
 

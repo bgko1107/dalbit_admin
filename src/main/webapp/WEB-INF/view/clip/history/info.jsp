@@ -12,11 +12,18 @@
                             <tr>
                                 <th rowspan="2" style="background-color:#4472c4;color:#e9ee17;width: 70px">
                                     <i class="fa fa-search"></i><br/>검색
+                                </th>
+                                <th id="th_bottonList" style="display: none">
                                     <jsp:include page="../../searchArea/daySearchFunction.jsp"/>
+                                    <div>
+                                        <div id="div_monthButton"><jsp:include page="../../searchArea/monthSearchArea.jsp"/></div>
+                                    </div>
                                 </th>
                             </tr>
                             <tr>
                                 <td style="text-align: left">
+                                    <input id="monthDate" type="text" class="form-control"/>
+
                                     <span id="isChoiceDateArea"></span>
                                     <jsp:include page="../../searchArea/dateRangeSearchArea.jsp"/>
 
@@ -24,10 +31,9 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
+
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
-
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
-
                                     <a href="javascript://" class="_prevSearch">[이전]</a>
                                     <a href="javascript://" class="_todaySearch">[오늘]</a>
                                     <a href="javascript://" class="_nextSearch">[다음]</a>
@@ -68,6 +74,7 @@
     $(function(){
         slctType = 99;
         $("#isChoiceDateArea").append(util.getCommonCodeRadio(-1, clip_isChoiceDate));
+
         dateType();
         $('input[id="searchText"]').keydown(function() {
             if (event.keyCode === 13) {
