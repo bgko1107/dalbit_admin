@@ -70,7 +70,7 @@
             , stateType : Number($("#stateType_select").val())
             , subjectType : Number(common.isEmpty($("#search_clipSubjectType").val()) ? "-1" : $("#search_clipSubjectType").val())
             , orderType : Number($("#orderByType").val())
-            , inner : $('input[name="search_testId"]').is(":checked") ? "0" : "1" // todo - 기획서에 inner조건이 없으나, 프로시저에는 검색 조건에 있어서 추가해두었습니다.
+            , inner : $('input[name="search_testId"]').is(":checked") ? "0" : "1"
             , pageNo : copyrightPagingInfo.pageNo
             , pageCnt : copyrightPagingInfo.pageCnt
         }
@@ -271,8 +271,8 @@
             <td>{{addComma regCnt}} 명</td>
             <td>{{addComma totalClip}} 개</td>
             <td>{{addComma totalPlayCnt}} 회</td>
-            <td>{{addComma }} 원</td>
-            <td>{{addComma }} 원</td>
+            <td></td>
+            <td></td>
         </tr>
         </tbody>
     </table>
