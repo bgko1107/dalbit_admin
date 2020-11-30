@@ -43,46 +43,6 @@
                                 </td>
                             </tr>
                         </table>
-
-
-                        <%--<div class="widget-header searchBoxRow">--%>
-                            <%--<h3 class="title"><i class="fa fa-search"></i> 검색조건</h3>--%>
-                            <%--<div>--%>
-                                <%--&lt;%&ndash;<span id="slctTypeArea"></span>&ndash;%&gt;--%>
-
-                                <%--<div class="input-group date" id="oneDayDatePicker">--%>
-                                    <%--<label for="onedayDate" class="input-group-addon">--%>
-                                        <%--<span><i class="fa fa-calendar" id="onedayDateBtn"></i></span>--%>
-                                    <%--</label>--%>
-                                    <%--<input type="text" class="form-control" id="onedayDate" name="onedayDate">--%>
-                                <%--</div>--%>
-
-                                <%--<div class="input-group date" id="rangeDatepicker" style="display:none;">--%>
-                                    <%--<label for="displayDate" class="input-group-addon">--%>
-                                        <%--<span><i class="fa fa-calendar"></i></span>--%>
-                                    <%--</label>--%>
-                                    <%--<input id="displayDate" type="text" class="form-control" style="width: 196px;"/>--%>
-                                <%--</div>--%>
-
-                                <%--<div class="input-group date" id="yearDatepicker" style="display:none;">--%>
-                                    <%--<label for="yearDate" class="input-group-addon">--%>
-                                        <%--<span><i class="fa fa-calendar"></i></span>--%>
-                                    <%--</label>--%>
-                                    <%--<input id="yearDate" type="text" class="form-control" style="width: 196px;"/>--%>
-                                <%--</div>--%>
-
-                                <%--<input class="hide" name="startDate" id="startDate" style="width: 100px">--%>
-                                <%--<input class="hide" name="endDate" id="endDate" style="width: 100px">--%>
-                                <%--&lt;%&ndash;<input name="startDate" id="startDate" style="width: 100px">&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;<input name="endDate" id="endDate" style="width: 100px">&ndash;%&gt;--%>
-                                <%--<label><input type="text" class="form-control hide" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>--%>
-
-                                <%--<button type="button" class="btn btn-success" id="bt_search">검색</button>--%>
-                                <%--<a href="javascript://" class="_prevSearch">[이전]</a>--%>
-                                <%--<a href="javascript://" class="_todaySearch">[오늘]</a>--%>
-                                <%--<a href="javascript://" class="_nextSearch">[다음]</a>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
                     </div>
                 </div>
             </form>
@@ -135,7 +95,7 @@
 
     $(function() {
         slctType = 1;
-        setDayButton();
+        dateType();
     });
 
     function dataSet(){
