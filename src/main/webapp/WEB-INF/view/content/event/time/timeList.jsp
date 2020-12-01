@@ -182,7 +182,7 @@
      });
 
      $(document).on('click', '#detailSaveBtn', function(){
-         var data = generateTimeEventParam();
+         var data = generateTimeEventParam(false);
          if(data && confirm('저장하시겠습니까?')){
              util.getAjaxData('saveTimeEvent', "/rest/content/event/time/save", data, function(dst_id, response, params){
 
@@ -196,7 +196,7 @@
      });
 
      $(document).on('click', '#detailCopyBtn', function(){
-         var data = generateTimeEventParam();
+         var data = generateTimeEventParam(true);
          if(data && confirm('복사하시겠습니까?')){
              util.getAjaxData('saveTimeEvent', "/rest/content/event/time/copy", data, function(dst_id, response, params){
 
@@ -243,7 +243,7 @@
      /**
       * 등록/수정에 필요한 데이터 가공
       */
-     function generateTimeEventParam(){
+     function generateTimeEventParam(isCopy){
 
          //이벤트 정보
          var idx = $("#idx").val();
@@ -262,10 +262,15 @@
          if(common.isEmpty(event_time)){
              alert('이벤트 시간을 선택해주세요.');
              return false;
-         }else if(moment(start_datetime).format('YYYYMMDDHHmmss') < moment(new Date()).format('YYYYMMDDHHmmss')){
-             alert('이벤트 시간이 현재 시간보다 작습니다.');
-             return false;
          }
+
+         if(!isCopy){
+             if(moment(start_datetime).format('YYYYMMDDHHmmss') < moment(new Date()).format('YYYYMMDDHHmmss')){
+                 alert('이벤트 시간이 현재 시간보다 작습니다.');
+                 return false;
+             }
+         }
+
 
          var rate = $('input[name="rate"]:checked').val();
          if(common.isEmpty(rate)){
