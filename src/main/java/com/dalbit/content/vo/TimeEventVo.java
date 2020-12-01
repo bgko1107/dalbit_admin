@@ -33,6 +33,7 @@ public class TimeEventVo extends PagingVo {
     private int main_top_banner_link_yn;
     private String main_top_pc_link_url;
     private String main_top_mobile_link_url;
+    private int is_cookie;              //쿠키사용여부(0:안함, 1:사용함)
 
     //메인센터 배너
     private int main_center_banner_idx;
