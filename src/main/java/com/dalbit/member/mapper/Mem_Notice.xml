@@ -186,9 +186,9 @@
                 left outer join rd_data.tb_member_basic reba on nore.writer_no = reba.mem_no
                 left outer join rd_data.tb_member_withdrawal_bak rebak on nore.writer_no = rebak.mem_no
                 <include refid="noticeReplyCondition"/>
-            ) as a, (select @rownum := #{pageNo}) as b
+            ) as a, (select @rownum := #{searchStartLimitNo}) as b
         order by a.writeDate desc
-        limit #{pageNo}, #{pageCnt}
+        limit #{searchStartLimitNo}, #{pageCnt}
     </select>
 
     <select id="selectNoticeReplyListCnt" parameterType="com.dalbit.content.vo.BoardAdmNoticeReplyListInputVo" resultType="integer">

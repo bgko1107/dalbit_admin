@@ -83,6 +83,10 @@
         }else if(targetId == "profile_paginate_top" || targetId == "profile_paginate"){
             profilePagingInfo = pagingInfo;
             profileMsgList();
+
+        }else if(targetId == "noticeReply_paginate_top" || targetId == "noticeReply_paginate"){
+            noticeReplyPagingInfo = pagingInfo;
+            broadNoticeReply(pagingInfo.pageNo);
         }
     }
 </script>

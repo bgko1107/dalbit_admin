@@ -32,12 +32,15 @@ public class PagingVo extends BaseVo {
     private int pageCnt;
 
     private int searchStartNo;
+    private int searchStartLimitNo;
     private int searchEndNo;
 
     public void setTotalCnt(int totalCnt){
         this.totalCnt = totalCnt;
         this.searchStartNo = (int)(Math.floor(this.pageStart-1) * this.pageCnt) + 1;
         this.searchEndNo = this.pageStart * this.pageCnt;
+
+        this.searchStartLimitNo = (int)(Math.floor(this.pageStart-1) * this.pageCnt);
 /*
         int pageSt = (int)(Math.floor(this.pageStart-1) * this.pageCnt);
         this.pageStart = 0 < pageSt ? pageSt : 0;*/

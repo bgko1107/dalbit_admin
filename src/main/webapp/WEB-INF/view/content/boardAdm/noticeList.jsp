@@ -142,13 +142,6 @@
         noticeList();
     }
 
-    function handlebarsPaging(targetId, pagingInfo) {
-        if(targetId == "notice_paginate_top" || targetId == "notice_paginate") {
-            noticePagingInfo = pagingInfo;
-            noticeList(pagingInfo.pageNo);
-        }
-    }
-
 </script>
 
 <script id="tmp_noticeTable" type="text/x-handlebars-template">
