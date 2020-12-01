@@ -289,6 +289,7 @@
          }
 
          var detail_iosJudgeViewOn = $("#detail_iosJudgeViewOn").prop('checked') ? 1 : 0;
+         var detail_is_cookie = $("#detail_is_cookie").prop('checked') ? 1 : 0;
 
          if($("#main_top_banner_link_yn").prop('checked') || $("#main_center_banner_link_yn").prop('checked') || $("#store_banner_link_yn").prop('checked')){
              if(common.isEmpty($("#pc_link_url").val())){
@@ -315,10 +316,11 @@
              , main_top_pc_image_url : $("#main_top_pc_image_url").val()
              , main_top_mobile_image_url : $("#main_top_mobile_image_url").val()
              , main_top_banner_link_yn : $('input[name="main_top_banner_link_yn"]').prop('checked') ? 1 : 0
-             , main_center_banner_idx : $("#main_center_banner_idx").val()
+             , is_cookie : detail_is_cookie
+             /*, main_center_banner_idx : $("#main_center_banner_idx").val()
              , main_center_pc_image_url : $("#main_center_pc_image_url").val()
              , main_center_mobile_image_url : $("#main_center_mobile_image_url").val()
-             , main_center_banner_link_yn : $('input[name="main_center_banner_link_yn"]').prop('checked') ? 1 : 0
+             , main_center_banner_link_yn : $('input[name="main_center_banner_link_yn"]').prop('checked') ? 1 : 0*/
              , store_banner_idx : $("#store_banner_idx").val()
              , store_pc_image_url : $("#store_pc_image_url").val()
              , store_mobile_image_url : $("#store_mobile_image_url").val()
@@ -406,7 +408,7 @@
         <form id="detailFrm">
             <input type="hidden" id="idx" name="idx" value="{{idx}}" />
             <input type="hidden" id="main_top_banner_idx" name="main_top_banner_idx" value="{{main_top_banner_idx}}" />
-            <input type="hidden" id="main_center_banner_idx" name="main_center_banner_idx" value="{{main_center_banner_idx}}" />
+            <!--<input type="hidden" id="main_center_banner_idx" name="main_center_banner_idx" value="{{main_center_banner_idx}}" />-->
             <input type="hidden" id="store_banner_idx" name="store_banner_idx" value="{{store_banner_idx}}" />
             <div class="col-lg-12 form-inline mb15">
                 <div class="row">
@@ -466,21 +468,22 @@
                         <col width="10%"/>
                         <col width="30%"/>
                         <col width="20%"/>
-                        <col width="30%"/>
+                        <col width="20%"/>
+                        <col width="10%"/>
                     </colgroup>
                     <thead>
                     <tr>
-                        <th colspan="5">배너 정보</th>
+                        <th colspan="7">배너 정보</th>
                     </tr>
                     </thead>
                         <tr>
                             <th colspan="2">플랫폼</th>
                             <td>{{{getCommonCodeHorizontalCheck platform 'content_platform2'}}}</td>
                             <th>IOS 심사중 노출</th>
-                            <td>{{{getOnOffSwitch ios_judge_view_on 'iosJudgeViewOn'}}}</td>
+                            <td colspan="3">{{{getOnOffSwitch ios_judge_view_on 'iosJudgeViewOn'}}}</td>
                         </tr>
                         <tr>
-                            <th rowspan="2">Main Top</th>
+                            <th rowspan="2">Main 이미지 팝업</th>
                             <th>PC 이미지</th>
                             <td>
                                 <input type="text" class="form-control" id="main_top_pc_image_url" style="width:70%" value="{{main_top_pc_image_url}}" maxlength="150" />
@@ -491,6 +494,12 @@
                             </td>
                             <td rowspan="2">
                                 {{{getCommonCodeHorizontalCheck main_top_banner_link_yn 'time_event_link_yn' 'Y' 'main_top_banner_link_yn'}}}
+                            </td>
+                            <th rowspan="2">
+                               오늘하루 열지않기
+                            </th>
+                            <td rowspan="2">
+                                {{{getOnOffSwitch is_cookie 'is_cookie'}}}
                             </td>
                         </tr>
                         <tr>
@@ -503,7 +512,7 @@
                                 <div class="_prevArea"></div>
                             </td>
                         </tr>
-                        <tr>
+                        <!--<tr>
                             <th rowspan="2">Main Center</th>
                             <th>PC 이미지 링크</th>
                             <td>
@@ -526,7 +535,7 @@
                             <td>
                                 <div class="_prevArea"></div>
                             </td>
-                        </tr>
+                        </tr>-->
 
                         <tr>
                             <th rowspan="2">스토어 배너</th>
@@ -541,6 +550,7 @@
                             <td rowspan="2">
                                 {{{getCommonCodeHorizontalCheck store_banner_link_yn 'time_event_link_yn' 'Y' 'store_banner_link_yn'}}}
                             </td>
+                            <td rowspan="2" colspan="2">-</td>
                         </tr>
                         <tr>
                             <th>모바일 링크</th>
@@ -555,13 +565,13 @@
 
                         <tr>
                             <th colspan="2">PC 링크</th>
-                            <td colspan="3">
+                            <td colspan="5">
                                 <input type="text" class="form-control" id="pc_link_url" style="width:100%" value="{{pc_link_url}}" maxlength="150" />
                             </td>
                         </tr>
                         <tr>
                             <th colspan="2">모바일 링크</th>
-                            <td colspan="3">
+                            <td colspan="5">
                                 <input type="text" class="form-control" id="mobile_link_url" style="width:100%" value="{{mobile_link_url}}" maxlength="150" />
                             </td>
                         </tr>
