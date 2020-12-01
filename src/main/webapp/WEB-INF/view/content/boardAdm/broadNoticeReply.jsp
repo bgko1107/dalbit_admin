@@ -115,6 +115,11 @@
         broadNoticeReply();
     });
 
+    function handlebarsPaging(targetId, pagingInfo){
+        noticeReplyPagingInfo = pagingInfo;
+        broadNoticeReply();
+    }
+
 </script>
 
 <script id="tmp_noticeReplyTable" type="text/x-handlebars-template">
