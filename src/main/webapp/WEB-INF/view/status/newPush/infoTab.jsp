@@ -8,8 +8,8 @@
         <div class="row col-lg-12 form-inline" style="padding-top: 2px; padding-bottom: 0px;">
             <div class="widget-content">
                 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
-                    <li class="active"><a href="#time" role="tab" data-toggle="tab" id="tab_time">시간대 현황</a></li>
-                    <li><a href="#day" role="tab" data-toggle="tab" id="tab_day">일별 현황</a></li>
+                    <li><a href="#time" role="tab" data-toggle="tab" id="tab_time">시간대 현황</a></li>
+                    <li class="active"><a href="#day" role="tab" data-toggle="tab" id="tab_day">일별 현황</a></li>
                     <li><a href="#month" role="tab" data-toggle="tab" id="tab_month">월간 현황</a></li>
                     <li><a href="#year" role="tab" data-toggle="tab" id="tab_year">연간 현황</a></li>
                     <li><a href="#notice" role="tab" data-toggle="tab" id="tab_notice">알림 수신 설정현황</a></li>
@@ -18,8 +18,8 @@
 
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane fade in active" id="time"><jsp:include page="time.jsp"/></div>
-                    <div class="tab-pane fade" id="day"><jsp:include page="day.jsp"/></div>
+                    <div class="tab-pane fade" id="time"><jsp:include page="time.jsp"/></div>
+                    <div class="tab-pane fade  in active" id="day"><jsp:include page="day.jsp"/></div>
                     <div class="tab-pane fade" id="month"><jsp:include page="month.jsp"/></div>
                     <div class="tab-pane fade" id="year"><jsp:include page="year.jsp"/></div>
                     <div class="tab-pane fade" id="notice"><jsp:include page="notice.jsp"/></div>
@@ -33,7 +33,7 @@
 <!-- /#wrapper -->
 
 <script type="text/javascript">
-    var tabId = 'tab_time';
+    var tabId = 'tab_day';
     $("#tablist_con li a").on('click', function(){
         tabId = $(this).prop('id');
         $("#searchText").hide();

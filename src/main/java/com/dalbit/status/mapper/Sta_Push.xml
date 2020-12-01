@@ -22,23 +22,8 @@
                 history.idx
                 ,history.send_date
                 ,history.target_mem
-                ,history.target_platform
-                ,history.push_slct
-                ,history.push_type
-                ,history.image_type
-                ,history.send_type
-                ,history.target_cnt
-                ,history.send_title
-                ,history.send_cont
                 ,IF(history.admin_idx = '0', history.mem_no, NULL)  AS mem_no
                 ,IF(history.admin_idx = '0', history.mem_nick, admin.op_name)   AS mem_nick
-                ,history.send_etc
-                ,history.send_cnt
-                ,history.succ_cnt
-                ,history.fail_cnt
-                ,history.succ_rate
-                ,history.click_cnt
-                ,history.click_rate
                 ,history.admin_idx
                 ,history.ins_date
                 ,history.last_upd_date
@@ -66,27 +51,17 @@
                 <if test='push_slct != null and push_slct != "" and push_slct != "-1"'>
                     AND history.push_slct = #{push_slct}
                 </if>
+
+                <if test='searchText != null and searchText != ""'>
+                    AND (history.send_title like concat ('%', #{searchText}, '%')
+                    OR history.send_cont like concat ('%', #{searchText}, '%')
+                    OR (history.mem_no like concat ('%', #{searchText}, '%')
+                    OR history.mem_nick like concat ('%', #{searchText}, '%'))
+                    OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                </if>
+
             </where>
-        ) AS a,
-        (select @rownum := #{pageStart}) AS b
-        <where>
-            <if test='searchText != null and searchText != ""'>
-                <choose>
-                    <when test='searchType == 1'>
-                        AND a.send_title like concat ('%', #{searchText}, '%')
-                    </when>
-                    <when test='searchType == 2'>
-                        AND a.send_cont like concat ('%', #{searchText}, '%')
-                    </when>
-                    <when test='searchType == 3'>
-                        AND (a.mem_no like concat ('%', #{searchText}, '%') OR a.mem_nick like concat ('%', #{searchText}, '%'))
-                    </when>
-                    <otherwise>
-                        AND (a.send_title like concat ('%', #{searchText}, '%') OR a.send_cont like concat ('%', #{searchText}, '%') OR (a.mem_no like concat ('%', #{searchText}, '%') OR a.mem_nick like concat ('%', #{searchText}, '%')))
-                    </otherwise>
-                </choose>
-            </if>
-        </where>
+        ) AS a
     </select>
 
     <select id="callPushHistoryList" parameterType="com.dalbit.status.vo.procedure.P_PushHistoryInputVo" resultType="com.dalbit.status.vo.procedure.P_PushHistoryOutputVo">
@@ -152,18 +127,17 @@
                 <if test='push_send_user == "2"'>
                   AND admin.op_name is null
                 </if>
+
+                <if test='searchText != null and searchText != ""'>
+                    AND (history.send_title like concat ('%', #{searchText}, '%')
+                    OR history.send_cont like concat ('%', #{searchText}, '%')
+                    OR (history.mem_no like concat ('%', #{searchText}, '%')
+                    OR history.mem_nick like concat ('%', #{searchText}, '%'))
+                    OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                </if>
             </where>
         ) AS a,
         (select @rownum := #{pageStart}) AS b
-        <where>
-            <if test='searchText != null and searchText != ""'>
-                    AND (a.send_title like concat ('%', #{searchText}, '%')
-                        OR a.send_cont like concat ('%', #{searchText}, '%')
-                        OR (a.mem_no like concat ('%', #{searchText}, '%')
-                        OR a.mem_nick like concat ('%', #{searchText}, '%'))
-                        OR ifnull(admin.op_name,'자동') like like concat ('%', #{searchText}, '%'))
-            </if>
-        </where>
         <trim prefix="ORDER BY">
             a.ins_date desc
         </trim>

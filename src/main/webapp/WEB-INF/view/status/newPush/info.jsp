@@ -91,7 +91,7 @@
         if(!common.isEmpty(tabType)){
             $("#tablist_con li.active a").click();
         }else{
-            slctType = 0;
+            slctType = 1;
             setDayButton();
         }
 
