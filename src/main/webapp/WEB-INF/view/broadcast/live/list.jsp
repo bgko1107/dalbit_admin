@@ -338,11 +338,8 @@
         formData.append("dj_searchText", tmp_dj_searchText);
         formData.append("room_slctType", tmp_room_slctType);
         formData.append("room_liveType", room_liveType);
-        /*formData.append("startDate", $("#onedayDate").val() + ' 00:00:00');
-        formData.append("endDate", $("#onedayDate").val() + ' 23:59:59');*/
-
-        formData.append("startDate", '2020-11-20 00:00:00');
-        formData.append("endDate", '2020-11-24 23:59:59');
+        formData.append("startDate", $("#onedayDate").val() + ' 00:00:00');
+        formData.append("endDate", $("#onedayDate").val() + ' 23:59:59');
         util.excelDownload($(this), "/rest/broadcast/broadcast/liveListExcel", formData)
     });
 

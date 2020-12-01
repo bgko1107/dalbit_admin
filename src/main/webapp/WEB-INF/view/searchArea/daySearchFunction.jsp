@@ -283,9 +283,8 @@
     }
 
     function dateRangePrev(isPrev){
-        var addDate = isPrev ? -1 : 1;
-        $("#startDate").val(moment($("#startDate").val()).add("days", addDate).format('YYYY.MM.DD'));
-        $("#endDate").val(moment($("#endDate").val()).add("days", addDate).format('YYYY.MM.DD'));
+        $("#startDate").val(moment($("#startDate").val()).add("days", isPrev).format('YYYY.MM.DD'));
+        $("#endDate").val(moment($("#endDate").val()).add("days", isPrev).format('YYYY.MM.DD'));
         $("#displayDate").val($("#startDate").val() + " - " + $("#endDate").val());
         $("#bt_search").click();
     }

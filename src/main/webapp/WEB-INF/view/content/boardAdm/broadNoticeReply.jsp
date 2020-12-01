@@ -46,8 +46,13 @@
         // $("#searchType_boardReply").html(util.getCommonCodeSelect(-1, searchType_board, "N","searchType_boardReply"));
     });
 
-    function broadNoticeReply() {
+    function broadNoticeReply(pagingInfo) {
         $('#title').html('회원/방송공지');
+        if(!common.isEmpty(pagingInfo)){
+            noticeReplyPagingInfo.pageNo = pagingInfo;
+        }else{
+            noticeReplyPagingInfo.pageNo = 1;
+        }
 
         var data = {
             'pageStart' : noticeReplyPagingInfo.pageNo
@@ -72,7 +77,6 @@
         noticeReplyPagingInfo.totalCnt = response.pagingVo.totalCnt;
         util.renderPagingNavigation('noticeReply_paginate_top', noticeReplyPagingInfo);
         util.renderPagingNavigation('noticeReply_paginate', noticeReplyPagingInfo);
-        noticeReplyPagingInfo.pageNo=1;
 
         if(response.data.length == 0) {
             $("#noticeReply_paginate_top").hide();
@@ -114,11 +118,6 @@
     $('#noticeReplayStatus').on('change', function () {
         broadNoticeReply();
     });
-
-    function handlebarsPaging(targetId, pagingInfo){
-        noticeReplyPagingInfo = pagingInfo;
-        broadNoticeReply();
-    }
 
 </script>
 
