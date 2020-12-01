@@ -169,7 +169,7 @@
                 or start_date <![CDATA[<=]]> #{end_date} and #{end_date} <![CDATA[<=]]> end_date
             )
             and start_date != '9999.12.31 00:00:00'
-            and state = 0
+            and `state` = 0
     </select>
 
     <insert id="copyTimeEvent" parameterType="com.dalbit.content.vo.TimeEventVo">
