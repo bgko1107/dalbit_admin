@@ -65,11 +65,11 @@
     }
 
     function monthClick(id, paramYear, paramMonth, paramDay){
-        // console.log("----------------- monthClick");
-        // console.log(id);
-        // console.log(paramYear);
-        // console.log(paramMonth);
-        // console.log(paramDay);
+        console.log("----------------- monthClick");
+        console.log(id);
+        console.log(paramYear);
+        console.log(paramMonth);
+        console.log(paramDay);
 
          $(".dayButton").empty();
         year = paramYear;
@@ -98,12 +98,12 @@
     }
 
     function dayClick(id, paramYear, paramMonth, paramDay){
-        // console.log("----------------- dayClick");
-        // console.log(id);
-        // console.log(paramYear);
-        // console.log(paramMonth);
-        // console.log(paramDay);
-        // console.log(day);
+        console.log("----------------- dayClick");
+        console.log(id);
+        console.log(paramYear);
+        console.log(paramMonth);
+        console.log(paramDay);
+        console.log(day);
 
         var lastDay = new Date(paramYear,paramMonth,-1).getDate() + 1;
 
@@ -132,6 +132,13 @@
             $("#startDate").val(selectDate.substr(0,5) + "01.01");
             $("#endDate").val(selectDate.substr(0,5) + "12.31");
             $("._searchDate").html(moment($("#startDate").val()).format('YYYY년'));
+        }else if(slctType == 4){
+            $("#onedayDate").val(selectDate);
+            var monday = getMonday(selectDate);       // 선택한 날의 월요일
+            var startDate = monday;
+            var endDate = new Date(Date.parse(monday) + 6 * 1000 * 60 * 60 * 24);
+            $("#startDate").val(startDate.getFullYear() + "." + common.lpad(startDate.getMonth() + 1,2,"0") + "." + common.lpad(startDate.getDate(),2,"0"));
+            $("#endDate").val(endDate.getFullYear() + "." + common.lpad(endDate.getMonth() + 1,2,"0") + "." + common.lpad(endDate.getDate(),2,"0"));
         }
 
         $("#bt_search").click();
@@ -169,7 +176,7 @@
         }else if(paramSlctType == 99){          // 99 : 검색창만
             $("#bt_search").click();
         }else if(common.isEmpty(paramSlctType)){
-            if(slctType == 0 ){
+            if(slctType == 0 || slctType == 4){
                 setDayButton();
                 $("#onedayDate").show();
                 $("#div_dayButton").show();
@@ -226,14 +233,17 @@
 
         var addDate = isPrev ? -1 : 1;
 
-        if(slctType == 0) {
+        if(slctType == 0) {                 // 일간
             dayButtonPrev(addDate);
-        }else if(slctType == 1) {
+        }else if(slctType == 1) {           // 월간
             monthButtonPrev(addDate);
-        }else if(slctType == 2) {
+        }else if(slctType == 2) {           // 연간
             yearButtonPrev(addDate);
-        }else if(slctType == 3) {
+        }else if(slctType == 3) {           // 기간 선택
             dateRangePrev(addDate);
+        }else if(slctType == 4) {           // 주간
+            dayButtonPrev(addDate);
+            weekRangePrev(addDate);
         }
     }
 
@@ -278,6 +288,32 @@
         $("#endDate").val(moment($("#endDate").val()).add("days", addDate).format('YYYY.MM.DD'));
         $("#displayDate").val($("#startDate").val() + " - " + $("#endDate").val());
         $("#bt_search").click();
+    }
+
+
+    function getMonday(str) {
+        var y = str.substr(0, 4);
+        var m = str.substr(5, 2);
+        var d = str.substr(8, 2);
+        d = new Date(y,m-1,d);
+        var day = d.getDay(),
+            diff = d.getDate() - day + (day == 0 ? -6:1);
+        return new Date(d.setDate(diff));
+    }
+    function setMonday(){
+        var monday = getMonday($("#onedayDate").val());       // 선택한 날의 월요일
+        var startDate = monday;
+        var endDate = new Date(Date.parse(monday) + 6 * 1000 * 60 * 60 * 24);
+        $("#startDate").val(startDate.getFullYear() + "." + common.lpad(startDate.getMonth() + 1,2,"0") + "." + common.lpad(startDate.getDate(),2,"0"));
+        $("#endDate").val(endDate.getFullYear() + "." + common.lpad(endDate.getMonth() + 1,2,"0") + "." + common.lpad(endDate.getDate(),2,"0"));
+    }
+
+    function weekRangePrev(week){
+        var monday = getMonday($("#onedayDate").val());       // 선택한 날의 월요일
+        var startDate = monday;
+        var endDate = new Date(Date.parse(monday) + 6 * 1000 * 60 * 60 * 24);
+        $("#startDate").val(startDate.getFullYear() + "." + common.lpad(startDate.getMonth() + 1,2,"0") + "." + common.lpad(startDate.getDate(),2,"0"));
+        $("#endDate").val(endDate.getFullYear() + "." + common.lpad(endDate.getMonth() + 1,2,"0") + "." + common.lpad(endDate.getDate(),2,"0"));
     }
 
 </script>
