@@ -269,6 +269,13 @@ var clip_copyright_searchStateType = [
     , new COMMON_CODE('5', '5', '숨기기')
 ];
 
+var clip_copyright_orderbyType = [
+    new COMMON_CODE(null, 'clipOrderByType', '정렬')
+    , new COMMON_CODE('1', '1', '청취 수 많은 순으로')
+    , new COMMON_CODE('2', '2', '최근 등록 순으로')
+    , new COMMON_CODE('3', '3', '누적 등록이 많은 순으로')
+];
+
 var clip_copyrightDetail_searchType = [
     new COMMON_CODE(null, 'searchType', '검색 조건')
     , new COMMON_CODE('all', '0', '회원검색(전체)')
@@ -278,4 +285,3 @@ var clip_copyrightDetail_searchType = [
     , new COMMON_CODE('memNick', '4', '전화번호')
     , new COMMON_CODE('ip', '5', 'ip')
 ];
-

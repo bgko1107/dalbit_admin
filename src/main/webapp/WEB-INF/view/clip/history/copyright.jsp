@@ -19,7 +19,7 @@
     </div>
     <div class="widget-footer">
         <span>
-            <%--<button class="btn btn-default print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>--%>
+            <button class="btn btn-default print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
         </span>
     </div>
 </div>
@@ -31,7 +31,7 @@
 
     var beforeClipStateType = 0;
     var beforeClipSubjectType = -1;
-    var beforeOrderByType = 3;
+    var beforeOrderByType = 1;
 
     $(document).on('change', "#stateType_select, #search_clipSubjectType, #orderByType, #search_testId", function(){
         beforeClipStateType = $("#stateType_select").val();
@@ -47,7 +47,7 @@
     function getHistoryCopyright() {
 
         $("#search_clipStateType").html(util.getCommonCodeSelect(beforeClipStateType, clip_copyright_searchStateType, 'N', 'stateType_select'));
-        $("#search_clipOrderByType").html(util.getCommonCodeSelect(beforeOrderByType, clip_orderByType, 'N', 'orderByType'));
+        $("#search_clipOrderByType").html(util.getCommonCodeSelect(beforeOrderByType, clip_copyright_orderbyType, 'N', 'orderByType'));
         getClipSubjectCodeDefine();
 
         initDataTable_clipCopyright();
@@ -77,7 +77,11 @@
         util.getAjaxData("getHistoryCopyright", "/rest/clip/history/copyright/list", data, function fn_getHistoryCopyright_success(dst_id, response) {
             var template = $('#tmp_clipCopyrightList').html();
             var templateScript = Handlebars.compile(template);
-            var context = response.data.list;
+
+            response.data.year = moment($('#startDate').val()).format("YYYY");
+            response.data.month = moment($('#startDate').val()).format("MM");
+
+            var context = response.data;
             var html = templateScript(context);
 
             $('#clipCopyrightList').html(html);
@@ -173,6 +177,19 @@
         $("#search_clipSubjectType").val(beforeClipSubjectType);
     }
 
+    $('#excelDownBtn').on('click', function() {
+        var formElement = document.querySelector("form");
+        var formData = new FormData(formElement);
+        formData.append("searchDate", moment($('#startDate').val()).format("YYYY-MM-01"));
+        formData.append("stateType", $("#stateType_select").val());
+        formData.append("subjectType", common.isEmpty($("#search_clipSubjectType").val()) ? "-1" : $("#search_clipSubjectType").val());
+        formData.append("orderType", $("#orderByType").val());
+        formData.append("inner", $('input[name="search_testId"]').is(":checked") ? "0" : "1");
+        formData.append("pageNo", copyrightPagingInfo.pageNo);
+        util.excelDownload($(this), "/rest/clip/history/copyright/listExcel", formData, function fn_success_excel() {
+            console.log("fn_success_excel");
+        });
+    });
 </script>
 
 <script id="tmp_codeDefine" type="text/x-handlebars-template">
@@ -201,24 +218,24 @@
             <col width="5"/>
         </colgroup>
         <thead>
-            <tr>
-                <th>No.</th>
-                <th>회원번호</th>
-                <th>주제</th>
-                <th>녹음시간<br />[듣기]</th>
-                <th>클립정보</th>
-                <th>등록일시</th>
-                <th>커버 곡명<br />(유저)</th>
-                <th>커버 가수<br />(유저)</th>
-                <th>커버 곡명<br />(관리자)</th>
-                <th>커버 가수<br />(관리자)</th>
-                <th>저장</th>
-                <th>청취 횟수</th>
-                <th>상태</th>
-            </tr>
+        <tr>
+            <th>No.</th>
+            <th>회원번호</th>
+            <th>주제</th>
+            <th>녹음시간<br />[듣기]</th>
+            <th>클립정보</th>
+            <th>등록일시</th>
+            <th>커버 곡명<br />(유저)</th>
+            <th>커버 가수<br />(유저)</th>
+            <th>커버 곡명<br />(관리자)</th>
+            <th>커버 가수<br />(관리자)</th>
+            <th>저장</th>
+            <th>청취 횟수</th>
+            <th>상태</th>
+        </tr>
         </thead>
         <tbody>
-            {{#each this as |data|}}
+        {{#each this.list as |data|}}
             <tr>
                 <td>{{rowNum}}</td>
                 <td>{{{memNoLink mem_no mem_no}}} <br />{{nickName}}</td>
@@ -236,14 +253,19 @@
                 <td><input type="text" class="form-control _trim" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" maxlength="50" /></td>
                 <td><input type="text" class="form-control _trim" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" maxlength="50" /></td>
                 <td><button type="button" class="_adminCover btn btn-primary" data-idx="{{clipIdx}}">저장</button></td>
-                <td><a href="javascript://" class="_openClipCopyrightDetailPop" data-clipno="{{cast_no}}">{{addComma playCnt}}</a></td>
+                <td>
+                    {{^equal playCnt '0'}}
+                    <a href="javascript://" class="_openClipCopyrightDetailPop" data-clipno="{{../cast_no}}" data-year="{{../../year}}" data-month="{{../../month}}">{{addComma ../playCnt}}</a>
+                    {{/equal}}
+                    {{#equal playCnt '0'}}{{/equal}}
+                </td>
                 <td>
                     {{#dalbit_if state '==' '1'}} 정상 {{/dalbit_if}}
                     {{#dalbit_if state '==' '4'}} <span style="color:red;font-weight:bold">삭제</span> {{/dalbit_if}}
                     {{#dalbit_if state '==' '5'}} <span style="color:red;font-weight:bold">삭제</span> <br /> ({{opName}}) {{/dalbit_if}}
                 </td>
             </tr>
-            {{/each}}
+        {{/each}}
         </tbody>
     </table>
 </script>

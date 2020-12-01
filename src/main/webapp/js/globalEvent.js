@@ -83,7 +83,8 @@ $(document).on('click', '._openClipInfoPop', function(){
 
 /*클립 청취 횟수 상세 팝업*/
 $(document).on('click', '._openClipCopyrightDetailPop', function(){
-    var url = "/clip/history/popup/clipCopyrightDetailPopup?clipNo=" + encodeURIComponent($(this).data('clipno'));
+    var url = "/clip/history/popup/clipCopyrightDetailPopup?clipNo=" + encodeURIComponent($(this).data('clipno')) + "&year=" + encodeURIComponent($(this).data('year'))
+        + "&month=" +encodeURIComponent($(this).data('month'));
 
     util.windowOpen(url, 1050, 730, 'clipPlayCntInfo');
 });

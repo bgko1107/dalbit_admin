@@ -3,6 +3,8 @@
 <c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %></c:set>
 <%
     String in_clipNo = request.getParameter("clipNo");
+    String in_year = request.getParameter("year");
+    String in_month = request.getParameter("month");
 %>
 
 
@@ -70,13 +72,12 @@
     var copyrightDetailPagingInfo = new PAGING_INFO(0,1,50);
 
     var clipNo = "<%=in_clipNo%>";
+    var year = "<%=in_year%>";
+    var month = "<%=in_month%>";
 
     $(document).ready(function() {
-       var date = new Date();
-       date = moment(date).format('YYYY.MM.DD')
-       var monthFormat = moment(date).format('MM');
-       $('#search_year').html(util.getCommonCodeSelect('', search_exchange_years, 'N', 'searchYear'));
-       $('#search_month').html(util.getCommonCodeSelect(monthFormat, search_exchange_months, 'N', 'searchMonth'));
+       $('#search_year').html(util.getCommonCodeSelect(year, search_exchange_years, 'N', 'searchYear'));
+       $('#search_month').html(util.getCommonCodeSelect(month, search_exchange_months, 'N', 'searchMonth'));
        $('#search_memInfo').html(util.getCommonCodeSelect('0', clip_copyrightDetail_searchType, 'N', 'searchType'));
 
         getCopyrightDetail();
