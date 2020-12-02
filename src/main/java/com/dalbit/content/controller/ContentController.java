@@ -156,6 +156,11 @@ public class ContentController {
         return "content/ios/list";
     }
 
+    @GetMapping("/push/list")
+    public String list() {
+        return "content/push/list";
+    }
+
     @GetMapping("/ios/version")
     @ResponseBody
     public String iosVersion(){
