@@ -18,7 +18,7 @@ var questionDataTableSource = {
                 }},
             {'title': '플랫폼', 'data': 'platform','width':'60px'},
             {'title': 'Browser', 'data': 'browser','width':'60px'},
-            {'title': '회원번호', 'data': 'mem_no','width':'100px','render': function (data, type, row, meta) {
+            {'title': '회원번호', 'data': 'mem_no','width':'150px','render': function (data, type, row, meta) {
                     var tmp = util.memNoLink(data, row.mem_no);
                     if(row.mem_state == 1){
                         tmp = tmp + '<br/>' +  row.mem_level +" / "+ row.mem_grade;
@@ -101,7 +101,7 @@ var questionDataTableSource = {
                 }},
             {'title': '플랫폼', 'data': 'platform','width':'60px'},
             {'title': 'Browser', 'data': 'browser','width':'60px'},
-            {'title': '회원번호', 'data': 'mem_no','width':'100px','render': function (data, type, row, meta) {
+            {'title': '회원번호', 'data': 'mem_no','width':'150px','render': function (data, type, row, meta) {
                     var tmp = util.memNoLink(data, row.mem_no);
                     if(row.mem_state == 1){
                         tmp = tmp + '<br/>' +  row.mem_level +" / "+ row.mem_grade;
@@ -124,7 +124,7 @@ var questionDataTableSource = {
                     return common.addComma(data) + " 건";
                 }},
 
-            {'title': '문의제목', 'className':'break-word', 'data': 'question_title',  'render': function (data, type, row, meta) {
+            {'title': '문의제목', 'className':'break-word', 'width':'350px', 'data': 'question_title',  'render': function (data, type, row, meta) {
                     return '<a href="javascript://" class="getQuestDetail" onclick="javascript:getQuestDetail('+meta.row+');">'+data+'</a>'
                 }},
             {'title': '첨부<br>파일', 'data': 'fileCnt','width':'40px', 'render' : function(data, type, row, meta){
