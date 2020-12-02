@@ -30,9 +30,9 @@
 
 
 <script type="text/javascript">
-    var beforeClipTypeOpen = 0;
-    var beforeClipConfirmType = 0;
-    var beforeClipStateType = 0;
+    var beforeClipTypeOpen = -1;
+    var beforeClipConfirmType = -1;
+    var beforeClipStateType = -1;
     var beforeOrderByType = 0;
     var beforeClipSubjectType = -1;
 
@@ -75,7 +75,7 @@
         $("#select_clipTypeOpen").html(util.getCommonCodeSelect(beforeClipTypeOpen, clip_typeOpen_select));
         $("#select_clipConfirmType").html(util.getCommonCodeSelect(beforeClipConfirmType, clip_confirmType_select));
         $("#select_clipStateType").html(util.getCommonCodeSelect(beforeClipStateType, clip_stateType_select));
-        $("#select_clipOrderByType").html(util.getCommonCodeSelect(beforeOrderByType, clip_orderByType));
+        $("#select_clipOrderByType").html(util.getCommonCodeSelect(0, clip_orderByType));
         getClipSubjectTypeCodeDefine();
 
         initDataTable_clipHistory();
