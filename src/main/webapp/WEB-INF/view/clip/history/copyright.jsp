@@ -265,6 +265,10 @@
                     {{#dalbit_if state '==' '5'}} <span style="color:red;font-weight:bold">삭제</span> <br /> ({{opName}}) {{/dalbit_if}}
                 </td>
             </tr>
+        {{else}}
+            <tr>
+                <td colspan="13" class="noData">{{isEmptyData}}</td>
+            </tr>
         {{/each}}
         </tbody>
     </table>
