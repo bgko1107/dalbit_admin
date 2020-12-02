@@ -1192,11 +1192,11 @@
                 <td>{{addComma totalInfo.total_levelup_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_ranking_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_recovery_Cnt 'Y'}}</td>
+                <td>{{addComma totalInfo.total_specialdj_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_attendance_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_roulette_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_eventauto_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_eventdirect_Cnt 'Y'}}</td>
-                <td>{{addComma totalInfo.total_specialdj_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_testin_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_incTotal_Cnt 'Y'}}</td>
                 <td style="background-color: white; border-bottom: hidden;border-top: hidden;"></td>
@@ -1230,11 +1230,11 @@
                     <td>{{addComma levelup_Cnt 'Y'}}</td>
                     <td>{{addComma ranking_Cnt 'Y'}}</td>
                     <td>{{addComma recovery_Cnt 'Y'}}</td>
+                    <td>{{addComma specialdj_Cnt 'Y'}}</td>
                     <td>{{addComma attendance_Cnt 'Y'}}</td>
                     <td>{{addComma roulette_Cnt 'Y'}}</td>
                     <td>{{addComma eventauto_Cnt 'Y'}}</td>
                     <td>{{addComma eventdirect_Cnt 'Y'}}</td>
-                    <td>{{addComma specialdj_Cnt 'Y'}}</td>
                     <td>{{addComma testin_Cnt 'Y'}}</td>
                     <td class="_bgColor" data-bgcolor="#d9d9d9">{{addComma sub_incTotal_Cnt 'Y'}}</td>
                     <td class="{{upAndDownClass sub_inc_Cnt}}"> <i class="fa {{upAndDownIcon sub_inc_Cnt}}"></i> {{addComma sub_inc_Cnt 'Y'}} </td>
@@ -1264,11 +1264,11 @@
                     <td>{{addComma totalInfo.total_levelup_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_ranking_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_recovery_Cnt 'Y'}}</td>
+                    <td>{{addComma totalInfo.total_specialdj_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_attendance_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_roulette_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_eventauto_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_eventdirect_Cnt 'Y'}}</td>
-                    <td>{{addComma totalInfo.total_specialdj_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_testin_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_incTotal_Cnt 'Y'}}</td>
                     <td></td>
