@@ -106,11 +106,20 @@ public class Con_TimeEventService {
 
         if(timeEventVo.getIdx() == 0){
 
-            //메인 탑 배너 등록
+            //메인 탑 배너 등록 => 메인 팝업으로 변경됨.(2020.12.01)
             var mainTopBanner = new P_bannerInsertVo();
             mainTopBanner.setTitle(banner_title);
             mainTopBanner.setPlatform(banner_platform);
             mainTopBanner.setIosJudgeViewOn(banner_ios_judge_view_on);
+            mainTopBanner.setIs_cookie(timeEventVo.getIs_cookie());
+            mainTopBanner.setPopup_type(0); //이미지 팝업
+            mainTopBanner.setIs_title_view(0); //제목 노출여부
+            if(timeEventVo.getMain_top_banner_link_yn() == 1){
+                mainTopBanner.setIs_button_view(1); //버튼 노출여부
+            }else{
+                mainTopBanner.setIs_button_view(0); //버튼 노출여부
+            }
+
             mainTopBanner.setView_type(banner_view_type);
             mainTopBanner.setSex(banner_sex);
             mainTopBanner.setFrequency_rate(banner_frequency_rate);
@@ -119,7 +128,7 @@ public class Con_TimeEventService {
             mainTopBanner.setEnd_datetime(banner_end_datetime);
             mainTopBanner.setIs_pop(banner_is_pop);
             mainTopBanner.setIs_view(banner_is_view);
-            mainTopBanner.setPosition(1); //메인 탑
+            mainTopBanner.setPosition(6); //메인 팝업
             mainTopBanner.setPc_img_url(timeEventVo.getMain_top_pc_image_url());
             mainTopBanner.setMobile_img_url(timeEventVo.getMain_top_mobile_image_url());
             //링크 적용 시에만 url 등록
@@ -132,7 +141,7 @@ public class Con_TimeEventService {
 
 
             //메인 센터 배너 등록
-            var mainCenterBanner = new P_bannerInsertVo();
+            /*var mainCenterBanner = new P_bannerInsertVo();
             mainCenterBanner.setTitle(banner_title);
             mainCenterBanner.setPlatform(banner_platform);
             mainCenterBanner.setIosJudgeViewOn(banner_ios_judge_view_on);
@@ -153,7 +162,7 @@ public class Con_TimeEventService {
 
             mainCenterBanner.setOpName(MemberVo.getMyMemNo());
             mainCenterBanner.setDesc(banner_desc);
-            mainCenterBanner.setContent_scheduleWeekTime(week_time_type);
+            mainCenterBanner.setContent_scheduleWeekTime(week_time_type);*/
 
             //스토어 배너 등록
             var storeBanner = new P_bannerInsertVo();
@@ -183,9 +192,9 @@ public class Con_TimeEventService {
             conBannerService.callContentsBannerAdd(mainTopBanner);
             timeEventVo.setMain_top_banner_idx(mainTopBanner.getIdx());
 
-            //메인센터 배너 등록
+            /*//메인센터 배너 등록
             conBannerService.callContentsBannerAdd(mainCenterBanner);
-            timeEventVo.setMain_center_banner_idx(mainCenterBanner.getIdx());
+            timeEventVo.setMain_center_banner_idx(mainCenterBanner.getIdx());*/
 
             //스토어 배너 등록
             conBannerService.callContentsBannerAdd(storeBanner);
@@ -203,6 +212,15 @@ public class Con_TimeEventService {
             mainTopBanner.setTitle(banner_title);
             mainTopBanner.setPlatform(banner_platform);
             mainTopBanner.setIosJudgeViewOn(banner_ios_judge_view_on);
+            mainTopBanner.setIs_cookie(timeEventVo.getIs_cookie());
+            mainTopBanner.setPopup_type(0); //이미지 팝업
+            mainTopBanner.setIs_title_view(0); //제목 노출여부
+            if(timeEventVo.getMain_top_banner_link_yn() == 1){
+                mainTopBanner.setIs_button_view(1); //버튼 노출여부
+            }else{
+                mainTopBanner.setIs_button_view(0); //버튼 노출여부
+            }
+
             mainTopBanner.setView_type(banner_view_type + "");
             mainTopBanner.setSex(banner_sex + "");
             mainTopBanner.setFrequency_rate(banner_frequency_rate + "");
@@ -211,7 +229,7 @@ public class Con_TimeEventService {
             mainTopBanner.setEnd_datetime(banner_end_datetime);
             mainTopBanner.setIs_pop(banner_is_pop + "");
             mainTopBanner.setIs_view(banner_is_view + "");
-            mainTopBanner.setPosition(1 + ""); //메인 탑
+            mainTopBanner.setPosition(6 + ""); //메인 탑
             mainTopBanner.setPc_img_url(timeEventVo.getMain_top_pc_image_url());
             mainTopBanner.setMobile_img_url(timeEventVo.getMain_top_mobile_image_url());
             //링크 적용 시에만 url 등록
@@ -225,7 +243,7 @@ public class Con_TimeEventService {
 
 
             //메인 센터 배너 수정
-            var mainCenterBanner = new P_bannerUpdateVo();
+            /*var mainCenterBanner = new P_bannerUpdateVo();
             mainCenterBanner.setBanner_idx(timeEventVo.getMain_center_banner_idx() + "");
             mainCenterBanner.setTitle(banner_title);
             mainCenterBanner.setPlatform(banner_platform);
@@ -248,7 +266,7 @@ public class Con_TimeEventService {
 
             mainCenterBanner.setLastOpName(MemberVo.getMyMemNo());
             mainCenterBanner.setDesc(banner_desc);
-            mainCenterBanner.setContent_scheduleWeekTime(week_time_type);
+            mainCenterBanner.setContent_scheduleWeekTime(week_time_type);*/
 
             //스토어 배너 수정
             var storeBanner = new P_bannerUpdateVo();
@@ -280,7 +298,7 @@ public class Con_TimeEventService {
             conBannerService.callContentsBannerEdit(mainTopBanner);
 
             //메인센터 배너 수정
-            conBannerService.callContentsBannerEdit(mainCenterBanner);
+            //conBannerService.callContentsBannerEdit(mainCenterBanner);
 
             //스토어 배너 수정
             conBannerService.callContentsBannerEdit(storeBanner);

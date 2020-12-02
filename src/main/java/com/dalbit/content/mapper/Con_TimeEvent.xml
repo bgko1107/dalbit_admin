@@ -56,13 +56,14 @@
             , top_banner.mobile_img_url as main_top_mobile_image_url
             , top_banner.pc_link_url as main_top_pc_link_url
             , top_banner.mobile_link_url as main_top_mobile_link_url
+            , top_banner.is_cookie as is_cookie
 
-            , main_center_banner_idx
+            /*, main_center_banner_idx
             , main_center_banner_link_yn
             , center_banner.pc_img_url as main_center_pc_image_url
             , center_banner.mobile_img_url as main_center_mobile_image_url
             , center_banner.pc_link_url as main_center_pc_link_url
-            , center_banner.mobile_link_url as main_center_mobile_link_url
+            , center_banner.mobile_link_url as main_center_mobile_link_url*/
 
             , store_banner_idx
             , store_banner_link_yn
@@ -73,7 +74,7 @@
 
         from rd_data.tbl_time_event event
             left join rd_admin.tb_admin_banner top_banner on event.main_top_banner_idx = top_banner.idx
-            left join rd_admin.tb_admin_banner center_banner on event.main_center_banner_idx = center_banner.idx
+            /*left join rd_admin.tb_admin_banner center_banner on event.main_center_banner_idx = center_banner.idx*/
             left join rd_admin.tb_admin_banner store_banner on event.store_banner_idx = store_banner.idx
         where event.idx = #{idx}
     </select>
@@ -168,7 +169,7 @@
                 or start_date <![CDATA[<=]]> #{end_date} and #{end_date} <![CDATA[<=]]> end_date
             )
             and start_date != '9999.12.31 00:00:00'
-            and state != 2
+            and `state` = 0
     </select>
 
     <insert id="copyTimeEvent" parameterType="com.dalbit.content.vo.TimeEventVo">
