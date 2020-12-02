@@ -774,8 +774,7 @@
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">레벨 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">랭킹 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">소실금액 복구<br/>(운영자지급)</th>
-                <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>
-                <th colspan="4" class="_bgColor" data-bgcolor="#dae3f3">이벤트 지급</th>
+                <th colspan="5" class="_bgColor" data-bgcolor="#dae3f3">이벤트 지급</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">테스트 지급</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#b4c7e7" style="border:solid 2px black">구분</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#8faadc" style="border:solid 2px black">소계</th>
@@ -785,6 +784,7 @@
             <tr>
                 <th class="_bgColor" data-bgcolor="#dae3f3">일반</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">자동</th>
+                <th class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">출석</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">룰렛</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">기타 자동</th>
@@ -1158,8 +1158,7 @@
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">레벨 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">랭킹 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">소실금액 복구<br/>(운영자 지급)</th>
-                <th colspan="4" class="_bgColor" data-bgcolor="#dae3f3">이벤트 지급</th>
-                <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>
+                <th colspan="5" class="_bgColor" data-bgcolor="#dae3f3">이벤트 지급</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">테스트 지급</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#d9d9d9">소계</th>
                 <th rowspan="3" class="_bgColor" data-bgcolor="#d9d9d9">증감</th>
@@ -1177,6 +1176,7 @@
             <tr>
                 <th class="_bgColor" data-bgcolor="#dae3f3">일반</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">자동</th>
+                <th class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">출석</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">룰렛</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">기타 자동</th>
