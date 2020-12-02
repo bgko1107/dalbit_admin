@@ -448,6 +448,9 @@ common.average = function(lvalue, rvalue, point) {
 };
 
 common.sexIcon = function(sex, birthYear, isBr){
+    if(common.isEmpty(sex)){
+        return '';
+    }
     var sex_lowercase = sex.toLowerCase();
     if(birthYear > 0){
         var date = new Date();
