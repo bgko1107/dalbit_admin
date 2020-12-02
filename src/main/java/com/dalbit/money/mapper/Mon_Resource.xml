@@ -40,7 +40,7 @@
              From rd_data.tb_payment_succ a
         </if>
         <if test='type == "3" or type == "3-1" or type == "4" or type == "5" or type == "6" or type == "7" or type == "8"
-                     or type == "9-1" or type == "9-2" or type == "10" or type == "15" or type == "19"'>
+                     or type == "9-1" or type == "9-2" or type == "10" or type == "15" or type == "19" or type == "22"'>
            select  ifnull(base.mem_no,withdrawal.mem_no) as memNo
                   , ifnull(base.mem_nick,withdrawal.mem_nick) as memNick
                   , ifnull(base.mem_sex,withdrawal.mem_sex) as memSex
@@ -54,7 +54,7 @@
                   , a.ruby_new as dalNewCnt
                 </if>
                 <if test='type == "4" or type == "5" or type == "6" or type == "7" or type == "8"
-                        or type == "9-1" or type == "9-2" or type == "10" or type == "15" or type == "19"'>
+                        or type == "9-1" or type == "9-2" or type == "10" or type == "15" or type == "19" or type == "22"'>
                   , a.ruby as dalCnt
                 </if>
                 <if test='type == "4"'>
@@ -86,6 +86,9 @@
                 </if>
                 <if test='type == "19"'>
                     , '룰렛 이벤트' as rewardType
+                </if>
+                <if test='type == "22"'>
+                    , '스패셜DJ 혜택' as rewardType
                 </if>
             from rd_data.tb_member_wallet_ruby a
             left join rd_data.tb_member_wallet_gold b on a.mem_no = b.mem_no and a.last_upd_date = b.last_upd_date
@@ -130,6 +133,9 @@
         <if test='type == "9-2"'>
             where a.type='23'
         </if>
+        <if test='type == "22"'>
+            where a.type='22'
+        </if>
         <if test='type == "10"'>
             where a.type='13' and ruby <![CDATA[>]]> 0
         </if>
@@ -159,7 +165,7 @@
           order by cancelDt desc
         </if>
         <if test='type == "3" or type == "31" or type == "4" or type == "5" or type == "6" or type == "7" or type == "8"
-                or type == "9-1" or type == "9-2" or type == "10" or type == "15" or type == "19"'>
+                or type == "9-1" or type == "9-2" or type == "10" or type == "15" or type == "19" or type == "22"'>
             order by lastUpdDate desc
         </if>
     </sql>

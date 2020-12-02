@@ -735,7 +735,7 @@
         var popupUrl = "/money/resource/popup/dal?sDate=" + $("#startDate").val() + "&eDate=" + $("#endDate").val() + "&type=" + data.type + "&gender=" + data.gender +"&slctType="+ slctType;
         if(data.type == "1" || data.type == "3" || data.type == "3-1" || data.type == "4" || data.type == "5" || data.type == "6"
             || data.type == "7" || data.type == "8" || data.type == "9-1" || data.type == "9-2" || data.type == "10"
-            || data.type == "12" || data.type == "13" || data.type == "14" || data.type == "15" || data.type == "19"
+            || data.type == "12" || data.type == "13" || data.type == "14" || data.type == "15" || data.type == "19"|| data.type == "22"
         ){
             util.windowOpen(popupUrl,"745","550","달 정보 데이터");
         }else{
@@ -760,7 +760,7 @@
             <colgroup>
                 <col width="3%"/><col width="4%"/><col width="4%"/><col width="4%"/><col width="4%"/><col width="4%"/>
                 <col width="4%"/><col width="3%"/><col width="3%"/><col width="5%"/><col width="3%"/>
-                <col width="3%"/><col width="4%"/><col width="4%"/><col width="4%"/><col width="4%"/>
+                <col width="3%"/><col width="4%"/><col width="4%"/><col width="4%"/><col width="4%"/><col width="4%"/>
                 <col width="5%"/><col width="5%"/><col width="5%"/>
             </colgroup>
             <tbody>
@@ -774,8 +774,8 @@
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">레벨 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">랭킹 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">소실금액 복구<br/>(운영자지급)</th>
+                <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>
                 <th colspan="4" class="_bgColor" data-bgcolor="#dae3f3">이벤트 지급</th>
-                <%--<th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>--%>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">테스트 지급</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#b4c7e7" style="border:solid 2px black">구분</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#8faadc" style="border:solid 2px black">소계</th>
@@ -800,8 +800,9 @@
                 <td onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="8"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma recovery_mCnt 'Y'}}</span></a></td>
+                <td onclick="resourceDalClick($(this).data())" data-type="22"  data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma specialdj_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="7"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma attendance_mCnt 'Y'}}</span></a></td>
-                <td onclick="resourceDalClick($(this).data())" data-type="19"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_mCnt 'Y'}}</span></a></td>
+                <td onclick="resourceDalClick($(this).data())" data-type="19"  data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="9-1" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventauto_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="9-2" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventdirect_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="10"  data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma testin_mCnt 'Y'}}</span></a></td>
@@ -824,8 +825,9 @@
                 <td onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="8"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma recovery_fCnt 'Y'}}</span></a></td>
+                <td onclick="resourceDalClick($(this).data())" data-type="2"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma specialdj_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="7"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma attendance_fCnt 'Y'}}</span></a></td>
-                <td onclick="resourceDalClick($(this).data())" data-type="19"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_fCnt 'Y'}}</span></a></td>
+                <td onclick="resourceDalClick($(this).data())" data-type="19"  data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="9-1" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventauto_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="9-2" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventdirect_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="10"  data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma testin_fCnt 'Y'}}</span></a></td>
@@ -842,8 +844,9 @@
                 <td onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="8"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma recovery_nCnt 'Y'}}</span></a></td>
+                <td onclick="resourceDalClick($(this).data())" data-type="22"  data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma specialdj_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="7"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma attendance_nCnt 'Y'}}</span></a></td>
-                <td onclick="resourceDalClick($(this).data())" data-type="19"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_nCnt 'Y'}}</span></a></td>
+                <td onclick="resourceDalClick($(this).data())" data-type="19"  data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="9-1" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventauto_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="9-2" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventdirect_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="10"  data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma testin_nCnt 'Y'}}</span></a></td>
@@ -860,8 +863,9 @@
                 <td onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="8"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma recovery_tCnt 'Y'}}</span></a></td>
+                <td onclick="resourceDalClick($(this).data())" data-type="22"  data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma specialdj_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="7"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma attendance_tCnt 'Y'}}</span></a></td>
-                <td onclick="resourceDalClick($(this).data())" data-type="19"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_tCnt 'Y'}}</span></a></td>
+                <td onclick="resourceDalClick($(this).data())" data-type="19"  data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="9-1" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventauto_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="9-2" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventdirect_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="10"  data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma testin_tCnt 'Y'}}</span></a></td>
@@ -878,8 +882,9 @@
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_total_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_total_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="8"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma recovery_total_Cnt 'Y'}}</span></a></td>
+                <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="22"  data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma specialdj_total_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="7"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma attendance_total_Cnt 'Y'}}</span></a></td>
-                <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="19"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_Cnt 'Y'}}</span></a></td>
+                <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="19"  data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma roulette_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="9-1" data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventauto_total_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="9-2" data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma eventdirect_total_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="10"  data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma testin_total_Cnt 'Y'}}</span></a></td>
@@ -1140,7 +1145,7 @@
             <%--</colgroup>--%>
             <thead>
             <tr>
-                <th colspan="16" class="_bgColor" data-bgcolor="#8faadc">달 증가</th>
+                <th colspan="17" class="_bgColor" data-bgcolor="#8faadc">달 증가</th>
                 <th style="background-color: white; border-bottom: hidden;border-top: hidden;"></th>
                 <th colspan="9" class="_bgColor" data-bgcolor="#f4b183">달 감소</th>
             </tr>
@@ -1154,7 +1159,7 @@
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">랭킹 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">소실금액 복구<br/>(운영자 지급)</th>
                 <th colspan="4" class="_bgColor" data-bgcolor="#dae3f3">이벤트 지급</th>
-                <%--<th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>--%>
+                <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">테스트 지급</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#d9d9d9">소계</th>
                 <th rowspan="3" class="_bgColor" data-bgcolor="#d9d9d9">증감</th>
@@ -1191,7 +1196,7 @@
                 <td>{{addComma totalInfo.total_roulette_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_eventauto_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_eventdirect_Cnt 'Y'}}</td>
-                <%--<td>{{addComma totalInfo.total_specialdj_Cnt 'Y'}}</td>--%>
+                <td>{{addComma totalInfo.total_specialdj_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_testin_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_incTotal_Cnt 'Y'}}</td>
                 <td style="background-color: white; border-bottom: hidden;border-top: hidden;"></td>
@@ -1229,7 +1234,7 @@
                     <td>{{addComma roulette_Cnt 'Y'}}</td>
                     <td>{{addComma eventauto_Cnt 'Y'}}</td>
                     <td>{{addComma eventdirect_Cnt 'Y'}}</td>
-                    <%--<td>{{addComma specialdj_Cnt 'Y'}}</td>--%>
+                    <td>{{addComma specialdj_Cnt 'Y'}}</td>
                     <td>{{addComma testin_Cnt 'Y'}}</td>
                     <td class="_bgColor" data-bgcolor="#d9d9d9">{{addComma sub_incTotal_Cnt 'Y'}}</td>
                     <td class="{{upAndDownClass sub_inc_Cnt}}"> <i class="fa {{upAndDownIcon sub_inc_Cnt}}"></i> {{addComma sub_inc_Cnt 'Y'}} </td>
@@ -1263,7 +1268,7 @@
                     <td>{{addComma totalInfo.total_roulette_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_eventauto_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_eventdirect_Cnt 'Y'}}</td>
-                    <%--<td>{{addComma totalInfo.total_specialdj_Cnt 'Y'}}</td>--%>
+                    <td>{{addComma totalInfo.total_specialdj_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_testin_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_incTotal_Cnt 'Y'}}</td>
                     <td></td>
