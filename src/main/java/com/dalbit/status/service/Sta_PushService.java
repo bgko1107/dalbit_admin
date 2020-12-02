@@ -321,18 +321,18 @@ public class Sta_PushService {
             }
 
             if(outVoSw){
-                outVo.setBmale_alim_s(bDetailList.get(i).getBmale_alim_s());
-                outVo.setBfemale_alim_s(bDetailList.get(i).getBfemale_alim_s());
-                outVo.setBnone_alim_s(bDetailList.get(i).getBnone_alim_s());
-                outVo.setBmale_alim_v(bDetailList.get(i).getBmale_alim_v());
-                outVo.setBfemale_alim_v(bDetailList.get(i).getBfemale_alim_v());
-                outVo.setBnone_alim_v(bDetailList.get(i).getBnone_alim_v());
-                outVo.setBmale_alim_n(bDetailList.get(i).getBmale_alim_n());
-                outVo.setBfemale_alim_n(bDetailList.get(i).getBfemale_alim_n());
-                outVo.setBnone_alim_n(bDetailList.get(i).getBnone_alim_n());
-                outVo.setBtotal_alim_s(detailList.get(i).getBmale_alim_s() + detailList.get(i).getBfemale_alim_s() + detailList.get(i).getBnone_alim_s());
-                outVo.setBtotal_alim_v(detailList.get(i).getBmale_alim_v() + detailList.get(i).getBfemale_alim_v() + detailList.get(i).getBnone_alim_v());
-                outVo.setBtotal_alim_n(detailList.get(i).getBmale_alim_n() + detailList.get(i).getBfemale_alim_n() + detailList.get(i).getBnone_alim_n());
+                outVo.setBmale_alim_s(bDetailList.get(i).getMale_alim_s());
+                outVo.setBfemale_alim_s(bDetailList.get(i).getFemale_alim_s());
+                outVo.setBnone_alim_s(bDetailList.get(i).getNone_alim_s());
+                outVo.setBmale_alim_v(bDetailList.get(i).getMale_alim_v());
+                outVo.setBfemale_alim_v(bDetailList.get(i).getFemale_alim_v());
+                outVo.setBnone_alim_v(bDetailList.get(i).getNone_alim_v());
+                outVo.setBmale_alim_n(bDetailList.get(i).getMale_alim_n());
+                outVo.setBfemale_alim_n(bDetailList.get(i).getFemale_alim_n());
+                outVo.setBnone_alim_n(bDetailList.get(i).getNone_alim_n());
+                outVo.setBtotal_alim_s(bDetailList.get(i).getMale_alim_s() + bDetailList.get(i).getFemale_alim_s() + bDetailList.get(i).getNone_alim_s());
+                outVo.setBtotal_alim_v(bDetailList.get(i).getMale_alim_v() + bDetailList.get(i).getFemale_alim_v() + bDetailList.get(i).getNone_alim_v());
+                outVo.setBtotal_alim_n(bDetailList.get(i).getMale_alim_n() + bDetailList.get(i).getFemale_alim_n() + bDetailList.get(i).getNone_alim_n());
             }else{
                 outVo.setBmale_alim_s(0);
                 outVo.setBfemale_alim_s(0);

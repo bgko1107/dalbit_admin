@@ -79,17 +79,20 @@
         if(tabId == 'tab_all'){         //클립 관리 (전체)
             slctType = 99;
             $("input:radio[name='isChoiceDate']:radio[value='-1']").prop('checked', true);  // 날짜 전체, 선택 여부
+            $('#searchText, #bt_search').show();
             initClipHistory();
         }else if(tabId == 'tab_today'){     //클립 관리 (오늘)
             slctType = 3;
             $("._prevSearch").show();
             $("._todaySearch").show();
             $("._nextSearch").show();
+            $('#searchText, #bt_search').show();
             initClipHistory();
         }else if(tabId == 'tab_member'){    // 클립 관리 (회원)
             slctType = 99;
             $("input:radio[name='isChoiceDate']:radio[value='-1']").prop('checked', true);  // 날짜 전체, 선택 여부
             $("#search_aria").html(util.getCommonCodeSelect(-1, clip_member_searchType))
+            $('#searchText, #bt_search').show();
         }else if(tabId == 'tab_listen'){    // 클립 청취
             slctType = 3;
             $("._prevSearch").show();
@@ -97,6 +100,7 @@
             $("._nextSearch").show();
             $("#search_aria").html(util.getCommonCodeSelect(-1, clip_listen_searchType));
             $("#div_stepButtonArea").show();
+            $('#searchText, #bt_search').show();
         }else if(tabId == 'tab_gift'){      // 클립 선물
             slctType = 3;
             $("._prevSearch").show();
@@ -104,14 +108,17 @@
             $("._nextSearch").show();
             $("#search_aria").html(util.getCommonCodeSelect(-1, clip_gift_searchType));
             $("#isChoiceDateArea").show();
+            $('#searchText, #bt_search').show();
         }else if(tabId == 'tab_remove'){        //클립 삭제
             slctType = 3;
             $("._prevSearch").show();
             $("._todaySearch").show();
             $("._nextSearch").show();
             $("#isChoiceDateArea").show();
+            $('#searchText, #bt_search').show();
         }else if(tabId == 'tab_copyright'){
             slctType = 1;
+            $('#searchText, #bt_search').hide();
         }
         dateType();
 
