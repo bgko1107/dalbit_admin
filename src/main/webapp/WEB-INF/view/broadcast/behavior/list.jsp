@@ -76,7 +76,7 @@
 </div>
 
 <script type="text/javascript" src="/js/code/broadcast/broadCodeList.js?${dummyData}"></script>
-<script>
+<script type="text/javascript">
     var behaviorPagingInfo = new PAGING_INFO(0,1,10);
     $(document).ready(function() {
        getBehaviorList();
