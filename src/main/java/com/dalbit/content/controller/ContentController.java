@@ -226,11 +226,6 @@ public class ContentController {
         return "content/theme/list";
     }
 
-    @GetMapping("/marketing/list")
-    public String marcketingList() {
-        return "content/marketing/list";
-    }
-
     @GetMapping("/marketing/info")
     public String info() {
         return "content/marketing/info";

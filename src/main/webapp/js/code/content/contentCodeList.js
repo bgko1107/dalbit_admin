@@ -776,3 +776,17 @@ var time_event_link_yn = [
     new COMMON_CODE(null, 'rate', '링크적용여부')
     , new COMMON_CODE('1', '1', '링크 적용')
 ];
+
+//마케팅관리
+var marketing_search_type = [
+    new COMMON_CODE(null, 'searchType', '검색구분')
+    , new COMMON_CODE('all', '-1', '전체')
+    , new COMMON_CODE('title', '1', '제목')
+    , new COMMON_CODE('content', '2', '내용')
+]
+
+var marketing_slct_type = [
+    new COMMON_CODE(null, 'searchType', '구분')
+    , new COMMON_CODE('title', '1', '위클리픽')
+    , new COMMON_CODE('content', '2', '15초 광고 모델')
+]
