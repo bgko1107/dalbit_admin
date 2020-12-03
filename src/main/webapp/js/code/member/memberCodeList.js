@@ -309,3 +309,13 @@ var member_item_state = [
     , new COMMON_CODE('2', '2', '사용')
     , new COMMON_CODE('3', '3', '차감')
 ];
+
+var member_saerch_type = [
+    new COMMON_CODE('', 'searchType', '회원검색')
+    , new COMMON_CODE('-1', '-1', '전체')
+    , new COMMON_CODE('1', '1', '회원번호')
+    , new COMMON_CODE('2', '2', '회원이름')
+    , new COMMON_CODE('3', '3', '회원아이디')
+    , new COMMON_CODE('4', '4', '닉네임')
+    , new COMMON_CODE('5', '5', '연락처')
+]

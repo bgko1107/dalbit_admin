@@ -55,7 +55,9 @@
         </div>
     </div>
 </div>
-<script>
+
+<script type="text/javascript" src="/js/code/member/memberCodeList.js?${dummyData}"></script>
+<script type="text/javascript">
 
     var memberModalId = "select_memberList";
 
@@ -71,7 +73,7 @@
         });
         <!-- 버튼 끝 -->
 
-        $("#"+memberModalId).find("#searchType").html(util.getCommonCodeSelect(-1, searchType));
+        $("#"+memberModalId).find("#searchType").html(util.getCommonCodeSelect(-1, member_saerch_type));
     });
 
     var callbackFn;
