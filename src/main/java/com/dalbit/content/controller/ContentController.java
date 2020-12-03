@@ -220,4 +220,7 @@ public class ContentController {
     public String themeList() {
         return "content/theme/list";
     }
+
+    @GetMapping("/fullmoon/list")
+    public String fullmoonList() {return "content/fullmoon/list";}
 }

@@ -119,6 +119,8 @@
         }else if(tabId == 'tab_copyright'){
             slctType = 1;
             $('#searchText, #bt_search').hide();
+            initClipHistory();
+            $("#page-wrapper").css("height", "90px");
         }
         dateType();
 

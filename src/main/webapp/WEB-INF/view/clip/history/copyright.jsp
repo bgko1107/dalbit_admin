@@ -53,17 +53,6 @@
         initDataTable_clipCopyright();
     }
 
-    function initClipHistory(){
-
-        $("#page-wrapper").css("height", "140px");
-        $("#searchContainer").removeClass("col-lg-9");
-        $("#totalContainer").removeClass("col-md-3");
-        $("#tabContainer").removeClass("col-lg-9");
-        $("#searchContainer").addClass("col-lg-7");
-        $("#totalContainer").addClass("col-lg-3");
-        $("#tabContainer").addClass("col-lg-7");
-    }
-
     function initDataTable_clipCopyright() {
         var data = {
             searchDate : moment($('#startDate').val()).format("YYYY-MM-01")
