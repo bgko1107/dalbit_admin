@@ -34,6 +34,9 @@ public class P_pushInsertVo extends BaseVo {
     private String target_info;
     private String image_type;
 
+    private String imageUrl;            //push 이미지 url
+    private String imagePath;           //push 이미지 path
+
     /*
         push_slct
 
