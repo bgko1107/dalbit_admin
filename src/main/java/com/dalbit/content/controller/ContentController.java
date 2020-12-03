@@ -230,4 +230,7 @@ public class ContentController {
     public String info() {
         return "content/marketing/info";
     }
+
+    @GetMapping("/fullmoon/list")
+    public String fullmoonList() {return "content/fullmoon/list";}
 }
