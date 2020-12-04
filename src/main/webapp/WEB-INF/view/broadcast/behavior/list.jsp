@@ -26,7 +26,7 @@
         <div class="row col-lg-12 form-inline" style="padding-bottom: 15px">
             <div class="pull-left">
                 <h4>청취자 행위 유도 관리</h4>
-                방송에서 DJ 및 청취자에게 보여지는 방송방 행위 유도 관리입니다. 등장 시간은 청취자 입장 후 입니다.
+                방송에서 청취자에게 보여지는 방송방 행위 유도 관리입니다.<br />등장 시간은 청취자 입장 후 입니다.
             </div>
             <div class="pull-right">
                 <button type="button" id="bt_addMsg" class="btn btn-primary mt10 mr10">추가</button>
