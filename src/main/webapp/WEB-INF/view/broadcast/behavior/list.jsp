@@ -337,25 +337,25 @@
             <tr class="align-middle">
                 <th>행위 유도 내용1</th>
                 <td colspan="5">
-                    <input type="text" class="form-control _trim" id="desc1" value="{{desc1}}" maxlength="100" style="width: 80%;"/>
+                    <input type="text" class="form-control" id="desc1" value="{{desc1}}" maxlength="100" style="width: 80%;"/>
                 </td>
             </tr>
             <tr class="align-middle">
                 <th>행위 유도 내용2</th>
                 <td colspan="5">
-                    <input type="text" class="form-control _trim" id="desc2" value="{{desc2}}" maxlength="100" style="width: 80%;"/>
+                    <input type="text" class="form-control" id="desc2" value="{{desc2}}" maxlength="100" style="width: 80%;"/>
                 </td>
             </tr>
             <tr class="align-middle">
                 <th>행위 유도 내용3</th>
                 <td colspan="5">
-                    <input type="text" class="form-control _trim" id="desc3" value="{{desc3}}" maxlength="100" style="width: 80%;"/>
+                    <input type="text" class="form-control" id="desc3" value="{{desc3}}" maxlength="100" style="width: 80%;"/>
                 </td>
             </tr>
             <tr class="align-middle">
                 <th>버튼명</th>
                 <td colspan="5">
-                    <input type="text" class="form-control _trim" id="title" value="{{title}}" maxlength="20" style="width: 80%;"/>
+                    <input type="text" class="form-control" id="title" value="{{title}}" maxlength="20" style="width: 80%;"/>
                 </td>
             </tr>
         </tbody>
