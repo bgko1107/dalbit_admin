@@ -114,17 +114,14 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        condition();
-    });
-
-    function condition() {
         djCondition();
         listenerCondition();
         prize();
-    }
+    });
+
     function djCondition() {
         var data = {
-            slctType : 1
+            type : 1
         };
         util.getAjaxData("djConditionList", "/rest/content/fullmoon/info/condition", data, function fn_djCondition_success(dst_id, response) {
             var template = $("#tmp_djCondition").html();
@@ -135,18 +132,27 @@
         });
     }
     function listenerCondition() {
-        var template = $("#tmp_listenerCondition").html();
-        var templateScript = Handlebars.compile(template);
-        // var data =
-        var html = templateScript(templateScript);
-        $("#listenerCondition").html(templateScript);
+        var data = {
+            type : 3
+        };
+        util.getAjaxData("listenerConditionList", "/rest/content/fullmoon/info/condition", data, function fn_djCondition_success(dst_id, response) {
+            var template = $("#tmp_listenerCondition").html();
+            var templateScript = Handlebars.compile(template);
+            var context = response.data;
+            var html = templateScript(context);
+            $("#listenerCondition").html(html);
+        });
     }
     function prize() {
-        var template = $("#tmp_prize").html();
-        var templateScript = Handlebars.compile(template);
-        // var data =
-        var html = templateScript(templateScript);
-        $("#prize").html(templateScript);
+        var data = {
+            type : 2
+        };
+        util.getAjaxData("prizeConditionList", "/rest/content/fullmoon/info/condition", data, function fn_djCondition_success(dst_id, response) {
+            var template = $("#tmp_prize").html();
+            var templateScript = Handlebars.compile(template);
+            var html = templateScript(templateScript);
+            $("#prize").html(html);
+        });
     }
 
 </script>
