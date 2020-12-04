@@ -6,7 +6,7 @@
     <div class="widget-content mt10" id="divMonth_new">
         <%--<a href="javascript://" class="_prevSearch">[이전]</a>--%>
         <span class="_searchDate"></span>
-            <span id="_paywayType"></span>
+            <div id="_paywayType" style="width:150px;"></div>
         <%--<a href="javascript://" class="_nextSearch">[다음]</a>--%>
         <table class="table table-bordered mb0 _tableHeight" data-height="23px">
             <colgroup>
