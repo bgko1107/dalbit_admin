@@ -1,5 +1,6 @@
 package com.dalbit.clip.dao;
 
+import com.dalbit.clip.vo.procedure.P_ClipRecommend;
 import com.dalbit.clip.vo.procedure.P_ClipRecommendDetailOutPut;
 import com.dalbit.clip.vo.procedure.P_ClipRecommendListOutPut;
 import com.dalbit.common.vo.ProcedureVo;
@@ -45,4 +46,7 @@ public interface Cli_ClipCategoryDao {
     ArrayList<P_ClipRecommendDetailOutPut> callClipRecommendDetail(ProcedureVo procedureVo);
 
     ProcedureVo callClipRecommendDelete(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    P_ClipRecommendDetailOutPut getLeaderCheck(P_ClipRecommend pClipRecommend);
 }

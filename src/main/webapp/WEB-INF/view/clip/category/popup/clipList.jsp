@@ -165,11 +165,34 @@
             alert("한 개의 클립만 대표 클립으로 등록이 가능합니다");
             return false;
         }
-        for(var i=0;i<dtList_info_recommendClip.getCheckedData().length;i++){
-            dtList_info_recommendClip.getCheckedData()[i].represent = '1';
+
+        var data = {
+            castNo : dtList_info_recommendClip.getCheckedData()[0].castNo
+        };
+        util.getAjaxData("leaderCheck", "/rest/clip/category/recommend/leaderCheck", data, fn_RecommendLeaderCheck_success);
+
+    }
+
+    function fn_RecommendLeaderCheck_success(dst_id, respones){
+        console.log("-----------------------------");
+        console.log(respones);
+        if(common.isEmpty(respones.data)){
+            for(var i=0;i<dtList_info_recommendClip.getCheckedData().length;i++){
+                dtList_info_recommendClip.getCheckedData()[i].represent = '1';
+            }
+            window.opener.representClipAdd(dtList_info_recommendClip.getCheckedData());
+            window.close();
+        }else{
+            respones.data.viewYn = respones.data.viewYn == "0" ? "N" : "Y";
+
+            alert("이미 대표로 등록된 클립입니다. \n\n" +
+                "등록일시  : " + respones.data.regDate + "\n" +
+                "대표 기간 : " + respones.data.yearMonth + "-" + respones.data.weekNo + "\n" +
+                "대표 그룹 : " + respones.data.groupNo + "\n" +
+                "개시여부  : " +  respones.data.viewYn + "\n" +
+                "등록자    : " +  respones.data.opName
+                );
         }
-        window.opener.representClipAdd(dtList_info_recommendClip.getCheckedData());
-        window.close();
     }
 
     function recommendClipAdd(){

@@ -31,6 +31,8 @@ public class P_ClipRecommendDetailOutPut {
     private String videoUrl;
     private String thumbUrl;
     private String viewCnt;
+    private String groupNo;
+
 
     //list
     private String fileName;

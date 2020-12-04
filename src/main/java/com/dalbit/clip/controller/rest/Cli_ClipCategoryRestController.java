@@ -92,4 +92,10 @@ public class Cli_ClipCategoryRestController {
         return result;
     }
 
+    @PostMapping("recommend/leaderCheck")
+    public String getLeaderCheck(P_ClipRecommend pClipRecommend) {
+        String result = cliClipCategoryService.getLeaderCheck(pClipRecommend);
+        return result;
+    }
+
 }

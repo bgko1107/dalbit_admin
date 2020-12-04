@@ -23,6 +23,7 @@ public class P_ClipRecommend extends PagingVo {
     private String leaderYnList;
 
 
+    private String castNo;
     private String yearMonthList;
     private String weekNoList;
     private String groupNoList;

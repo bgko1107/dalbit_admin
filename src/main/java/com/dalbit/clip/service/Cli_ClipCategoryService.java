@@ -9,6 +9,7 @@ import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.customer.dao.Cus_BlockAdmDao;
+import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,7 @@ public class Cli_ClipCategoryService {
      * 달대리 추천 클립 등록
      */
     public String callClipRecommendEdit(P_ClipRecommend pClipRecommend){
+        pClipRecommend.setOpName(MemberVo.getMyMemNo());
         ProcedureVo procedureVo = new ProcedureVo(pClipRecommend);
         cli_ClipCategoryDao.callClipRecommendEdit(procedureVo);
 
@@ -74,7 +76,6 @@ public class Cli_ClipCategoryService {
         return result;
     }
 
-
     /**
      * 달대리 추천 클립 등록
      */
@@ -101,5 +102,13 @@ public class Cli_ClipCategoryService {
         }
 
         return resultSw ? gsonUtil.toJson(new JsonOutputVo(Status.처리완료)) : gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+    }
+
+    /**
+     * 달대리 대표 클립 등록 여부 체크
+     */
+    public String getLeaderCheck(P_ClipRecommend pClipRecommend){
+        P_ClipRecommendDetailOutPut outVo = cli_ClipCategoryDao.getLeaderCheck(pClipRecommend);
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, outVo));
     }
 }

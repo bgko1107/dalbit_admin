@@ -241,4 +241,16 @@
     <select id="callClipRecommendDelete" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.common.vo.ProcedureVo">
         call rd_admin.sp_admin_clip_recommend_delete(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
+
+    <select id="getLeaderCheck" parameterType="com.dalbit.clip.vo.procedure.P_ClipRecommend" resultType="com.dalbit.clip.vo.procedure.P_ClipRecommendDetailOutPut">
+        SELECT `year_month` AS yearMonth
+              , week_no AS weekNo
+              , group_no AS groupNo
+              , view_yn AS viewYn
+              , reg_date AS regDate
+              , op_name AS opName
+          FROM rd_admin.tb_admin_clip_recommend WHERE leader_yn = 1 AND cast_no = #{castNo}
+         order by regDate desc
+          limit 1
+    </select>
 </mapper>
