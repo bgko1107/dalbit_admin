@@ -56,8 +56,8 @@
         exchange.send_type,
         exchange.last_upd_date,
         wallet.gold,
-        (select account_name from rd_data.tb_member_exchange where mem_no = ifnull(basic.mem_no,withdrawal.mem_no) and latest_idx = 0 order by idx desc limit 1) prevAccountName,
-        (select social_no from rd_data.tb_member_exchange where mem_no = ifnull(basic.mem_no,withdrawal.mem_no) and latest_idx = 0 order by idx desc limit 1) prevSocialNo
+        (select account_name from rd_data.tb_member_exchange where mem_no = ifnull(basic.mem_no,withdrawal.mem_no) and latest_idx = 0 and `state` = 1 order by idx desc limit 1) prevAccountName,
+        (select social_no from rd_data.tb_member_exchange where mem_no = ifnull(basic.mem_no,withdrawal.mem_no) and latest_idx = 0 and `state` = 1 order by idx desc limit 1) prevSocialNo
         from rd_data.tb_member_exchange exchange
         inner join rd_data.tb_member_profile profile on exchange.mem_no = profile.mem_no
         inner join rd_data.tb_member_wallet wallet on exchange.mem_no = wallet.mem_no
