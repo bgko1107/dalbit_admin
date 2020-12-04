@@ -19,10 +19,10 @@
             <th>첨부영상</th>
             <th>소개글</th>
             <th>이미지</th>
-            <th>[듣기]녹음시간</th>
+            <th>[듣기]<br/>녹음시간</th>
             <th>등록회원</th>
             <th>성별(나이)</th>
-            <th>공개 혜택</th>
+            <th>공개</th>
             <th>인증</th>
             <th>청취자</th>
             <th>청취 수</th>
@@ -157,7 +157,13 @@
             <a href="javascript://" class="_openMemberPop" data-memno="{{memNo}}">{{mem_no}}</a>
         </td>
         <td>{{{sexIcon mem_sex mem_birth_year}}}</td>
-        <td></td>
+        <td>
+            {{#dalbit_if type_open '==' 1}}
+                YES
+            {{else}}
+                NO
+            {{/dalbit_if}}
+        </td>
         <td>
             {{#dalbit_if confirm '==' 1}}
                 Y

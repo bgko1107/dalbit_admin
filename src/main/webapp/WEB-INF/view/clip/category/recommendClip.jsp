@@ -34,7 +34,7 @@
                     <th>순서변경</th>
                     <th>주제<br/>제목</th>
                     <th>이미지</th>
-                    <th>[듣기]녹음시간</th>
+                    <th>[듣기]<br/>녹음시간</th>
                     <th>등록회원</th>
                     <th>성별(나이)</th>
                     <th>공개</th>
@@ -255,28 +255,30 @@
     }
 
 
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
-
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.$("#recommendClip").id);
-    }
-
-    function drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        var idx = data.split("_")[1];
-        var targetIdx = $("#recommendClip").find(ev.target).parent("tr").attr("id").split("_")[1];
-
-        if(parseInt(targetIdx) < parseInt(idx)){
-            $("#recommendClip").find(ev.target).parent("tr").before($("#recommendClip").find("#"+data));
-        }else{
-            $("#recommendClip").find(ev.target).parent("tr").after($("#recommendClip").find("#"+data));
-        }
-        resetNo();
-        btnSet();
-    }
+    // function allowDrop(event) {
+    //     event.preventDefault();
+    // }
+    //
+    // function drag(event) {
+    //     event.dataTransfer.setData("text", event.target.id);
+    // }
+    //
+    // function drop(event) {
+    //     event.preventDefault();
+    //
+    //     var data = event.dataTransfer.getData("text");
+    //     var idx = data.split("_")[1];
+    //     var targetIdx = $('#table_recommendClip').find(event.target).parent("tr").attr("id").split("_")[1];
+    //
+    //     if(parseInt(targetIdx) < parseInt(idx)){
+    //         $('#table_recommendClip').find(event.target).parent("tr").before($('#table_recommendClip').find("#"+data));
+    //     }else{
+    //         $('#table_recommendClip').find(event.target).parent("tr").after($('#table_recommendClip').find("#"+data));
+    //     }
+    //
+    //     resetNo();
+    //     btnSet();
+    // }
 
     // 데이터
     function getArrCodeData(){
@@ -400,9 +402,10 @@
 
 <script id="tmp_list" type="text/x-handlebars-template">
     {{#each this}}
-    <tr class="_noTr" id="row_{{sortNo}}" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)">
+    <%--<tr class="_noTr" id="row_{{sortNo}}" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)">--%>
+    <tr class="_noTr" id="row_{{sortNo}}" >
         <td>
-            <input type="checkbox" class="form-control _check" />
+            <input type="checkbox" class="_check" />
         </td>
         <td class="hide" name="castNo" id="castNo">{{castNo}}</td>
         <td>
@@ -430,7 +433,7 @@
     </tr>
     {{else}}
     <tr>
-        <td colspan="11" class="noData">{{isEmptyData}}<td>
+        <td colspan="9" class="noData">{{isEmptyData}}<td>
     </tr>
     {{/each}}
 </script>
