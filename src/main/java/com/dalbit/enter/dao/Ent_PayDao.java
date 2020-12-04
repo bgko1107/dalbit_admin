@@ -20,6 +20,10 @@ public interface Ent_PayDao {
     @Transactional(readOnly = true)
     List<P_PayTotalOutDetailVo> callPayTotal(ProcedureVo procedureVo);
 
+    /* 월별 / 수단별 */
+    @Transactional(readOnly = true)
+    List<P_PayTotalOutDetailVo> callPayMonthWay(ProcedureVo procedureVo);
+
     @Transactional(readOnly = true)
     List<P_PayAgeOutDetailVo> callPayAge(ProcedureVo procedureVo);
 

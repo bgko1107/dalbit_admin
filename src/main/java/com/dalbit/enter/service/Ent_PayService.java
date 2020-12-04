@@ -15,7 +15,6 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -482,6 +481,141 @@ public class Ent_PayService {
             result.put("detailList", detailList);
 
             resultList.add(result);
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", sum_Total);
+        result.put("detailList", sum);
+        resultList.add(result);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, resultList));
+    }
+
+    /**
+     * 월간/결제 수단 별 총계
+     * @param pPayTotalWayInPutVo
+     * @return
+     */
+    public String callPayMonthWay(P_PayTotalWayInPutVo pPayTotalWayInPutVo){
+
+        ArrayList resultList = new ArrayList();
+        String[] dateList = pPayTotalWayInPutVo.getDateList().split("@");
+
+        int slctType_date = 0;
+        P_PayTotalOutDetailVo[] sum = null;
+
+        if(pPayTotalWayInPutVo.getSlctType() == 1) {
+            sum = new P_PayTotalOutDetailVo[32];
+            slctType_date = 32;
+        }
+        P_PayTotalOutVo sum_Total = new P_PayTotalOutVo();
+        for(int i=0;i<dateList.length;i++){
+            if(dateList[i].indexOf("-") > -1){
+                pPayTotalWayInPutVo.setStartDate(dateList[i].split("-")[0]);
+                pPayTotalWayInPutVo.setEndDate(dateList[i].split("-")[1]);
+            }else{
+                pPayTotalWayInPutVo.setStartDate(dateList[i]);
+                pPayTotalWayInPutVo.setEndDate(null);
+            }
+
+            ProcedureVo procedureVo = new ProcedureVo(pPayTotalWayInPutVo);
+            List<P_PayTotalOutDetailVo> detailList =  ent_PayDao.callPayMonthWay(procedureVo);
+            P_PayTotalOutVo totalInfo = new P_PayTotalOutVo();
+            if(pPayTotalWayInPutVo.getPaywayType().equals("all")) {
+                totalInfo = new Gson().fromJson(procedureVo.getExt(), P_PayTotalOutVo.class);
+            }
+
+            boolean zeroSw = false;
+            if(detailList.size() < slctType_date){
+                int detailList_size = detailList.size();
+                for (int j = 0; j < slctType_date; j++) {
+                    P_PayTotalOutDetailVo outVo = new P_PayTotalOutDetailVo();
+                    for (int k = 0; k < detailList_size; k++){
+                        if(pPayTotalWayInPutVo.getSlctType() == 1) {
+                            if (Integer.parseInt(detailList.get(k).getDaily().split("-")[2]) == j) {
+                                detailList.get(k).setDay(j);
+                                if(!pPayTotalWayInPutVo.getPaywayType().equals("all")) {
+                                    totalInfo.setSum_succCnt(totalInfo.getSum_succCnt() + detailList.get(k).getSuccCnt());
+                                    totalInfo.setSum_succCmt(totalInfo.getSum_succCmt() + detailList.get(k).getSuccCmt());
+                                    totalInfo.setSum_succAmt(totalInfo.getSum_succAmt() + detailList.get(k).getSuccAmt());
+                                }
+                                zeroSw = true;
+                                break;
+                            }
+                        }
+                    }
+                    if(!zeroSw){
+                        outVo.setDay(j);
+                        outVo.setHour(j);
+                        outVo.setMonthly(j);
+                        outVo.setSuccCnt(0);
+                        outVo.setSuccAmt(0);
+                        outVo.setSuccCmt(0);
+                        outVo.setAccumAmt(0);
+                        outVo.setCancCnt(0);
+                        outVo.setCancCmt(0);
+                        outVo.setCancAmt(0);
+                        outVo.setFailCnt(0);
+
+                        detailList.add(outVo);
+                    }
+                }
+            }
+
+            var result = new HashMap<String, Object>();
+            result.put("totalInfo", totalInfo);
+            result.put("detailList", detailList);
+
+            resultList.add(result);
+
+            for(int j=0; j < detailList.size();j++){
+                if(DalbitUtil.isEmpty(sum[j])){
+                    sum[j] = new P_PayTotalOutDetailVo();
+                }
+                if(pPayTotalWayInPutVo.getSlctType() == 1) {
+                    zeroSw = false;
+                    int tmp_k = 0;
+                    for (int k = 0; k < 32; k++) {
+                        if(DalbitUtil.isEmpty(sum[k])){
+                            sum[k] = new P_PayTotalOutDetailVo();
+                            sum[k].setHour(k);
+                            sum[k].setDay(k);
+                        }
+                        if(!DalbitUtil.isEmpty(detailList.get(j).getDaily())) {
+                            if (Integer.parseInt(detailList.get(j).getDaily().split("-")[2]) == k) {
+                                tmp_k = k;
+                                zeroSw = true;
+                                break;
+                            }
+                        }else{
+                            break;
+                        }
+                    }
+                    if(zeroSw) {
+                        sum[tmp_k].setSuccCnt(sum[tmp_k].getSuccCnt() + detailList.get(j).getSuccCnt());
+                        sum[tmp_k].setSuccCmt(sum[tmp_k].getSuccCmt() + detailList.get(j).getSuccCmt());
+                        sum[tmp_k].setSuccAmt(sum[tmp_k].getSuccAmt() + detailList.get(j).getSuccAmt());
+                        sum[tmp_k].setAccumAmt(sum[tmp_k].getAccumAmt() + detailList.get(j).getAccumAmt());
+                        sum[tmp_k].setCancCnt(sum[tmp_k].getCancCnt() + detailList.get(j).getCancCnt());
+                        sum[tmp_k].setCancCmt(sum[tmp_k].getCancCmt() + detailList.get(j).getCancCmt());
+                        sum[tmp_k].setCancAmt(sum[tmp_k].getCancAmt() + detailList.get(j).getCancAmt());
+                        sum[tmp_k].setFailCnt(sum[tmp_k].getFailCnt() + detailList.get(j).getFailCnt());
+                    }
+                }
+            }
+
+            sum_Total.setSum_succCnt(sum_Total.getSum_succCnt() + totalInfo.getSum_succCnt());
+            sum_Total.setSum_succCmt(sum_Total.getSum_succCmt() + totalInfo.getSum_succCmt());
+            sum_Total.setSum_succAmt(sum_Total.getSum_succAmt() + totalInfo.getSum_succAmt());
+            sum_Total.setSum_firstCnt(sum_Total.getSum_firstCnt() + totalInfo.getSum_firstCnt());
+            sum_Total.setSum_firstCmt(sum_Total.getSum_firstCmt() + totalInfo.getSum_firstCmt());
+            sum_Total.setSum_firstAmt(sum_Total.getSum_firstAmt() + totalInfo.getSum_firstAmt());
+            sum_Total.setSum_reCnt(sum_Total.getSum_reCnt() + totalInfo.getSum_reCnt());
+            sum_Total.setSum_reCmt(sum_Total.getSum_reCmt() + totalInfo.getSum_reCmt());
+            sum_Total.setSum_reAmt(sum_Total.getSum_reAmt() + totalInfo.getSum_reAmt());
+            sum_Total.setSum_cancCnt(sum_Total.getSum_cancCnt() + totalInfo.getSum_cancCnt());
+            sum_Total.setSum_cancCmt(sum_Total.getSum_cancCmt() + totalInfo.getSum_cancCmt());
+            sum_Total.setSum_cancAmt(sum_Total.getSum_cancAmt() + totalInfo.getSum_cancAmt());
+            sum_Total.setSum_failCnt(sum_Total.getSum_failCnt() + totalInfo.getSum_failCnt());
         }
         var result = new HashMap<String, Object>();
         result.put("totalInfo", sum_Total);

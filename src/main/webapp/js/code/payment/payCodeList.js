@@ -78,3 +78,18 @@ var slctPayMemberDateType = [
     , new COMMON_CODE('1', '1', '시도일시')
     , new COMMON_CODE('2', '2', '완료일시')
 ];
+
+var payWay_new = [
+    new COMMON_CODE(null, 'payway', '결제수단')
+    , new COMMON_CODE('all', 'all', '결제수단 (전체)')
+    , new COMMON_CODE('MC', 'MC', '휴대폰')
+    , new COMMON_CODE('CN', 'CN', '신용카드')
+    , new COMMON_CODE('InApp', 'InApp', '인앱(IOS)')
+    , new COMMON_CODE('VA', 'VA', '가상계좌')
+    , new COMMON_CODE('GM', 'GM', '문화상품권')
+    , new COMMON_CODE('HM', 'HM', '해피머니상품권')
+    , new COMMON_CODE('payletter', 'tmoney', '티머니')
+    , new COMMON_CODE('payletter', 'cashbee', '캐시비')
+    , new COMMON_CODE('payletter', 'payco', '페이코')
+    , new COMMON_CODE('payletter', 'kakaopay', '카카오페이')
+];

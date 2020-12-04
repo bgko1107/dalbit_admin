@@ -2,6 +2,7 @@ package com.dalbit.enter.controller.rest;
 
 import com.dalbit.enter.service.Ent_PayService;
 import com.dalbit.enter.vo.procedure.P_PayTotalInPutVo;
+import com.dalbit.enter.vo.procedure.P_PayTotalWayInPutVo;
 import com.dalbit.enter.vo.procedure.P_PayTryInPutVo;
 import com.dalbit.enter.vo.procedure.P_StatVo;
 import com.dalbit.util.DalbitUtil;
@@ -102,6 +103,13 @@ public class Ent_PayRestController {
     @PostMapping("try")
     public String payTry(P_PayTryInPutVo pPayTryInPutVo){
         String result = ent_PayService.callPayTry(pPayTryInPutVo);
+        return result;
+    }
+
+    // 결제 현황 월별_수단별
+    @PostMapping("/month/way")
+    public String payMonthWay(P_PayTotalWayInPutVo pPayTotalWayInPutVo){
+        String result = ent_PayService.callPayMonthWay(pPayTotalWayInPutVo);
         return result;
     }
 }
