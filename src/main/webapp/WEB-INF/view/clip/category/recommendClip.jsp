@@ -12,14 +12,21 @@
 
 <div id="wrapper">
     <div id="page-wrapper">
+
         <div class="container-fluid">
+            <ul class="nav nav-tabs nav-tabs-custom-colored mb10" role="tablist">
+                <li class="active"><a href="" role="tab" data-toggle="tab">대표 클립</a></li>
+                <button type="button" class="btn btn-default btn-sm pull-right" onclick="recommendList();">목록보기</button>
+                <button type="button" class="btn btn-default btn-sm pull-right mr5" onclick="recommendSelect();">대표 클립 검색</button>
+            </ul>
             <%--<button class="pull-right" type="button" class="btn btn-success btn-ms pull-left" onclick="save();">저장하기</button>--%>
-            <button class="pull-right" type="button" class="btn btn-success btn-ms pull-left" onclick="recommendSelect();">대표 클립 검색</button>
-            <button class="pull-right" type="button" class="btn btn-success btn-ms pull-left" onclick="recommendList();">목록보기</button>
             <span id="recommendClipForm"></span>
         </div>
 
         <div class="col-md-12 mt10" id="recommendClip">
+            <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist">
+                <li class="active"><a href="" role="tab" data-toggle="tab">추천 클립</a></li>
+            </ul>
             <table id="table_recommendClip" class="table table-sorting table-hover table-bordered datatable">
                 <thead>
                 <tr>
@@ -27,7 +34,7 @@
                     <th>순서변경</th>
                     <th>주제<br/>제목</th>
                     <th>이미지</th>
-                    <th>[듣기]녹음시간</th>
+                    <th>[듣기]<br/>녹음시간</th>
                     <th>등록회원</th>
                     <th>성별(나이)</th>
                     <th>공개</th>
@@ -41,7 +48,7 @@
             </table>
 
             <button type="button" class="btn btn-sm btn-danger" id="deleteBtn">선택삭제</button>
-            <button type="button" class="btn btn-sm btn-success" id="updateBtn">저장하기</button>
+            <button type="button" class="btn btn-sm btn-success pull-right" id="updateBtn">저장하기</button>
         </div>
     </div>
 </div>
@@ -85,13 +92,10 @@
 
         $("#recommendClip").find('#deleteBtn').off('click').on('click', function () {
             var checked = $("#recommendClip").find('#tableBody').find('._check:checked');
-
             if (0 == checked.length) {
                 alert("삭제할 클립을 선택해주세요.");
                 return;
             }
-            var checked = $("#recommendClip").find('#tableBody').find('._check:checked');
-
             checked.closest('tr').remove();
             resetNo();
             btnSet();
@@ -129,6 +133,7 @@
                 ,castNoList : castNo
                 ,orderNoList : order
                 ,leaderYnList : leader
+                ,groupNo : groupNo
             };
 
             console.log(data);
@@ -148,10 +153,6 @@
         var templateScript = Handlebars.compile(template);
         var html = templateScript();
         $("#recommendClip").find('#tableBody').html(html);
-
-
-        videoButtonSet();
-
     }
 
     function getRecommendClip(){
@@ -175,8 +176,6 @@
         var context = response.data;
         var html = templateScript(context);
         $("#recommendClip").find("#tableBody").append(html);
-
-        videoButtonSet();
 
         resetNo();
         btnSet();
@@ -226,7 +225,7 @@
 
     function recommendSelect(){
         var popupUrl = "/clip/category/popup/clipList";
-        util.windowOpen(popupUrl,"1458","550","대표클립 검색");
+        util.windowOpen(popupUrl,"1458","1050","대표클립 검색");
     }
 
 
@@ -256,28 +255,30 @@
     }
 
 
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
-
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.$("#recommendClip").id);
-    }
-
-    function drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        var idx = data.split("_")[1];
-        var targetIdx = $("#recommendClip").find(ev.target).parent("tr").attr("id").split("_")[1];
-
-        if(parseInt(targetIdx) < parseInt(idx)){
-            $("#recommendClip").find(ev.target).parent("tr").before($("#recommendClip").find("#"+data));
-        }else{
-            $("#recommendClip").find(ev.target).parent("tr").after($("#recommendClip").find("#"+data));
-        }
-        resetNo();
-        btnSet();
-    }
+    // function allowDrop(event) {
+    //     event.preventDefault();
+    // }
+    //
+    // function drag(event) {
+    //     event.dataTransfer.setData("text", event.target.id);
+    // }
+    //
+    // function drop(event) {
+    //     event.preventDefault();
+    //
+    //     var data = event.dataTransfer.getData("text");
+    //     var idx = data.split("_")[1];
+    //     var targetIdx = $('#table_recommendClip').find(event.target).parent("tr").attr("id").split("_")[1];
+    //
+    //     if(parseInt(targetIdx) < parseInt(idx)){
+    //         $('#table_recommendClip').find(event.target).parent("tr").before($('#table_recommendClip').find("#"+data));
+    //     }else{
+    //         $('#table_recommendClip').find(event.target).parent("tr").after($('#table_recommendClip').find("#"+data));
+    //     }
+    //
+    //     resetNo();
+    //     btnSet();
+    // }
 
     // 데이터
     function getArrCodeData(){
@@ -311,13 +312,11 @@
         $("#fullSize_background").modal('show');
     }
 
-    function videoButtonSet(){
-        $(".js-video-button").modalVideo({
-            youtube:{
-                controls:0,
-                nocookie: true
-            }
-        });
+    function videoSet(){
+        $("#test").html('<button class="btn-default btn-xs js-video-button" id="videoPreview" data-video-id=' + $("#txt_videoUrl").val() + ' data-url="">유튜브 팝업</button>').hide();
+        $(".js-video-button").modalVideo();
+        $('#videoPreview').click();
+
     }
 
 </script>
@@ -381,13 +380,18 @@
         <tr>
             <th>첨부영상</th>
             <td colspan="5">
-                <input type="text" class="" style="width: 90%;" id="txt_videoUrl" value="{{videoUrl}}">
-                <button class="btn-default btn-xs js-video-button" data-video-id='{{videoUrl}}'>미리보기</button>
+                <div class="col-md-10 no-padding">
+                    <input type="text" class="form-control" id="txt_videoUrl" value="{{videoUrl}}" placeholder="Youtube video ID 입력 ex) GVGUkA9Uv_w">
+                </div>
+                <button class="btn-default btn-xs pull-right" onclick="videoSet();">미리보기</button>
+                <span id="test"></span>
             </td>
             <th>썸네일</th>
             <td colspan="3">
-                <input type="text" class="" style="width: 87%;" id="txt_thumbnailUrl" value="{{thumbUrl}}">
-                <input type="button" class="pull-right" value="미리보기" onclick="preview();">
+                <div class="col-md-10 no-padding">
+                <input type="text" class="form-control" id="txt_thumbnailUrl" value="{{thumbUrl}}">
+                </div>
+                <input type="button" class="pull-right btn-default btn-xs" value="미리보기" onclick="preview();">
                 <%--<button class="btn-default btn-xs" onclick="preview('thumbnail')">미리보기</button>--%>
             </td>
         </tr>
@@ -398,9 +402,10 @@
 
 <script id="tmp_list" type="text/x-handlebars-template">
     {{#each this}}
-    <tr class="_noTr" id="row_{{sortNo}}" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)">
+    <%--<tr class="_noTr" id="row_{{sortNo}}" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)">--%>
+    <tr class="_noTr" id="row_{{sortNo}}" >
         <td>
-            <input type="checkbox" class="form-control _check" />
+            <input type="checkbox" class="_check" />
         </td>
         <td class="hide" name="castNo" id="castNo">{{castNo}}</td>
         <td>
@@ -428,7 +433,7 @@
     </tr>
     {{else}}
     <tr>
-        <td colspan="11" class="noData">{{isEmptyData}}<td>
+        <td colspan="9" class="noData">{{isEmptyData}}<td>
     </tr>
     {{/each}}
 </script>

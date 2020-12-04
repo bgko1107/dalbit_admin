@@ -26,7 +26,7 @@
         <div class="row col-lg-12 form-inline" style="padding-bottom: 15px">
             <div class="pull-left">
                 <h4>청취자 행위 유도 관리</h4>
-                방송에서 DJ 및 청취자에게 보여지는 방송방 행위 유도 관리입니다. 등장 시간은 청취자 입장 후 입니다.
+                방송에서 청취자에게 보여지는 방송방 행위 유도 관리입니다.<br />등장 시간은 청취자 입장 후 입니다.
             </div>
             <div class="pull-right">
                 <button type="button" id="bt_addMsg" class="btn btn-primary mt10 mr10">추가</button>
@@ -337,25 +337,25 @@
             <tr class="align-middle">
                 <th>행위 유도 내용1</th>
                 <td colspan="5">
-                    <input type="text" class="form-control _trim" id="desc1" value="{{desc1}}" maxlength="100" style="width: 80%;"/>
+                    <input type="text" class="form-control" id="desc1" value="{{desc1}}" maxlength="100" style="width: 80%;"/>
                 </td>
             </tr>
             <tr class="align-middle">
                 <th>행위 유도 내용2</th>
                 <td colspan="5">
-                    <input type="text" class="form-control _trim" id="desc2" value="{{desc2}}" maxlength="100" style="width: 80%;"/>
+                    <input type="text" class="form-control" id="desc2" value="{{desc2}}" maxlength="100" style="width: 80%;"/>
                 </td>
             </tr>
             <tr class="align-middle">
                 <th>행위 유도 내용3</th>
                 <td colspan="5">
-                    <input type="text" class="form-control _trim" id="desc3" value="{{desc3}}" maxlength="100" style="width: 80%;"/>
+                    <input type="text" class="form-control" id="desc3" value="{{desc3}}" maxlength="100" style="width: 80%;"/>
                 </td>
             </tr>
             <tr class="align-middle">
                 <th>버튼명</th>
                 <td colspan="5">
-                    <input type="text" class="form-control _trim" id="title" value="{{title}}" maxlength="20" style="width: 80%;"/>
+                    <input type="text" class="form-control" id="title" value="{{title}}" maxlength="20" style="width: 80%;"/>
                 </td>
             </tr>
         </tbody>

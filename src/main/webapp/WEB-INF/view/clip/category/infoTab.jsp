@@ -46,8 +46,6 @@
 </div>
 
 <script type="text/javascript">
-    var tabId = 'tab_new';
-
     $("#tablist_con li a").on('click', function(){
         tabId = $(this).prop('id');
 
@@ -67,7 +65,10 @@
             $("#sp_prevGroup").show();
             slctType = 0;
         }else if(tabId == 'tab_recommendList'){
+            $("#sp_prevGroup").show();
             slctType = 1;
+        }else{
+            slctType = 99;
         }
         dateType();
         $(".searchDate").html($("#onedayDate").val());
