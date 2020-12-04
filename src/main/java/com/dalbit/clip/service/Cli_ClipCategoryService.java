@@ -73,4 +73,33 @@ public class Cli_ClipCategoryService {
         }
         return result;
     }
+
+
+    /**
+     * 달대리 추천 클립 등록
+     */
+    public String callClipRecommendDelete(P_ClipRecommend pClipRecommend){
+        String[] yearMonthList = pClipRecommend.getYearMonthList().split("@@");
+        String[] weekNoList = pClipRecommend.getWeekNoList().split("@@");
+        String[] groupNoList = pClipRecommend.getGroupNoList().split("@@");
+
+        boolean resultSw = false;
+        for(int i=0;i<groupNoList.length;i++){
+            pClipRecommend.setYearMonth(yearMonthList[i]);
+            pClipRecommend.setWeekNo(Integer.parseInt(weekNoList[i]));
+            pClipRecommend.setGroupNo(Integer.parseInt(groupNoList[i]));
+
+            ProcedureVo procedureVo = new ProcedureVo(pClipRecommend);
+            cli_ClipCategoryDao.callClipRecommendDelete(procedureVo);
+
+            if(!procedureVo.getRet().equals("0")) {
+                resultSw = false;
+                break;
+            }else{
+                resultSw = true;
+            }
+        }
+
+        return resultSw ? gsonUtil.toJson(new JsonOutputVo(Status.처리완료)) : gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+    }
 }

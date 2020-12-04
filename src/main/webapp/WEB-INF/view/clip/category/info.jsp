@@ -84,6 +84,8 @@
 
 <script type="text/javascript">
     var tabMove = <%=in_tabMove%>;
+    var tabId = 'tab_new';
+
     $(function(){
         // tab_id 이동
         if(!common.isEmpty(tabMove)){
@@ -105,6 +107,7 @@
         });
 
         if(tabMove == 3){
+            tabId = 'tab_recommendList';
             getRecommendList();
         }
     });

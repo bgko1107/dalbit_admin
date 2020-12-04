@@ -14,9 +14,37 @@
             · 추천 목록은 목록에서 제한 없이 추가 선택이 가능>[추천 클립 추가]버튼> 추천 클립부분에 데이터 출력가 출력되어 확인 및 저장이 가능합니다.
         </span><br/>
 
+        <form id="searchForm">
+            <div class="col-lg-12 form-inline no-padding">
+                <div class="widget widget-table searchBoxArea">
+                    <table>
+                        <tr>
+                            <th rowspan="2" style="background-color:#4472c4;color:#e9ee17;width: 70px">
+                                <i class="fa fa-search"></i><br/>검색
+                            </th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left">
+                                <label><input type="text" class="form-control" name="searchText" id="searchText"
+                                              placeholder="검색어를 입력해주세요."></label>
+                                <button type="button" class="btn btn-success" id="bt_search">검색</button>
+                                <span id="searchCheck">
+                        <label class="control-inline fancy-checkbox custom-color-green">
+                            <input type="checkbox" name="search_testId" id="search_testId" value="1">
+                            <span>테스트 아이디 제외</span>
+                        </label>
+                    </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </form>
         <div>
-            <div class="col-md-1 no-padding"><select id="recommendClipSubjectType" name="recommendClipSubjectType" class="form-control pull-left ml5" onchange="recommendClipSelect_onChange();"></select></div>
-            <span id="recommendClipOrderByType" name="recommendClipOrderByType" class="pull-left ml5" onchange="recommendClipSelect_onChange();"></span>
+            <div class="col-md-1 no-padding">
+                <select id="recommendClipSubjectType" name="recommendClipSubjectType" class="form-control pull-left" onchange="recommendClipSelect_onChange();"></select>
+            </div>
+            <span id="recommendClipOrderByType" name="recommendClipOrderByType" class="pull-left" onchange="recommendClipSelect_onChange();"></span>
 
             <span class="pull-right">
                 <button type="button" class="btn-default btn btn-sm" onclick="representClipAdd()" >대표클립등록</button>
@@ -42,6 +70,19 @@
     $(function (){
         getHistory();
 
+        $("#bt_search").on('click', function(){
+            getHistory();
+        });
+
+        $('input[id="searchText"]').keydown(function() {
+            if (event.keyCode === 13) {
+                $("#bt_search").click();
+            };
+        });
+
+        $(document).on('click', '#search_testId', function(){
+            $("#bt_search").click();
+        });
     });
     function getHistory(){
         $("#recommendClipOrderByType").html(util.getCommonCodeSelect(-1, clip_orderByType));
@@ -57,7 +98,7 @@
         var dtList_info_data = function (data) {
             data.subjectType = Number(common.isEmpty($("#recommendClipSubjectType").val()) ? "-1" : $("#recommendClipSubjectType").val());
             data.searchText = $("#searchText").val();
-            data.search_testId = $('input[name="search_testId"]').is(":checked") ? "0" : "-1";
+            data.search_testId = $('input[name="search_testId"]').is(":checked") ? "1" : "0";
             data.orderByType = Number($("#recommendClipOrderByType").find("#clipOrderByType").val());
             data.isChoiceDate = -1;
             data.searchTypeOpen = 1;
@@ -66,7 +107,7 @@
 
         dtList_info_recommendClip = new DalbitDataTable($("#clip_history_list_info"), dtList_info_data, ClipHistoryDataTableSource.recommendClip);
         dtList_info_recommendClip.useIndex(true);
-        dtList_info_recommendClip.setPageLength(10);
+        dtList_info_recommendClip.setPageLength(50);
         // dtList_info.usePageLenght(50);
         dtList_info_recommendClip.useCheckBox(true);
         dtList_info_recommendClip.createDataTable();

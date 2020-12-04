@@ -44,4 +44,5 @@ public interface Cli_ClipCategoryDao {
     @Transactional(readOnly = true)
     ArrayList<P_ClipRecommendDetailOutPut> callClipRecommendDetail(ProcedureVo procedureVo);
 
+    ProcedureVo callClipRecommendDelete(ProcedureVo procedureVo);
 }

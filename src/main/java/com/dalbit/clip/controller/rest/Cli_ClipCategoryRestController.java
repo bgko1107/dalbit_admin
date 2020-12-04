@@ -83,4 +83,13 @@ public class Cli_ClipCategoryRestController {
         return result;
     }
 
+    /**
+     * 달대리 추천 클립 삭제
+     */
+    @PostMapping("/recommend/delete")
+    public String callClipRecommendDelete(P_ClipRecommend pClipRecommend) {
+        String result = cliClipCategoryService.callClipRecommendDelete(pClipRecommend);
+        return result;
+    }
+
 }
