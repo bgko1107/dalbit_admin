@@ -44,4 +44,14 @@ public class ClipController {
     public String statusDetailPopup() {
         return "clip/popup/statusDetailPopup";
     }
+
+    @GetMapping("/category/recommendClip")
+    public String recommendClip() {
+        return "clip/category/recommendClip";
+    }
+
+    @GetMapping("/category/popup/clipList")
+    public String clipList() {
+        return "clip/category/popup/clipList";
+    }
 }

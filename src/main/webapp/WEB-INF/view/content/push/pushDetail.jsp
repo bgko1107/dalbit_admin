@@ -194,8 +194,8 @@
                 fnc_pushDetail.target.find("#div_inputLink").show();
 
                 fnc_pushDetail.target.find("#input_targetLink").val("");
-                fnc_pushDetail.target.find("#input_mobileLink").val("")
-                fnc_pushDetail.target.find("#input_pcLink").val("")
+                fnc_pushDetail.target.find("#input_mobileLink").val("");
+                fnc_pushDetail.target.find("#input_pcLink").val("");
             }else{
                 fnc_pushDetail.target.find("#label_targetType").text("");
                 fnc_pushDetail.target.find("#input_targetLink").hide();
@@ -391,7 +391,6 @@
         detailData.rowNum = getSelectDataInfo().data.rowNum;
         dalbitLog(detailData);
 
-
         // form 띄우기
         var template = $('#tmp_pushDetailFrm').html();
         var templateScript = Handlebars.compile(template);
@@ -582,6 +581,12 @@
             resultJson['slct_push'] = "9";
         }
 
+        if(!common.isEmpty($("#send_url").val())){
+            resultJson['image_type'] = "301";       // 이미지 타입
+            resultJson['send_url'] = $("#send_url").val();
+            // resultJson['imagePath'] = imagePath;
+        }
+
         dalbitLog(resultJson);
         return resultJson;
     };
@@ -739,12 +744,59 @@
         fnc_pushDetail.target.find("#input_targetLink").data("targetinfo", data.mem_no);
     };
 
+
+
+
+    /* 파일 업로드 */
+    function photoSubmit(me) {
+
+        var formData = new FormData();
+        formData.append('uploadType', 'profile');
+
+        var files = $('#'+ $(me).attr('id'))[0].files;
+        for (var i = 0; i < files.length; ++i) {
+            console.log(files[i]);
+            formData.append('file', files[i]);
+        }
+        $.ajax({
+            url: PHOTO_SERVER_URL + "/upload",
+            method: 'POST',
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (response) {
+                console.log(response);
+                console.log(JSON.parse(response));
+                response = JSON.parse(response);
+                alert(response.message);
+                if (response.result == "success") {
+                    $("._hidden_filename").val(response.data.url);
+                    pathChange();
+                }
+            },
+            error: function (e) {
+                console.log(e);
+                alert("error : " + e);
+            }
+        });
+    }
+
+    /* 파일 경로를 바꿀 done */
+    function pathChange() {
+        // file1 upload -> done
+        if($("#send_url").val().indexOf('_1/') >= 0) {
+            var data = {
+                'tempFileURI': $("#send_url").val()
+            };
+            util.getAjaxData("send_url", PHOTO_SERVER_URL + "/done", data, fn_pathChange_success);
+        }
+    }
+
+    function fn_pathChange_success(dst_id, response) {
+        $("#previewImage").attr('src', response.data.url);
+    }
+
 </script>
-
-
-
-
-
 
 <!-- =------------------ Handlebars ---------------------------------- -->
 
@@ -838,8 +890,8 @@
                 </td>
             </tr>
             <tr>
-                <th rowspan="3">메시지 내용</th>
-                <td rowspan="3" colspan="5">
+                <th rowspan="4">메시지 내용</th>
+                <td rowspan="4" colspan="5">
                     <div>
                         <textarea class="form-control" name="send_cont" id="push-send_cont" rows="5" cols="30" placeholder="방송 시스템에 적용되는 내용을 작성해주세요." style="resize: none" maxlength="150">{{send_cont}}</textarea>
                         <span style="color: red">* 메시지 내용은 10자~150자(한글) 입력 가능합니다.</span>
@@ -875,6 +927,16 @@
                     </div>
                 </td>
             </tr>
+
+            <tr>
+                <th>이미지첨부</th>
+                <td colspan="5">
+                    <div class="col-md-4 no-padding"><input id="files1" type="file" onchange="photoSubmit($(this))"></div>
+                    <input class="_hidden_filename form-control hide" name="send_url" id="send_url" value="{{send_url}}" />
+                    {{#dalbit_if send_url "!=" ""}}<img class="thumbnail fullSize_background no-padding no-margin" id="previewImage" src="{{renderImage send_url}}" alt="your image" style="width: 50px;height: 50px" />{{/dalbit_if}}
+                </td>
+            </tr>
+
             <tr>
                 <th>이동대상지정</th>
                 <td colspan="11">

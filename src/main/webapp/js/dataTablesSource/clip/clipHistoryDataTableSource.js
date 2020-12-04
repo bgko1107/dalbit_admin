@@ -371,4 +371,108 @@ var ClipHistoryDataTableSource = {
             }
         }
     },
+
+
+    'recommendClip': {
+        'url': '/rest/clip/history/list'
+
+        , 'columns': [
+            {'title': '플랫폼', 'width':'40px', 'data': 'osType', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, clip_platformType);
+                }},
+            {'title': '주제', 'width':'60px', 'data': 'subjectName', 'render': function (data, type, row, meta) {
+                    return data;
+                }},
+            {'title': '클립', 'width':'180px', 'data': 'title', 'render': function (data, type, row, meta) {
+                    return '<a href="javascript://" class="_openClipInfoPop" data-clipNo="' + row.castNo + '">' + data + '</a>';
+                }},
+            {'title': '이미지', 'width':'25px', 'data': 'imageBackground', 'render': function (data, type, row, meta) {
+                    if(common.isEmpty(data)){
+                        return "";
+                    }
+                    return '<img class="thumbnail fullSize_background" src="'+ PHOTO_SERVER_URL + data +'" width="25px" max-height="25px" />';
+
+                    // return data;
+                }},
+            {'title': '[듣기]<br>녹음시간', 'width':'50px', 'data': 'filePath', 'render': function (data, type, row, meta) {
+
+                    return row.filePlay + '&nbsp;<a class="_openClipPlayerPop" id="' + "play_" + row.castNo + '" data-clipNo="' + row.castNo + '" data-clipPath="' + data + '" href="javascript:;" >[ <i class="fa fa-play"></i> 듣기]</a>';
+                    // return '<audio class="clipPlayer" id="player_' + row.castNo + '" onended="playEnd(' + row.castNo + ')"><source src="'+ PHOTO_SERVER_URL + row.filePath +'"></audio><a id="' + "play_" + row.castNo + '" data-castNo="' + row.castNo + '" href="javascript:;" onclick="eventPlay($(this))">[ <i class="fa fa-play"></i> ]</a><br>' + row.filePlay;
+                }},
+            {'title': '등록회원', 'width':'70px', 'data': 'memNo', 'render': function (data, type, row, meta) {
+                    return row.memNick + ' [<a href="javascript://" class="_openMemberPop" data-memno="' + data + '">' + data + '</a>]';
+                }},
+            {'title': '성별(나이)', 'width':'70px', 'data': 'memSex', 'render': function (data, type, row, meta) {
+                    return common.sexIcon(data,row.memBirthYear);
+                }},
+            {'title': '등록일시', 'width':'70px', 'data': 'startDate', 'render': function (data, type, row, meta) {
+                    return common.substr(data,0,19);
+                }},
+            {'title': '공개<br>여부', 'width':'25px', 'data': 'typeOpen', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, clip_typeOpen);
+                }},
+            {'title': '인증<br>여부', 'width':'35px', 'data': 'clipConfirm', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, clip_confirmType_yn) + '&nbsp;<a href="javascript:;" onclick="editClipConfirm('+ row.castNo + ',' + data + ')">[' + util.getCommonCodeLabel(data, clip_confirmType_update) + ']</a>';
+                }},
+            // {'title': '운영자<br>메모', 'width':'40px', 'data': 'opMemoCnt', 'render': function (data, type, row, meta) {
+            //         return '<a href="javascript://" class="_openClipInfoPop" data-clipNo="' + row.castNo + '" data-tabid="bt_detail_memo">' + common.addComma(data) + '</a>';
+            //     }},
+            // {'title': '청취자', 'width':'50px', 'data': 'countPlayMemberCnt', 'render': function (data, type, row, meta) {
+            //         return '<a href="javascript://" class="_openClipInfoPop" data-clipNo="' + row.castNo + '" data-tabid="tab_listen">' + common.addComma(data) + '</a>';
+            //     }},
+            {'title': '청취수', 'width':'50px', 'data': 'countPlay', 'render': function (data, type, row, meta) {
+                    return '<a href="javascript://" class="_openClipInfoPop" data-clipNo="' + row.castNo + '" data-tabid="tab_listen">' + common.addComma(data) + '</a>';
+                }},
+            // {'title': '최다<br>청취수', 'width':'50px', 'data': 'countMaxPlay', 'render': function (data, type, row, meta) {
+            //         return '<a href="javascript://" class="_openClipInfoPop" data-clipNo="' + row.castNo + '" data-tabid="tab_listen" data-orderby="3">' + common.addComma(data) + '</a>';
+            //     }},
+            {'title': '좋아요', 'width':'50px', 'data': 'countGood', 'render': function (data, type, row, meta) {
+                    return '<a href="javascript://" class="_openClipInfoPop" data-clipNo="' + row.castNo + '" data-tabid="tab_good">' + common.addComma(data) + '</a>';
+                }},
+            // {'title': '선물 건', 'width':'50px', 'data': 'countGift', 'render': function (data, type, row, meta) {
+            //         return '<a href="javascript://" class="_openClipInfoPop" data-clipNo="' + row.castNo + '" data-tabid="tab_gift">' + common.addComma(data) + '</a>';
+            //     }},
+            // {'title': '선물 별', 'width':'55px', 'data': 'countByeol', 'render': function (data, type, row, meta) {
+            //         return '<a href="javascript://" class="_openClipInfoPop" data-clipNo="' + row.castNo + '" data-tabid="tab_gift">' + common.addComma(data) + '</a>';
+            //     }},
+            // {'title': '댓글', 'width':'45px', 'data': 'replyCnt', 'render': function (data, type, row, meta) {
+            //         return '<a href="javascript://" class="_selectReply" data-reply="' + data +  '" data-cast_no="' + row.castNo +'">' + data + '</a>';
+            //     }},
+            // {'title': '숨기기', 'width':'45px', 'data': 'hide', 'render': function (data, type, row, meta) {
+            //         if(row.state == 4 || row.state == 5){
+            //             return "-";
+            //         }
+            //
+            //         if(data == 0){
+            //             return '<a href="javascript:;" onclick="updateClipHide(' + row.castNo + ', '+ data +')">[숨기기]</a>';
+            //         }else{
+            //             return '<a href="javascript:;" onclick="updateClipHide(' + row.castNo + ', '+ data +')">[해제]</a>';
+            //         }
+            //     }},
+            // {'title': '삭제', 'width':'70px', 'data': 'state', 'render': function (data, type, row, meta) {
+            //         if(data == 4 || row.state == 5){
+            //             return "-";
+            //         }else{
+            //             return '<p class="mb5"><a href="javascript:;" onclick="reportDeleteClip(' + row.castNo + ')">[경고/삭제]</a></p><a href="javascript:;" onclick="deleteClip(' + row.castNo + ', ' + row.memNo + ')">[삭제]</a>';
+            //         }
+            //     }},
+            {'title': '상태', 'width':'45px', 'data': 'state', 'render': function (data, type, row, meta) {
+                    if(data == 4 || data == 5){
+                        return '<span style="color:red;font-weight:bold">삭제</span>' + (common.isEmpty(row.delName) ? '' : '<br>(' + row.delName + ')');
+                    }
+
+                    if(row.hide == 1){
+                        return util.getCommonCodeLabel(data, clip_hide) + (common.isEmpty(row.hideName) ? '' : '<br>(' + row.hideName + ')');
+                    }
+
+                    return util.getCommonCodeLabel(data, clip_stateType);
+                }},
+        ],
+
+        'createdRow' : function( row, data, dataIndex ) {
+            if(data.inner == 1){    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
+    },
 }

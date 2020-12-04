@@ -58,6 +58,13 @@ var PushDataTableSource = {
              {'title': '메시지 제목', 'data': 'send_title', 'width':'50%', 'render': function (data, type, row, meta) {
                      return '<a href="javascript://" class="_getNoticeDetail" data-idx="'+meta.row+'">' + data + '</a>'
                  }},
+            // {'title': '첨부이미지', 'data': 'send_url', 'width':'80px', 'render': function (data, type, row, meta) {
+            //         if(!common.isEmpty(data)){
+            //             return 'Y';
+            //         }else{
+            //             return 'N';
+            //         }
+            //     }},
             {'title': '발송대기', 'data': 'reservationCnt', 'width':'80px', 'render': function (data, type, row, meta) {
                     if(data > 0){
                         return 'Y';
