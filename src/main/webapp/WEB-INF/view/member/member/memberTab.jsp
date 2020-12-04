@@ -55,7 +55,8 @@
             <div class="tab-pane fade" id="mystarDetail"><jsp:include page="../myStar/list.jsp"/></div>         <!-- 마이스타 -->
             <div class="tab-pane fade" id="notice"><!-- 회원게시관리 -->
                 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist">
-                    <li><a href="#noticeDetail" role="tab" data-toggle="tab" id="tab_noticeDetail" onclick="tab_click(this.id);">회원/방송공지</a></li>
+                    <li><a href="#noticeDetail" role="tab" data-toggle="tab" id="tab_noticeBroadcastDetail" onclick="tab_click(this.id);">방송공지</a></li>
+                    <li><a href="#noticeDetail" role="tab" data-toggle="tab" id="tab_noticeMemberDetail" onclick="tab_click(this.id);">회원공지</a></li>
                     <li><a href="#fanboardDetail" role="tab" data-toggle="tab" id="tab_fanboardDetail" onclick="tab_click(this.id);">팬보드</a></li>
                     <li><a href="#banwordDetail" role="tab" data-toggle="tab" id="tab_banwordDetail" onclick="tab_click(this.id);">금지어</a></li>
                 </ul>
@@ -149,9 +150,12 @@
         }else if(tmp == "tab_mystarDetail"){
             getHistory_mystarDetail(tmp);
         }else if(tmp == "tab_notice"){
-            $("#tab_noticeDetail").click();
-        }else if(tmp == "tab_noticeDetail"){
-            noticeList();
+            $("#tab_noticeBroadcastDetail").click();
+        }else if(tmp == "tab_noticeBroadcastDetail"){
+            noticeList(null, tmp);
+            // getHistory_noticeDetail(tmp);
+        }else if(tmp == "tab_noticeMemberDetail"){
+            noticeList(null, tmp);
             // getHistory_noticeDetail(tmp);
         }else if(tmp == "tab_fanboardDetail"){
             getHistory_fanbroadDetail(tmp);
