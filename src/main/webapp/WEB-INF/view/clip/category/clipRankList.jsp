@@ -30,61 +30,12 @@
 
 
 <script type="text/javascript">
-    var beforeClipTypeOpen = 1;
-    var beforeClipStateType = 1;
-    var beforeOrderByType = 5;
-    var beforeClipSubjectType = -1;
-
-    $(document).on('change', "#clipSubjectType", function(){
-        beforeClipTypeOpen = $("#searchTypeOpen").val();
-        beforeClipStateType = $("#searchState").val();
-        beforeOrderByType = $("#clipOrderByType").val();
-        beforeClipSubjectType = $("#clipSubjectType").val();
-        // dtList_info.reload(selectCallback_hotHistory, false);
-        initDataTable_clipHot();
-    });
 
     $(function(){
 
     });
 
-    function initClipHotList(){
-        beforeClipTypeOpen = 1;
-        beforeClipStateType = 1;
-        beforeOrderByType = 5;
-        beforeClipSubjectType = -1;
-
-        $("#searchTypeOpen").val("1");
-        $("#searchState").val("1");
-        $("#clipOrderByType").val("5");
-        $("#clipSubjectType").val("-1");
-    }
-
-    function initClipNewList(){
-        beforeClipTypeOpen = 1;
-        beforeClipStateType = 1;
-        beforeOrderByType = 1;
-        beforeClipSubjectType = -1;
-
-        $("#searchTypeOpen").val("1");
-        $("#searchState").val("1");
-        $("#clipOrderByType").val("1");
-        $("#clipSubjectType").val("-1");
-    }
-
-    function getClipList(){
-        $("#select_clipTypeOpen").html(util.getCommonCodeSelect(beforeClipTypeOpen, clip_typeOpen_select));
-        $("#select_clipTypeOpen").hide();
-        $("#select_clipStateType").html(util.getCommonCodeSelect(beforeClipStateType, clip_stateType_select));
-        $("#select_clipStateType").hide();
-        $("#select_clipOrderByType").html(util.getCommonCodeSelect(beforeOrderByType, clip_orderByType_hot));
-        $("#select_clipOrderByType").hide();
-        getClipSubjectTypeCodeDefine();
-
-        initDataTable_clipHot();
-    }
-
-    var dtList_info;
+    var dtClipRankList_info;
     function initDataTable_clipHot() {
         //=---------- Main DataTable ----------
         var dtList_info_data = function (data) {
@@ -94,12 +45,11 @@
             data.subjectType = Number(common.isEmpty($("#clipSubjectType").val()) ? "-1" : $("#clipSubjectType").val());
         };
 
-        dtList_info = new DalbitDataTable($("#clip_hot_list_info"), dtList_info_data, ClipHistoryDataTableSource.list, $("#searchForm"));
-        dtList_info.useCheckBox(false);
-        dtList_info.useIndex(true);
-        dtList_info.setPageLength(50);
-        // dtList_info.createDataTable(selectCallback_hotHistory);
-        dtList_info.createDataTable();
+        dtClipRankList_info = new DalbitDataTable($("#clip_hot_list_info"), dtList_info_data, ClipHistoryDataTableSource.list, $("#searchForm"));
+        dtClipRankList_info.useCheckBox(false);
+        dtClipRankList_info.useIndex(true);
+        dtClipRankList_info.setPageLength(50);
+        dtClipRankList_info.createDataTable();
 
         //---------- Main DataTable ----------=
     };
@@ -152,68 +102,8 @@
 
 
 
-    //숨기기 기능 이베트
-    function updateClipHide(clipNo, hide) {
-        var hideType = hide == 0 ? 1 : 0;
-        if(confirm("클립 숨기기를 하는 경우 어드민에서 확인되지만 리스트에서는 본인외 타인에게 확인되지 않습니다. \n\n해당 클립을 "+ ((hideType === 1) ? "숨기기" : "숨기기 해제") +" 하시겠습니까?")){
-            var data = Object();
-            data.cast_no = clipNo;
-            data.editSlct = 5;
-            data.hide = hideType;
-            data.sendNoti = 0;
-
-            editClipDetailData(data);
-        }
-    }
-
-    function fn_ClipUpdateHide_success(dst_id, response){
-        alert(response.message);
-        $("#bt_search").click();
-    }
-    function fn_fail(dst_id, response){
-        alert(data.message);
-        console.log(data, textStatus, jqXHR);
-    };
 
 
-    // 클립 신고 삭제 이벤트
-    function reportDeleteClip(clipNo){
-        console.log(clipNo)
-        // if(confirm("해당 클립을 삭제 하시겠습니까?")){
-            var data = new Object();
-            data.cast_no = clipNo;
-
-            util.getAjaxData("clipDetailInfo", "/rest/clip/history/info", data, fn_detailInfo_select_success);
-        // }
-    }
-
-
-    //클립 삭제 이벤트
-    function deleteClip(clipNo, memNo) {
-        console.log(clipNo)
-        if(confirm("해당 클립을 삭제 하시겠습니까?")){
-            var data = Object();
-            data.memNo = memNo;
-            data.cast_no = clipNo;
-            data.editSlct = 4;
-            data.state = 5;
-            data.sendNoti = 1;
-
-            editClipDetailData(data);
-        }
-    }
-
-    var clipInfoData = "";
-    function fn_detailInfo_select_success(dst_id, response, dst_params) {
-        dalbitLog(response);
-        clipInfoData = response.data;
-        openClipReportPopup();
-    }
-
-    function fn_ClipDelete_success(dst_id, response){
-        alert(response.message);
-        $("#bt_search").click();
-    }
 
 </script>
 

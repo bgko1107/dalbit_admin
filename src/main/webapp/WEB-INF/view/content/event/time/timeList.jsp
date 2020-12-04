@@ -135,7 +135,6 @@
              $("#timeDetailArea").html(html).show();
 
              //플랫폼 체크 박스 처리
-             console.log(response.data.platform)
              if(response.data.platform == "111"){
                  $("input[name='platform']").each(function () {
                      this.checked = true;
@@ -155,7 +154,12 @@
              }
 
              $('#start_date').datepicker("setDate", moment(response.data.start_date).format('YYYY.MM.DD'));
+             $('#copy_start_date').datepicker("setDate", moment(response.data.start_date).format('YYYY.MM.DD'));
+
              ui.bottomScroll();
+             $('._previewBtn').each(function(){
+                 $(this).click();
+             });
          });
      });
 
@@ -196,6 +200,11 @@
      });
 
      $(document).on('click', '#detailCopyBtn', function(){
+        $(this).hide();
+        $('._copyShow').show();
+     });
+
+     $(document).on('click', '#detailCopySubmitBtn', function(){
          var data = generateTimeEventParam(true);
          if(data && confirm('복사하시겠습니까?')){
              util.getAjaxData('saveTimeEvent', "/rest/content/event/time/copy", data, function(dst_id, response, params){
@@ -264,11 +273,21 @@
              return false;
          }
 
-         if(!isCopy){
-             if(moment(start_datetime).format('YYYYMMDDHHmmss') < moment(new Date()).format('YYYYMMDDHHmmss')){
-                 alert('이벤트 시간이 현재 시간보다 작습니다.');
+         if(isCopy){
+             var copy_start_date = $("#copy_start_date").val();
+             if(common.isEmpty(copy_start_date)){
+                 alert('날짜를 선택해주세요.');
                  return false;
              }
+             var copy_start_hour = $("#copy_start_hour").val();
+             var copy_start_minute = $("#copy_start_minute").val();
+             var start_datetime = copy_start_date + " " + copy_start_hour + ":" + copy_start_minute +":00";
+
+         }
+
+         if(moment(start_datetime).format('YYYYMMDDHHmmss') < moment(new Date()).format('YYYYMMDDHHmmss')){
+             alert('이벤트 시간이 현재 시간보다 작습니다.');
+             return false;
          }
 
 
@@ -453,10 +472,17 @@
                         </table>
                     </div>
                     <div class="col-sm-5">
+                        <button class="btn btn-sm btn-success" type="button" id="detailSaveBtn"> 저장</button>
                         {{^equal idx 0}}
                             <button class="btn btn-sm btn-primary" type="button" id="detailCopyBtn"> 복사하기</button>
+                            <span class="_copyShow" style="display:none;">
+                                * 복사 시 들어갈 이벤트 일시를 선택해주세요.
+                                <input type="text" class="form-control" id="copy_start_date" name="copy_start_date" style="width:100px" />
+                                {{{getCommonCodeSelect start_hour 'timeHour' 'Y' 'copy_start_hour'}}}
+                                {{{getCommonCodeSelect start_minute 'timeMinute' 'Y' 'copy_start_minute'}}}
+                                <button class="btn btn-sm btn-primary" type="button" id="detailCopySubmitBtn"> 복사실행</button>
+                            </span>
                         {{/equal}}
-                        <button class="btn btn-sm btn-success" type="button" id="detailSaveBtn"> 저장</button>
                     </div>
                 </div>
             </div>

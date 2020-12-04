@@ -1,5 +1,8 @@
 package com.dalbit.clip.dao;
 
+import com.dalbit.clip.vo.procedure.P_ClipRecommendDetailOutPut;
+import com.dalbit.clip.vo.procedure.P_ClipRecommendListOutPut;
+import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.customer.vo.BlockAdmVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,5 +34,14 @@ public interface Cli_ClipCategoryDao {
 
     @Transactional(readOnly = true)
     int selectBlockHistListCnt(BlockAdmVo blockAdmVo);
+
+
+    @Transactional(readOnly = true)
+    ArrayList<P_ClipRecommendListOutPut> callClipRecommendList(ProcedureVo procedureVo);
+
+    ProcedureVo callClipRecommendEdit(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<P_ClipRecommendDetailOutPut> callClipRecommendDetail(ProcedureVo procedureVo);
 
 }

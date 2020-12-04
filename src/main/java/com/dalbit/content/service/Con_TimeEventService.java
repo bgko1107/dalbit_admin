@@ -345,15 +345,15 @@ public class Con_TimeEventService {
 
     public String copyTimeEvent(TimeEventVo timeEventVo){
 
-        String copyDate = "9999.12.31 00:00:00";
+        //String copyDate = "9999.12.31 00:00:00";
         String opName = MemberVo.getMyMemNo();
         String is_view = "1";
 
         //메인 탑 배너 복사
         var bannerVo = new P_bannerUpdateVo();
         bannerVo.setBanner_idx(timeEventVo.getMain_top_banner_idx() + "");
-        bannerVo.setStart_datetime(copyDate);
-        bannerVo.setEnd_datetime(copyDate);
+        bannerVo.setStart_datetime(timeEventVo.getStart_date());
+        bannerVo.setEnd_datetime(timeEventVo.getEnd_date());
         bannerVo.setOp_name(opName);
         bannerVo.setIs_view(is_view);
         conTimeEventDao.copyBanner(bannerVo);
@@ -370,8 +370,8 @@ public class Con_TimeEventService {
         timeEventVo.setStore_banner_idx(bannerVo.getIdx());
 
         //타임이벤트 복사
-        timeEventVo.setStart_date(copyDate);
-        timeEventVo.setEnd_date(copyDate);
+        timeEventVo.setStart_date(timeEventVo.getStart_date());
+        timeEventVo.setEnd_date(timeEventVo.getEnd_date());
         timeEventVo.setOp_name(opName);
         timeEventVo.setView_yn(1);
         timeEventVo.setState(0);
