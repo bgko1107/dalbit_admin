@@ -37,6 +37,10 @@
         call rd_admin.sp_admin_stat_member_payment_total(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
+    <select id="callPayMonthWay" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.enter.vo.procedure.P_PayTotalOutDetailVo">
+        call rd_admin.sp_admin_stat_member_payment_month_way(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
     <select id="callPayAge" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.enter.vo.procedure.P_PayAgeOutDetailVo">
         call rd_admin.sp_admin_stat_member_payment_mem(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>

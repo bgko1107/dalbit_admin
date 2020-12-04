@@ -47,16 +47,21 @@
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
     var noticePagingInfo = new PAGING_INFO(0,1,40);
+    var tabId = 'tab_noticeBroadcastDetail';
 
     $(document).ready(function() {
         // noticeList();
     });
 
     var memNo;
-    function noticeList(pagingInfo) {
-        $('#title').html('회원/방송공지');
-        if(!common.isEmpty(pagingInfo)){
-            noticePagingInfo.pageNo = pagingInfo;
+    function noticeList(pagingNo, _tabId) {
+        if(!common.isEmpty(_tabId)){
+            tabId = _tabId;
+        }
+
+        $('#title').html('방송공지');
+        if(!common.isEmpty(pagingNo)){
+            noticePagingInfo.pageNo = pagingNo;
         }else{
             noticePagingInfo.pageNo = 1;
         }
@@ -66,13 +71,14 @@
         }else{
             txt_search = $('#txt_search').val();
         }
+
         var data = {
             'pageNo': noticePagingInfo.pageNo
             , 'pageCnt' : noticePagingInfo.pageCnt
             , 'mem_no' : txt_search
             , 'sDate' : $("#startDate").val()
             , 'eDate' : $("#endDate").val()
-            , 'searchType' : 2
+            , 'searchType' : tabId == "tab_noticeMemberDetail" ? 1 : 2
         };
 
         util.getAjaxData("noticeList", "/rest/content/boardAdm/noticeList", data, fn_success_noticeList);
@@ -122,8 +128,6 @@
                 noticeType: $(this).data('type'),
                 roomNo: $(this).data('roomno')
             };
-
-            console.log(data);
             util.getAjaxData("delete", "/rest/member/notice/delete", data, noticeDel_success);
         }else return;
     });
@@ -140,6 +144,10 @@
     function noticeDel_success(dst_id, response){
         alert(response.message);
         noticeList();
+    }
+
+    function handlebarsPaging(targetId, pagingInfo){
+        noticeList(pagingInfo.pageNo);
     }
 
 </script>
