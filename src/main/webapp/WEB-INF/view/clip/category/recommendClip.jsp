@@ -133,6 +133,7 @@
                 ,castNoList : castNo
                 ,orderNoList : order
                 ,leaderYnList : leader
+                ,groupNo : groupNo
             };
 
             console.log(data);

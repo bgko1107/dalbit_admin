@@ -118,7 +118,7 @@
     }
 
 
-    // 댓글 목록 리스트
+    // 달대립 추천 클립 상세 정보
     $(document).on('click', '._openRecommendDetail', function() {
         location.href = "/clip/category/recommendClip?yearMonth="+$(this).data('yearmonth')+"&weekNo=" + $(this).data('weekno')+"&groupNo=" + $(this).data('groupno');
     });
