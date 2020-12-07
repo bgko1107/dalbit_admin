@@ -25,6 +25,7 @@ var broadCast_summary = [
     , new COMMON_CODE('', 'totalByeol', '받은 별')
     , new COMMON_CODE('', 'totalGood', '좋아요')
     , new COMMON_CODE('', 'totalBooster', '부스터')
+    , new COMMON_CODE('', 'totalBooster', '보름달 완료 수')
 ];
 
 var member_listen_summary = [
@@ -34,6 +35,7 @@ var member_listen_summary = [
     // , new COMMON_CODE('', 'totalByeol', '총 보낸 별')
     , new COMMON_CODE('', 'totalGood', '좋아요')
     , new COMMON_CODE('', 'totalBooster', '부스터')
+    , new COMMON_CODE('', 'totalBooster', '보름달 완료 수')
 ];
 
 var pay = [

@@ -54,7 +54,8 @@ var BroadcastDataTableSource = {
             //         return ;
             //     }},
             {'title': '방송<br/>개설', 'data': 'broadCastCnt','width' : '30px', 'render': function (data, type, row, meta) {
-                    return common.addComma(data);
+                    var tmp = row.complete_moon == 1 ? "<br/>보름달Y" : "<br/>보름달N";
+                    return common.addComma(data) + tmp;
                 }},
             {'title': '상태', 'data': 'state', 'width':'35px', 'render': function (data, type, row, meta) {
                     if(row.freezeMsg == 1){
@@ -193,7 +194,8 @@ var BroadcastDataTableSource = {
                     return common.sexIcon(data, row.dj_birth_year, true);
                 }},
             {'title': '방송 개설', 'data': 'broadCastCnt','width' : '70px', 'render': function (data, type, row, meta) {
-                    return common.addComma(data);
+                    var tmp = row.complete_moon == 1 ? "<br/>보름달Y" : "<br/>보름달N";
+                    return common.addComma(data) + tmp;
                 }},
 
             {'title': '상태', 'data': 'state', 'width':'50px', 'render': function (data, type, row, meta) {

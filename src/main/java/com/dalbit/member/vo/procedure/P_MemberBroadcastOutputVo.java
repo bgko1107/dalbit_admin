@@ -29,6 +29,7 @@ public class P_MemberBroadcastOutputVo extends SearchVo {
     private int boosterCnt;
     private int os_type;
     private int inner;
+    private int complete_moon;
 
     //summary
     private int totalListenCnt;
@@ -37,6 +38,7 @@ public class P_MemberBroadcastOutputVo extends SearchVo {
     private int totalByeol;
     private int totalGood;
     private int totalBooster;
+    private int totalCompleteMoonCnt;
 
 
     public void setStart_date(Date start_date){
