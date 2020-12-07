@@ -83,7 +83,7 @@
             initClipNewList();
             getClipList();
         }else if(tabId == 'tab_clipRank'){
-            // getClipRankList();
+            getClipRankList();
         }else if(tabId == 'tab_recommendList'){
             getRecommendList();
         }else if(tabId == 'tab_category'){
