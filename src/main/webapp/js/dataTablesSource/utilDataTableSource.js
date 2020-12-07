@@ -75,4 +75,29 @@ var UtilDataTableSource = {
             }
         ]
     },
+
+    'modalMemberBoosterList': {
+        'url': '/rest/member/member/boost/list'
+        , 'columns': [
+            {'title': 'memNo', 'data': 'mem_no' , 'visible' : false},
+            {'title': 'UserID', 'data': 'mem_userid','width':'100px', 'render': function (data, type, row, meta) {
+                    return '<a href="javascript://" class="_openMemberPop" data-memNo="'+row.mem_no+'">' + data + '</a>'
+                }},
+            {'title': '닉네임', 'data': 'mem_nick','width':'150px'},
+            {'title': '연락처', 'data': 'mem_phone','width':'150px', 'render': function (data, type, row, meta) {
+                    return common.phoneNumHyphen(data)
+                }},
+            {'title': '보유수량 및 지급/차감', 'data': 'item_cnt', 'render': function (data, type, row, meta) {
+                    return data +'개 '
+                        + '<select id="boostPlusMinus" name="boostPlusMinus" class="form-control searchType ml15 boostPlusMinus">'
+                        + '     <option value="1">+</option>'
+                        + '     <option value="3">-</option>'
+                        + '</select>'
+                        + '<input type="text" class="form-control ml10 txt_boostAddCnt" id="txt_boostAddCnt" style="width:50px" maxLength="4">'
+                        + '<button type="button" id="bt_boostAdd" class="btn btn-default btn-sm ml10"'
+                        + '     data-memno="' + row.mem_no + '" data-boostcnt="'+data+'">변경'
+                        + '</button>'
+                }},
+        ]
+    },
 };

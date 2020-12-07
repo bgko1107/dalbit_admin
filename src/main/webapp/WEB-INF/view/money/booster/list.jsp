@@ -22,6 +22,7 @@
 
                         <%--<label><input type="text" class="form-control" id="txt_search"></label>--%>
                         <button type="button" class="btn btn-success" id="bt_search">검색</button>
+                        <input type="text" value="" style="display:none;" />
                     </div>
                 </div>
             </div>
@@ -58,6 +59,8 @@
     <div class="tab-content no-padding" id="layoutDiv"></div>
 </div>
 <!-- DATA TABLE END -->
+
+<jsp:include page="/WEB-INF/view/common/util/select_memeberBoosterList.jsp"></jsp:include>
 
 <script type="text/javascript" src="/js/code/money/boosterCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/handlebars/moneyHelper.js?${dummyData}"></script>
@@ -218,8 +221,8 @@
             startDate : $("#onedayDate").val()
             , pageNo : boostHistPagingInfo.pageNo
             , pageCnt : boostHistPagingInfo.pageCnt
-            , searchType : $("#searchType").val()
-            , searchText : $("#searchText").val()
+            , searchType : $("#searchForm #search_type").val()
+            , searchText : $("#searchForm #searchText").val()
         }
         util.getAjaxData("histList", "/rest/money/booster/histList", data, function(dist_id, response, param){
             var template = $("#tmp_histList").html();
@@ -227,14 +230,55 @@
             var html = templateScript(response.data);
             $("#tableBodyHist").html(html);
 
-            boostHistPagingInfo.totalCnt = response.data.paging.totalCnt;
-            util.renderPagingNavigation('histList_paginate', boostHistPagingInfo);
+            if(!common.isEmpty(response.data.paging)){
+                boostHistPagingInfo.totalCnt = response.data.paging.totalCnt;
+                util.renderPagingNavigation('histList_paginate', boostHistPagingInfo);
+            }
         });
     }
 
     function handlebarsPaging(targetId, pagingInfo){
         specialDjPagingInfo = pagingInfo;
         getHistoryList();
+    }
+
+    $(document).on('click', '#bt_member_search', function () {
+        showPopMemberList(choiceMember);
+    });
+
+    function choiceMember(data) {
+        console.log(data);
+        var html = '<a href="javascript://" class="_openMemberPop" data-memno="'+data.mem_no+'">'+data.mem_nick+'</a>';
+        html += ' <a href="javascript://" class="_deleteMem _fontColor" data-fontColor="red"><i class="fa fa-trash-o"></i></a>';
+
+        var regMemberLength = $("#weeklyForm").find('._openMemberPop').length;
+        var tabId = $("#tablist_con li.active a").prop('id');
+
+        if(tabId == 'tab_weekly' && regMemberLength == 2){
+            alert("위클리픽은 최대 2명까지 지정 가능합니다.");
+            return false;
+        }
+
+        if(tabId == 'tab_second' && regMemberLength == 1){
+            alert("15초 광고 모델은 1명만 지정 가능합니다.");
+            return false;
+        }
+
+
+        //이미 등록된 회원인지 체크
+        if(0 < $('._openMemberPop[data-memno="'+data.mem_no+'"]').length){
+            alert('이미 등록된 회원입니다.');
+            return false;
+        }
+
+        $("#weeklyForm").find('._regMemberArea').each(function(){
+            if($(this).find('._openMemberPop').length == 0){
+                $(this).html(html);
+                return false;
+            }
+        });
+
+        ui.paintColor();
     }
 </script>
 

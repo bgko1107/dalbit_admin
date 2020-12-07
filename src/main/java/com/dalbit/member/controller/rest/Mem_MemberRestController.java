@@ -328,4 +328,10 @@ public class Mem_MemberRestController {
         String result = mem_MemberService.boostItemHist(pMemberItemVo);
         return result;
     }
+
+    @PostMapping("boost/list")
+    public String memberBoostList(P_MemberListInputVo pMemberListInputVo){
+        String result = mem_MemberService.memberBoostList(pMemberListInputVo);
+        return result;
+    }
 }
