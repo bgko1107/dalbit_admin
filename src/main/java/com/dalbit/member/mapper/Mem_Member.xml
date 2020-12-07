@@ -879,4 +879,72 @@
     <select id="setChangeAutoSetting" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_MemberEditorVo">
         call rd_admin.sp_admin_member_auto_change_setting_edit(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
+
+    <select id="selectMemberBoostListCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberListInputVo" resultType="int">
+        select count(*)
+        from rd_data.tb_member_basic basic
+        <where>
+            <if test='searchText != null and searchText != ""'>
+                <choose>
+                    <when test='searchType == "1"'>
+                        AND mem_no like concat ('%', #{searchText}, '%')
+                    </when>
+                    <when test='searchType == "2"'>
+                        AND mem_id like concat ('%', #{searchText}, '%')
+                    </when>
+                    <when test='searchType == "3"'>
+                        AND mem_nick like concat ('%', #{searchText}, '%')
+                    </when>
+                    <when test='searchType == "4"'>
+                        AND mem_phone like concat ('%', #{searchText}, '%')
+                    </when>
+                    <otherwise>
+                        AND (
+                            mem_no like concat ('%', #{searchText}, '%')
+                            or mem_id like concat ('%', #{searchText}, '%')
+                            or mem_nick like concat ('%', #{searchText}, '%')
+                            or mem_phone like concat ('%', #{searchText}, '%')
+                        )
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+    </select>
+
+    <select id="selectMemberBoostList" parameterType="com.dalbit.member.vo.procedure.P_MemberListInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberListOutputVo">
+        select basic.mem_no
+             , basic.mem_userid
+             , basic.mem_nick
+             , basic.mem_phone
+             , ifnull(item.item_cnt, 0) item_cnt
+        from rd_data.tb_member_basic basic
+                 left join rd_data.tb_member_item item on basic.mem_no = item.mem_no and item_type = 1
+        <where>
+            <if test='searchText != null and searchText != ""'>
+                <choose>
+                    <when test='searchType == "1"'>
+                        AND basic.mem_no like concat ('%', #{searchText}, '%')
+                    </when>
+                    <when test='searchType == "2"'>
+                        AND basic.mem_id like concat ('%', #{searchText}, '%')
+                    </when>
+                    <when test='searchType == "3"'>
+                        AND basic.mem_nick like concat ('%', #{searchText}, '%')
+                    </when>
+                    <when test='searchType == "4"'>
+                        AND basic.mem_phone like concat ('%', #{searchText}, '%')
+                    </when>
+                    <otherwise>
+                        AND (
+                        basic.mem_no like concat ('%', #{searchText}, '%')
+                        or basic.mem_id like concat ('%', #{searchText}, '%')
+                        or basic.mem_nick like concat ('%', #{searchText}, '%')
+                        or basic.mem_phone like concat ('%', #{searchText}, '%')
+                        )
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+        limit #{pageStart}, #{pageCnt}
+    </select>
 </mapper>

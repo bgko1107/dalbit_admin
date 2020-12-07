@@ -168,4 +168,8 @@ public interface Mem_MemberDao {
     int boostItemHistCnt(P_MemberItemVo pMemberItemVo);
 
     List<P_MemberItemVo> boostItemHist(P_MemberItemVo pMemberItemVo);
+
+    int selectMemberBoostListCnt(P_MemberListInputVo pMemberListInputVo);
+
+    ArrayList<P_MemberListOutputVo> selectMemberBoostList(P_MemberListInputVo pMemberListInputVo);
 }

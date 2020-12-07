@@ -34,6 +34,8 @@ public class P_MemberListOutputVo extends SearchVo {
     private Date last_connect_date;
     private String last_connect_DateFormat;
 
+    private int item_cnt;
+
     public void setJoinDate(Date joinDate){
         this.joinDate = joinDate;
         this.joinDateFormat = DalbitUtil.convertDateFormat(joinDate, "yyyy.MM.dd HH:mm:ss");

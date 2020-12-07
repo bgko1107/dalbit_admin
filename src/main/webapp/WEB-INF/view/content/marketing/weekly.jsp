@@ -93,7 +93,7 @@
 
     // // [수신대상 선택 - 지정회원] 회원 추가
     function choiceMember(data) {
-        console.log(data);
+
         var html = '<a href="javascript://" class="_openMemberPop" data-memno="'+data.mem_no+'">'+data.mem_nick+'</a>';
         html += ' <a href="javascript://" class="_deleteMem _fontColor" data-fontColor="red"><i class="fa fa-trash-o"></i></a>';
 
@@ -215,7 +215,7 @@
             , viewOn : $("#detail_viewOn").prop('checked') ? 1 : 0
             , mem_no1 : mem_no1
             , mem_no2 : mem_no2
-            , slctType : 1
+            , slctType : $("#tablist_con li.active a").prop('id') == 'tab_weekly' ? 1 : 2
         }
         return data;
     }
@@ -231,7 +231,27 @@
     });
 
     $(document).on('click', '#btn_regist', function(){
-        getDetail('');
+        var template = $('#tmp_weeklyForm').html();
+        var templateScript = Handlebars.compile(template);
+
+        var tabId = $("#tablist_con li.active a").prop('id');
+
+        var data = {
+            idx : ''
+            , tabId : tabId
+        }
+
+        var context = data;
+        var html = templateScript(context);
+        $("#weeklyForm").html(html);
+
+        $('#detailArea').show();
+        if(tabId == 'tab_second'){
+            $('._weekly_show').hide();
+        }else{
+            $('._weekly_show').show();
+        }
+        ui.paintColor();
     });
 
     $(document).on('click', '#btn_delete', function(){
@@ -275,6 +295,7 @@
             var tabId = $("#tablist_con li.active a").prop('id');
             response.data.tabId = tabId;
 
+            console.log(response.data)
             var context = response.data;
             var html = templateScript(context);
             $("#weeklyForm").html(html);
@@ -379,8 +400,8 @@
             {{#equal tabId 'tab_weekly'}}
                 <th>등록회원2</th>
                 <td class="_regMemberArea" colspan="3">
-                    {{#if mem_no2}}
-                        <a href="javascript://" class="_openMemberPop" data-memno="{{mem_no2}}">{{mem_nick2}}</a>
+                    {{#if ../mem_no2}}
+                        <a href="javascript://" class="_openMemberPop" data-memno="{{../mem_no2}}">{{../mem_nick2}}</a>
                         <a href="javascript://" class="_deleteMem _fontColor" data-fontColor="red"><i class="fa fa-trash-o"></i></a>
                     {{else}}
                         회원을 검색하여 등록해주세요.

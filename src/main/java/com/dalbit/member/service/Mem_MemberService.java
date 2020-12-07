@@ -1057,4 +1057,13 @@ public class Mem_MemberService {
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, itemHistoryList, new PagingVo(totalCnt)));
     }
+
+    public String memberBoostList(P_MemberListInputVo pMemberListInputVo){
+
+        int totalCnt = mem_MemberDao.selectMemberBoostListCnt(pMemberListInputVo);
+        pMemberListInputVo.setTotalCnt(totalCnt);
+        ArrayList<P_MemberListOutputVo> memberList = mem_MemberDao.selectMemberBoostList(pMemberListInputVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, memberList, new PagingVo(totalCnt)));
+    }
 }
