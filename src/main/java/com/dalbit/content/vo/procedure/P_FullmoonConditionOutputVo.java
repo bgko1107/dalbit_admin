@@ -17,7 +17,7 @@ public class P_FullmoonConditionOutputVo extends BaseVo {
     /* 혜택 */
     private int itemType;
     private int itemCnt;
-    
+
     /* 청취자 */
     private int minValue;
 

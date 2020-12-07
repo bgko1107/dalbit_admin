@@ -3,7 +3,7 @@
 <mapper namespace="com.dalbit.content.dao.Con_FullmoonDao" >
 
     <select id="callFullmoonManagementSelect" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.content.vo.procedure.P_FullmoonConditionOutputVo">
-        call rd_admin.sp_admin_fullmoon_management_select(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+        call rd_admin.sp_admin_contents_fullmoon_management_select(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
 </mapper>
