@@ -1,9 +1,7 @@
 package com.dalbit.clip.service;
 
 import com.dalbit.clip.dao.Cli_ClipCategoryDao;
-import com.dalbit.clip.vo.procedure.P_ClipRecommend;
-import com.dalbit.clip.vo.procedure.P_ClipRecommendDetailOutPut;
-import com.dalbit.clip.vo.procedure.P_ClipRecommendListOutPut;
+import com.dalbit.clip.vo.procedure.*;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
@@ -27,6 +25,22 @@ public class Cli_ClipCategoryService {
 
     @Autowired
     Cli_ClipCategoryDao cli_ClipCategoryDao;
+
+    /**
+     * 클립 랭킹 조회
+     */
+    public String callClipRankList(P_ClipRank pClipRank){
+        ProcedureVo procedureVo = new ProcedureVo(pClipRank);
+        ArrayList<P_ClipRankListOutPut> list = cli_ClipCategoryDao.callClipRankList(procedureVo);
+
+        String result;
+        if(list.size() > 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        return result;
+    }
 
     /**
      * 달대리 추천클립 목록 조회
