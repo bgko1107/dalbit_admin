@@ -10,7 +10,7 @@
         <div class="row col-lg-12 mt15">
             <div class="pull-left ml5">
                 ㆍ 일자 기준 가입한지 60일 이상 된 자, 일자 기준 현재 스페셜 DJ가 아닌자,<br/>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일자 기준 30일 내 15일 이상 방송한 자, 일자 기준 30일 내 20시간 이상 방송한 자를 모두 충족한 유저의 정보<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일자 기준 30일 내 15일 이상 방송한 자, 일자 기준 30일 내 30시간 이상 방송한 자를 모두 충족한 유저의 정보<br/>
                 ㆍ 방송은 1시간 이상 방송만이 집계됩니다.
             </div>
 
