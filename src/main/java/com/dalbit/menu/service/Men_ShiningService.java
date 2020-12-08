@@ -65,11 +65,11 @@ public class Men_ShiningService {
 
         String[] headers = {
                 "No", "회원번호", "닉네임", "성별"
-                , "가입일", "30일 내 방송 횟수", "30일 내 방송시간", "30일 내 청취자 수", "30일 내 평균 청취자수"
+                , "가입일", "30일 내 방송일수", "30일 내 방송 횟수", "30일 내 방송시간", "30일 내 청취자 수", "30일 내 평균 청취자수"
                 , "30일 내 받은 별", "누적 신고 기록"};
         int[] headerWidths = {
                 3000, 5000, 6000, 3000
-                , 5000, 5000, 5000, 5000, 5000
+                , 5000, 5000, 5000, 5000, 5000, 5000
                 , 5000, 5000};
 
         List<Object[]> bodies = new ArrayList<>();
@@ -82,8 +82,9 @@ public class Men_ShiningService {
             hm.put("mem_sex", DalbitUtil.isEmpty(list.get(i).getMemSex()) ? "" : list.get(i).getMemSex());
 
             hm.put("join_date", DalbitUtil.isEmpty(list.get(i).getMemJoinDate()) ? "" : list.get(i).getMemJoinDate());
+            hm.put("dateCnt", DalbitUtil.isEmpty(list.get(i).getDateCnt()) ? "" : list.get(i).getDateCnt());
             hm.put("broadcastCnt", DalbitUtil.isEmpty(list.get(i).getBroadcastCnt()) ? "" : list.get(i).getBroadcastCnt());
-            hm.put("airTime", DalbitUtil.isEmpty(list.get(i).getAirTime()) ? "" : list.get(i).getAirTime());
+            hm.put("airTime", DalbitUtil.isEmpty(list.get(i).getAirTime()) ? "" : DalbitUtil.timeStampDay(list.get(i).getAirTime()));
             hm.put("sumEntry", DalbitUtil.isEmpty(list.get(i).getSumEntry()) ? "" : list.get(i).getSumEntry());
             hm.put("avgEntry", DalbitUtil.isEmpty(list.get(i).getAvgEntry()) ? "" : list.get(i).getAvgEntry());
 

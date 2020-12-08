@@ -1178,4 +1178,35 @@ public class DalbitUtil {
         SimpleDateFormat afterFormat = new SimpleDateFormat(afterPattern);
         return afterFormat.format(beforeDate);
     }
+
+    public static String timeStampDay(int timeSecond){
+
+        try {
+            if(timeSecond <= 0){
+                return "";
+            }
+
+            int day = (int) Math.floor(timeSecond / 60 / 60 / 24);
+            int day_s = day * 60 * 60 * 24;
+            int hours_s = timeSecond - (day_s);
+            int hours = (int) Math.floor(hours_s / 60 / 60);
+            int minutes_s = timeSecond - (day_s + (hours * 60 * 60));
+            int minutes = (int) Math.floor(minutes_s / 60);
+
+            String timeData = "";
+            if(day != 0){
+                timeData = day + "일 " + hours  + "시간";
+            }else{
+                if(hours != 0){
+                    timeData = hours  + "시간 " + minutes + "분";
+                }else{
+                    timeData = minutes + "분";
+                }
+            }
+
+            return timeData;
+        }catch (Exception e){
+            return timeSecond + "";
+        }
+    }
 }
