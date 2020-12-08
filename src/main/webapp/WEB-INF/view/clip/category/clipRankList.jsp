@@ -116,7 +116,7 @@
             <a href="javascript://" class="_openMemberPop" data-memno="{{mem_no}}">{{mem_no}}</a>
         </td>
         <td>{{{sexIcon mem_sex mem_birth_year}}}</td>
-        <td>{{clipPoint}}</td>
+        <th style="color: red;">{{clipPoint}}</th>
         {{#dalbit_if ../slctType '==' 4}}<td>{{rewardBadge}}</td>{{/dalbit_if}}
         {{#dalbit_if ../slctType '==' 4}}<td>{{startBadge}}</td>{{/dalbit_if}}
         {{#dalbit_if ../slctType '==' 4}}<td>{{endBadge}}</td>{{/dalbit_if}}
@@ -127,7 +127,7 @@
         <td><a href="javascript://" class="_openClipInfoPop" data-clipNo="{{cast_no}}" data-tabid="tab_good">{{goodPoint}}</a></td>
         <td><a href="javascript://" class="_selectReply" data-reply="{{replyPoint}}" data-cast_no="{{cast_no}}">{{replyPoint}}</a></td>
         <td>
-            {{#dalbit_if winnerMsg '!=' ''}}
+            {{#dalbit_if rowNum '<' 4}}
                 <a href="javascript://" data-title="{{title}}" data-nickname="{{mem_nick}}" data-winnermsg="{{winnerMsg}}" onclick="winnerMsgClick($(this))">[소감보기]</a>
             {{else}}
                 -
