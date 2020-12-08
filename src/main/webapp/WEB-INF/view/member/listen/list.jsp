@@ -56,7 +56,7 @@
     <table class="table table-bordered table-summary pull-right" id="declarationSummary" style="width: 500px;">
         <thead>
         <tr>
-            <th colspan="5" class="_bgColor" data-bgcolor="#8faadc">총 합</th>
+            <th colspan="6" class="_bgColor" data-bgcolor="#8faadc">총 합</th>
         </tr>
         <tr>
             {{#each this.header}}
@@ -70,6 +70,7 @@
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalDal}} 달</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalGood}} 건</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalBooster}} 개</td>
+            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalCompleteMoonCnt}} 개</td>
         </tbody>
     </table>
 </script>

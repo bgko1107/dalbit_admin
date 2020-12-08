@@ -181,6 +181,9 @@ var MemberDataTableSource = {
             {'title': '부스터', 'data': 'boosterCnt', 'width':'80px', 'render': function (data) {
                     return common.addComma(data);
                 }},
+            {'title': '보름달', 'data': 'complete_moon', 'width':'80px', 'render': function (data) {
+                    return data == 1 ? "완료" : "미완료";
+                }},
         ]
         ,'comments': 'ㆍ회원이 방송을 진행하고, 청취한 기록을 확인할 수 있습니다.'
         ,'createdRow' : function( row, data, dataIndex ) {
@@ -229,6 +232,9 @@ var MemberDataTableSource = {
                 }},
             {'title': '부스터', 'data': 'boosterCnt', 'width':'50px', 'render': function (data) {
                     return common.addComma(data);
+                }},
+            {'title': '보름달', 'data': 'complete_moon', 'width':'80px', 'render': function (data) {
+                    return data == 1 ? "완료" : "미완료";
                 }},
         ]
         ,'comments': 'ㆍ회원이 청취한 방송기록을 확인할 수 있습니다.'
