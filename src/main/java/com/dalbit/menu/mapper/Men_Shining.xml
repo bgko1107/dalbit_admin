@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dalbit.menu.dao.Men_ShiningDao" >
+
+    <select id="callExpectedList" statementType="CALLABLE" parameterType="ProcedureVo" resultType="com.dalbit.menu.vo.ShiningVo">
+        call rd_admin.sp_admin_nominee_shiningdj_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+</mapper>

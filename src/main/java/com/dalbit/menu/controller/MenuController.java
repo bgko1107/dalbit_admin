@@ -43,4 +43,9 @@ public class MenuController {
     public String specialList(){
         return "menu/special/list";
     }
+
+    @RequestMapping("/shining/list")
+    public String shiningList(){
+        return "menu/shining/list";
+    }
 }
