@@ -17,6 +17,7 @@ public class ShiningVo extends PagingVo {
     private String memNick;
     private String memSex;
     private String memJoinDate;
+    private int dateCnt;
     private int broadcastCnt;
     private int airTime;
     private int sumEntry;

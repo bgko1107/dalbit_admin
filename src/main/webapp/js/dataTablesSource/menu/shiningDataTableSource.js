@@ -15,6 +15,9 @@ var shiningDataTableSource = {
             , {'title': '가입일', 'data': 'memJoinDate', 'render': function(data, type, row) {
                     return common.convertToDate(data, 'YYYY-MM-DD HH:mm:ss');
                 }}
+            , {'title': '30일  내<br />방송 일수', 'data': 'dateCnt', 'width':'10%', 'render': function(data){
+                    return common.phoneNumHyphen(data) + ' 일'
+                }}
             , {'title': '30일  내<br />방송 횟수', 'data': 'broadcastCnt', 'width':'10%', 'render': function(data){
                     return common.phoneNumHyphen(data) + ' 회'
                 }}
