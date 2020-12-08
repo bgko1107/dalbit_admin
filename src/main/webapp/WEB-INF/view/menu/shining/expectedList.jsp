@@ -66,6 +66,7 @@
         var dtList_info;
         var dtList_info_data = function(data) {
             data.checkDate = $('#onedayDate').val();
+            data.pageCnt = 50;
         };
         dtList_info = new DalbitDataTable($("#expectedList"), dtList_info_data, shiningDataTableSource.expectedList, $("#searchForm"));
         dtList_info.useCheckBox(true);
