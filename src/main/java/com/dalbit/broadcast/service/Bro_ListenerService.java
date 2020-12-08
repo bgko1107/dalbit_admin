@@ -93,6 +93,7 @@ public class Bro_ListenerService {
                     outVo.setMem_birth_day(memInfoOutVo.getMem_birth_day());
                 }
 
+                outVo.setComplete_moon(broadList.get(i).getComplete_moon());
                 list.add(outVo);
             }
         }

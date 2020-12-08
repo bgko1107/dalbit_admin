@@ -45,6 +45,8 @@ public class P_ListenListOutputVo extends PagingVo {
     private int totalGuestCnt;
     private int inner;
     private int joinCnt;
+    private int complete_moon;
+    private int totalColmpleteMoonCnt;
 
     // 회원 배찌
     private String recomm_badge;

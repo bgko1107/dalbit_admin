@@ -12,5 +12,7 @@ public class P_ClipRank extends PagingVo {
     private String startDate;
     private String endDate;
     private String slctType;
+    private String rankingDate;
+    private int searchType;
 
 }

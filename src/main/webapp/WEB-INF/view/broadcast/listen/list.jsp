@@ -221,6 +221,7 @@
             <td>{{#equal length '0'}}0{{/equal}}{{content.totalGoodCnt}}건</td>
             <td>{{#equal length '0'}}0{{/equal}}{{content.totalBoosterCnt}}건</td>
             <td>{{#equal length '0'}}0{{/equal}}{{content.totalGiftCnt}}건</td>
+            <td>{{#equal length '0'}}0{{/equal}}{{content.totalColmpleteMoonCnt}}건</td>
         </tbody>
     </table>
 </script>
