@@ -359,15 +359,15 @@ var BroadcastDataTableSource = {
                     tmp = tmp + '<br/>' +  row.level +" / "+ row.grade;
                     return tmp;
                 }},
-            {'title': 'User 닉네임', 'data': 'nickName', 'width':'140px'},
+            {'title': 'User 닉네임', 'data': 'nickName', 'width':'80px'},
             {'title': '성별', 'data': 'mem_sex', 'width':'70px', 'render': function (data, type, row, meta) {
-                    return common.sexIcon(data, row.mem_birth_year);
+                    return common.sexIcon(data, row.mem_birth_year, true);
                 }},
-            {'title': '최근 청취 시작 일시', 'data': 'startDateFormat', 'width':'120px'},
-            {'title': '청취 종료시간', 'data': 'endDateFormat', 'width':'120px'},
-            {'title': '권한 시작 일시', 'data': 'authStartDateFormat', 'width':'120px'},
-            {'title': '권한 종료 일시', 'data': 'authEndDateFormat', 'width':'120px'},
-            {'title': '누적 청취시간', 'data': 'listenTime', 'width':'120px','render' : function (data){
+            {'title': '최근 청취 시작 일시', 'data': 'startDateFormat', 'width':'100px'},
+            {'title': '청취 종료시간', 'data': 'endDateFormat', 'width':'100px'},
+            {'title': '권한 시작 일시', 'data': 'authStartDateFormat', 'width':'100px'},
+            {'title': '권한 종료 일시', 'data': 'authEndDateFormat', 'width':'100px'},
+            {'title': '누적 청취시간', 'data': 'listenTime', 'width':'100px','render' : function (data){
                     return common.timeStamp(data);
                 }},
             {'title': '입장수', 'data': 'joinCnt', 'width':'60px'},
@@ -377,6 +377,9 @@ var BroadcastDataTableSource = {
                 }},
             {'title': '보낸아이템', 'data': 'giftCnt', 'width':'80px', 'render': function (data) {
                     return data + " 개"
+                }},
+            {'title': '보름달', 'data' : 'complete_moon', 'width':'50px', 'render': function (data, type, row, meta) {
+                    return data == 0 ? "N" : "Y";
                 }},
         ]
         , 'comments' : 'ㆍ방송 중 (게스트와 매니저를 포함한) 청취자 변동사항을 확인할 수 있습니다.<br/>' +
