@@ -21,7 +21,7 @@
 
             <th>청취자</th>
             <th>청취 수<br/>(+1)</th>
-            <th>선물 건<br/>(+2)</th>
+            <th>선물 별<br/>(+2)</th>
             <th>좋아요<br/>(+3)</th>
             <th>댓글<br/>(+10)</th>
             <th class="th_weekly" style="display: none">소감</th>
