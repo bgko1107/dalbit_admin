@@ -13,7 +13,7 @@
             <th>[듣기]<br/>녹음시간</th>
             <th>등록회원</th>
             <th>성별(나이)</th>
-            <th style="color: red;">총점수</th>
+            <th style="color: red;">총 점수</th>
 
             <th class="th_weekly" style="display: none">보상배지</th>
             <th class="th_weekly" style="display: none">배지시작</th>
