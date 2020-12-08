@@ -791,3 +791,68 @@ var marketing_slct_type = [
     , new COMMON_CODE('title', '1', '위클리픽')
     , new COMMON_CODE('content', '2', '15초 광고 모델')
 ]
+
+//보름달 관리
+var full_moon_condition1_slctType = [
+    new COMMON_CODE(null, 'slctType', '구분')
+    , new COMMON_CODE('1', '1', '방송시간')
+    , new COMMON_CODE('2', '2', '누적청취자')
+    , new COMMON_CODE('3', '3', '받은 별')
+    , new COMMON_CODE('4', '4', '좋아요<br />(구매 부스터 포함)')
+]
+
+var full_moon_condition1_values = [
+    new COMMON_CODE(null, 'values', '구분')
+    , new COMMON_CODE('1', '1', 'broadTime')
+    , new COMMON_CODE('2', '2', 'listenerCnt')
+    , new COMMON_CODE('3', '3', 'byeolCnt')
+    , new COMMON_CODE('4', '4', 'goodPoint')
+]
+
+//보름달 관리
+var full_moon_condition1_slctType_unit = [
+    new COMMON_CODE(null, 'slctType', '단위')
+    , new COMMON_CODE('1', '1', '분')
+    , new COMMON_CODE('2', '2', '명')
+    , new COMMON_CODE('3', '3', '별')
+    , new COMMON_CODE('4', '4', '개')
+]
+
+var full_moon_condition2_slctType = [
+    new COMMON_CODE(null, 'slctType', '구분')
+    , new COMMON_CODE('1', '1', 'DJ')
+    , new COMMON_CODE('2', '2', '청취자')
+]
+
+var full_moon_condition2_reward = [
+    new COMMON_CODE(null, 'reward', '보상')
+    , new COMMON_CODE('1', '1', '룰렛응모권')
+    , new COMMON_CODE('2', '2', '부스터응모권')
+]
+
+var full_moon_condition2_slctType_values = [
+    new COMMON_CODE(null, 'slctType', '단위')
+    , new COMMON_CODE('1', '1', 'djItemCnt')
+    , new COMMON_CODE('2', '2', 'listenerItemCnt')
+]
+
+var full_moon_condition3_slctType = [
+    new COMMON_CODE(null, 'slctType', '구분')
+    , new COMMON_CODE('1', '1', '보낸 달')
+    , new COMMON_CODE('2', '2', '좋아요')
+    , new COMMON_CODE('3', '3', '보름달 완성 시 청취 중')
+]
+
+var full_moon_condition3_slctType_unit = [
+    new COMMON_CODE(null, 'slctType', '단위')
+    , new COMMON_CODE('1', '1', '달')
+    , new COMMON_CODE('2', '2', '개')
+    , new COMMON_CODE('3', '3', ' ')
+]
+
+var full_moon_condition3_slctType_values = [
+    new COMMON_CODE(null, 'slctType', '단위')
+    , new COMMON_CODE('1', '1', 'minGiftDal')
+    , new COMMON_CODE('2', '2', 'minGoodPoint')
+    , new COMMON_CODE('3', '3', 'listenYn')
+]

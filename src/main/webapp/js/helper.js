@@ -104,6 +104,11 @@ Handlebars.registerHelper("indexDescWithoutRownum", function(totalCnt, pageStart
     return common.isEmpty(totalCnt) ? 0 : totalCnt - pageStart - index;
 });
 
+Handlebars.registerHelper("getCommonCodeText", function(value, targetCode)
+{
+    return util.getCommonCodeText(value, targetCode);
+});
+
 Handlebars.registerHelper("getCommonCodeSelect", function(value, targetCode, isExcludeAllYn, name)
 {
     return util.getCommonCodeSelect(value, targetCode, isExcludeAllYn, name);
