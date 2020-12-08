@@ -133,7 +133,7 @@
                 ,castNoList : castNo
                 ,orderNoList : order
                 ,leaderYnList : leader
-                ,groupNo : groupNo
+                ,groupNo : groupNo == null ? 0 : groupNo
             };
 
             console.log(data);
@@ -255,6 +255,7 @@
     }
 
 
+    // 대표 클립이랑 순서가 변경되어서 일단 주석 ------------------
     // function allowDrop(event) {
     //     event.preventDefault();
     // }
@@ -279,6 +280,7 @@
     //     resetNo();
     //     btnSet();
     // }
+    // ----------------------------------------------------------------
 
     // 데이터
     function getArrCodeData(){
