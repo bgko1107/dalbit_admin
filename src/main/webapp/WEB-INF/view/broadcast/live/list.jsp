@@ -236,6 +236,8 @@
                     data.sortGift = 1;
                 if ($("select[name='liveSort']").val() == 6)
                     data.sortByeol = 1;
+                if ($("select[name='liveSort']").val() == 7)
+                    data.sortMoon = 1;
             }
         }else if(liveState == 2) {
             if($("select[name='endSort']").val() != 0){
@@ -249,6 +251,8 @@
                     data.sortGift = 1;
                 if ($("select[name='endSort']").val() == 6)
                     data.sortByeol = 1;
+                if ($("select[name='endSort']").val() == 7)
+                    data.sortMoon = 1;
             }
         }
         data.startDate = $("#onedayDate").val() + ' 00:00:00';

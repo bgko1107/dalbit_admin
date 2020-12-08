@@ -71,7 +71,6 @@ public class Bro_BroadcastService {
         ArrayList<P_BroadcastListOutputVo> broadList = bro_BroadcastDao.callBroadcastList(procedureVo);
         P_BroadcastListOutputVo summary = new Gson().fromJson(procedureVo.getExt(), P_BroadcastListOutputVo.class);
 
-
         // 종료된 총 방송방 정보 조회
         ArrayList<P_BroadcastListOutputVo> osCntList = bro_BroadcastDao.callBroadcastList_all(pBroadcastListInputVo);
         if(!DalbitUtil.isEmpty(osCntList)) {
