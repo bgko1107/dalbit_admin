@@ -104,6 +104,7 @@ var searchRoom_state = [
 var liveSort = [
     new COMMON_CODE(null, 'liveSort', '실시간방송정렬')
     , new COMMON_CODE('0', '0', '현재 실시간방송 순으로')
+    , new COMMON_CODE('7', '7', '보름달 완료 방송')
     , new COMMON_CODE('1', '1', '최근 방송시작 순으로')
     , new COMMON_CODE('2', '2', '진행시간 오래된 순으로')
     , new COMMON_CODE('3', '3', '청취자 많은 순으로')
@@ -115,6 +116,7 @@ var liveSort = [
 var endSort = [
     new COMMON_CODE(null, 'endSort', '실시간방송정렬')
     , new COMMON_CODE('0', '0', '최근 방송 종료 순으로')
+    , new COMMON_CODE('7', '7', '보름달 완료 방송')
     , new COMMON_CODE('2', '2', '진행시간 오래된 순으로')
     , new COMMON_CODE('3', '3', '청취자 많은 순으로')
     , new COMMON_CODE('4', '4', '청취자 적은 순으로')
