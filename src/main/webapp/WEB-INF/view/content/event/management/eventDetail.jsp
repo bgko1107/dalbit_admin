@@ -234,6 +234,8 @@
             , listImgUrl : $('#listImgUrl').val()
             , announcementDate : $('#announcementDate').val() == '-' ? '' : $('#announcementDate').val().replace(/\./g, '-')
             , contentJsondata : getContentJsondata()
+            , foldYn : $('input:radio[name="foldYn"]:checked').val()
+            , notice : $('#eventNotice').val()
         };
     }
 
@@ -268,6 +270,8 @@
             , listImgUrl : $('#listImgUrl').val()
             , announcementDate : $('#announcementDate').val() == '-' ? '' : $('#announcementDate').val().replace(/\./g, '-')
             , contentJsondata : getContentJsondata()
+            , foldYn : $('input:radio[name="foldYn"]:checked').val()
+            , notice : $('#eventNotice').val()
         };
     }
 
@@ -566,6 +570,18 @@
                 <td colspan="8">
                     <!--미리보기-->
                     <img id="listImgUrlViewer" class="thumbnail" style="max-width:360px; max-height:450px;" onclick="eventDetail_fullSize(this.src);"/>
+                </td>
+            </tr>
+            <tr>
+                <th>접기 여부</th>
+                <td colspan="7">
+                    {{{getCommonCodeRadio foldYn 'event_foldYn'}}}
+                </td>
+            </tr>
+            <tr>
+                <th>유의사항</th>
+                <td colspan="7">
+                    <textarea class="form-control" name="eventNotice" id="eventNotice" placeholder="유의사항을 작성해주세요." style="width: 100%;height: 100%">{{{replaceHtml notice}}}</textarea>
                 </td>
             </tr>
             </tbody>

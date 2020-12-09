@@ -485,6 +485,12 @@ var event_content_button_type = [
     , new COMMON_CODE('popup', 'popup', '팝업')
 ]
 
+var event_foldYn = [
+    new COMMON_CODE(null, 'foldYn', '접기 여부 버튼 타입')
+    , new COMMON_CODE('0', '0', '비노출')
+    , new COMMON_CODE('1', '1', '노출')
+]
+
 /** =------ Item ---------- */
 var item_searchType = [
     new COMMON_CODE(null, 'searchType', '검색구분')
