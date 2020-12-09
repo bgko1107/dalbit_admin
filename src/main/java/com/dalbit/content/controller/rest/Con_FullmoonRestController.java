@@ -1,7 +1,8 @@
 package com.dalbit.content.controller.rest;
 
 import com.dalbit.content.service.Con_FullmoonService;
-import com.dalbit.content.vo.procedure.P_FullmoonConditionInputVo;
+import com.dalbit.content.vo.procedure.P_FullmoonConditionVo;
+import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,16 @@ public class Con_FullmoonRestController {
     GsonUtil gsonUtil;
 
     @PostMapping("/info/condition")
-    public String fullmoonManagementSelect(P_FullmoonConditionInputVo pFullmoonConditionInputVo) {
-        String result = con_fullmoonService.callFullmoonManagementSelect(pFullmoonConditionInputVo);
+    public String fullmoonManagementSelect(P_FullmoonConditionVo pFullmoonConditionVo) {
+        String result = con_fullmoonService.callFullmoonManagementSelect(pFullmoonConditionVo);
         return result;
     }
+    @PostMapping("/info/conditionEdit")
+    public String fullmoonManagementEdit(P_FullmoonConditionVo pFullmoonConditionVo) {
+        pFullmoonConditionVo.setOpName(MemberVo.getMyMemNo());
+        String result = con_fullmoonService.callFullmoonManagementEdit(pFullmoonConditionVo);
+        return result;
+    }
+
 
 }
