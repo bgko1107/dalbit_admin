@@ -103,4 +103,10 @@ public class Mon_ExchangeRestController {
         String result = monExchangeService.selectEnableSummary(monEnableSummaryVo);
         return result;
     }
+
+    @PostMapping("exchange/list")
+    public String callExchangeList(Mon_ExchangeInputVo monExchangeInputVo) throws GlobalException {
+        String result = monExchangeService.callExchangeList(monExchangeInputVo);
+        return result;
+    }
 }

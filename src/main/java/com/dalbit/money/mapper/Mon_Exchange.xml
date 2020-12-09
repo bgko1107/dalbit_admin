@@ -101,7 +101,7 @@
         <if test='gender != "0" and gender != "" and gender != null'>
             and IFNULL(basic.mem_sex, withdrawal.mem_sex) = #{gender}
         </if>
-        <if test='search_state != null and search_state != ""'>
+        <if test='search_state != null and search_state != "" and search_state != -1'>
             and exchange.state = #{search_state}
         </if>
 
@@ -128,12 +128,7 @@
                         and exchange.state = 2
                     </when>
                     <when test='last_reject != 0'>
-                        and (exchange.state in (0,1)
-                        or (
-                        exchange.state = 2
-                        and exchange.last_reject = #{last_reject}
-                        )
-                        )
+                        and (exchange.state in (0,1) or ( exchange.state = 2 and exchange.last_reject = #{last_reject}))
                         <choose>
                             <when test="isSpecial == 0">
                                 and special.mem_no is null
