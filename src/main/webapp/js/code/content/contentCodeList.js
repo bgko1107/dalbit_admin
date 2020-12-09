@@ -856,3 +856,38 @@ var full_moon_condition3_slctType_values = [
     , new COMMON_CODE('2', '2', 'minGoodPoint')
     , new COMMON_CODE('3', '3', 'listenYn')
 ]
+
+//보름달 문구관리
+var full_moon_text_alert_status = [
+    new COMMON_CODE(null, 'status', '보름달 상태')
+    , new COMMON_CODE('1', '1', '미완성')
+    , new COMMON_CODE('2', '2', '완성')
+    , new COMMON_CODE('3', '3', '완성')
+    , new COMMON_CODE('4', '4', '완성')
+    , new COMMON_CODE('5', '5', '완성')
+]
+
+var full_moon_text_alert_type = [
+    new COMMON_CODE(null, 'type', '구분')
+    , new COMMON_CODE('1', '1', '상태창')
+    , new COMMON_CODE('2', '2', '상태창')
+    , new COMMON_CODE('3', '3', '상태창')
+    , new COMMON_CODE('4', '4', '상태창')
+    , new COMMON_CODE('5', '5', '알럿')
+]
+
+var full_moon_text_alert_target = [
+    new COMMON_CODE(null, 'type', '노출 대상')
+    , new COMMON_CODE('1', '1', '공통')
+    , new COMMON_CODE('2', '2', 'DJ')
+    , new COMMON_CODE('3', '3', '조건 충족 청취자')
+    , new COMMON_CODE('4', '4', '조건 미충족 청취자')
+    , new COMMON_CODE('5', '5', '공통')
+]
+
+var full_moon_text_guide_area = [
+    new COMMON_CODE(null, 'area', '영역')
+    , new COMMON_CODE('6', '6', '1')
+    , new COMMON_CODE('7', '7', '2')
+    , new COMMON_CODE('8', '8', '3')
+]

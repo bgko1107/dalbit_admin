@@ -37,5 +37,8 @@
 
 
 <script type="text/javascript">
+    /*$(document).on('click', '#tablist_con li', function(){
+       console.log('tab click');
 
+    });*/
 </script>

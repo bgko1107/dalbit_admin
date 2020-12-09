@@ -273,6 +273,14 @@ common.profileImage = function(PHOTO_SERVER_URL, path, gender){
     }
     return image ;
 }
+
+common.replaceTextarea = function(text){
+    if(!common.isEmpty(text)){
+        return common.replace(common.replaceEnter(text), /<br *\/?>/gi, '\n');
+    }
+}
+
+
 common.replaceEnter = function(text){
     if(!common.isEmpty(text)){
         text = text.replace(/\\n/g, "<br/>")

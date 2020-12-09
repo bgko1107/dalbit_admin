@@ -202,6 +202,10 @@ Handlebars.registerHelper("timeStampAllKor", function(value) {
     return common.timeStampAllKor(value);
 });
 
+Handlebars.registerHelper("replaceTextarea", function(value) {
+    return common.replaceTextarea(value);
+});
+
 Handlebars.registerHelper("replaceEnter", function(value) {
    return common.replaceEnter(value);
 });
