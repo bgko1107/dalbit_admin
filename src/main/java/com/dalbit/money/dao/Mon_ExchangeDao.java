@@ -60,4 +60,10 @@ public interface Mon_ExchangeDao {
     @Transactional(readOnly = true)
     ArrayList<Mon_EnableSummaryVo> selectEnableSummary(Mon_EnableSummaryVo monEnableSummaryVo);
 
+
+
+
+    @Transactional(readOnly = true)
+    ArrayList<Mon_ExchangeOutputVo> callExchangeList(ProcedureVo procedureVo);
+
 }

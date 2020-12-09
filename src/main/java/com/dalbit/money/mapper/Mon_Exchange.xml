@@ -87,43 +87,21 @@
         <!--concat(#{search_year}, #{search_month}) = DATE_FORMAT(exchange.reg_date, '%Y%m')-->
 
         <if test='search_value != null and search_value != ""'>
-            <choose>
-                <when test="search_type == 'mem_no'">
-                    and exchange.mem_no like CONCAT('%',#{search_value},'%')
-                </when>
-                <when test="search_type == 'user_id'">
-                    and (
-                    basic.mem_userid like CONCAT('%',#{search_value},'%')
-                    or withdrawal.mem_userid like CONCAT('%',#{search_value},'%')
-                    )
-                </when>
-                <when test="search_type == 'mem_nick'">
-                    and (
-                    basic.mem_nick like CONCAT('%',#{search_value},'%')
-                    or withdrawal.mem_nick like CONCAT('%',#{search_value},'%')
-                    )
-                </when>
-                <when test="search_type == 'mem_phone'">
-                    and exchange.phone_no like CONCAT('%',#{search_value},'%')
-                </when>
-                <otherwise>
-                    and (
-                    exchange.mem_no like CONCAT('%',#{search_value},'%')
-                    or withdrawal.mem_no like CONCAT('%',#{search_value},'%')
-                    or basic.mem_userid like CONCAT('%',#{search_value},'%')
-                    or withdrawal.mem_userid like CONCAT('%',#{search_value},'%')
-                    or basic.mem_nick like CONCAT('%',#{search_value},'%')
-                    or withdrawal.mem_nick like CONCAT('%',#{search_value},'%')
-                    or exchange.phone_no like CONCAT('%',#{search_value},'%')
-                    )
-                </otherwise>
-            </choose>
+            and (
+            exchange.mem_no like CONCAT('%',#{search_value},'%')
+            or withdrawal.mem_no like CONCAT('%',#{search_value},'%')
+            or basic.mem_userid like CONCAT('%',#{search_value},'%')
+            or withdrawal.mem_userid like CONCAT('%',#{search_value},'%')
+            or basic.mem_nick like CONCAT('%',#{search_value},'%')
+            or withdrawal.mem_nick like CONCAT('%',#{search_value},'%')
+            or exchange.phone_no like CONCAT('%',#{search_value},'%')
+            )
         </if>
 
         <if test='gender != "0" and gender != "" and gender != null'>
             and IFNULL(basic.mem_sex, withdrawal.mem_sex) = #{gender}
         </if>
-        <if test='search_state != null and search_state != ""'>
+        <if test='search_state != null and search_state != "" and search_state != -1'>
             and exchange.state = #{search_state}
         </if>
 
@@ -150,12 +128,7 @@
                         and exchange.state = 2
                     </when>
                     <when test='last_reject != 0'>
-                        and (exchange.state in (0,1)
-                        or (
-                        exchange.state = 2
-                        and exchange.last_reject = #{last_reject}
-                        )
-                        )
+                        and (exchange.state in (0,1) or ( exchange.state = 2 and exchange.last_reject = #{last_reject}))
                         <choose>
                             <when test="isSpecial == 0">
                                 and special.mem_no is null
@@ -1058,5 +1031,10 @@
                     and lastOpDate is not null
                 </if>
         ) sum
+    </select>
+
+    <select id="callExchangeList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.money.vo.Mon_ExchangeOutputVo">
+        /* M_Member.xml - callExchangeList */
+        call rd_admin.sp_admin_member_all_exchange_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 </mapper>

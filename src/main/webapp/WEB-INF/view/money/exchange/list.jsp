@@ -39,7 +39,7 @@
                                         <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                         <%--<input name="endDate" id="endDate" style="width: 100px">--%>
 
-                                        <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." style="display: none"></label>
+                                        <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
 
                                         <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                         <a href="javascript://" class="_prevSearch">[이전]</a>
@@ -173,18 +173,25 @@
             isSpecial : $('._tab.active a').data('specialdj')
             , search_year : common.substr($("#startDate").val(),0,4)
             , search_month : common.substr($("#startDate").val(),5,2)
-            // , search_state : $("#search_state").val()
+            , search_state : $("#search_state").val()
             , exchange_sort : $("#exchange_sort").val()
             , gender : $("#gender").val()
-            , search_type : $("#search_type").val()
             , search_value : $("#searchText").val()
             , search_testId : $('input[name="search_testId"]').prop('checked') ? 1 : 0
             , search_exchangeYn : $('input[name="search_exchangeYn"]').prop('checked') ? 'Y' : 'N'
             , pageStart : exchangePagingInfo.pageNo
+            , pageNo : exchangePagingInfo.pageNo
             , pageCnt : exchangePagingInfo.pageCnt
             , limitDay : limitDay
-            , slctType : 1
             , viewName : viewName
+
+            , startDate : $("#startDate").val()
+            , endDate : $("#endDate").val()
+            , searchText : $("#searchText").val()
+            , slctType : $("#search_state").val()
+            , orderType : $("#exchange_sort").val()
+            , innerType : $('input[name="search_testId"]').prop('checked') ? 1 : 0
+            , djType : $('._tab.active a').data('specialdj')
         };
     }
 
@@ -259,7 +266,7 @@
             $("#summaryArea").show();
             $("#div_testIdTable").hide();
             $("#th_bottonList").show();
-            $("#searchText").hide();
+            // $("#searchText").hide();
             $('._nextSearch').show();
             $('._prevSearch').show();
             $('._todaySearch').show();
@@ -272,7 +279,7 @@
             $("#summaryArea").hide();
             $("#div_testIdTable").show();
             $("#th_bottonList").show();
-            $("#searchText").show();
+            // $("#searchText").show();
 
             $('._nextSearch').show();
             $('._prevSearch').show();
@@ -282,7 +289,7 @@
         }else if(targetAnchor.prop('id') == 'enableList') {
             $("#monthDate").hide();
             $("#th_bottonList").hide();
-            $("#searchText").show();
+            // $("#searchText").show();
             $("#exchangeCheckArea").show();
             $("#searchStateArea").hide();
             $("#summaryArea").show();
@@ -328,7 +335,9 @@
 
         $("#allChk").removeAttr('checked');
         getSummary();
-        util.getAjaxData("select", "/rest/money/exchange/list", getParameter(), fn_succ_list);
+
+        console.log(getParameter());
+        util.getAjaxData("select", "/rest/money/exchange/exchange/list", getParameter(), fn_succ_list);
     }
 
     function enableList(){
@@ -418,13 +427,11 @@
         var checkPassDay = moment(new Date()).add('days', -1).format('YYYYMMDD');
         if(0 < response.data.exchangeCnt){
             response.data.exchangeList.forEach(function(data, index){
-                if(moment(data.reg_date).format('YYYYMMDD') < checkPassDay && data.state == 0){
+                if(Number(moment(data.reg_date).format('YYYYMMDD')) < Number(checkPassDay) && data.state == "0"){
                     is_waring = true;
                 }
             });
         }
-
-
         if(is_waring){
             $("#warning_desc").show();
             if(${fn:contains("/dev/", cfn:getActiveProfile())}) {
@@ -494,7 +501,6 @@
         hiddenData += hidden.replace('{name}', 'search_state').replace('{value}', 0);
         hiddenData += hidden.replace('{name}', 'exchange_sort').replace('{value}', 0);
         hiddenData += hidden.replace('{name}', 'search_testId').replace('{value}', getParameter().search_testId);
-        hiddenData += hidden.replace('{name}', 'search_type').replace('{value}', getParameter().search_type);
         hiddenData += hidden.replace('{name}', 'search_value').replace('{value}', getParameter().search_value);
         hiddenData += hidden.replace('{name}', 'limitDay').replace('{value}', getParameter().limitDay);
 
@@ -506,12 +512,12 @@
     });
 
     $(document).on('click', '#completeListBtn', function(){
-        $("#rangeDatepicker, #completeExcelDownBtn").show();
+        $("#rangeDatepickerExcel, #completeExcelDownBtn").show();
         setRangeDatepicker();
     });
 
     $(document).on('click', '#completeExcelDownBtn', function(){
-        if($("#startDate").val() == '' || $("#endDate").val() == ''){
+        if($("#startDateExcel").val() == '' || $("#endDateExcel").val() == ''){
             alert('날짜를 선택해주세요.');
             return false;
         }
@@ -519,8 +525,8 @@
         var hidden = '<input type="hidden" name="{name}" value="{value}">';
 
         var hiddenData = '';
-        hiddenData += hidden.replace('{name}', 'startDate').replace('{value}', $("#startDate").val());
-        hiddenData += hidden.replace('{name}', 'endDate').replace('{value}', $("#endDate").val());
+        hiddenData += hidden.replace('{name}', 'startDate').replace('{value}', $("#startDateExcel").val());
+        hiddenData += hidden.replace('{name}', 'endDate').replace('{value}', $("#endDateExcel").val());
         hiddenData += hidden.replace('{name}', 'search_testId').replace('{value}', $('input[name="search_testId"]').prop('checked') ? 1 : 0);
 
         $("#excelForm").html(hiddenData).attr({
@@ -547,7 +553,9 @@
 
         var detailData = getParameter();
         detailData.idx = $(this).data('exchangeidx');
+        delete detailData.search_state;
 
+        console.log(detailData);
         util.getAjaxData("select", "/rest/money/exchange/detail", detailData, fn_succ_detail);
     });
 
@@ -791,16 +799,16 @@
         startDate = common.isEmpty(startDate) ? moment(new Date()).format("YYYY.MM.01") : startDate;
         endDate = common.isEmpty(endDate) ? moment(new Date()).format("YYYY.MM.DD") : endDate;
 
-        $("#startDate").val(startDate);
-        $("#endDate").val(endDate);
+        $("#startDateExcel").val(startDate);
+        $("#endDateExcel").val(endDate);
 
         $('#rangeDate').daterangepicker({
             startDate: startDate,
             endDate: endDate
         }, function(startDate,endDate){
-            $("#startDate").val(moment(startDate).format("YYYY.MM.DD"));
-            $("#endDate").val(moment(endDate).format("YYYY.MM.DD"));
-            $("#displayDate").val($("#startDate").val() + ' - ' + $("#endDate").val());
+            $("#startDateExcel").val(moment(startDate).format("YYYY.MM.DD"));
+            $("#endDateExcel").val(moment(endDate).format("YYYY.MM.DD"));
+            $("#displayDateExcel").val($("#startDateExcel").val() + ' - ' + $("#endDateExcel").val());
         });
     }
 
@@ -940,15 +948,15 @@
                     <button class="btn btn-sm btn-primary print-btn ml5 mr5 no-margin" type="button" id="completeBtn"><i class="fa fa-check-square"></i> 선택 완료처리</button>
                     <button class="btn btn-sm btn-success print-btn" type="button" id="completeListBtn"><i class="fa fa-print"></i>완료내역 받기</button>
 
-                    <div class="input-group date" id="rangeDatepicker" style="display:none;">
+                    <div class="input-group date" id="rangeDatepickerExcel" style="display:none;">
                         <label for="rangeDate" class="input-group-addon">
                             <span><i class="fa fa-calendar"></i></span>
                         </label>
                         <input id="rangeDate" type="text" class="form-control"/>
                     </div>
 
-                    <input type="hidden" name="startDate" id="startDate">
-                    <input type="hidden" name="endDate" id="endDate" />
+                    <input type="hidden" name="startDateExcel" id="startDateExcel">
+                    <input type="hidden" name="endDateExcel" id="endDateExcel" />
 
                     <button class="btn btn-sm btn-success print-btn" type="button" id="completeExcelDownBtn" style="display:none;"><i class="fa fa-print"></i>Down</button>
                 </div>

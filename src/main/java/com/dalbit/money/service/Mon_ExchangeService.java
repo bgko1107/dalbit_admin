@@ -22,6 +22,7 @@ import com.dalbit.payment.vo.Pay_PaySumOutputVo;
 import com.dalbit.util.AES;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
@@ -169,7 +170,6 @@ public class Mon_ExchangeService {
             }
 
         }else{  //환전내역
-
             if(!DalbitUtil.isEmpty(monExchangeInputVo.getBaseDay())){
                 monExchangeInputVo.setEnd_day(monExchangeInputVo.getEnd_day().length() == 1 ? "0"+monExchangeInputVo.getEnd_day() : monExchangeInputVo.getEnd_day());
                 monExchangeInputVo.setSearch_day(monExchangeInputVo.getSearch_day().length() == 1 ? "0"+monExchangeInputVo.getSearch_day() : monExchangeInputVo.getSearch_day());
@@ -597,7 +597,8 @@ public class Mon_ExchangeService {
 
             hm.put("no", i+1);
             hm.put("id", DalbitUtil.isEmpty(exchangeVo.getMem_userid()) ? "" : exchangeVo.getMem_userid());
-            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getMem_name()) ? "" : exchangeVo.getMem_name());
+//            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getMem_name()) ? "" : exchangeVo.getMem_name());
+            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getPrevAccountName()) ? exchangeVo.getAccount_name() : exchangeVo.getPrevAccountName());
             hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getSocial_no()) ? "" : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))));
 
             hm.put("accountName", DalbitUtil.isEmpty(exchangeVo.getAccount_name()) ? "" : exchangeVo.getAccount_name());
@@ -684,5 +685,18 @@ public class Mon_ExchangeService {
         summaryList.add(total);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, summaryList));
+    }
+
+
+    public String callExchangeList(Mon_ExchangeInputVo monExchangeInputVo){
+
+        var resultMap = new HashMap<>();
+        ProcedureVo procedureVo = new ProcedureVo(monExchangeInputVo);
+        ArrayList<Mon_ExchangeOutputVo> exchangeList = monExchangeDao.callExchangeList(procedureVo);
+        Mon_ExchangeOutputVo totalInfo = new Gson().fromJson(procedureVo.getExt(), Mon_ExchangeOutputVo.class);
+
+        resultMap.put("exchangeCnt", totalInfo.getTotalCnt());
+        resultMap.put("exchangeList", exchangeList);
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, resultMap));
     }
 }

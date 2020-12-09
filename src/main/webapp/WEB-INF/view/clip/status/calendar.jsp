@@ -23,7 +23,6 @@
 <script type="text/javascript">
 
     $(function(){
-        getCalendarInfo();
     });
 
     function getCalendarInfo(){
@@ -68,7 +67,6 @@
                         slctType : 1
                     },
                     success: function(response) {
-                        console.log("-----------------------");
                         console.log(response);
                         $("#totalTable").empty();
 

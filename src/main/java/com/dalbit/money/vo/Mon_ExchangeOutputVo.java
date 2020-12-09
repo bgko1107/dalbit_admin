@@ -67,4 +67,6 @@ public class Mon_ExchangeOutputVo{
     private String birth;
     private String inner;
 
+    private String totalCnt;
+
 }
