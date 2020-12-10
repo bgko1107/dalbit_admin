@@ -40,7 +40,7 @@
         </table>
 
         <%--<div class="dataTables_paginate paging_full_numbers" id="list_info_paginate"></div>--%>
-        <button type="button" class="btn btn-danger pull-right" id="shiningDel">삭제</button>
+        <button type="button" class="btn btn-danger mb10" id="shiningDel">삭제</button>
     </div>
 </div>
 <div id="#imageFullSize"></div>
