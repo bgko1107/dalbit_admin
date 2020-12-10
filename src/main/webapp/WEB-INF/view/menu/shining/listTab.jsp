@@ -54,12 +54,10 @@
         TAB_INDEX = tabIndex;
 
         if(tabIndex == 0){
-
-            specialDjPagingInfo.pageNo = 1;
-            shiningList();
+            slctType = 1;
         } else if (tabIndex == 1){
             slctType = 0;
-            dateType();
         }
+        dateType();
     });
 </script>

@@ -2,7 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dalbit.menu.dao.Men_ShiningDao" >
 
+    <select id="callShiningList" statementType="CALLABLE" parameterType="ProcedureVo" resultType="com.dalbit.menu.vo.procedure.P_ShiningDjListOutVo">
+        call rd_admin.sp_admin_shiningdj_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
     <select id="callExpectedList" statementType="CALLABLE" parameterType="ProcedureVo" resultType="com.dalbit.menu.vo.ShiningVo">
         call rd_admin.sp_admin_nominee_shiningdj_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callAddShining" statementType="CALLABLE" parameterType="ProcedureVo" resultType="ProcedureVo">
+        call rd_admin.sp_admin_member_badge_add(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callShiningDelete" statementType="CALLABLE" parameterType="ProcedureVo" resultType="ProcedureVo">
+        call rd_admin.sp_admin_member_badge_del(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 </mapper>

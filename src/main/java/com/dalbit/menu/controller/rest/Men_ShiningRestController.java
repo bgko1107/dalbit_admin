@@ -39,7 +39,25 @@ public class Men_ShiningRestController {
     ExcelService excelService;
 
     /**
-     * 스페셜 달D 신청 목록 조회
+     * 샤이닝 DJ 목록
+     */
+    @PostMapping("list")
+    public String list(ShiningVo shiningVo){
+        String result = menShiningService.callShiningList(shiningVo);
+        return result;
+    }
+
+    /**
+     * 샤이닝 DJ 대상 삭제
+     */
+    @PostMapping("delete")
+    public String delete(ShiningVo shiningVo){
+        String result = menShiningService.callShiningDelete(shiningVo);
+        return result;
+    }
+
+    /**
+     * 샤이닝 DJ 예상 후보 파악 목록
      */
     @PostMapping("expectedList")
     public String expectedList(ShiningVo shiningVo){
@@ -48,7 +66,7 @@ public class Men_ShiningRestController {
     }
 
     /**
-     * 스페셜 달D 신청 목록 조회
+     * 샤이닝 DJ 예상 후보 엑셀 저장
      */
     @PostMapping("expectedListExcel")
     public String expectedListExcel(HttpServletRequest request, HttpServletResponse response, Model model, ShiningVo shiningVo) throws GlobalException {
@@ -57,6 +75,16 @@ public class Men_ShiningRestController {
 
         excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
         return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
+
+
+    /**
+     * 샤이닝 DJ 등록
+     */
+    @PostMapping("add")
+    public String addShining(ShiningVo shiningVo){
+        String result = menShiningService.callAddShining(shiningVo);
+        return result;
     }
 
 

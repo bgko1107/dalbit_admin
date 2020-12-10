@@ -70,9 +70,6 @@
 
     $('#bt_search').on('click', function () {
         $('#dalList, #sampleDalList, #reqDalList').empty();
-        /*var tab = $('#tablist_con li.active');
-        var tabIndex = $('#tablist_con li').index(tab);*/
-
         if (TAB_INDEX == 0) {
             shiningList();
         } else if (TAB_INDEX == 1) {
@@ -81,32 +78,9 @@
     });
 
     $('input[id="searchText"]').keydown(function () {
-        var tab = $('#tablist_con li.active');
-        var tabIndex = $('#tablist_con li').index(tab);
-        if (event.keyCode == 13) {
-            $('#dalList, #sampleDalList, #reqDalList').empty();
-            if (tabIndex == 0) {
-                init();
-            } else if (tabIndex == 1) {
-
-                slctType = 0;
-                dateType();
-                //initReq();
-            }
-        }
+        if (event.keyCode === 13) {
+            $("#bt_search").click();
+        };
     });
-
-    function choiceMember(data) {
-        if(confirm($('#select_month').val() + '월의 스페셜 DJ로 등록하시겠습니까?')){
-            var obj = {
-                mem_no : data.mem_no
-                , is_force : 1
-                , select_year : common.substr($("#startDate").val(),0,4)
-                , select_month :  common.substr($("#startDate").val(),5,2)
-            };
-            util.getAjaxData("ok", "/rest/menu/special/reqOk", obj, fn_success_ok);
-        }
-        return false;
-    }
 
 </script>
