@@ -43,4 +43,8 @@ public class P_bannerUpdateVo extends BaseVo {
     private String content_scheduleWeekTime;        // 스케쥴 시간 구분 선택
     private String weekStartDatetime;   // 스케쥴 시작 시간
     private String weekEndDatetime;     // 스케쥴 종료 시간
+
+    private Integer memJoinInnerDate;   // 회원가입 몇일 이내
+    private Integer memLevelStart;      // 시작 노출레벨
+    private Integer memLevelEnd;        // 종료 노출레벨
 }

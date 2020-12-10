@@ -112,3 +112,13 @@ $(document).on('focusout', '._trim', function(){
     var a = $(this).val().replace(/(\s*)/gi, '');
     $(this).val(a);
 });
+
+$(document).on('keydown', '._onlyNumber', function(event){
+    common.inputFilterNumber(event);
+});
+
+$(document).on('focusout', '._onlyNumber', function(){
+    var me = $(this);
+    var replaced = me.val().replace(/[^0-9]/g,"")
+    me.val(replaced);
+});

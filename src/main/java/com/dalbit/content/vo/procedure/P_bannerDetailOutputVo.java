@@ -40,4 +40,8 @@ public class P_bannerDetailOutputVo extends BaseVo {
     private String content_scheduleWeekTime;        // 스케쥴 시간 구분 선택
     private String weekStartDatetime;   // 스케쥴 시작 시간
     private String weekEndDatetime;     // 스케쥴 종료 시간
+
+    private String memJoinInnerDate;    //Gson 변환과정에서 0으로 변경이 되어 detail만 String형으로 변경
+    private String memLevelStart;       //Gson 변환과정에서 0으로 변경이 되어 detail만 String형으로 변경
+    private String memLevelEnd;         //Gson 변환과정에서 0으로 변경이 되어 detail만 String형으로 변경
 }
