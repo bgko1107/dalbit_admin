@@ -25,9 +25,10 @@
         fnc_pushDetail.target.find("#targetForm").attr("id", fnc_pushDetail.targetId + "Form");
         this.formId = fnc_pushDetail.targetId + "Form";
 
-        if(common.isEmpty(getSelectDataInfo())){
-            fnc_pushDetail.insertDetail();
-        }else{
+        // if(common.isEmpty(getSelectDataInfo())){
+        //     fnc_pushDetail.insertDetail();
+        // }else{
+        if(!common.isEmpty(getSelectDataInfo())){
             var data = new Object();
             data.push_idx = getSelectDataInfo().data.push_idx;
 
