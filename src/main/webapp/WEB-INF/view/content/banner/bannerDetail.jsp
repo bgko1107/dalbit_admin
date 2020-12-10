@@ -528,7 +528,6 @@
             resultJson['dayOfTheWeek'] = content_scheduleWeek;
         }
 
-
         dalbitLog(resultJson);
 
         return resultJson
@@ -608,12 +607,29 @@
             }
         }
 
+        //회원레벨 시작 종료 체크
+        var memLevelStart = fnc_bannerDetail.target.find("input[name=memLevelStart]");
+        var memLevelEnd = fnc_bannerDetail.target.find("input[name=memLevelEnd]");
+
+        console.log('sss')
+        console.log(memLevelStart.val())
+        console.log(memLevelEnd.val())
+
+        if(!common.isEmpty(memLevelStart.val()) || !common.isEmpty(memLevelEnd.val())){
+            if(common.isEmpty(memLevelStart.val()) || common.isEmpty(memLevelEnd.val())){
+                alert('레벨 범위를 입력해주세요.');
+                return false;
+            }
+
+            if(Number(memLevelEnd.val()) < Number(memLevelStart.val())){
+                alert('레벨 범위를 선택해주세요.');
+                return false;
+            }
+
+        }
+
         return true;
     };
-
-    //=------------------------------ Modal ----------------------------------
-
-
 
 </script>
 
@@ -688,6 +704,17 @@
             </tr>
 
             <tr>
+                <th>회원 노출 조건</th>
+                <th>회원가일 일 수</th>
+                <td colspan="2">회원 가입 <input type="text" class="_onlyNumber" id="memJoinInnerDate" name="memJoinInnerDate" maxlength="6" style="width:50px" value="{{memJoinInnerDate}}" />일 이내</td>
+                <th>회원레벨 범위</th>
+                <td colspan="3">
+                    <input type="text" class="_onlyNumber" id="memLevelStart" name="memLevelStart" maxlength="3" style="width:50px" value="{{memLevelStart}}" /> ~
+                    <input type="text" class="_onlyNumber" id="memLevelEnd" name="memLevelEnd" maxlength="3" style="width:50px" value="{{memLevelEnd}}" />
+                </td>
+            </tr>
+
+            <tr>
                 <th rowspan="2">배너위치</th>
                 <th>팝업</th>
                 <td colspan="6">{{{getCommonCodeRadio '1' 'banner_bannerType_popup' 'Y' 'position'}}}</td>
@@ -724,6 +751,7 @@
                 <th>페이지 전환</th>
                 <td>{{{getCommonCodeRadio is_pop 'viewType' 'N' 'is_pop'}}}</td>
             </tr>
+
             <tr class="_show_popup" style='display:none;'>
                 <th>팝업 구분</th>
                 <td>{{{getCommonCodeRadio popup_type 'banner_popupType' 'N' 'popup_type'}}}</td>
