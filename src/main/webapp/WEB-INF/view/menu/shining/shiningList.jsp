@@ -186,7 +186,7 @@
         <td>{{nickName}}</td>
         <td>{{{sexIcon memSex memBirthYear}}}</td>
         <td>{{addComma fanCnt}} 명</td>
-        <td>{{timeStamp broadCastTime}}</td>
+        <td>{{timeStampDay broadCastTime}}</td>
         <td>{{addComma totalByeol}} 개</td>
         <td>{{addComma totalGood}} 개</td>
         <td>{{broadCastDate}}</td>
