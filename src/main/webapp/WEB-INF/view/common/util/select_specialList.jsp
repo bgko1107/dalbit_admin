@@ -55,6 +55,9 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="/js/dataTablesSource/menu/specialDataTableSource.js?${dummyData}"></script>
+
 <script>
 
     var targetId = "select_specialList";

@@ -24,4 +24,16 @@ public class ShiningVo extends PagingVo {
     private int avgEntry;
     private int byeolCnt;
     private int reportedCnt;
+
+
+    private int slctType;
+    private int badgeValue;
+    private int badgeType;
+    private int badgeRank;
+    private String memNo;
+    private String startDate;
+    private String endDate;
+    private String searchText;
+
+
 }

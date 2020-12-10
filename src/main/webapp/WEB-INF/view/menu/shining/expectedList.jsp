@@ -42,6 +42,7 @@
 
         <div class="widget-footer">
             <span>
+                <button type="button" class="btn btn-success btn-sm print-btn pull-left" id="addShining">샤이닝DJ등록</button>
                 <button type="button" class="btn btn-default btn-sm print-btn pull-right" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
             </span>
         </div>
@@ -61,9 +62,9 @@
 <script type="text/javascript">
 
 
+    var dtList_info;
     function expectiedList() {
 
-        var dtList_info;
         var dtList_info_data = function(data) {
             data.checkDate = $('#onedayDate').val();
             data.pageCnt = 50;
@@ -107,6 +108,33 @@
         }
         return false;
     });*/
+
+    $('#addShining').on('click', function() {
+        var checkDatas = dtList_info.getCheckedData();
+
+        var memNo = "";
+        for(var i =0; i<checkDatas.length;i++){
+            memNo += checkDatas[i].mem_no + "@@";
+        }
+
+        var endDate = moment($("#startDate").val()).add('months', 1).format('YYYY.MM');
+        var data = {
+            memNo : memNo
+            ,badgeType : 10
+            ,badgeRank : 1
+            ,startDate : $("#startDate").val().substr(0,7) + ".15"
+            ,endDate : endDate + ".14"
+        };
+
+        console.log(data);
+        util.getAjaxData("addShining", "/rest/menu/shining/add", data, fn_addShining_success);
+    });
+
+    function fn_addShining_success(dst_id, response){
+        alert(response.message);
+        $("#bt_search").click();
+    }
+
 
     // /!*=---------- 엑셀 ----------*!/
     $('#excelDownBtn').on('click', function() {

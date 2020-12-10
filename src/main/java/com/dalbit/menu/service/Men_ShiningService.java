@@ -14,6 +14,7 @@ import com.dalbit.member.vo.MemberVo;
 import com.dalbit.menu.dao.Men_ShiningDao;
 import com.dalbit.menu.dao.Men_SpecialDao;
 import com.dalbit.menu.vo.*;
+import com.dalbit.menu.vo.procedure.P_ShiningDjListOutVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.Gson;
@@ -39,6 +40,16 @@ public class Men_ShiningService {
 
     @Autowired
     ExcelService excelService;
+
+    /**
+     * 샤이닝 DJ 목록
+     */
+    public String callShiningList(ShiningVo shiningVo) {
+        ProcedureVo procedureVo = new ProcedureVo(shiningVo);
+        List<P_ShiningDjListOutVo> expectedList = menShiningDao.callShiningList(procedureVo);
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.조회, expectedList, new PagingVo(procedureVo.getRet())));
+        return result;
+    }
 
     /**
      * 예상 후보 파악
@@ -101,5 +112,53 @@ public class Men_ShiningService {
 
         return model;
     }
+
+
+
+    /**
+     * 샤이닝 DJ 등록
+     */
+    public String callAddShining(ShiningVo shiningVo) {
+        shiningVo.setOpName(MemberVo.getMyMemNo());
+
+        String[] memNo = shiningVo.getMemNo().split("@@");
+
+        for(int i=0; i<memNo.length;i++){
+            shiningVo.setMemNo(memNo[i]);
+            ProcedureVo procedureVo = new ProcedureVo(shiningVo);
+            menShiningDao.callAddShining(procedureVo);
+
+            if(procedureVo.getRet().equals(Status.샤이닝DJ등록_실패_스페셜DJ.getMessageCode())){
+                return gsonUtil.toJson(new JsonOutputVo(Status.샤이닝DJ등록_실패_스페셜DJ));
+            }else if(procedureVo.getRet().equals(Status.샤이닝DJ등록_실패_뱃지중복.getMessageCode())){
+                return gsonUtil.toJson(new JsonOutputVo(Status.샤이닝DJ등록_실패_뱃지중복));
+            }else if(procedureVo.getRet().equals(Status.비즈니스로직오류.getMessageCode())){
+                return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+            }
+        }
+        return gsonUtil.toJson(new JsonOutputVo(Status.샤이닝DJ등록_성공));
+
+    }
+
+    /**
+     * 샤이닝 DJ 삭제
+     */
+    public String callShiningDelete(ShiningVo shiningVo) {
+
+        String[] memNo = shiningVo.getMemNo().split("@@");
+
+        for(int i=0; i<memNo.length;i++){
+            shiningVo.setMemNo(memNo[i]);
+            ProcedureVo procedureVo = new ProcedureVo(shiningVo);
+            menShiningDao.callShiningDelete(procedureVo);
+
+            if(!procedureVo.getRet().equals(Status.샤이닝DJ삭제_성공.getMessageCode())){
+                return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+            }
+        }
+        return gsonUtil.toJson(new JsonOutputVo(Status.샤이닝DJ삭제_성공));
+
+    }
+
 
 }

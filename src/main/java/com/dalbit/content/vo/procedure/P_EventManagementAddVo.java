@@ -22,4 +22,7 @@ public class P_EventManagementAddVo extends BaseVo {
     private String mobileLinkUrl;
     private String listImgUrl;
     private String announcementDate;
+
+    private int foldYn;
+    private String notice;
 }
