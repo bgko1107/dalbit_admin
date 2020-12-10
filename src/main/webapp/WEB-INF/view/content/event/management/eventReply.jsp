@@ -36,9 +36,7 @@
     function initEventReplyDataTable(){
         //=---------- Main DataTable ----------
         var dtList_info_data = function ( data ) {
-            data.event_idx = 1//$('#eventidx').val()
-            // data.pageCnt = 20;
-            // data.length = 20;
+            data.event_idx = $('#eventidx').val()
         };
         console.log(dtList_info_data)
         dtList_info = new DalbitDataTable($('#list_info'), dtList_info_data, EventDataTableSource.reply);
