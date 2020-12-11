@@ -1120,12 +1120,12 @@
             <%--</td>--%>
             <th>보유달</th>
             <td colspan="6" style="text-align: left;">
-                <span class="col-md-3 no-padding">
+                <span class="col-md-5 no-padding">
                     {{addComma dal}} / {{addComma money}} / 총 달 : {{addComma totalDal}}
                 </span>
                 <c:if test="${insertYn eq 'Y'}">
                     {{#equal memWithdrawal '0'}}
-                    <span class="col-md-9 no-padding" id="sp_dalPointEdit">
+                    <span class="col-md-7 no-padding" id="sp_dalPointEdit">
                             <select id="dalPlusMinus" name="dalPlusMinus" class="form-control searchType">
                                 <option value="1">+</option>
                                 <option value="2">-</option>
@@ -1204,12 +1204,12 @@
             <td colspan="2"></td>
 
             <th>부스터</th>
-            <td colspan="3" style="text-align: left">
+            <td colspan="5" style="text-align: left">
                 <span class="col-md-3 no-padding" style="text-align: left">
                     {{addComma boostCnt}} 개
                 </span>
                 <c:if test="${insertYn eq 'Y'}">
-                    <span class="col-md-9 no-padding" id="">
+                    <span class="col-md-7 no-padding" id="">
                         <select id="boostPlusMinus" name="boostPlusMinus" class="form-control searchType">
                             <option value="1">+</option>
                             <option value="3">-</option>
