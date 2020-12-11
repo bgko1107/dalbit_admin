@@ -298,11 +298,11 @@ public class Con_EventRestController {
 //    /**
 //     * 이벤트 댓글 리스트 조회
 //     */
-//    @PostMapping("/reply")
-//    public String replyList(P_EventReplyListInputVo pEventReplyListInputVo) {
-//        String result = con_EventService.getEventReplyList(pEventReplyListInputVo);
-//        return result;
-//    }
+    @PostMapping("/reply")
+    public String replyList(P_EventReplyListInputVo pEventReplyListInputVo) {
+        String result = con_EventService.getEventReplyList(pEventReplyListInputVo);
+        return result;
+    }
 //
 //
 //    /**

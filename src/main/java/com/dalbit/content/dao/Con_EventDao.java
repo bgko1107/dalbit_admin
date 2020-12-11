@@ -95,9 +95,9 @@ public interface Con_EventDao {
 //    ArrayList<P_EventMemberListOutputVo> callEventOverlapApplyList(P_EventMemberListInputVo pEventMemberListInputVo);
 //
 //    @Transactional(readOnly = true)
-//    ArrayList<P_EventReplyListOutputVo> callEventReplyList(P_EventReplyListInputVo pEventReplyListInputVo);
+    ArrayList<P_EventReplyListOutputVo> callEventReplyList(P_EventReplyListInputVo pEventReplyListInputVo);
 //    @Transactional(readOnly = true)
-//    int callEventReplyList_totalCnt(P_EventReplyListInputVo pEventReplyListInputVo);
+    int callEventReplyList_totalCnt(P_EventReplyListInputVo pEventReplyListInputVo);
 //
 //    int callEventReplyDelete(P_EventReplyDeleteInputVo pEventReplyDeleteInputVo);
 }

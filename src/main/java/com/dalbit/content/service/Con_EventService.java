@@ -857,18 +857,18 @@ public class Con_EventService {
 //    /**
 //     * 이벤트 댓글 리스트
 //     */
-//    public String getEventReplyList(P_EventReplyListInputVo pEventReplyListInputVo) {
-//        int totalCnt = con_EventDao.callEventReplyList_totalCnt(pEventReplyListInputVo);
-//        ArrayList<P_EventReplyListOutputVo> eventReplyList = con_EventDao.callEventReplyList(pEventReplyListInputVo);
-//
-//        String result;
-//        if(eventReplyList.size() > 0) {
-//            result = gsonUtil.toJson(new JsonOutputVo(Status.이벤트중복응모자목록보기_성공, eventReplyList, new PagingVo(totalCnt)));
-//        }else{
-//            result = gsonUtil.toJson(new JsonOutputVo(Status.이벤트중복응모자목록보기_실패));
-//        }
-//        return result;
-//    }
+        public String getEventReplyList(P_EventReplyListInputVo pEventReplyListInputVo) {
+            int totalCnt = con_EventDao.callEventReplyList_totalCnt(pEventReplyListInputVo);
+            ArrayList<P_EventReplyListOutputVo> eventReplyList = con_EventDao.callEventReplyList(pEventReplyListInputVo);
+
+            String result;
+            if(eventReplyList.size() > 0) {
+                result = gsonUtil.toJson(new JsonOutputVo(Status.이벤트중복응모자목록보기_성공, eventReplyList, new PagingVo(totalCnt)));
+            }else{
+                result = gsonUtil.toJson(new JsonOutputVo(Status.이벤트중복응모자목록보기_실패));
+            }
+            return result;
+        }
 //
 //    /**
 //     * 이벤트 댓글 삭제

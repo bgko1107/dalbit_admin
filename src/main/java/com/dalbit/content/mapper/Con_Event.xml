@@ -249,73 +249,73 @@
     <!--order by enter_date desc-->
     <!--</select>-->
 
-    <!--&lt;!&ndash;이벤트 댓글 목록 &ndash;&gt;-->
-    <!--<select id="callEventReplyList" parameterType="com.dalbit.content.vo.procedure.P_EventReplyListInputVo" resultType="com.dalbit.content.vo.procedure.P_EventReplyListOutputVo">-->
-    <!--/* Con_Event.xml - callEventReplyList */-->
-    <!--SELECT  @rownum := @rownum + 1 as rowNum, a.*-->
-    <!--FROM (-->
-    <!--SELECT-->
-    <!--a.idx AS reply_idx-->
-    <!--,a.event_idx AS event_idx-->
-    <!--,a.mem_no AS write_mem_no-->
-    <!--,a.depth AS depth-->
-    <!--,a.contents AS contents-->
-    <!--,a.status AS status-->
-    <!--,a.reg_date AS writeDate-->
-    <!--,a.op_name AS op_name-->
-    <!--,a.last_upd_date AS updateDate-->
-    <!--,mb.mem_userId AS userId-->
-    <!--,mb.mem_nick AS nickName-->
-    <!--,mb.mem_sex AS memSex-->
-    <!--,(SELECT image_profile FROM rd_data.tb_member_profile WHERE mem_no = a.mem_no) AS profileImage-->
-    <!--,mv.level AS level-->
-    <!--,mv.grade AS grade-->
-    <!--,c.applyCnt AS applyCnt-->
-    <!--FROM-->
-    <!--rd_admin.tb_event_reply AS a-->
-    <!--LEFT JOIN-->
-    <!--rd_data.tb_member_basic AS mb-->
-    <!--ON-->
-    <!--a.mem_no = mb.mem_no-->
-    <!--LEFT JOIN-->
-    <!--rd_data.tb_member_level AS mv-->
-    <!--ON-->
-    <!--a.mem_no = mv.mem_no-->
-    <!--LEFT JOIN-->
-    <!--(SELECT mem_no, COUNT(*) as applyCnt FROM rd_admin.tb_event_reply WHERE event_idx = #{event_idx} AND depth = 1 AND status = 1 GROUP BY mem_no HAVING COUNT(*) > 0) AS c-->
-    <!--ON-->
-    <!--a.mem_no = c.mem_no-->
-    <!--WHERE-->
-    <!--a.event_idx = #{event_idx}-->
-    <!--AND a.depth = 1-->
-    <!--AND a.status = 1-->
-    <!--ORDER BY-->
-    <!--a.idx desc-->
-    <!--LIMIT #{pageStart}, #{pageCnt}-->
-    <!--) a-->
-    <!--, (select @rownum := #{pageStart} ) AS d-->
-    <!--</select>-->
+    <!--이벤트 댓글 목록 -->
+    <select id="callEventReplyList" parameterType="com.dalbit.content.vo.procedure.P_EventReplyListInputVo" resultType="com.dalbit.content.vo.procedure.P_EventReplyListOutputVo">
+    /* Con_Event.xml - callEventReplyList */
+    SELECT  @rownum := @rownum + 1 as rowNum, a.*
+    FROM (
+    SELECT
+    a.idx AS reply_idx
+    ,a.event_idx AS event_idx
+    ,a.mem_no AS write_mem_no
+    ,a.depth AS depth
+    ,a.contents AS contents
+    ,a.status AS status
+    ,a.reg_date AS writeDate
+    ,a.op_name AS op_name
+    ,a.last_upd_date AS updateDate
+    ,mb.mem_userId AS userId
+    ,mb.mem_nick AS nickName
+    ,mb.mem_sex AS memSex
+    ,(SELECT image_profile FROM rd_data.tb_member_profile WHERE mem_no = a.mem_no) AS profileImage
+    ,mv.level AS level
+    ,mv.grade AS grade
+    ,c.applyCnt AS applyCnt
+    FROM
+    rd_admin.tb_event_reply AS a
+    LEFT JOIN
+    rd_data.tb_member_basic AS mb
+    ON
+    a.mem_no = mb.mem_no
+    LEFT JOIN
+    rd_data.tb_member_level AS mv
+    ON
+    a.mem_no = mv.mem_no
+    LEFT JOIN
+    (SELECT mem_no, COUNT(*) as applyCnt FROM rd_admin.tb_event_reply WHERE event_idx = #{event_idx} AND depth = 1 AND status = 1 GROUP BY mem_no HAVING COUNT(*) > 0) AS c
+    ON
+    a.mem_no = c.mem_no
+    WHERE
+    a.event_idx = #{event_idx}
+    AND a.depth = 1
+    AND a.status = 1
+    ORDER BY
+    a.idx desc
+    LIMIT #{pageStart}, #{pageCnt}
+    ) a
+    , (select @rownum := #{pageStart} ) AS d
+    </select>
 
 
-    <!--<select id="callEventReplyList_totalCnt" parameterType="com.dalbit.content.vo.procedure.P_EventReplyListInputVo" resultType="Integer">-->
-    <!--/* Con_Event.xml - callEventReplyList_totalCnt */-->
-    <!--SELECT-->
-    <!--COUNT(*) AS totalCnt-->
-    <!--FROM-->
-    <!--rd_admin.tb_event_reply AS a-->
-    <!--LEFT JOIN-->
-    <!--rd_data.tb_member_basic AS mb-->
-    <!--ON-->
-    <!--a.mem_no = mb.mem_no-->
-    <!--LEFT JOIN-->
-    <!--rd_data.tb_member_level AS mv-->
-    <!--ON-->
-    <!--a.mem_no = mv.mem_no-->
-    <!--WHERE-->
-    <!--a.event_idx = ${event_idx}-->
-    <!--AND a.depth = 1-->
-    <!--AND a.status = 1-->
-    <!--</select>-->
+    <select id="callEventReplyList_totalCnt" parameterType="com.dalbit.content.vo.procedure.P_EventReplyListInputVo" resultType="Integer">
+    /* Con_Event.xml - callEventReplyList_totalCnt */
+    SELECT
+        COUNT(*) AS totalCnt
+    FROM
+    rd_admin.tb_event_reply AS a
+    LEFT JOIN
+    rd_data.tb_member_basic AS mb
+    ON
+    a.mem_no = mb.mem_no
+    LEFT JOIN
+    rd_data.tb_member_level AS mv
+    ON
+    a.mem_no = mv.mem_no
+    WHERE
+    a.event_idx = ${event_idx}
+    AND a.depth = 1
+    AND a.status = 1
+    </select>
 
 
     <!--&lt;!&ndash;이벤트 댓글 삭제 &ndash;&gt;-->

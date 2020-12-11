@@ -10,12 +10,14 @@
                     <li><a href="#eventPrize" role="tab" data-toggle="tab" id="tab_eventPrize">경품 관리</a></li>
                     <li><a href="#eventWinnerApplicant" role="tab" data-toggle="tab" id="tab_eventWinnerApplicant">응모자 / 당첨자 관리</a></li>
                     <li><a href="#eventWinnerAnnounce" role="tab" data-toggle="tab" id="tab_eventWinnerAnnounce">당첨자 발표</a></li>
+                    <li><a href="#eventReply" role="tab" data-toggle="tab" id="tab_eventReply">이벤트 댓글</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="eventDetail"><jsp:include page="eventDetail.jsp"/></div>
                     <div class="tab-pane fade" id="eventPrize"><jsp:include page="eventPrize.jsp"/></div>
                     <div class="tab-pane fade" id="eventWinnerApplicant"><jsp:include page="eventWinnerApplicant.jsp"/></div>
                     <div class="tab-pane fade" id="eventWinnerAnnounce"><jsp:include page="eventWinnerAnnounce.jsp"/></div>
+                    <div class="tab-pane fade" id="eventReply"><jsp:include page="eventReply.jsp"/></div>
                 </div>
             </div>
         </div>
@@ -35,7 +37,8 @@
         }
     });
 
-    $('#tablist_con li a').on('change', function() {
+    $('#tablist_con li a').on('click', function() {
+
        var tab = $(this).prop('id').split("_")[1];
        if(tab == 'eventDetail') {
            initDetail();
@@ -45,6 +48,8 @@
            initWinnerApplicant();
        } else if(tab == 'eventWinnerAnnounce') {
            initWinnerAnnounce();
+       } else if(tab == 'eventReply') {
+           initEventReply();
        }
     });
 
