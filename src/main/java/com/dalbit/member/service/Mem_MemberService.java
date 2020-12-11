@@ -234,6 +234,7 @@ public class Mem_MemberService {
             }
         }
         memberInfo.setLiveBadgeList(liveBadgeList);
+        memberInfo.setTotalDal(memberInfo.getDal() + memberInfo.getMoney());
 
         //ip정보 및 device 정보
         //recentLoginInfo

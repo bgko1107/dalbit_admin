@@ -38,6 +38,8 @@ public class P_MemberInfoOutputVo extends SearchVo {
     private String micState;
     private String listeningState;
     private int dal;
+    private int money;
+    private int totalDal;
     private int byeol;
     private int managerICnt;
     private int managerMeCnt;

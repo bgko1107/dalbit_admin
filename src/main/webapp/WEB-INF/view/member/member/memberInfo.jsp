@@ -1121,7 +1121,7 @@
             <th>보유달</th>
             <td colspan="6" style="text-align: left;">
                 <span class="col-md-3 no-padding">
-                    {{addComma dal}} 달
+                    {{addComma dal}} / {{addComma money}} / 총 달 : {{addComma totalDal}}
                 </span>
                 <c:if test="${insertYn eq 'Y'}">
                     {{#equal memWithdrawal '0'}}
