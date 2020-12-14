@@ -13,6 +13,7 @@ public class P_MemberBroadcastOutputVo extends SearchVo {
 
     //output
     private String room_no;
+    private String mem_no;
     private String subject_type;
     private String title;
     private Date start_date;

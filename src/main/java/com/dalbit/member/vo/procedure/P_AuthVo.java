@@ -15,4 +15,7 @@ public class P_AuthVo {
     private String birthMonth;
     private String birthDay;
     private int gender;
+    private String opName;
+    private int type;
+    private String roomNo;
 }

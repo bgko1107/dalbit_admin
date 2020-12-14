@@ -2,6 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %></c:set>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="cfn" uri="/WEB-INF/tld/comFunction.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="principal" property="principal" />
+<sec:authentication var="principal" property="principal" />
 
 <!-- serachBox -->
 <form id="searchForm">
@@ -79,7 +84,7 @@
     <div class="tab-content no-padding">
         <div class="tab-pane fade in active" id="liveList" >
             <div class="widget widget-table">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <br/>
                     <label id="liveTitle">
                         ㆍ실시간 생방송 시작된 방송이 최상위 누적되어 보여집니다.<br/>
@@ -91,9 +96,12 @@
                     <br/>
                     <span id="liveSort" onchange="sortChange();"></span>
                     <span id="endSort" style="display: none" onchange="sortChange();"></span>
+                <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이상훈|', principal.getUserInfo().getName())}">
+                    <button class="btn btn-danger btn-sm print-btn pull-right" type="button" id="inspection" onclick="inspection_click();">임시점검</button>
+                </c:if>
                 </div>
-                <div class="col-md-12 no-padding pull-right">
-                    <div class="col-md-2 no-padding pull-right mr10">
+                <div class="col-md-12">
+                    <div class="col-md-2 no-padding pull-right">
                         <table class="table table-sorting table-hover table-bordered">
                             <colgroup>
                                 <col width="15%"/><col width="65%"/>
@@ -385,6 +393,34 @@
                 $("#tab_LoginUser").text("방송 외 접속 회원(" + response.data[i].totalCnt + ")");
             }
         }
+    }
+
+    function inspection_click(){
+        if($("#inspection").text() == "임시점검"){
+            if(confirm("임시점검 설정 입니다.\n진행중인방이 전부 종료되고 방 생성이 임시 정지 됩니다.")){
+                $("#inspection").text("임시점검 해제");
+                var data = {};
+                data.type = "1";
+                // data.roomNo="91607910501425";
+                util.getAjaxData("inspection", "/rest/member/broadcast/inspection",data, fn_inspection_success);
+            }
+        }else{
+            if(confirm("방생성 제한 기능이 해제 됩니다.")){
+                $("#inspection").text("임시점검");
+                var data = {};
+                data.type = "0";
+                util.getAjaxData("inspection", "/rest/member/broadcast/inspection",data, fn_inspection_success);
+            }
+        }
+    }
+
+    function fn_inspection_success(dst_id, response, param){
+        if(param.type == "1"){
+            alert("임시점검 설정");
+        }else{
+            alert("임시점검 해제");
+        }
+        $("#bt_search").click();
     }
 
 
