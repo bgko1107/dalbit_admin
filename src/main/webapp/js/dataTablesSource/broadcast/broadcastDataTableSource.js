@@ -344,12 +344,16 @@ var BroadcastDataTableSource = {
                     }else if(data == "2"){
                         return '<lable style="color:#ff1600">강제퇴장자</lable><br/>' + tmp;
                     }else if(data == "0"){
-                        if(row.auth == "0"){
-                        return '<lable style="color:#080004">청취자</lable><br/>' + tmp;
-                        }else if(row.auth == "1"){
-                            return '<lable style="color:#00ff32">매니저</lable><br/>' + tmp;
-                        }else if(row.auth == "2"){
-                            return '<lable style="color:#0036ff">게스트</lable><br/>' + tmp;
+                        if(row.shadow == "0"){
+                            if(row.auth == "0"){
+                                return '<lable style="color:#080004">청취자</lable><br/>' + tmp;
+                            }else if(row.auth == "1"){
+                                return '<lable style="color:#00ff32">매니저</lable><br/>' + tmp;
+                            }else if(row.auth == "2"){
+                                return '<lable style="color:#0036ff">게스트</lable><br/>' + tmp;
+                            }
+                        }else{
+                            return '<lable class="font-bold" style="color:#9900ff">관리자</lable><br/>' + tmp;
                         }
                     }
                 }},

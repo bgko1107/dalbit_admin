@@ -27,4 +27,22 @@
           limit 5;
     </select>
 
+    <select id="getLiveBroadCastList" parameterType="com.dalbit.member.vo.procedure.P_AuthVo" resultType="com.dalbit.member.vo.procedure.P_MemberBroadcastOutputVo">
+        select room_no, mem_no
+          From rd_data.tb_broadcast_room
+         where state != 4
+         <if test='roomNo != "" and roomNo != null'>
+           and room_no = #{roomNo}
+         </if>
+         ;
+    </select>
+
+    <insert id="setInspectionHistory" parameterType="com.dalbit.member.vo.MemberVo">
+        INSERT INTO rd_admin.tb_admin_inspection_history(`type`, op_name, last_upd_date) VALUES (#{type}, #{opName} ,now() )
+    </insert>
+
+    <insert id="setUpdateCodeDefine" parameterType="com.dalbit.member.vo.MemberVo">
+        update rd_data.tbl_code_define set is_use=#{type} where `type`='system_config' and `order` in (0, 1)
+    </insert>
+
 </mapper>

@@ -94,6 +94,7 @@ public class Bro_ListenerService {
                 }
 
                 outVo.setComplete_moon(broadList.get(i).getComplete_moon());
+                outVo.setShadow(broadList.get(i).getShadow());
                 list.add(outVo);
             }
         }
