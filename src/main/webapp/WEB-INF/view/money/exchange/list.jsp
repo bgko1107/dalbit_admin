@@ -1411,16 +1411,16 @@
             </tr>
             <tr>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#e2f0d9">1회 이상 환전 신청 회원 중</th>
-                <th class="_bgColor" data-bgcolor="#e2f0d9">3개월 이상 환전하지 않은 회원</th>
-                <td>{{addComma content.monthNot3ExchangeMemberCnt}} 명</td>
-                <td>{{addComma content.monthNot3ExchangeMemberByeol}} 별</td>
-                <td>{{addComma content.monthNot3ExchangeMemberAmt}} 원</td>
-            </tr>
-            <tr>
                 <th class="_bgColor" data-bgcolor="#e2f0d9">3개월 내 환전 한 회원 잔여</th>
                 <td>{{addComma content.month3ExchangeMemberCnt}} 명</td>
                 <td>{{addComma content.month3ExchangeMemberByeol}} 별</td>
                 <td>{{addComma content.month3ExchangeMemberAmt}} 원</td>
+            </tr>
+            <tr>
+                <th class="_bgColor" data-bgcolor="#e2f0d9">3개월 이상 환전하지 않은 회원</th>
+                <td>{{addComma content.monthNot3ExchangeMemberCnt}} 명</td>
+                <td>{{addComma content.monthNot3ExchangeMemberByeol}} 별</td>
+                <td>{{addComma content.monthNot3ExchangeMemberAmt}} 원</td>
             </tr>
             <tr>
                 <th colspan="2">총계</th>

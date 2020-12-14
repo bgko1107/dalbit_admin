@@ -115,13 +115,13 @@ public class Mon_ExchangeService {
                         notExchangeMemberByeol = summaryList.get(i).getGeneral() + summaryList.get(i).getSpecial();
                         notExchangeMemberAmt = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
                     }else if(i == 1){
-                        monthNot3ExchangeMemberCnt = summaryList.get(i).getCount();
-                        monthNot3ExchangeMemberByeol = summaryList.get(i).getGeneral() + summaryList.get(i).getSpecial();
-                        monthNot3ExchangeMemberAmt = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
-                    }else if(i == 2){
                         month3ExchangeMemberCnt = summaryList.get(i).getCount();
                         month3ExchangeMemberByeol = summaryList.get(i).getGeneral() + summaryList.get(i).getSpecial();
                         month3ExchangeMemberAmt = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
+                    }else if(i == 2){
+                        monthNot3ExchangeMemberCnt = summaryList.get(i).getCount();
+                        monthNot3ExchangeMemberByeol = summaryList.get(i).getGeneral() + summaryList.get(i).getSpecial();
+                        monthNot3ExchangeMemberAmt = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
                     }
                 }
 

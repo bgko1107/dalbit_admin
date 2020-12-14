@@ -979,7 +979,7 @@
 
         union all
 
-        /*3개월 이상 환전하지 않은사람*/
+        /*3개월 내 환전한 회원*/
         select count(gold) count
             , ifnull(sum(general), 0) general
             , ifnull(sum(special), 0) special
@@ -1007,7 +1007,7 @@
 
         union all
 
-        /*3개월 내 환전한 회원*/
+        /*3개월 이상 환전하지 않은사람*/
         select count(gold) count
             , ifnull(sum(general), 0) general
             , ifnull(sum(special), 0) special
