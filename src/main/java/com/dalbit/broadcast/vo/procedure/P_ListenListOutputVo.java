@@ -46,7 +46,9 @@ public class P_ListenListOutputVo extends PagingVo {
     private int inner;
     private int joinCnt;
     private int complete_moon;
-    private int totalColmpleteMoonCnt;
+    private int step;
+    private String complete_date; //보름달 완료일시
+    private int totalCompleteMoonCnt;
     private int shadow;
 
     // 회원 배찌

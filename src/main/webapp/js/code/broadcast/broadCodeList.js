@@ -156,7 +156,7 @@ var listen_summary = [
     ,new COMMON_CODE('','totalGoodCnt','좋아요 수')
     ,new COMMON_CODE('','totalBoosterCnt','부스터 수')
     ,new COMMON_CODE('','totalGiftCnt','선물 수')
-    ,new COMMON_CODE('','totalColmpleteMoonCnt','보름달 공헌 인원')
+    ,new COMMON_CODE('','totalCompleteMoonCnt','보름달 공헌 인원')
 ];
 
 var guest_summary = [
