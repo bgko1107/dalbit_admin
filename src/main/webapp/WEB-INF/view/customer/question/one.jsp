@@ -390,7 +390,7 @@
                     localStorage.answer = $("#smsSend-msg_body").val();
                 }
             }
-        }, 1000 * 60);
+        }, 1000 * 30);
     }
 
 </script>
