@@ -123,9 +123,12 @@
                 memNo += $(this).parent().parent().find('._check').data('memno') + "@@";
             });
 
+            startDate = $("#startDate").val().substr(0,7) + ".15";
+
             var data = {
                 memNo: memNo
-                , startDate: $("#startDate").val().substr(0,7) + ".15"
+                , startDate: startDate
+                , endDate : moment(startDate).add('months', 1).format('YYYY.MM.15')
                 , badgeType : 10
             };
 
