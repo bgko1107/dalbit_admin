@@ -24,7 +24,7 @@
             </thead>
             <tbody id="clipTableBody"></tbody>
         </table>
-        <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate"></div>
+        <div class="dataTables_paginate paging_full_numbers" id="list_clip_paginate"></div>
     </div>
     <div class="widget-footer">
         <span>
@@ -38,18 +38,19 @@
         getClipList();
     });
 
-    giftHistoryListPagingInfo = new PAGING_INFO(0, 1, 50);
+    giftClipListPagingInfo = new PAGING_INFO(0, 1, 50);
 
     function getClipList(){
-        $("#searchForm #pageNo").val(giftHistoryListPagingInfo.pageNo);
-        $("#searchForm #pageCnt").val(giftHistoryListPagingInfo.pageCnt);
+
+        $("#searchForm #pageNo").val(giftClipListPagingInfo.pageNo);
+        $("#searchForm #pageCnt").val(giftClipListPagingInfo.pageCnt);
 
         var data = {};
         data.slctType = $('input[name="slctType2"]:checked').val();
         data.startDate = $("#startDate").val();
         data.endDate = $("#endDate").val();
-        data.pageNo = giftHistoryListPagingInfo.pageNo;
-        data.pageCnt = giftHistoryListPagingInfo.pageCnt;
+        data.pageNo = giftClipListPagingInfo.pageNo;
+        data.pageCnt = giftClipListPagingInfo.pageCnt;
         util.getAjaxData("itemClipList", "/rest/status/item/clip/list", data, fn_clipJoin_success);
     }
 
@@ -74,8 +75,8 @@
 
         if(response.data != ''){
             var pagingInfo = response.data.totalInfo;
-            giftHistoryListPagingInfo.totalCnt = pagingInfo.totalCnt;
-            util.renderPagingNavigation('list_info_paginate', giftHistoryListPagingInfo);
+            giftClipListPagingInfo.totalCnt = pagingInfo.totalCnt;
+            util.renderPagingNavigation('list_clip_paginate', giftClipListPagingInfo);
 
             detailContext.totalCnt = pagingInfo.totalCnt;
         }
@@ -85,6 +86,17 @@
         }else{
             $("#clipTableBody").append(totalHtml);
         }
+    }
+
+    function handlebarsPaging(targetId, pagingInfo){
+        if(targetId == 'list_broadcast_paginate'){
+            giftClipListPagingInfo = pagingInfo;
+            getBroadList();
+        }else if(targetId == 'list_clip_paginate'){
+            giftClipListPagingInfo = pagingInfo;
+            getClipList();
+        }
+
     }
 </script>
 <script type="text/x-handlebars-template" id="tmp_clipTotal">

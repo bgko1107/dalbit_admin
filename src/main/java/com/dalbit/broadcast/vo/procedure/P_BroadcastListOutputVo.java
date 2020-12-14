@@ -62,7 +62,9 @@ public class P_BroadcastListOutputVo extends PagingVo {
     private int inner;
     private int freezeMsg;
     private int guestCnt;
+    private int step;
     private int complete_moon; //보름달 상태
+    private String complete_date; //보름달 완료일시
 
     /* 회원 배지 */
     private int day_badge;

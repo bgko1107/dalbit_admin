@@ -24,7 +24,7 @@
             </thead>
             <tbody id="broadTableBody"></tbody>
         </table>
-        <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate"></div>
+        <div class="dataTables_paginate paging_full_numbers" id="list_broadcast_paginate"></div>
     </div>
     <div class="widget-footer">
         <span>
@@ -38,18 +38,19 @@
         getBroadList();
     });
 
-    giftHistoryListPagingInfo = new PAGING_INFO(0, 1, 50);
+    giftBroadcastListPagingInfo = new PAGING_INFO(0, 1, 50);
 
     function getBroadList(){
-        $("#searchForm #pageNo").val(giftHistoryListPagingInfo.pageNo);
-        $("#searchForm #pageCnt").val(giftHistoryListPagingInfo.pageCnt);
+
+        $("#searchForm #pageNo").val(giftBroadcastListPagingInfo.pageNo);
+        $("#searchForm #pageCnt").val(giftBroadcastListPagingInfo.pageCnt);
 
         var data = {};
         data.slctType = $('input[name="slctType2"]:checked').val();
         data.startDate = $("#startDate").val();
         data.endDate = $("#endDate").val();
-        data.pageNo = giftHistoryListPagingInfo.pageNo;
-        data.pageCnt = giftHistoryListPagingInfo.pageCnt;
+        data.pageNo = giftBroadcastListPagingInfo.pageNo;
+        data.pageCnt = giftBroadcastListPagingInfo.pageCnt;
         util.getAjaxData("memberList", "/rest/status/item/broad/list", data, fn_broadJoin_success);
     }
 
@@ -74,8 +75,8 @@
 
         if(response.data != ''){
             var pagingInfo = response.data.totalInfo;
-            giftHistoryListPagingInfo.totalCnt = pagingInfo.totalCnt;
-            util.renderPagingNavigation('list_info_paginate', giftHistoryListPagingInfo);
+            giftBroadcastListPagingInfo.totalCnt = pagingInfo.totalCnt;
+            util.renderPagingNavigation('list_broadcast_paginate', giftBroadcastListPagingInfo);
 
             detailContext.totalCnt = pagingInfo.totalCnt;
         }
@@ -86,6 +87,8 @@
             $("#broadTableBody").append(totalHtml);
         }
     }
+
+
 </script>
 <script type="text/x-handlebars-template" id="tmp_broadTotal">
     <tr class="success font-bold">
