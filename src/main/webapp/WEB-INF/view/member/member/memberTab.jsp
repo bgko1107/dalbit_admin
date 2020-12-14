@@ -24,6 +24,7 @@
             <li><a href="#connectState" role="tab" data-toggle="tab" id="tab_connectState" onclick="tab_click(this.id);">접속내역</a></li>
             <li><a href="#edit" role="tab" data-toggle="tab" id="tab_edit" onclick="tab_click(this.id);">수정내역</a></li>
             <li><a href="#levelDetail" role="tab" data-toggle="tab" id="tab_levelDetail" onclick="tab_click(this.id);">레벨</a></li>
+            <li><a href="#rouletteList" role="tab" data-toggle="tab" id="tab_rouletteList" onclick="tab_click(this.id);">룰렛이벤트</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade in active " id="infoDetail"><jsp:include page="memberInfo.jsp"/></div>     <!-- 상세 -->
@@ -98,6 +99,7 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="levelDetail"><jsp:include page="../level/list.jsp"/></div>     <!-- 레벨 -->
+            <div class="tab-pane fade" id="rouletteList"><jsp:include page="../roulette/list.jsp"/></div>     <!-- 레벨 -->
         </div>
     </div>
 </div>
@@ -195,6 +197,8 @@
             $("#tab_editHistory_etc").click();
         }else if(tmp == "tab_levelDetail"){
             getHistory_levelHistory(tmp);
+        }else if(tmp == "tab_rouletteList"){
+            getHistory_rouletteList(tmp);
         }
 
     }
