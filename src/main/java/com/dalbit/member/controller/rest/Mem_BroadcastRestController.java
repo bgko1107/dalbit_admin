@@ -48,6 +48,16 @@ public class Mem_BroadcastRestController {
     }
 
     /**
+     * 임시점검 체크
+     */
+    @PostMapping("inspection/check")
+    public String inspectionCheck(P_AuthVo pAuthVo){
+        String result = mem_BroadcastService.inspectionCheck(pAuthVo);
+        return result;
+
+    }
+
+    /**
      * 임시점검 (전체 방 강제종료, 생성 제한)
      */
     @PostMapping("inspection")

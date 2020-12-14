@@ -19,6 +19,9 @@ public interface Mem_BroadcastDao {
     ArrayList<P_MemberBroadcastOutputVo> callbroadCastList(MemberVo MemberVo);
 
     @Transactional(readOnly = true)
+    P_AuthVo getInspectionCheck(P_AuthVo pAuthVo);
+
+    @Transactional(readOnly = true)
     ArrayList<P_MemberBroadcastOutputVo> getLiveBroadCastList(P_AuthVo pAuthVo);
 
     int setInspectionHistory(P_AuthVo pAuthVo);
