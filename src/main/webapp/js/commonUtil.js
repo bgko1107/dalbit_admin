@@ -576,9 +576,10 @@ util.imageFullSize = function(modalId ,url){
         html+=          '<div class="modal-content">';
         html+=              '<div class="modal-header no-padding">';
         html+=                  '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+        html+=                  '<button id="rotateR" ><i class="fa fa-repeat"></i></button>';
         html+=              '</div>';
         html+=              '<div class="modal-body no-padding">';
-        html+=                  '<img id="image_full_size" src="'+ url + '" alt="your image" style="max-width: 1000px;max-height: 1000px;" onclick=util.fullSize_modal_close();>';
+        html+=                  '<img class="image_full_size" id="image_full_size" src="'+ url + '" alt="your image" style="max-width: 1000px;max-height: 1000px;" onclick=util.fullSize_modal_close();>';
         html+=              '</div>';
         html+=          '</div>';
         html+=      '</div>';
@@ -592,6 +593,12 @@ util.fullSize_background = function(url){
     }
     $("#imageFullSize").html(util.imageFullSize("fullSize_background", url));
     $('#fullSize_background').modal('show');
+
+    var angle = 0;
+    $('#rotateR').click(function() {
+        angle += +15;
+        $('#image_full_size').css('transform','rotate(' + angle + 'deg)');
+    });
 },
 
 util.fullSize_modal_close = function(){
