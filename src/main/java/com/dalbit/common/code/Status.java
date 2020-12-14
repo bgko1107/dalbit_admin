@@ -861,6 +861,10 @@ public enum Status {
     샤이닝DJ삭제_성공("0", "shining.del.success", "샤이닝 DJ 삭제 성공 시"),
 
 
+    //5,10 레벨
+    레벨보상대상조회_성공("0", "newvi.level.list.success", "레벨 보상 대상 조회 성공 시"),
+
+
     ;
 
     final private String RESULT_SUCCESS = "success";
