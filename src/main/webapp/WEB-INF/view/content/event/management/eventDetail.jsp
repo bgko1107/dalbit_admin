@@ -268,7 +268,7 @@
             , pcLinkUrl : $('#pcLinkUrl').val()
             , mobileLinkUrl : $('#mobileLinkUrl').val()
             , listImgUrl : $('#listImgUrl').val()
-            , announcementDate : $('#announcementDate').val() == '-' ? '' : $('#announcementDate').val().replace(/\./g, '-')
+            , announcementDate : $('#announcementDate').val() == '-' ? null : $('#announcementDate').val().replace(/\./g, '-')
             , contentJsondata : getContentJsondata()
             , foldYn : $('input:radio[name="foldYn"]:checked').val()
             , notice : $('#eventNotice').val()

@@ -23,4 +23,6 @@ public interface SampleDao {
 
     @Transactional(readOnly = true)
     int getLogErrorDataCnt(ErrorVo errorVo);
+
+    void joinEventReset(String memNo);
 }

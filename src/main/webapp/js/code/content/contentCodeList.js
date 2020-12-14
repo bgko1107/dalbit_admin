@@ -276,6 +276,7 @@ var banner_bannerType = [
     , new COMMON_CODE('exchangePopup', '11', '환전팝업')
     , new COMMON_CODE('storePopup', '12', '스토어팝업')
     , new COMMON_CODE('rankPopup', '14', '랭킹팝업')
+    , new COMMON_CODE('questionTop', '15', '1:1문의 TOP')
 ];
 
 var banner_bannerType_popup = [
@@ -299,6 +300,7 @@ var banner_bannerType_banner = [
     , new COMMON_CODE('center', '5', '고객센터')
     , new COMMON_CODE('mainRankBottom', '9', 'Main Center')
     , new COMMON_CODE('clip', '10', '클립 Center')
+    , new COMMON_CODE('questionTop', '15', '1:1문의 TOP')
 ];
 
 var banner_loginType = [
@@ -826,8 +828,8 @@ var full_moon_condition1_slctType_unit = [
 
 var full_moon_condition2_slctType = [
     new COMMON_CODE(null, 'slctType', '구분')
-    , new COMMON_CODE('1', '1', 'DJ')
-    , new COMMON_CODE('2', '2', '청취자')
+    , new COMMON_CODE('1', '1', '청취자')
+    , new COMMON_CODE('2', '2', 'DJ')
 ]
 
 var full_moon_condition2_reward = [

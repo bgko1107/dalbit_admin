@@ -4,6 +4,7 @@ import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.exception.GlobalException;
+import com.dalbit.sample.dao.SampleDao;
 import com.dalbit.sample.service.SampleService;
 import com.dalbit.sample.vo.ErrorVo;
 import com.dalbit.util.DalbitUtil;
@@ -12,6 +13,7 @@ import com.dalbit.util.OkHttpClientUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +36,9 @@ public class SampleRestController {
 
     @Autowired
     GsonUtil gsonUtil;
+
+    @Autowired
+    SampleDao sampleDao;
 
     @PostMapping("list")
     public String list(Model model){
@@ -80,5 +85,18 @@ public class SampleRestController {
 
         excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
         return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
+
+    /**
+     * 5/10레벨 이벤트 참여내역 초기화
+     */
+    @GetMapping("joinEventReset")
+    public String joinEventReset(HttpServletRequest request) {
+        String mem_no = request.getParameter("memNo");
+
+        sampleDao.joinEventReset(mem_no);
+
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.삭제));
+        return result;
     }
 }

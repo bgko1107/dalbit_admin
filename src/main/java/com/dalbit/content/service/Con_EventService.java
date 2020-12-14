@@ -148,6 +148,10 @@ public class Con_EventService {
                 pEventManagementEditVo.setEndDate("0000-00-00 00:00:00");
             }
 
+            if (DalbitUtil.isEmpty(pEventManagementEditVo.getAnnouncementDate())) {
+                pEventManagementEditVo.setAnnouncementDate("0000-00-00 00:00:00");
+            }
+
             ProcedureVo procedureVo = new ProcedureVo(pEventManagementEditVo);
 
             con_EventDao.callEventManagementEdit(procedureVo);

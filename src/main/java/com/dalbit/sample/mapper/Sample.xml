@@ -92,4 +92,9 @@
         <include refid="condition"/>
     </select>
 
+    <select id="joinEventReset" parameterType="java.lang.String">
+        delete from rd_data.tb_event_new_join_level
+        where mem_no = #{memNo}
+    </select>
+
 </mapper>

@@ -4851,7 +4851,7 @@ html[dir="rtl"] .select2-search-choice-close {
     border: 0; }
 
 .note-editor p {
-    margin: 0 0 10px; }
+    margin: 0 0 0 0; }
 
 .note-editor .lead {
     margin-bottom: 20px;
@@ -4959,8 +4959,14 @@ html[dir="rtl"] .select2-search-choice-close {
 .note-editor h1,
 .note-editor h2,
 .note-editor h3 {
-    margin-top: 20px;
-    margin-bottom: 10px; }
+    margin-top: 0px;
+    margin-bottom: 0px; }
+
+.note-editor h1,
+.note-editor h2,
+.note-editor h3 {
+    margin-top: 0px;
+    margin-bottom: 0px; }
 
 .note-editor h1 small,
 .note-editor h2 small,
@@ -4973,8 +4979,14 @@ html[dir="rtl"] .select2-search-choice-close {
 .note-editor h4,
 .note-editor h5,
 .note-editor h6 {
-    margin-top: 10px;
-    margin-bottom: 10px; }
+    margin-top: 0px;
+    margin-bottom: 0px; }
+
+._editor h4,
+._editor h5,
+._editor h6 {
+    margin-top: 0px;
+    margin-bottom: 0px; }
 
 .note-editor h4 small,
 .note-editor h5 small,
