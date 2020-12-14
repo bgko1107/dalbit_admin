@@ -1121,7 +1121,7 @@
             <th>보유달</th>
             <td colspan="6" style="text-align: left;">
                 <span class="col-md-5 no-padding">
-                    {{addComma dal}} / {{addComma money}} / 총 달 : {{addComma totalDal}}
+                    <span class="font-bold">{{addComma totalDal}}</span> 달 (구매 : {{addComma money}} 달 / 무료 : {{addComma dal}} 달)
                 </span>
                 <c:if test="${insertYn eq 'Y'}">
                     {{#equal memWithdrawal '0'}}
