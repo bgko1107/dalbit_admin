@@ -30,6 +30,11 @@ public class AdministrateController {
         return "administrate/category/list";
     }
 
+    @GetMapping("/category/popup/authority")
+    public String categoryPopupAuthority() {
+        return "administrate/category/popup/authority";
+    }
+
     @GetMapping("/faq/list")
     public String faqList() {
         return "administrate/faq/list";

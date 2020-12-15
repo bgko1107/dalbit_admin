@@ -64,10 +64,35 @@ public class Adm_AuthorityRestController {
         String menuAuthArr = request.getParameter("menuAuthArr");
         String empNoArr = request.getParameter("empNoArr");
         MenuAuthVo[] menuAuthVos = new Gson().fromJson(menuAuthArr, MenuAuthVo[].class);
-        int[] empNos = new Gson().fromJson(empNoArr, int[].class);
+        String[] empNos = new Gson().fromJson(empNoArr, String[].class);
         log.debug("메뉴 : {}", request);
 
         admAuthorityService.setAuth(empNos, menuAuthVos);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.관리자권한부여_성공));
+    }
+
+    @PostMapping("/selectAuthMenu")
+    public String selectAuthMenu(SearchVo searchVo) throws GlobalException{
+
+        //선택된 메뉴를 가진 직원 조회
+        List<MenuVo> menuAuthList = admAuthorityService.getMenuAuthInfo(searchVo.getMenuIdx());
+        var map = new HashMap();
+        map.put("menuAuthList", menuAuthList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, map));
+    }
+
+    @PostMapping("/setMenu")
+    public String setMenu(HttpServletRequest request) throws GlobalException{
+
+        String menuAuthArr = request.getParameter("menuAuthArr");
+        String empNoArr = request.getParameter("empNoArr");
+
+        MenuAuthVo[] menuAuthVos = new Gson().fromJson(menuAuthArr, MenuAuthVo[].class);
+        log.debug("메뉴 : {}", menuAuthVos);
+
+        admAuthorityService.setMenu(menuAuthVos);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.관리자권한부여_성공));
     }

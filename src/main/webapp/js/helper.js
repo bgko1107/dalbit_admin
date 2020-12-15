@@ -388,3 +388,7 @@ Handlebars.registerHelper("getBadge", function(startColor, endColor, icon, text,
 Handlebars.registerHelper("getPlatformName", function(platform){
     return util.getPlatformName(platform);
 });
+
+Handlebars.registerHelper("popupLink", function(display, url, width, height){
+    return util.popupLink(display, url, width, height);
+});

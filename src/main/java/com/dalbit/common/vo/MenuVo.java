@@ -33,6 +33,7 @@ public class MenuVo {
     private String mobile_yn;
     private Date reg_date;
     private Date last_upd_date;
+    private String emp_no;
 
     private int is_read;
     private int is_insert;
