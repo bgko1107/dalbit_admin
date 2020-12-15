@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dalbit.administrate.dao.Adm_AuthorityDao" >
 
-    <delete id="deleteMenuAuth" parameterType="int">
+    <delete id="deleteMenuAuth" parameterType="String">
         /* Adm_Authority.xml - deleteMenuAuth */
         DELETE FROM rd_admin.tb_admin_menu_auth
         WHERE EMP_NO = #{empNo}
