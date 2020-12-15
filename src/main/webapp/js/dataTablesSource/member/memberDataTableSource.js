@@ -181,8 +181,8 @@ var MemberDataTableSource = {
             {'title': '부스터', 'data': 'boosterCnt', 'width':'80px', 'render': function (data) {
                     return common.addComma(data);
                 }},
-            {'title': '보름달', 'data': 'complete_moon', 'width':'80px', 'render': function (data) {
-                    return data == 1 ? "완료" : "미완료";
+            {'title': '보름달', 'data': 'complete_moon', 'width':'80px', 'render': function (data, type, row) {
+                    return data == 1 ? common.convertToDate(row.complete_date) : row.step + "단계";
                 }},
         ]
         ,'comments': 'ㆍ회원이 방송을 진행하고, 청취한 기록을 확인할 수 있습니다.'
