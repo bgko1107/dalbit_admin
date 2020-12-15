@@ -27,6 +27,10 @@
           limit 5;
     </select>
 
+    <select id="getInspectionCheck" parameterType="com.dalbit.member.vo.procedure.P_AuthVo" resultType="com.dalbit.member.vo.procedure.P_AuthVo">
+        select is_use AS `type` From  rd_data.tbl_code_define where `type`='system_config' and `order` in (0)
+    </select>
+
     <select id="getLiveBroadCastList" parameterType="com.dalbit.member.vo.procedure.P_AuthVo" resultType="com.dalbit.member.vo.procedure.P_MemberBroadcastOutputVo">
         select room_no, mem_no
           From rd_data.tb_broadcast_room
@@ -34,7 +38,6 @@
          <if test='roomNo != "" and roomNo != null'>
            and room_no = #{roomNo}
          </if>
-         ;
     </select>
 
     <insert id="setInspectionHistory" parameterType="com.dalbit.member.vo.MemberVo">

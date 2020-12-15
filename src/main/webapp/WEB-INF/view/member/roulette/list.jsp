@@ -6,6 +6,7 @@
     <div class="widget widget-table" id="main_table">
         <div class="widget-content">
             <div class="col-md-12 no-padding mt10">
+                <span id="winTypeArea"></span>
                 <div class="input-group date " id="rouletteRangeDatepicker">
                     <label for="rouletteDisplayDate" class="input-group-addon">
                         <span><i class="fa fa-calendar"></i></span>
@@ -17,6 +18,9 @@
                 <%--<input name="rouletteStartDate" id="rouletteStartDate">--%>
                 <%--<input name="rouletteEndDate" id="rouletteEndDate" />--%>
                 <button type="button" class="btn btn-success" id="bt_rouletteSearch">검색</button>
+                <a href="javascript://" class="_roulettePrevSearch">[이전]</a>
+                <a href="javascript://" class="_rouletteTodaySearch">[오늘]</a>
+                <a href="javascript://" class="_rouletteNextSearch">[다음]</a>
             </div>
             <table id="applyList" class="table table-sorting table-hover table-bordered datatable">
                 <thead>
@@ -35,8 +39,8 @@
 
 <script type="text/javascript">
 
+    var dateTime = new Date();
     $(document).ready(function() {
-        var dateTime = new Date();
         dateTime = moment(dateTime).format("YYYY.MM.DD");
 
         $("#rouletteDisplayDate").statsDaterangepicker(
@@ -48,6 +52,8 @@
 
         $("#rouletteStartDate").val(dateTime);
         $("#rouletteEndDate").val(dateTime);
+
+        $('#winTypeArea').html(util.getCommonCodeSelect('-1', roulette_winType));
     });
 
     $('#bt_rouletteSearch').click(function() {
@@ -58,7 +64,7 @@
 
         var roulette_dtList_info;
         var dtList_info_data = function (data) {
-            data.attendanceType = -1;   // 참여 구분
+            data.winType = $('#winType').val();   // 참여 구분
             data.searchType = -1;    // 검색 조건
             data.txt_search = memNo;                   // 검색 창
             data.startDate =  $("#rouletteStartDate").val().replace(/\./gi,'');
@@ -71,6 +77,29 @@
         roulette_dtList_info.setPageLength(50);
         roulette_dtList_info.useInitReload(true);
         roulette_dtList_info.createDataTable();
+    }
+
+    $(document).on('click', '._roulettePrevSearch', function(){
+        prevNext(true);
+    });
+
+    $(document).on('click', '._rouletteNextSearch', function(){
+        prevNext(false);
+    });
+
+    $(document).on('click', '._rouletteTodaySearch', function(){
+        $("#rouletteStartDate").val(dateTime);
+        $("#rouletteEndDate").val(dateTime);
+        $("#rouletteDisplayDate").val($("#rouletteStartDate").val() + " - " + $("#rouletteEndDate").val());
+        $("#bt_rouletteSearch").click();
+    });
+
+    function prevNext(isPrev){
+        var addDate = isPrev ? -1 : 1;
+        $("#rouletteStartDate").val(moment($("#rouletteStartDate").val()).add("days", addDate).format('YYYY.MM.DD'));
+        $("#rouletteEndDate").val(moment($("#rouletteEndDate").val()).add("days", addDate).format('YYYY.MM.DD'));
+        $("#rouletteDisplayDate").val($("#rouletteStartDate").val() + " - " + $("#rouletteEndDate").val());
+        $("#bt_rouletteSearch").click();
     }
 
 </script>

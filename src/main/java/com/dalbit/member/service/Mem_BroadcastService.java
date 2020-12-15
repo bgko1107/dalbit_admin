@@ -136,6 +136,16 @@ public class Mem_BroadcastService {
     /**
      * 임시점검 (전체 방 강제종료, 생성 제한)
      */
+    public String inspectionCheck(P_AuthVo pAuthVo) {
+
+        P_AuthVo outvo = mem_BroadcastDao.getInspectionCheck(pAuthVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, outvo));
+    }
+
+    /**
+     * 임시점검 (전체 방 강제종료, 생성 제한)
+     */
     public String inspection(P_AuthVo pAuthVo) {
 
         String result;
