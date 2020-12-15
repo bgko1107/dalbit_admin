@@ -134,6 +134,8 @@ public class Men_ShiningService {
                 return gsonUtil.toJson(new JsonOutputVo(Status.샤이닝DJ등록_실패_뱃지중복));
             }else if(procedureVo.getRet().equals(Status.비즈니스로직오류.getMessageCode())){
                 return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+            }else if(procedureVo.getRet().equals(Status.DB_비즈니스로직오류.getMessageCode())){
+                return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
             }
         }
         return gsonUtil.toJson(new JsonOutputVo(Status.샤이닝DJ등록_성공));
@@ -148,8 +150,12 @@ public class Men_ShiningService {
         String[] memNo = shiningVo.getMemNo().split("@@");
 
         for(int i=0; i<memNo.length;i++){
-            shiningVo.setMemNo(memNo[i]);
-            ProcedureVo procedureVo = new ProcedureVo(shiningVo);
+            var deleteMember = new ShiningVo();
+            deleteMember.setMemNo(memNo[i]);
+            deleteMember.setStartDate(shiningVo.getStartDate());
+            deleteMember.setEndDate(shiningVo.getEndDate());
+            deleteMember.setBadgeType(10);
+            ProcedureVo procedureVo = new ProcedureVo(deleteMember);
             menShiningDao.callShiningDelete(procedureVo);
 
             if(!procedureVo.getRet().equals(Status.샤이닝DJ삭제_성공.getMessageCode())){
