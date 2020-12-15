@@ -48,4 +48,24 @@ public class MenuController {
     public String shiningList(){
         return "menu/shining/list";
     }
+
+    @RequestMapping("/rank/awardsVote")
+    public String awardsVote(){
+        return "menu/rank/awardsVote";
+    }
+
+    @RequestMapping("/rank/awardsDj")
+    public String awardsDj(){
+        return "menu/rank/awardsDj";
+    }
+
+    @RequestMapping("/rank/awardsFan")
+    public String awardsFan(){
+        return "menu/rank/awardsFan";
+    }
+
+    @RequestMapping("/rank/popup/voteDetail")
+    public String voteDetail(){
+        return "menu/rank/popup/voteDetail";
+    }
 }

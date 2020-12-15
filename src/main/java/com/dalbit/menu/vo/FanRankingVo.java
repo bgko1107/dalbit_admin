@@ -59,5 +59,6 @@ public class FanRankingVo extends PagingVo {
     private int goodCnt;
     private int rankPoint;
     private int itemCnt;
+    private int awards;
 
 }

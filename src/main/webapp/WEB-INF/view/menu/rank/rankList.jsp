@@ -84,6 +84,9 @@
                     </li>
                     <li><a href="/menu/rank/addDjPoint" id="tab_addDjPoint">DJ가산점</a></li>
                     <li><a href="/menu/rank/goodRank" id="tab_goodRank">좋아요 랭킹</a></li>
+                    <li><a href="/menu/rank/awardsVote" id="tab_awardsVote">어워즈 투표현황</a></li>
+                    <%--<li><a href="/menu/rank/awardsDj" id="tab_awardsDj">어워즈DJ 선정</a></li>--%>
+                    <%--<li><a href="/menu/rank/awardsFan" id="tab_awardsFan">어워즈 팬 선정</a></li>--%>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active " id="djRankList">
@@ -220,6 +223,27 @@
         djRankListPagingInfo = pagingInfo;
         init();
     }
+
+    function awardsClick(data){
+        var slctType = data.data('awards') > 0 ? 0 : 1;
+        var data = {
+            mem_no : data.data('memno')
+            , slctTarget : data.data('type')
+            , selectYear : $("#startDate").val().substr(0,4)
+            , slctType : slctType
+        };
+
+        console.log(data);
+        util.getAjaxData("regist", "/rest/menu/rank/awards/regist", data, fn_regist_success);
+    }
+
+    function fn_regist_success(dst_id, response){
+        if(response.result == "success"){
+            alert("어워즈 후보 등록 수정");
+            init();
+        }
+    }
+
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_djRankList">
@@ -239,6 +263,7 @@
         <th style="background-color: #4472c4;color: white">받은 좋아요<br/>(부스터 제외)<br/>x1점</th>
         <th style="background-color: #4472c4;color: white">부스터 횟수<br/>x20점</th>
         <th>방송진행 시간</th>
+        <th>어워즈<br/>후보 등록</th>
     </tr>
     </thead>
     <tbody id="djRankListBody">
@@ -292,13 +317,18 @@
             <td>{{addComma recByeol}}개<br/>({{addComma itemCnt}}개)</td>
             <td>{{addComma listenCnt}}명</td>
             <td>{{addComma totalGoodCnt}}<br/>({{addComma goodCnt}}개)</td>
-            <td>{{addComma boostCnt}}개</td>
+            <td>{{addComma boostCnt}}개</td>$(this)
             <td>{{timeStamp airTime}}</td>
+            <td>
+                <a href="javascript://" onclick="awardsClick($(this));" data-memNo="{{memNo}}" data-type="1" data-awards="{{awards}}">
+                    {{#dalbit_if awards '>' 0}}해제{{else}}등록{{/dalbit_if}}
+                </a>
+            </td>
         </tr>
 
         {{else}}
             <tr>
-                <td colspan="15">{{isEmptyData}}</td>
+                <td colspan="16">{{isEmptyData}}</td>
             </tr>
         {{/each}}
     </tbody>
@@ -320,6 +350,7 @@
         <th style="background-color: #4472c4;color: white">1분 좋아요<br/>x1점</th>
         <th>부스터 횟수</th>
         <th>청취 시간</th>
+        <th>어워즈<br/>팬 선정</th>
     </tr>
     </thead>
     <tbody id="fanRankListBody">
@@ -366,11 +397,16 @@
             <td>{{addComma goodCnt}}개</td>
             <td>{{addComma boostCnt}}개</td>
             <td>{{timeStamp airTime}}</td>
+            <td>
+                <a href="javascript://" onclick="awardsClick($(this));" data-memNo="{{mem_no}}" data-type="2" data-awards="{{awards}}">
+                    {{#dalbit_if awards '>' 0}}해제{{else}}등록{{/dalbit_if}}
+                </a>
+            </td>
         </tr>
 
     {{else}}
         <tr>
-            <td colspan="15">{{isEmptyData}}</td>
+            <td colspan="16">{{isEmptyData}}</td>
         </tr>
     {{/each}}
     </tbody>

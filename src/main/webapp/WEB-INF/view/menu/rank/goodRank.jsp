@@ -63,6 +63,9 @@
                     <li><a href="/menu/rank/djRankList?tabType=1" id="tab_rankFanList"><i class="fa fa-user"></i> Fan랭킹</a></li>
                     <li><a href="/menu/rank/addDjPoint" id="tab_addDjPoint">DJ가산점</a></li>
                     <li class="active"><a href="#goodRank"><i class="fa fa-user"></i>좋아요랭킹</a></li>
+                    <li><a href="/menu/rank/awardsVote" id="tab_awardsVote">어워즈 투표현황</a></li>
+                    <%--<li><a href="/menu/rank/awardsDj" id="tab_awardsDj">어워즈DJ 선정</a></li>--%>
+                    <%--<li><a href="/menu/rank/awardsFan" id="tab_awardsFan">어워즈 팬 선정</a></li>--%>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active " id="goodRankList">

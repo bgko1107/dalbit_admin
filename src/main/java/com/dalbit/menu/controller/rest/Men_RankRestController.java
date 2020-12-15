@@ -1,5 +1,9 @@
 package com.dalbit.menu.controller.rest;
 
+import com.dalbit.common.code.Status;
+import com.dalbit.common.vo.JsonOutputVo;
+import com.dalbit.excel.service.ExcelService;
+import com.dalbit.exception.GlobalException;
 import com.dalbit.menu.service.Men_RankService;
 import com.dalbit.menu.vo.*;
 import com.dalbit.menu.vo.procedure.P_MainDjRankingVo;
@@ -7,12 +11,15 @@ import com.dalbit.menu.vo.procedure.P_MainFanRankingVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Slf4j
@@ -25,6 +32,9 @@ public class Men_RankRestController {
 
     @Autowired
     Men_RankService menRankService;
+
+    @Autowired
+    ExcelService excelService;
 
 
 //    @RequestMapping("djRankList")
@@ -63,6 +73,29 @@ public class Men_RankRestController {
     @RequestMapping("goodRank")
     public String goodRank(GoodRankVo goodRankVo) {
         return menRankService.getGoodRank(goodRankVo);
+    }
+
+    @RequestMapping("awards/vote")
+    public String awardsVote(AwardsVoteVo awardsVoteVo) {
+        return menRankService.callAwardsVote(awardsVoteVo);
+    }
+
+    @PostMapping("awards/vote/listExcel")
+    public String awardsVoteListExcel(HttpServletRequest request, HttpServletResponse response, Model model, AwardsVoteVo awardsVoteVo) throws GlobalException {
+        Model resultModel = menRankService.callAwardsVoteExcel(awardsVoteVo, model);
+        excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
+
+    @RequestMapping("awards/vote/detail")
+    public String awardsVoteDetail(AwardsVoteVo awardsVoteVo) {
+        return menRankService.callAwardsVoteDetail(awardsVoteVo);
+    }
+
+    @RequestMapping("awards/regist")
+    public String awardsRegist(AwardsVoteVo awardsVoteVo) {
+        return menRankService.callAwardsRegist(awardsVoteVo);
     }
 
 }

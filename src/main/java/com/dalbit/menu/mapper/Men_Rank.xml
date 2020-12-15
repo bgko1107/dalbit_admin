@@ -250,7 +250,7 @@
                 , CAST(dj.dj_point AS INT) AS rankPoint
                 , dj.listener_point as listenCnt
                 , dj.gift_point as itemCnt
-
+                , (select count(*) from rd_data.tb_member_dalbitaward_dj_list where mem_no = mem.mem_no and select_year = date_format(#{sDate},'%Y')) AS awards
                 <if test='rankType == "1"'>
                     ,(select badge_value From rd_data.tb_member_badge where slct_type=3 and mem_no=mem.mem_no and date_format(start_date, '%Y.%m.%d') = #{sDate}
                        union
@@ -383,7 +383,7 @@
                         , fan.listen_point as airTime
                         , CAST(fan.fan_point AS INT) AS rankPoint
                         , fan.gift_point as itemCnt
-
+                        , (select count(*) from rd_data.tb_member_dalbitaward_fan_list where mem_no = mem.mem_no and select_year = date_format(#{sDate},'%Y')) AS awards
                         <if test='rankType == "1"'>
                             ,(select badge_value From rd_data.tb_member_badge where slct_type=2 and mem_no=mem.mem_no and date_format(start_date, '%Y.%m.%d') = #{sDate}
                                union
@@ -620,6 +620,18 @@
 
     <select id="callGetGoodRank" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.menu.vo.GoodRankVo">
         call rd_admin.sp_admin_good_ranking_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callAwardsVote" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.menu.vo.AwardsVoteVo">
+        call rd_admin.sp_admin_member_dalbitaward_vote_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callAwardsVoteDetail" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.menu.vo.AwardsVoteVo">
+        call rd_admin.sp_admin_member_dalbitaward_vote_detail(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callAwardsRegist" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.common.vo.ProcedureVo">
+        call rd_admin.sp_admin_member_dalbitaward_regist(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
 </mapper>
