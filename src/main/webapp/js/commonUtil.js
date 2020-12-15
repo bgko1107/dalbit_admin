@@ -576,6 +576,7 @@ util.imageFullSize = function(modalId ,url){
         html+=          '<div class="modal-content">';
         html+=              '<div class="modal-header no-padding">';
         html+=                  '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+        html+=                  '<button id="rotateL" ><i class="fa fa-undo"></i></button>';
         html+=                  '<button id="rotateR" ><i class="fa fa-repeat"></i></button>';
         html+=              '</div>';
         html+=              '<div class="modal-body no-padding">';
@@ -595,6 +596,11 @@ util.fullSize_background = function(url){
     $('#fullSize_background').modal('show');
 
     var angle = 0;
+    $('#rotateL').click(function() {
+        angle += -15;
+        $('#image_full_size').css('transform','rotate(' + angle + 'deg)');
+    });
+
     $('#rotateR').click(function() {
         angle += +15;
         $('#image_full_size').css('transform','rotate(' + angle + 'deg)');
