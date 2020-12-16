@@ -51,14 +51,16 @@
                     <li><a href="/menu/rank/djRankList?tabType=1" id="tab_rankFanList"><i class="fa fa-user"></i> Fan랭킹</a></li>
                     <li><a href="/menu/rank/addDjPoint" id="tab_addDjPoint">DJ가산점</a></li>
                     <li><a href="/menu/rank/goodRank" id="tab_goodRank">좋아요랭킹</a></li>
-                    <li class="active"><a href="/menu/rank/awardsVote" id="tab_awardsVote">어워즈 투표현황</a></li>
-                    <%--<li><a href="/menu/rank/awardsDj" id="tab_awardsDj">어워즈DJ 선정</a></li>--%>
-                    <%--<li><a href="/menu/rank/awardsFan" id="tab_awardsFan">어워즈 팬 선정</a></li>--%>
+                    <li class="active"><a href="#awardsVote" id="tab_awardsVote">어워즈 투표현황</a></li>
+                    <li><a href="/menu/rank/awardsDj" id="tab_awardsDj">어워즈 수상 DJ</a></li>
+                    <li><a href="/menu/rank/awardsFan" id="tab_awardsFan">어워즈 수상 팬</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active " id="addDjPointList">
-                        <button class="btn btn-default print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
-                        <button type="button" class="btn btn-primary pull-right mr5" id="memSearch" name="memSearch"><i class="fa fa-search"></i>운영자 직접 등록</button>
+                        <div class="col-md-12 no-padding">
+                            <button class="btn btn-default print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
+                            <button type="button" class="btn btn-primary pull-right mr5" id="memSearch" name="memSearch"><i class="fa fa-search"></i>운영자 직접 등록</button>
+                        </div>
                         <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate_top"></div>
                         <table id="list_info" class="table table-sorting table-hover table-bordered">
                         </table>

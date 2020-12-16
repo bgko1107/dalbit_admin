@@ -68,4 +68,5 @@ public class MenuController {
     public String voteDetail(){
         return "menu/rank/popup/voteDetail";
     }
+
 }

@@ -19,13 +19,13 @@
                                 <th id="th_bottonList">
                                     <jsp:include page="../../searchArea/daySearchFunction.jsp"/>
                                     <div>
-                                        <div id="div_monthButton"><jsp:include page="../../searchArea/monthSearchArea.jsp"/></div>
+                                        <div id="div_yearButton"><jsp:include page="../../searchArea/yearSearchArea.jsp"/></div>
                                     </div>
                                 </th>
                             </tr>
                             <tr>
                                 <td style="text-align: left">
-                                    <input id="monthDate" type="text" class="form-control" style="width: 196px;"/>
+                                    <input id="yearDate" type="text" class="form-control" style="width: 196px;"/>
 
                                     <input class="hide" name="startDate" id="startDate" style="width: 100px">
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
@@ -49,25 +49,18 @@
                 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="rankTab">
                     <li><a href="/menu/rank/djRankList?tabType=0" id="tab_rankList"><i class="fa fa-home"></i> DJ랭킹</a></li>
                     <li><a href="/menu/rank/djRankList?tabType=1" id="tab_rankFanList"><i class="fa fa-user"></i> Fan랭킹</a></li>
-                    <li class="active"><a href="#addDjPointList"><i class="fa fa-user"></i>DJ가산점</a></li>
+                    <li><a href="/menu/rank/addDjPoint" id="tab_addDjPoint">DJ가산점</a></li>
                     <li><a href="/menu/rank/goodRank" id="tab_goodRank">좋아요랭킹</a></li>
                     <li><a href="/menu/rank/awardsVote" id="tab_awardsVote">어워즈 투표현황</a></li>
                     <li><a href="/menu/rank/awardsDj" id="tab_awardsDj">어워즈 수상 DJ</a></li>
-                    <li><a href="/menu/rank/awardsFan" id="tab_awardsFan">어워즈 수상 팬</a></li>
+                    <li class="active"><a href="#awardsFan" id="tab_awardsFan">어워즈 수상 팬</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active " id="addDjPointList">
-                        <div class="row col-lg-12 form-inline">
-                            <div class="col-md-8 no-padding mt10">
-                                <span id="tab_title">
-                                    · 스페셜 DJ 선정 시 필요 데이터 입니다.<br/>
-                                    &nbsp;&nbsp;DJ 랭킹의 (어제 랭킹) 기준 [1위 2점, 2위 1점, 3위 0.5점]이 오늘 반영되어 일 단위로 누적됩니다.<br/>
-                                    &nbsp;&nbsp;가산점 총합 순위이며, 가산점 총합이 동일한 경우 월간 랭킹 점수가 높은 순으로 노출됩니다.
-
-                                </span>
-                            </div>
+                        <%--<button class="btn btn-default print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>--%>
+                        <div class="col-md-12 no-padding">
+                            <button type="button" class="btn btn-primary pull-right mr5" id="memSearch" name="memSearch"><i class="fa fa-search"></i>운영자 직접 등록</button>
                         </div>
-
                         <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate_top"></div>
                         <table id="list_info" class="table table-sorting table-hover table-bordered">
                         </table>
@@ -79,34 +72,31 @@
         <!-- DATA TABLE END -->
     </div>
 </div>
-</div>
+
+<jsp:include page="/WEB-INF/view/common/util/select_specialList.jsp"></jsp:include>
+
 <script type="text/javascript" src="/js/code/menu/menuCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
-    djRankListPagingInfo = new PAGING_INFO(0, 1, 50);
+    listPagingInfo = new PAGING_INFO(0, 1, 50);
 
     $(function(){
-        $("#searchArea").html(util.getCommonCodeSelect(9999, searchType));
-
-        slctType = 1;
+        slctType = 2;
         dateType();
     });
 
-    function init(tabName){
+    function init(){
         var data = {
-             pageStart : djRankListPagingInfo.pageNo
-            , pageCnt : djRankListPagingInfo.pageCnt
-            , selectGubun : $('#searchArea').val()
-            , txt_search : $("#searchText").val()
-            , sDate : $("#startDate").val()
-            , eDate : $("#endDate").val()
-        }
-        util.getAjaxData("addDjPoint", "/rest/menu/rank/addDjPoint", data, fn_succ_list);
+             pageStart : listPagingInfo.pageNo
+            , pageCnt : listPagingInfo.pageCnt
+            , selectYear : $("#startDate").val().substr(0,4)
+        };
+        util.getAjaxData("addDjPoint", "/rest/menu/rank/awards/fan", data, fn_succ_list);
     }
 
     function fn_succ_list(dst_id, response, params) {
         dalbitLog(response);
 
-        var template = $('#tmp_addDjPoint').html();
+        var template = $('#tmp_list_info').html();
         var templateScript = Handlebars.compile(template);
         var context = response.data;
         var html = templateScript(context);
@@ -114,9 +104,9 @@
 
         if(response.result == "success") {
             var pagingInfo = response.pagingVo;
-            djRankListPagingInfo.totalCnt = pagingInfo.totalCnt;
-            util.renderPagingNavigation('list_info_paginate_top', djRankListPagingInfo);
-            util.renderPagingNavigation('list_info_paginate', djRankListPagingInfo);
+            listPagingInfo.totalCnt = pagingInfo.totalCnt;
+            util.renderPagingNavigation('list_info_paginate_top', listPagingInfo);
+            util.renderPagingNavigation('list_info_paginate', listPagingInfo);
         }
     }
 
@@ -126,39 +116,103 @@
 
     $('input[id="searchText"]').on('keydown', function(e) {
         if(e.keyCode == 13) {
-            init();
+            $('#bt_search').click();
         };
     });
 
     function handlebarsPaging(targetId, pagingInfo){
-        djRankListPagingInfo = pagingInfo;
-        init();
+        listPagingInfo = pagingInfo;
+        $('#bt_search').click();
     }
+
+    $('#memSearch').on('click', function() {
+        showPopMemberList(awardsFanChoiceMember);
+    });
+
+    function awardsFanChoiceMember(data) {
+        if(confirm(data.mem_nick + '님을 어워즈 수상 명단에 등록하시겠습니까?')){
+            var data = {
+                mem_no : data.mem_no
+                , slctTarget : 0
+                , selectYear : $("#startDate").val().substr(0,4)
+                , slctType : 1
+            };
+            util.getAjaxData("regist", "/rest/menu/rank/awards/regist", data, fn_regist_success);
+        }else{
+            return false;
+        }
+    }
+
+    function fn_regist_success(dst_id, response){
+        if(response.result == "success"){
+            alert("어워즈 후보 등록 수정");
+            $('#bt_search').click();
+        }
+    }
+
+    function awardsClick(data){
+        if(confirm(data.data('memnick') + "님을 어워즈 수상 해제 하시겠습니까?")){
+            var data = {
+                mem_no : data.data('memno')
+                , slctTarget : 0
+                , selectYear : $("#startDate").val().substr(0,4)
+                , slctType : 0
+            };
+
+            console.log(data);
+            util.getAjaxData("regist", "/rest/menu/rank/awards/regist", data, fn_regist_success);
+        }else{
+            return false;
+        }
+    }
+
+    /*=============엑셀==================*/
+    /*$('#excelDownBtn').on('click', function(){
+        var formElement = document.querySelector("form");
+        var formData = new FormData(formElement);
+        formData.append("selectYear", $("#startDate").val().substr(0,4));
+        formData.append("searchText", $("#searchText").val());
+        formData.append("pageStart", 1);
+        formData.append("pageCnt", 10000);
+
+        util.excelDownload($(this), "/rest/menu/rank/awards/vote/listExcel", formData, fn_success_excel, fn_fail_excel)
+    });
+
+    function fn_success_excel(){
+        console.log("fn_success_excel");
+    }
+
+    function fn_fail_excel(){
+        console.log("fn_fail_excel");
+    }*/
+    /*==================================*/
+
 </script>
 
-<script type="text/x-handlebars-template" id="tmp_addDjPoint">
+<script type="text/x-handlebars-template" id="tmp_list_info">
     <thead>
         <tr>
-            <th>가산점 순위</th>
+            <th>순위</th>
             <th>프로필<br/>이미지</th>
             <th>회원번호</th>
             <th>닉네임</th>
             <th>성별</th>
-            <th style="color: red">가산점<br/>총합</th>
-            <th>1위 횟수<br/>(가산점)</th>
-            <th>2위 횟수<br/>(가산점)</th>
-            <th>3위 횟수<br/>(가산점)</th>
-            <th>랭킹 점수</th>
+            <th>연간<br/>팬 랭킹</th>
+            <th>보낸 달 x1</th>
+            <th>1분 좋아요<br/>x1</th>
+            <th>부스터 사용</th>
+            <th>청취시간</th>
+            <th>어워즈<br/>팬 해제</th>
         </tr>
     </thead>
-    <tbody id="djRankListBody">
-    {{#each this as |rank|}}
+    <tbody id="listBody">
+    {{#each this}}
         <tr {{#dalbit_if inner '==' 1}} class="bg-testMember" {{/dalbit_if}}>
         <td>
-            {{rowNum}}
+            {{rank}}
         </td>
         <td style="width: 50px">
-            <img class="thumbnail fullSize_background" src="{{renderProfileImage rank.image_profile rank.mem_sex}}" style='height:68px; width:68px;margin-bottom: 0px' />
+            <img class="thumbnail fullSize_background" src="{{renderProfileImage profileImage memSex}}" style='height:68px; width:68px;margin-bottom: 0px' />
         </td>
         <td>
             <a href="javascript://" class="_openMemberPop" data-memNo="{{memNo}}">{{memNo}}</a>
@@ -167,22 +221,27 @@
             등급 : {{grade}}
         </td>
         <td>
-            {{#equal mem_nick ''}}
-            {{{fontColor '탈퇴회원 입니다.' 0 'red'}}}
+            {{#dalbit_if memNick '!=' ''}}
+                {{memNick}}
             {{else}}
-            {{rank.mem_nick}}
-            {{/equal}}
+                {{{fontColor '탈퇴회원 입니다.' 0 'red'}}}
+            {{/dalbit_if}}
         </td>
-        <td>{{{sexIcon mem_sex mem_birth_year}}}</td>
-        <td style="color: red;">{{#dalbit_if addPointTotal '!=' 0.0}}{{addPointTotal}}점{{/dalbit_if}}</td>
-        <td>{{addPointRank1}}회<br/>({{addPoint1}}점)</td>
-        <td>{{addPointRank2}}회<br/>({{addPoint2}}점)</td>
-        <td>{{addPointRank3}}회<br/>({{addPoint3}}점)</td>
-        <td>{{addComma rankPoint}}점</td>
+        <td>{{{sexIcon memSex memBirthYear}}}</td>
+        <td>{{fanRank}}</td>
+        <td>{{giftPoint}}</td>
+        <td>{{goodPoint}}</td>
+        <td>{{boosterPoint}}</td>
+        <td>{{timeStampDay listenPoint}}</td>
+        <td>
+            <a href="javascript://" onclick="awardsClick($(this));" data-memno="{{memNo}}" data-memnick="{{memNick}}" data-type="1">
+                해제
+            </a>
+        </td>
     </tr>
     {{else}}
     <tr>
-        <td colspan="15">{{isEmptyData}}</td>
+        <td colspan="11">{{isEmptyData}}</td>
     </tr>
     {{/each}}
     </tbody>
