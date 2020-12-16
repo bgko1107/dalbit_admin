@@ -45,7 +45,7 @@ public class Adm_AuthorityService {
     CommonService commonService;
 
     @Transactional(readOnly = false)
-    public void setAuth(int[] empNos, MenuAuthVo[] menuAuthVos)throws GlobalException {
+    public void setAuth(String[] empNos, MenuAuthVo[] menuAuthVos)throws GlobalException {
         if(DalbitUtil.isEmpty(empNos)){
             throw new GlobalException(Status.관리자권한부여_임직원번호업음);
 
@@ -53,7 +53,7 @@ public class Adm_AuthorityService {
             throw new GlobalException(Status.관리자권한부여_메뉴없음);
         }
 
-        for (int empNo : empNos) {
+        for (String empNo : empNos) {
 
             admAuthorityDao.deleteMenuAuth(empNo);
 
@@ -62,6 +62,19 @@ public class Adm_AuthorityService {
 
                 admAuthorityDao.insertMenuAuth(menuAuthVo);
             }
+        }
+    }
+
+    @Transactional(readOnly = false)
+    public void setMenu(MenuAuthVo[] menuAuthVos)throws GlobalException {
+
+        if(0 < menuAuthVos.length){
+            int menuIdx = menuAuthVos[0].getMenu_idx();
+            admAuthorityDao.deleteMenuAuthByMenuIdx(menuIdx);
+        }
+
+        for (MenuAuthVo menuAuthVo : menuAuthVos) {
+            admAuthorityDao.insertMenuAuth(menuAuthVo);
         }
     }
 
@@ -129,6 +142,10 @@ public class Adm_AuthorityService {
 
     public List<MenuVo> getMemberAuthInfo(int empNo){
         return admAuthorityDao.getMemberAuthInfo(empNo);
+    }
+
+    public List<MenuVo> getMenuAuthInfo(int menuIdx){
+        return admAuthorityDao.getMenuAuthInfo(menuIdx);
     }
 
     public List<MenuVo> getLnbMemberAuthInfo(int empNo){

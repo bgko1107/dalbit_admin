@@ -36,7 +36,6 @@
     <div class="col-md-7">
         <form id="menuFrm"></form>
     </div>
-
 </div>
 
 <script type="text/javascript" src="/js/lib/jstree.min.js"></script>
@@ -197,6 +196,12 @@
         alert(response.message);
         getMenuList();
     }
+
+    $(document).on('click', '._authorityBtn', function(){
+        var me = $(this);
+        var url = '/administrate/category/popup/authority?menuIdx='+me.data('menuidx');
+        util.windowOpen(url, 1200, 800, 'authorityPopup');
+    });
 </script>
 
 
@@ -238,6 +243,9 @@
         </tr>
         </tbody>
     </table>
+
+    <button type="button" class="btn btn-default btn-sm _authorityBtn" data-menuidx='{{idx}}'><i class="fa fa-lock"></i> 메뉴권한</button>
+
 </script>
 
 </body>

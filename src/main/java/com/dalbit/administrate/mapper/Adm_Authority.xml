@@ -2,10 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dalbit.administrate.dao.Adm_AuthorityDao" >
 
-    <delete id="deleteMenuAuth" parameterType="int">
+    <delete id="deleteMenuAuth" parameterType="String">
         /* Adm_Authority.xml - deleteMenuAuth */
         DELETE FROM rd_admin.tb_admin_menu_auth
         WHERE EMP_NO = #{empNo}
+    </delete>
+
+    <delete id="deleteMenuAuthByMenuIdx" parameterType="int">
+        /* Adm_Authority.xml - deleteMenuAuthByMenuIdx */
+        DELETE FROM rd_admin.tb_admin_menu_auth
+        WHERE MENU_IDX = #{menuIdx}
     </delete>
 
     <insert id="insertMenuAuth" parameterType="com.dalbit.common.vo.MenuAuthVo">
@@ -38,6 +44,7 @@
             , MENU.IS_POP
             , MENU.IS_COMMING_SOON
             , MENU.MOBILE_YN
+            , AUTH.EMP_NO
             , AUTH.IS_READ
             , AUTH.IS_INSERT
             , AUTH.IS_DELETE
@@ -48,6 +55,32 @@
             AND IS_USE = 1
         ORDER BY MENU.DEPTH ASC, MENU.ORDER_NO ASC, MENU.PARENT_IDX ASC
     </select>
+
+    <select id="getMenuAuthInfo" parameterType="int" resultType="com.dalbit.common.vo.MenuVo">
+        /* Adm_Authority.xml - getMenuAuthInfo */
+        SELECT
+            MENU.IDX
+             , MENU.MENU_NAME
+             , MENU.MENU_URL
+             , MENU.DEPTH
+             , MENU.ORDER_NO
+             , MENU.PARENT_IDX
+             , MENU.ICON
+             , MENU.IS_POP
+             , MENU.IS_COMMING_SOON
+             , MENU.MOBILE_YN
+             , AUTH.EMP_NO
+             , AUTH.IS_READ
+             , AUTH.IS_INSERT
+             , AUTH.IS_DELETE
+        FROM rd_admin.tb_admin_menu_auth AUTH
+           , rd_admin.tb_admin_menu MENU
+        WHERE AUTH.MENU_IDX = MENU.IDX
+          AND MENU_IDX = #{menuIdx}
+          AND IS_USE = 1
+        ORDER BY MENU.DEPTH ASC, MENU.ORDER_NO ASC, MENU.PARENT_IDX ASC
+    </select>
+
     <select id="getMemberAuthCnt" parameterType="string" resultType="integer">
         select count(*) as cnt from rd_admin.tb_admin_menu_auth where lpad(emp_no,5,0) = #{empNo}
     </select>

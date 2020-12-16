@@ -10,10 +10,12 @@ import java.util.List;
 @Repository
 public interface Adm_AuthorityDao {
 
-    void deleteMenuAuth(int empNo);
+    void deleteMenuAuth(String empNo);
+    void deleteMenuAuthByMenuIdx(int menuIdx);
     void insertMenuAuth(MenuAuthVo menuAuthVo);
     @Transactional(readOnly = true)
     List<MenuVo> getMemberAuthInfo(int empNo);
+    List<MenuVo> getMenuAuthInfo(int menuIdx);
     int getMemberAuthCnt(String empNo);
     int getTestIdCnt(String empNo);
 }
