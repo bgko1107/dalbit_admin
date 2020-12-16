@@ -425,6 +425,16 @@ var BroadcastDataTableSource = {
             {'title': '보름달', 'data' : 'complete_moon', 'width':'50px', 'render': function (data, type, row, meta) {
                     return data == 0 ? "N" : "Y";
                 }},
+            {'title': '디바이스 정보', 'data' : 'osType', 'width':'150px', 'render': function (data, type, row, meta) {
+                    var html = '';
+                    html += 'osType : ' + row.osType + '<br />';
+                    html += '제조사명 : ' + row.deviceManufacturer + '<br />';
+                    html += '모델명 : ' + row.deviceModel + '<br />';
+                    html += 'appVersion : ' + row.appVersion + '<br />';
+                    html += 'buildVersion : ' + row.buildVersion;
+
+                    return html;
+                }},
         ]
         , 'comments' : 'ㆍ방송 중 (게스트와 매니저를 포함한) 청취자 변동사항을 확인할 수 있습니다.<br/>' +
                        'ㆍ청취자 리스트는 방송 Live상태 내에서의 데이터로 방송 입퇴장 정보를 포함합니다.'

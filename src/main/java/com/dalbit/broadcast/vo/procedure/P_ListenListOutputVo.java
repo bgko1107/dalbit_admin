@@ -51,6 +51,12 @@ public class P_ListenListOutputVo extends PagingVo {
     private int totalCompleteMoonCnt;
     private int shadow;
 
+    private String osType;
+    private String appVersion;
+    private String buildVersion;
+    private String deviceManufacturer;
+    private String deviceModel;
+
     // 회원 배찌
     private String recomm_badge;
     private String newdj_badge;

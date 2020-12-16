@@ -95,6 +95,12 @@ public class Bro_ListenerService {
 
                 outVo.setComplete_moon(broadList.get(i).getComplete_moon());
                 outVo.setShadow(broadList.get(i).getShadow());
+
+                outVo.setOsType(broadList.get(i).getOsType());
+                outVo.setAppVersion(broadList.get(i).getAppVersion());
+                outVo.setBuildVersion(broadList.get(i).getBuildVersion());
+                outVo.setDeviceManufacturer(broadList.get(i).getDeviceManufacturer());
+                outVo.setDeviceModel(broadList.get(i).getDeviceModel());
                 list.add(outVo);
             }
         }
