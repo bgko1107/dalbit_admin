@@ -132,7 +132,7 @@ var specialDataTableSource = {
             {'title': 'UserID', 'data': 'mem_userid','width':'50px'},
             {'title': '닉네임', 'data': 'mem_nick','width':'100px'},
             {'title': '연락처', 'data': 'mem_phone','width':'50px'},
-            {'title': '스페셜DJ등록하기', 'data': '','defaultContent': '', 'render': function (data, type, row, meta) {
+            {'title': '등록하기', 'data': '','defaultContent': '', 'render': function (data, type, row, meta) {
                     return '<a onclick="javascript:setModalMemeberData('+meta.row+')" data-dismiss="modal">' + "[등록하기]" + '</a>'
                 },'width':'60px'},
         ]

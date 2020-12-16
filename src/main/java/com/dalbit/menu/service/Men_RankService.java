@@ -7,6 +7,7 @@ import com.dalbit.common.vo.ProcedureOutputVo;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.excel.vo.ExcelVo;
+import com.dalbit.member.vo.MemberVo;
 import com.dalbit.menu.dao.Men_RankDao;
 import com.dalbit.menu.vo.*;
 import com.dalbit.menu.vo.procedure.P_MainDjRankingVo;
@@ -257,8 +258,54 @@ public class Men_RankService {
      * 어워즈 후보 등록
      */
     public String callAwardsRegist(AwardsVoteVo awardsVoteVo) {
+        awardsVoteVo.setOpName(MemberVo.getMyMemNo());
         ProcedureVo procedureVo = new ProcedureVo(awardsVoteVo);
         menRankDao.callAwardsRegist(procedureVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.수정));
+    }
+
+    /**
+     * 어워즈 수상 Dj 목록
+     */
+    public String callAwardsDj(AwardsVoteVo awardsVoteVo) {
+        ProcedureVo procedureVo = new ProcedureVo(awardsVoteVo);
+        ArrayList<AwardsVoteVo> outVoList = menRankDao.callAwardsDj(procedureVo);
+
+        String result;
+        if(outVoList.size() > 0){
+            result = gsonUtil.toJson(new JsonOutputVo(Status.어워즈투표수상조회_성공, outVoList, new PagingVo(procedureVo.getRet())));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+
+        return result;
+    }
+
+    /**
+     * 어워즈 수상 팬 목록
+     */
+    public String callAwardsFan(AwardsVoteVo awardsVoteVo) {
+        ProcedureVo procedureVo = new ProcedureVo(awardsVoteVo);
+        ArrayList<AwardsVoteVo> outVoList = menRankDao.callAwardsFan(procedureVo);
+
+        String result;
+        if(outVoList.size() > 0){
+            result = gsonUtil.toJson(new JsonOutputVo(Status.어워즈투표수상조회_성공, outVoList, new PagingVo(procedureVo.getRet())));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+
+        return result;
+    }
+
+    /**
+     * 어워즈 수상 DJ 등록
+     */
+    public String callAwardsDjRegist(AwardsVoteVo awardsVoteVo) {
+        awardsVoteVo.setOpName(MemberVo.getMyMemNo());
+        ProcedureVo procedureVo = new ProcedureVo(awardsVoteVo);
+        menRankDao.callAwardsDjRegist(procedureVo);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.수정));
     }

@@ -31,6 +31,14 @@ public class AwardsVoteVo extends PagingVo {
     private int goodPoint;
     private int boosterPoint;
     private int broadcastPoint;
+    private String fan1_memNo;
+    private String fan1_memNick;
+    private String fan2_memNo;
+    private String fan2_memNick;
+    private String fan3_memNo;
+    private String fan3_memNick;
+    private int fanRank;
+    private int listenPoint;
 
 
     private String lastUpdDate;
