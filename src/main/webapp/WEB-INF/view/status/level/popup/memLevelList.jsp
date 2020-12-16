@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %></c:set>
 
-<%
-    String in_level = request.getParameter("level");
-%>
-
 <div id="wrapper">
     <div id="page-wrapper">
         <!-- serachBox -->
@@ -35,9 +31,7 @@
 
     init();
 
-    var tmp_level;
     function init(){
-        tmp_level = <%=in_level%>;
         getMemLevelList();
     };
 
@@ -50,7 +44,7 @@
     function getMemLevelList() {
         var dtList_info_data = function(data) {
             data.searchText = "";
-            data.level = tmp_level;
+            data.checkLevel = '${param.level}';
             data.inner = $('input[name="search_testId"]').is(":checked") ? "0" : "-1";
         };
         dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, levelDataTableSource.memLevelList);
