@@ -246,10 +246,19 @@
                         $("#monthTableBody_new tr:eq(" + (34 - Number(tmp_day.split(".")[2])) + ") td:eq(" + (index * 6 + i) + ")").css("font-weight", "bold");
                     }
                 } else if(index == 7) {     //평균
-                    $("#monthTableBody_new tr.__tr_" + (detail.day) + " td:eq(" + (3 * 6 + 1) + ")").html(common.addComma((succCnt/7).toFixed(1)));
-                    $("#monthTableBody_new tr.__tr_" + (detail.day) + " td:eq(" + (3 * 6 + 2) + ")").html(common.addComma((succCmt/7).toFixed(1)));
-                    $("#monthTableBody_new tr.__tr_" + (detail.day) + " td:eq(" + (3 * 6 + 3) + ")").html(common.vatMinus(succAmt/7));
-                    $("#monthTableBody_new tr.__tr_" + (detail.day) + " td:eq(" + (3 * 6 + 4) + ")").html(common.vatMinus(accumAmt/7));
+                    var payCnt = 0;
+                    payCnt += common.isEmpty($('#monthTableBody_new2 .__tr_' + (detail.day) + ' td:eq(1)').text()) ? 0 : 1;
+                    payCnt += common.isEmpty($('#monthTableBody_new2 .__tr_' + (detail.day) + ' td:eq(7)').text()) ? 0 : 1;
+                    payCnt += common.isEmpty($('#monthTableBody_new2 .__tr_' + (detail.day) + ' td:eq(13)').text()) ? 0 : 1;
+                    payCnt += common.isEmpty($('#monthTableBody_new2 .__tr_' + (detail.day) + ' td:eq(19)').text()) ? 0 : 1;
+                    payCnt += common.isEmpty($("#monthTableBody_new .__tr_" + (detail.day) + " td:eq(1)").text()) ? 0 : 1;
+                    payCnt += common.isEmpty($("#monthTableBody_new .__tr_" + (detail.day) + " td:eq(7)").text()) ? 0 : 1;
+                    payCnt += common.isEmpty($("#monthTableBody_new .__tr_" + (detail.day) + " td:eq(13)").text()) ? 0 : 1;
+
+                    $("#monthTableBody_new tr.__tr_" + (detail.day) + " td:eq(" + (3 * 6 + 1) + ")").html(common.addComma((succCnt/payCnt).toFixed(1)));
+                    $("#monthTableBody_new tr.__tr_" + (detail.day) + " td:eq(" + (3 * 6 + 2) + ")").html(common.addComma((succCmt/payCnt).toFixed(1)));
+                    $("#monthTableBody_new tr.__tr_" + (detail.day) + " td:eq(" + (3 * 6 + 3) + ")").html(common.vatMinus(succAmt/payCnt));
+                    $("#monthTableBody_new tr.__tr_" + (detail.day) + " td:eq(" + (3 * 6 + 4) + ")").html(common.vatMinus(accumAmt/payCnt));
                     $("#monthTableBody_new tr.__tr_" + (detail.day) + " td:eq(" + (3 * 6 + 5) + ")").html(common.vatMinus(cancAmt/7));
                     for (var i = 1; i < 6; i++) {
                         $("#monthTableBody_new tr:eq(" + (34 - Number(tmp_day.split(".")[2])) + ") td:eq(" + (3 * 6 + i) + ")").css("background-color", "#e3ecfb");
