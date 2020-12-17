@@ -115,6 +115,7 @@
             , itemNo6
             , itemNo7
             , itemNo8
+            , itemNo9
             , (select count(distinct mem_no)
                 from rd_data.tb_event_coupon_member_apply apply
                 where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(apply.apply_date, '%Y-%m-%d')
@@ -156,6 +157,7 @@
                 , sum(item_no_6) itemNo6
                 , sum(item_no_7) itemNo7
                 , sum(item_no_8) itemNo8
+                , sum(item_no_9) itemNo9
             from (
                 select apply.apply_date
                     , item_no
@@ -168,6 +170,7 @@
                     , CASE WHEN apply.item_no = 6 or apply.item_no = 16 or apply.item_no = 26 THEN count(apply.item_no) ELSE 0 END item_no_6
                     , CASE WHEN apply.item_no = 7 or apply.item_no = 17 or apply.item_no = 27 THEN count(apply.item_no) ELSE 0 END item_no_7
                     , CASE WHEN apply.item_no = 8 or apply.item_no = 18 or apply.item_no = 28 THEN count(apply.item_no) ELSE 0 END item_no_8
+                    , CASE WHEN apply.item_no = 9 or apply.item_no = 19 or apply.item_no = 29 THEN count(apply.item_no) ELSE 0 END item_no_9
                 from (
                     select date_format(apply.apply_date, '%Y-%m-%d') apply_date
                         , apply.item_no
@@ -212,6 +215,7 @@
             , sum(item_no_6) itemNo6
             , sum(item_no_7) itemNo7
             , sum(item_no_8) itemNo8
+            , sum(item_no_9) itemNo9
         from (
             select
                 apply.apply_date
@@ -223,6 +227,7 @@
                 , if(apply.item_no = 6 or apply.item_no = 16 or apply.item_no = 26, 1, 0) item_no_6
                 , if(apply.item_no = 7 or apply.item_no = 17 or apply.item_no = 27, 1, 0) item_no_7
                 , if(apply.item_no = 8 or apply.item_no = 18 or apply.item_no = 28, 1, 0) item_no_8
+                , if(apply.item_no = 9 or apply.item_no = 19 or apply.item_no = 29, 1, 0) item_no_9
             from rd_data.tb_event_coupon_member_apply apply
             left join rd_data.tb_member_basic basic on apply.mem_no = basic.mem_no
             where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(apply.apply_date, '%Y-%m-%d')
