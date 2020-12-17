@@ -17,6 +17,7 @@
             </div>
         </div>
     </div>
+    <input type="button" value="선택삭제" class="btn btn-danger btn-sm" id="btn_reply_delete" style="margin-left: 3px;"/>
     <!-- DATA TABLE END -->
 </div>
 
@@ -98,5 +99,9 @@
     function event_fail(dst_id, data){
         console.log(data.message);
     };
+
+    $(document).on('click', '#btn_reply_delete', function(){
+        deleteReplyEvent();
+    });
 
 </script>

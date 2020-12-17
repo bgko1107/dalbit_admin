@@ -873,20 +873,20 @@ public class Con_EventService {
             }
             return result;
         }
-//
-//    /**
-//     * 이벤트 댓글 삭제
-//     */
-//    public String getEventReplyDelete(P_EventReplyDeleteInputVo pEventReplyDeleteInputVo) {
-//        String result;
-//        pEventReplyDeleteInputVo.setOpName(MemberVo.getMyMemNo());
-//        int delResult =con_EventDao.callEventReplyDelete(pEventReplyDeleteInputVo);
-//        if(delResult > 0){
-//            result = gsonUtil.toJson(new JsonOutputVo(Status.이벤트댓글삭제성공));
-//        }else{
-//            result = gsonUtil.toJson(new JsonOutputVo(Status.이벤트댓글삭제실패));
-//        }
-//
-//        return result;
-//    }
+
+        /**
+         * 이벤트 댓글 삭제
+         */
+        public String getEventReplyDelete(P_EventReplyDeleteInputVo pEventReplyDeleteInputVo) {
+            String result;
+            pEventReplyDeleteInputVo.setOpName(MemberVo.getMyMemNo());
+            int delResult =con_EventDao.callEventReplyDelete(pEventReplyDeleteInputVo);
+            if(delResult > 0){
+                result = gsonUtil.toJson(new JsonOutputVo(Status.이벤트댓글삭제성공));
+            }else{
+                result = gsonUtil.toJson(new JsonOutputVo(Status.이벤트댓글삭제실패));
+            }
+
+            return result;
+        }
 }

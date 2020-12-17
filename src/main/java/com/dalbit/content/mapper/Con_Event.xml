@@ -318,16 +318,16 @@
     </select>
 
 
-    <!--&lt;!&ndash;이벤트 댓글 삭제 &ndash;&gt;-->
-    <!--<update id="callEventReplyDelete" parameterType="com.dalbit.content.vo.procedure.P_EventReplyDeleteInputVo">-->
-    <!--/* Con_Event.xml - callEventReplyDelete */-->
-    <!--UPDATE rd_admin.tb_event_reply-->
-    <!--SET-->
-    <!--status = 2-->
-    <!--,op_name = #{opName}-->
-    <!--,last_upd_date = NOW()-->
-    <!--WHERE-->
-    <!--idx = #{reply_idx}-->
-    <!--AND event_idx = #{event_idx}-->
-    <!--</update>-->
+    <!--이벤트 댓글 삭제 -->
+    <update id="callEventReplyDelete" parameterType="com.dalbit.content.vo.procedure.P_EventReplyDeleteInputVo">
+    /* Con_Event.xml - callEventReplyDelete */
+    UPDATE rd_admin.tb_event_reply
+    SET
+    status = 2
+    ,op_name = #{opName}
+    ,last_upd_date = NOW()
+    WHERE
+    idx = #{reply_idx}
+    AND event_idx = #{event_idx}
+    </update>
 </mapper>
