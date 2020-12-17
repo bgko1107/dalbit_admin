@@ -44,6 +44,7 @@
                                     <th>상품 C</th>
                                     <th>상품 D</th>
                                     <th>상품 E</th>
+                                    <th>100달</th>
                                     <th>등록/수정일</th>
                                     <th>등록자명</th>
                                 </tr>
@@ -59,11 +60,13 @@
                                     <td><input type="text" class="form-control _data" /></td>
                                     <td><input type="text" class="form-control _data" /></td>
                                     <td><input type="text" class="form-control _data" /></td>
+                                    <td><input type="text" class="form-control _data" /></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr id="giftRate">
                                     <th>확률(100%)</th>
+                                    <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
                                     <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
                                     <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
                                     <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
@@ -139,7 +142,7 @@
                 dalCnt = 3;
             }
             editList += index + 1 + ',' + dalCnt + ',' + (giftRate * 100) + ',' + giftCnt;
-            if(index != 7){
+            if(index != 8){
                 editList += splitTxt;
             }
         });
