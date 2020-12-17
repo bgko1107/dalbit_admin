@@ -62,7 +62,7 @@
         var html = templateScript(context);
         $("#detailTableBody").html(html);
 
-        detailRowspan("day");
+        //detailRowspan("day");
 
 
         detailPagingInfo.totalCnt = response.pagingVo.totalCnt;
