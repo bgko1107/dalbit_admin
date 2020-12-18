@@ -23,7 +23,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align: left">
-                                    <input id="dayDate" type="text" class="form-control" style="width: 196px;"/>
+                                    <input id="onedayDate" type="text" class="form-control" style="width: 196px;"/>
                                     <input id="monthDate" type="text" class="form-control" style="width: 196px;"/>
 
                                     <input class="hide" name="startDate" id="startDate" style="width: 100px">
