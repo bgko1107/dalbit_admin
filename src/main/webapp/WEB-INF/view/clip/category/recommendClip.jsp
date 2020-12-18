@@ -74,7 +74,7 @@
     var groupNo = <%=in_groupNo%>;
 
     $(document).ready(function() {
-        if(!common.isEmpty(recdate)){
+        if(!common.isEmpty(recdate) && recdate != null && recdate != "null"){
             getRecommendClip();
         }else{
             getRecommendClipNoData();
@@ -343,7 +343,9 @@
         $('#onedayDate').datepicker("onedayDate", new Date()).on('changeDate', function(dateText, inst){
             setMonday();
         });
-        setMonday(date);
+        if(!common.isEmpty(date)){
+            setMonday(date);
+        }
     }
 
     function getMonday(str) {
