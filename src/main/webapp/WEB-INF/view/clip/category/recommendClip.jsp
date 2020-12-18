@@ -5,10 +5,16 @@
 <link rel="stylesheet" href="/css/modal-video.min.css">
 
 <%
-    String in_yearMonth = request.getParameter("yearMonth");
+    String in_recdate = request.getParameter("recdate");
     String in_weekNo = request.getParameter("weekNo");
     String in_groupNo = request.getParameter("groupNo");
 %>
+
+<input class="hide" name="startDate" id="startDate" style="width: 100px">
+<input class="hide" name="endDate" id="endDate" style="width: 100px">
+
+<%--<input name="startDate" id="startDate" style="width: 100px">--%>
+<%--<input name="endDate" id="endDate" style="width: 100px">--%>
 
 <div id="wrapper">
     <div id="page-wrapper">
@@ -63,12 +69,12 @@
 <script src="/js/lib/jquery-modal-video.min.js"></script>
 
 <script>
-    var yearMonth = <%=in_yearMonth%>;
+    var recdate = '<%=in_recdate%>';
     var weekNo = <%=in_weekNo%>;
     var groupNo = <%=in_groupNo%>;
 
     $(document).ready(function() {
-        if(!common.isEmpty(yearMonth)){
+        if(!common.isEmpty(recdate)){
             getRecommendClip();
         }else{
             getRecommendClipNoData();
@@ -134,6 +140,7 @@
                 ,orderNoList : order
                 ,leaderYnList : leader
                 ,groupNo : groupNo == null ? 0 : groupNo
+                ,recDate : $("#startDate").val()
             };
 
             console.log(data);
@@ -153,14 +160,18 @@
         var templateScript = Handlebars.compile(template);
         var html = templateScript();
         $("#recommendClip").find('#tableBody').html(html);
+
+        datePickerSet();
     }
 
     function getRecommendClip(){
         var data = {
-            yearMonth : yearMonth
-            , weekNo : weekNo
+            recDate : recdate
             , groupNo : groupNo
         };
+
+        console.log(data);
+
         util.getAjaxData("selectReply", "/rest/clip/category/recommend/detail", data, fn_recommendDetai_success);
     }
 
@@ -179,6 +190,9 @@
 
         resetNo();
         btnSet();
+
+        $("#onedayDate").val(recdate.replace(/-/gi,"."));
+        datePickerSet(recdate);
     }
 
     function representClipAdd(data){
@@ -197,6 +211,8 @@
         $("#recommendClip").find('#tableBody tr:eq(1)').remove();
 
         btnSet();
+
+        datePickerSet();
     }
 
     function recommendClipAdd(data){
@@ -217,6 +233,8 @@
 
             btnSet();
         }
+
+        datePickerSet();
     }
 
     function recommendList(){
@@ -321,6 +339,31 @@
 
     }
 
+    function datePickerSet(date){
+        $('#onedayDate').datepicker("onedayDate", new Date()).on('changeDate', function(dateText, inst){
+            setMonday();
+        });
+        setMonday(date);
+    }
+
+    function getMonday(str) {
+        var y = str.substr(0, 4);
+        var m = str.substr(5, 2);
+        var d = str.substr(8, 2);
+        d = new Date(y,m-1,d);
+        var day = d.getDay(),
+            diff = d.getDate() - day + (day == 0 ? -6:1);
+        return new Date(d.setDate(diff));
+    }
+    function setMonday(){
+        var monday = getMonday($("#onedayDate").val().replace(/-/gi,"."));       // 선택한 날의 월요일
+        var startDate = monday;
+        var endDate = new Date(Date.parse(monday) + 6 * 1000 * 60 * 60 * 24);
+        $("#startDate").val(startDate.getFullYear() + "." + common.lpad(startDate.getMonth() + 1,2,"0") + "." + common.lpad(startDate.getDate(),2,"0"));
+        $("#endDate").val(endDate.getFullYear() + "." + common.lpad(endDate.getMonth() + 1,2,"0") + "." + common.lpad(endDate.getDate(),2,"0"));
+
+    }
+
 </script>
 
 <script id="tmp_recommendClipFrm" type="text/x-handlebars-template">
@@ -343,8 +386,15 @@
             </td>
             <th>주차</th>
             <td>
-                <div class="col-md-5 no-padding"><input type="text" class="form-control" id="txt_yearMonth"  placeholder="년월 ex) 202012" value="{{yearMonth}}"></div>
-                <div class="col-md-5 no-padding"><input type="text" class="form-control" id="txt_weekly" placeholder="주차 ex) 2" value="{{weekNo}}"></div>
+                <div class="input-group date" id="oneDayDatePicker">
+                    <label for="onedayDate" class="input-group-addon">
+                        <span><i class="fa fa-calendar" id="onedayDateBtn"></i></span>
+                    </label>
+                    <input type="text" class="form-control" id="onedayDate" name="onedayDate">
+                </div>
+                <%--<input id="onedayDate" type="text" class="form-control" style="width: 196px;"/>--%>
+                <%--<div class="col-md-5 no-padding"><input type="text" class="form-control" id="txt_yearMonth"  placeholder="년월 ex) 202012" value="{{yearMonth}}"></div>--%>
+                <%--<div class="col-md-5 no-padding"><input type="text" class="form-control" id="txt_weekly" placeholder="주차 ex) 2" value="{{weekNo}}"></div>--%>
             </td>
             <th>추천주제</th>
             <td><input type="text" class="form-control" id="txt_weeklyTitle" value="{{titleMsg}}"></td>

@@ -32,6 +32,7 @@ public class P_ClipRecommendDetailOutPut {
     private String thumbUrl;
     private String viewCnt;
     private String groupNo;
+    private String recDate;
 
 
     //list

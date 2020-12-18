@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 @Slf4j
 @Service
@@ -48,6 +49,22 @@ public class Cli_ClipCategoryService {
     public String callClipRecommendList(P_ClipRecommend pClipRecommend){
         ProcedureVo procedureVo = new ProcedureVo(pClipRecommend);
         ArrayList<P_ClipRecommendListOutPut> list = cli_ClipCategoryDao.callClipRecommendList(procedureVo);
+
+        for(int i=0;i<list.size();i++){
+
+            Calendar calendar = Calendar.getInstance();
+            String date = list.get(i).getRec_date();
+            String[] dates = date.split("-");
+            int year = Integer.parseInt(dates[0]);
+            int month = Integer.parseInt(dates[1]);
+            int day = Integer.parseInt(dates[2]);
+            calendar.setFirstDayOfWeek(Calendar.MONDAY);
+            calendar.setMinimalDaysInFirstWeek(7);
+            calendar.set(year, month - 1, day);
+
+            list.get(i).setWeek_no(Integer.toString(calendar.get(Calendar.WEEK_OF_MONTH)));
+
+        }
 
         String result;
         if(list.size() > 0) {
@@ -94,14 +111,12 @@ public class Cli_ClipCategoryService {
      * 달대리 추천 클립 등록
      */
     public String callClipRecommendDelete(P_ClipRecommend pClipRecommend){
-        String[] yearMonthList = pClipRecommend.getYearMonthList().split("@@");
-        String[] weekNoList = pClipRecommend.getWeekNoList().split("@@");
+        String[] redDateList = pClipRecommend.getRedDateList().split("@@");
         String[] groupNoList = pClipRecommend.getGroupNoList().split("@@");
 
         boolean resultSw = false;
         for(int i=0;i<groupNoList.length;i++){
-            pClipRecommend.setYearMonth(yearMonthList[i]);
-            pClipRecommend.setWeekNo(Integer.parseInt(weekNoList[i]));
+            pClipRecommend.setRecDate(redDateList[i]);
             pClipRecommend.setGroupNo(Integer.parseInt(groupNoList[i]));
 
             ProcedureVo procedureVo = new ProcedureVo(pClipRecommend);

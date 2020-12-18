@@ -251,8 +251,7 @@
     </select>
     <!-- 달대리 추천 클립 대표 등록여부 체크-->
     <select id="getLeaderCheck" parameterType="com.dalbit.clip.vo.procedure.P_ClipRecommend" resultType="com.dalbit.clip.vo.procedure.P_ClipRecommendDetailOutPut">
-        SELECT `year_month` AS yearMonth
-              , week_no AS weekNo
+        SELECT rec_date AS recDate
               , group_no AS groupNo
               , view_yn AS viewYn
               , reg_date AS regDate

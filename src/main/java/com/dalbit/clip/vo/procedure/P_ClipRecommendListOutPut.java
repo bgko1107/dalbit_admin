@@ -35,6 +35,7 @@ public class P_ClipRecommendListOutPut{
     private String view_yn;
     private String count_reply;
     private String count_listener;
+    private String rec_date;
     private int group_no;
     private int type_open;
 

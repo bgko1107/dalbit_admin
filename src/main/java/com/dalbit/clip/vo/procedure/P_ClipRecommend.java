@@ -8,11 +8,10 @@ import lombok.Setter;
 @Setter
 public class P_ClipRecommend extends PagingVo {
 
-    private String yearMonth;
     private String searchText;
+    private String recDate;
     private int groupNo;
 
-    private int weekNo;
     private String titleMsg;
     private String descMsg;
     private String videoUrl;
@@ -24,8 +23,7 @@ public class P_ClipRecommend extends PagingVo {
 
 
     private String castNo;
-    private String yearMonthList;
-    private String weekNoList;
+    private String redDateList;
     private String groupNoList;
 
 }

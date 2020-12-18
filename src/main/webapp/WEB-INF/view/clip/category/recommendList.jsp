@@ -40,7 +40,7 @@
 
     function getRecommendList(){
         var data = {
-            yearMonth : $("#monthDate").val().replace(".","")
+            recDate : $("#startDate").val()
             ,searchText : $("#searchText").val()
         };
 
@@ -91,18 +91,15 @@
             return false;
         }
         if(confirm('선택한 달대리 추천 클립을 삭제 하시겠습니까?')) {
-            var yearMonth = "";
-            var weekno = "";
+            var recDate = "";
             var groupno = "";
             checked.each(function () {
-                yearMonth += $(this).parent().parent().find('._check').data('yearmonth') + "@@";
-                weekno += $(this).parent().parent().find('._check').data('weekno') + "@@";
+                recDate += $(this).parent().parent().find('._check').data('recdate') + "@@";
                 groupno += $(this).parent().parent().find('._check').data('groupno') + "@@";
             });
 
             var data = {
-                yearMonthList: yearMonth
-                , weekNoList: weekno
+                redDateList: recDate
                 , groupNoList: groupno
             };
 
@@ -120,7 +117,9 @@
 
     // 달대립 추천 클립 상세 정보
     $(document).on('click', '._openRecommendDetail', function() {
-        location.href = "/clip/category/recommendClip?yearMonth="+$(this).data('yearmonth')+"&weekNo=" + $(this).data('weekno')+"&groupNo=" + $(this).data('groupno');
+        console.log($(this).data('recdate'));
+        console.log($(this).data('groupno'));
+        location.href = "/clip/category/recommendClip?recdate="+encodeURIComponent($(this).data('recdate'))+"&groupNo=" + $(this).data('groupno');
     });
 
 </script>
@@ -130,10 +129,10 @@
     <tr>
         <td class="weeklyCheck">
             <span style="display: none">{{year_month}} {{week_no}} {{group_no}}</span>
-            <input type="checkbox" class="form-control _check" data-yearmonth="{{year_month}}" data-weekno="{{week_no}}" data-groupno="{{group_no}}"/>
+            <input type="checkbox" class="form-control _check" data-recdate="{{rec_date}}" data-weekno="{{week_no}}" data-groupno="{{group_no}}"/>
         </td>
         <td class="weekly">
-            <a href="javascript://" class="_openRecommendDetail" data-yearmonth="{{year_month}}" data-weekno="{{week_no}}" data-groupno="{{group_no}}">{{year_month}} - {{week_no}} 주차</a>
+            <a href="javascript://" class="_openRecommendDetail" data-recdate="{{rec_date}}" data-weekno="{{week_no}}" data-groupno="{{group_no}}">{{rec_date}} / {{week_no}} 주차</a>
             <span style="display: none">{{group_no}}</span>
         </td>
         <td>
