@@ -52,6 +52,11 @@ public class P_MemberEditorVo extends BaseVo {
     private String use_contents;
     private String pointEditStroy;
 
+    private int dalSlct;
+    private int dalType;
+    private String useContents;
+    private String addContents;
+
 
     private P_MemberInfoOutputVo beforeMemberData;
 

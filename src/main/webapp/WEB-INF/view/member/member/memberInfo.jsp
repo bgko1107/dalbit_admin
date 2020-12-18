@@ -727,7 +727,7 @@
                 return;
             }
             if($("select[name='dalPlusMinus']").val() == 2){
-                if(memberInfo_responseDate.dal < $("#txt_dalAddCnt").val()){
+                if(memberInfo_responseDate.totalDal < $("#txt_dalAddCnt").val()){
                     alert("적용할 수 없는 수치입니다.");
                     return;
                 }

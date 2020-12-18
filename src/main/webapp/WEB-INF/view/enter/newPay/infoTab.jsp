@@ -27,7 +27,7 @@
                 <div class="tab-pane fade" id="try"><jsp:include page="try.jsp"/></div>            <!-- 결제 성공/시도 -->
                 <div class="tab-pane fade" id="cancel"><jsp:include page="cancel.jsp"/></div>            <!-- 결제 취소 -->
                 <div class="tab-pane fade" id="member"><jsp:include page="age.jsp"/></div>            <!-- 결제 회원별 -->
-                <div class="tab-pane fade" id="way"><jsp:include page="way.jsp"/></div>                  <!-- 결제 수단별 -->
+                <div class="tab-pane fade" id="way" style="width: 1800px"><jsp:include page="way.jsp"/></div>                  <!-- 결제 수단별 -->
                 <div class="tab-pane fade" id="product"><jsp:include page="code.jsp"/></div>          <!-- 결제 상품별 -->
             </div>
         </div>

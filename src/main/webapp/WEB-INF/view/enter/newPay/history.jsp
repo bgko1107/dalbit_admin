@@ -321,7 +321,8 @@
             <th>티머니</th>
             <th>캐시비</th>
             <th>페이코</th>
-            <th>카카오페이</th>
+            <th>카카오페이(카드)</th>
+            <th>카카오페이(머니)</th>
             <th style="color: green;font-weight: bold">총합</th>
         </tr>
         </thead>
@@ -340,6 +341,7 @@
             <td>{{addComma cashbee_cnt}}</td>
             <td>{{addComma payco_cnt}}</td>
             <td>{{addComma kakaopay_cnt}}</td>
+            <td>{{addComma kakaoMoney_cnt}}</td>
             <td><b>{{addComma total_cnt}}</b></td>
         </tr>
         <tr>
@@ -356,6 +358,7 @@
             <td>{{addComma cashbee_cmt}}</td>
             <td>{{addComma payco_cmt}}</td>
             <td>{{addComma kakaopay_cmt}}</td>
+            <td>{{addComma kakaoMoney_cmt}}</td>
             <td><b>{{addComma total_cmt}}</b></td>
         </tr>
         <tr  style="color: #66a449">
@@ -372,6 +375,7 @@
             <td>{{addComma cashbee_amt}}</td>
             <td>{{addComma payco_amt}}</td>
             <td>{{addComma kakaopay_amt}}</td>
+            <td>{{addComma kakaoMoney_amt}}</td>
             <td><b>{{addComma total_amt}}</b></td>
         </tr>
 
@@ -389,6 +393,7 @@
             <td>{{vatMinus cashbee_amt}}</td>
             <td>{{vatMinus payco_amt}}</td>
             <td>{{vatMinus kakaopay_amt}}</td>
+            <td>{{vatMinus kakaoMoney_amt}}</td>
             <td><b>{{vatMinus total_amt}}</b></td>
         </tr>
         <tr>
@@ -405,6 +410,7 @@
             <td>({{payRate cashbee_cnt total_cnt}}%)<br/><b>{{payRate cashbee_amt total_amt}}%</b></td>
             <td>({{payRate payco_cnt total_cnt}}%)<br/><b>{{payRate payco_amt total_amt}}%</b></td>
             <td>({{payRate kakaopay_cnt total_cnt}}%)<br/><b>{{payRate kakaopay_amt total_amt}}%</b></td>
+            <td>({{payRate kakaoMoney_cnt total_cnt}}%)<br/><b>{{payRate kakaoMoney_amt total_amt}}%</b></td>
             <td>({{payRate total_cnt total_cnt}}%)<br/><b>{{payRate total_amt total_amt}}%</b></td>
         </tr>
         </tbody>

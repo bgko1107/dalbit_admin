@@ -735,34 +735,49 @@ public class Mem_MemberService {
      */
     public String getMemberDalAdd(P_MemberEditorVo pMemberEditorVo){
         pMemberEditorVo.setOpName(MemberVo.getMyMemNo());
-        // 가지고 있는 dal
+
+
+//        // 가지고 있는 dal
+//        // 달 set
+//        pMemberEditorVo.setBeforDalCnt(beforDalCnt);
+//        pMemberEditorVo.setAfterDalCnt(afterDalCnt);
+//        // 달 추가
+//        mem_MemberDao.callMemberAddDal(pMemberEditorVo);
+//        // 달 추가 로그
+//        mem_MemberDao.callMemberAddDal_history(pMemberEditorVo);
+//        // 최근정보 수정일 변경
+//        mem_MemberDao.callMemberEdit_date(pMemberEditorVo);
+//        // 최근 정보 수정 자 입력
+
+        // addDalCnt 추가달
+        // dalSlct  0:dal, 1:money
+        // dalType  type
+        // useContents wellet 문구
+        // addContents profile_history 문구
+        pMemberEditorVo.setUseContents(pMemberEditorVo.getAddDalCnt() + " - " +  pMemberEditorVo.getPointEditStroy());
         int beforDalCnt = mem_MemberDao.callMemberBeforDelCnt(pMemberEditorVo);
         int afterDalCnt = beforDalCnt + pMemberEditorVo.getAddDalCnt();
-        // 달 set
-        pMemberEditorVo.setBeforDalCnt(beforDalCnt);
-        pMemberEditorVo.setAfterDalCnt(afterDalCnt);
-        pMemberEditorVo.setUse_contents(pMemberEditorVo.getAddDalCnt() + " - " +  pMemberEditorVo.getPointEditStroy());
-        // 달 추가
-        mem_MemberDao.callMemberAddDal(pMemberEditorVo);
-        // 달 추가 로그
-        mem_MemberDao.callMemberAddDal_history(pMemberEditorVo);
-        // 최근정보 수정일 변경
-        mem_MemberDao.callMemberEdit_date(pMemberEditorVo);
-        // 최근 정보 수정 자 입력
         pMemberEditorVo.setEditContents("달수 변경 : " + DalbitUtil.comma(beforDalCnt) + " >> " + DalbitUtil.comma(pMemberEditorVo.getAddDalCnt())
                                          + " 변경 >> " + DalbitUtil.comma(afterDalCnt) + " | " + pMemberEditorVo.getPointEditStroy());
-        pMemberEditorVo.setType(1);
-        mem_MemberDao.callMemberEditHistoryAdd(pMemberEditorVo);
-        //notice
+
+        // 소실금액 복구, 운영자 지급이 같은 코드를 사용. 소실 금액 복구시에만 money ( 차감시에는 dalSlct 사용 X )
+        if (pMemberEditorVo.getPointEditStroy().equals("소실금액 복구")) {
+            pMemberEditorVo.setDalSlct(1);
+        } else {
+            pMemberEditorVo.setDalSlct(0);
+        }
+
+        ProcedureVo procedureVo = new ProcedureVo(pMemberEditorVo);
+        mem_MemberDao.callMemberEditor(procedureVo);
+
+
+//        //notice
         P_MemberReportVo pMemberReportVo = new P_MemberReportVo();
         pMemberReportVo.setReported_mem_no(pMemberEditorVo.getMem_no());
-//        pMemberReportVo.setNotiContents(pMemberEditorVo.getAddDalCnt() + " - " + pMemberEditorVo.getPointEditStroy());
-//        pMemberReportVo.setNotimemo(pMemberEditorVo.getAddDalCnt() + " - " + pMemberEditorVo.getPointEditStroy());
         pMemberReportVo.setType_noti(32);
         pMemberReportVo.setNotiContents("운영자가 선물을 보냈습니다.");
         pMemberReportVo.setNotimemo("운영자가 선물을 보냈습니다.");
         mem_MemberDao.callMemberNotification_Add(pMemberReportVo);
-
 
         if(pMemberEditorVo.getAddDalCnt() > 0){
             try{    // PUSH 발송
