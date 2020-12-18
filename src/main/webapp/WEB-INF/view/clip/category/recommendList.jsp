@@ -146,7 +146,7 @@
             <a href="javascript://" class="_openClipInfoPop" data-clipNo="{{cast_no}}">{{title}}</a>
         </td>
         <td>{{video_url}}</td>
-        <td>{{desc_msg}}</td>
+        <td>{{{replaceEnter desc_msg}}}</td>
         <td style="width: 50px"><img class="thumbnail fullSize_background no-padding" src="{{renderProfileImage image_background}}" style='height:50px; width:50px;margin-bottom: 0px' /></td>
         <td>
             {{file_play}}<br />
