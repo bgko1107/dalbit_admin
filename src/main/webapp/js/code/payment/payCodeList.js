@@ -36,7 +36,8 @@ var payWay = [
     , new COMMON_CODE('payletter', 'cashbee', '캐시비')
     , new COMMON_CODE('payletter', 'tmoney', '티머니')
     , new COMMON_CODE('payletter', 'payco', '페이코')
-    , new COMMON_CODE('payletter', 'kakaopay', '카카오페이')
+    , new COMMON_CODE('payletter', 'kakaopay', '카카오페이(카드)')
+    , new COMMON_CODE('kakaoMoney', 'kakaoMoney', '카카오페이(머니)')
 ];
 
 var bankList = [
@@ -91,5 +92,6 @@ var payWay_new = [
     , new COMMON_CODE('payletter', 'tmoney', '티머니')
     , new COMMON_CODE('payletter', 'cashbee', '캐시비')
     , new COMMON_CODE('payletter', 'payco', '페이코')
-    , new COMMON_CODE('payletter', 'kakaopay', '카카오페이')
+    , new COMMON_CODE('payletter', 'kakaopay', '카카오페이(카드)')
+    , new COMMON_CODE('kakaoMoney', 'kakaoMoney', '카카오페이(머니)')
 ];
