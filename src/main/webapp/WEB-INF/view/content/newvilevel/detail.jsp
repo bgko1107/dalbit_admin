@@ -8,10 +8,12 @@
         </colgroup>
         <thead>
         <tr>
-            <th class="_bgColor" data-bgcolor="#c6d9f1"></th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">No</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">이벤트 구분</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">회원 번호</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">닉네임</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">인증 여부</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">휴대폰 번호</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">지급 달</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">지급 일시</th>
         </tr>
@@ -44,25 +46,17 @@
 
         console.log(data);
 
-        // var template = $('#tmp_detailTableBody').html();
-        // var templateScript = Handlebars.compile(template);
-        // var html = templateScript();
-        // $("#detailTableBody").html(html);
-
-        // detailRowspan("day");
-
         util.getAjaxData("list", "/rest/content/newvilevel/detail", data, fn_getDetailList_success);
     }
 
     function fn_getDetailList_success(data, response){
 
+        response.data.totalCnt = response.pagingVo.totalCnt;
         var template = $('#tmp_detailTableBody').html();
         var templateScript = Handlebars.compile(template);
         var context = response.data;
         var html = templateScript(context);
         $("#detailTableBody").html(html);
-
-        //detailRowspan("day");
 
 
         detailPagingInfo.totalCnt = response.pagingVo.totalCnt;
@@ -79,26 +73,21 @@
         }
 
         ui.paintColor();
+
+        levelSummary(response);
     }
 
-    function detailRowspan(className){
-        $("." + className).each(function() {
-            var rows = $("." + className + ":contains('" + $(this).text() + "')");
-            if (rows.length > 1) {
-                rows.eq(0).attr("rowspan", rows.length);
-                rows.not(":eq(0)").remove();
-            }
-        });
-    }
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_detailTableBody">
     {{#each this as |data|}}
     <tr>
-        <td class="_bgColor day" data-bgcolor="#c6d9f1">{{achieveDate}}</td>
+        <td class="_bgColor" data-bgcolor="#c6d9f1">{{indexDesc ../totalCnt rowNum}}</td>
         <td>{{level}} 레벨</td>
         <td><a href="javascript://" class="_openMemberPop" data-memNo="{{mem_no}}">{{mem_no}}</a></td>
         <td><a href="javascript://" class="_openMemberPop" data-memNo="{{mem_no}}">{{mem_nick}}</a></td>
+        <td>{{certificationYn}}</td>
+        <td>{{phone}}</td>
         <td>{{addComma dal}} 달</td>
         <td>{{achieve_date}}</td>
     </tr>
