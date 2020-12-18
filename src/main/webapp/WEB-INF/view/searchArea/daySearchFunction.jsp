@@ -65,14 +65,15 @@
     }
 
     function monthClick(id, paramYear, paramMonth, paramDay){
-        console.log("----------------- monthClick");
-        console.log(id);
-        console.log(paramYear);
-        console.log(paramMonth);
-        console.log(paramDay);
-
          $(".dayButton").empty();
-        year = paramYear;
+
+        if(slctType == 0) {
+            year = $("#div_dayButton").find("#search_year").val();
+        }else if(slctType == 1){
+            year = $("#div_monthButton").find("#search_year").val();
+        }else if(slctType == 2){
+            year = $("#div_yearButton").find("#search_year").val();
+        }
         month = paramMonth;
         if(paramMonth < 1 || paramMonth > 12){
             return false;
@@ -83,7 +84,7 @@
 
         $(".labelMonthButton" + month).addClass('active');
 
-        var lastDay = new Date(paramYear,paramMonth,-1).getDate() + 1;
+        var lastDay = new Date(year,paramMonth,-1).getDate() + 1;
         var dayButton = '<div class="btn-group" data-toggle="buttons" id="labelDayButton">';
         for(var i=1; i<lastDay+1;i++){
             dayButton = dayButton + '<label class="btn btn-xs mr5 btn-default btn-search labelDayButton' + common.lpad(i,2,"0") +'" style="border-radius: 4px;" data-day="' + i +'" onclick="dayBottonClick($(this).data())"> <input type="radio">' + i + '</label>';
@@ -91,20 +92,13 @@
         dayButton = dayButton + '</div>';
         $(".dayButton").append(dayButton);
         if(Number(paramDay) > lastDay) {
-            dayClick("", paramYear, paramMonth, lastDay);
+            dayClick("", year, paramMonth, lastDay);
         }else{
-            dayClick("", paramYear, paramMonth, paramDay);
+            dayClick("", year, paramMonth, paramDay);
         }
     }
 
     function dayClick(id, paramYear, paramMonth, paramDay){
-        console.log("----------------- dayClick");
-        console.log(id);
-        console.log(paramYear);
-        console.log(paramMonth);
-        console.log(paramDay);
-        console.log(day);
-
         var lastDay = new Date(paramYear,paramMonth,-1).getDate() + 1;
 
         for(var i=1; i<lastDay + 1;i++){
