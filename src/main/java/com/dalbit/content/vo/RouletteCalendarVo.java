@@ -31,4 +31,5 @@ public class RouletteCalendarVo extends PagingVo {
     private int itemNo6;
     private int itemNo7;
     private int itemNo8;
+    private int itemNo9;
 }

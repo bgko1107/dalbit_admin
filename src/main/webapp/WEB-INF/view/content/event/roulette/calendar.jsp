@@ -30,6 +30,7 @@
                                 <col width="5%">
                                 <col width="5%">
                                 <col width="5%">
+                                <col width="5%">
                             </colgroup>
                             <thead>
                                 <tr>
@@ -49,6 +50,7 @@
                                     <th>상품 C</th>
                                     <th>상품 D</th>
                                     <th>상품 E</th>
+                                    <th>100달</th>
                                 </tr>
                             </thead>
                             <tbody id="loginLiveTableBody">
@@ -69,6 +71,7 @@
                                     <td class="itemNo6">0건</td>
                                     <td class="itemNo7">0건</td>
                                     <td class="itemNo8">0건</td>
+                                    <td class="itemNo9">0건</td>
                                 </tr>
                                 <tr class="yesterday_summary">
                                     <th>전일</th>
@@ -87,6 +90,7 @@
                                     <td class="itemNo6">0건</td>
                                     <td class="itemNo7">0건</td>
                                     <td class="itemNo8">0건</td>
+                                    <td class="itemNo9">0건</td>
                                 </tr>
                                 <tr class="thisWeek_summary">
                                     <th>이번주</th>
@@ -105,6 +109,7 @@
                                     <td class="itemNo6">0건</td>
                                     <td class="itemNo7">0건</td>
                                     <td class="itemNo8">0건</td>
+                                    <td class="itemNo9">0건</td>
                                 </tr>
                                 <tr class="prevWeek_summary">
                                     <th>지난주</th>
@@ -123,6 +128,7 @@
                                     <td class="itemNo6">0건</td>
                                     <td class="itemNo7">0건</td>
                                     <td class="itemNo8">0건</td>
+                                    <td class="itemNo9">0건</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -215,6 +221,7 @@
         target.find('.itemNo6').html(common.addComma(data.itemNo6) + '건');
         target.find('.itemNo7').html(common.addComma(data.itemNo7) + '건');
         target.find('.itemNo8').html(common.addComma(data.itemNo8) + '건');
+        target.find('.itemNo9').html(common.addComma(data.itemNo9) + '건');
     }
 
     function getAttendanceWeek(startDate, endDate, index){
@@ -244,6 +251,7 @@
             , dal_0_Sum : 0
             , dalSum : 0
             , giftConSum : 0
+            , dal_100_Sum : 0
         }
 
         if(!common.isEmpty(response.data)){
@@ -257,6 +265,7 @@
             weekTotal.dal_0_Sum += response.data.itemNo1;
             weekTotal.dalSum += (response.data.itemNo2 + response.data.itemNo3 * 3);
             weekTotal.giftConSum += (response.data.itemNo4 + response.data.itemNo5 + response.data.itemNo6 + response.data.itemNo7 + response.data.itemNo8);
+            weekTotal.dal_100_Sum += (response.data.itemNo9);
         }
 
         var weekTarget = $('.fc-week:eq('+param.index+')').find('.fc-day-content:last');
@@ -299,6 +308,7 @@
 
                         info.dalSum = info.itemNo2 + info.itemNo3 * 3;
                         info.giftConSum = info.itemNo4 + info.itemNo5 + info.itemNo6 + info.itemNo7 + info.itemNo8;
+                        info.dal_100_Sum = info.itemNo9;
                         var context = info;
                         var html=templateScript(context);
                         dayTarget.append(html);
@@ -330,6 +340,7 @@
     <div>꽝 : {{addComma itemNo1}} 건</div>
     <div>달 : {{addComma dalSum}} 건</div>
     <div>기프티콘 : {{addComma giftConSum}} 개</div>
+    <div>100달 : {{addComma dal_100_Sum}} 건</div>
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_weekCalendarData">
@@ -343,4 +354,5 @@
     <div>꽝 : {{addComma dal_0_Sum}} 건</div>
     <div>달 : {{addComma dalSum}} 개</div>
     <div>기프티콘 : {{addComma giftConSum}} 개</div>
+    <div>100달 : {{addComma dal_100_Sum}} 건</div>
 </script>

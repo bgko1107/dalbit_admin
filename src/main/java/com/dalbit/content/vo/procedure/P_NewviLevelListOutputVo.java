@@ -15,5 +15,14 @@ public class P_NewviLevelListOutputVo extends PagingVo {
     private String mem_nick;
     private String achieve_date;
     private String inner;
+    private String certificationYn;
+    private String phone;
+
+    //summary
+    private int totalDal;
+    private int level5Cnt;
+    private int level10Cnt;
+    private int dal5Cnt;
+    private int dal10Cnt;
 
 }

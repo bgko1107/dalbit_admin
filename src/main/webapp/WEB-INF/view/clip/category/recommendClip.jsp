@@ -375,7 +375,7 @@
         </tr>
         <tr>
             <th>소개정보</th>
-            <td colspan="7"><textarea type="textarea" class="form-control" id="memo" cols="50" style="height: 100px;width: 100%">{{descMsg}}</textarea></td>
+            <td colspan="7"><textarea type="textarea" class="form-control" id="memo" cols="50" style="height: 100px;width: 100%">{{{replaceTextarea descMsg}}}</textarea></td>
             <th>등록자<br/>최종수정자</th>
             <td></td>
         </tr>

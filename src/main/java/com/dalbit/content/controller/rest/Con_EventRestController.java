@@ -303,14 +303,14 @@ public class Con_EventRestController {
         String result = con_EventService.getEventReplyList(pEventReplyListInputVo);
         return result;
     }
-//
-//
-//    /**
-//     * 이벤트 댓글 삭제
-//     */
-//    @PostMapping("/reply/delete")
-//    public String replyDelete(P_EventReplyDeleteInputVo pEventReplyDeleteInputVo) {
-//        String result = con_EventService.getEventReplyDelete(pEventReplyDeleteInputVo);
-//        return result;
-//    }
+
+
+    /**
+     * 이벤트 댓글 삭제
+     */
+    @PostMapping("/reply/delete")
+    public String replyDelete(P_EventReplyDeleteInputVo pEventReplyDeleteInputVo) {
+        String result = con_EventService.getEventReplyDelete(pEventReplyDeleteInputVo);
+        return result;
+    }
 }

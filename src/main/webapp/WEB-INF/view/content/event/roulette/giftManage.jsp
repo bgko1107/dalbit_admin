@@ -140,6 +140,8 @@
                 dalCnt = 1;
             }else if(index == 2){
                 dalCnt = 3;
+            }else if(index == 8){
+                dalCnt = 100;
             }
             editList += index + 1 + ',' + dalCnt + ',' + (giftRate * 100) + ',' + giftCnt;
             if(index != 8){
