@@ -54,6 +54,9 @@ public interface Men_RankDao {
     ArrayList<AwardsVoteVo> callAwardsVote(ProcedureVo procedureVo);
 
     @Transactional(readOnly = true)
+    ArrayList<AwardsVoteVo> callAwardsVoteMember(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
     ArrayList<AwardsVoteVo> callAwardsVoteDetail(ProcedureVo procedureVo);
 
     ProcedureVo callAwardsRegist(ProcedureVo procedureVo);

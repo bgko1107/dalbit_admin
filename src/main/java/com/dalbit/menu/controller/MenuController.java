@@ -54,6 +54,11 @@ public class MenuController {
         return "menu/rank/awardsVote";
     }
 
+    @RequestMapping("/rank/awardsVoteMember")
+    public String awardsVoteMember(){
+        return "menu/rank/awardsVoteMember";
+    }
+
     @RequestMapping("/rank/awardsDj")
     public String awardsDj(){
         return "menu/rank/awardsDj";

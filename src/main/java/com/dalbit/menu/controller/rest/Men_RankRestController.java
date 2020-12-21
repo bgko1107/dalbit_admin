@@ -80,6 +80,11 @@ public class Men_RankRestController {
         return menRankService.callAwardsVote(awardsVoteVo);
     }
 
+    @RequestMapping("awards/vote/member")
+    public String awardsVoteMember(AwardsVoteVo awardsVoteVo) {
+        return menRankService.callAwardsVoteMember(awardsVoteVo);
+    }
+
     @PostMapping("awards/vote/listExcel")
     public String awardsVoteListExcel(HttpServletRequest request, HttpServletResponse response, Model model, AwardsVoteVo awardsVoteVo) throws GlobalException {
         Model resultModel = menRankService.callAwardsVoteExcel(awardsVoteVo, model);

@@ -40,7 +40,31 @@ public class AwardsVoteVo extends PagingVo {
     private int fanRank;
     private int listenPoint;
 
+    private String memUserId;
+    private String voteDate;
+    private String dj1_memNo;
+    private String dj1_memNick;
+    private String dj2_memNo;
+    private String dj2_memNick;
+    private String dj3_memNo;
+    private String dj3_memNick;
+    private String mem_phone;
+
 
     private String lastUpdDate;
     private String ip;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

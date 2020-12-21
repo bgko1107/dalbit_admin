@@ -712,6 +712,7 @@ public enum Status {
 
     //어워즈 투표 현황 조회
     어워즈투표현황조회_성공("0", "awards.vote.list.success", "어워즈 투표 현황 조회 성공 시"),
+    투표참여자목록조회_성공("0", "awards.vote.member.list.success", "투표 참여자 목록 조회 성공 시"),
     어워즈투표수상조회_성공("0", "awards.list.success", "어워즈 수상 현황 조회 성공 시"),
 
 

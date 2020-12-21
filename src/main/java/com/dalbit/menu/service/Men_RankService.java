@@ -199,6 +199,23 @@ public class Men_RankService {
     }
 
     /**
+     * 어워즈 투표 참여자 목록
+     */
+    public String callAwardsVoteMember(AwardsVoteVo awardsVoteVo) {
+        ProcedureVo procedureVo = new ProcedureVo(awardsVoteVo);
+        ArrayList<AwardsVoteVo> outVoList = menRankDao.callAwardsVoteMember(procedureVo);
+
+        String result;
+        if(outVoList.size() > 0){
+            result = gsonUtil.toJson(new JsonOutputVo(Status.투표참여자목록조회_성공, outVoList, new PagingVo(procedureVo.getRet())));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+
+        return result;
+    }
+
+    /**
      * 어워즈 투표현황 엑셀 출력
      */
     public Model callAwardsVoteExcel(AwardsVoteVo awardsVoteVo, Model model) {
