@@ -14,6 +14,8 @@ public class AwardsVoteVo extends PagingVo {
     private String mem_no;
     private int slctTarget;
     private int slctType;
+    private String startDate;
+    private String endDate;
 
     /* output */
     private int rank;
