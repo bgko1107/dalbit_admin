@@ -81,7 +81,7 @@
 
     function init(){
         var data = {
-             pageStart : listPagingInfo.pageNo
+            pageNo : listPagingInfo.pageNo
             , pageCnt : listPagingInfo.pageCnt
             , startDate : $("#startDate").val()
             , endDate : $("#endDate").val()

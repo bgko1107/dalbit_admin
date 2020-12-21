@@ -9,6 +9,7 @@ import lombok.Setter;
 public class AwardsVoteVo extends PagingVo {
 
     /* input */
+    private int pageNo;
     private String searchText;
     private String selectYear;
     private String mem_no;
