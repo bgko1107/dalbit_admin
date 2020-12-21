@@ -43,13 +43,30 @@
         storyList();
     });
 
-    function storyList() {
+    function storyList(pagingNo, _tabId) {
+
+        if(!common.isEmpty(_tabId)){
+            tabId = _tabId;
+        }
+
         $('#title').html('사연검색');
+        if(!common.isEmpty(pagingNo)){
+            StoryPagingInfo.pageNo = pagingNo;
+        }else{
+            StoryPagingInfo.pageNo = 1;
+        }
+
+        if(!common.isEmpty(memNo) && memNo != null){
+            txt_search = memNo;
+        }else{
+            txt_search = $('#txt_search').val();
+        }
+
 
         var data = {
             'pageStart': StoryPagingInfo.pageNo
             , 'pageCnt' : StoryPagingInfo.pageCnt
-            , 'txt_search' : $('#txt_search').val()
+            , 'txt_search' : txt_search
             // , 'searchType' : $('select[name="searchType"]').find('option:selected').val()
             , 'start_sel' : $("#startDate").val()
             , 'end_sel' : $("#endDate").val()

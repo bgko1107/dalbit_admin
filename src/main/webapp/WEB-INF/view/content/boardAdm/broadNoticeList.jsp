@@ -84,7 +84,11 @@
     });
 
     var memNo;
-    function broadNoticeList(pagingInfo) {
+    function broadNoticeList(pagingInfo, _tabId) {
+        if(!common.isEmpty(_tabId)){
+            tabId = _tabId;
+        }
+
         $('#title').html('회원/방송공지');
         if(!common.isEmpty(pagingInfo)){
             broadNoticePagingInfo.pageNo = pagingInfo;

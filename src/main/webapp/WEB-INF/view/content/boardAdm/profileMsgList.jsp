@@ -59,14 +59,24 @@
     });
 
     var memNo;
-    function profileMsgList() {
-        $('#title').html('회원/방송공지');
+    function profileMsgList(pagingNo, _tabId) {
+        if(!common.isEmpty(_tabId)){
+            tabId = _tabId;
+        }
+
+        $('#title').html('프로필 메시지');
+        if(!common.isEmpty(pagingNo)){
+            profilePagingInfo.pageNo = pagingNo;
+        }else{
+            profilePagingInfo.pageNo = 1;
+        }
 
         if(!common.isEmpty(memNo) && memNo != null){
             txt_search = memNo;
         }else{
             txt_search = $('#txt_search').val();
         }
+
         var data = {
             'pageStart': profilePagingInfo.pageNo
             , 'pageCnt' : profilePagingInfo.pageCnt

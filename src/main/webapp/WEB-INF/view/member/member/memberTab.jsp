@@ -56,15 +56,28 @@
             <div class="tab-pane fade" id="mystarDetail"><jsp:include page="../myStar/list.jsp"/></div>         <!-- 마이스타 -->
             <div class="tab-pane fade" id="notice"><!-- 회원게시관리 -->
                 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist">
-                    <li><a href="#noticeDetail" role="tab" data-toggle="tab" id="tab_noticeBroadcastDetail" onclick="tab_click(this.id);">방송공지</a></li>
-                    <li><a href="#noticeDetail" role="tab" data-toggle="tab" id="tab_noticeMemberDetail" onclick="tab_click(this.id);">회원공지</a></li>
-                    <li><a href="#fanboardDetail" role="tab" data-toggle="tab" id="tab_fanboardDetail" onclick="tab_click(this.id);">팬보드</a></li>
+                    <%--<li><a href="#fanboardDetail" role="tab" data-toggle="tab" id="tab_fanboardDetail" onclick="tab_click(this.id);">팬보드</a></li>--%>
+                    <li><a href="#storyList" role="tab" data-toggle="tab" id="tab_storyList" onclick="tab_click(this.id);">사연</a></li>
+                    <li><a href="#fanBoardList" role="tab" data-toggle="tab" id="tab_fanBoardList" onclick="tab_click(this.id);">팬보드</a></li>
+                    <li><a href="#fanBoardReply" role="tab" data-toggle="tab" id="tab_fanBoardReply" onclick="tab_click(this.id);">팬보드댓글</a></li>
+                    <li><a href="#noticeList" role="tab" data-toggle="tab" id="tab_noticeList" onclick="tab_click(this.id);">방송방공지</a></li>
+                    <li><a href="#broadNoticeList" role="tab" data-toggle="tab" id="tab_broadNoticeList" onclick="tab_click(this.id);">회원공지</a></li>
+                    <li><a href="#broadNoticeReply" role="tab" data-toggle="tab" id="tab_broadNoticeReply" onclick="tab_click(this.id);">회원공지댓글</a></li>
+                    <li><a href="#profileMsgList" role="tab" data-toggle="tab" id="tab_profileMsgList" onclick="tab_click(this.id);">프로필 메시지</a></li>
+                    <li><a href="#clipReply" role="tab" data-toggle="tab" id="tab_clipReply" onclick="tab_click(this.id);">클립댓글</a></li>
                     <li><a href="#banwordDetail" role="tab" data-toggle="tab" id="tab_banwordDetail" onclick="tab_click(this.id);">금지어</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane fade" id="noticeDetail"><jsp:include page="../../content/boardAdm/noticeList.jsp"/></div>         <!-- 회원/방송공지 -->
-                    <div class="tab-pane fade" id="fanboardDetail"><jsp:include page="../fanboard/list.jsp"/></div>       <!-- 팬보드 -->
-                    <div class="tab-pane fade" id="banwordDetail"><jsp:include page="../banword/list.jsp"/></div>         <!-- 금지어 -->
+                    <%--<div class="tab-pane fade" id="fanboardDetail"><jsp:include page="../fanboard/list.jsp"/></div> --%>
+                    <div class="tab-pane fade" id="storyList"><jsp:include page="../../content/boardAdm/storyList.jsp"/></div>                       <!-- 사연 -->
+                    <div class="tab-pane fade" id="fanBoardList"><jsp:include page="../../content/boardAdm/fanBoardList.jsp"/></div>                    <!-- 팬보드 -->
+                    <div class="tab-pane fade" id="fanBoardReply"><jsp:include page="../../content/boardAdm/fanBoardReply.jsp"/></div>               <!-- 팬보드댓글 -->
+                    <div class="tab-pane fade" id="noticeList"><jsp:include page="../../content/boardAdm/noticeList.jsp"/></div>       <!-- 방송방공지 -->
+                    <div class="tab-pane fade" id="broadNoticeList"><jsp:include page="../../content/boardAdm/broadNoticeList.jsp"/></div>     <!-- 회원공지 -->
+                    <div class="tab-pane fade" id="broadNoticeReply"><jsp:include page="../../content/boardAdm/broadNoticeReply.jsp"/></div>           <!-- 회원공지댓글 -->
+                    <div class="tab-pane fade" id="profileMsgList"><jsp:include page="../../content/boardAdm/profileMsgList.jsp"/></div>                  <!-- 프로필 메시지 -->
+                    <div class="tab-pane fade" id="clipReply"><jsp:include page="../../content/boardAdm/clipReply.jsp"/></div>                   <!-- 클립댓글 -->
+                    <div class="tab-pane fade" id="banwordDetail"><jsp:include page="../banword/list.jsp"/></div>                                 <!-- 금지어 -->
                 </div>
             </div>
             <div class="tab-pane fade" id="declaration"><!-- 신고내역 -->
@@ -152,13 +165,27 @@
         }else if(tmp == "tab_mystarDetail"){
             getHistory_mystarDetail(tmp);
         }else if(tmp == "tab_notice"){
-            $("#tab_noticeBroadcastDetail").click();
-        }else if(tmp == "tab_noticeBroadcastDetail"){
+            $("#tab_storyList").click();
+
+        //  회원 게시글 관리 -----------------------
+        }else if(tmp == "tab_storyList"){
+            storyList(null, tmp);
+        }else if(tmp == "tab_fanBoardList"){
+            fanBoardList(null, tmp);
+        }else if(tmp == "tab_fanBoardReply"){
+            fanBoardReply(null, tmp);
+        }else if(tmp == "tab_noticeList"){
             noticeList(null, tmp);
-            // getHistory_noticeDetail(tmp);
-        }else if(tmp == "tab_noticeMemberDetail"){
-            noticeList(null, tmp);
-            // getHistory_noticeDetail(tmp);
+        }else if(tmp == "tab_broadNoticeList"){
+            broadNoticeList(null, tmp);
+        }else if(tmp == "tab_broadNoticeReply"){
+            broadNoticeReply(null, tmp);
+        }else if(tmp == "tab_profileMsgList"){
+            profileMsgList(null, tmp);
+        }else if(tmp == "tab_clipReply"){
+            clipReplyList(null, tmp);
+         // 회원 게시글 관리 ------------------------
+
         }else if(tmp == "tab_fanboardDetail"){
             getHistory_fanbroadDetail(tmp);
         }else if(tmp == "tab_banwordDetail"){
@@ -200,6 +227,46 @@
         }else if(tmp == "tab_rouletteList"){
             getHistory_rouletteList(tmp);
         }
-
     }
+
+    function handlebarsPaging(targetId, pagingInfo) {
+
+        if(targetId == "notice_paginate_top" || targetId == "notice_paginate") {
+            noticePagingInfo = pagingInfo;
+            noticeList(pagingInfo.pageNo);
+
+        }else if(targetId == "story_paginate_top" || targetId == "story_paginate"){
+            StoryPagingInfo = pagingInfo;
+            storyList(pagingInfo.pageNo);
+
+        } else if(targetId == "fanBoard_paginate_top" || targetId == "fanBoard_paginate") {
+            fanBoardPagingInfo = pagingInfo;
+            fanBoardList(pagingInfo.pageNo);
+
+        }else if(targetId == "fanBoardReply_paginate_top" || targetId == "fanBoardReply_paginate") {
+            fanBoardReplyPagingInfo = pagingInfo;
+            fanBoardReply();
+
+        } else if(targetId == "list_info_paginate_top" || targetId == "list_info_paginate") {
+            shotListPagingInfo = pagingInfo;
+            profileMsgList(pagingInfo.pageNo);
+
+        } else if(targetId == "broadNotice_paginate_top" || targetId == "broadNotice_paginate") {
+            sbroadNoticePagingInfo = pagingInfo;
+            broadNoticeList(pagingInfo.pageNo);
+
+        } else if(targetId == "clipReply_paginate_top" || targetId == "clipReply_paginate"){
+            clipPagingInfo = pagingInfo;
+            clipReplyList();
+
+        }else if(targetId == "profile_paginate_top" || targetId == "profile_paginate"){
+            profilePagingInfo = pagingInfo;
+            profileMsgList();
+
+        }else if(targetId == "noticeReply_paginate_top" || targetId == "noticeReply_paginate"){
+            noticeReplyPagingInfo = pagingInfo;
+            broadNoticeReply(pagingInfo.pageNo);
+        }
+    }
+
 </script>
