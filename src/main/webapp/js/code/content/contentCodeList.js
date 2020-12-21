@@ -865,6 +865,11 @@ var full_moon_condition3_slctType_values = [
     , new COMMON_CODE('3', '3', 'listenYn')
 ]
 
+var full_moon_condition5_slctType = [
+    new COMMON_CODE(null, 'slctType', '구분')
+    , new COMMON_CODE('1', '1', '보름날 노출여부')
+]
+
 //보름달 문구관리
 var full_moon_text_alert_status = [
     new COMMON_CODE(null, 'status', '보름달 상태')

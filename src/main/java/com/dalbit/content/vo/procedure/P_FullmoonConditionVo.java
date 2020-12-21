@@ -36,4 +36,6 @@ public class P_FullmoonConditionVo extends BaseVo {
     private String listenerItemCnt;
     private String listenerItemType;
 
+    private String fullmoonYn;
+
 }
