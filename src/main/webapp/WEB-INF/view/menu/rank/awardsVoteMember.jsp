@@ -93,6 +93,9 @@
     function fn_succ_list(dst_id, response, params) {
         dalbitLog(response);
 
+        if(response.result == "success") {
+            response.data.totalCnt = response.pagingVo.totalCnt;
+        }
         var template = $('#tmp_list_info').html();
         var templateScript = Handlebars.compile(template);
         var context = response.data;
@@ -197,22 +200,22 @@
             <th>참여일시</th>
             <th>투표내역 1</th>
             <th>투표내역 2</th>
-            <th>투표내역 3/th>
+            <th>투표내역 3</th>
             <th>휴대폰 번호</th>
         </tr>
     </thead>
     <tbody id="listBody">
     {{#each this}}
         <tr {{#dalbit_if inner '==' 1}} class="bg-testMember" {{/dalbit_if}}>
-        <td>{{rowNum}}</td>
+        <td>{{indexDesc ../totalCnt rowNum}}</td>
         <td><a href="javascript://" class="_openMemberPop" data-memNo="{{memNo}}">{{memNo}}</a></td>
         <td>{{memUserId}}</td>
         <td>{{memNick}}</td>
         <td>{{{sexIcon memSex memBirthYear}}}</td>
         <td>{{voteDate}}</td>
         <td><a href="javascript://" class="_openMemberPop" data-memNo="{{dj1_memNo}}">{{dj1_memNo}}</a><br/>{{dj1_memNick}}</td>
-        <td><a href="javascript://" class="_openMemberPop" data-memNo="{{dj2_memNo}}">{{dj2_memNo}}</a><br/>{{dj1_memNick}}</td>
-        <td><a href="javascript://" class="_openMemberPop" data-memNo="{{dj3_memNo}}">{{dj3_memNo}}</a><br/>{{dj1_memNick}}</td>
+        <td><a href="javascript://" class="_openMemberPop" data-memNo="{{dj2_memNo}}">{{dj2_memNo}}</a><br/>{{dj2_memNick}}</td>
+        <td><a href="javascript://" class="_openMemberPop" data-memNo="{{dj3_memNo}}">{{dj3_memNo}}</a><br/>{{dj3_memNick}}</td>
         <td>{{mem_phone}}</td>
     </tr>
     {{else}}
