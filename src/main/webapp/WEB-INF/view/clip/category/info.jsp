@@ -91,6 +91,7 @@
         if(!common.isEmpty(tabMove)){
             if(tabMove == 3){
                 $('.nav-tabs li:eq(3) a').tab('show');
+                $("#sp_prevGroup").show();
                 slctType = 1;
             }else{
                 slctType = 99;
