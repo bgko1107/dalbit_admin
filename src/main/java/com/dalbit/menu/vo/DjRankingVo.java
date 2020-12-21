@@ -17,6 +17,7 @@ public class DjRankingVo extends PagingVo {
     private String onedayDate;
     private int liveCnt;
     private String liveDate;
+    private int timeRound;
 
     /* output */
     private int djRank;

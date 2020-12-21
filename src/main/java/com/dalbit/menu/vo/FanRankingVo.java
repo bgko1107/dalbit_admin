@@ -16,6 +16,7 @@ public class FanRankingVo extends PagingVo {
     private String eDate;
     private int liveCnt;
     private String liveDate;
+    private int timeRound;
 
     /* output */
     private int fanRank;
