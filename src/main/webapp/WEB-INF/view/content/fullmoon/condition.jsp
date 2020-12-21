@@ -3,6 +3,44 @@
 <c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %>
 </c:set>
 
+
+<!-- 보름달 On/Off -->
+<form id="condition5">
+    <div class="col-lg-12 form-inline mt15 mb15">
+        <div class="widget widget-table">
+            <div class="widget-header">
+                <h3>보름달 노출여부</h3>
+            </div>
+            <div class="widget-content mt10">
+                <table id="fullmoonYn" class="table table-sorting table-hover table-bordered">
+                    <colgroup>
+                        <col width="10%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>값</th>
+                        <th>수정일</th>
+                        <th>등록자명</th>
+                    </tr>
+                    </thead>
+                    <tbody id="fullmoonYnCondition">
+                    </tbody>
+                </table>
+            </div>
+            <div class="widget-footer">
+                <span>
+                    <button class="btn btn-default full-right" type="button" id="bt_fullmoonYnEdit">수정하기</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- //보름달 On/Off -->
+
 <!-- 보름달 완성 조건(DJ) -->
 <form id="condition1">
     <div class="col-lg-6 form-inline mt15">
@@ -120,10 +158,24 @@
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
+        fullmoonYnCondition();
         djCondition();
         listenerCondition();
         prize();
     });
+
+    function fullmoonYnCondition(){
+        var data = {
+            slctType : 5
+        };
+        util.getAjaxData("fullmoonYnConditionList", "/rest/content/fullmoon/info/condition", data, function(dst_id, response) {
+            var template = $("#tmp_fullmoonYnCondition").html();
+            var templateScript = Handlebars.compile(template);
+            var context = response.data;
+            var html = templateScript(context);
+            $("#fullmoonYnCondition").html(html);
+        });
+    }
 
     function djCondition() {
         var data = {
@@ -159,8 +211,6 @@
             var context = response.data;
             var html = templateScript(context);
             $("#prize").html(html);
-
-            console.log(response.data);
         });
     }
 
@@ -262,6 +312,16 @@
         }
     });
 
+    $(document).on('click', '#bt_fullmoonYnEdit', function(){
+        if(confirm("보름달 노출 여부를 수정하시겠습니까?")){
+            var data = {
+                slctType : 5
+                , fullmoonYn : $("#condition5 #detail_fullmoonYn").prop('checked') ? 1 : 0
+            }
+            conditionEdit('condition5', data);
+        }
+    });
+
     function conditionEdit(dist_id, data){
         util.getAjaxData(dist_id, "/rest/content/fullmoon/info/conditionEdit", data, function(dst_id, response) {
             alert(response.message);
@@ -313,6 +373,19 @@
                 {{else}}
                     {{{getOnOffSwitch ../minValue 'listenYn'}}}
                 {{/equal}}
+            </td>
+            <td>{{moment editDate 'YYYY-MM-DD HH:mm:ss'}}</td>
+            <td>{{opName}}</td>
+        </tr>
+    {{/each}}
+</script>
+
+<script id="tmp_fullmoonYnCondition" type="text/x-handlebars-template">
+    {{#each this}}
+        <tr>
+            <td>{{{getCommonCodeLabel slctType 'full_moon_condition5_slctType'}}}</td>
+            <td>
+                {{{getOnOffSwitch minValue 'fullmoonYn'}}}
             </td>
             <td>{{moment editDate 'YYYY-MM-DD HH:mm:ss'}}</td>
             <td>{{opName}}</td>
