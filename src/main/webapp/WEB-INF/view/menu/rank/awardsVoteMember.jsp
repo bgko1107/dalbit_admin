@@ -25,7 +25,7 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
-                                    <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." style="display: none"></label>
+                                    <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." ></label>
 
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                     <a href="javascript://" class="_prevSearch">[이전]</a>
@@ -83,7 +83,8 @@
         var data = {
              pageStart : listPagingInfo.pageNo
             , pageCnt : listPagingInfo.pageCnt
-            , selectYear : $("#startDate").val().substr(0,4)
+            , startDate : $("#startDate").val()
+            , endDate : $("#endDate").val()
             , searchText : $("#searchText").val()
         };
         util.getAjaxData("addDjPoint", "/rest/menu/rank/awards/vote/member", data, fn_succ_list);
