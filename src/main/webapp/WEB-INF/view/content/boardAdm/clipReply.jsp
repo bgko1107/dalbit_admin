@@ -70,13 +70,26 @@
     });
 
     var memNo;
-    function clipReplyList() {
+    function clipReplyList(pagingInfo, _tabId) {
+
+        if(!common.isEmpty(_tabId)){
+            tabId = _tabId;
+        }
+
+        $('#title').html('클립댓글');
+        if(!common.isEmpty(pagingInfo)){
+            clipPagingInfo.pageNo = pagingInfo;
+        }else{
+            clipPagingInfo.pageNo = 1;
+        }
 
         if(!common.isEmpty(memNo) && memNo != null){
             txt_search = memNo;
         }else{
             txt_search = $('#txt_search').val();
         }
+
+
         var data = {
             'pageStart': clipPagingInfo.pageNo
             , 'pageCnt' : clipPagingInfo.pageCnt

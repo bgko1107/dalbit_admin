@@ -46,18 +46,29 @@
         // $("#searchType_boardReply").html(util.getCommonCodeSelect(-1, searchType_board, "N","searchType_boardReply"));
     });
 
-    function broadNoticeReply(pagingInfo) {
-        $('#title').html('회원/방송공지');
-        if(!common.isEmpty(pagingInfo)){
-            noticeReplyPagingInfo.pageNo = pagingInfo;
+    function broadNoticeReply(pagingNo, _tabId) {
+        if(!common.isEmpty(_tabId)){
+            tabId = _tabId;
+        }
+
+        $('#title').html('회원공지 댓글');
+        if(!common.isEmpty(pagingNo)){
+            noticeReplyPagingInfo.pageNo = pagingNo;
         }else{
             noticeReplyPagingInfo.pageNo = 1;
         }
 
+        if(!common.isEmpty(memNo) && memNo != null){
+            txt_search = memNo;
+        }else{
+            txt_search = $('#txt_search').val();
+        }
+
+
         var data = {
             'pageStart' : noticeReplyPagingInfo.pageNo
             , 'pageCnt' : noticeReplyPagingInfo.pageCnt
-            , 'txt_search' : $('#txt_search').val()
+            , 'txt_search' : txt_search
             , 'start_sel' : $("#startDate").val()
             , 'end_sel' : $("#endDate").val()
             , 'searchType' : 0

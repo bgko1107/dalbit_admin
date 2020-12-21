@@ -146,10 +146,6 @@
         noticeList();
     }
 
-    function handlebarsPaging(targetId, pagingInfo){
-        noticeList(pagingInfo.pageNo);
-    }
-
 </script>
 
 <script id="tmp_noticeTable" type="text/x-handlebars-template">

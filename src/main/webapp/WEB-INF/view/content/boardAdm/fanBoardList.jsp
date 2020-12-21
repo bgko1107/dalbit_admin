@@ -82,13 +82,28 @@
         // $("#searchType_board").html(util.getCommonCodeSelect(-1, searchType_board));
     });
 
-    function fanBoardList() {
+    function fanBoardList(pagingNo, _tabId) {
+        if(!common.isEmpty(_tabId)){
+            tabId = _tabId;
+        }
+
         $('#title').html('팬보드검색');
+        if(!common.isEmpty(pagingNo)){
+            fanBoardPagingInfo.pageNo = pagingNo;
+        }else{
+            fanBoardPagingInfo.pageNo = 1;
+        }
+
+        if(!common.isEmpty(memNo) && memNo != null){
+            txt_search = memNo;
+        }else{
+            txt_search = $('#txt_search').val();
+        }
 
         var data = {
             'pageStart' : fanBoardPagingInfo.pageNo
             , 'pageCnt' : fanBoardPagingInfo.pageCnt
-            , 'txt_search' : $('#txt_search').val()
+            , 'txt_search' : txt_search
             , 'start_sel' : $("#startDate").val()
             , 'end_sel' : $("#endDate").val()
             , 'searchType' : 0
