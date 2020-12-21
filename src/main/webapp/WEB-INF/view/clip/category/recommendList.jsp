@@ -153,7 +153,7 @@
         </td>
         <td>
             {{mem_nick}}<br/>
-            <a href="javascript://" class="_openMemberPop" data-memno="{{memNo}}">{{mem_no}}</a>
+            <a href="javascript://" class="_openMemberPop" data-memno="{{mem_no}}">{{mem_no}}</a>
         </td>
         <td>{{{sexIcon mem_sex mem_birth_year}}}</td>
         <td>
