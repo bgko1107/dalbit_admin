@@ -88,7 +88,7 @@
         <td>{{level}} 레벨</td>
         <td><a href="javascript://" class="_openMemberPop" data-memNo="{{mem_no}}">{{mem_no}}</a></td>
         <td><a href="javascript://" class="_openMemberPop" data-memNo="{{mem_no}}">{{mem_nick}}</a></td>
-        <td>{{{sexIcon mem_sex mem_bitrh_year}}}
+        <td>{{{sexIcon mem_sex mem_birth_year}}}
         <td>{{certificationYn}}</td>
         <td>{{phone}}</td>
         <td>{{addComma totalPay}}</td>
