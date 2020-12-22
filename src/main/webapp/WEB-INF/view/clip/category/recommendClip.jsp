@@ -463,8 +463,8 @@
                 </div>
                 <input type="button" class="pull-right btn-default btn-xs" value="미리보기" onclick="previewPopup('fbook');">
             </td>
-            <th rowspan="3">등록자<br/>최종수정자</th>
-            <td rowspan="3"></td>
+            <th rowspan="3">등록자</th>
+            <td rowspan="3">{{opName}}</td>
         </tr>
         <tr>
             <th>인스타그램</th>
