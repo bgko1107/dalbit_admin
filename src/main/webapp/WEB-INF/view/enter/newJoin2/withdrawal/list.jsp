@@ -70,9 +70,6 @@
             data.withdrawalDateSort = _withdrawalDateSort;
             data.serviceDateSort = _serviceDateSort;
         };
-        console.log("------------------------------- 1");
-        console.log(_withdrawalDateSort);
-        console.log(_serviceDateSort);
         dtList_info2 = new DalbitDataTable($("#tb_withdrawalList"), dtList_info_data2, MemberDataTableSource.withdrawalList);
         dtList_info2.useCheckBox(false);
         dtList_info2.useIndex(true);

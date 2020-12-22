@@ -204,6 +204,13 @@ var serviceDateSort = [
     ,new COMMON_CODE('1','1','내림차순')
 ];
 
+var dormancyType = [
+    new COMMON_CODE('','dormancyType','휴면/해제')
+    ,new COMMON_CODE('0','0','휴면/해제 전체')
+    ,new COMMON_CODE('1','1','휴면 회원')
+    ,new COMMON_CODE('2','2','휴면 해제 회원')
+];
+
 // ------------------------- table -----------------------------
 var mem_gift_summary = [
     new COMMON_CODE('', 'total_charge_dal', '누적 충전 보낸 달')

@@ -7,7 +7,7 @@
 %>
 
 <div id="wrapper">
-    <div id="page-wrapper" class="col-lg-8 no-padding">
+    <div id="page-wrapper" class="col-lg-6 no-padding">
         <div class="container-fluid">
             <form id="searchForm">
                 <div class="row form-inline">
@@ -65,12 +65,16 @@
         </div>
     </div>
 
-    <div class="col-lg-4" id="stateSummary">
+    <div class="col-lg-6" id="stateSummary">
         <span id="summary"></span>
     </div>
 
-    <div class="col-lg-4" id="joinListSummary" style="display: none">
+    <div class="col-lg-6" id="joinListSummary" style="display: none">
         <span id="joinList_summaryArea"></span>
+    </div>
+
+    <div class="col-lg-6" id="dormancySummary" style="display: none">
+        <span id="dormancyList_summaryArea"></span>
     </div>
 
     <!-- tab -->
@@ -105,18 +109,24 @@
     }
 
     function setSummary(response){
+        $("#stateSummary").show();
+        $("#joinListSummary").hide();
+        $("#dormancySummary").hide();
 
         response.totalInfo.accum_total_join_cnt = accum_total_join_cnt;
         response.totalInfo.accum_total_out_cnt = accum_total_out_cnt;
         response.totalInfo.accum_total_join_before_cnt = accum_total_join_before_cnt;
         response.totalInfo.accum_total_out_before_cnt = accum_total_out_before_cnt;
 
-        response.totalInfo.sum_inc_total_cnt = response.totalInfo.sum_total_join_cnt - response.totalInfo.accum_total_join_before_cnt;
 
         response.totalInfo.sum_total_out_cnt = response.totalInfo.sum_pc_total_out_cnt + response.totalInfo.sum_aos_total_out_cnt + response.totalInfo.sum_ios_total_out_cnt;
         response.totalInfo2.sum_total_out_cnt = response.totalInfo2.sum_pc_total_out_cnt + response.totalInfo2.sum_aos_total_out_cnt + response.totalInfo2.sum_ios_total_out_cnt;
 
-        response.totalInfo.sum_inc_out_total_cnt = response.totalInfo.sum_total_out_cnt - response.totalInfo.accum_total_out_before_cnt;
+        response.totalInfo.sum_inc_total_cnt = response.totalInfo.sum_total_join_cnt - response.totalInfo2.sum_total_join_cnt;
+        response.totalInfo.sum_inc_out_total_cnt = response.totalInfo.sum_total_out_cnt - response.totalInfo2.sum_total_out_cnt;
+
+        response.totalInfo.sum_inc_sleep_cnt = response.totalInfo.sum_sleep_cnt - response.totalInfo2.sum_sleep_cnt;
+        response.totalInfo.sum_inc_return_cnt = response.totalInfo.sum_return_cnt - response.totalInfo2.sum_return_cnt;
 
         var template = $('#tmp_summary').html();
         var templateScript = Handlebars.compile(template);
@@ -129,6 +139,9 @@
     }
 
     function withdrawalListSummary(json){
+        $("#stateSummary").hide();
+        $("#joinListSummary").show();
+        $("#dormancySummary").hide();
         var template = $("#joinList_tableSummary").html();
         var templateScript = Handlebars.compile(template);
         var data = {
@@ -141,21 +154,37 @@
         ui.tableHeightSet();
         ui.paintColor();
     }
-</script>
 
+    function dormancyListSummary(json){
+        console.log("dormancyListSummary ------------ ");
+        $("#stateSummary").hide();
+        $("#joinListSummary").hide();
+        $("#dormancySummary").show();
+        var template = $("#dormancyList_tableSummary").html();
+        var templateScript = Handlebars.compile(template);
+        var data = {
+            content : json.summary
+            , length : json.recordsTotal
+        }
+        var html = templateScript(data);
+        $("#dormancyList_tableSummary").html(html);
+
+        ui.tableHeightSet();
+        ui.paintColor();
+    }
+</script>
 
 <script type="text/x-handlebars-template" id="tmp_summary">
     <table class="table table-bordered _tableHeight no-margin" data-height="23px">
         <colgroup>
             <col width="8.3%"/><col width="8.3%"/><col width="8.3%"/><col width="8.3%"/><col width="8.3%"/>
-            <col width="8.3%"/><col width="8.3%"/><col width="10%"/><col width="10%"/>
+            <col width="8.3%"/><col width="8.3%"/><col width="10%"/><col width="10%"/><col width="10%"/>
         </colgroup>
 
         <tr>
             <th colspan="3" class="_bgColor" data-bgColor="#b3c7e7">성별</th>
             <th colspan="3" class="_bgColor" data-bgColor="#f8cbaa">플랫폼별</th>
-            <th colspan="2" class="_bgColor" data-bgColor="#bfbfbf">총합</th>
-            <th class="_bgColor" data-bgColor="#bfbfbf">비율</th>
+            <th colspan="4" class="_bgColor" data-bgColor="#bfbfbf">총합</th>
         </tr>
         <tr>
             <th class="_bgColor" data-bgColor="#dbe2f4">{{{sexIcon 'm'}}}</th>
@@ -165,25 +194,38 @@
             <th class="_bgColor" data-bgColor="#fde6d8">IOS</th>
             <th class="_bgColor" data-bgColor="#fde6d8">PC</th>
             <th class="_bgColor" data-bgColor="#ffe699">가입</th>
-            <th class="_bgColor" data-bgColor="#f2f2f2">탈퇴</th>
-            <th class="_bgColor" data-bgColor="#f2f2f2">가입 대비 탈퇴</th>
+            <th class="_bgColor" data-bgColor="#f2f2f2">탈퇴<br/>(자동)</th>
+            <th class="_bgColor" data-bgColor="#c5e0b4">휴면</th>
+            <th class="_bgColor" data-bgColor="#f2f2f2">해제</th>
         </tr>
         <tr>
-            <td>{{sum_total_out_mcnt}}<br/>({{average  sum_total_out_mcnt sum_total_out_cnt}}%)</td>
-            <td>{{sum_total_out_fcnt}}<br/>({{average  sum_total_out_fcnt sum_total_out_cnt}}%)</td>
-            <td>{{sum_total_out_ncnt}}<br/>({{average  sum_total_out_ncnt sum_total_out_cnt}}%)</td>
-            <td>{{sum_aos_total_out_cnt}}<br/>({{average  sum_aos_total_out_cnt sum_total_out_cnt}}%)</td>
-            <td>{{sum_ios_total_out_cnt}}<br/>({{average  sum_ios_total_out_cnt sum_total_out_cnt}}%)</td>
-            <td>{{sum_pc_total_out_cnt}}<br/>({{average sum_pc_total_out_cnt sum_total_out_cnt}}%)</td>
+            <td rowspan="2">{{sum_total_out_mcnt}}<br/>({{average  sum_total_out_mcnt sum_total_out_cnt}}%)</td>
+            <td rowspan="2">{{sum_total_out_fcnt}}<br/>({{average  sum_total_out_fcnt sum_total_out_cnt}}%)</td>
+            <td rowspan="2">{{sum_total_out_ncnt}}<br/>({{average  sum_total_out_ncnt sum_total_out_cnt}}%)</td>
+            <td rowspan="2">{{sum_aos_total_out_cnt}}<br/>({{average  sum_aos_total_out_cnt sum_total_out_cnt}}%)</td>
+            <td rowspan="2">{{sum_ios_total_out_cnt}}<br/>({{average  sum_ios_total_out_cnt sum_total_out_cnt}}%)</td>
+            <td rowspan="2">{{sum_pc_total_out_cnt}}<br/>({{average sum_pc_total_out_cnt sum_total_out_cnt}}%)</td>
             <td class="{{upAndDownClass sum_inc_total_cnt}}"><span style="color: #555555">{{sum_total_join_cnt}}</span> <br/> (<i class="fa {{upAndDownIcon sum_inc_total_cnt}}"></i> <span>{{addComma sum_inc_total_cnt}}</span>)</td>
-            <td class="{{upAndDownClass sum_inc_out_total_cnt}}"><span style="color: #555555">{{sum_total_out_cnt}}</span> <br/> (<i class="fa {{upAndDownIcon sum_inc_out_total_cnt}}"></i> <span>{{addComma sum_inc_out_total_cnt}}</span>)</td>
-            <td>{{average sum_total_out_cnt sum_total_join_cnt 0}}%</td>
+            <td class="{{upAndDownClass sum_inc_out_total_cnt}}">
+                <span style="color: #555555">{{sum_total_out_cnt}}</span> (<i class="fa {{upAndDownIcon sum_inc_out_total_cnt}}"></i> <span>{{addComma sum_inc_out_total_cnt}}</span>)<br/>
+                <span style="color: #555555">({{addComma sum_auto_out_cnt}})</span>
+            </td>
+            <td class="{{upAndDownClass sum_inc_sleep_cnt}}">
+                <span style="color: #555555">{{addComma sum_sleep_cnt}}</span> (<i class="fa {{upAndDownIcon sum_inc_sleep_cnt}}"></i> <span>{{addComma sum_inc_sleep_cnt}}</span>)
+            </td>
+            <td class="{{upAndDownClass sum_inc_return_cnt}}">
+                <span style="color: #555555">{{addComma sum_return_cnt}}</span> (<i class="fa {{upAndDownIcon sum_inc_return_cnt}}"></i> <span>{{addComma sum_inc_return_cnt}}</span>)
+            </td>
         </tr>
-
+        <tr>
+            <th class="_bgColor" data-bgColor="#ffe699">가입 대비<br/>탈퇴 비율</th>
+            <td>{{average sum_total_out_cnt sum_total_join_cnt}}%</td>
+            <th class="_bgColor" data-bgColor="#c5e0b4">휴변 대비<br/>해제 비율</th>
+            <td>{{average sum_return_cnt sum_sleep_cnt}}%</td>
+        </tr>
     </table>
+    <span class="_fontColor pull-right" data-fontColor="red">＊ 자동이란? 장기 미접속 회원에 대한 자동탈퇴 회원</span>
 </script>
-
-
 
 <script id="joinList_tableSummary" type="text/x-handlebars-template">
     <table class="table table-bordered _tableHeight no-margin" data-height="23px">
@@ -221,4 +263,51 @@
             <td>{{content.allCnt}}</td>
         </tr>
     </table>
+</script>
+
+
+<script type="text/x-handlebars-template" id="dormancyList_tableSummary">
+    <table class="table table-bordered _tableHeight no-margin" data-height="23px">
+        <colgroup>
+            <col width="8.3%"/><col width="8.3%"/><col width="8.3%"/><col width="8.3%"/><col width="8.3%"/>
+            <col width="8.3%"/><col width="8.3%"/><col width="10%"/><col width="10%"/><col width="10%"/>
+        </colgroup>
+
+        <tr>
+            <th colspan="3" class="_bgColor" data-bgColor="#b3c7e7">성별</th>
+            <th colspan="3" class="_bgColor" data-bgColor="#f8cbaa">플랫폼별</th>
+            <th colspan="4" class="_bgColor" data-bgColor="#bfbfbf">총합</th>
+        </tr>
+        <tr>
+            <th class="_bgColor" data-bgColor="#dbe2f4">{{{sexIcon 'm'}}}</th>
+            <th class="_bgColor" data-bgColor="#dbe2f4">{{{sexIcon 'f'}}}</th>
+            <th class="_bgColor" data-bgColor="#dbe2f4">{{{sexIcon 'n'}}}</th>
+            <th class="_bgColor" data-bgColor="#fde6d8">AOS</th>
+            <th class="_bgColor" data-bgColor="#fde6d8">IOS</th>
+            <th class="_bgColor" data-bgColor="#fde6d8">PC</th>
+            <th class="_bgColor" data-bgColor="#ffe699">가입</th>
+            <th class="_bgColor" data-bgColor="#f2f2f2">탈퇴<br/>(자동)</th>
+            <th class="_bgColor" data-bgColor="#c5e0b4">휴면</th>
+            <th class="_bgColor" data-bgColor="#f2f2f2">해제</th>
+        </tr>
+        <tr>
+            <td rowspan="2">{{sum_sleep_mcnt}}<br/>({{average  sum_sleep_mcnt sum_sleep_cnt}}%)</td>
+            <td rowspan="2">{{sum_sleep_fcnt}}<br/>({{average  sum_sleep_fcnt sum_sleep_cnt}}%)</td>
+            <td rowspan="2">{{sum_sleep_ncnt}}<br/>({{average  sum_sleep_ncnt sum_sleep_cnt}}%)</td>
+            <td rowspan="2">{{sum_aos_total_sleep_cnt}}<br/>({{average  sum_aos_total_sleep_cnt sum_sleep_cnt}}%)</td>
+            <td rowspan="2">{{sum_ios_total_sleep_cnt}}<br/>({{average  sum_ios_total_sleep_cnt sum_sleep_cnt}}%)</td>
+            <td rowspan="2">{{sum_pc_total_sleep_cnt}}<br/>({{average sum_pc_total_sleep_cnt sum_sleep_cnt}}%)</td>
+            <td>{{sum_total_join_cnt}}</td>
+            <td>{{sum_total_out_cnt}} ({{sum_auto_out_cnt}})</td>
+            <td>{{sum_sleep_cnt}}</td>
+            <td>{{sum_return_cnt}}</td>
+        </tr>
+        <tr>
+            <th class="_bgColor" data-bgColor="#ffe699">가입 대비<br/>탈퇴 비율</th>
+            <td>{{average sum_total_out_cnt sum_total_join_cnt}}%</td>
+            <th class="_bgColor" data-bgColor="#c5e0b4">휴변 대비<br/>해제 비율</th>
+            <td>{{average sum_return_cnt sum_sleep_cnt}}%</td>
+        </tr>
+    </table>
+    <span class="_fontColor pull-right" data-fontColor="red">＊ 자동이란? 장기 미접속 회원에 대한 자동탈퇴 회원</span>
 </script>

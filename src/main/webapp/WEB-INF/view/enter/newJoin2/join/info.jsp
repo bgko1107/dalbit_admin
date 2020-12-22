@@ -112,6 +112,8 @@
     }
 
     function setSummary(response){
+        $("#stateSummary").show();
+        $("#joinListSummary").hide();
         response.totalInfo.accum_total_join_cnt = accum_total_join_cnt;
         response.totalInfo.accum_total_out_cnt = accum_total_out_cnt;
         response.totalInfo.accum_total_join_before_cnt = accum_total_join_before_cnt;
@@ -133,6 +135,8 @@
     }
 
     function joinListSummary(json){
+        $("#stateSummary").hide();
+        $("#joinListSummary").show();
         var template = $("#joinList_tableSummary").html();
         var templateScript = Handlebars.compile(template);
         var data = {

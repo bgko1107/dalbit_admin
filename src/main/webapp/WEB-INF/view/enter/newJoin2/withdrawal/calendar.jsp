@@ -10,9 +10,9 @@
             <div id='lineArea'></div>
         </div>
         <div id="container-fluid">
-            <div class="widget-content col-md-10">
-                <div class="calendar col-md-10 no-padding"></div>
-                <div class="col-md-2 no-padding" id="totalTable"></div>
+            <div class="widget-content col-md-12">
+                <div class="calendar col-md-8 no-padding"></div>
+                <div class="col-md-3 no-padding" id="totalTable"></div>
 
             </div>
         </div>
@@ -31,6 +31,7 @@
     var accum_total_out_cnt = 0;
     var accum_total_join_before_cnt = 0;
     var accum_total_out_before_cnt = 0;
+    var accum_auto_out_Cnt = 0;
 
     $(function(){
         // getCalendar();
@@ -79,12 +80,15 @@
                         , slctTab : 2
                     },
                     success: function(response) {
+                        console.log("-----------------------------");
                         console.log(response);
+                        console.log("-----------------------------");
 
                         accum_total_join_cnt = 0;
                         accum_total_out_cnt = 0;
                         accum_total_join_before_cnt = 0;
                         accum_total_out_before_cnt = 0;
+                        accum_auto_out_Cnt = 0;
 
                         if(!common.isEmpty(response.data.detailList)){
                             response.data.detailList.forEach(function(detail, detailIndex) {
@@ -105,11 +109,18 @@
                                     detail.total_inc_out_cnt = detail.total_out_cnt - total_out_before_cnt;
                                     accum_total_out_cnt = accum_total_out_cnt + detail.total_out_cnt;
                                     detail.accum_total_out_cnt = accum_total_out_cnt;
+
+                                    accum_auto_out_Cnt = accum_auto_out_Cnt + detail.auto_out_Cnt;
+                                    detail.accum_auto_out_Cnt = accum_auto_out_Cnt;
                                 }else{
                                     detail.total_inc_out_cnt = detail.total_out_cnt - 0;
                                     accum_total_out_cnt = accum_total_out_cnt + detail.total_out_cnt;
                                     detail.accum_total_out_cnt = accum_total_out_cnt;
+
+                                    accum_auto_out_Cnt = accum_auto_out_Cnt + detail.auto_out_Cnt;
+                                    detail.accum_auto_out_Cnt = accum_auto_out_Cnt;
                                 }
+
                                 var the_date = detail.the_date;
                                 var dayTarget = $('.fc-day[data-date="' + the_date + '"]').find('.fc-day-content');
                                 var template = $('#tmp_calendarData').html();
@@ -120,9 +131,11 @@
                             });
                         }
 
-                        response.data.totalInfo.cnt = response.data.detailList.length;
+                        if(response.result == "success"){
+                            response.data.totalInfo.cnt = response.data.detailList.length;
+                            response.data.totalInfo.sum_total_inc_out_cnt = response.data.totalInfo.sum_total_out_cnt - response.data.totalInfo2.sum_total_out_cnt;
+                        }
 
-                        response.data.totalInfo.sum_total_inc_out_cnt = response.data.totalInfo.sum_total_out_cnt - response.data.totalInfo2.sum_total_out_cnt;
 
                         $("#totalTable").empty();
                         var template = $('#tmp_totalTable').html();
@@ -227,6 +240,8 @@
             , slctType: 2
             , slctTab: 2
         };
+
+        console.log(data);
         util.getAjaxData("month", "/rest/enter/newjoin2/info/state", data, fn_platform_success);
     }
 
@@ -342,8 +357,8 @@
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_calendarData">
-    <div class="font-bold" style="color: #ff5600;">탈퇴 총계 : {{addComma total_out_cnt}}</div>
-    <div class="font-bold" style="color: black;">탈퇴 누적 : {{addComma accum_total_out_cnt}}</div>
+    <div class="font-bold" style="color: #ff5600;">탈퇴 총계 : {{addComma total_out_cnt}}({{addComma auto_out_Cnt}})</div>
+    <div class="font-bold" style="color: black;">탈퇴 누적 : {{addComma accum_total_out_cnt}}({{addComma accum_auto_out_Cnt}})</div>
     <div class="{{upAndDownClass total_inc_out_cnt}}" style="color: black;">전월 대비 :
         <span {{#dalbit_if total_inc_out_cnt '>' 0 }} style="color: red" {{/dalbit_if}}
               {{#dalbit_if total_inc_out_cnt '<' 0 }} style="color: blue" {{/dalbit_if}} >
@@ -360,39 +375,51 @@
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_totalTable">
-    <table class="table table-bordered" style="width: 100%">
+    <table class="table table-bordered">
         <colgroup>
-            <col width="33%"/><col width="33%"/><col width="33%"/>
+            <col width="20%"/><col width="20%"/><col width="20%"/><col width="20%"/><col width="20%"/>
         </colgroup>
         <tbody>
             <tr>
                 <th>구분</th>
-                <th>가입수</th>
-                <th>탈퇴수</th>
+                <th>가입</th>
+                <th>탈퇴<br>(자동)</th>
+                <th>휴면</th>
+                <th>휴면<br/>해제</th>
             </tr>
             <tr class="font-bold" style="color: #ff5600">
                 <td>총합</td>
                 <td>{{addComma sum_total_join_cnt}}</td>
-                <td>{{addComma sum_total_out_cnt}}</td>
+                <td>{{addComma sum_total_out_cnt}}<br/>({{addComma sum_auto_out_cnt}})</td>
+                <td>{{addComma sum_sleep_cnt}}</td>
+                <td>{{addComma sum_return_cnt}}</td>
             </tr>
             <tr>
                 <td>{{{sexIcon 'n'}}}</td>
                 <td>{{addComma sum_total_join_ncnt}}</td>
-                <td>{{addComma sum_total_out_ncnt}}</td>
+                <td>{{addComma sum_total_out_ncnt}}<br/>({{addComma sum_auto_out_mcnt}})</td>
+                <td>{{addComma sum_sleep_mcnt}}</td>
+                <td>{{addComma sum_return_mcnt}}</td>
             </tr>
             <tr>
                 <td>{{{sexIcon 'm'}}}</td>
                 <td>{{addComma sum_total_join_mcnt}}</td>
-                <td>{{addComma sum_total_out_mcnt}}</td>
+                <td>{{addComma sum_total_out_mcnt}}<br/>({{addComma sum_auto_out_fcnt}})</td>
+                <td>{{addComma sum_sleep_fcnt}}</td>
+                <td>{{addComma sum_return_fcnt}}</td>
             </tr>
             <tr>
                 <td>{{{sexIcon 'f'}}}</td>
                 <td>{{addComma sum_total_join_fcnt}}</td>
-                <td>{{addComma sum_total_out_fcnt}}</td>
+                <td>{{addComma sum_total_out_fcnt}}<br/>({{addComma sum_auto_out_ncnt}})</td>
+                <td>{{addComma sum_sleep_ncnt}}</td>
+                <td>{{addComma sum_return_ncnt}}</td>
             </tr>
             <tr>
-                <td colspan="2">가입 대비 탈퇴 비율</td>
-                <td>{{average sum_total_out_cnt sum_total_join_cnt}}%</td>
+                <th colspan="2" class="_bgColor" data-bgColor="#ffe699">가입 대비<br/>탈퇴 비율</th>
+                <th class="_bgColor" data-bgColor="#fff2cc">{{average sum_total_out_cnt sum_total_join_cnt}}%</th>
+                <th class="_bgColor" data-bgColor="#a9d18e">휴면 대비<br/>해제 비율</th>
+                <th class="_bgColor" data-bgColor="#e2f0d9">{{average sum_return_cnt sum_sleep_cnt}}%</th>
             </tr>
         </tbody>
     </table>

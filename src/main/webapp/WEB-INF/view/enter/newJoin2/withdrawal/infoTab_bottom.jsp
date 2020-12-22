@@ -10,6 +10,7 @@
                     <li><a href="#time" role="tab" data-toggle="tab" id="tab_time">시간대별</a></li>
                     <li><a href="#month" role="tab" data-toggle="tab" id="tab_month">월간별</a></li>
                     <li><a href="#list" role="tab" data-toggle="tab" id="tab_list">탈퇴 회원내역</a></li>
+                    <li><a href="#dormancy" role="tab" data-toggle="tab" id="tab_dormancy">휴면/해제 회원내역</a></li>
                     <%--<li><a href="/member/join/list?toptabType=1" id="tab_memberJoin" title="회원검색으로 이동합니다.">가입 회원내역</a></li>--%>
                 </ul>
                 <div class="tab-content">
@@ -17,6 +18,7 @@
                     <div class="tab-pane fade" id="time"><jsp:include page="time.jsp"/></div>                       <!-- 실시간 -->
                     <div class="tab-pane fade" id="month"><jsp:include page="month.jsp"/></div>                     <!-- 월간별 -->
                     <div class="tab-pane fade" id="list"><jsp:include page="list.jsp"/></div>                       <!-- 가입 회원내역 -->
+                    <div class="tab-pane fade" id="dormancy"><jsp:include page="dormancyList.jsp"/></div>           <!-- 휴변/해제 회원내역 -->
                 </div>
             </div>
         </div>
@@ -44,7 +46,7 @@
             slctType = 0;
         }else if(tabId == 'tab_calendar' || tabId == 'tab_month') {
             slctType = 1;
-        }else if(tabId == 'tab_list') {
+        }else if(tabId == 'tab_list' || tabId == 'tab_dormancy') {
             $("#searchText").show();
             slctType = 3;
         }
@@ -54,23 +56,24 @@
         $("#searchFormRadio").hide();
         $("#searchCheck").hide();
         $("#txt_search").hide();
-        $("#stateSummary").show();
-        $("#joinListSummary").hide();
+        // $("#stateSummary").show();
+        // $("#joinListSummary").hide();
 
         $(".searchDate").html($("#onedayDate").val());
     });
 
     $("#bt_search").on('click', function(){
-        if(tabId != 'tab_list'){
-            if(tabId == 'tab_time'){
-                getTime();
-            }else if(tabId == 'tab_calendar') {
-                getCalendar();
-            }else if(tabId == 'tab_month') {
-                getMonth();
-            }
+        console.log(tabId);
+        if(tabId == 'tab_time'){
+            getTime();
+        }else if(tabId == 'tab_calendar') {
+            getCalendar();
+        }else if(tabId == 'tab_month') {
+            getMonth();
         }else if (tabId == 'tab_list'){
             getUserInfo();
+        }else if (tabId == 'tab_dormancy'){
+            getDormancy();
         }
     });
 </script>
