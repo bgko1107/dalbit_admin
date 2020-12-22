@@ -80,17 +80,33 @@
         dblist_chat_detail.createDataTable();
     }
 
+    $(document).on('keydown', '#chat_slct_value', function(event){
+        if(event.keyCode == 13){
+            $("#chat_bt_search").click();
+        }
+    });
+
     $(document).on('click', '#chat_bt_search', function(){
 
         var slct_type = $('#chat_slct_type option:selected').val();
         var slct_value = $("#chat_slct_value").val();
 
-        $('#chatRight_title').html((slct_type == 1 ? '회원번호' : '채팅 내용') + '[' + slct_value + "] 으로 검색한 채팅글")
+        var display = '';
+        if(slct_type == 1){
+            display += '회원번호'
+        }else if(slct_type == 2){
+            display += '채팅 내용'
+        }else if(slct_type == 3){
+            display += '닉네임'
+        }
+        display += '[' + slct_value + "] 으로 검색한 채팅글";
+
+        $('#chatRight_title').html(display);
 
         dtList_info_detail_data = function (data) {
             data.room_no = '${param.roomNo}';
             data.mem_no = slct_type == 1 ? slct_value : '0';
-            data.slct_value = slct_type == 2 ? slct_value : '';
+            data.slct_value = slct_type != 1 ? slct_value : '';
             data.slct_type = slct_type;
         }
         targetChatSearch();
@@ -124,8 +140,10 @@
                     <select class="form-control" id="chat_slct_type">
                         <option value="1">회원번호</option>
                         <option value="2">채팅내용</option>
+                        <option value="3">닉네임</option>
                     </select>
                     <input type="text" class="form-control" id="chat_slct_value" />
+                    <input type="text" style="display:none;" />
                     <button type="button" class="btn btn-success" id="chat_bt_search">검색</button>
                 </td>
             </tr>
