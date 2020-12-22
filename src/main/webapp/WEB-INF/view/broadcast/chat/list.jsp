@@ -11,12 +11,7 @@
     <form id="chatFrm"></form>
 </div>
 
-
-
-<script>
-    $(document).ready(function() {
-    });
-
+<script type="text/javascript">
     function getBroadHistory_chat(tmp) {     // 상세보기
         dalbitLog(detailData);
         var template = $('#tmp_chatFrm').html();
@@ -57,16 +52,26 @@
             $('#djOs').html(util.getCommonCodeLabel(json.summary.djOs, djOs));
         }
     }
+
+    var dtList_info_detail_data;
     function targetChat(index){
-        $("#chatRight").removeClass("hide");
         var metaData = dtList_info_detail.getDataRow(index);
-        $("#chatLeft").removeClass("col-md-12");
-        $("#chatLeft").addClass("col-md-6");
         $('#chatRight_title').html(util.memNoLink(metaData.nickname, metaData.mem_no)  + "님의 채팅글");
-        var dtList_info_detail_data = function (data) {
+        dtList_info_detail_data = function (data) {
             data.room_no = room_no;
             data.mem_no = metaData.mem_no;
+            data.slct_type = 1;
         }
+
+        targetChatSearch();
+    }
+
+    function targetChatSearch(){
+
+        $("#chatRight").removeClass("hide");
+        $("#chatLeft").removeClass("col-md-12");
+        $("#chatLeft").addClass("col-md-6");
+
         var dblist_chat_detail;
         dblist_chat_detail = new DalbitDataTable($("#list_target_chat"), dtList_info_detail_data, BroadcastDataTableSource.targetchat);
         dblist_chat_detail.useCheckBox(false);
@@ -75,13 +80,36 @@
         dblist_chat_detail.createDataTable();
     }
 
+    $(document).on('click', '#chat_bt_search', function(){
+
+        var slct_type = $('#chat_slct_type option:selected').val();
+        var slct_value = $("#chat_slct_value").val();
+
+        $('#chatRight_title').html((slct_type == 1 ? '회원번호' : '채팅 내용') + '[' + slct_value + "] 으로 검색한 채팅글")
+
+        dtList_info_detail_data = function (data) {
+            data.room_no = '${param.roomNo}';
+            data.mem_no = slct_type == 1 ? slct_value : '0';
+            data.slct_value = slct_type == 2 ? slct_value : '';
+            data.slct_type = slct_type;
+        }
+        targetChatSearch();
+    });
+
 </script>
 
 <script id="tmp_chatFrm" type="text/x-handlebars-template">
     <div class="col-md-12 no-padding">
         <table class="table table-bordered table-dalbit" style="margin-bottom: 0px;">
             <colgroup>
-                <col width="5%"/><col width="5%"/><col width="10%"/><col width="10%"/><col width="15%"/><col width="55%"/>
+                <col width="5%"/>
+                <col width="5%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="20%"/>
+                <col width="10%"/>
+                <col width="30%"/>
             </colgroup>
             <tbody>
             <tr>
@@ -91,6 +119,15 @@
                 <td id="djOs"></td>
                 <th>방송제목</th>
                 <td>{{title}}</td>
+                <th>검색</th>
+                <td>
+                    <select class="form-control" id="chat_slct_type">
+                        <option value="1">회원번호</option>
+                        <option value="2">채팅내용</option>
+                    </select>
+                    <input type="text" class="form-control" id="chat_slct_value" />
+                    <button type="button" class="btn btn-success" id="chat_bt_search">검색</button>
+                </td>
             </tr>
             </tbody>
         </table>
