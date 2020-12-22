@@ -67,7 +67,7 @@ public class Cli_ClipCategoryRestController {
     }
 
     /**
-     * 달대리 추천 클립 조회
+     * 주간 클립 테이블 조회
      */
     @PostMapping("/recommend/list")
     public String callClipRecommendList(P_ClipRecommend pClipRecommend) {
@@ -76,7 +76,7 @@ public class Cli_ClipCategoryRestController {
     }
 
     /**
-     * 달대리 추천 클립 등록
+     * 주간 클립 테이블 등록
      */
     @PostMapping("/recommend/edit")
     public String callClipRecommendEdit(P_ClipRecommend pClipRecommend) {
@@ -85,7 +85,7 @@ public class Cli_ClipCategoryRestController {
     }
 
     /**
-     * 달대리 추천 클립 상세 정보
+     * 주간 클립 테이블 상세 정보
      */
     @PostMapping("/recommend/detail")
     public String callClipRecommendDetail(P_ClipRecommend pClipRecommend) {
@@ -94,7 +94,7 @@ public class Cli_ClipCategoryRestController {
     }
 
     /**
-     * 달대리 추천 클립 삭제
+     * 주간 클립 테이블 삭제
      */
     @PostMapping("/recommend/delete")
     public String callClipRecommendDelete(P_ClipRecommend pClipRecommend) {

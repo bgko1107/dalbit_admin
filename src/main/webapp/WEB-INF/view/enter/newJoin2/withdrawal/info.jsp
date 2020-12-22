@@ -156,8 +156,6 @@
     }
 
     function dormancyListSummary(json){
-        console.log("dormancyListSummary ------------ ");
-        console.log(json);
         $("#stateSummary").hide();
         $("#joinListSummary").hide();
         $("#dormancySummary").show();

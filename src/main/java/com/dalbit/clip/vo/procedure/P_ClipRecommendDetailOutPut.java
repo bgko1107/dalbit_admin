@@ -28,11 +28,14 @@ public class P_ClipRecommendDetailOutPut {
     private String regDate;
     private String descMsg;
     private String opName;
-    private String videoUrl;
     private String thumbUrl;
     private String viewCnt;
     private String groupNo;
     private String recDate;
+    private String fbookUrl;
+    private String instaUrl;
+    private String ytubeUrl;
+    private String bannerUrl;
 
 
     //list

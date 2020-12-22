@@ -119,6 +119,8 @@
                 return false;
             }
 
+            var editYn = common.isEmpty($("#txt_idx").val()) ? 0 : 1;
+
             var castNo = "";
             var order = "";
             var leader = "";
@@ -133,18 +135,22 @@
                 ,weekNo : Number($("#txt_weekly").val())
                 ,titleMsg : $("#txt_weeklyTitle").val()
                 ,descMsg : $("#memo").val()
-                ,videoUrl : $("#txt_videoUrl").val()
+                ,bannerUrl : $("#txt_bannerUrl").val()
                 ,thumbUrl : $("#txt_thumbnailUrl").val()
                 ,viewYn : Number($("#detail_viewOn").is(":checked")? "1" : "0")
                 ,castNoList : castNo
                 ,orderNoList : order
                 ,leaderYnList : leader
                 ,groupNo : groupNo == null ? 0 : groupNo
-                ,recDate : $("#startDate").val()
+                ,recDate : $("#startDate").val()        // 변경 날짜
+                ,beforRecDate : common.isEmpty($("#txt_recDate").val()) ? $("#startDate").val() : $("#txt_recDate").val()
+                ,fbookUrl : $("#txt_fbookUrl").val()
+                ,instaUrl : $("#txt_instaUrl").val()
+                ,ytubeUrl : $("#txt_ytubeUrl").val()
+                ,editYn : editYn
             };
 
             console.log(data);
-
 
             util.getAjaxData("list", "/rest/clip/category/recommend/edit", data, fn_submit_success);
         });
@@ -192,6 +198,7 @@
         btnSet();
 
         $("#onedayDate").val(recdate.replace(/-/gi,"."));
+        $("#txt_recDate").val(recdate.replace(/-/gi,"."));
         datePickerSet(recdate);
     }
 
@@ -320,24 +327,41 @@
     function fn_submit_success(dst_id, response){
         console.log(response.result);
         if(response.result =="success"){
-            alert("달대리 추천 클립 등록이 완료되었습니다.");
+            if(common.isEmpty($("#txt_idx").val())){
+                alert("주간 클립 테이블 등록이 완료되었습니다.");
+            }else{
+                alert("주간 클립 테이블 수정이 완료되었습니다.");
+            }
             recommendList();
+
         }else{
-            alert("달대리 추천 클립 등록 실패하였습니다.");
+            alert("주간 클립 테이블 등록 실패하였습니다.");
         }
     }
 
-    function preview(){
-        $("#imageFullSize").html(util.imageFullSize("fullSize_background", $("#txt_thumbnailUrl").val()));
+    function preview(tmp){
+        $("#imageFullSize").html(util.imageFullSize("fullSize_background", tmp == "thumbUrl" ? $("#txt_thumbnailUrl").val() : $("#txt_bannerUrl").val()));
         $("#fullSize_background").modal('show');
     }
-
-    function videoSet(){
-        $("#test").html('<button class="btn-default btn-xs js-video-button" id="videoPreview" data-video-id=' + $("#txt_videoUrl").val() + ' data-url="">유튜브 팝업</button>').hide();
-        $(".js-video-button").modalVideo();
-        $('#videoPreview').click();
+    function previewPopup(tmp){
+        var tmp_url = "";
+        if(tmp == "fbook"){
+            tmp_url = $("#txt_fbookUrl").val();
+        }else if(tmp == "insta"){
+            tmp_url = $("#txt_instaUrl").val();
+        }else if(tmp == "ytube"){
+            tmp_url = $("#txt_ytubeUrl").val();
+        }
+        util.windowOpen(tmp_url);
 
     }
+
+    // function videoSet(){
+    //     $("#test").html('<button class="btn-default btn-xs js-video-button" id="videoPreview" data-video-id=' + $("#txt_videoUrl").val() + ' data-url="">유튜브 팝업</button>').hide();
+    //     $(".js-video-button").modalVideo();
+    //     $('#videoPreview').click();
+    //
+    // }
 
     function datePickerSet(date){
         $('#onedayDate').datepicker("onedayDate", new Date()).on('changeDate', function(dateText, inst){
@@ -375,19 +399,23 @@
     </div>
     <table class="table table-bordered table-dalbit border-black mb0" style="border-color: black">
         <colgroup>
-            <col width="5%"><col width="6%"><col width="5%"><col width="10%"><col width="5%">
-            <col width="19%"><col width="10%"><col width="15%"><col width="10%"><col width="10%">
+            <col width="5%"><col width="6%"><col width="5%"><col width="6%"><col width="5%">
+            <col width="10%"><col width="10%"><col width="23%"><col width="10%"><col width="10%">
         </colgroup>
         <tbody>
         <tr class="align-middle">
             <th>No</th>
-            <td>{{idx}}</td>
+            <td>
+                {{idx}}
+                <input type="text" class="hide" id="txt_idx" value="{{idx}}">
+            </td>
             <th rowspan="2">이미지</th>
             <td rowspan="2" style="width: 50px">
                 <img class="thumbnail fullSize_background no-padding" src="{{renderProfileImage imageBackground}}" style='height:68px; width:68px;margin-bottom: 0px' />
             </td>
             <th>주차</th>
             <td>
+                <input type="text" class="hide" id="txt_recDate">
                 <div class="input-group date" id="oneDayDatePicker">
                     <label for="onedayDate" class="input-group-addon">
                         <span><i class="fa fa-calendar" id="onedayDateBtn"></i></span>
@@ -426,26 +454,51 @@
             <td>{{regDate}}</td>
         </tr>
         <tr>
-            <th>소개정보</th>
-            <td colspan="7"><textarea type="textarea" class="form-control" id="memo" cols="50" style="height: 100px;width: 100%">{{{replaceTextarea descMsg}}}</textarea></td>
-            <th>등록자<br/>최종수정자</th>
-            <td></td>
+            <th rowspan="3">소개정보</th>
+            <td rowspan="3" colspan="5"><textarea type="textarea" class="form-control" id="memo" cols="50" style="height: 100px;width: 100%">{{{replaceTextarea descMsg}}}</textarea></td>
+            <th>페이스북</th>
+            <td>
+                <div class="col-md-10 no-padding">
+                    <input type="text" class="form-control" id="txt_fbookUrl" value="{{fbookUrl}}">
+                </div>
+                <input type="button" class="pull-right btn-default btn-xs" value="미리보기" onclick="previewPopup('fbook');">
+            </td>
+            <th rowspan="3">등록자<br/>최종수정자</th>
+            <td rowspan="3"></td>
         </tr>
         <tr>
-            <th>첨부영상</th>
+            <th>인스타그램</th>
+            <td>
+                <div class="col-md-10 no-padding">
+                    <input type="text" class="form-control" id="txt_instaUrl" value="{{instaUrl}}" >
+                </div>
+                <input type="button" class="pull-right btn-default btn-xs" value="미리보기" onclick="previewPopup('insta');">
+            </td>
+        </tr>
+        <tr>
+            <th>유튜브</th>
+            <td>
+                <div class="col-md-10 no-padding">
+                    <input type="text" class="form-control" id="txt_ytubeUrl" value="{{ytubeUrl}}">
+                </div>
+                <input type="button" class="pull-right btn-default btn-xs" value="미리보기" onclick="previewPopup('ytube');">
+            </td>
+        </tr>
+        <tr>
+            <th>썸네일</th>
             <td colspan="5">
                 <div class="col-md-10 no-padding">
-                    <input type="text" class="form-control" id="txt_videoUrl" value="{{videoUrl}}" placeholder="Youtube video ID 입력 ex) GVGUkA9Uv_w">
+                    <input type="text" class="form-control" id="txt_thumbnailUrl" value="{{thumbUrl}}">
                 </div>
-                <button class="btn-default btn-xs pull-right" onclick="videoSet();">미리보기</button>
-                <span id="test"></span>
+                <input type="button" class="pull-right btn-default btn-xs" value="미리보기" onclick="preview('thumbnail');">
+                <%--<button class="btn-default btn-xs" onclick="preview('thumbnail')">미리보기</button>--%>
             </td>
-            <th>썸네일</th>
+            <th>상세 이미지</th>
             <td colspan="3">
                 <div class="col-md-10 no-padding">
-                <input type="text" class="form-control" id="txt_thumbnailUrl" value="{{thumbUrl}}">
+                    <input type="text" class="form-control" id="txt_bannerUrl" value="{{bannerUrl}}">
                 </div>
-                <input type="button" class="pull-right btn-default btn-xs" value="미리보기" onclick="preview();">
+                <input type="button" class="pull-right btn-default btn-xs" value="미리보기" onclick="preview('bannerUrl');">
                 <%--<button class="btn-default btn-xs" onclick="preview('thumbnail')">미리보기</button>--%>
             </td>
         </tr>

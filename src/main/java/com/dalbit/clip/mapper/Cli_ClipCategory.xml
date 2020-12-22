@@ -233,23 +233,23 @@
     <select id="callClipRankList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.clip.vo.procedure.P_ClipRankListOutPut">
         call rd_admin.sp_admin_clip_ranking_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
-    <!-- 달대리 추천 클립 목록-->
+    <!-- 주간 클립 테이블 목록-->
     <select id="callClipRecommendList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.clip.vo.procedure.P_ClipRecommendListOutPut">
         call rd_admin.sp_admin_clip_recommend_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
-    <!-- 달대리 추천 클립 등록-->
+    <!-- 주간 클립 테이블 등록-->
     <select id="callClipRecommendEdit" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.common.vo.ProcedureVo">
         call rd_admin.sp_admin_clip_recommend_edit(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
-    <!-- 달대리 추천 클립 상세정보-->
+    <!-- 주간 클립 테이블 상세정보-->
     <select id="callClipRecommendDetail" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.clip.vo.procedure.P_ClipRecommendDetailOutPut">
         call rd_admin.sp_admin_clip_recommend_detail(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
-    <!-- 달대리 추천 클립 삭제-->
+    <!-- 주간 클립 테이블 삭제-->
     <select id="callClipRecommendDelete" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.common.vo.ProcedureVo">
         call rd_admin.sp_admin_clip_recommend_delete(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
-    <!-- 달대리 추천 클립 대표 등록여부 체크-->
+    <!-- 주간 클립 테이블 대표 등록여부 체크-->
     <select id="getLeaderCheck" parameterType="com.dalbit.clip.vo.procedure.P_ClipRecommend" resultType="com.dalbit.clip.vo.procedure.P_ClipRecommendDetailOutPut">
         SELECT rec_date AS recDate
               , group_no AS groupNo

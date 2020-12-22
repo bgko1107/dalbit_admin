@@ -16,7 +16,7 @@
             <th>추천 주간</th>
             <th>대표 클립</th>
             <th>주제<br/>제목</th>
-            <th>첨부영상</th>
+            <th>상세 이미지</th>
             <th>소개글</th>
             <th>이미지</th>
             <th>[듣기]<br/>녹음시간</th>
@@ -87,10 +87,10 @@
     function recommendDel(){
         var checked = $('#recommendListTableBody > tr > td > input[type=checkbox]:checked');
         if(checked.length == 0) {
-            alert('삭제할 달대리 추천 클립을 선택해주세요.');
+            alert('삭제할 주간 클립 테이블을 선택해주세요.');
             return false;
         }
-        if(confirm('선택한 달대리 추천 클립을 삭제 하시겠습니까?')) {
+        if(confirm('선택한 주간 클립 테이블을 삭제 하시겠습니까?')) {
             var recDate = "";
             var groupno = "";
             checked.each(function () {
@@ -109,7 +109,7 @@
 
     function fn_getRecommendDelete_success(dst_id, response){
         if(response.result == "success"){
-            alert("달대리 추천 클립 삭제 성공.");
+            alert("주간 클립 테이블 삭제 성공.");
         }
         $("#bt_search").click();
     }
@@ -144,7 +144,7 @@
             {{{getCommonCodeLabel subject_type 'clipSubjectType'}}}<br/>
             <a href="javascript://" class="_openClipInfoPop" data-clipNo="{{cast_no}}">{{title}}</a>
         </td>
-        <td>{{video_url}}</td>
+        <td style="width: 50px"><img class="thumbnail fullSize_background no-padding" src="{{bannerUrl}}" style='height:50px; width:50px;margin-bottom: 0px' /></td>
         <td>{{{replaceEnter desc_msg}}}</td>
         <td style="width: 50px"><img class="thumbnail fullSize_background no-padding" src="{{renderProfileImage image_background}}" style='height:50px; width:50px;margin-bottom: 0px' /></td>
         <td>

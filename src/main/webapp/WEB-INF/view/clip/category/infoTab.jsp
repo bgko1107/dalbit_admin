@@ -12,7 +12,7 @@
                         <li class="active"><a href="#clipList" role="tab" data-toggle="tab" id="tab_new">최신 클립</a></li>
                         <li><a href="#clipList" role="tab" data-toggle="tab" id="tab_hot">인기 클립</a></li>
                         <li><a href="#clipRank" role="tab" data-toggle="tab" id="tab_clipRank">클립 랭킹</a></li>
-                        <li><a href="#recommendList" role="tab" data-toggle="tab" id="tab_recommendList">달대리 추천 클립</a></li>
+                        <li><a href="#recommendList" role="tab" data-toggle="tab" id="tab_recommendList">주간 클립 테이블</a></li>
                         <%--<li><a href="#recommendClip" role="tab" data-toggle="tab" id="tab_recommendClip">추천 클립 등록관리</a></li>--%>
                         <li><a href="#category" role="tab" data-toggle="tab" id="tab_category">주제 관리</a></li>
                     </ul>

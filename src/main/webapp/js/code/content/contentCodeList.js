@@ -100,7 +100,7 @@ var push_slctPush2 = [
     // , new COMMON_CODE('43', '43', '랭킹 > FAN > 일간')
     // , new COMMON_CODE('44', '44', '랭킹 > FAN > 주간')
     , new COMMON_CODE('input', '50', '직접입력')
-    , new COMMON_CODE('input', '51', '달대리 추천 클립')
+    , new COMMON_CODE('input', '51', '주간 클립 테이블')
 ];
 
 var push_slctPush3 = [

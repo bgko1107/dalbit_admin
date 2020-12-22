@@ -38,6 +38,7 @@ public class P_ClipRecommendListOutPut{
     private String rec_date;
     private int group_no;
     private int type_open;
+    private String bannerUrl;
 
 }
 

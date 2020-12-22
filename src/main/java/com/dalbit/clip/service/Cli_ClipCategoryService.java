@@ -44,7 +44,7 @@ public class Cli_ClipCategoryService {
     }
 
     /**
-     * 달대리 추천클립 목록 조회
+     * 주간 클립 테이블 테이블 목록 조회
      */
     public String callClipRecommendList(P_ClipRecommend pClipRecommend){
         ProcedureVo procedureVo = new ProcedureVo(pClipRecommend);
@@ -76,7 +76,7 @@ public class Cli_ClipCategoryService {
     }
 
     /**
-     * 달대리 추천 클립 등록
+     * 주간 클립 테이블 등록
      */
     public String callClipRecommendEdit(P_ClipRecommend pClipRecommend){
         pClipRecommend.setOpName(MemberVo.getMyMemNo());
@@ -91,7 +91,7 @@ public class Cli_ClipCategoryService {
     }
 
     /**
-     * 달대리 추천클립 상세 정보 조회
+     * 주간 클립 테이블 상세 정보 조회
      */
     public String callClipRecommendDetail(P_ClipRecommend pClipRecommend){
         ProcedureVo procedureVo = new ProcedureVo(pClipRecommend);
@@ -108,7 +108,7 @@ public class Cli_ClipCategoryService {
     }
 
     /**
-     * 달대리 추천 클립 등록
+     * 주간 클립 테이블 등록
      */
     public String callClipRecommendDelete(P_ClipRecommend pClipRecommend){
         String[] redDateList = pClipRecommend.getRedDateList().split("@@");
@@ -134,7 +134,7 @@ public class Cli_ClipCategoryService {
     }
 
     /**
-     * 달대리 대표 클립 등록 여부 체크
+     * 주간 클립 테이블 등록 여부 체크
      */
     public String getLeaderCheck(P_ClipRecommend pClipRecommend){
         P_ClipRecommendDetailOutPut outVo = cli_ClipCategoryDao.getLeaderCheck(pClipRecommend);
