@@ -30,7 +30,12 @@
                             <tr>
                                 <td style="text-align: left">
                                     <label class="control-inline fancy-radio custom-color-green">
-                                        <input type="radio" name="rankType" value='1' checked="checked" />
+                                        <input type="radio" name="rankType" value='5' checked="checked" />
+                                        <span><i></i>타임</span>
+                                    </label>
+                                    <span id="timeRoundArea"></span>
+                                    <label class="control-inline fancy-radio custom-color-green">
+                                        <input type="radio" name="rankType" value='1'/>
                                         <span><i></i>일간</span>
                                     </label>
                                     <label class="control-inline fancy-radio custom-color-green">
@@ -119,6 +124,15 @@
 
     $(function(){
         $("#searchArea").html(util.getCommonCodeSelect(9999, searchType));
+        var Time = new Date();
+
+        if(Time.getHours() >= 0 && Time.getHours() < 10){
+            $("#timeRoundArea").html(util.getCommonCodeSelect(1, timeRound));
+        }else if(Time.getHours() >= 10 && Time.getHours() < 19){
+            $("#timeRoundArea").html(util.getCommonCodeSelect(2, timeRound));
+        }else if(Time.getHours() >= 19 && Number(Time.getHours() + Time.getMinutes() + Time.getSeconds()) < 235959){
+            $("#timeRoundArea").html(util.getCommonCodeSelect(3, timeRound));
+        }
 
         slctType = 0;
         dateType();
@@ -148,6 +162,7 @@
             , sDate : $("#startDate").val()
             , eDate : $("#endDate").val()
             , onedayDate : $("#onedayDate").val()
+            , timeRound : $("#timeRound").val()
         }
         util.getAjaxData(rank, "/rest/menu/rank/"+rank, data, fn_succ_list);
     }
@@ -183,7 +198,11 @@
     }
 
     $('input[name="rankType"]').on('change', function(){
-        if($('input:radio[name="rankType"]:checked').val() == 1){
+        $("#timeRound").hide();
+        if($('input:radio[name="rankType"]:checked').val() == 5) {
+            $("#timeRound").show();
+            slctType = 0;
+        }else if($('input:radio[name="rankType"]:checked').val() == 1){
             slctType = 0;
         }else if($('input:radio[name="rankType"]:checked').val() == 2){
             slctType = 4;
@@ -244,6 +263,9 @@
             init();
         }
     }
+     $('#timeRoundArea').on('change', function () {
+         $('#bt_search').click();
+     });
 
 </script>
 

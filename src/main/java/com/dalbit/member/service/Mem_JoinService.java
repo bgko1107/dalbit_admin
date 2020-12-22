@@ -3,13 +3,18 @@ package com.dalbit.member.service;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
+import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.excel.vo.ExcelVo;
 import com.dalbit.member.dao.Mem_JoinDao;
+import com.dalbit.member.vo.MemberVo;
+import com.dalbit.member.vo.procedure.P_DormancyInputVo;
+import com.dalbit.member.vo.procedure.P_DormancyOutputVo;
 import com.dalbit.member.vo.procedure.P_MemberJoinInputVo;
 import com.dalbit.member.vo.procedure.P_MemberJoinOutputVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +63,7 @@ public class Mem_JoinService {
 
         return result;
     }
+
 
     /**
      * 회원가입 엑셀
@@ -187,4 +193,33 @@ public class Mem_JoinService {
         return model;
     }
 
+    public String callDormancyList(P_DormancyInputVo pDormancyInputVo){
+        ProcedureVo procedureVo = new ProcedureVo(pDormancyInputVo);
+        ArrayList<P_DormancyOutputVo> list = mem_JoinDao.callDormancyList(procedureVo);
+        P_DormancyOutputVo summary = new Gson().fromJson(procedureVo.getExt(), P_DormancyOutputVo.class);
+
+        String result;
+        if(Integer.parseInt(procedureVo.getRet()) > 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.휴면계정조회_성공, list, new PagingVo(procedureVo.getRet()),summary));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+
+        return result;
+    }
+
+    public String callMemberReturn(P_DormancyInputVo pDormancyInputVo){
+        pDormancyInputVo.setOpName(MemberVo.getMyMemNo());
+        ProcedureVo procedureVo = new ProcedureVo(pDormancyInputVo);
+        mem_JoinDao.callMemberReturn(procedureVo);
+
+        String result;
+        if(Integer.parseInt(procedureVo.getRet()) == 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+
+        return result;
+    }
 }

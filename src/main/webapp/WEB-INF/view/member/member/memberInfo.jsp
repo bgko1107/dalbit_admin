@@ -1006,7 +1006,7 @@
         <tr>
             <th>회원상태</th>
             <td style="text-align: left">
-                {{{getCommonCodeLabel memState 'mem_state'}}}
+                <span {{#dalbit_if memState '==' 7}} style="color:blue" {{/dalbit_if}}>{{{getCommonCodeLabel memState 'mem_state'}}}</span>
             </td>
             <td colspan="4" style="text-align: center;">
                 <%--{{{block}}}--%>

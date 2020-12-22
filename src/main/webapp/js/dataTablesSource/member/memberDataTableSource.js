@@ -102,6 +102,40 @@ var MemberDataTableSource = {
         }
     },
 
+    'dormancyList': {
+        'url': '/rest/member/join/dormancyList'
+        , 'columns': [
+            {'title': '가입일시', 'data': 'memJoinDate', 'width':'100px'},
+            {'title': '마지막 접속일', 'data': 'lastLoginDate', 'width':'100px'},
+            {'title': '미접속 기간', 'data': 'notLoginDate', 'width':'100px', 'render': function (data, type, row, meta) {
+                    return common.timeStampDay(data);
+                }},
+            {'title': '휴면처리일', 'data': 'sleepStartDate', 'width':'100px'},
+            {'title': '가입OS', 'data': 'osType', 'width':'100px', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, os_type);
+                }},
+            {'title': '마지막접속 OS', 'data': 'lastOsType', 'width':'100px'},
+            {'title': '회원정보', 'data': 'mem_no', 'width':'100px', 'render': function (data, type, row, meta) {
+                    return util.memNoLink(data, data) + '<br/>' + row.memNick;
+                }},
+            {'title': '성별', 'data': 'memSex', 'width':'100px', 'render': function (data, type, row, meta) {
+                    return common.sexIcon(data,row.memBirthYear);
+                }},
+            {'title': 'IP', 'data': 'ip', 'width':'100px'},
+            {'title': '상태', 'data': 'endDate', 'width':'100px', 'render': function (data, type, row, meta) {
+                    if(!common.isEmpty(data)){
+                        return row.opName;
+                    }else{
+                        return '<a href="javascript://" data-memNo="' + row.mem_no + '" onclick="returnMember($(this).data())">휴면</a>';
+                    }
+                }},
+        ]
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
+    },
 
 
     'userInfo': {

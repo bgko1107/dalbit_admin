@@ -12,10 +12,11 @@ var mem_state = [
     new COMMON_CODE('', 'mem_state', '회원상태')
     , new COMMON_CODE('1', '1', '정상')
     , new COMMON_CODE('2', '2', '경고')
-    , new COMMON_CODE('2', '3', '정지')
+    , new COMMON_CODE('3', '3', '정지')
     , new COMMON_CODE('5', '5', '영구정지')
     , new COMMON_CODE('4', '4', '탈퇴')
-    , new COMMON_CODE('6', '6', '임시정지')
+    , new COMMON_CODE('6', '6', '휴면상태')
+    , new COMMON_CODE('7', '7', '자동탈퇴')
 ];
 
 var broadCast_summary = [
@@ -202,6 +203,13 @@ var serviceDateSort = [
     ,new COMMON_CODE('-1','-1','서비스 유지기간')
     ,new COMMON_CODE('0','0','오름차순')
     ,new COMMON_CODE('1','1','내림차순')
+];
+
+var dormancyType = [
+    new COMMON_CODE('','dormancyType','휴면/해제')
+    ,new COMMON_CODE('0','0','휴면/해제 전체')
+    ,new COMMON_CODE('1','1','휴면 회원')
+    ,new COMMON_CODE('2','2','휴면 해제 회원')
 ];
 
 // ------------------------- table -----------------------------

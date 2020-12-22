@@ -10,6 +10,13 @@ var searchType = [
 ];
 
 
+var timeRound = [
+    new COMMON_CODE(null, 'timeRound', '타임')
+    , new COMMON_CODE('1', '1', '0시~10시')
+    , new COMMON_CODE('2', '2', '10시~19시')
+    , new COMMON_CODE('3', '3', '19시~00시')
+];
+
 /** =------ special ---------- */
 var special_state = [
     new COMMON_CODE(null, 'stateType', '상태구분')

@@ -5,6 +5,7 @@ import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.exception.GlobalException;
 import com.dalbit.member.service.Mem_JoinService;
+import com.dalbit.member.vo.procedure.P_DormancyInputVo;
 import com.dalbit.member.vo.procedure.P_MemberJoinInputVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,7 @@ public class Mem_JoinRestController {
          return mem_JoinService.getWithdrawalList(pMemberJoinInputVo);
      }
 
+
     /**
      * 회원 가입 엑셀
      */
@@ -66,5 +68,20 @@ public class Mem_JoinRestController {
         excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
+    /**
+    * 휴면/해제 회원 내역
+    */
+     @PostMapping("dormancyList")
+     public String dormancyList(P_DormancyInputVo pDormancyInputVo){
+         return mem_JoinService.callDormancyList(pDormancyInputVo);
+     }
+
+    /**
+     * 휴면 해제
+     */
+    @PostMapping("member/return")
+    public String memberReturn(P_DormancyInputVo pDormancyInputVo){
+        return mem_JoinService.callMemberReturn(pDormancyInputVo);
     }
 }

@@ -1,6 +1,8 @@
 package com.dalbit.member.dao;
 
+import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.vo.procedure.P_EventMemberListOutputVo;
+import com.dalbit.member.vo.procedure.P_DormancyOutputVo;
 import com.dalbit.member.vo.procedure.P_MemberJoinInputVo;
 import com.dalbit.member.vo.procedure.P_MemberJoinOutputVo;
 import org.springframework.stereotype.Repository;
@@ -30,4 +32,8 @@ public interface Mem_JoinDao {
     @Transactional(readOnly = true)
     P_MemberJoinOutputVo callWithdrawalList_slctCnt(P_MemberJoinInputVo pMemberJoinInputVo);
 
+    @Transactional(readOnly = true)
+    ArrayList<P_DormancyOutputVo> callDormancyList(ProcedureVo procedureVo);
+
+    ProcedureVo callMemberReturn(ProcedureVo procedureVo);
 }

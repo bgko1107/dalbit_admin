@@ -25,6 +25,19 @@
         <if test='rankType == "4"'>
             from rd_data.tb_ranking_dj_live_data_year where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
         </if>
+        <if test='rankType == "5"'>
+            from rd_data.tb_ranking_time_dj_live_data
+           <!--where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}-->
+            <if test='timeRound == 1'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+            </if>
+            <if test='timeRound == 2'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
+            </if>
+            <if test='timeRound == 3'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
+            </if>
+        </if>
     </select>
 
     <select id="getFanLiveCheck" parameterType="com.dalbit.menu.vo.FanRankingVo" resultType="com.dalbit.menu.vo.FanRankingVo">
@@ -42,7 +55,19 @@
         <if test='rankType == "4"'>
             from rd_data.tb_ranking_fan_live_data_year where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
         </if>
-
+        <if test='rankType == "5"'>
+            from rd_data.tb_ranking_time_fan_live_data
+           <!--where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}-->
+            <if test='timeRound == 1'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+            </if>
+            <if test='timeRound == 2'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
+            </if>
+            <if test='timeRound == 3'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
+            </if>
+        </if>
         <!--select count(*) as liveCnt, max(ranking_date) as liveDate from rd_data.tb_ranking_fan_live where date_format(ranking_date,'%Y.%m.%d') = #{sDate}-->
     </select>
 
@@ -80,12 +105,18 @@
                   rd_data.tb_ranking_dj_year dj
               </if>
           </if>
+          <if test='rankType == "5"'>
+              <if test='liveCnt != 0'>
+                  rd_data.tb_ranking_time_dj_live_data dj
+              </if>
+              <if test='liveCnt == 0'>
+                  rd_data.tb_ranking_time_dj dj
+              </if>
+          </if>
           inner join rd_data.tb_member_profile prof on prof.mem_no = dj.mem_no
           inner join  rd_data.tb_member_level lev on prof.mem_no = lev.mem_no
           left join rd_data.tb_member_basic mem on prof.mem_no = mem.mem_no
           left join rd_admin.tb_admin_test_account test on prof.mem_no = test.mem_no
-          <if test='rankType == "3"'>
-          </if>
 
           <if test='rankType == "1"'>
            <if test='liveCnt != 0'>
@@ -94,6 +125,24 @@
             <if test='liveCnt == 0'>
                where date_format(dj.ranking_date,'%Y.%m.%d') <![CDATA[ = ]]> #{sDate}
             </if>
+          </if>
+          <if test='rankType == "5"'>
+              <if test='liveCnt != 0'>
+                  <if test='timeRound == 1'>
+                      where dj.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00')  and dj.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+                  </if>
+                  <if test='timeRound == 2'>
+                      where dj.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and dj.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
+                  </if>
+                  <if test='timeRound == 3'>
+                      where dj.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and dj.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
+                  </if>
+                 <!--where date_format(dj.upd_date,'%Y.%m.%d') = #{sDate}-->
+              </if>
+              <if test='liveCnt == 0'>
+               where date_format(dj.ranking_date,'%Y.%m.%d') <![CDATA[ = ]]> #{sDate}
+                 and dj.time_round = ${timeRound}
+              </if>
           </if>
           <if test='rankType == "2" or rankType == "3" or rankType == "4"'>
             <if test='liveCnt != 0'>
@@ -168,6 +217,14 @@
                 left join rd_data.tb_ranking_fan_year fan
             </if>
         </if>
+        <if test='rankType == "5"'>
+            <if test='liveCnt != 0'>
+                left join  rd_data.tb_ranking_time_fan_live_data fan
+            </if>
+            <if test='liveCnt == 0'>
+                left join rd_data.tb_ranking_time_fan fan
+            </if>
+        </if>
         on mem.mem_no = fan.mem_no
 
         <if test='rankType == "1"'>
@@ -176,6 +233,24 @@
             </if>
             <if test='liveCnt == 0'>
                 where date_format(fan.ranking_date,'%Y.%m.%d') = #{sDate}
+            </if>
+        </if>
+        <if test='rankType == "5"'>
+            <if test='liveCnt != 0'>
+                <if test='timeRound == 1'>
+                    where fan.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00')  and fan.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+                </if>
+                <if test='timeRound == 2'>
+                    where fan.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and fan.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
+                </if>
+                <if test='timeRound == 3'>
+                    where fan.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and fan.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
+                </if>
+                <!--where date_format(dj.upd_date,'%Y.%m.%d') = #{sDate}-->
+            </if>
+            <if test='liveCnt == 0'>
+                where date_format(fan.ranking_date,'%Y.%m.%d') <![CDATA[ = ]]> #{sDate}
+                and fan.time_round = ${timeRound}
             </if>
         </if>
         <if test='rankType == "2" or rankType == "3" or rankType == "4"'>

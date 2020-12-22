@@ -199,7 +199,7 @@
             <th>1위 팬<br/>회원정보</th>
             <th>2위 팬<br/>회원정보</th>
             <th>3위 팬<br/>회원정보</th>
-            <th>어워즈<br/>팬 해제</th>
+            <th>어워즈<br/>DJ 해제</th>
         </tr>
     </thead>
     <tbody id="listBody">
