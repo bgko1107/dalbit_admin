@@ -157,17 +157,15 @@
 
     function dormancyListSummary(json){
         console.log("dormancyListSummary ------------ ");
+        console.log(json);
         $("#stateSummary").hide();
         $("#joinListSummary").hide();
         $("#dormancySummary").show();
         var template = $("#dormancyList_tableSummary").html();
         var templateScript = Handlebars.compile(template);
-        var data = {
-            content : json.summary
-            , length : json.recordsTotal
-        }
-        var html = templateScript(data);
-        $("#dormancyList_tableSummary").html(html);
+        var content = json.summary;
+        var html = templateScript(content);
+        $("#dormancyList_summaryArea").html(html);
 
         ui.tableHeightSet();
         ui.paintColor();
