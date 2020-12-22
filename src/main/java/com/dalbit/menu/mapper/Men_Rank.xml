@@ -26,7 +26,17 @@
             from rd_data.tb_ranking_dj_live_data_year where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
         </if>
         <if test='rankType == "5"'>
-            from rd_data.tb_ranking_time_dj_live_data where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+            from rd_data.tb_ranking_time_dj_live_data
+           <!--where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}-->
+            <if test='timeRound == 1'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+            </if>
+            <if test='timeRound == 2'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
+            </if>
+            <if test='timeRound == 3'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
+            </if>
         </if>
     </select>
 
@@ -46,7 +56,17 @@
             from rd_data.tb_ranking_fan_live_data_year where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
         </if>
         <if test='rankType == "5"'>
-            from rd_data.tb_ranking_time_fan_live_data where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+            from rd_data.tb_ranking_time_fan_live_data
+           <!--where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}-->
+            <if test='timeRound == 1'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+            </if>
+            <if test='timeRound == 2'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
+            </if>
+            <if test='timeRound == 3'>
+                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
+            </if>
         </if>
         <!--select count(*) as liveCnt, max(ranking_date) as liveDate from rd_data.tb_ranking_fan_live where date_format(ranking_date,'%Y.%m.%d') = #{sDate}-->
     </select>
