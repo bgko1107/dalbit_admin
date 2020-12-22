@@ -12,8 +12,10 @@
             <th class="_bgColor" data-bgcolor="#c6d9f1">이벤트 구분</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">회원 번호</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">닉네임</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">성별</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">인증 여부</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">휴대폰 번호</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">총 결제금액</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">지급 달</th>
             <th class="_bgColor" data-bgcolor="#c6d9f1">지급 일시</th>
         </tr>
@@ -86,8 +88,10 @@
         <td>{{level}} 레벨</td>
         <td><a href="javascript://" class="_openMemberPop" data-memNo="{{mem_no}}">{{mem_no}}</a></td>
         <td><a href="javascript://" class="_openMemberPop" data-memNo="{{mem_no}}">{{mem_nick}}</a></td>
+        <td>{{{sexIcon mem_sex mem_bitrh_year}}}
         <td>{{certificationYn}}</td>
         <td>{{phone}}</td>
+        <td>{{addComma totalPay}}</td>
         <td>{{addComma dal}} 달</td>
         <td>{{achieve_date}}</td>
     </tr>

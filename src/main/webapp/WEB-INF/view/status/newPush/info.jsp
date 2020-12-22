@@ -92,7 +92,7 @@
             $("#tablist_con li.active a").click();
         }else{
             slctType = 1;
-            setDayButton();
+            dateType();
         }
 
         $('input[id="searchText"]').keydown(function() {

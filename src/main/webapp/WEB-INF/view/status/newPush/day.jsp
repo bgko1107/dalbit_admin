@@ -217,6 +217,19 @@
             response.data.detailList[i].date = toDay;
         }
 
+        for(var i = (response.data.detailList.length - 1); 0 <= i; i-- ){
+            var accumTotSucc = 0;
+            var accumTotFail = 0;
+            for(var j = (response.data.detailList.length - 1); 0 <= j; j-- ) {
+                if(response.data.detailList[i].the_date == response.data.detailList[j].the_date){
+                    accumTotSucc = accumTotSucc + response.data.detailList[j].totSucc;
+                    accumTotFail = accumTotFail + response.data.detailList[j].totFail;
+                }
+            }
+            response.data.detailList[i].accumTotSucc = accumTotSucc;
+            response.data.detailList[i].accumTotFail = accumTotFail;
+        }
+
 
         var detailContext = response.data.detailList;
         var html=templateScript(detailContext);
@@ -269,6 +282,20 @@
             }
             response.data.detailList[i].date = toDay;
         }
+
+        for(var i = (response.data.detailList.length - 1); 0 <= i; i-- ){
+            var accumTotSucc = 0;
+            var accumTotFail = 0;
+            for(var j = (response.data.detailList.length - 1); 0 <= j; j-- ) {
+                if(response.data.detailList[i].the_date == response.data.detailList[j].the_date){
+                    accumTotSucc = accumTotSucc + response.data.detailList[j].totSucc;
+                    accumTotFail = accumTotFail + response.data.detailList[j].totFail;
+                }
+            }
+            response.data.detailList[i].accumTotSucc = accumTotSucc;
+            response.data.detailList[i].accumTotFail = accumTotFail;
+        }
+
         var detailContext = response.data.detailList;
         var html=templateScript(detailContext);
         $("#tableDayBody_detail").append(html);
@@ -382,7 +409,7 @@
 
         <td class="total _bgColor font-bold" data-bgcolor="#bfbfbf" data-month="{{data.the_date}}">
             <span style="display: none">{{the_date}}</span>
-            <span class="_fontColor" data-fontcolor="#ca6927">0</span><br/>(0)<br/>(0%)
+            <span class="_fontColor" data-fontcolor="#ca6927">{{accumTotSucc}}</span><br/>({{accumTotFail}})<br/>({{average accumTotFail accumTotSucc}}%)
         </td>
     </tr>
     {{else}}
@@ -472,7 +499,7 @@
     <td class="_fontColor" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if totSucc '!=' 0}}<span class="font-bold">{{addComma totSucc}}</span><br/>({{addComma totFail}})<br/>({{average totFail totSucc}}%){{else}}{{#dalbit_if totFail '!=' 0}}<span class="font-bold">{{addComma totSucc}}</span><br/>({{addComma totFail}})<br/>({{average totFail totSucc}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="detailTotal _bgColor font-bold" data-bgcolor="#bfbfbf" data-month="{{data.the_date}}">
         <span style="display: none">{{the_date}}</span>
-        <span class="_fontColor" data-fontcolor="#ca6927">0</span><br/>(0)<br/>(0%)
+        <span class="_fontColor" data-fontcolor="#ca6927">{{accumTotSucc}}</span><br/>({{accumTotFail}})<br/>({{average accumTotFail accumTotSucc}}%)
     </td>
     </tr>
     {{else}}
