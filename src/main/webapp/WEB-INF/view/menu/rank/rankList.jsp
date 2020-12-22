@@ -125,11 +125,12 @@
     $(function(){
         $("#searchArea").html(util.getCommonCodeSelect(9999, searchType));
         var Time = new Date();
-        if(Time.getHours() > 0 && Time.getHours() < 10){
+
+        if(Time.getHours() >= 0 && Time.getHours() < 10){
             $("#timeRoundArea").html(util.getCommonCodeSelect(1, timeRound));
-        }else if(Time.getHours() > 10 && Time.getHours() < 19){
+        }else if(Time.getHours() >= 10 && Time.getHours() < 19){
             $("#timeRoundArea").html(util.getCommonCodeSelect(2, timeRound));
-        }else if(Time.getHours() > 19 && Number(Time.getHours() + Time.getMinutes() + Time.getSeconds()) < 235959){
+        }else if(Time.getHours() >= 19 && Number(Time.getHours() + Time.getMinutes() + Time.getSeconds()) < 235959){
             $("#timeRoundArea").html(util.getCommonCodeSelect(3, timeRound));
         }
 
