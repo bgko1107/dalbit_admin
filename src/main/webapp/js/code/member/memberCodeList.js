@@ -12,10 +12,11 @@ var mem_state = [
     new COMMON_CODE('', 'mem_state', '회원상태')
     , new COMMON_CODE('1', '1', '정상')
     , new COMMON_CODE('2', '2', '경고')
-    , new COMMON_CODE('2', '3', '정지')
+    , new COMMON_CODE('3', '3', '정지')
     , new COMMON_CODE('5', '5', '영구정지')
     , new COMMON_CODE('4', '4', '탈퇴')
-    , new COMMON_CODE('6', '6', '임시정지')
+    , new COMMON_CODE('6', '6', '휴면상태')
+    , new COMMON_CODE('7', '7', '자동탈퇴')
 ];
 
 var broadCast_summary = [
