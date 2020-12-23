@@ -862,7 +862,6 @@ var MemberDataTableSource = {
         }
     },
 
-
     'clipList': {
         'url': '/rest/clip/history/list'
 
@@ -1043,5 +1042,30 @@ var MemberDataTableSource = {
                 }},
             {'title': '선물 일시', 'data': 'giftDateFormat'},*/
         ]
+    },
+
+    'couponHistory': {
+        'url': '/rest/member/member/coupon/history'
+        , 'columns': [
+            {'title': '구분', 'data': 'type', 'render': function (data, type, row, meta) {
+                    return type == 1 ? '기본' : '이벤트';
+                }},
+            {'title': '획득일시', 'data': 'issue_date', function(data, type, row, meta){
+                    return common.formatDate()
+                }},
+            {'title': '상태', 'data': 'status', 'render': function (data, type, row, meta) {
+                    return data == 0 ? '미사용' : data == 1 ? common.setFontColor('사용', 'blue') : common.setFontColor('만료', 'red');
+                }},
+            {'title': '출처 DJ 회원번호', 'data': 'dj_mem_no', 'render': function (data, type, row, meta) {
+                    return util.memNoLink(data, data)
+                }},
+            {'title': '출처 DJ 닉네임', 'data': 'mem_nick'},
+            {'title': '방송제목', 'data': 'title'},
+        ]
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
     },
 }

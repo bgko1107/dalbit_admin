@@ -172,4 +172,6 @@ public interface Mem_MemberDao {
     int selectMemberBoostListCnt(P_MemberListInputVo pMemberListInputVo);
 
     ArrayList<P_MemberListOutputVo> selectMemberBoostList(P_MemberListInputVo pMemberListInputVo);
+
+    ArrayList<P_MemberCouponVo> callMemberCouponHistory(ProcedureVo procedureVo);
 }
