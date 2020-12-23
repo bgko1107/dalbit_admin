@@ -155,14 +155,15 @@
     });
 
     function getYearState(){
-        slctType = 1;
         var data = getData();
         data.viewType = 0;
+        data.slctType = 6;
         console.log(data);
         util.getAjaxData("day", "/rest/status/push/day", data, fn_yearState_simple_success);
 
         var data = getData();
         data.viewType = 1;
+        data.slctType = 6;
         console.log(data);
         util.getAjaxData("day", "/rest/status/push/day", data, fn_yearState_detail_success);
     }
@@ -322,7 +323,8 @@
     function yearStateDetailPopup(data){
         var data = {
             type : data.data('type')
-            , startDate : data.data('startdate')
+            , startDate : data.data('startdate') + "-01"
+            , slctType : 1
         };
         util.getAjaxData("yearState", "/rest/status/push/day/detail/popup", data, fn_yearState_detail_popup_success);
     }
@@ -330,7 +332,8 @@
     function yearStateSimplePopup(data){
         var data = {
             type : data.data('type')
-            , startDate : data.data('startdate')
+            , startDate : data.data('startdate') + "-01"
+            , slctType : 1
         };
         util.getAjaxData("yearState", "/rest/status/push/day/detail/popup", data, fn_yearState_simple_popup_success);
     }
@@ -380,7 +383,7 @@
     <tr {{#dalbit_if ../nowDay '==' data.day}} class="font-bold _stateSubTh" {{/dalbit_if}} >
         <td class="year _bgColor font-bold" data-bgcolor="#b4c7e7">{{data.the_date}}</td>
         <td class="_fontColor _bgColor" data-bgColor="#dae3f3" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{{sexIcon data.gb}}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="11, 18, 30"              data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p11Succ '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{else}}{{#dalbit_if p11Fail '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="11, 18, 24, 30"          data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p11Succ '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{else}}{{#dalbit_if p11Fail '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
         <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="15"                      data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p15Succ '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{else}}{{#dalbit_if p15Fail '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
         <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="16"                      data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p16Succ '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{else}}{{#dalbit_if p16Fail '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
         <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="17, 21, 22, 23"          data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p17Succ '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{else}}{{#dalbit_if p17Fail '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>

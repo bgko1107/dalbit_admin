@@ -322,6 +322,7 @@
         var data = {
             type : data.data('type')
             , startDate : data.data('startdate')
+            , slctType : 0
         };
         util.getAjaxData("day", "/rest/status/push/day/detail/popup", data, fn_day_detail_popup_success);
     }
@@ -330,6 +331,7 @@
         var data = {
             type : data.data('type')
             , startDate : data.data('startdate')
+            , slctType : 0
         };
         util.getAjaxData("day", "/rest/status/push/day/detail/popup", data, fn_day_simple_popup_success);
     }
