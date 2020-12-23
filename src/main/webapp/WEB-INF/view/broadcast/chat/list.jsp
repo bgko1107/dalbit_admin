@@ -138,9 +138,9 @@
                 <th>검색</th>
                 <td>
                     <select class="form-control" id="chat_slct_type">
-                        <option value="1">회원번호</option>
-                        <option value="2">채팅내용</option>
                         <option value="3">닉네임</option>
+                        <option value="2">채팅내용</option>
+                        <option value="1">회원번호</option>
                     </select>
                     <input type="text" class="form-control" id="chat_slct_value" />
                     <input type="text" style="display:none;" />
