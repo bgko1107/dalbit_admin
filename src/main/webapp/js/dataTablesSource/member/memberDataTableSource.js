@@ -1048,10 +1048,10 @@ var MemberDataTableSource = {
         'url': '/rest/member/member/coupon/history'
         , 'columns': [
             {'title': '구분', 'data': 'type', 'render': function (data, type, row, meta) {
-                    return type == 1 ? '기본' : '이벤트';
+                    return data == 1 ? '기본' : '이벤트';
                 }},
-            {'title': '획득일시', 'data': 'issue_date', function(data, type, row, meta){
-                    return common.formatDate()
+            {'title': '획득일시', 'data': 'issue_date', 'render': function(data, type, row, meta){
+                    return moment(data.substr(0,7) + ' ' + data.substr(8,13)).format('YYYY.MM.DD HH:mm:ss')
                 }},
             {'title': '상태', 'data': 'status', 'render': function (data, type, row, meta) {
                     return data == 0 ? '미사용' : data == 1 ? common.setFontColor('사용', 'blue') : common.setFontColor('만료', 'red');
@@ -1060,7 +1060,9 @@ var MemberDataTableSource = {
                     return util.memNoLink(data, data)
                 }},
             {'title': '출처 DJ 닉네임', 'data': 'mem_nick'},
-            {'title': '방송제목', 'data': 'title'},
+            {'title': '방송제목', 'data': 'title', 'render': function (data, type, row, meta) {
+                    return util.roomNoLink(data, row.room_no)
+                }},
         ]
         ,'createdRow' : function( row, data, dataIndex ) {
             if (data.inner == 1) {    // 테스트계정 row 색상 표시

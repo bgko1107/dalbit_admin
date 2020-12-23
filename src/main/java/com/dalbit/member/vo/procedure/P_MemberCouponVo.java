@@ -17,6 +17,7 @@ public class P_MemberCouponVo extends SearchVo {
     private String status;
     private String mem_nick;
     private String title;
+    private String room_no;
     private String dj_mem_no;
     private String issue_date;
 }
