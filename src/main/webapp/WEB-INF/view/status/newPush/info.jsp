@@ -6,6 +6,13 @@
     String in_tabType = request.getParameter("tabType");
 %>
 
+<style>
+    .selectedRow {
+        background-color: #007ef9;
+        cursor: pointer;
+    }
+
+</style>
 
 <div id="wrapper">
     <div id="page-wrapper">
