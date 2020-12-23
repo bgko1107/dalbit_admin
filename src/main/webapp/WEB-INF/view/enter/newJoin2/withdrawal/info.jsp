@@ -45,17 +45,17 @@
                                     <a href="javascript://" class="_todaySearch">[오늘]</a>
                                     <a href="javascript://" class="_nextSearch">[다음]</a>
 
-                                    <span id="searchCheck" style="display: none">
-                                        <label class="control-inline fancy-checkbox custom-color-green">
-                                            <input type="checkbox" name="search_testId" id="search_testId" value="1" checked="true">
-                                            <span>테스트 아이디 제외</span>
-                                        </label>
+                                    <%--<span id="searchCheck" style="display: none">--%>
+                                        <%--<label class="control-inline fancy-checkbox custom-color-green">--%>
+                                            <%--<input type="checkbox" name="search_testId" id="search_testId" value="1" checked="true">--%>
+                                            <%--<span>테스트 아이디 제외</span>--%>
+                                        <%--</label>--%>
 
-                                        <label class="control-inline fancy-checkbox custom-color-green">
-                                            <input type="checkbox" name="search_joinPath" id="search_joinPath" value="1">
-                                            <span>광고유입</span>
-                                        </label>
-                                    </span>
+                                        <%--<label class="control-inline fancy-checkbox custom-color-green">--%>
+                                            <%--<input type="checkbox" name="search_joinPath" id="search_joinPath" value="1">--%>
+                                            <%--<span>광고유입</span>--%>
+                                        <%--</label>--%>
+                                    <%--</span>--%>
                                 </td>
                             </tr>
                         </table>
