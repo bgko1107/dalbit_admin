@@ -1051,7 +1051,8 @@ var MemberDataTableSource = {
                     return data == 1 ? '기본' : '이벤트';
                 }},
             {'title': '획득일시', 'data': 'issue_date', 'render': function(data, type, row, meta){
-                    return moment(data.substr(0,7) + ' ' + data.substr(8,13)).format('YYYY.MM.DD HH:mm:ss')
+                console.log(data);
+                    return data;
                 }},
             {'title': '상태', 'data': 'status', 'render': function (data, type, row, meta) {
                     return data == 0 ? '미사용' : data == 1 ? common.setFontColor('사용', 'blue') : common.setFontColor('만료', 'red');
