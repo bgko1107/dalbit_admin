@@ -209,6 +209,7 @@ var status_detail_push_type = [
     ,new COMMON_CODE('21','21','신규 글 등록(비밀)')
     ,new COMMON_CODE('22','22','신규 댓글 등록(일반)')
     ,new COMMON_CODE('23','23','신규 댓글 등록(비밀)')
+    ,new COMMON_CODE('24','24','공지댓글')
     ,new COMMON_CODE('31','31','좋아요')
     ,new COMMON_CODE('32','32','댓글')
     ,new COMMON_CODE('33','33','선물')

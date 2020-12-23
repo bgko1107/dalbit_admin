@@ -757,7 +757,7 @@ public class Mem_MemberService {
         pMemberEditorVo.setUseContents(pMemberEditorVo.getAddDalCnt() + " - " +  pMemberEditorVo.getPointEditStroy());
         int beforDalCnt = mem_MemberDao.callMemberBeforDelCnt(pMemberEditorVo);
         int afterDalCnt = beforDalCnt + pMemberEditorVo.getAddDalCnt();
-        pMemberEditorVo.setEditContents("달수 변경 : " + DalbitUtil.comma(beforDalCnt) + " >> " + DalbitUtil.comma(pMemberEditorVo.getAddDalCnt())
+        pMemberEditorVo.setAddContents("달수 변경 : " + DalbitUtil.comma(beforDalCnt) + " >> " + DalbitUtil.comma(pMemberEditorVo.getAddDalCnt())
                                          + " 변경 >> " + DalbitUtil.comma(afterDalCnt) + " | " + pMemberEditorVo.getPointEditStroy());
 
         // 소실금액 복구, 운영자 지급이 같은 코드를 사용. 소실 금액 복구시에만 money ( 차감시에는 dalSlct 사용 X )

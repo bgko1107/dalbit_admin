@@ -144,7 +144,11 @@
             {{{getCommonCodeLabel subject_type 'clipSubjectType'}}}<br/>
             <a href="javascript://" class="_openClipInfoPop" data-clipNo="{{cast_no}}">{{title}}</a>
         </td>
-        <td style="width: 50px"><img class="thumbnail fullSize_background no-padding" src="{{bannerUrl}}" style='height:50px; width:50px;margin-bottom: 0px' /></td>
+        <td style="width: 50px">
+            {{#dalbit_if bannerUrl '!=' ''}}
+            <img class="thumbnail fullSize_background no-padding" src="{{bannerUrl}}" style='height:50px; width:50px;margin-bottom: 0px' />
+            {{/dalbit_if}}
+        </td>
         <td>{{{replaceEnter desc_msg}}}</td>
         <td style="width: 50px"><img class="thumbnail fullSize_background no-padding" src="{{renderProfileImage image_background}}" style='height:50px; width:50px;margin-bottom: 0px' /></td>
         <td>

@@ -41,23 +41,19 @@
 
         tabId = $(this).prop('id');
 
+        $("#searchCheck").hide();
         $("#searchText").hide();
         if(tabId == 'tab_time'){
             slctType = 0;
         }else if(tabId == 'tab_calendar' || tabId == 'tab_month') {
             slctType = 1;
         }else if(tabId == 'tab_list' || tabId == 'tab_dormancy') {
+            $("#searchCheck").show();
             $("#searchText").show();
             slctType = 3;
         }
 
         dateType(slctType);
-
-        $("#searchFormRadio").hide();
-        $("#searchCheck").hide();
-        $("#txt_search").hide();
-        // $("#stateSummary").show();
-        // $("#joinListSummary").hide();
 
         $(".searchDate").html($("#onedayDate").val());
     });

@@ -13,7 +13,7 @@
                         (
                           `type` IN (1, 5, 6, 9, 10, 11, 15)
                         OR
-                          (`type` IN (7, 8, 12, 13, 22, 23) AND (ruby_new - ruby_old) > 0)
+                          (`type` IN (7, 8, 12, 13, 22, 23) AND ((money_new - money_old)+(ruby_new - ruby_old)) > 0)
                         )
                     </when>
                     <when test='walletType == "2"'>
@@ -21,7 +21,7 @@
                         (
                           `type` IN (2, 3, 4, 9, 7, 14, 17, 19, 20)
                         OR
-                          (`type` IN (7, 8, 12, 13, 22, 23) AND  0 > (ruby_new - ruby_old))
+                          (`type` IN (7, 8, 12, 13, 22, 23) AND  0 > ((money_new - money_old)+(ruby_new - ruby_old)))
                         )
                     </when>
                 </choose>
@@ -38,11 +38,11 @@
 
     <select id="getResultDalSummary" parameterType="com.dalbit.member.vo.procedure.P_WalletDalVo" resultType="java.util.HashMap">
         SELECT
-        (SELECT IFNULL(SUM(ruby_new - ruby_old), 0) FROM rd_data.tb_member_wallet_ruby  where `type` = 1  <include refid="condition_dal"/>) AS sum_charge_cnt
-        ,(SELECT IFNULL(SUM(ruby_new - ruby_old), 0) FROM rd_data.tb_member_wallet_ruby where `type` = 5  <include refid="condition_dal"/>) AS sum_input_cnt
-        ,(SELECT IFNULL(SUM(ruby_new - ruby_old), 0) FROM rd_data.tb_member_wallet_ruby where `type` in (7, 8, 9, 10, 11, 12, 13, 16, 18, 22, 23)  <include refid="condition_dal"/>) AS sum_event_cnt
-        ,(SELECT IFNULL(SUM(ruby_new - ruby_old), 0) FROM rd_data.tb_member_wallet_ruby where `type` in (2, 3, 4, 14, 17, 19, 20) <include refid="condition_dal"/>) AS sum_output_cnt
-        ,(SELECT IFNULL(SUM(ruby_new - ruby_old), 0) FROM rd_data.tb_member_wallet_ruby where `type` = 6 <include refid="condition_dal"/>) AS sum_change_cnt
+        (SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby  where `type` = 1  <include refid="condition_dal"/>) AS sum_charge_cnt
+        ,(SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby where `type` = 5  <include refid="condition_dal"/>) AS sum_input_cnt
+        ,(SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby where `type` in (7, 8, 9, 10, 11, 12, 13, 16, 18, 22, 23)  <include refid="condition_dal"/>) AS sum_event_cnt
+        ,(SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby where `type` in (2, 3, 4, 14, 17, 19, 20) <include refid="condition_dal"/>) AS sum_output_cnt
+        ,(SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby where `type` = 6 <include refid="condition_dal"/>) AS sum_change_cnt
         ,IFNULL((SELECT IFNULL(ruby_new, 0) FROM rd_data.tb_member_wallet_ruby where mem_no = #{mem_no} and `type`=15),0) AS start_cnt
         ,IFNULL(ruby, 0) AS sum_own_cnt
         FROM
@@ -115,7 +115,7 @@
             UNION ALL
             SELECT
                 `type` AS gubun
-                ,( ruby_new - ruby_old ) AS ruby
+                ,( (money_new - money_old)+(ruby_new - ruby_old) ) AS ruby
                 ,'' AS room_no
                 ,'' AS item_type
                 ,'10000000000000' AS mem_no
@@ -267,7 +267,7 @@
                 UNION ALL
                 SELECT
                     `type` AS gubun
-                    ,( ruby_new - ruby_old ) AS ruby
+                    ,( (money_new - money_old)+(ruby_new - ruby_old) ) AS ruby
                     ,'' AS room_no
                     ,'' AS item_type
                     ,'10000000000000' AS mem_no
@@ -661,7 +661,7 @@
                 last_upd_date AS updateDt,
                 `type` AS slct_type,
                 use_contents AS contents,
-                ( ruby_new - ruby_old ) AS dalCnt
+                ( (money_new - money_old)+(ruby_new - ruby_old) ) AS dalCnt
             FROM
                 rd_data.tb_member_wallet_ruby
             WHERE

@@ -1,23 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<style>
-    .selectedRow {
-        background-color: #007ef9;
-        cursor: pointer;
-    }
-
-    /*.fade {*/
-        /*opacity: 0;*/
-        /*-webkit-transition: opacity 0.05s linear;*/
-        /*-moz-transition: opacity 0.05s linear;*/
-        /*-ms-transition: opacity 0.05s linear;*/
-        /*-o-transition: opacity 0.05s linear;*/
-        /*transition: opacity 0.05s linear;*/
-    /*}*/
-
-</style>
-
 <!-- 회원가입 > 총계 -->
 <div class="widget widget-table" id="div_scroll">
     <div class="widget-content">
@@ -65,16 +48,16 @@
                     <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
                     <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
                     <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                    <col width="2.7%"/>
+                    <col width="2.7%"/><col width="2.7%"/>
                 </colgroup>
                 <thead>
                 <tr>
                     <th rowspan="3" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">구분</th>
                     <th rowspan="3" class="_bgColor" data-bgColor="#b4c7e7">성별</th>
-                    <th colspan="3" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">마이스타</th>
+                    <th colspan="4" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">마이스타</th>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">선물</th>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">팬 등록</th>
-                    <th colspan="4" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">팬 보드</th>
+                    <th colspan="4" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">팬 보드/댓글</th>
                     <th colspan="3" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">클립</th>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">랭킹</th>
                     <th colspan="4" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">서비스</th>
@@ -87,11 +70,12 @@
                 <tr>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">방송 시작</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">신규공지 등록</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">공지댓글</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">클립 등록</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">수신</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">최초 1회</th>
                     <th colspan="2" class="_bgColor" data-bgColor="#b4c7e7">신규 글 등록</th>
-                    <th colspan="2" class="_bgColor" data-bgColor="#b4c7e7">신규 댓글 등록</th>
+                    <th colspan="2" class="_bgColor" data-bgColor="#b4c7e7">신규 댓글</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">좋아요</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">댓글</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">선물</th>
@@ -338,6 +322,7 @@
         var data = {
             type : data.data('type')
             , startDate : data.data('startdate')
+            , slctType : 0
         };
         util.getAjaxData("day", "/rest/status/push/day/detail/popup", data, fn_day_detail_popup_success);
     }
@@ -346,27 +331,28 @@
         var data = {
             type : data.data('type')
             , startDate : data.data('startdate')
+            , slctType : 0
         };
         util.getAjaxData("day", "/rest/status/push/day/detail/popup", data, fn_day_simple_popup_success);
     }
 
     function fn_day_detail_popup_success(dst_id, response, param){
         $('#dayModal').modal("show");
-        $("#type").html(util.getCommonCodeLabel(param.type,status_detail_push_type));
-        $("#date").html(param.startDate);
-        $("#sendCount").html('<span style="color:blue;">' + response.data.totalInfo.sendmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.sendfCnt + '</span> / ' + response.data.totalInfo.sendnCnt);
-        $("#succCount").html('<span style="color:blue;">' + response.data.totalInfo.succmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.succfCnt + '</span> / ' + response.data.totalInfo.succnCnt);
-        $("#failCount").html('<span style="color:blue;">' + response.data.totalInfo.failmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.failfCnt + '</span> / ' + response.data.totalInfo.failnCnt);
+        $('#dayModal').find("#type").html(util.getCommonCodeLabel(param.type,status_detail_push_type));
+        $('#dayModal').find("#date").html(param.startDate);
+        $('#dayModal').find("#sendCount").html('<span style="color:blue;">' + response.data.totalInfo.sendmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.sendfCnt + '</span> / ' + response.data.totalInfo.sendnCnt);
+        $('#dayModal').find("#succCount").html('<span style="color:blue;">' + response.data.totalInfo.succmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.succfCnt + '</span> / ' + response.data.totalInfo.succnCnt);
+        $('#dayModal').find("#failCount").html('<span style="color:blue;">' + response.data.totalInfo.failmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.failfCnt + '</span> / ' + response.data.totalInfo.failnCnt);
 
     }
 
     function fn_day_simple_popup_success(dst_id, response, param){
         $('#dayModal').modal("show");
-        $("#type").html(util.getCommonCodeLabel(param.type,status_simple_push_type));
-        $("#date").html(param.startDate);
-        $("#sendCount").html('<span style="color:blue;">' + response.data.totalInfo.sendmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.sendfCnt + '</span> / ' + response.data.totalInfo.sendnCnt);
-        $("#succCount").html('<span style="color:blue;">' + response.data.totalInfo.succmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.succfCnt + '</span> / ' + response.data.totalInfo.succnCnt);
-        $("#failCount").html('<span style="color:blue;">' + response.data.totalInfo.failmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.failfCnt + '</span> / ' + response.data.totalInfo.failnCnt);
+        $('#dayModal').find("#type").html(util.getCommonCodeLabel(param.type,status_simple_push_type));
+        $('#dayModal').find("#date").html(param.startDate);
+        $('#dayModal').find("#sendCount").html('<span style="color:blue;">' + response.data.totalInfo.sendmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.sendfCnt + '</span> / ' + response.data.totalInfo.sendnCnt);
+        $('#dayModal').find("#succCount").html('<span style="color:blue;">' + response.data.totalInfo.succmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.succfCnt + '</span> / ' + response.data.totalInfo.succnCnt);
+        $('#dayModal').find("#failCount").html('<span style="color:blue;">' + response.data.totalInfo.failmCnt + '</span> / <span style="color:red;">' + response.data.totalInfo.failfCnt + '</span> / ' + response.data.totalInfo.failnCnt);
 
     }
 
@@ -395,16 +381,16 @@
     <tr {{#dalbit_if ../nowDay '==' data.day}} class="font-bold _stateSubTh" {{/dalbit_if}} >
         <td class="month _bgColor font-bold" data-bgcolor="#b4c7e7">{{data.the_date}}</td>
         <td class="_fontColor _bgColor" data-bgColor="#dae3f3" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{{sexIcon data.gb}}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="11" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p11Succ '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{else}}{{#dalbit_if p11Fail '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="15" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p15Succ '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{else}}{{#dalbit_if p15Fail '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="16" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p16Succ '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{else}}{{#dalbit_if p16Fail '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="17" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p17Succ '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{else}}{{#dalbit_if p17Fail '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="31" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p31Succ '!=' 0}}<span class="font-bold">{{addComma p31Succ}}</span><br/>({{addComma p31Fail}})<br/>({{average p31Fail p31Succ}}%){{else}}{{#dalbit_if p31Fail '!=' 0}}<span class="font-bold">{{addComma p31Succ}}</span><br/>({{addComma p31Fail}})<br/>({{average p31Fail p31Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="20" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p20Succ '!=' 0}}<span class="font-bold">{{addComma p20Succ}}</span><br/>({{addComma p20Fail}})<br/>({{average p20Fail p20Succ}}%){{else}}{{#dalbit_if p20Fail '!=' 0}}<span class="font-bold">{{addComma p20Succ}}</span><br/>({{addComma p20Fail}})<br/>({{average p20Fail p20Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="19" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p19Succ '!=' 0}}<span class="font-bold">{{addComma p19Succ}}</span><br/>({{addComma p19Fail}})<br/>({{average p19Fail p19Succ}}%){{else}}{{#dalbit_if p19Fail '!=' 0}}<span class="font-bold">{{addComma p19Succ}}</span><br/>({{addComma p19Fail}})<br/>({{average p19Fail p19Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="62" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p62Succ '!=' 0}}<span class="font-bold">{{addComma p62Succ}}</span><br/>({{addComma p62Fail}})<br/>({{average p62Fail p62Succ}}%){{else}}{{#dalbit_if p62Fail '!=' 0}}<span class="font-bold">{{addComma p62Succ}}</span><br/>({{addComma p62Fail}})<br/>({{average p62Fail p62Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="53" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p53Succ '!=' 0}}<span class="font-bold">{{addComma p53Succ}}</span><br/>({{addComma p53Fail}})<br/>({{average p53Fail p53Succ}}%){{else}}{{#dalbit_if p53Fail '!=' 0}}<span class="font-bold">{{addComma p53Succ}}</span><br/>({{addComma p53Fail}})<br/>({{average p53Fail p53Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
-        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="61" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p61Succ '!=' 0}}<span class="font-bold">{{addComma p61Succ}}</span><br/>({{addComma p61Fail}})<br/>({{average p61Fail p61Succ}}%){{else}}{{#dalbit_if p61Fail '!=' 0}}<span class="font-bold">{{addComma p61Succ}}</span><br/>({{addComma p61Fail}})<br/>({{average p61Fail p61Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="11, 18, 24, 30"         data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p11Succ '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{else}}{{#dalbit_if p11Fail '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="15"                     data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p15Succ '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{else}}{{#dalbit_if p15Fail '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="16"                     data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p16Succ '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{else}}{{#dalbit_if p16Fail '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="17, 21, 22, 23"         data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p17Succ '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{else}}{{#dalbit_if p17Fail '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="31, 32, 33"             data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p31Succ '!=' 0}}<span class="font-bold">{{addComma p31Succ}}</span><br/>({{addComma p31Fail}})<br/>({{average p31Fail p31Succ}}%){{else}}{{#dalbit_if p31Fail '!=' 0}}<span class="font-bold">{{addComma p31Succ}}</span><br/>({{addComma p31Fail}})<br/>({{average p31Fail p31Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="20"                     data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p20Succ '!=' 0}}<span class="font-bold">{{addComma p20Succ}}</span><br/>({{addComma p20Fail}})<br/>({{average p20Fail p20Succ}}%){{else}}{{#dalbit_if p20Fail '!=' 0}}<span class="font-bold">{{addComma p20Succ}}</span><br/>({{addComma p20Fail}})<br/>({{average p20Fail p20Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="19, 51, 52, 60"         data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p19Succ '!=' 0}}<span class="font-bold">{{addComma p19Succ}}</span><br/>({{addComma p19Fail}})<br/>({{average p19Fail p19Succ}}%){{else}}{{#dalbit_if p19Fail '!=' 0}}<span class="font-bold">{{addComma p19Succ}}</span><br/>({{addComma p19Fail}})<br/>({{average p19Fail p19Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="62, 63"                 data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p62Succ '!=' 0}}<span class="font-bold">{{addComma p62Succ}}</span><br/>({{addComma p62Fail}})<br/>({{average p62Fail p62Succ}}%){{else}}{{#dalbit_if p62Fail '!=' 0}}<span class="font-bold">{{addComma p62Succ}}</span><br/>({{addComma p62Fail}})<br/>({{average p62Fail p62Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="53, 54, 55, 56, 57, 58" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p53Succ '!=' 0}}<span class="font-bold">{{addComma p53Succ}}</span><br/>({{addComma p53Fail}})<br/>({{average p53Fail p53Succ}}%){{else}}{{#dalbit_if p53Fail '!=' 0}}<span class="font-bold">{{addComma p53Succ}}</span><br/>({{addComma p53Fail}})<br/>({{average p53Fail p53Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="daySimplePopup($(this))" data-type="61, 92, 93, 94, 95, 96" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p61Succ '!=' 0}}<span class="font-bold">{{addComma p61Succ}}</span><br/>({{addComma p61Fail}})<br/>({{average p61Fail p61Succ}}%){{else}}{{#dalbit_if p61Fail '!=' 0}}<span class="font-bold">{{addComma p61Succ}}</span><br/>({{addComma p61Fail}})<br/>({{average p61Fail p61Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
         <td class="_fontColor" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if totSucc '!=' 0}}<span class="font-bold">{{addComma totSucc}}</span><br/>({{addComma totFail}})<br/>({{average totFail totSucc}}%){{else}}{{#dalbit_if totFail '!=' 0}}<span class="font-bold">{{addComma totSucc}}</span><br/>({{addComma totFail}})<br/>({{average totFail totSucc}}%){{/dalbit_if}}{{/dalbit_if}}</td>
 
         <td class="total _bgColor font-bold" data-bgcolor="#bfbfbf" data-month="{{data.the_date}}">
@@ -422,40 +408,41 @@
     <tr class="font-bold">
         <td class="_bgColor" data-bgcolor="#bfbfbf">총합</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">성공수치</span><br/>(수신거부)<br/>(거부비율%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11mFail p11Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p18Succ}}</span><br/>({{addComma p18Fail}})<br/>({{average p18mFail p18Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p30Succ}}</span><br/>({{addComma p30Fail}})<br/>({{average p30mFail p30Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15mFail p15Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16mFail p16Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17mFail p17Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p21Succ}}</span><br/>({{addComma p21Fail}})<br/>({{average p21mFail p21Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p22Succ}}</span><br/>({{addComma p22Fail}})<br/>({{average p22mFail p22Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p23Succ}}</span><br/>({{addComma p23Fail}})<br/>({{average p23mFail p23Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p31Succ}}</span><br/>({{addComma p31Fail}})<br/>({{average p31mFail p31Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p32Succ}}</span><br/>({{addComma p32Fail}})<br/>({{average p32mFail p32Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p33Succ}}</span><br/>({{addComma p33Fail}})<br/>({{average p33mFail p33Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p20Succ}}</span><br/>({{addComma p20Fail}})<br/>({{average p20mFail p20Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p19Succ}}</span><br/>({{addComma p19Fail}})<br/>({{average p19mFail p19Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p51Succ}}</span><br/>({{addComma p51Fail}})<br/>({{average p51mFail p51Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p52Succ}}</span><br/>({{addComma p52Fail}})<br/>({{average p52mFail p52Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p60Succ}}</span><br/>({{addComma p60Fail}})<br/>({{average p60mFail p60Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p62Succ}}</span><br/>({{addComma p62Fail}})<br/>({{average p62mFail p62Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p63Succ}}</span><br/>({{addComma p63Fail}})<br/>({{average p63mFail p63Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p53Succ}}</span><br/>({{addComma p53Fail}})<br/>({{average p53mFail p53Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p50Succ}}</span><br/>({{addComma p50Fail}})<br/>({{average p50mFail p50Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p54Succ}}</span><br/>({{addComma p54Fail}})<br/>({{average p54mFail p54Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p55Succ}}</span><br/>({{addComma p55Fail}})<br/>({{average p55mFail p55Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p56Succ}}</span><br/>({{addComma p56Fail}})<br/>({{average p56mFail p56Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p57Succ}}</span><br/>({{addComma p57Fail}})<br/>({{average p57mFail p57Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p58Succ}}</span><br/>({{addComma p58Fail}})<br/>({{average p58mFail p58Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p61Succ}}</span><br/>({{addComma p61Fail}})<br/>({{average p61mFail p61Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p92Succ}}</span><br/>({{addComma p92Fail}})<br/>({{average p92mFail p92Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p93Succ}}</span><br/>({{addComma p93Fail}})<br/>({{average p93mFail p93Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p94Succ}}</span><br/>({{addComma p94Fail}})<br/>({{average p94mFail p94Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p95Succ}}</span><br/>({{addComma p95Fail}})<br/>({{average p95mFail p95Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p96Succ}}</span><br/>({{addComma p96Fail}})<br/>({{average p96mFail p96Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma totSucc}}</span><br/>({{addComma totFail}})<br/>({{average totmFail totSucc}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma totSucc}}</span><br/>({{addComma totFail}})<br/>({{average totmFail totSucc}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p18Succ}}</span><br/>({{addComma p18Fail}})<br/>({{average p18Fail p18Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p24Succ}}</span><br/>({{addComma p24Fail}})<br/>({{average p24Fail p24Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p30Succ}}</span><br/>({{addComma p30Fail}})<br/>({{average p30Fail p30Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p21Succ}}</span><br/>({{addComma p21Fail}})<br/>({{average p21Fail p21Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p22Succ}}</span><br/>({{addComma p22Fail}})<br/>({{average p22Fail p22Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p23Succ}}</span><br/>({{addComma p23Fail}})<br/>({{average p23Fail p23Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p31Succ}}</span><br/>({{addComma p31Fail}})<br/>({{average p31Fail p31Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p32Succ}}</span><br/>({{addComma p32Fail}})<br/>({{average p32Fail p32Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p33Succ}}</span><br/>({{addComma p33Fail}})<br/>({{average p33Fail p33Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p20Succ}}</span><br/>({{addComma p20Fail}})<br/>({{average p20Fail p20Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p19Succ}}</span><br/>({{addComma p19Fail}})<br/>({{average p19Fail p19Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p51Succ}}</span><br/>({{addComma p51Fail}})<br/>({{average p51Fail p51Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p52Succ}}</span><br/>({{addComma p52Fail}})<br/>({{average p52Fail p52Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p60Succ}}</span><br/>({{addComma p60Fail}})<br/>({{average p60Fail p60Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p62Succ}}</span><br/>({{addComma p62Fail}})<br/>({{average p62Fail p62Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p63Succ}}</span><br/>({{addComma p63Fail}})<br/>({{average p63Fail p63Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p53Succ}}</span><br/>({{addComma p53Fail}})<br/>({{average p53Fail p53Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p50Succ}}</span><br/>({{addComma p50Fail}})<br/>({{average p50Fail p50Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p54Succ}}</span><br/>({{addComma p54Fail}})<br/>({{average p54Fail p54Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p55Succ}}</span><br/>({{addComma p55Fail}})<br/>({{average p55Fail p55Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p56Succ}}</span><br/>({{addComma p56Fail}})<br/>({{average p56Fail p56Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p57Succ}}</span><br/>({{addComma p57Fail}})<br/>({{average p57Fail p57Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p58Succ}}</span><br/>({{addComma p58Fail}})<br/>({{average p58Fail p58Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p61Succ}}</span><br/>({{addComma p61Fail}})<br/>({{average p61Fail p61Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p92Succ}}</span><br/>({{addComma p92Fail}})<br/>({{average p92Fail p92Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p93Succ}}</span><br/>({{addComma p93Fail}})<br/>({{average p93Fail p93Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p94Succ}}</span><br/>({{addComma p94Fail}})<br/>({{average p94Fail p94Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p95Succ}}</span><br/>({{addComma p95Fail}})<br/>({{average p95Fail p95Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p96Succ}}</span><br/>({{addComma p96Fail}})<br/>({{average p96Fail p96Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma totSucc}}</span><br/>({{addComma totFail}})<br/>({{average totFail totSucc}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma totSucc}}</span><br/>({{addComma totFail}})<br/>({{average totFail totSucc}}%)</td>
     </tr>
 </script>
 
@@ -466,6 +453,7 @@
     <td class="_fontColor _bgColor" data-bgColor="#dae3f3" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{{sexIcon data.gb}}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="dayDetailPopup($(this))" data-type="11" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p11Succ '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{else}}{{#dalbit_if p11Fail '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="dayDetailPopup($(this))" data-type="18" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p18Succ '!=' 0}}<span class="font-bold">{{addComma p18Succ}}</span><br/>({{addComma p18Fail}})<br/>({{average p18Fail p18Succ}}%){{else}}{{#dalbit_if p18Fail '!=' 0}}<span class="font-bold">{{addComma p18Succ}}</span><br/>({{addComma p18Fail}})<br/>({{average p18Fail p18Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+    <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="dayDetailPopup($(this))" data-type="24" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p24Succ '!=' 0}}<span class="font-bold">{{addComma p24Succ}}</span><br/>({{addComma p24Fail}})<br/>({{average p30Fail p24Succ}}%){{else}}{{#dalbit_if p24Fail '!=' 0}}<span class="font-bold">{{addComma p24Succ}}</span><br/>({{addComma p24Fail}})<br/>({{average p24Fail p24Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="dayDetailPopup($(this))" data-type="30" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p30Succ '!=' 0}}<span class="font-bold">{{addComma p30Succ}}</span><br/>({{addComma p30Fail}})<br/>({{average p30Fail p30Succ}}%){{else}}{{#dalbit_if p30Fail '!=' 0}}<span class="font-bold">{{addComma p30Succ}}</span><br/>({{addComma p30Fail}})<br/>({{average p30Fail p30Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="dayDetailPopup($(this))" data-type="15" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p15Succ '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{else}}{{#dalbit_if p15Fail '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="dayDetailPopup($(this))" data-type="16" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p16Succ '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{else}}{{#dalbit_if p16Fail '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>

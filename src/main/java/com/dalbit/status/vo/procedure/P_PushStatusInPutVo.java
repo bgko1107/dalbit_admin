@@ -19,6 +19,6 @@ public class P_PushStatusInPutVo {
     private String beforStartDate;
     private String beforEndDate;
 
-    private int type;
+    private String type;
 
 }
