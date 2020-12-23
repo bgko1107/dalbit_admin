@@ -34,8 +34,8 @@ public class Con_RouletteEventService {
     GsonUtil gsonUtil;
 
 
-    public String selectRouletteRate(){
-        ProcedureVo procedureVo = new ProcedureVo();
+    public String selectRouletteRate(P_RouletteRateVo pRouletteRateVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRouletteRateVo);
         ArrayList<P_RouletteRateVo> list = con_rouletteEventDao.callRouletteRate(procedureVo);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, list));

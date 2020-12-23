@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class P_RouletteRateVo extends BaseVo {
 
+    private int couponType;
     private int itemNo;
     private int dalCnt;
     private int winRate;
