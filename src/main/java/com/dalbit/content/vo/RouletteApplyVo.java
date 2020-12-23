@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class RouletteApplyVo extends PagingVo {
 
+    private int couponType;
     private String mem_no;
     private String apply_date;
     private String item_no;

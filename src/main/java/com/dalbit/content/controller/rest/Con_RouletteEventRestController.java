@@ -27,8 +27,8 @@ public class Con_RouletteEventRestController {
      * 선물지급관리
      */
     @PostMapping("/selectRouletteRate")
-    public String selectRouletteRate() {
-        String result = con_rouletteEventService.selectRouletteRate();
+    public String selectRouletteRate(P_RouletteRateVo pRouletteRateVo) {
+        String result = con_rouletteEventService.selectRouletteRate(pRouletteRateVo);
         return result;
     }
 
