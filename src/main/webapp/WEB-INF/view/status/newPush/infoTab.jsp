@@ -9,7 +9,7 @@
             <div class="widget-content">
                 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
                     <li><a href="#time" role="tab" data-toggle="tab" id="tab_time">시간대 현황</a></li>
-                    <li class="active"><a href="#day" role="tab" data-toggle="tab" id="tab_day">일별 현황</a></li>
+                    <li class="active"><a href="#day" role="tab" data-toggle="tab" id="tab_day">월간 현황</a></li>
                     <%--<li><a href="#month" role="tab" data-toggle="tab" id="tab_month">월간 현황</a></li>--%>
                     <li><a href="#yearState" role="tab" data-toggle="tab" id="tab_yearState">연간 현황</a></li>
                     <li><a href="#history" role="tab" data-toggle="tab" id="tab_history">Push 발송내역</a></li>

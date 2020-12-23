@@ -340,7 +340,7 @@
     }
 
     function preview(tmp){
-        $("#imageFullSize").html(util.imageFullSize("fullSize_background", tmp == "thumbUrl" ? $("#txt_thumbnailUrl").val() : $("#txt_bannerUrl").val()));
+        $("#imageFullSize").html(util.imageFullSize("fullSize_background", tmp == "thumbnail" ? $("#txt_thumbnailUrl").val() : $("#txt_bannerUrl").val()));
         $("#fullSize_background").modal('show');
     }
     function previewPopup(tmp){
