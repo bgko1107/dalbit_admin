@@ -38,11 +38,6 @@
 <script type="text/javascript">
     var StoryPagingInfo = new PAGING_INFO(0,1,100);
 
-    $(document).ready(function() {
-        // $("#searchType_story").html(util.getCommonCodeSelect(-1, searchType_story));
-        storyList();
-    });
-
     function storyList(pagingNo, _tabId) {
 
         if(!common.isEmpty(_tabId)){
@@ -75,42 +70,37 @@
         };
 
         console.log(data);
-        util.getAjaxData("storyList", "/rest/content/boardAdm/storyList", data, fn_success_storyList);
+        util.getAjaxData("storyList", "/rest/content/boardAdm/storyList", data, function (dst_id, response, param) {
+            var template = $('#tmp_storyTable').html();
+            var templateScript = Handlebars.compile(template);
+            var context = response;
+            var html = templateScript(context);
+            $('#storyTable').html(html);
+
+            StoryPagingInfo.totalCnt = response.pagingVo.totalCnt;
+            util.renderPagingNavigation('story_paginate_top', StoryPagingInfo);
+            util.renderPagingNavigation('story_paginate', StoryPagingInfo);
+            StoryPagingInfo.pageNo=1;
+
+            if(response.data.length == 0) {
+                $("storyList").find("#story_paginate_top").hide();
+                $("storyList").find('#story_paginate').hide();
+            } else {
+                $("storyList").find("#story_paginate_top").show();
+                $("storyList").find('#story_paginate').show();
+            }
+
+            util.getAjaxData("storyListSummary", "/rest/content/boardAdm/storyList/summary", param, function(dst_id, response){
+                $("#tab_storyList").text("사연" + "(" + response.data.totalCnt +")");
+                $("#storyListCnt").html(
+                    '<span style="color:black">[검색결과 : ' +  response.data.totalCnt + ' 건]</span>' +
+                    '<span style="color: blue;"> [남' + response.data.maleCnt + " 건]</span>" + "," +
+                    '<span style="color: red;"> [여' + response.data.femaleCnt + " 건]</span>" + "," +
+                    '<span style="color: #555555;"> [알수없음' + response.data.noneCnt + " 건]</span>"
+                );
+            });
+        });
     }
-
-    function fn_success_storyList(dst_id, response, param) {
-        var template = $('#tmp_storyTable').html();
-        var templateScript = Handlebars.compile(template);
-        var context = response;
-        var html = templateScript(context);
-        $('#storyTable').html(html);
-
-        StoryPagingInfo.totalCnt = response.pagingVo.totalCnt;
-        util.renderPagingNavigation('story_paginate_top', StoryPagingInfo);
-        util.renderPagingNavigation('story_paginate', StoryPagingInfo);
-        StoryPagingInfo.pageNo=1;
-
-        if(response.data.length == 0) {
-            $("storyList").find("#story_paginate_top").hide();
-            $("storyList").find('#story_paginate').hide();
-        } else {
-            $("storyList").find("#story_paginate_top").show();
-            $("storyList").find('#story_paginate').show();
-        }
-
-        util.getAjaxData("storyListSummary", "/rest/content/boardAdm/storyList/summary", param, fn_success_storySummary);
-    }
-
-    function fn_success_storySummary(dst_id, response){
-        $("#tab_storyList").text("사연" + "(" + response.data.totalCnt +")");
-        $("#storyListCnt").html(
-            '<span style="color:black">[검색결과 : ' +  response.data.totalCnt + ' 건]</span>' +
-            '<span style="color: blue;"> [남' + response.data.maleCnt + " 건]</span>" + "," +
-            '<span style="color: red;"> [여' + response.data.femaleCnt + " 건]</span>" + "," +
-            '<span style="color: #555555;"> [알수없음' + response.data.noneCnt + " 건]</span>"
-        );
-    }
-
 
     $(document).on('click', '._deleteStory', function() {
         if(confirm('삭제하시겠습니까?')){
@@ -118,15 +108,13 @@
                 storyIdx: $(this).data('storyidx')
                 , room_no: $(this).data('roomno')
             };
-            util.getAjaxData("deleteStory", "/rest/content/boardAdm/deleteStory", data, fn_success_deleteStory);
+            util.getAjaxData("deleteStory", "/rest/content/boardAdm/deleteStory", data, function(dst_id, response){
+                alert(response.message);
+                storyList();
+            });
         }
         return false;
     });
-
-    function fn_success_deleteStory(dst_id, response) {
-        alert(response.message);
-        storyList();
-    }
 
     $('#broState').on('change', function () {
         storyList();

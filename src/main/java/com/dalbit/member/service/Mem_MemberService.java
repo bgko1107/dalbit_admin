@@ -19,6 +19,7 @@ import com.dalbit.exception.GlobalException;
 import com.dalbit.member.dao.Mem_MemberDao;
 import com.dalbit.member.vo.*;
 import com.dalbit.member.vo.procedure.*;
+import com.dalbit.money.vo.Mon_ExchangeSummaryOutputVo;
 import com.dalbit.security.vo.InforexLoginUserInfoVo;
 import com.dalbit.util.*;
 import com.google.gson.Gson;
@@ -1081,5 +1082,19 @@ public class Mem_MemberService {
         ArrayList<P_MemberListOutputVo> memberList = mem_MemberDao.selectMemberBoostList(pMemberListInputVo);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, memberList, new PagingVo(totalCnt)));
+    }
+
+    public String memberCouponHistory(P_MemberCouponVo pMemberCouponVo){
+
+        ProcedureVo procedureVo = new ProcedureVo(pMemberCouponVo);
+        ArrayList<P_MemberCouponVo> couponHistoryList = mem_MemberDao.callMemberCouponHistory(procedureVo);
+
+        P_MemberCouponVo summary = new Gson().fromJson(procedureVo.getExt(), P_MemberCouponVo.class);
+
+        HashMap map = new HashMap();
+        map.put("list", couponHistoryList);
+        map.put("summary", summary);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, couponHistoryList, new PagingVo(summary.getTotalCnt())));
     }
 }
