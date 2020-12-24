@@ -1051,7 +1051,6 @@ var MemberDataTableSource = {
                     return data == 1 ? '기본' : '이벤트';
                 }},
             {'title': '획득일시', 'data': 'issue_date', 'render': function(data, type, row, meta){
-                console.log(data);
                     return data;
                 }},
             {'title': '상태', 'data': 'status', 'render': function (data, type, row, meta) {
