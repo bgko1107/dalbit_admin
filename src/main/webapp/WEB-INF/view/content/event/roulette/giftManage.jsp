@@ -8,9 +8,9 @@
 
             <%@ include file="/WEB-INF/view/content/event/roulette/rouletteTab.jsp"%>
             <!-- serachBox -->
-            <div class="widget widget-table mb10">
+            <div class="widget widget-table mb15">
                 <div class="widget-header">
-                    <h3><i class="fa fa-table"></i> <span id="summary_today"></span> 선물지급관리</h3>
+                    <h3><i class="fa fa-table"></i> 기본권 응모권</h3>
                 </div>
                 <div class="col-md-12 no-padding">
                     <div class="widget-content mt10 no-padding ml10 mr10">
@@ -49,7 +49,7 @@
                                     <th>등록자명</th>
                                 </tr>
                             </thead>
-                            <tbody id="loginLiveTableBody">
+                            <tbody>
                                 <tr id="giftCntArea">
                                     <th>최대 당첨<br />제한 명수</th>
                                     <td>무제한<input type="hidden" class="form-control _data" /></td>
@@ -82,11 +82,92 @@
                         </table>
                     </div>
                 </div>
+                <div class="form-inline pull-right mr10 mb10">
+                    <button class="btn btn-success btn-sm" type="button" id="gift_bt_update">기본 응모권 수정하기</button>
+                </div>
+            </div>
+
+
+            <div class="widget widget-table mt15 mb10">
+                <div class="widget-header">
+                    <h3><i class="fa fa-table"></i> 이벤트형 응모권</h3>
+                </div>
+                <div class="col-md-12 no-padding">
+                    <div class="widget-content mt10 no-padding ml10 mr10">
+                        <table class="table table-bordered">
+                            <colgroup>
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>꽝</th>
+                                <th>1달</th>
+                                <th>3달</th>
+                                <th>상품 A</th>
+                                <th>상품 B</th>
+                                <th>상품 C</th>
+                                <th>상품 D</th>
+                                <th>상품 E</th>
+                                <th>100달</th>
+                                <th>등록/수정일</th>
+                                <th>등록자명</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr id="eventCntArea" style="display:none;">
+                                <th>최대 당첨<br />제한 명수</th>
+                                <td>무제한<input type="hidden" class="form-control _data" /></td>
+                                <td>무제한<input type="hidden" class="form-control _data" /></td>
+                                <td>무제한<input type="hidden" class="form-control _data" /></td>
+                                <td><input type="text" class="form-control _data" /></td>
+                                <td><input type="text" class="form-control _data" /></td>
+                                <td><input type="text" class="form-control _data" /></td>
+                                <td><input type="text" class="form-control _data" /></td>
+                                <td><input type="text" class="form-control _data" /></td>
+                                <td><input type="text" class="form-control _data" /></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr id="eventRate">
+                                <th>확률(100%)</th>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-inline pull-right mr10 mb10">
+                    <button class="btn btn-success btn-sm" type="button" id="event_bt_update">이벤트 응모권 수정하기</button>
+                </div>
             </div>
             <!-- // DATA TABLE -->
-            <div class="form-inline pull-right">
-                <button class="btn btn-success btn-sm" type="button" id="bt_update">수정하기</button>
-            </div>
+
         </div> <!-- //container-fluid -->
     </div> <!-- //page-wrapper -->
 </div> <!-- //wrapper -->
@@ -103,7 +184,11 @@
     });
 
     function getList() {
-        util.getAjaxData("today_summary" , "/rest/content/event/roulette/selectRouletteRate", null, function(dst_id, response){
+
+        var giftData = {
+            couponType : 1
+        }
+        util.getAjaxData("giftData" , "/rest/content/event/roulette/selectRouletteRate", giftData, function(dst_id, response){
             if(response.result == 'success'){
                 response.data.forEach(function(data, index){
                     $('#giftCntArea td:eq('+index+') input').val(data.limitCnt);
@@ -111,28 +196,51 @@
                 })
             }
         });
+
+        var eventData = {
+            couponType : 2
+        }
+        util.getAjaxData("eventData" , "/rest/content/event/roulette/selectRouletteRate", eventData, function(dst_id, response){
+            if(response.result == 'success'){
+                response.data.forEach(function(data, index){
+                    $('#eventCntArea td:eq('+index+') input').val(data.limitCnt);
+                    $('#eventRate td:eq('+index+') input').val(data.winRate / 100);
+                })
+            }
+        });
     }
 
-    $(document).on('click', '#bt_update', function(){
+    $(document).on('click', '#gift_bt_update, #event_bt_update', function(){
+
+        var cntArea = 'giftCntArea';
+        var rate = 'eventRate';
+        var couponType = 2;
+
+        if(-1 < $(this).prop('id').indexOf('gift')){
+            var cntArea = 'giftCntArea';
+            var rate = 'giftRate';
+            var couponType = 1;
+        }
+
         var isValid = true;
 
         var editList = '';
         var splitTxt = '|'
-        $('#giftCntArea td input._data').each(function(index){
+        $('#'+cntArea+' td input._data').each(function(index){
             var dalCnt = 0;
-            var giftRate = $('#giftRate td:eq('+index+') input').val();
-            var giftCnt = $('#giftCntArea td:eq('+index+') input').val();
+            var giftRate = $('#'+rate+' td:eq('+index+') input').val();
+            var giftCnt = $('#'+cntArea+' td:eq('+index+') input').val();
             if(common.isEmpty(giftCnt)){
                 alert('최대 당첨제한 명수를 입력해주세요.');
                 isValid = false;
-                $('#giftCntArea td:eq('+index+') input').focus();
+                $('#'+cntArea+' td:eq('+index+') input').focus();
                 return false;
             }
 
             if(common.isEmpty(giftRate)){
                 alert('확률을 입력해주세요.');
                 isValid = false;
-                $('#giftRate td:eq('+index+') input').focus();
+                $('#'+rate+' td:eq('+index+') input').focus();
                 return false;
             }
 
@@ -151,6 +259,7 @@
         console.log(editList);
         var param = {
             editList : editList
+            , couponType : couponType
         }
 
         if(!isValid){

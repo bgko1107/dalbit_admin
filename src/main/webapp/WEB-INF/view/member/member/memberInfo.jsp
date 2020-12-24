@@ -153,6 +153,9 @@
         $('#bt_adminMemoList').click(function() {       //운영자 메모 리스트
             getAdminMemoList(this.id,"운영자메모");
         });
+        $('#bt_couponHistory').click(function() {       //운영자 메모 리스트
+            getInfoDetail(this.id,"룰렛 응모권");
+        });
         $('.bt_connectState').click(function() {         //접속상태
             $("#tab_connectState").click();
             // getInfoDetail('bt_connectState',"접속상태");
@@ -632,26 +635,49 @@
         data.mem_no = memNo;
         data.delList =  dtMemoList.getCheckedData();
         console.log(data);
-        util.getAjaxData("adminMemoDel", "/rest/member/member/admin/memoDel",data, adminMemoDel_success);
+        util.getAjaxData("adminMemoDel", "/rest/member/member/admin/memoDel",data, function(){
+            dtMemoList.reload();
+        });
     }
 
-    function adminMemoDel_success(dst_id, response) {
-        // alert(response.message);
-        // tmp_bt = "bt_adminMemoList";
-        // getMemNo_info_reload(memNo);
-        dtMemoList.reload();
+    function getCouponHistory(tmp,tmp1) {     // 상세보기
+        var template = $('#tmp_member_detailFrm').html();
+        var templateScript = Handlebars.compile(template);
+        $("#member_detailFrm").html(templateScript);
+
+        $('#tab_memberInfoDetail').text(tmp1);           //텝 이름 변경
+        $('#member_detailFrm').addClass("show");
+        if(tmp.indexOf("_") > 0){ tmp = tmp.split("_"); tmp = tmp[1]; }
+
+        console.log(tmp);
+
+        var source = MemberDataTableSource[tmp];
+        var dtList_info_detail_data = function (data) {
+            data.mem_no = memNo;
+            data.memoSlct = inputSearchMemoSlct;
+        };
+        console.log(source)
+        dtMemoList = new DalbitDataTable($("#info_detail"), dtList_info_detail_data, source);
+        dtMemoList.useCheckBox(true);
+        dtMemoList.useIndex(true);
+        dtMemoList.createDataTable();
+
+        var scrollPosition = $("#tab_infoDetail").offset();
+        util.scrollPostion(scrollPosition.top);
+
+        var adminMemoDel = '<input type="button" value="삭제" class="btn btn-danger btn-sm" id="btn_adminMemoDel" style="margin-right: 3px;"/>';
+        $("#memberInfoDetail").find(".footer-left").append(adminMemoDel);
+
     }
 
     function stateEdit() {
         if(confirm("상태를 정상으로 변경 하시겠습니까?")) {
             var obj = new Object();
             obj.mem_no = memNo;
-            util.getAjaxData("editor", "/rest/member/member/state_edit", obj, state_edit_success, fn_fail);
+            util.getAjaxData("editor", "/rest/member/member/state_edit", obj, function(dst_id, response){
+                getMemNo_info_reload(memNo);
+            });
         }return false;
-    }
-
-    function state_edit_success(dst_id, response) {
-        getMemNo_info_reload(memNo);
     }
 
     $(document).on('click', 'input:radio[name="memSex"]', function(title, content){
@@ -1330,9 +1356,14 @@
                 {{/equal}}
             </td>
             <th>최근메모<br>등록</th>
-            <td colspan="6" style="text-align: left;border-right-color:white;border-right-width:0px;">등록: {{addComma opMemoCnt}} 건</td>
+            <td colspan="2" style="text-align: left;border-right-color:white;border-right-width:0px;">등록: {{addComma opMemoCnt}} 건</td>
             <td>
                 <button type="button" id="bt_adminMemoList" class="btn btn-default btn-sm pull-right">상세</button>
+            </td>
+            <th>룰렛<br />응모권</th>
+            <td colspan="2" style="text-align: left;border-right-color:white;border-right-width:0px;">{{addComma couponCnt}} 개</td>
+            <td>
+                <button type="button" id="bt_couponHistory" class="btn btn-default btn-sm pull-right">상세</button>
             </td>
         </tr>
         </tbody>

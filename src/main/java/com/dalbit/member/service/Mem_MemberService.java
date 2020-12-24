@@ -19,6 +19,7 @@ import com.dalbit.exception.GlobalException;
 import com.dalbit.member.dao.Mem_MemberDao;
 import com.dalbit.member.vo.*;
 import com.dalbit.member.vo.procedure.*;
+import com.dalbit.money.vo.Mon_ExchangeSummaryOutputVo;
 import com.dalbit.security.vo.InforexLoginUserInfoVo;
 import com.dalbit.util.*;
 import com.google.gson.Gson;
@@ -757,7 +758,7 @@ public class Mem_MemberService {
         pMemberEditorVo.setUseContents(pMemberEditorVo.getAddDalCnt() + " - " +  pMemberEditorVo.getPointEditStroy());
         int beforDalCnt = mem_MemberDao.callMemberBeforDelCnt(pMemberEditorVo);
         int afterDalCnt = beforDalCnt + pMemberEditorVo.getAddDalCnt();
-        pMemberEditorVo.setEditContents("달수 변경 : " + DalbitUtil.comma(beforDalCnt) + " >> " + DalbitUtil.comma(pMemberEditorVo.getAddDalCnt())
+        pMemberEditorVo.setAddContents("달수 변경 : " + DalbitUtil.comma(beforDalCnt) + " >> " + DalbitUtil.comma(pMemberEditorVo.getAddDalCnt())
                                          + " 변경 >> " + DalbitUtil.comma(afterDalCnt) + " | " + pMemberEditorVo.getPointEditStroy());
 
         // 소실금액 복구, 운영자 지급이 같은 코드를 사용. 소실 금액 복구시에만 money ( 차감시에는 dalSlct 사용 X )
@@ -1081,5 +1082,19 @@ public class Mem_MemberService {
         ArrayList<P_MemberListOutputVo> memberList = mem_MemberDao.selectMemberBoostList(pMemberListInputVo);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, memberList, new PagingVo(totalCnt)));
+    }
+
+    public String memberCouponHistory(P_MemberCouponVo pMemberCouponVo){
+
+        ProcedureVo procedureVo = new ProcedureVo(pMemberCouponVo);
+        ArrayList<P_MemberCouponVo> couponHistoryList = mem_MemberDao.callMemberCouponHistory(procedureVo);
+
+        P_MemberCouponVo summary = new Gson().fromJson(procedureVo.getExt(), P_MemberCouponVo.class);
+
+        HashMap map = new HashMap();
+        map.put("list", couponHistoryList);
+        map.put("summary", summary);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, couponHistoryList, new PagingVo(summary.getTotalCnt())));
     }
 }

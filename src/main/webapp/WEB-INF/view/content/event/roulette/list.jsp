@@ -69,15 +69,8 @@
         dateType();
     });
 
-
-    $(function() {
-       init();
-       getList();
-    });
-
     $('#bt_search').click(function() {
         getList();
-
     });
 
     $('input[id="txt_search"]').keydown(function(e) {

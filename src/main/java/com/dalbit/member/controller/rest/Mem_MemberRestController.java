@@ -334,4 +334,10 @@ public class Mem_MemberRestController {
         String result = mem_MemberService.memberBoostList(pMemberListInputVo);
         return result;
     }
+
+    @PostMapping("coupon/history")
+    public String memberCouponHistory(P_MemberCouponVo pMemberCouponVo){
+        String result = mem_MemberService.memberCouponHistory(pMemberCouponVo);
+        return result;
+    }
 }

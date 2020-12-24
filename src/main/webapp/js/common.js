@@ -388,6 +388,11 @@ common.fontColor = function(value, minValue, fontColor){
     return "<span style='color:"+fontColor+";font-weight: bold;'>" + value + "</span>";
 };
 
+common.setFontColor = function(value, fontColor){
+    fontColor = common.isEmpty(fontColor) ? 'black' : fontColor;
+    return "<span style='color:"+fontColor+";font-weight: bold;'>" + value + "</span>";
+};
+
 common.scrollTop = function(){
     $(window).scroll(function () {
         if ($(this).scrollTop() > 50) {

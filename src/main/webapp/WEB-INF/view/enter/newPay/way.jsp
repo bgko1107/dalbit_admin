@@ -188,9 +188,9 @@
         <td>{{vatMinus sum_kakaopayCnt}}</td>
         <td>{{vatMinus sum_kakaopayCmt}}</td>
         <td>{{vatMinus sum_kakaopayAmt}}</td>
-        <td>{{vatMinus sum_kakaoMoneyCnt}}</td>
-        <td>{{vatMinus sum_kakaoMoneyCmt}}</td>
-        <td>{{vatMinus sum_kakaoMoneyAmt}}</td>
+        <td>{{vatMinus sum_kakaomoneyCnt}}</td>
+        <td>{{vatMinus sum_kakaomoneyCmt}}</td>
+        <td>{{vatMinus sum_kakaomoneyAmt}}</td>
     </tr>
 </script>
 
@@ -242,9 +242,9 @@
         <td>{{vatMinus kakaopayCnt}}</td>
         <td>{{vatMinus kakaopayCmt}}</td>
         <td>{{vatMinus kakaopayAmt}}</td>
-        <td>{{vatMinus kakaoMoneyCnt}}</td>
-        <td>{{vatMinus kakaoMoneyCmt}}</td>
-        <td>{{vatMinus kakaoMoneyAmt}}</td>
+        <td>{{vatMinus kakaomoneyCnt}}</td>
+        <td>{{vatMinus kakaomoneyCmt}}</td>
+        <td>{{vatMinus kakaomoneyAmt}}</td>
 
     </tr>
     {{else}}

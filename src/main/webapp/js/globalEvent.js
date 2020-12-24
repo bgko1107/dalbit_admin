@@ -16,7 +16,7 @@ $(document).on('click', '._openMemberPop', function(){
     }
 
     var url = "/member/member/popup/memberPopup?memNo="+encodeURIComponent($(this).data('memno')) + moveTabId;
-    util.windowOpen(url, 1460, 825, 'memberInfo' + $(this).data('memno'));
+    util.windowOpen(url, 1460, 885, 'memberInfo' + $(this).data('memno'));
 });
 
 /*방송정보보기 팝업*/

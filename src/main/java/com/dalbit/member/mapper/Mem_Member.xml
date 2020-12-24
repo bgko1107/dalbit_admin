@@ -947,4 +947,8 @@
         </where>
         limit #{pageStart}, #{pageCnt}
     </select>
+
+    <select id="callMemberCouponHistory" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_MemberCouponVo">
+        call rd_admin.sp_admin_coupon_member_history(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
 </mapper>
