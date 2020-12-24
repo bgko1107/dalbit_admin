@@ -194,6 +194,8 @@
                 restUrl='hm'
             }else if(cancelData.paycd == 'toss' || cancelData.paycd == 'payco' || cancelData.paycd == 'cashbee' || cancelData.paycd == 'tmoney' || cancelData.paycd == 'kakaopay' ){
                 restUrl='payletter'
+            }else if(cancelData.paycd == 'kakaoMoney'){
+                restUrl='kakaoMoney'
             }else {
                 alert("결제수단 오류 확인필요");
             }

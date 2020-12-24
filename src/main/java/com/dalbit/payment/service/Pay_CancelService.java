@@ -18,13 +18,19 @@ import com.dalbit.payment.module.ucCancel_v0001.CancelUc;
 import com.dalbit.payment.vo.*;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
+import com.dalbit.util.OkHttpClientUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -586,6 +592,69 @@ public class Pay_CancelService {
             result.put("status", Status.달차감_보유달부족);
         }else {
             result.put("status", Status.달차감_실패);
+        }
+        return result;
+    }
+
+
+    /**
+     * 카카오페이(머니) 결제 취소
+     */
+    public String payCancelKakaoMoney(Pay_CancelKakaoPayVo payCancelKakaoPayVo) throws GlobalException{
+        String result;
+        // 서버로 요청할 Body
+        RequestBody formBody = new FormBody.Builder()
+                .add("cid", DalbitUtil.getProperty("kakao.cid"))
+                .add("tid", payCancelKakaoPayVo.getMobilid())
+                .add("cancel_amount", String.valueOf(payCancelKakaoPayVo.getPrdtprice()))
+                .add("cancel_tax_free_amount","0")
+                .build();
+
+        try{
+            OkHttpClientUtil okHttpClientUtil = new OkHttpClientUtil();
+            Response response = okHttpClientUtil.sendKakaoPost(DalbitUtil.getProperty("kakao.host") + "/v1/payment/cancel", formBody);
+            String data = response.body().string();
+
+            Pay_CancelVo cancelVo = new Pay_CancelVo();
+            if(response.code() == 200){
+                KakaoPayCancelResVo kakaoPayCancelResVo = new Gson().fromJson(data, KakaoPayCancelResVo.class);
+                cancelVo.setOrder_id(payCancelKakaoPayVo.getTradeid());
+                cancelVo.setCancel_dt(kakaoPayCancelResVo.getCanceled_at().replace("T", " "));
+                cancelVo.setFail_msg("");
+                cancelVo.setOp_name(MemberVo.getMyMemNo());
+                cancelVo.setCancel_state("y");
+
+                //결제취소 달 차감
+                P_CancelVo pCancelVo = new P_CancelVo();
+                pCancelVo.setMem_no(payCancelKakaoPayVo.getMemno());
+                pCancelVo.setOrder_id(payCancelKakaoPayVo.getTradeid());
+                HashMap resultMap = dalCancel(pCancelVo);
+
+                if(resultMap.get("status").equals(Status.달차감_성공)){
+                    result =  gsonUtil.toJson(new JsonOutputVo(Status.결제취소성공));
+                }else {
+                    result = gsonUtil.toJson(new JsonOutputVo((Status) resultMap.get("status")));
+                }
+            } else {
+                FailVo failVo = new Gson().fromJson(data, FailVo.class);
+                log.info("=====================================");
+                log.info("[카카오페이(머니)] 취소코드: {}", failVo.getCode());
+                log.info("[카카오페이(머니)] Result Msg: {}", failVo.getExtras().getMethod_result_message());
+                log.info("=====================================");
+
+                cancelVo.setOrder_id(payCancelKakaoPayVo.getTradeid());
+                cancelVo.setCancel_dt("");
+                cancelVo.setFail_msg(failVo.getExtras().getMethod_result_message());
+                cancelVo.setOp_name(MemberVo.getMyMemNo());
+                cancelVo.setCancel_state("f");
+
+                result = gsonUtil.toJson(new JsonOutputVo(Status.결제취소실패));
+            }
+            //취소 업데이트
+            payCancelDao.sendPayCancel(cancelVo);
+
+        }catch (RestClientException | IOException e) {
+            throw new GlobalException(Status.비즈니스로직오류, e);
         }
         return result;
     }
