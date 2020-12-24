@@ -130,7 +130,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr id="eventCntArea">
+                            <tr id="eventCntArea" style="display:none;">
                                 <th>최대 당첨<br />제한 명수</th>
                                 <td>무제한<input type="hidden" class="form-control _data" /></td>
                                 <td>무제한<input type="hidden" class="form-control _data" /></td>
@@ -212,7 +212,7 @@
 
     $(document).on('click', '#gift_bt_update, #event_bt_update', function(){
 
-        var cntArea = 'eventCntArea';
+        var cntArea = 'giftCntArea';
         var rate = 'eventRate';
         var couponType = 2;
 
