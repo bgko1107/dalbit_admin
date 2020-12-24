@@ -102,4 +102,15 @@ public class Pay_CancelRestController {
         return result;
     }
 
+
+    /**
+     * 카카오페이(머니) 결제 취소
+     */
+    @PostMapping("kakaoMoney")
+    public String payCancelKakaoMoney(Pay_CancelKakaoPayVo payCancelKakaoPayVo) throws GlobalException {
+        String result = payCancelService.payCancelKakaoMoney(payCancelKakaoPayVo);
+        return result;
+    }
+
+
 }

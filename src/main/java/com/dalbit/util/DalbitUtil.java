@@ -851,6 +851,8 @@ public class DalbitUtil {
             str = "스마트문상(게임)";
         } else if (str.equals("GC")) {
             str = "도서문화상품권";
+        } else if (str.equals("kakaoMoney")) {
+            str = "카카오페이(머니)";
         } else {
             str = "-";
         }

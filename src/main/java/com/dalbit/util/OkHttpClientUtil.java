@@ -116,4 +116,25 @@ public class OkHttpClientUtil {
         }
     }
 
+    public Response sendKakaoPost(String url, RequestBody formBody) throws GlobalException {
+        try{
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(formBody)
+                    .addHeader("Authorization", "KakaoAK " + DalbitUtil.getProperty("kakao.admin.key"))
+                    .addHeader("Accept", org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE)
+                    .addHeader("Content-Type", org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8")
+                    .build()
+                    ;
+
+            Call call = client.newCall(request);
+            Response response = call.execute();
+
+            return response;
+        }catch (Exception e){
+            throw new GlobalException(ErrorStatus.잘못된호출);
+        }
+    }
+
 }
