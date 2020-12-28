@@ -66,7 +66,7 @@
 
         }else if(targetId == "fanBoardReply_paginate_top" || targetId == "fanBoardReply_paginate") {
             fanBoardReplyPagingInfo = pagingInfo;
-            fanBoardReply();
+            fanBoardReply(pagingInfo.pageNo);
 
         } else if(targetId == "list_info_paginate_top" || targetId == "list_info_paginate") {
             shotListPagingInfo = pagingInfo;
@@ -78,11 +78,11 @@
 
         } else if(targetId == "clipReply_paginate_top" || targetId == "clipReply_paginate"){
             clipPagingInfo = pagingInfo;
-            clipReplyList();
+            clipReplyList(pagingInfo.pageNo);
 
         }else if(targetId == "profile_paginate_top" || targetId == "profile_paginate"){
             profilePagingInfo = pagingInfo;
-            profileMsgList();
+            profileMsgList(pagingInfo.pageNo);
 
         }else if(targetId == "noticeReply_paginate_top" || targetId == "noticeReply_paginate"){
             noticeReplyPagingInfo = pagingInfo;
