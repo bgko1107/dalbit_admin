@@ -136,10 +136,10 @@
             and b.state=4
         </if>
         <if test="endDate != null">
-            and DATE_FORMAT(b.start_date, '%Y-%m-%d') >= #{startDate} and DATE_FORMAT(b.start_date, '%Y-%m-%d')  <![CDATA[<=]]>  #{endDate}
+            and b.start_date >= #{startDate} and b.start_date  <![CDATA[<=]]>  #{endDate}
         </if>
         <if test="endDate == null">
-            and DATE_FORMAT(b.start_date, '%Y-%m-%d') >= #{startDate}
+            and b.start_date >= #{startDate}
         </if>
     </select>
 
