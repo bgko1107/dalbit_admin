@@ -1032,7 +1032,15 @@
         <tr>
             <th>회원상태</th>
             <td style="text-align: left">
-                <span {{#dalbit_if memState '==' 7}} style="color:blue" {{/dalbit_if}}>{{{getCommonCodeLabel memState 'mem_state'}}}</span>
+                {{#dalbit_if memState '==' 5}}
+                    {{#dalbit_if block_type '==' 1}}
+                        임시정지
+                    {{else}}
+                        <span {{#dalbit_if memState '==' 7}} style="color:blue" {{/dalbit_if}}>{{{getCommonCodeLabel memState 'mem_state'}}}</span>
+                    {{/dalbit_if}}
+                {{else}}
+                    <span {{#dalbit_if memState '==' 7}} style="color:blue" {{/dalbit_if}}>{{{getCommonCodeLabel memState 'mem_state'}}}</span>
+                {{/dalbit_if}}
             </td>
             <td colspan="4" style="text-align: center;">
                 <%--{{{block}}}--%>
