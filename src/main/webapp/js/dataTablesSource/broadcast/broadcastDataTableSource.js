@@ -374,10 +374,13 @@ var BroadcastDataTableSource = {
                         tmp = '<span class ="label" style="background-color:#d943c1">' + "추천" + '</span><br/>';
                     }
                     if(row.newdj_badge == "1"){
-                        tmp = tmp + '<span class ="label" style="background-color:#d9c811">' + "신입" + '</span><br/>';
+                        tmp = tmp + '<span class ="label" style="background-color:#632beb">' + "신입DJ" + '</span><br/>';
                     }
                     if(row.specialdj_badge == "1"){
                         tmp = tmp + '<span class ="label" style="background-color:red">' + "스페셜DJ" + '</span>';
+                    }
+                    if(row.new_badge == "1"){
+                        tmp = tmp + '<span class ="label" style="background-color:#ffc000">' + "신입" + '</span><br/>';
                     }
                     if(data == "1") {
                         return '<lable style="color:#d98000">퇴장</lable><br/>' + tmp;

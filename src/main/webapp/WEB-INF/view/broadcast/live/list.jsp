@@ -11,7 +11,7 @@
 <!-- serachBox -->
 <form id="searchForm">
     <div class="row col-lg-12 form-inline">
-        <div class="col-md-7 no-padding">
+        <div class="col-md-6 no-padding">
             <div class="widget widget-table searchBoxArea">
                 <table>
                     <tr>
@@ -41,13 +41,13 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-5 pull-right no-padding" id="divLive">
+        <div class="col-md-6 pull-right no-padding" id="divLive">
             <span id="live_summaryArea"></span>
             <%--<span id="dj_typeSummaryArea"></span>--%>
             <%--<span id="platform_summaryArea"></span>--%>
         </div>
 
-        <div class="col-md-5 pull-right no-padding" id="divLiveListen" style="display: none">
+        <div class="col-md-6 pull-right no-padding" id="divLiveListen" style="display: none">
             <div class="col-md-7 no-padding pull-right">
                 <span id="live_summaryArea2"></span>
             </div>
@@ -56,11 +56,11 @@
             </div>
         </div>
 
-        <div class="col-md-5 pull-right no-padding" id="divLivelogin" style="display: none">
+        <div class="col-md-6 pull-right no-padding" id="divLivelogin" style="display: none">
             <span id="login_summaryArea"></span>
         </div>
 
-        <div class="col-md-5 pull-right no-padding" id="divLiveGuest" style="display: none">
+        <div class="col-md-6 pull-right no-padding" id="divLiveGuest" style="display: none">
             <span id="liveGuest_summaryArea"></span>
         </div>
 
@@ -440,13 +440,13 @@
     <table class="table table-bordered table-summary pull-right no-margin" style="width: 100%">
         <tr>
             <th colspan="8" style="background-color: #8faadc">방송방</th>
-            <th colspan="3" style="background-color: #f4b183">청취자</th>
+            <th colspan="4" style="background-color: #f4b183">청취자</th>
         </tr>
         <tr>
             <th colspan="3" style="background-color: #dae3f3;">플랫폼</th>
             <th colspan="2" style="background-color: #dae3f3;">DJ구분</th>
             <th colspan="3" style="background-color: #dae3f3;">DJ성별</th>
-            <th colspan="3" style="background-color: #fbe5d6;">청취자(게스트)성별</th>
+            <th colspan="4" style="background-color: #fbe5d6;">청취자(게스트)성별</th>
         </tr>
         <tr>
             <th style="background-color: #b4c7e7">Android</th>
@@ -457,6 +457,7 @@
             <th style="background-color: #b4c7e7">{{{sexIcon 'm'}}}</th>
             <th style="background-color: #b4c7e7">{{{sexIcon 'f'}}}</th>
             <th style="background-color: #b4c7e7">{{{sexIcon 'n'}}}</th>
+            <th style="background-color: #f8cbad">신입</th>
             <th style="background-color: #f8cbad">{{{sexIcon 'm'}}}</th>
             <th style="background-color: #f8cbad">{{{sexIcon 'f'}}}</th>
             <th style="background-color: #f8cbad">{{{sexIcon 'n'}}}</th>
@@ -470,6 +471,7 @@
             <td>{{addComma content.broadMaleCnt}}</td>
             <td>{{addComma content.broadFemaleCnt}}</td>
             <td>{{addComma content.broadNoneCnt}}</td>
+            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.newCnt}}명</td>
             <td>{{addComma content.liveListenMaleCnt}} ({{addComma content.guestMaleCnt}})</td>
             <td>{{addComma content.liveListenFemaleCnt}} ({{addComma content.guestFemaleCnt}})</td>
             <td>{{addComma content.liveListenNoneCnt}} ({{addComma content.guestNoneCnt}})</td>
@@ -478,7 +480,7 @@
             <td class="font-bold" style="background-color: #d8d8d8;" colspan="3">총 수(방송중/끊김)</td>
             <td class="font-bold" style="background-color: #f2f2f2; color: #ed7d31" colspan="5">{{addComma content.totalBroadCastCnt}} ({{addComma content.broadStateNomal}}/{{addComma content.broadBreak}})</td>
             <td class="font-bold" style="background-color: #d8d8d8;" >총 수</td>
-            <td class="font-bold" style="background-color: #f2f2f2; color: #ed7d31" colspan="2">{{addComma content.liveListenerCnt}} ({{addComma content.totalGuestCnt}})</td>
+            <td class="font-bold" style="background-color: #f2f2f2; color: #ed7d31" colspan="3">{{addComma content.liveListenerCnt}} ({{addComma content.totalGuestCnt}})</td>
         </tr>
     </table>
 </script>

@@ -56,6 +56,7 @@ public class Bro_ListenerService {
                     outVo.setRecomm_badge(String.valueOf(djBadge.get("recomm_badge")) );
                     outVo.setNewdj_badge(String.valueOf(djBadge.get("newdj_badge")));
                     outVo.setSpecialdj_badge(String.valueOf(djBadge.get("specialdj_badge")));
+                    outVo.setNew_badge(String.valueOf(djBadge.get("new_badge")));
                 }
                 outVo.setRowNum(broadList.get(i).getRowNum());
                 outVo.setAuth(broadList.get(i).getAuth());

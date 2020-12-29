@@ -128,6 +128,7 @@
                , ifnull(SUM(case when newdj_badge = 0 then 1 else 0 end),0) as normalDjCnt
                , ifnull(SUM(case when newdj_badge = 1 then 1 else 0 end),0) as newDjCnt
                , ifnull(SUM(case when specialdj_badge = 1 then 1 else 0 end),0) as specialDjCnt
+               , (select count(*) from rd_data.tb_member_profile where mem_no in (select mem_no from rd_data.tb_broadcast_room_member where state = 0 and auth <![CDATA[<]]> 3) and new_badge ='1') as newCnt
          from rd_data.tb_member_profile a join rd_data.tb_broadcast_room b on a.mem_no = b.mem_no
         <if test="room_liveType == 1">
             and b.state != 4

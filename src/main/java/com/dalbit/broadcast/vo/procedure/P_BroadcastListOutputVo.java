@@ -97,6 +97,7 @@ public class P_BroadcastListOutputVo extends PagingVo {
     private int normalDjCnt;
     private int newDjCnt;
     private int specialDjCnt;
+    private int newCnt;
 
     private int totalListenMaleCnt;
     private int totalListenFemaleCnt;

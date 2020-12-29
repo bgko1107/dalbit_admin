@@ -98,6 +98,7 @@ public class P_MemberInfoOutputVo extends SearchVo {
     private String recomm_badge;
     private String newdj_badge;
     private String specialdj_badge;
+    private String new_badge;
 
     //마지막 로그인 정보
     private String ip;
