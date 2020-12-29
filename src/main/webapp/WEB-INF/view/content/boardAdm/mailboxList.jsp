@@ -89,6 +89,16 @@
             $("mailboxList").find("#mailbox_paginate_top").show();
             $("mailboxList").find('#mailbox_paginate').show();
 
+            response.summary.gift_totalCnt = response.summary.gift_mCnt + response.summary.gift_fCnt + response.summary.gift_nCnt;
+            response.summary.total_giftCnt = response.summary.male_giftCnt + response.summary.female_giftCnt + response.summary.none_giftCnt;
+            response.summary.total_byeolCnt = response.summary.male_byeolCnt + response.summary.female_byeolCnt + response.summary.none_byeolCnt;
+
+            response.summary.msg_totalCnt = response.summary.msg_mCnt + response.summary.msg_fCnt + response.summary.msg_nCnt;
+            response.summary.total_msgCnt = response.summary.male_msgCnt + response.summary.female_msgCnt + response.summary.none_msgCnt;
+
+            response.summary.img_totalCnt = response.summary.img_mCnt + response.summary.img_fCnt + response.summary.img_nCnt;
+            response.summary.total_imgCnt = response.summary.male_imgCnt + response.summary.female_imgCnt + response.summary.none_imgCnt;
+
             var template = $('#tmp_mailboxSummary').html();
             var templateScript = Handlebars.compile(template);
             var context = response.summary;
@@ -126,7 +136,7 @@
                     <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">{{msg}}</a>
                 {{/dalbit_if}}
                 {{#dalbit_if msgType '==' 2}}       <!-- 이미지 -->
-                    <img class="fullSize_background" alt="your image" src="{{renderImage data1}}" style='height:68px; width:68px; margin: auto;vertical-align:middle;' />
+                    <img class="fullSize_background thumbnailImg" alt="your image" src="{{renderImage data1}}" style='height:68px; width:68px; margin: auto;vertical-align:middle;' />
                     <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">이미지 전송</a>
                 {{/dalbit_if}}
                 {{#dalbit_if msgType '==' 3}}       <!-- 아이템 -->
@@ -179,10 +189,10 @@
             <td class="_fontColor" data-fontcolor="blue">{{addComma male_giftCnt}} / {{addComma male_byeolCnt}}</td>
             <td class="_fontColor" data-fontcolor="red">{{addComma gift_fCnt}}</td>
             <td class="_fontColor" data-fontcolor="red">{{addComma female_giftCnt}} / {{addComma female_byeolCnt}}</td>
-            <td>{{addComma gict_nCnt}}</td>
+            <td>{{addComma gift_nCnt}}</td>
             <td>{{addComma none_giftCnt}} / {{addComma none_byeolCnt}}</td>
-            <td>{{addComma aa}}</td>
-            <td>{{addComma aa}}</td>
+            <td>{{addComma gift_totalCnt}}</td>
+            <td>{{addComma total_giftCnt}} / {{addComma total_byeolCnt}}</td>
         </tr>
         <tr>
             <th class="_bgColor" data-bgcolor="#f2f2f2">대화</th>
@@ -192,8 +202,8 @@
             <td class="_fontColor" data-fontcolor="red">{{addComma female_msgCnt}}</td>
             <td>{{addComma msg_nCnt}}</td>
             <td>{{addComma none_msgCnt}}</td>
-            <td>{{addComma aa}}</td>
-            <td>{{addComma aa}}</td>
+            <td>{{addComma msg_totalCnt}}</td>
+            <td>{{addComma total_msgCnt}}</td>
         </tr>
         <tr>
             <th class="_bgColor" data-bgcolor="#f2f2f2">이미지</th>
@@ -203,8 +213,8 @@
             <td class="_fontColor" data-fontcolor="red">{{addComma female_imgCnt}}</td>
             <td>{{addComma img_nCnt}}</td>
             <td>{{addComma none_imgCnt}}</td>
-            <td>{{addComma aa}}</td>
-            <td>{{addComma aa}}</td>
+            <td>{{addComma img_totalCnt}}</td>
+            <td>{{addComma total_imgCnt}}</td>
         </tr>
     </table>
 </script>

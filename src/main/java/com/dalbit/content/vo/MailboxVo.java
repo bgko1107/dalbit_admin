@@ -45,7 +45,7 @@ public class MailboxVo extends PagingVo {
     private int img_nCnt;
     private int gift_mCnt;
     private int gift_fCnt;
-    private int gict_nCnt;
+    private int gift_nCnt;
     private int male_msgCnt;
     private int female_msgCnt;
     private int none_msgCnt;

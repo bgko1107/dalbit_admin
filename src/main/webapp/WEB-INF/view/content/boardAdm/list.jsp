@@ -103,4 +103,33 @@
             broadNoticeReply(pagingInfo.pageNo);
         }
     }
+
+    // thumbnail 명칭 겹쳐서 thumbnailImg 로 세팅
+    var xOffset = 10;
+    var yOffset = 30;
+    var height = 0;
+    $(document).on("mouseover",".thumbnailImg",function(e){ //마우스 오버
+        if(common.isEmpty($(this).attr("src"))){
+            return;
+        }
+
+        $("body").append("<p id='preview'><img id='previewImage' src='"+ $(this).attr("src") +"' width='300px' /></p>"); //이미지
+
+        $("#previewImage").load(function () {
+            height = $(this).height();
+        });
+
+        $("#preview")
+            .css("top",(e.pageY - ((height/2) + (height/2)) + 30) + "px")
+            .css("left",(e.pageX + yOffset) + "px")
+            .fadeIn("fast");
+    });
+    $(document).on("mousemove",".thumbnailImg",function(e){ //마우스 이동
+        $("#preview")
+            .css("top",(e.pageY - ((height/2) + (height/2)) + 30) + "px")
+            .css("left",(e.pageX + yOffset) + "px");
+    });
+    $(document).on("mouseout",".thumbnailImg",function(){ //마우스 아웃
+        $("#preview").remove();
+    });
 </script>
