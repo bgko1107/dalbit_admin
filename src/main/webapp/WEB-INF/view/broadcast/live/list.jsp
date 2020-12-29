@@ -474,9 +474,9 @@
             <td>{{addComma content.broadFemaleCnt}}</td>
             <td>{{addComma content.broadNoneCnt}}</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.newCnt}}명</td>
-            <td>{{#dalbit_if liveState '==' 0}} {{addComma content.liveListenMaleCnt}} {{else}} {{addComma content.totalListenMaleCnt}} {{/dalbit_if}} ({{addComma content.guestMaleCnt}})</td>
-            <td>{{#dalbit_if liveState '==' 0}} {{addComma content.liveListenFemaleCnt}} {{else}} {{addComma content.totalListenFemaleCnt}} {{/dalbit_if}} ({{addComma content.guestFemaleCnt}})</td>
-            <td>{{#dalbit_if liveState '==' 0}} {{addComma content.liveListenNoneCnt}} {{else}} {{addComma content.totalListenNoneCnt}} {{/dalbit_if}} ({{addComma content.guestNoneCnt}})</td>
+            <td>{{#dalbit_if liveState '==' 1}} {{addComma content.liveListenMaleCnt}} {{else}} {{addComma content.totalListenMaleCnt}} {{/dalbit_if}} ({{addComma content.guestMaleCnt}})</td>
+            <td>{{#dalbit_if liveState '==' 1}} {{addComma content.liveListenFemaleCnt}} {{else}} {{addComma content.totalListenFemaleCnt}} {{/dalbit_if}} ({{addComma content.guestFemaleCnt}})</td>
+            <td>{{#dalbit_if liveState '==' 1}} {{addComma content.liveListenNoneCnt}} {{else}} {{addComma content.totalListenNoneCnt}} {{/dalbit_if}} ({{addComma content.guestNoneCnt}})</td>
         </tr>
         <tr>
             <td class="font-bold" style="background-color: #d8d8d8;" colspan="3">총 수(방송중/끊김)</td>
