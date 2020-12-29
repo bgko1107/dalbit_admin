@@ -1,5 +1,6 @@
 package com.dalbit.content.dao;
 
+import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.vo.*;
 import com.dalbit.member.vo.procedure.P_MemberEditHistInputVo;
 import com.dalbit.member.vo.procedure.P_MemberEditHistOutputVo;
@@ -52,7 +53,6 @@ public interface Con_BoardAdmDao {
     @Transactional(readOnly = true)
     P_MemberProfileOutputVo profileMsgListSummary(P_MemberProfileInputVo pMemberProfileInputVo);
 
-
     int callProfileMsgDelete(P_MemberProfileInputVo pMemberProfileInputVo);
 
     @Transactional(readOnly = true)
@@ -69,7 +69,6 @@ public interface Con_BoardAdmDao {
     @Transactional(readOnly = true)
     P_MemberProfileOutputVo callMemberProfileMsg(P_MemberProfileInputVo pMemberProfileInputVo);
 
-
     @Transactional(readOnly = true)
     int editListCnt(P_MemberEditHistInputVo pMemberEditHistInputVo);
 
@@ -78,4 +77,7 @@ public interface Con_BoardAdmDao {
 
     @Transactional(readOnly = true)
     BoardAdmTabCountVo tabCount(BoardAdmTabCountVo boardAdmTabCountVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<MailboxVo> callMailbox(ProcedureVo procedureVo);
 }

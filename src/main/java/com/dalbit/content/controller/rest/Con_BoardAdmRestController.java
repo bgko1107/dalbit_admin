@@ -195,4 +195,14 @@ public class Con_BoardAdmRestController {
     public String tabCount(BoardAdmTabCountVo boardAdmTabCountVo) {
         return conBoardAdmService.tabCount(boardAdmTabCountVo);
     }
+
+
+    /**
+     * 우체통 대화 목록
+     */
+    @PostMapping("mailbox")
+    public String mailbox(MailboxVo mailboxVo){
+        String result = conBoardAdmService.callMailbox(mailboxVo);
+        return result;
+    }
 }

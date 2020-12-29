@@ -5,6 +5,7 @@ import com.dalbit.broadcast.vo.procedure.P_StoryDeleteVo;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
+import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.dao.Con_BoardAdmDao;
 import com.dalbit.content.vo.*;
 import com.dalbit.member.dao.Mem_MemberDao;
@@ -12,6 +13,7 @@ import com.dalbit.member.dao.Mem_NoticeDao;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.member.vo.procedure.*;
 import com.dalbit.util.GsonUtil;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -346,5 +348,18 @@ public class Con_BoardAdmService {
         result = gsonUtil.toJson(new JsonOutputVo(Status.TabCount조회_성공, outVo, new PagingVo(0, 0,0)));
 
         return result;
+    }
+
+    public String callMailbox(MailboxVo mailboxVo){
+
+        ProcedureVo procedureVo = new ProcedureVo(mailboxVo);
+        ArrayList<MailboxVo> list = conBoardAdmDao.callMailbox(procedureVo);
+        MailboxVo summary = new Gson().fromJson(procedureVo.getExt(), MailboxVo.class);
+        if(list.size() > 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(summary.getTotalCnt()),summary));
+        }else{
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, list, new PagingVo(summary.getTotalCnt()),summary));
+        }
+
     }
 }

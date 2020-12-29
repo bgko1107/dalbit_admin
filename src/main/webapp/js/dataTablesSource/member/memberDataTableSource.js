@@ -1070,4 +1070,44 @@ var MemberDataTableSource = {
             }
         }
     },
+
+    'mailbox': {
+        'url': '/rest/member/mailbox/list'
+
+        , 'columns': [
+            {'title': '대화일시', 'data': 'lastChatDate'},
+            {'title': '개설회원', 'data': 'memNo', 'render': function (data, type, row, meta) {
+                    return util.memNoLink(data, data) + '<br/>' + row.memNick;
+                }},
+            {'title': '참여회원', 'data': 'targetMemNo', 'width':'100px', 'render': function (data, type, row, meta) {
+                    return util.memNoLink(data, data) + '<br/>' + row.target_mem_nick;
+                }},
+            {'title': '대화내용', 'data': 'msg', 'render': function (data, type, row, meta) {
+                    if(row.msgType == "1"){
+                        return '<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="row.chatNo">data</a>';
+                    }else if(row.msgType == "2"){       // 이미지
+                        return '<img class="thumbnail fullSize_background" src="'+ common.viewImage(row.data1) +'" width="50px" height="50px" />' + '<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="row.chatNo">이미지 전송</a>';
+                    }else if(row.msgType == "3"){       // 아이템
+                        return '<img class="fullSize_background _webpImage" src="'+ row.item_thumbnail+'" width="50px" height="50px" data-webpImage="' + row.webp_image+ '"/>' + '<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="row.chatNo">아이템 전송</a>';
+                    }
+                }},
+            {'title': '기간', 'data': 'diffDate', 'render': function (data, type, row, meta) {
+                    return data;
+                }},
+            {'title': '상태', 'data': 'state', 'render': function (data, type, row, meta) {
+                    if(data == "0"){
+                        return "대화전";
+                    }else if(data == "1"){
+                        return "정상";
+                    }else if(data == "2"){
+                        return "퇴장";
+                    }
+                }},
+        ]
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
+    },
 }

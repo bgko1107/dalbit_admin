@@ -5,7 +5,8 @@
 
 
 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
-    <li class="active"><a href="#storyList" role="tab" data-toggle="tab" id="tab_storyList">사연</a></li>
+    <li class="active"><a href="#mailboxList" role="tab" data-toggle="tab" id="tab_mailboxList">우체통</a></li>
+    <li><a href="#storyList" role="tab" data-toggle="tab" id="tab_storyList">사연</a></li>
     <li><a href="#fanBoardList" role="tab" data-toggle="tab" id="tab_fanBoardList">팬보드</a></li>
     <li><a href="#fanBoardReply" role="tab" data-toggle="tab" id="tab_fanBoardReply">팬보드댓글</a></li>
     <li><a href="#noticeList" role="tab" data-toggle="tab" id="tab_noticeList">방송방공지</a></li>
@@ -15,7 +16,8 @@
     <li><a href="#clipReply" role="tab" data-toggle="tab" id="tab_clipReply">클립댓글</a></li> <!-- 클립댓글-->
 </ul>
 <div class="tab-content no-padding">
-    <div class="tab-pane fade in active" id="storyList"><jsp:include page="storyList.jsp"/></div>
+    <div class="tab-pane fade in active" id="mailboxList"><jsp:include page="mailboxList.jsp"/></div>
+    <div class="tab-pane fade" id="storyList"><jsp:include page="storyList.jsp"/></div>
     <div class="tab-pane fade" id="fanBoardList"><jsp:include page="fanBoardList.jsp"/></div>
     <div class="tab-pane fade" id="fanBoardReply"><jsp:include page="fanBoardReply.jsp"/></div>
     <div class="tab-pane fade" id="noticeList"><jsp:include page="noticeList.jsp"/></div>
@@ -27,11 +29,16 @@
 
 
 <script type="text/javascript">
-    var tabId = "tab_storyList" ;
+    var tabId = "tab_mailboxList" ;
     $("#tablist_con li a").on('click', function(){
         tabId = $(this).prop('id');
 
-        $("#bt_search").click();
+        slctType = 3;
+        if(tabId == "tab_mailboxList" ){
+            slctType = 0;
+        }
+
+        dateType();
     });
     $('input[id="txt_search"]').keydown(function(e) {
         if(e.keyCode == 13) {
@@ -39,7 +46,7 @@
         }
     });
     $('#bt_search').on('click', function() {
-
+        $("#summaryArea").empty();
         if(tabId == "tab_storyList" ){
             storyList();
         }else if(tabId == "tab_fanBoardList" ){
@@ -56,6 +63,8 @@
             profileMsgList();
         }else if(tabId == "tab_clipReply" ){
             clipReplyList();
+        }else if(tabId == "tab_mailboxList" ){
+            mailboxList();
         }
         tabCntSelect();
     });
@@ -66,16 +75,17 @@
             'txt_search' : $('#txt_search').val()
             , 'start_sel' : $("#startDate").val()
             , 'end_sel' : $("#endDate").val()
-            ,'broState' : 0
-            ,'searchType' : 0
-            ,'boardType' : 1
-            ,'status' : 0
+            , 'broState' : 0
+            , 'searchType' : 0
+            , 'boardType' : 1
+            , 'status' : 0
         };
         util.getAjaxData("storyList", "/rest/content/boardAdm/tab/count", data, fn_success_tabCntSelect);
     }
     function fn_success_tabCntSelect(dst_id, response){
 
         console.log(response);
+        $("#tab_mailboxList").text("우체통" + "(" + response.data.mailboxCnt +")");
         $("#tab_storyList").text("사연" + "(" + response.data.storyListCnt +")");
         $("#tab_fanBoardList").text("팬보드" + "(" + response.data.fanBoardListCnt +")");
         $("#tab_fanBoardReply").text("팬보드댓글" + "(" + response.data.fanBoardReplyCnt +")");
