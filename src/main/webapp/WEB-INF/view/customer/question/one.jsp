@@ -210,11 +210,11 @@
         }
 
         if(tmp_slctMember == 0){
-            dtList_info_detail0.reload();
+            dtList_info_detail0.reload(null, false);
         }else if(tmp_slctMember == 1){
-            dtList_info_detail.reload();
+            dtList_info_detail.reload(null, false);
         }else{
-            dtList_info_detail2.reload();
+            dtList_info_detail2.reload(null, false);
         }
         $('#tab_customerQuestion').removeClass("show");
     }

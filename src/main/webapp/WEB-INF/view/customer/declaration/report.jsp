@@ -109,21 +109,18 @@
         }
         if(confirm('처리하시겠습니까?')) {
             // 정상일 경우 & 제재, 조치사유 선택완료
-            util.getAjaxData("declaration", "/rest/customer/declaration/operate", declarationFormData(), fn_declaration_success);
+            util.getAjaxData("declaration", "/rest/customer/declaration/operate", declarationFormData(), function (dst_id, response) {
+
+                alert(response.message);
+
+                dtList_info.reload(null, false);
+
+                // 상단이동
+                $('html').animate({scrollTop: 0}, 100);
+                $("#declarationForm").empty();
+            });
         }
     });
-
-    function fn_declaration_success(dst_id, response) {
-
-        alert(response.message);
-
-        dtList_info.reload();
-
-        // 상단이동
-        $('html').animate({scrollTop: 0}, 100);
-        $("#declarationForm").empty();
-    }
-
 
     $(document).on('click', 'input:radio[name="opCode"]', function(title, content){
         messageCheck();
