@@ -9,6 +9,10 @@
 <div class="col-md-12 no-padding">
     <table class="table table-sorting table-bordered datatable">
         <colgroup>
+            <col width="1%"><col width="4.5%"><col width="2%"><col width="8%"><col width="3%">
+            <col width="30%"><col width="3%"><col width="4.5%"><col width="5.5%"><col width="3.5%">
+            <col width="3.5%"><col width="3.5%"><col width="3.5%"><col width="3.5%"><col width="3.5%">
+            <col width="3.5%"><col width="3.5%"><col width="3.5%">
         </colgroup>
         <thead>
         <tr>
