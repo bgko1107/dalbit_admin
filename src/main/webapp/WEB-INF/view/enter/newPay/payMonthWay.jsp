@@ -340,84 +340,99 @@
                 //총합
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 1) + ")").html(common.addComma(sum_succCnt));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 2) + ")").html(common.addComma(sum_succCmt));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 3) + ")").html(common.vatMinus(sum_succAmt));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 4) + ")").html(common.vatMinus(sum_cancAmt));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 3) + ")").html(common.addComma((sum_succAmt/sum_succCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 4) + ")").html(common.vatMinus(sum_succAmt));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 5) + ")").html(common.vatMinus(sum_cancAmt));
                 //첫구매
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 1) + ")").html(common.addComma(sum_firstCnt));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 2) + ")").html(common.addComma(sum_firstCmt));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 3) + ")").html(common.vatMinus(sum_firstAmt));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 4) + ")").html();
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 3) + ")").html(common.addComma((sum_firstAmt/sum_firstCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 4) + ")").html(common.vatMinus(sum_firstAmt));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 5) + ")").html();
                 //재구매
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 1) + ")").html(common.addComma(sum_reCnt));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 2) + ")").html(common.addComma(sum_reCmt));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 3) + ")").html(common.vatMinus(sum_reAmt));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 4) + ")").html();
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 3) + ")").html(common.addComma((sum_reAmt/sum_reCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 4) + ")").html(common.vatMinus(sum_reAmt));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 5) + ")").html();
             }else if(i == 1 || i == 2) {
                 //총합
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 5 + 1) + ")").html(common.addComma(sum_succCnt));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 5 + 2) + ")").html(common.addComma(sum_succCmt));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 5 + 3) + ")").html(common.vatMinus(sum_succAmt));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 5 + 4) + ")").html(common.vatMinus(sum_cancAmt));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 1) + ")").html(common.addComma(sum_succCnt));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 2) + ")").html(common.addComma(sum_succCmt));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 3) + ")").html(common.addComma((sum_succAmt/sum_succCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 4) + ")").html(common.vatMinus(sum_succAmt));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 5) + ")").html(common.vatMinus(sum_cancAmt));
                 //첫구매
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 5 + 1) + ")").html(common.addComma(sum_firstCnt));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 5 + 2) + ")").html(common.addComma(sum_firstCmt));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 5 + 3) + ")").html(common.vatMinus(sum_firstAmt));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 5 + 4) + ")").html();
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 1) + ")").html(common.addComma(sum_firstCnt));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 2) + ")").html(common.addComma(sum_firstCmt));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 3) + ")").html(common.addComma((sum_firstAmt/sum_firstCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 4) + ")").html(common.vatMinus(sum_firstAmt));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 5) + ")").html();
                 //재구매
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 5 + 1) + ")").html(common.addComma(sum_reCnt));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 5 + 2) + ")").html(common.addComma(sum_reCmt));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 5 + 3) + ")").html(common.vatMinus(sum_reAmt));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 5 + 4) + ")").html();
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 1) + ")").html(common.addComma(sum_reCnt));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 2) + ")").html(common.addComma(sum_reCmt));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 3) + ")").html(common.addComma((sum_reAmt/sum_reCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 4) + ")").html(common.vatMinus(sum_reAmt));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 5) + ")").html();
             }else if(i == 7){
                 //총합
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 5 + 1) + ")").html(common.addComma((sum_succCnt/7).toFixed(1)));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 5 + 2) + ")").html(common.addComma((sum_succCmt/7).toFixed(1)));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 5 + 3) + ")").html(common.vatMinus(sum_succAmt/7));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 5 + 4) + ")").html(common.vatMinus(sum_cancAmt/7));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 1) + ")").html(common.addComma((sum_succCnt/7).toFixed(1)));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 2) + ")").html(common.addComma((sum_succCmt/7).toFixed(1)));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 3) + ")").html(common.addComma((((sum_succAmt/7).toFixed(0) / 1.1).toFixed(0) / (sum_succCnt/7).toFixed(0)).toFixed(0)));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 4) + ")").html(common.vatMinus(sum_succAmt/7));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 5) + ")").html(common.vatMinus(sum_cancAmt/7));
                 //첫구매
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 5 + 1) + ")").html(common.addComma((sum_firstCnt/7).toFixed(1)));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 5 + 2) + ")").html(common.addComma((sum_firstCmt/7).toFixed(1)));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 5 + 3) + ")").html(common.vatMinus(sum_firstAmt/7));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 5 + 4) + ")").html();
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 1) + ")").html(common.addComma((sum_firstCnt/7).toFixed(1)));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 2) + ")").html(common.addComma((sum_firstCmt/7).toFixed(1)));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 3) + ")").html(common.addComma((((sum_firstAmt/7).toFixed(0) / 1.1).toFixed(0) / (sum_firstCnt/7).toFixed(0)).toFixed(0)));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 4) + ")").html(common.vatMinus(sum_firstAmt/7));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 5) + ")").html();
                 //재구매
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 5 + 1) + ")").html(common.addComma((sum_reCnt/7).toFixed(1)));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 5 + 2) + ")").html(common.addComma((sum_reCmt/7).toFixed(1)));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 5 + 3) + ")").html(common.vatMinus(sum_reAmt/7));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 5 + 4) + ")").html();
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 1) + ")").html(common.addComma((sum_reCnt/7).toFixed(1)));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 2) + ")").html(common.addComma((sum_reCmt/7).toFixed(1)));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 3) + ")").html(common.addComma((((sum_reAmt/7).toFixed(0) / 1.1).toFixed(0) / (sum_reCnt/7).toFixed(0)).toFixed(0)));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 4) + ")").html(common.vatMinus(sum_reAmt/7));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 5) + ")").html();
             }
 
             if(i == 3){
                 //총합
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 1) + ")").html(common.addComma(sum_succCnt));
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 2) + ")").html(common.addComma(sum_succCmt));
-                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 3) + ")").html(common.vatMinus(sum_succAmt));
-                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 4) + ")").html(common.vatMinus(sum_cancAmt));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 3) + ")").html(common.addComma((sum_succAmt/sum_succCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 4) + ")").html(common.vatMinus(sum_succAmt));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 5) + ")").html(common.vatMinus(sum_cancAmt));
                 //첫구매
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 1) + ")").html(common.addComma(sum_firstCnt));
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 2) + ")").html(common.addComma(sum_firstCmt));
-                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 3) + ")").html(common.vatMinus(sum_firstAmt));
-                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 4) + ")").html();
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 3) + ")").html(common.addComma((sum_firstAmt/sum_firstCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 4) + ")").html(common.vatMinus(sum_firstAmt));
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 5) + ")").html();
                 //재구매
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 1) + ")").html(common.addComma(sum_reCnt));
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 2) + ")").html(common.addComma(sum_reCmt));
-                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 3) + ")").html(common.vatMinus(sum_reAmt));
-                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 4) + ")").html();
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 3) + ")").html(common.addComma((sum_reAmt/sum_reCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 4) + ")").html(common.vatMinus(sum_reAmt));
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 5) + ")").html();
             }else if(i == 4 || i == 5 || i == 6) {
                 //총합
-                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 5 + 1) + ")").html(common.addComma(sum_succCnt));
-                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 5 + 2) + ")").html(common.addComma(sum_succCmt));
-                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 5 + 3) + ")").html(common.vatMinus(sum_succAmt));
-                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 5 + 4) + ")").html(common.vatMinus(sum_cancAmt));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 1) + ")").html(common.addComma(sum_succCnt));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 2) + ")").html(common.addComma(sum_succCmt));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 3) + ")").html(common.addComma((sum_succAmt/sum_succCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 4) + ")").html(common.vatMinus(sum_succAmt));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 5) + ")").html(common.vatMinus(sum_cancAmt));
                 //첫구매
-                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 5 + 1) + ")").html(common.addComma(sum_firstCnt));
-                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 5 + 2) + ")").html(common.addComma(sum_firstCmt));
-                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 5 + 3) + ")").html(common.vatMinus(sum_firstAmt));
-                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 5 + 4) + ")").html();
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 1) + ")").html(common.addComma(sum_firstCnt));
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 2) + ")").html(common.addComma(sum_firstCmt));
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 3) + ")").html(common.addComma((sum_firstAmt/sum_firstCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 4) + ")").html(common.vatMinus(sum_firstAmt));
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 5) + ")").html();
                 //재구매
-                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 5 + 1) + ")").html(common.addComma(sum_reCnt));
-                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 5 + 2) + ")").html(common.addComma(sum_reCmt));
-                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 5 + 3) + ")").html(common.vatMinus(sum_reAmt));
-                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 5 + 4) + ")").html();
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 1) + ")").html(common.addComma(sum_reCnt));
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 2) + ")").html(common.addComma(sum_reCmt));
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 3) + ")").html(common.addComma((sum_reAmt/sum_reCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 4) + ")").html(common.vatMinus(sum_reAmt));
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 5) + ")").html();
             }
         }
         ui.tableHeightSet();
@@ -427,32 +442,35 @@
 <script type="text/x-handlebars-template" id="tmp_monthTableBody_new">
     <tr class="__tr_{{this}} font-bold" style="color: #ff5600;">
         <td style="background-color: #dae3f3">총합</td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
-        <td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td colspan="2" style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="border-bottom: hidden;border-top: hidden"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
+        <td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="border-bottom: hidden;border-top: hidden"></td>
         <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
         <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
-        <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다." colspan="2"></td>
+        <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
+        <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
         <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
     </tr>
     <tr class="__tr_{{this}} _totalHidden" style="background-color: #f2f2f2">
         <td class="font-bold">첫구매</td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td colspan="2" style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
         <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
         <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
-        <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다." colspan="2"></td>
+        <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
+        <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
         <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
     </tr>
     <tr class="__tr_{{this}} _totalHidden" style="background-color: #f2f2f2">
         <td class="font-bold">재구매</td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td colspan="2" style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="background-color: #FFF7E5"></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
         <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
         <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
-        <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다." colspan="2"></td>
+        <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
+        <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
         <td title="평균 합계의 경우 반올림된 평균 데이터의 총합이라&#10;항목별 합계와 다소 오차가 생길 수 있습니다."></td>
     </tr>
 
@@ -470,24 +488,24 @@
 <script type="text/x-handlebars-template" id="tmp_monthTableBody_new2">
     <tr class="__tr_{{this}} font-bold" style="color: #ff5600;">
         <td style="background-color: #dae3f3">총합</td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
-        <td></td><td></td><td colspan="2"></td><td></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden"></td>
+        <td></td><td></td><td></td><td></td><td></td>
     </tr>
     <tr class="__tr_{{this}} _totalHidden" style="background-color: #f2f2f2">
         <td class="font-bold">첫구매</td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td></td><td></td><td colspan="2"></td><td></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td>
     </tr>
     <tr class="__tr_{{this}} _totalHidden" style="background-color: #f2f2f2">
         <td class="font-bold">재구매</td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td></td><td></td><td colspan="2"></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
-        <td></td><td></td><td colspan="2"></td><td></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td><td style="border-bottom: hidden;border-top: hidden;background-color: white"></td>
+        <td></td><td></td><td></td><td></td><td></td>
     </tr>
     {{#each this.slctType_date}}
     <tr class="__tr_{{this}}">
