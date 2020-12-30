@@ -155,6 +155,45 @@
 </form>
 <!-- //혜택 -->
 
+<!-- 슈퍼문 혜택 -->
+<form id="condition4">
+    <div class="col-lg-9 form-inline mt15">
+        <div class="widget widget-table">
+            <div class="widget-header">
+                <h3>혜택</h3>
+            </div>
+            <div class="widget-content mt10">
+                <table id="superMoonPrize" class="table table-sorting table-hover table-bordered">
+                    <colgroup>
+                        <col width="5%"/>
+                        <col width="10%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                        <col width="5%"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>보상</th>
+                        <th>지급 개수 / 확률</th>
+                        <th>수정일</th>
+                        <th>등록자명</th>
+                    </tr>
+                    </thead>
+                    <tbody id="superMoonPrizeCondition">
+                    </tbody>
+                </table>
+            </div>
+            <div class="widget-footer">
+                <span>
+                    <button class="btn btn-default" type="button" id="bt_superMoonPrizeEdit">수정하기</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- //슈퍼문 혜택 -->
+
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -162,6 +201,7 @@
         djCondition();
         listenerCondition();
         prize();
+        superMoonPrize();
     });
 
     function fullmoonYnCondition(){
@@ -211,6 +251,19 @@
             var context = response.data;
             var html = templateScript(context);
             $("#prize").html(html);
+        });
+    }
+
+    function superMoonPrize() {
+        var data = {
+            slctType : 4
+        };
+        util.getAjaxData("superMoonPrizeConditionList", "/rest/content/fullmoon/info/condition", data, function(dst_id, response) {
+            var template = $("#tmp_superMoonPrizeCondition").html();
+            var templateScript = Handlebars.compile(template);
+            var context = response.data;
+            var html = templateScript(context);
+            $("#superMoonPrizeCondition").html(html);
         });
     }
 
@@ -312,6 +365,58 @@
         }
     });
 
+
+
+    $(document).on('click', '#bt_superMoonPrizeEdit', function(){
+        if(confirm("슈퍼문 혜택을 수정하시겠습니까?")){
+            var listenItem = $("#condition4 #listenItem");
+            if(common.isEmpty(listenItem.val())){
+                alert('청취자 룰렛 응모권 수를 입력해주세요.');
+                listenItem.focus();
+                return false;
+            }
+
+            var listenDal = $("#condition4 #listenDal");
+            if(common.isEmpty(listenDal.val())){
+                alert('청취자 달 수를 입력해주세요.');
+                listenDal.focus();
+                return false;
+            }
+
+            var djItem = $("#condition4 #djItem");
+            if(common.isEmpty(djItem.val())){
+                alert('DJ 룰렛 응모권 수를 입력해주세요.');
+                djItem.focus();
+                return false;
+            }
+
+            var djDal = $("#condition4 #djDal");
+            if(common.isEmpty(djDal.val())){
+                alert('DJ 룰렛 달 수를 입력해주세요.');
+                djDal.focus();
+                return false;
+            }
+
+            var moonRate = $("#condition4 #moonRate");
+            if(common.isEmpty(moonRate.val())){
+                alert('슈퍼문 확률을 입력해주세요.');
+                moonRate.focus();
+                return false;
+            }
+
+            var data = {
+                slctType : 4
+                , listenItem : listenItem.val()
+                , listenDal : listenDal.val()
+                , djItem : djItem.val()
+                , djDal : djDal.val()
+                , moonRate : moonRate.val()
+            }
+
+            conditionEdit('condition4', data);
+        }
+    });
+
     $(document).on('click', '#bt_fullmoonYnEdit', function(){
         if(confirm("보름달 노출 여부를 수정하시겠습니까?")){
             var data = {
@@ -333,6 +438,9 @@
 
             }else if(dist_id == 'condition3'){
                 listenerCondition();
+
+            }else if(dist_id == 'condition4'){
+                superMoonPrize();
             }
         });
     }
@@ -386,6 +494,21 @@
             <td>{{{getCommonCodeLabel slctType 'full_moon_condition5_slctType'}}}</td>
             <td>
                 {{{getOnOffSwitch minValue 'fullmoonYn'}}}
+            </td>
+            <td>{{moment editDate 'YYYY-MM-DD HH:mm:ss'}}</td>
+            <td>{{opName}}</td>
+        </tr>
+    {{/each}}
+</script>
+
+<script id="tmp_superMoonPrizeCondition" type="text/x-handlebars-template">
+    {{#each this}}
+        <tr>
+            <td>{{{getCommonCodeLabel slctType 'full_moon_condition4_slctType'}}}</td>
+            <td>{{{getCommonCodeLabel slctType 'full_moon_condition4_reward'}}}</td>
+            <td>
+                <input type="text" class="form-control" style="width: 50%;" id="{{getCommonCodeText slctType 'full_moon_condition4_slctType_values'}}" value="{{minValue}}" />
+                {{{getCommonCodeLabel slctType 'full_moon_condition4_slctType_unit'}}}
             </td>
             <td>{{moment editDate 'YYYY-MM-DD HH:mm:ss'}}</td>
             <td>{{opName}}</td>

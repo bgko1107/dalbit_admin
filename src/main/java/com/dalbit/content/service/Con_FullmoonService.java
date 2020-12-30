@@ -7,6 +7,7 @@ import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.dao.Con_FullmoonDao;
 import com.dalbit.content.vo.procedure.P_FullmoonConditionVo;
 import com.dalbit.content.vo.procedure.P_FullmoonTextVo;
+import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class Con_FullmoonService {
     }
 
     public String callFullmoonManagementEdit(P_FullmoonConditionVo pFullmoonConditionVo) {
+        pFullmoonConditionVo.setOpName(MemberVo.getMyMemNo());
         ProcedureVo procedureVo = new ProcedureVo(pFullmoonConditionVo);
         con_fullmoonDao.callFullmoonManagementEdit(procedureVo);
         return gsonUtil.toJson(new JsonOutputVo(Status.수정));
@@ -44,6 +46,7 @@ public class Con_FullmoonService {
     }
 
     public String callFullmoonTextEdit(P_FullmoonTextVo pFullmoonTextVo) {
+        pFullmoonTextVo.setOpName(MemberVo.getMyMemNo());
         ProcedureVo procedureVo = new ProcedureVo(pFullmoonTextVo, true);
         con_fullmoonDao.callFullmoonTextEdit(procedureVo);
         return gsonUtil.toJson(new JsonOutputVo(Status.수정));

@@ -3,11 +3,45 @@
 <c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %>
 </c:set>
 
-<!-- 보름달 상태창 & 알럿 문구 -->
+<!-- 보름달 상태창 -->
 <div class="col-lg-12 form-inline mt15">
     <div class="widget widget-table">
         <div class="widget-header">
-            <h3>보름달 상태창 & 알럿 문구</h3>
+            <h3>보름달 상태창</h3>
+        </div>
+        <div class="widget-content mt10">
+            <table id="status" class="table table-sorting table-hover table-bordered">
+                <colgroup>
+                    <col width="5%"/>
+                    <col width="5%"/>
+                    <col width="5%"/>
+                    <col width="10%"/>
+                    <col width="30%"/>
+                    <col width="10%"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>보름달 상태</th>
+                    <th>구분</th>
+                    <th>노출 대상</th>
+                    <th>문구</th>
+                    <th>적용</th>
+                </tr>
+                </thead>
+                <tbody id="statusWord">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- //보름달 상태창 -->
+
+<!-- 보름달 애니메이션 알럿 문구 -->
+<div class="col-lg-12 form-inline mt15">
+    <div class="widget widget-table">
+        <div class="widget-header">
+            <h3>보름달 애니메이션 알럿 문구</h3>
         </div>
         <div class="widget-content mt10">
             <table id="alert" class="table table-sorting table-hover table-bordered">
@@ -83,20 +117,35 @@
             slctType : 0
         }
         util.getAjaxData('list', "/rest/content/fullmoon/info/text", data, function(dst_id, response) {
-            //alert(response.message);
 
+            var statusArray;
             var alertArray;
             var guideArray;
 
             if(!common.isEmpty(response.data)){
-                alertArray = response.data.slice(0,2);
-                guideArray = response.data.slice(2,5)
+                statusArray = response.data.slice(0,1);
+                alertArray = response.data.slice(1,2).concat(response.data.slice(5,6));
+                guideArray = response.data.slice(2,5);
             }
 
+            statusWord(statusArray);
             alertWord(alertArray);
             guideWord(guideArray);
         });
     }
+
+    function statusWord(data) {
+
+        if(common.isEmpty(data)){
+            return false;
+        }
+        var template = $("#tmp_statusWord").html();
+        var templateScript = Handlebars.compile(template);
+        var context = data;
+        var html = templateScript(context);
+        $("#statusWord").html(html);
+    }
+
     function alertWord(data) {
 
         if(common.isEmpty(data)){
@@ -127,15 +176,13 @@
             var slctType = me.data('slcttype');
             var title = '';
 
-            if(slctType == 5){
-                title = me.parent().parent().find('._title');
-                if(common.isEmpty(title.val())){
-                    alert('제목을 입력해주세요.');
-                    title.focus();
-                    return false;
-                }
-                title = title.val();
+            title = me.parent().parent().find('._title');
+            if(common.isEmpty(title.val())){
+                alert('제목을 입력해주세요.');
+                title.focus();
+                return false;
             }
+            title = title.val();
 
             var textData = me.parent().parent().find('._textData');
             if(common.isEmpty(textData.val())){
@@ -190,6 +237,22 @@
 </script>
 
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
+
+<script id="tmp_statusWord" type="text/x-handlebars-template">
+    {{#each this as |data|}}
+        <tr>
+            <td>{{slctType}}</td>
+            <td>{{{getCommonCodeLabel slctType 'full_moon_text_alert_status'}}}</td>
+            <td>{{{getCommonCodeLabel slctType 'full_moon_text_alert_type'}}}</td>
+            <td>{{{getCommonCodeLabel slctType 'full_moon_text_alert_target'}}}</td>
+            <td>
+                <textarea type="textarea" class="form-control _textData" style="width:100%;" rows="5">{{{replaceTextarea textData}}}</textarea>
+            </td>
+            <td><button type="button" class="form-control btn-default sm _updateAlertWordBtn" data-slcttype="{{data.slctType}}">수정</button></td>
+        </tr>
+    {{/each}}
+</script>
+
 <script id="tmp_alertWord" type="text/x-handlebars-template">
     {{#each this as |data|}}
         <tr>
@@ -198,11 +261,7 @@
             <td>{{{getCommonCodeLabel slctType 'full_moon_text_alert_type'}}}</td>
             <td>{{{getCommonCodeLabel slctType 'full_moon_text_alert_target'}}}</td>
             <td>
-                {{#equal data.slctType '5'}}
-                    <input type="text" class="form-control _title" style="width:100%;" rows="5" value="{{data.title}}" />
-                {{else}}
-                    -
-                {{/equal}}
+                <input type="text" class="form-control _title" style="width:100%;" rows="5" value="{{data.title}}" />
             </td>
             <td>
                 <textarea type="textarea" class="form-control _textData" style="width:100%;" rows="5">{{{replaceTextarea textData}}}</textarea>

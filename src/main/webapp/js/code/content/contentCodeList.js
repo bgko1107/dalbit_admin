@@ -866,6 +866,42 @@ var full_moon_condition3_slctType_values = [
     , new COMMON_CODE('3', '3', 'listenYn')
 ]
 
+var full_moon_condition4_slctType = [
+    new COMMON_CODE(null, 'slctType', '구분')
+    , new COMMON_CODE('1', '1', '청취자')
+    , new COMMON_CODE('2', '2', '청취자')
+    , new COMMON_CODE('3', '3', 'DJ')
+    , new COMMON_CODE('4', '4', 'DJ')
+    , new COMMON_CODE('5', '5', '슈퍼문 확률')
+]
+
+var full_moon_condition4_reward = [
+    new COMMON_CODE(null, 'reward', '보상')
+    , new COMMON_CODE('1', '1', '룰렛 응모권')
+    , new COMMON_CODE('2', '2', '달')
+    , new COMMON_CODE('3', '3', '부스터 아이템')
+    , new COMMON_CODE('4', '4', '달')
+    , new COMMON_CODE('5', '5', '-')
+]
+
+var full_moon_condition4_slctType_values = [
+    new COMMON_CODE(null, 'slctType', '단위')
+    , new COMMON_CODE('1', '1', 'listenItem')
+    , new COMMON_CODE('2', '2', 'listenDal')
+    , new COMMON_CODE('3', '3', 'djItem')
+    , new COMMON_CODE('4', '4', 'djDal')
+    , new COMMON_CODE('5', '5', 'moonRate')
+]
+
+var full_moon_condition4_slctType_unit = [
+    new COMMON_CODE(null, 'slctType', '단위')
+    , new COMMON_CODE('1', '1', '개')
+    , new COMMON_CODE('2', '2', '개')
+    , new COMMON_CODE('3', '3', '개')
+    , new COMMON_CODE('4', '4', '개')
+    , new COMMON_CODE('5', '5', '%')
+]
+
 var full_moon_condition5_slctType = [
     new COMMON_CODE(null, 'slctType', '구분')
     , new COMMON_CODE('1', '1', '보름날 노출여부')
@@ -878,7 +914,8 @@ var full_moon_text_alert_status = [
     , new COMMON_CODE('2', '2', '완성')
     , new COMMON_CODE('3', '3', '완성')
     , new COMMON_CODE('4', '4', '완성')
-    , new COMMON_CODE('5', '5', '완성')
+    , new COMMON_CODE('5', '5', '기본 보름달')
+    , new COMMON_CODE('9', '9', '슈퍼문')
 ]
 
 var full_moon_text_alert_type = [
@@ -888,6 +925,7 @@ var full_moon_text_alert_type = [
     , new COMMON_CODE('3', '3', '상태창')
     , new COMMON_CODE('4', '4', '상태창')
     , new COMMON_CODE('5', '5', '알럿')
+    , new COMMON_CODE('9', '9', '알럿')
 ]
 
 var full_moon_text_alert_target = [
@@ -897,6 +935,7 @@ var full_moon_text_alert_target = [
     , new COMMON_CODE('3', '3', '조건 충족 청취자')
     , new COMMON_CODE('4', '4', '조건 미충족 청취자')
     , new COMMON_CODE('5', '5', '공통')
+    , new COMMON_CODE('9', '9', '공통')
 ]
 
 var full_moon_text_guide_area = [
