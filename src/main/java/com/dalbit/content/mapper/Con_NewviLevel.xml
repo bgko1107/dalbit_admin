@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dalbit.content.dao.Con_NewviLevelDao" >
 
-    <select id="callDetailList" statementType="CALLABLE" parameterType="ProcedureVo" resultType="com.dalbit.content.vo.procedure.P_NewviLevelListOutputVo">
+    <select id="callDay" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.content.vo.procedure.P_NewviLevelStateOutputVo">
+        call rd_admin.sp_admin_new_join_level_stat(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callDetailList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.content.vo.procedure.P_NewviLevelListOutputVo">
         call rd_admin.sp_admin_new_join_level_event_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 

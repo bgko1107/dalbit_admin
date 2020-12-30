@@ -22,6 +22,15 @@ public class Con_NewviLevelRestController {
     Con_NewviLevelService con_NewviLevelService;
 
     /**
+     * 5,10 레벨 보상 현황
+     */
+    @PostMapping("day")
+    public String day(P_NewviLevelInputVo pNewviLevelInputVo) {
+        String result = con_NewviLevelService.callDay(pNewviLevelInputVo);
+        return result;
+    }
+
+    /**
      * 5,10 레벨 보상 받은 대상
      */
     @PostMapping("detail")
