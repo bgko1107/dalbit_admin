@@ -30,6 +30,12 @@
     $("#tablist_con li a").on('click', function(){
         tabId = $(this).prop('id');
 
+        if(tabId == 'tab_day'){
+            slctType = 1;
+        }else if(tabId == 'tab_detail'){
+            slctType = 0;
+        }
+
         dateType();
     });
 
