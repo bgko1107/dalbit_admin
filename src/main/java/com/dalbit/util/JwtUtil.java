@@ -39,17 +39,34 @@ public class JwtUtil {
     /**
      * 이름으로 Jwt Token을 생성한다.
      */
-    public String generateToken(String name) {
+    public String generateToken(String name, long expireTime) {
         return Jwts.builder()
                 .setId(name)
                 .setIssuedAt(new Date(System.currentTimeMillis())) // 토큰 발행일자
-                .setExpiration(new Date(System.currentTimeMillis() + 2592000000L)) // 유효시간 설정 (30일 기준)
+                .setExpiration(new Date(System.currentTimeMillis() + expireTime)) // 유효시간 설정 (30일 기준)
                 .signWith(SignatureAlgorithm.HS256, JWT_SECRET_KEY) // 암호화 알고리즘, secret값 세팅
                 .compact();
     }
 
+    public String generateToken(String name) {
+        return generateToken(name, 2592000000L);
+    }
     public String generateToken(String memNo, boolean isLogin) {
-        return generateToken(memNo + JWT_SEPARATOR + isLogin);
+        return generateToken(memNo, isLogin, false, 2592000000L);
+    }
+
+    public String generateToken(String memNo, boolean isLogin, int isAdmin) {
+        return generateToken(memNo, isLogin, isAdmin > 0, 2592000000L);
+    }
+    public String generateToken(String memNo, boolean isLogin, boolean isAdmin) {
+        return generateToken(memNo, isLogin, isAdmin, 2592000000L);
+    }
+    public String generateToken(String memNo, boolean isLogin, long expireTime) {
+        return generateToken(memNo, isLogin, false, expireTime);
+    }
+    public String generateToken(String memNo, boolean isLogin, boolean isAdmin, long expireTime) {
+        return generateToken(memNo + JWT_SEPARATOR + isLogin + JWT_SEPARATOR + isAdmin, expireTime);
+
     }
 
     /**
@@ -59,34 +76,38 @@ public class JwtUtil {
         return getClaims(jwt).getBody().getId();
     }
 
-    public TokenVo getTokenVoFromJwt(String jwt) throws GlobalException {
+    public TokenVo getTokenVoFromJwt(String jwt) throws GlobalException{
         try {
             String[] splitStrArr = getUserNameFromJwt(jwt).split(JWT_SEPARATOR);
-            if (splitStrArr.length == 2) {
+            if (2 <= splitStrArr.length) {
 
                 if(DalbitUtil.isEmpty(splitStrArr[0]) || DalbitUtil.isEmpty(splitStrArr[1])){
                     throw new GlobalException(ErrorStatus.토큰검증오류, "회원번호 or 로그인 여부가 null값 입니다.");
                 }
 
                 boolean isLogin = Boolean.valueOf(splitStrArr[1]);
+                boolean isAdmin = false;
+                if(splitStrArr.length == 3){
+                    isAdmin = Boolean.valueOf(splitStrArr[2]);
+                }
 
-                // 3(JWT_DURATION)시간 이내 토큰일경우 재발행 하지 않음
+                // 프로퍼티에(JWT_DURATION)시간 이내(현재 24 시간) 토큰일경우 재발행 하지 않음
                 boolean isNew = true;
                 Jws<Claims> jwtClaims = getClaims(jwt);
                 Object issuedAt = jwtClaims.getBody().get(Claims.ISSUED_AT);
                 if(issuedAt != null){
                     long issuedTs = Long.valueOf(issuedAt.toString());
-                    if((new Date().getTime() / 1000 - issuedTs) < (360 * JWT_DURATION)){
+                    if((new Date().getTime() / 1000 - issuedTs) < (3600 * JWT_DURATION)){
                         isNew = false;
                     }
                 }
+                return isNew ? new TokenVo(generateToken(splitStrArr[0], isLogin, isAdmin), splitStrArr[0], isLogin, isAdmin) : new TokenVo(jwt, splitStrArr[0], isLogin, isAdmin);
 
-                return isNew ? new TokenVo(generateToken(splitStrArr[0], isLogin), splitStrArr[0], isLogin) : new TokenVo(jwt, splitStrArr[0], isLogin);
             }else{
                 throw new GlobalException(ErrorStatus.토큰검증오류, "회원번호 or 로그인 여부가 없습니다.");
             }
         }catch (Exception e){
-            //e.printStackTrace();
+            e.printStackTrace();
             throw new GlobalException(ErrorStatus.토큰검증오류, "이상한 토큰이 넘어왔어요.");
         }
     }
