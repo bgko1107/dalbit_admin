@@ -336,101 +336,117 @@
             if(sum_cancAmt == 0)
                 sum_cancAmt = "null";
 
+            var tmpDay = 0;
             if(i == 0){
                 //총합
+                tmpDay = Number(moment($("#month_new_th_2").text()).add('months', 1).add('days', -1).format('DD'));
+
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 1) + ")").html(common.addComma(sum_succCnt));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 2) + ")").html(common.addComma(sum_succCmt));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 3) + ")").html(common.addComma((sum_succAmt/sum_succCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 3) + ")").html(common.addComma(((sum_succAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 4) + ")").html(common.vatMinus(sum_succAmt));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i + 5) + ")").html(common.vatMinus(sum_cancAmt));
                 //첫구매
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 1) + ")").html(common.addComma(sum_firstCnt));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 2) + ")").html(common.addComma(sum_firstCmt));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 3) + ")").html(common.addComma((sum_firstAmt/sum_firstCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 3) + ")").html(common.addComma(((sum_firstAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 4) + ")").html(common.vatMinus(sum_firstAmt));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i + 5) + ")").html();
                 //재구매
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 1) + ")").html(common.addComma(sum_reCnt));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 2) + ")").html(common.addComma(sum_reCmt));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 3) + ")").html(common.addComma((sum_reAmt/sum_reCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 3) + ")").html(common.addComma(((sum_reAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 4) + ")").html(common.vatMinus(sum_reAmt));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i + 5) + ")").html();
             }else if(i == 1 || i == 2) {
                 //총합
+                if(i == 1){
+                    tmpDay = Number(moment($("#month_new_th_1").text()).add('months', 1).add('days', -1).format('DD'));
+                }else{
+                    tmpDay = Number(moment($("#month_new_th_0").text()).add('months', 1).add('days', -1).format('DD'));
+                }
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 1) + ")").html(common.addComma(sum_succCnt));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 2) + ")").html(common.addComma(sum_succCmt));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 3) + ")").html(common.addComma((sum_succAmt/sum_succCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 3) + ")").html(common.addComma(((sum_succAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 4) + ")").html(common.vatMinus(sum_succAmt));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 5) + ")").html(common.vatMinus(sum_cancAmt));
                 //첫구매
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 1) + ")").html(common.addComma(sum_firstCnt));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 2) + ")").html(common.addComma(sum_firstCmt));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 3) + ")").html(common.addComma((sum_firstAmt/sum_firstCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 3) + ")").html(common.addComma(((sum_firstAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 4) + ")").html(common.vatMinus(sum_firstAmt));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (i * 6 + 5) + ")").html();
                 //재구매
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 1) + ")").html(common.addComma(sum_reCnt));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 2) + ")").html(common.addComma(sum_reCmt));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 3) + ")").html(common.addComma((sum_reAmt/sum_reCnt).toFixed(0)));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 3) + ")").html(common.addComma(((sum_reAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 4) + ")").html(common.vatMinus(sum_reAmt));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (i * 6 + 5) + ")").html();
             }else if(i == 7){
                 //총합
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 1) + ")").html(common.addComma((sum_succCnt/7).toFixed(1)));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 2) + ")").html(common.addComma((sum_succCmt/7).toFixed(1)));
-                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 3) + ")").html(common.addComma((((sum_succAmt/7).toFixed(0) / 1.1).toFixed(0) / (sum_succCnt/7).toFixed(0)).toFixed(0)));
+                $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 3) + ")").html(common.addComma((((sum_succAmt/7).toFixed(0) / 1.1).toFixed(0) / 31).toFixed(0)));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 4) + ")").html(common.vatMinus(sum_succAmt/7));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (3 * 6 + 5) + ")").html(common.vatMinus(sum_cancAmt/7));
                 //첫구매
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 1) + ")").html(common.addComma((sum_firstCnt/7).toFixed(1)));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 2) + ")").html(common.addComma((sum_firstCmt/7).toFixed(1)));
-                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 3) + ")").html(common.addComma((((sum_firstAmt/7).toFixed(0) / 1.1).toFixed(0) / (sum_firstCnt/7).toFixed(0)).toFixed(0)));
+                $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 3) + ")").html(common.addComma((((sum_firstAmt/7).toFixed(0) / 1.1).toFixed(0) / 31).toFixed(0)));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 4) + ")").html(common.vatMinus(sum_firstAmt/7));
                 $("#monthTableBody_new tr:eq(1) td:eq(" + (3 * 6 + 5) + ")").html();
                 //재구매
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 1) + ")").html(common.addComma((sum_reCnt/7).toFixed(1)));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 2) + ")").html(common.addComma((sum_reCmt/7).toFixed(1)));
-                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 3) + ")").html(common.addComma((((sum_reAmt/7).toFixed(0) / 1.1).toFixed(0) / (sum_reCnt/7).toFixed(0)).toFixed(0)));
+                $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 3) + ")").html(common.addComma((((sum_reAmt/7).toFixed(0) / 1.1).toFixed(0) / 31).toFixed(0)));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 4) + ")").html(common.vatMinus(sum_reAmt/7));
                 $("#monthTableBody_new tr:eq(2) td:eq(" + (3 * 6 + 5) + ")").html();
             }
 
             if(i == 3){
+                tmpDay = Number(moment($("#month_new_th_6").text()).add('months', 1).add('days', -1).format('DD'));
                 //총합
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 1) + ")").html(common.addComma(sum_succCnt));
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 2) + ")").html(common.addComma(sum_succCmt));
-                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 3) + ")").html(common.addComma((sum_succAmt/sum_succCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 3) + ")").html(common.addComma(((sum_succAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 4) + ")").html(common.vatMinus(sum_succAmt));
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index + 5) + ")").html(common.vatMinus(sum_cancAmt));
                 //첫구매
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 1) + ")").html(common.addComma(sum_firstCnt));
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 2) + ")").html(common.addComma(sum_firstCmt));
-                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 3) + ")").html(common.addComma((sum_firstAmt/sum_firstCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 3) + ")").html(common.addComma(((sum_firstAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 4) + ")").html(common.vatMinus(sum_firstAmt));
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index + 5) + ")").html();
                 //재구매
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 1) + ")").html(common.addComma(sum_reCnt));
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 2) + ")").html(common.addComma(sum_reCmt));
-                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 3) + ")").html(common.addComma((sum_reAmt/sum_reCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 3) + ")").html(common.addComma(((sum_reAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 4) + ")").html(common.vatMinus(sum_reAmt));
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index + 5) + ")").html();
             }else if(i == 4 || i == 5 || i == 6) {
                 //총합
+                if(i == 4){
+                    tmpDay = Number(moment($("#month_new_th_5").text()).add('months', 1).add('days', -1).format('DD'));
+                }else if(i == 5){
+                    tmpDay = Number(moment($("#month_new_th_4").text()).add('months', 1).add('days', -1).format('DD'));
+                }else if(i == 6) {
+                    tmpDay = Number(moment($("#month_new_th_3").text()).add('months', 1).add('days', -1).format('DD'));
+                }
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 1) + ")").html(common.addComma(sum_succCnt));
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 2) + ")").html(common.addComma(sum_succCmt));
-                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 3) + ")").html(common.addComma((sum_succAmt/sum_succCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 3) + ")").html(common.addComma(((sum_succAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 4) + ")").html(common.vatMinus(sum_succAmt));
                 $("#monthTableBody_new2 tr:eq(0) td:eq(" + (tmp_index * 6 + 5) + ")").html(common.vatMinus(sum_cancAmt));
                 //첫구매
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 1) + ")").html(common.addComma(sum_firstCnt));
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 2) + ")").html(common.addComma(sum_firstCmt));
-                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 3) + ")").html(common.addComma((sum_firstAmt/sum_firstCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 3) + ")").html(common.addComma(((sum_firstAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 4) + ")").html(common.vatMinus(sum_firstAmt));
                 $("#monthTableBody_new2 tr:eq(1) td:eq(" + (tmp_index * 6 + 5) + ")").html();
                 //재구매
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 1) + ")").html(common.addComma(sum_reCnt));
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 2) + ")").html(common.addComma(sum_reCmt));
-                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 3) + ")").html(common.addComma((sum_reAmt/sum_reCnt).toFixed(0)));
+                $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 3) + ")").html(common.addComma(((sum_reAmt / 1.1 ).toFixed(0) /tmpDay).toFixed(0)));
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 4) + ")").html(common.vatMinus(sum_reAmt));
                 $("#monthTableBody_new2 tr:eq(2) td:eq(" + (tmp_index * 6 + 5) + ")").html();
             }
