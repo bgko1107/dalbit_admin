@@ -410,7 +410,7 @@
                 , listenDal : listenDal.val()
                 , djItem : djItem.val()
                 , djDal : djDal.val()
-                , moonRate : moonRate.val()
+                , moonRate : Number(moonRate.val()) * 100
             }
 
             conditionEdit('condition4', data);
@@ -502,16 +502,20 @@
 </script>
 
 <script id="tmp_superMoonPrizeCondition" type="text/x-handlebars-template">
-    {{#each this}}
+    {{#each this as |data|}}
         <tr>
-            <td>{{{getCommonCodeLabel slctType 'full_moon_condition4_slctType'}}}</td>
-            <td>{{{getCommonCodeLabel slctType 'full_moon_condition4_reward'}}}</td>
+            <td>{{{getCommonCodeLabel data.slctType 'full_moon_condition4_slctType'}}}</td>
+            <td>{{{getCommonCodeLabel data.slctType 'full_moon_condition4_reward'}}}</td>
             <td>
-                <input type="text" class="form-control" style="width: 50%;" id="{{getCommonCodeText slctType 'full_moon_condition4_slctType_values'}}" value="{{minValue}}" />
-                {{{getCommonCodeLabel slctType 'full_moon_condition4_slctType_unit'}}}
+                {{^equal data.slctType '5'}}
+                    <input type="text" class="form-control" style="width: 50%;" id="{{getCommonCodeText data.slctType 'full_moon_condition4_slctType_values'}}" value="{{data.minValue}}" />
+                {{else}}
+                    <input type="text" class="form-control" style="width: 50%;" id="{{getCommonCodeText data.slctType 'full_moon_condition4_slctType_values'}}" value="{{math data.minValue '/' 100}}" />
+                {{/equal}}
+                {{{getCommonCodeLabel data.slctType 'full_moon_condition4_slctType_unit'}}}
             </td>
-            <td>{{moment editDate 'YYYY-MM-DD HH:mm:ss'}}</td>
-            <td>{{opName}}</td>
+            <td>{{moment data.editDate 'YYYY-MM-DD HH:mm:ss'}}</td>
+            <td>{{data.opName}}</td>
         </tr>
     {{/each}}
 </script>
