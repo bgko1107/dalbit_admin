@@ -139,16 +139,17 @@
 <script id="liveListener_tableSummary" type="text/x-handlebars-template">
     <table class="table table-bordered table-summary pull-right no-margin" style="width: 100%">
         <tr>
-            <th colspan="7" style="background-color: #2f5597;color: white">청취자</th>
+            <th colspan="8" style="background-color: #2f5597;color: white">청취자</th>
         </tr>
         <tr>
             <th colspan="3" style="background-color: #d9d9d9;color: black">플랫폼</th>
-            <th colspan="3" style="background-color: #d9d9d9;color: black">성별</th>
+            <th colspan="4" style="background-color: #d9d9d9;color: black">성별</th>
         </tr>
         <tr>
             <td style="background-color: #dae3f3" class="font-bold">Android</td>
             <td style="background-color: #dae3f3" class="font-bold">IOS</td>
             <td style="background-color: #dae3f3" class="font-bold">PC</td>
+            <th style="background-color: #dae3f3;">신입</th>
             <td style="background-color: #dae3f3">{{{sexIcon 'm'}}}</td>
             <td style="background-color: #dae3f3">{{{sexIcon 'f'}}}</td>
             <td style="background-color: #dae3f3">{{{sexIcon 'n'}}}</td>
@@ -157,6 +158,7 @@
             <td>{{addComma content.aosCnt}}</td>
             <td>{{addComma content.iosCnt}}</td>
             <td>{{addComma content.pcCnt}}</td>
+            <td>{{addComma content.newCnt}}명</td>
             <td>{{addComma content.maleCnt}}</td>
             <td>{{addComma content.femaleCnt}}</td>
             <td>{{addComma content.noneCnt}}</td>

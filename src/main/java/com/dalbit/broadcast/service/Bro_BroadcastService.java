@@ -85,6 +85,7 @@ public class Bro_BroadcastService {
             summary.setNormalDjCnt(djTypeCntList.get(0).getNormalDjCnt());
             summary.setNewDjCnt(djTypeCntList.get(0).getNewDjCnt());
             summary.setSpecialDjCnt(djTypeCntList.get(0).getSpecialDjCnt());
+            summary.setNewCnt(djTypeCntList.get(0).getNewCnt());
         }
 
         // 오늘 년도

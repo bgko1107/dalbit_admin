@@ -61,6 +61,7 @@ public class P_ListenListOutputVo extends PagingVo {
     private String recomm_badge;
     private String newdj_badge;
     private String specialdj_badge;
+    private String new_badge;
 
     public void setStart_date(Date start_date){
         this.start_date = start_date;

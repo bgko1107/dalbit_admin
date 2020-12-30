@@ -165,13 +165,17 @@ public interface Mem_MemberDao {
 
     P_MemberEditorVo setChangeAutoSetting(ProcedureVo procedureVo);
 
+    @Transactional(readOnly = true)
     int boostItemHistCnt(P_MemberItemVo pMemberItemVo);
 
+    @Transactional(readOnly = true)
     List<P_MemberItemVo> boostItemHist(P_MemberItemVo pMemberItemVo);
 
     int selectMemberBoostListCnt(P_MemberListInputVo pMemberListInputVo);
 
+    @Transactional(readOnly = true)
     ArrayList<P_MemberListOutputVo> selectMemberBoostList(P_MemberListInputVo pMemberListInputVo);
 
+    @Transactional(readOnly = true)
     ArrayList<P_MemberCouponVo> callMemberCouponHistory(ProcedureVo procedureVo);
 }

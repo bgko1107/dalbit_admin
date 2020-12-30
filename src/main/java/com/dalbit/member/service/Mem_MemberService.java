@@ -154,9 +154,9 @@ public class Mem_MemberService {
         mem_MemberDao.callMemberInfo(procedureVo);
         P_MemberInfoOutputVo memberInfo = new Gson().fromJson(procedureVo.getExt(), P_MemberInfoOutputVo.class);
 
-        if(memberInfo.getMemState().equals("5") && memberInfo.getBlock_type() == 1){
-            memberInfo.setMemState("6");
-        }
+//        if(memberInfo.getMemState().equals("5") && memberInfo.getBlock_type() == 1){
+//            memberInfo.setMemState("6");
+//        }
 
         P_MemberInfoOutputVo block = mem_MemberDao.callMemberBlock(pMemberInfoInputVo);
         if(!DalbitUtil.isEmpty(block)) {

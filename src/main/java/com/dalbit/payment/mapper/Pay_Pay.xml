@@ -157,7 +157,7 @@
                             (SELECT sum(pay_amt) paySum
                              FROM rd_data.tb_payment_succ
                              WHERE pay_yn = 'Y' AND mem_no = pay.mem_no) AS amount,
-                       ruby	as tot_dal_cnt
+                      money+ruby as tot_dal_cnt
                 FROM rd_data.tb_payment_succ pay
                       LEFT JOIN  rd_data.tb_member_wallet wallet ON pay.mem_no = wallet.mem_no
                         ) payAll
@@ -218,7 +218,7 @@
 						(SELECT sum(pay_amt) paySum
 						 FROM rd_data.tb_payment_succ
 						 WHERE pay_yn = 'Y' AND mem_no = pay.mem_no) AS amount,
-                   ruby	as tot_dal_cnt
+                    money+ruby as tot_dal_cnt
             FROM rd_data.tb_payment_succ pay
                   LEFT JOIN  rd_data.tb_member_wallet wallet ON pay.mem_no = wallet.mem_no
 					) payAll
@@ -286,7 +286,7 @@
 						(SELECT sum(pay_amt) paySum
 						 FROM rd_data.tb_payment_succ
 						 WHERE pay_yn = 'Y' AND mem_no = pay.mem_no) AS amount,
-                   ruby	as tot_dal_cnt
+                    money+ruby as tot_dal_cnt
             FROM rd_data.tb_payment_succ pay
                   LEFT JOIN  rd_data.tb_member_wallet wallet ON pay.mem_no = wallet.mem_no
 					) payAll

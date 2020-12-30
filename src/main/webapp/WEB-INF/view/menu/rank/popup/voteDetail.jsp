@@ -25,17 +25,14 @@
     </div>
 
     <div class="widget-content mt10">
-        <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate_top"></div>
         <table id="list_info" class="table table-sorting table-hover table-bordered">
         </table>
-        <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate"></div>
     </div>
 </div>
 
 <script type="text/javascript" src="/js/code/payment/payCodeList.js?${dummyData}"></script>
 
 <script type="text/javascript">
-    listPagingInfo = new PAGING_INFO(0, 1, 50);
 
     var memNo = '${param.memNo}';
     var memNick = '${param.memNick}';
@@ -56,8 +53,8 @@
     function getList() {
 
         var data = {
-            pageStart : listPagingInfo.pageNo
-            , pageCnt : listPagingInfo.pageCnt
+            pageStart : 0
+            , pageCnt : 9999
             , mem_no :memNo
             , selectYear : selectYear
         };
@@ -74,18 +71,7 @@
         var html = templateScript(context);
         $("#list_info").html(html);
 
-        if(response.result == "success") {
-            var pagingInfo = response.pagingVo;
-            listPagingInfo.totalCnt = pagingInfo.totalCnt;
-            util.renderPagingNavigation('list_info_paginate_top', listPagingInfo);
-            util.renderPagingNavigation('list_info_paginate', listPagingInfo);
-        }
         ui.paintColor();
-    }
-
-    function handlebarsPaging(targetId, pagingInfo){
-        listPagingInfo = pagingInfo;
-        $('#bt_search').click();
     }
 
 </script>
