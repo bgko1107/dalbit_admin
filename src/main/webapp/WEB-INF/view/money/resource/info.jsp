@@ -994,9 +994,9 @@
             </tr>
             <tr>
                 <th class="_bgColor" data-bgcolor="#b4c7e7">{{{sexIcon 'm'}}}</th>
-                <td onclick="resourceByeolClick($(this).data())" data-type="5" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_mcnt 'Y'}}</span></a></td>
+                <td onclick="resourceByeolClick($(this).data())" data-type="5"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_mcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="11"  data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma byeolgift_mcnt 'Y'}}</span></a></td>
-                <td onclick="resourceByeolClick($(this).data())" data-type="9-1"  data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma event_auto_mcnt 'Y'}}</span></a></td>
+                <td onclick="resourceByeolClick($(this).data())" data-type="9-1" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma event_auto_mcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="9"  data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma event_direct_mcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="16" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma cancel_mcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="8"  data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma recovery_mcnt 'Y'}}</span></a></td>

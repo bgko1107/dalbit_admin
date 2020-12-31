@@ -86,21 +86,21 @@
         </tr>
         <tr>
             <th>선물</th>
-            <td>{{addComma aa}} 명</td>
-            <td>{{addComma aa}} 건</td>
-            <td>{{addComma aa}} 달</td>
-            <td>{{addComma aa}} 별</td>
+            <td>{{addComma memGiftCnt}} 명</td>
+            <td>{{addComma giftCnt}} 건</td>
+            <td>{{addComma dalCnt}} 달</td>
+            <td>{{addComma byeolCnt}} 별</td>
         </tr>
         <tr>
             <th>대화</th>
-            <td>{{addComma aa}} 명</td>
-            <td>{{addComma aa}} 건</td>
+            <td>{{addComma memMsgCnt}} 명</td>
+            <td>{{addComma msgCnt}} 건</td>
             <td rowspan="2" colspan="2"></td>
         </tr>
         <tr>
             <th>이미지</th>
-            <td>{{addComma aa}} 명</td>
-            <td>{{addComma aa}} 건</td>
+            <td>{{addComma memImgCnt}} 명</td>
+            <td>{{addComma imageCnt}} 건</td>
         </tr>
     </table>
 </script>

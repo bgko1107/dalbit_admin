@@ -36,5 +36,12 @@ public class P_MailboxListVo extends SearchVo {
     private String webp_image;
 
     // summary
-
+    private int memMsgCnt;
+    private int memImgCnt;
+    private int memGiftCnt;
+    private int msgCnt;
+    private int imageCnt;
+    private int giftCnt;
+    private int dalCnt;
+    private int byeolCnt;
 }

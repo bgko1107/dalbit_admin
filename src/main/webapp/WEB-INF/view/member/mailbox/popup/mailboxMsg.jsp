@@ -116,22 +116,26 @@
         data.pageCnt = mailboxPagingInfo.pageCnt;
         data.msgType = $("#msgType").val();
 
-
         console.log(data);
         util.getAjaxData("mailboxMsg", "/rest/member/mailbox/msg", data, fn_list_success);
     }
 
     function fn_list_success(dst_id, response){
-        if(response.result == 'success'){
-            var template = $('#tmp_list').html();
-            var templateScript = Handlebars.compile(template);
-            var context = response.data.list;
-            var html=templateScript(context);
-            $("#tableBody").html(html);
+        var template = $('#tmp_list').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response.data.list;
+        var html=templateScript(context);
+        $("#tableBody").html(html);
 
+        if(response.result == 'success'){
+            $('#mailbox_paginate_top').show();
+            $('#mailbox_paginate').show();
             mailboxPagingInfo.totalCnt = response.pagingVo.totalCnt;
             util.renderPagingNavigation('mailbox_paginate_top', mailboxPagingInfo);
             util.renderPagingNavigation('mailbox_paginate', mailboxPagingInfo);
+        }else{
+            $('#mailbox_paginate_top').hide();
+            $('#mailbox_paginate').hide();
         }
         $("#mailboxMember").empty();
         for(var i=0;i<response.data.mailboxMember.length;i++){
@@ -177,6 +181,10 @@
             {{/dalbit_if}}
 
         </td>
+    </tr>
+    {{else}}
+    <tr>
+        <td colspan="6">{{isEmptyData}}</td>
     </tr>
     {{/each}}
 </script>
