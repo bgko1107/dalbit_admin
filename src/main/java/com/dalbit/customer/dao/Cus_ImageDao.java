@@ -7,6 +7,7 @@ import com.dalbit.customer.vo.procedure.P_ImageBroadcastListOutputVo;
 import com.dalbit.customer.vo.procedure.P_ImageProfileListInputVo;
 import com.dalbit.customer.vo.procedure.P_ImageProfileListOutputVo;
 import com.dalbit.member.vo.MemberNoticeImgDeleteVo;
+import com.dalbit.member.vo.procedure.P_MailboxImgListVo;
 import com.dalbit.member.vo.procedure.P_MemberNoticeInputVo;
 import com.dalbit.member.vo.procedure.P_MemberNoticeOutputVo;
 import org.springframework.stereotype.Repository;
@@ -39,4 +40,7 @@ public interface Cus_ImageDao {
     ArrayList<P_MemberNoticeOutputVo> getNoticeHistory(P_MemberNoticeInputVo pMemberNoticeInputVo);
 
     int deleteNoticeImg(MemberNoticeImgDeleteVo memberNoticeImgDeleteVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<P_MailboxImgListVo> callMailboxImgList(ProcedureVo procedureVo);
 }

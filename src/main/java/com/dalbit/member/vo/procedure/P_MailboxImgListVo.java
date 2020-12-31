@@ -18,5 +18,7 @@ public class P_MailboxImgListVo extends SearchVo {
     private String mem_sex;
     private String mem_birth_year;
     private String last_upd_date;
+    private String chat_no;
+    private String mem_no;
 
 }

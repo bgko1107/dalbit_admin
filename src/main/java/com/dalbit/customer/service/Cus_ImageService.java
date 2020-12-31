@@ -307,9 +307,9 @@ public class Cus_ImageService {
         ProcedureVo procedureVo = new ProcedureVo(pMailboxImgListVo);
         String result;
         try {
-            ArrayList<ClipHistoryVo> clipList = cusImageDao.callClipList(procedureVo);
-            if(clipList != null && clipList.size() > 0) {
-                result = gsonUtil.toJson(new JsonOutputVo(Status.조회, clipList, new PagingVo(procedureVo.getRet())));
+            ArrayList<P_MailboxImgListVo> list = cusImageDao.callMailboxImgList(procedureVo);
+            if(list != null && list.size() > 0) {
+                result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(procedureVo.getRet())));
             }else {
                 result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
             }

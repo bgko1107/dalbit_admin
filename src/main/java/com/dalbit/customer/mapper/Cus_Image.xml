@@ -266,4 +266,9 @@
         , last_upd_date = now()
         where idx = #{idx}
     </update>
+
+
+    <select id="callMailboxImgList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_MailboxImgListVo">
+        call rd_admin.sp_admin_mailbox_image_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
 </mapper>
