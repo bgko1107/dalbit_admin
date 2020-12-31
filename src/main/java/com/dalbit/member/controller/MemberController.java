@@ -31,9 +31,12 @@ public class MemberController {
     @RequestMapping("/member/popup/memberTestid")
     public String memberTestid(Model model) { return "member/member/popup/memberTestid"; }
 
-
     @RequestMapping("/member/login/history")
     public String loginHistory(Model model) { return "member/login/history"; }
+
+    @RequestMapping("/mailbox/popup/mailboxMsg")
+    public String mailboxMsg(Model model) { return "member/mailbox/popup/mailboxMsg"; }
+
 
     /**
      * 회원리스트

@@ -16,4 +16,7 @@ public interface Mem_MailboxDao {
 
     @Transactional(readOnly = true)
     ArrayList<P_MailboxMsgVo> callMailboxMsg(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<P_MailboxMsgVo> callMailboxMember(ProcedureVo procedureVo);
 }

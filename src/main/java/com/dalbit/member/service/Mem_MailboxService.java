@@ -8,6 +8,7 @@ import com.dalbit.member.vo.procedure.*;
 import com.dalbit.util.*;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,10 +50,17 @@ public class Mem_MailboxService {
         ProcedureVo procedureVo = new ProcedureVo(pMailboxMsgVo);
         ArrayList<P_MailboxMsgVo> list = mem_MailboxDao.callMailboxMsg(procedureVo);
         P_MailboxMsgVo summary = new Gson().fromJson(procedureVo.getExt(), P_MailboxMsgVo.class);
+
+        ArrayList<P_MailboxMsgVo> mailboxMember = mem_MailboxDao.callMailboxMember(procedureVo);
+
+        var resultMap = new HashMap<>();
+        resultMap.put("list", list);
+        resultMap.put("mailboxMember", mailboxMember);
+
         if(list.size() > 0){
-            return gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(summary.getTotalCnt()),summary));
+            return gsonUtil.toJson(new JsonOutputVo(Status.조회, resultMap, new PagingVo(summary.getTotalCnt()),summary));
         }else{
-            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, list, new PagingVo(summary.getTotalCnt()),summary));
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, resultMap, new PagingVo(summary.getTotalCnt()),summary));
         }
     }
 }

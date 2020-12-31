@@ -14,8 +14,28 @@ public class P_MailboxMsgVo extends SearchVo {
     private String startDate;
     private String endDate;
     private int inner;
+    private int msgType;
 
     // output
+    private String idx;
+    private String msg_idx;
+    private String mem_no;
+    private String mem_nick;
+    private String mem_id;
+    private String mem_sex;
+    private String mem_birth_year;
+    private String type;
+    private String msg;
+    private String read_yn;
+    private String delete_yn;
+    private String os;
+    private String last_upd_date;
+    private String itemThumbnail;
+    private String webpImage;
+    private String time;
+
+    // mailboxMember
+    private String readCnt;
 
     // summary
 

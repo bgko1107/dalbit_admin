@@ -67,8 +67,8 @@
     }
 
     function mailboxPopUp(data){
-        var popupUrl = "/member/mailbox/popup/mailboxMsg?catNo="+ data.data('chatno');
-        util.windowOpen(popupUrl,"600", "1000","우체통");
+        var popupUrl = "/member/mailbox/popup/mailboxMsg?chatNo="+ data.data('chatno');
+        util.windowOpen(popupUrl,"950", "1000","우체통");
     }
 </script>
 

@@ -6,6 +6,7 @@ import com.dalbit.customer.vo.procedure.P_ImageBroadcastListInputVo;
 import com.dalbit.customer.vo.procedure.P_ImageProfileListInputVo;
 import com.dalbit.exception.GlobalException;
 import com.dalbit.member.vo.MemberNoticeImgDeleteVo;
+import com.dalbit.member.vo.procedure.P_MailboxImgListVo;
 import com.dalbit.member.vo.procedure.P_MemberNoticeInputVo;
 import com.dalbit.member.vo.procedure.P_MemberReportVo;
 import com.dalbit.util.DalbitUtil;
@@ -92,6 +93,15 @@ public class Cus_ImageRestController {
     @PostMapping("/notice/imgDelete")
     public String getNoticeImgDelete(MemberNoticeImgDeleteVo memberNoticeImgDeleteVo) {
         String result = cusImageService.deleteNoticeImg(memberNoticeImgDeleteVo);
+        return result;
+    }
+
+    /**
+     * notice image 리스트 조회
+     */
+    @PostMapping("/mailbox/list")
+    public String getMailboxImgList(P_MailboxImgListVo pMailboxImgListVo) {
+        String result = cusImageService.getMailboxImgList(pMailboxImgListVo);
         return result;
     }
 }

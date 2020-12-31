@@ -21,10 +21,7 @@ import com.dalbit.member.dao.Mem_NoticeDao;
 import com.dalbit.member.service.Mem_MemberService;
 import com.dalbit.member.vo.MemberNoticeImgDeleteVo;
 import com.dalbit.member.vo.MemberVo;
-import com.dalbit.member.vo.procedure.P_MemberEditorVo;
-import com.dalbit.member.vo.procedure.P_MemberNoticeInputVo;
-import com.dalbit.member.vo.procedure.P_MemberNoticeOutputVo;
-import com.dalbit.member.vo.procedure.P_MemberReportVo;
+import com.dalbit.member.vo.procedure.*;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.JsonElement;
@@ -301,4 +298,28 @@ public class Cus_ImageService {
         }
         return result;
     }
+
+
+    /**
+     * 우체통 image 리스트 조회
+     */
+    public String getMailboxImgList(P_MailboxImgListVo pMailboxImgListVo) {
+        ProcedureVo procedureVo = new ProcedureVo(pMailboxImgListVo);
+        String result;
+        try {
+            ArrayList<ClipHistoryVo> clipList = cusImageDao.callClipList(procedureVo);
+            if(clipList != null && clipList.size() > 0) {
+                result = gsonUtil.toJson(new JsonOutputVo(Status.조회, clipList, new PagingVo(procedureVo.getRet())));
+            }else {
+                result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            result = gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+
+        return result;
+    }
+
 }
