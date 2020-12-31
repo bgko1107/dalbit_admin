@@ -202,6 +202,31 @@
 
     });
 
+    $(document).on('click', '._updateStatusWordBtn', function(){
+        var me = $(this);
+        if(confirm('수정하시겠습니까?')){
+
+            var slctType = me.data('slcttype');
+            var title = '';
+
+            var textData = me.parent().parent().find('._textData');
+            if(common.isEmpty(textData.val())){
+                alert('문구를 입력해주세요.');
+                textData.focus();
+                return false;
+            }
+
+            var data = {
+                slctType : slctType
+                , title : title
+                , textData : textData.val()
+            }
+
+            textEdit('alertWordUpdate', data);
+        }
+
+    });
+
     $(document).on('click', '._updateGuideWordBtn', function(){
         var me = $(this);
         if(confirm('수정하시겠습니까?')){
@@ -248,7 +273,7 @@
             <td>
                 <textarea type="textarea" class="form-control _textData" style="width:100%;" rows="5">{{{replaceTextarea textData}}}</textarea>
             </td>
-            <td><button type="button" class="form-control btn-default sm _updateAlertWordBtn" data-slcttype="{{data.slctType}}">수정</button></td>
+            <td><button type="button" class="form-control btn-default sm _updateStatusWordBtn" data-slcttype="{{data.slctType}}">수정</button></td>
         </tr>
     {{/each}}
 </script>
