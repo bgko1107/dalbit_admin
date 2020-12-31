@@ -1086,9 +1086,9 @@ var MemberDataTableSource = {
                     if(row.msgType == "1"){
                         return '<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="row.chatNo">data</a>';
                     }else if(row.msgType == "2"){       // 이미지
-                        return '<img class="thumbnail fullSize_background" src="'+ common.viewImage(row.data1) +'" width="50px" height="50px" />' + '<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="row.chatNo">이미지 전송</a>';
+                        return '<img class="thumbnail fullSize_background" src="'+ common.viewImage(row.data1) +'" width="50px" height="50px" />' + '<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="' + row.chatNo + '">이미지 전송</a>';
                     }else if(row.msgType == "3"){       // 아이템
-                        return '<img class="fullSize_background _webpImage" src="'+ row.item_thumbnail+'" width="50px" height="50px" data-webpImage="' + row.webp_image+ '"/>' + '<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="row.chatNo">아이템 전송</a>';
+                        return '<img class="fullSize_background _webpImage" src="'+ row.item_thumbnail+'" width="50px" height="50px" data-webpImage="' + row.webp_image+ '"/>' + '<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="' + row.chatNo + '">아이템 전송</a>';
                     }
                 }},
             {'title': '기간', 'data': 'diffDate', 'render': function (data, type, row, meta) {
