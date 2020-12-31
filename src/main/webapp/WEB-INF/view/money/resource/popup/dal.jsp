@@ -101,7 +101,7 @@
             dtList_info = new DalbitDataTable($("#list"), dtList_info_data, resourceDataTableSource.dalInc_payDetail);
         }else if(type == "2-1" || type == "2-2"){    // 달 직접 선물(달증가)/(달감소)
             dtList_info = new DalbitDataTable($("#list"), dtList_info_data, resourceDataTableSource.dalInc_giftDirect);
-        }else if(type == "3"){      // 달 교환
+        }else if(type == "3" || type == "3-1"){      // 달 교환
             dtList_info = new DalbitDataTable($("#list"), dtList_info_data, resourceDataTableSource.dalInc_dalChange);
         }else if(type == "4" || type == "5" || type == "6" || type == "7"               // 가입보상, 레벨보상, 랭킹보상, 출석이벤트,
                 || type == "8" || type == "9-1" || type == "9-2"  || type == "10"       // 소실금액 복구(운영자지급), 이벤트 지급(자동/운영자지급), 테스트 지급

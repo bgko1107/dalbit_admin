@@ -224,7 +224,7 @@
             and a.item_type = '3'
         </if>
         <if test='type == "11"'>
-            and a.item_type not in ('3','4','5')
+            and a.item_type not in ('3','4','5','9')
         </if>
         <if test='gender == "m" or gender == "f" or gender == "n"'>
             <if test='type == "2-1"'>
