@@ -78,6 +78,7 @@
 
 
     function levelSummary(data){
+        data.summary.totalDal = data.summary.dal5Cnt + data.summary.dal10Cnt;
         var template = $('#tmp_levelSummary').html();
         var templateScript = Handlebars.compile(template);
         var context = data.summary;
