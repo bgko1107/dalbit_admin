@@ -82,7 +82,11 @@ var BroadcastDataTableSource = {
                     }
                 }},
             {'title': '보름달', 'data': 'complete_moon','width' : '50px', 'render': function (data, type, row, meta) {
-                    return data == 1 ? common.convertToDate(row.complete_date, 'YYYY-MM-DD HH:mm:ss') : row.step + "단계";
+                    var moonName = '';
+                    if(data == 2){
+                        moonName = '(슈퍼문)<br />'
+                    }
+                    return 0 < data ? moonName + common.convertToDate(row.complete_date, 'YYYY-MM-DD HH:mm:ss') : row.step + "단계";
                 }},
             {'title': '시작일시', 'data': 'start_date','width' : '50px'},
             {'title': '진행시간', 'data': 'airTime','width' : '45px','render': function (data){
@@ -243,7 +247,11 @@ var BroadcastDataTableSource = {
                     }
                 }},
             {'title': '보름달', 'data': 'complete_moon','width' : '50px', 'render': function (data, type, row, meta) {
-                    return data == 1 ? common.convertToDate(row.complete_date, 'YYYY-MM-DD HH:mm:ss') : row.step + "단계";
+                    var moonName = '';
+                    if(data == 2){
+                        moonName = '(슈퍼문)<br />'
+                    }
+                    return 0 < data ? moonName + common.convertToDate(row.complete_date, 'YYYY-MM-DD HH:mm:ss') : row.step + "단계";
                 }},
             {'title': '시작일시', 'data': 'start_date','width' : '60px'},
             {'title': '종료일시', 'data': 'end_date','width' : '60px'},
@@ -426,7 +434,11 @@ var BroadcastDataTableSource = {
                     return data + " 개"
                 }},
             {'title': '보름달', 'data' : 'complete_moon', 'width':'50px', 'render': function (data, type, row, meta) {
-                    return data == 0 ? "N" : "Y";
+                    var moonName = '';
+                    if(data == 2){
+                        moonName = '<br />(슈퍼문)';
+                    }
+                    return 0 < data ? "Y" + moonName : "N";
                 }},
             {'title': '디바이스 정보', 'data' : 'osType', 'width':'150px', 'render': function (data, type, row, meta) {
                     var html = '';
