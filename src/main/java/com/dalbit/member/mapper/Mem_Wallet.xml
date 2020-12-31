@@ -139,9 +139,9 @@
             a.item_code = b.item_code
         LEFT JOIN
             (
-                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic where mem_no = #{mem_no}
+                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic
                 union
-                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak where mem_no = #{mem_no}
+                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak
             ) AS c
         ON
             a.mem_no = c.mem_no
@@ -291,9 +291,9 @@
                 a.item_code = b.item_code
             LEFT JOIN
                 (
-                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic where mem_no = #{mem_no}
+                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic
                     union
-                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak where mem_no = #{mem_no}
+                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak
                 ) AS c
             ON
                 a.mem_no = c.mem_no
@@ -448,9 +448,9 @@
             a.item_code = b.item_code
         LEFT JOIN
             (
-                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic where mem_no = #{mem_no}
+                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic
                 union
-                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak where mem_no = #{mem_no}
+                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak
             ) AS c
         ON
             a.mem_no = c.mem_no
@@ -557,9 +557,9 @@
                 a.item_code = b.item_code
             LEFT JOIN
                 (
-                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic where mem_no = #{mem_no}
+                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic
                     union
-                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak where mem_no = #{mem_no}
+                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak
                 ) AS c
             ON
                 a.mem_no = c.mem_no
