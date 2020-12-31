@@ -133,7 +133,7 @@
             </td>
             <td>
                 {{#dalbit_if msgType '==' 1}}       <!-- 메시지 -->
-                    <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">{{msg}}</a>
+                    <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">{{{replaceEnter msg}}}</a>
                 {{/dalbit_if}}
                 {{#dalbit_if msgType '==' 2}}       <!-- 이미지 -->
                     <img class="fullSize_background thumbnailImg" alt="your image" src="{{renderImage data1}}" style='height:68px; width:68px; margin: auto;vertical-align:middle;' />
