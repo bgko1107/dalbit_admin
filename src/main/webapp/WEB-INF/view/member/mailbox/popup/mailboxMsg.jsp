@@ -168,7 +168,7 @@
             <img class="fullSize_background thumbnail" alt="your image" src="{{renderImage itemThumbnail}}" style='height:68px; width:68px; margin: auto;vertical-align:middle;' />
             {{/dalbit_if}}
             {{#dalbit_if type '==' 3}}       <!-- 아이템 -->
-            <img class="_webpImage" src="{{itemThumbnail}}" width="50" height="50" data-webpImage="{{webp_image}}"/>
+            <img class="_webpImage" src="{{itemThumbnail}}" width="50" height="50" data-webpImage="{{webpImage}}"/>
             {{/dalbit_if}}
         </td>
         <td>{{timeStampDay time}}</td>
