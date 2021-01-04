@@ -49,13 +49,13 @@
                   , b.gold as byeolCnt
                   , a.last_upd_date as lastUpdDate
                 <if test='type == "3" or type == "3-1"'>
-                  , a.ruby as dalCnt
-                  , a.ruby_old as dalOldCnt
-                  , a.ruby_new as dalNewCnt
+                  , a.ruby + a.money as dalCnt
+                  , a.ruby_old + a.money_old as dalOldCnt
+                  , a.ruby_new + a.money_new as dalNewCnt
                 </if>
                 <if test='type == "4" or type == "5" or type == "6" or type == "7" or type == "8"
                         or type == "9-1" or type == "9-2" or type == "10" or type == "15" or type == "19" or type == "22"'>
-                  , a.ruby as dalCnt
+                  , a.ruby + a.money as dalCnt
                 </if>
                 <if test='type == "4"'>
                   , '가입보상' as rewardType
@@ -113,7 +113,7 @@
         </if>
         <if test='type == "4"'>
             where a.type='15'
-              and ruby <![CDATA[>]]> 0
+              and ruby + money <![CDATA[>]]> 0
         </if>
         <if test='type == "5"'>
             where a.type='10'
@@ -137,13 +137,13 @@
             where a.type='22'
         </if>
         <if test='type == "10"'>
-            where a.type='13' and ruby <![CDATA[>]]> 0
+            where a.type='13' and ruby + money <![CDATA[>]]> 0
         </if>
         <if test='type == "15"'>
-            where a.type='13' and ruby <![CDATA[<]]> 0
+            where a.type='13' and ruby + money <![CDATA[<]]> 0
         </if>
         <if test='type == "19"'>
-            where a.type='18' and ruby <![CDATA[>]]> 0
+            where a.type='18' and ruby + money <![CDATA[>]]> 0
         </if>
         <if test='type != "1" and type != "12"'>
               and date_format(a.last_upd_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(a.last_upd_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate}
@@ -202,7 +202,7 @@
              , 'https://image.dalbitlive.com/ani/thumbs/moon_thumb.jpg'  as webpImage
              , 'https://image.dalbitlive.com/ani/thumbs/moon_thumb.jpg' as itemThumbnail
              , '달 직접선물'  as itemName
-             , a.ruby * 100 as dalAmtCnt
+             , a.ruby  * 100 as dalAmtCnt
           </if>
           <if test='type == "11"'>
              , f.webp_image  as webpImage

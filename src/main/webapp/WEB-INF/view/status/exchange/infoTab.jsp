@@ -18,7 +18,7 @@
                     <li><a href="/money/exchange/list?tabType=2" id="tab_user">일반회원</a></li>
                     <c:if test="${fn:contains('|이재은|이형원|전유신|강다인|고병권|이재호|양효진|최계석|손우걸|', principal.getUserInfo().getName())}">
                         <li class="_tab ml15">
-                            <a href="/money/exchange/list?tabType=3" id="rejectList">불가내역</a>
+                            <a href="/money/exchange/list?tabType=3" id="rejectList">취소내역</a>
                         </li>
                     </c:if>
                     <li><a href="/money/exchange/list?tabType=4" id="enableList">환전신청 가능회원</a></li>
