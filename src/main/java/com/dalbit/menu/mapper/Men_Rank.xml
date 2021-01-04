@@ -604,10 +604,10 @@
               ,@RNUM := @RNUM + 1 as rowNum
           from (
                 select *
-                ,addPointRank1 * 2 as addPoint1
-                ,addPointRank2 * 1 as addPoint2
-                ,addPointRank3 * 0.5 as addPoint3
-                ,(addPointRank1 * 2) + (addPointRank2 * 1) + (addPointRank3 * 0.5) as addPointTotal
+                ,addPointRank1 * 1.5 as addPoint1
+                ,addPointRank2 * 0.5 as addPoint2
+                ,addPointRank3 * 0.3 as addPoint3
+                ,(addPointRank1 * 1.5) + (addPointRank2 * 0.5) + (addPointRank3 * 0.3) as addPointTotal
                 from (
                       select dj.mem_no as memNo
                         , prof.image_profile as image_profile
@@ -620,19 +620,19 @@
                         , mem.inner
                         , CAST(dj.dj_point AS INT) AS rankPoint
                         , (select count(*)
-                             from rd_data.tb_ranking_dj_day
+                             from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=1
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank1
                         , (select count(*)
-                             from rd_data.tb_ranking_dj_day
+                             from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=2
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank2
                         , (select count(*)
-                             from rd_data.tb_ranking_dj_day
+                             from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=3
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
@@ -651,10 +651,10 @@
         select count(*)
           from (
                 select *
-                ,addPointRank1 * 2 as addPoint1
-                ,addPointRank2 * 1 as addPoint2
-                ,addPointRank3 * 0.5 as addPoint3
-                ,(addPointRank1 * 2) + (addPointRank2 * 1) + (addPointRank3 * 0.5) as addPointTotal
+                ,addPointRank1 * 1.5 as addPoint1
+                ,addPointRank2 * 0.5 as addPoint2
+                ,addPointRank3 * 0.3 as addPoint3
+                ,(addPointRank1 * 1.5) + (addPointRank2 * 0.5) + (addPointRank3 * 0.3) as addPointTotal
                 from (
                       select dj.mem_no as memNo
                         , prof.image_profile as image_profile
@@ -667,19 +667,19 @@
                         , mem.inner
                         , CAST(dj.dj_point AS INT) AS rankPoint
                         , (select count(*)
-                             from rd_data.tb_ranking_dj_day
+                             from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=1
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank1
                         , (select count(*)
-                             from rd_data.tb_ranking_dj_day
+                             from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=2
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank2
                         , (select count(*)
-                             from rd_data.tb_ranking_dj_day
+                             from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=3
                               and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
