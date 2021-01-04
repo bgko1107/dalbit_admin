@@ -795,31 +795,46 @@ var MemberDataTableSource = {
         'url': '/rest/member/wallet/dal/list'
         , 'columns': [
             {'title': '회원번호', 'data': 'mem_no', 'render': function (data, type, row, meta) {
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     return util.memNoLink(data, row.mem_no);
                 }},
             {'title': 'UserID', 'data': 'userId', 'render' : function (data, type, row, meta){
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     return data;
                 }},
             {'title': 'User닉네임', 'data': 'nickName', 'render' : function (data,type,row,meta){
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     return data;
                 }},
             {'title': '성별', 'data': 'mem_sex', 'width':'70px', 'render': function (data, type, row, meta) {
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     return common.sexIcon(data, row.mem_birth_year);
                 }},
             {'title': '구분', 'data': 'gubun', 'render': function (data, type, row, meta) {
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     if(data == 12){
@@ -830,13 +845,19 @@ var MemberDataTableSource = {
                     return util.getCommonCodeLabel(data, mem_wallet_dal_code);
                 }},
             {'title': '비공개', 'data': 'secret', 'render': function (data, type, row, meta) {
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     return data == '' ? "X" : data == 1 ? "O" : common.addComma(data);
                 }},
             {'title': '이미지', 'data': 'item_thumbnail','width':'50px','render' : function (data, type, row, meta) {
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     var imgurl = common.isEmpty(data) ? "https://image.dalbitlive.com/ani/thumbs/moon_thumb.jpg" : data;
@@ -844,13 +865,19 @@ var MemberDataTableSource = {
                 }},
             {'title': '아이템명', 'data': 'itemName'},
             {'title': '선물 건', 'data': 'itemCnt', 'render': function(data, type, row, meta){
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     return common.addComma(data) + " 개"
                 }},
             {'title': '선물 달', 'data': 'ruby', 'render': function(data, type, row, meta){
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     return common.addComma(data) + " 달"
@@ -862,7 +889,10 @@ var MemberDataTableSource = {
                     return common.addComma(data) + " 달"
                 }},
             {'title': '선물 일시', 'data': 'giftDateFormat', 'render' : function(data, type, row, meta){
-                    if((row.gubun == "2" || row.gubun == "3" || row.gubun == "32" || row.gubun == "14"|| row.gubun == "17") && row.mem_no == "10000000000000"){
+                    if((row.gubun == "2" || row.gubun == "3"
+                        || row.gubun == "32" || row.gubun == "14"
+                        || row.gubun == "17"|| row.gubun == "4"
+                        || row.gubun == "5"|| row.gubun == "6") && row.mem_no == "10000000000000"){
                         return "";
                     }
                     return data;
