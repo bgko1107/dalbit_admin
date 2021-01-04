@@ -125,10 +125,10 @@
             <otherwise>
                 <choose>
                     <when test="last_reject == 0">
-                        and exchange.state = 2
+                        and exchange.state in ( 2, 4 )
                     </when>
                     <when test='last_reject != 0'>
-                        and (exchange.state in (0,1) or ( exchange.state = 2 and exchange.last_reject = #{last_reject}))
+                        and (exchange.state in (0,1,4) or ( exchange.state = 2 and exchange.last_reject = #{last_reject}))
                         <choose>
                             <when test="isSpecial == 0">
                                 and special.mem_no is null
@@ -520,7 +520,7 @@
         left join rd_data.tb_member_basic basic
         on exchange.mem_no = basic.mem_no
 
-        where exchange.state = 2
+        where exchange.state in ( 2, 4 )
         <choose>
             <when test="end_year == null">
                 and DATE_FORMAT(exchange.reg_date , '%Y%m') = concat(#{search_year}, #{search_month})
@@ -565,7 +565,7 @@
         </choose>
         left join rd_data.tb_member_basic basic
         on exchange.mem_no = basic.mem_no
-        where exchange.state = 2
+        where exchange.state in ( 2, 4 )
         <choose>
             <when test="end_year == null">
                 and DATE_FORMAT(exchange.reg_date , '%Y%m') = concat(#{search_year}, #{search_month})
@@ -609,7 +609,7 @@
         </choose>
         left join rd_data.tb_member_basic basic
         on exchange.mem_no = basic.mem_no
-        where exchange.state = 2
+        where exchange.state in ( 2, 4 )
         <choose>
             <when test="end_year == null">
                 and DATE_FORMAT(exchange.reg_date , '%Y%m') = concat(#{search_year}, #{search_month})
@@ -670,7 +670,7 @@
 
         select count(*) cnt, sum(cash_real) sumCashReal, sum(byeol) sumByeol
         from rd_data.tb_member_exchange exchange
-        where state = 2
+        where state in ( 2, 4 )
         and concat(#{search_year}, #{search_month}, #{search_day}) <![CDATA[<=]]> DATE_FORMAT(exchange.last_upd_date, '%Y%m%d')
         and DATE_FORMAT(exchange.last_upd_date, '%Y%m%d') <![CDATA[<=]]> concat(#{end_year}, #{end_month}, #{end_day})
         <choose>
@@ -691,7 +691,7 @@
             select mem_no
             from rd_data.tb_member_exchange
             where idx = #{idx}
-        ) and state = 2
+        ) and state in ( 2, 4 )
     </update>
 
     <sql id="baseUpdateColumn">

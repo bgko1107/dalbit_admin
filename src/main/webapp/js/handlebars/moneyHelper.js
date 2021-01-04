@@ -21,6 +21,8 @@ Handlebars.registerHelper("stateName", function (state) {
         return '<span style=color:blue;>완료</span>'
     }else if(state == 2){
         return '<span style=color:red;>취소</span>'
+    }else if(state == 4){
+        return '<span style=color:blue;>본인취소</span>'
     }
     
 });
