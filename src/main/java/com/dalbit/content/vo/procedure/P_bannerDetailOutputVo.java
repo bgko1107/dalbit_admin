@@ -44,4 +44,6 @@ public class P_bannerDetailOutputVo extends BaseVo {
     private String memJoinInnerDate;    //Gson 변환과정에서 0으로 변경이 되어 detail만 String형으로 변경
     private String memLevelStart;       //Gson 변환과정에서 0으로 변경이 되어 detail만 String형으로 변경
     private String memLevelEnd;         //Gson 변환과정에서 0으로 변경이 되어 detail만 String형으로 변경
+
+    private String buttonName;          // 버튼명
 }

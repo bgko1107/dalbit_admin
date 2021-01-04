@@ -31,5 +31,8 @@ public class P_NewviLevelStateOutputVo extends PagingVo {
     private int totalLevel10FemaleDal;
     private int totalLevel10FemalePay;
 
+    private int maleTotalCnt;
+    private int femaleTotalCnt;
+
 
 }

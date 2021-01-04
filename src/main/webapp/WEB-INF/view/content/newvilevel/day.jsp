@@ -68,15 +68,25 @@
             $("#dayTableBody tr._tr_" + response.data.list[i].theDate + "_" + response.data.list[i].eventType + " td:eq(" + 9 + ")").html(common.addComma(response.data.list[i].malePay + response.data.list[i].femalePay));
         }
 
-        $("#dayTableBody tr._tr_total_5 th:eq(" + 2 + ")").html(common.addComma(response.data.summary.totalLevel5MaleCnt));
-        $("#dayTableBody tr._tr_total_5 th:eq(" + 3 + ")").html(common.addComma(response.data.summary.totalLevel5MaleDal));
-        $("#dayTableBody tr._tr_total_5 th:eq(" + 4 + ")").html(common.addComma(response.data.summary.totalLevel5MalePay));
-        $("#dayTableBody tr._tr_total_5 th:eq(" + 5 + ")").html(common.addComma(response.data.summary.totalLevel5FemaleCnt));
-        $("#dayTableBody tr._tr_total_5 th:eq(" + 6 + ")").html(common.addComma(response.data.summary.totalLevel5FemaleDal));
-        $("#dayTableBody tr._tr_total_5 th:eq(" + 7 + ")").html(common.addComma(response.data.summary.totalLevel5FemalePay));
-        $("#dayTableBody tr._tr_total_5 th:eq(" + 8 + ")").html(common.addComma(response.data.summary.totalLevel5MaleCnt + response.data.summary.totalLevel5FemaleCnt));
-        $("#dayTableBody tr._tr_total_5 th:eq(" + 9 + ")").html(common.addComma(response.data.summary.totalLevel5MaleDal + response.data.summary.totalLevel5FemaleDal));
-        $("#dayTableBody tr._tr_total_5 th:eq(" + 10 + ")").html(common.addComma(response.data.summary.totalLevel5MalePay + response.data.summary.totalLevel5FemalePay));
+        $("#dayTableBody tr._tr_total th:eq(" + 2 + ")").html(common.addComma(response.data.summary.maleTotalCnt));
+        $("#dayTableBody tr._tr_total th:eq(" + 3 + ")").html(common.addComma(response.data.summary.totalLevel5MaleDal + response.data.summary.totalLevel10MaleDal));
+        $("#dayTableBody tr._tr_total th:eq(" + 4 + ")").html(common.addComma(response.data.summary.totalLevel5MalePay + response.data.summary.totalLevel10MalePay));
+        $("#dayTableBody tr._tr_total th:eq(" + 5 + ")").html(common.addComma(response.data.summary.femaleTotalCnt));
+        $("#dayTableBody tr._tr_total th:eq(" + 6 + ")").html(common.addComma(response.data.summary.totalLevel5FemaleDal + response.data.summary.totalLevel5FemaleDal));
+        $("#dayTableBody tr._tr_total th:eq(" + 7 + ")").html(common.addComma(response.data.summary.totalLevel5FemalePay + response.data.summary.totalLevel10FemalePay));
+        $("#dayTableBody tr._tr_total th:eq(" + 8 + ")").html(common.addComma(response.data.summary.maleTotalCnt + response.data.summary.femaleTotalCnt));
+        $("#dayTableBody tr._tr_total th:eq(" + 9 + ")").html(common.addComma(response.data.summary.totalLevel5MaleDal + response.data.summary.totalLevel5FemaleDal + response.data.summary.totalLevel10MaleDal + response.data.summary.totalLevel10FemaleDal));
+        $("#dayTableBody tr._tr_total th:eq(" + 10 + ")").html(common.addComma(response.data.summary.totalLevel5MalePay + response.data.summary.totalLevel5FemalePay + response.data.summary.totalLevel10MalePay + response.data.summary.totalLevel10FemalePay));
+
+        $("#dayTableBody tr._tr_total_5 th:eq(" + 1 + ")").html(common.addComma(response.data.summary.totalLevel5MaleCnt));
+        $("#dayTableBody tr._tr_total_5 th:eq(" + 2 + ")").html(common.addComma(response.data.summary.totalLevel5MaleDal));
+        $("#dayTableBody tr._tr_total_5 th:eq(" + 3 + ")").html(common.addComma(response.data.summary.totalLevel5MalePay));
+        $("#dayTableBody tr._tr_total_5 th:eq(" + 4 + ")").html(common.addComma(response.data.summary.totalLevel5FemaleCnt));
+        $("#dayTableBody tr._tr_total_5 th:eq(" + 5 + ")").html(common.addComma(response.data.summary.totalLevel5FemaleDal));
+        $("#dayTableBody tr._tr_total_5 th:eq(" + 6 + ")").html(common.addComma(response.data.summary.totalLevel5FemalePay));
+        $("#dayTableBody tr._tr_total_5 th:eq(" + 7 + ")").html(common.addComma(response.data.summary.totalLevel5MaleCnt + response.data.summary.totalLevel5FemaleCnt));
+        $("#dayTableBody tr._tr_total_5 th:eq(" + 8 + ")").html(common.addComma(response.data.summary.totalLevel5MaleDal + response.data.summary.totalLevel5FemaleDal));
+        $("#dayTableBody tr._tr_total_5 th:eq(" + 9 + ")").html(common.addComma(response.data.summary.totalLevel5MalePay + response.data.summary.totalLevel5FemalePay));
 
         $("#dayTableBody tr._tr_total_10 th:eq(" + 1 + ")").html(common.addComma(response.data.summary.totalLevel10MaleCnt));
         $("#dayTableBody tr._tr_total_10 th:eq(" + 2 + ")").html(common.addComma(response.data.summary.totalLevel10MaleDal));
@@ -102,8 +112,20 @@
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_dayTableBody">
+    <tr class="_tr_total">
+        <th rowspan="3" class="day _bgColor" data-bgcolor="#c6d9f1">합계</th>
+        <th>총계</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
     <tr class="_tr_total_5">
-        <th rowspan="2" class="day _bgColor" data-bgcolor="#c6d9f1">합계</th>
         <th>5레벨</th>
         <th></th>
         <th></th>

@@ -45,5 +45,7 @@ public class P_bannerInsertVo extends BaseVo {
     private Integer memLevelStart;      // 시작 노출레벨
     private Integer memLevelEnd;        // 종료 노출레벨
 
+    private String buttonName;          // 버튼명
+
 }
 
