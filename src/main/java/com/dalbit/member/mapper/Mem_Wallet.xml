@@ -57,10 +57,12 @@
         FROM
         (
             SELECT
-                (CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 3 WHEN 4 THEN 9 WHEN 5 THEN 6 WHEN 7 THEN 14 WHEN 8 THEN 2 ELSE item_type END) AS gubun
+                (CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 3 WHEN 4 THEN 9 WHEN 5 THEN 6 WHEN 7 THEN 14 WHEN 8 THEN 2 WHEN 10 THEN 32 ELSE item_type END) AS gubun
                 ,ruby
+                ,'' AS ruby_new
+                ,'' AS ruby_old
                 ,room_no
-                ,(CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 3 WHEN 4 THEN 9 WHEN 5 THEN 6 WHEN 7 THEN 14 WHEN 8 THEN 2 ELSE item_type END) AS item_type
+                ,(CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 3 WHEN 4 THEN 9 WHEN 5 THEN 6 WHEN 7 THEN 14 WHEN 8 THEN 2 WHEN 10 THEN 32 ELSE item_type END) AS item_type
                 ,gifted_mem_no AS mem_no
                 ,mem_level AS `level`
                 ,mem_grade AS grade
@@ -78,6 +80,8 @@
             SELECT
                 '4' AS gubun
                 ,ruby
+                ,'' AS ruby_new
+                ,'' AS ruby_old
                 ,room_no
                 ,item_type
                 ,gifted_mem_no AS mem_no
@@ -97,6 +101,8 @@
             SELECT
                 '5' AS gubun
                 ,ruby
+                ,'' AS ruby_new
+                ,'' AS ruby_old
                 ,room_no
                 ,item_type
                 ,mem_no AS mem_no
@@ -116,6 +122,8 @@
             SELECT
                 `type` AS gubun
                 ,( (money_new - money_old)+(ruby_new - ruby_old) ) AS ruby
+                ,( money_new + ruby_new ) AS ruby_new
+                ,( money_old + ruby_old ) AS ruby_old
                 ,'' AS room_no
                 ,'' AS item_type
                 ,'10000000000000' AS mem_no
@@ -131,7 +139,8 @@
             WHERE
                 mem_no =#{mem_no}
                 /*and type in (1, 7, 8, 9, 10, 11, 12, 13, 22, 23, 15)*/
-                and type not in (2, 3, 4, 5, 6, 14, 17, 19, 20)
+                /*and type not in (2, 3, 4, 5, 6, 14, 17, 19, 20, 32)*/
+                and type not in (4, 5, 6, 19, 20)
         ) a
         LEFT JOIN
             rd_data.tbl_gift_item AS b
@@ -153,7 +162,7 @@
                         (
                         a.gubun IN (1, 5, 6, 9, 10, 11, 15)
                         OR
-                        (a.gubun IN (7, 8, 12, 13, 22, 23) AND a.ruby > 0)
+                        (a.gubun IN (2, 3, 7, 8, 12, 13, 22, 23) AND a.ruby > 0)
                         )
                     </when>
                     <when test='walletType == "2"'>
@@ -161,7 +170,7 @@
                         (
                         a.gubun IN (2, 3, 4, 9, 7, 14, 17)
                         OR
-                        (a.gubun IN (7, 8, 12, 13, 22, 23) AND 0 > a.ruby)
+                        (a.gubun IN (2, 3, 7, 8, 12, 13, 22, 23) AND 0 > a.ruby)
                         )
                     </when>
                 </choose>
@@ -190,7 +199,9 @@
         (
             SELECT
                 a.gubun
-                ,a.ruby
+                ,ABS(a.ruby) AS ruby
+                ,a.ruby_new
+                ,a.ruby_old
                 ,a.room_no
                 ,a.mem_no
                 ,a.item_type
@@ -209,10 +220,12 @@
             FROM
             (
                 SELECT
-                    (CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 3 WHEN 4 THEN 9 WHEN 5 THEN 6 WHEN 7 THEN 14 WHEN 8 THEN 2  ELSE item_type END) AS gubun
+                    (CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 3 WHEN 4 THEN 9 WHEN 5 THEN 6 WHEN 7 THEN 14 WHEN 8 THEN 2 WHEN 10 THEN 32 ELSE item_type END) AS gubun
                     ,ruby
+                    ,'' AS ruby_new
+                    ,'' AS ruby_old
                     ,room_no
-                    ,(CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 3 WHEN 4 THEN 9 WHEN 5 THEN 6 WHEN 7 THEN 14 WHEN 8 THEN 2 ELSE item_type END) AS item_type
+                    ,(CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 3 WHEN 4 THEN 9 WHEN 5 THEN 6 WHEN 7 THEN 14 WHEN 8 THEN 2 WHEN 10 THEN 32 ELSE item_type END) AS item_type
                     ,gifted_mem_no AS mem_no
                     ,mem_level AS `level`
                     ,mem_grade AS grade
@@ -230,6 +243,8 @@
                 SELECT
                     '4' AS gubun
                     ,ruby
+                    ,'' AS ruby_new
+                    ,'' AS ruby_old
                     ,room_no
                     ,item_type
                     ,gifted_mem_no AS mem_no
@@ -249,6 +264,8 @@
                 SELECT
                     '5' AS gubun
                     ,ruby
+                    ,'' AS ruby_new
+                    ,'' AS ruby_old
                     ,room_no
                     ,item_type
                     ,mem_no AS mem_no
@@ -268,6 +285,8 @@
                 SELECT
                     `type` AS gubun
                     ,( (money_new - money_old)+(ruby_new - ruby_old) ) AS ruby
+                    ,( money_new + ruby_new ) AS ruby_new
+                    ,( money_old + ruby_old ) AS ruby_old
                     ,'' AS room_no
                     ,'' AS item_type
                     ,'10000000000000' AS mem_no
@@ -283,7 +302,8 @@
                 WHERE
                     mem_no =#{mem_no}
                     /*and type in (1,7,8, 9, 10, 11, 12, 13, 22, 23,15)*/
-                    and type not in (2, 3, 4, 5, 6, 14, 17, 19, 20)
+                    /*and type not in (2, 3, 4, 5, 6, 14, 17, 19, 20, 32)*/
+                    and type not in ( 4, 5, 6, 19, 20)
             ) a
             LEFT JOIN
                 rd_data.tbl_gift_item AS b
@@ -305,7 +325,7 @@
                             (
                             a.gubun IN (1, 5, 6, 9, 10, 11,15)
                             OR
-                            (a.gubun IN (7, 8, 12, 13, 22, 23) AND a.ruby > 0)
+                            (a.gubun IN (2, 3, 7, 8, 12, 13, 22, 23) AND a.ruby > 0)
                             )
                         </when>
                         <when test='walletType == "2"'>
@@ -313,7 +333,7 @@
                             (
                             a.gubun IN (2, 3, 4, 9, 7, 14, 17)
                             OR
-                            (a.gubun IN (7, 8, 12, 13, 22, 23) AND 0 > a.ruby)
+                            (a.gubun IN (2, 3, 7, 8, 12, 13, 22, 23) AND 0 > a.ruby)
                             )
                         </when>
                     </choose>

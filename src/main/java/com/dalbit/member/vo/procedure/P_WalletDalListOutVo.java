@@ -11,6 +11,8 @@ public class P_WalletDalListOutVo extends SearchVo {
     //output
     private String gubun;
     private int ruby;
+    private String ruby_new;
+    private String ruby_old;
     private String room_no;
     private String mem_no;
     private String item_type;
