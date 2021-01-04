@@ -72,7 +72,7 @@
             , (select item_name from rd_data.tbl_roulette_rel where evtApply.item_no = item_no) item_name
             , (select image_url from rd_data.tbl_roulette_rel where evtApply.item_no = item_no) image_url
         from rd_data.tb_event_coupon_member_apply evtApply
-            left join rd_data.tb_event_coupon_winning win on evtApply.mem_no = win.mem_no and date_format(evtApply.apply_date, '%Y%m%d') = date_format(win.win_date, '%Y%m%d') and evtApply.item_no = win.item_no
+            left join rd_data.tb_event_coupon_winning win on evtApply.win_idx = win.idx
             left join rd_data.tb_member_basic member on evtApply.mem_no = member.mem_no
             left join rd_data.tb_member_withdrawal_bak outMember on evtApply.mem_no = outMember.mem_no
             left join rd_data.tb_member_profile profile on evtApply.mem_no = profile.mem_no
@@ -92,7 +92,7 @@
         select
             count(*)
         from rd_data.tb_event_coupon_member_apply evtApply
-            left join rd_data.tb_event_coupon_winning win on evtApply.mem_no = win.mem_no and evtApply.apply_date = win.win_date and evtApply.item_no = win.item_no
+            left join rd_data.tb_event_coupon_winning win on evtApply.win_idx = win.idx
             left join rd_data.tb_member_basic member on evtApply.mem_no = member.mem_no
             left join rd_data.tb_member_withdrawal_bak outMember on evtApply.mem_no = outMember.mem_no
         where 1=1
