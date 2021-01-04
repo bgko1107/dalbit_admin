@@ -244,7 +244,7 @@
     }
 
     function targetChat(index){
-        $("#chatRight").removeClass("hide");
+        /*$("#chatRight").removeClass("hide");
         var metaData = dtList_info_detail.getDataRow(index);
         $("#chatLeft").removeClass("col-md-12");
         $("#chatLeft").addClass("col-md-6");
@@ -258,7 +258,7 @@
         dblist_chat_detail.useCheckBox(false);
         dblist_chat_detail.useIndex(false);
         dblist_chat_detail.useInitReload(true);
-        dblist_chat_detail.createDataTable();
+        dblist_chat_detail.createDataTable();*/
     }
 </script>
 
