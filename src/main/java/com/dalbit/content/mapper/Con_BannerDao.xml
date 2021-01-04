@@ -43,6 +43,7 @@
             , mem_join_inner_date AS memJoinInnerDate
             , mem_level_start AS memLevelStart
             , mem_level_end AS memLevelEnd
+            ,  button_name AS buttonName
         FROM rd_admin.tb_admin_banner
     </sql>
 
@@ -147,6 +148,7 @@
                 , mem_join_inner_date
                 , mem_level_start
                 , mem_level_end
+                , button_name
           )
           VALUES
           (
@@ -184,6 +186,7 @@
                 , #{memJoinInnerDate, jdbcType=INTEGER}
                 , #{memLevelStart, jdbcType=INTEGER}
                 , #{memLevelEnd, jdbcType=INTEGER}
+                , #{buttonName}
           )
     </insert>
 
@@ -223,6 +226,7 @@
             ,mem_join_inner_date = #{memJoinInnerDate, jdbcType=INTEGER}
             ,mem_level_start = #{memLevelStart, jdbcType=INTEGER}
             ,mem_level_end = #{memLevelEnd, jdbcType=INTEGER}
+            ,button_name = #{buttonName}
         WHERE
             idx = #{banner_idx}
     </update>

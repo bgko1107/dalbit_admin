@@ -528,6 +528,15 @@
             resultJson['dayOfTheWeek'] = content_scheduleWeek;
         }
 
+        if(fnc_bannerDetail.target.find('#detail_is_button_view').prop('checked')){
+            if(fnc_bannerDetail.target.find("#banner-button_name").val() == ""){
+                alert("버튼명을 입력하여 주시기 바랍니다.");
+                return;
+            }else{
+                resultJson['buttonName'] = fnc_bannerDetail.target.find("#banner-button_name").val();
+            }
+        }
+
         dalbitLog(resultJson);
 
         return resultJson
@@ -769,7 +778,7 @@
             <tr class="_show_popup" style='display:none;'>
                 <th>버튼명</th>
                 <td>
-                    <input type="text" class="_trim" id="banner-mobile_img_url" name="mobile_img_url" value="{{mobile_img_url}}" maxlength="20" />
+                    <input type="text" class="_trim" id="banner-button_name" name="banner-button_name" value="{{buttonName}}" maxlength="20" />
                 </td>
             </tr>
 

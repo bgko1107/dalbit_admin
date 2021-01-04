@@ -47,4 +47,6 @@ public class P_bannerUpdateVo extends BaseVo {
     private Integer memJoinInnerDate;   // 회원가입 몇일 이내
     private Integer memLevelStart;      // 시작 노출레벨
     private Integer memLevelEnd;        // 종료 노출레벨
+
+    private String buttonName;          // 버튼명
 }
