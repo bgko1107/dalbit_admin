@@ -470,7 +470,7 @@
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalPcCnt}}</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.normalDjCnt}} ({{addComma content.specialDjCnt}})</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.newDjCnt}}명</td>
-            <td>{{addComma content.broadMalCnt}}</td>
+            <td>{{addComma content.broadMaleCnt}}</td>
             <td>{{addComma content.broadFemaleCnt}}</td>
             <td>{{addComma content.broadNoneCnt}}</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.newCnt}}명</td>
