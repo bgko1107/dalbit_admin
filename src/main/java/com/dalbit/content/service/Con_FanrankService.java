@@ -30,7 +30,7 @@ public class Con_FanrankService {
 
     public String callFanrankOnOffList(HashMap<String, Object> hashMap) throws GlobalException{
         HashMap paramMap = new HashMap();
-        paramMap.put("mem_no", 0);
+        paramMap.put("mem_no", DalbitUtil.isNullToString(DalbitUtil.getStringMap(hashMap, "mem_no")));
         paramMap.put("checkDate", DalbitUtil.getStringMap(hashMap, "checkDate"));
         paramMap.put("slctType", DalbitUtil.getIntMap(hashMap, "slctType"));
         paramMap.put("pageNo", DalbitUtil.getIntMap(hashMap, "pageNo"));
