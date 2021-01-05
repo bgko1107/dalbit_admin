@@ -150,6 +150,9 @@
         $('#bt_adminMemo').click(function() {           //운영자 메모 등록
             bt_click(this.id);
         });
+        $("#bt_fanrankOnOffList").click(function(){     //실시간 팬랭킹 미반영
+            getInfoDetail(this.id,"실시간 팬랭킹 미반영");
+        });
         $('#bt_adminMemoList').click(function() {       //운영자 메모 리스트
             getAdminMemoList(this.id,"운영자메모");
         });
@@ -520,25 +523,25 @@
         }
     }
 
-    function getInfoDetail(tmp,tmp1) {     // 상세보기
+    function getInfoDetail(buttonId, tabName) {     // 상세보기
 
         var template = $('#tmp_member_detailFrm').html();
         var templateScript = Handlebars.compile(template);
         $("#member_detailFrm").html(templateScript);
 
-        $('#tab_memberInfoDetail').text(tmp1);           //텝 이름 변경
+        $('#tab_memberInfoDetail').text(tabName);           //텝 이름 변경
         $('#member_detailFrm').addClass("show");
-        if(tmp.indexOf("_") > 0){ tmp = tmp.split("_"); tmp = tmp[1]; }
+        if(buttonId.indexOf("_") > 0){ buttonId = buttonId.split("_"); buttonId = buttonId[1]; }
 
-        console.log(tmp);
+        console.log(buttonId);
 
-        var source = MemberDataTableSource[tmp];
+        var source = MemberDataTableSource[buttonId];
         console.log(source);
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
-            if(tmp == "connectState"){
+            if(buttonId == "connectState"){
                 data.sortDate = "1";
-            }else if(tmp == "manager" || tmp == "black" ){
+            }else if(buttonId == "manager" || buttonId == "black" ){
                 data.slctType = "1";
             }
         }
@@ -549,23 +552,23 @@
         dtList_info_detail.useIndex(true);
         dtList_info_detail.createDataTable();
 
-        if(tmp == "manager" || tmp == "black"){
+        if(buttonId == "manager" || buttonId == "black"){
             $('#detail2').addClass("show");
-            getInfoDetail2(tmp);
+            getInfoDetail2(buttonId);
         }
 
         var scrollPosition = $("#tab_infoDetail").offset();
         util.scrollPostion(scrollPosition.top);
     }
-    function getInfoDetail2(tmp){
+    function getInfoDetail2(buttonId){
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.slctType = "2";
         }
-        if(tmp == "manager") {
+        if(buttonId == "manager") {
             $('#tab_memberInfoDetail2').text("(나를 등록한) 매니저");           //텝 이름 변경
             var source = MemberDataTableSource["meManager"];
-        }else if(tmp == "black") {
+        }else if(buttonId == "black") {
             $('#tab_memberInfoDetail2').text("(나를 등록한) 블랙리스트");           //텝 이름 변경
             var source = MemberDataTableSource["meBlack"];
         }
@@ -579,18 +582,18 @@
     var dtMemoList;
 
     var inputSearchMemoSlct = 1;
-    function getAdminMemoList(tmp,tmp1) {     // 상세보기
+    function getAdminMemoList(buttonId,tabName) {     // 상세보기
         var template = $('#tmp_member_detailFrm').html();
         var templateScript = Handlebars.compile(template);
         $("#member_detailFrm").html(templateScript);
 
-        $('#tab_memberInfoDetail').text(tmp1);           //텝 이름 변경
+        $('#tab_memberInfoDetail').text(tabName);           //텝 이름 변경
         $('#member_detailFrm').addClass("show");
-        if(tmp.indexOf("_") > 0){ tmp = tmp.split("_"); tmp = tmp[1]; }
+        if(buttonId.indexOf("_") > 0){ buttonId = buttonId.split("_"); buttonId = buttonId[1]; }
 
-        console.log(tmp);
+        console.log(buttonId);
 
-        var source = MemberDataTableSource[tmp];
+        var source = MemberDataTableSource[buttonId];
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.memoSlct = inputSearchMemoSlct;
@@ -640,18 +643,18 @@
         });
     }
 
-    function getCouponHistory(tmp,tmp1) {     // 상세보기
+    function getCouponHistory(buttonId,tabName) {     // 상세보기
         var template = $('#tmp_member_detailFrm').html();
         var templateScript = Handlebars.compile(template);
         $("#member_detailFrm").html(templateScript);
 
-        $('#tab_memberInfoDetail').text(tmp1);           //텝 이름 변경
+        $('#tab_memberInfoDetail').text(tabName);           //텝 이름 변경
         $('#member_detailFrm').addClass("show");
-        if(tmp.indexOf("_") > 0){ tmp = tmp.split("_"); tmp = tmp[1]; }
+        if(buttonId.indexOf("_") > 0){ buttonId = buttonId.split("_"); buttonId = buttonId[1]; }
 
-        console.log(tmp);
+        console.log(buttonId);
 
-        var source = MemberDataTableSource[tmp];
+        var source = MemberDataTableSource[buttonId];
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.memoSlct = inputSearchMemoSlct;
@@ -1358,11 +1361,18 @@
         </tr>
         <tr>
             <th>비밀번호</th>
-            <td colspan="3" style="text-align: left">
+            <td style="text-align: left">
                 {{#equal memWithdrawal '0'}}
                 <button type="button" id="bt_resatPass" class="btn btn-default btn-sm" data-memno="{{mem_no}}" data-nickname="{{nickName}}">초기화</button>
                 {{/equal}}
             </td>
+
+            <th>실시간<br />팬랭킹<br />미반영</th>
+            <td>
+                <span style="">{{addComma fanrankOnOffCnt}} 건</span>
+                <button type="button" id="bt_fanrankOnOffList" class="btn btn-default btn-sm pull-right">상세</button>
+            </td>
+
             <th>최근메모<br>등록</th>
             <td colspan="2" style="text-align: left;border-right-color:white;border-right-width:0px;">등록: {{addComma opMemoCnt}} 건</td>
             <td>

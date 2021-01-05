@@ -70,6 +70,7 @@ public class P_MemberInfoOutputVo extends SearchVo {
     private int clipCnt;         // 클립 등록건수
     private int boostCnt;         // 부스터 아이템 보유 갯수
     private int couponCnt;         // 응모권 갯수
+    private int fanrankOnOffCnt;   // 팬랭킹 미반영 횟수
 
     private String certification;
     private String comm_company;

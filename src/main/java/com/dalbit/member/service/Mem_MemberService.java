@@ -19,7 +19,6 @@ import com.dalbit.exception.GlobalException;
 import com.dalbit.member.dao.Mem_MemberDao;
 import com.dalbit.member.vo.*;
 import com.dalbit.member.vo.procedure.*;
-import com.dalbit.money.vo.Mon_ExchangeSummaryOutputVo;
 import com.dalbit.security.vo.InforexLoginUserInfoVo;
 import com.dalbit.util.*;
 import com.google.gson.Gson;
@@ -366,7 +365,7 @@ public class Mem_MemberService {
                 tmp.put("nk", pMemberEditorVo.getNickName());
                 String message =  gson.toJson(tmp);
 
-                socketUtil.setSocket(param, "reqMyInfo", message, jwtUtil.generateToken(pMemberEditorVo.getMem_no(), true));
+                socketUtil.setSocket(param, "reqMyInfo", message, jwtUtil.generateToken(pMemberEditorVo.getMem_no(), true, true));
 
                  if(pMemberEditorVo.getSendNoti().equals("1")){
                     try{    // PUSH 발송
