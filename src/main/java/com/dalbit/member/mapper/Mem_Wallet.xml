@@ -458,7 +458,7 @@
                 rd_data.tb_member_wallet_gold
             where
                 mem_no = #{mem_no}
-                and type not in ( '2', '14', '17', 19, 20)
+                <!--and type not in ( '2', '14', '17', 19, 20)-->
         ) a
         LEFT JOIN
             rd_data.tbl_gift_item AS b
@@ -514,6 +514,8 @@
             SELECT
                 a.gubun
                 ,a.gold
+                ,a.gold_new
+                ,a.gold_old
                 ,a.room_no
                 ,a.mem_no
                 ,a.item_type
@@ -534,6 +536,8 @@
                 SELECT
                     (CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 2 WHEN 7 THEN 14 WHEN 8 THEN 2 ELSE item_type END) AS gubun
                     ,gold
+                    ,'' AS gold_new
+                    ,'' AS gold_old
                     ,room_no
                     ,(CASE item_type WHEN 1 THEN 2 WHEN 2 THEN 2 WHEN 7 THEN 14 WHEN 8 THEN 2 ELSE item_type END) AS item_type
                     ,mem_no AS mem_no
@@ -553,6 +557,8 @@
                 select
                     `type` AS gubun
                     ,( gold_new - gold_old) AS gold
+                    , gold_new
+                    , gold_old
                     ,'' AS room_no
                     ,'' AS item_type
                     ,'10000000000000' AS mem_no
@@ -567,7 +573,7 @@
                     rd_data.tb_member_wallet_gold
                 where
                     mem_no = #{mem_no}
-                    and type not in ( '2', '14', '17', 19, 20 )
+                    <!--and type not in ( '2', '14', '17', 19, 20 )-->
             ) a
             LEFT JOIN
                 rd_data.tbl_gift_item AS b

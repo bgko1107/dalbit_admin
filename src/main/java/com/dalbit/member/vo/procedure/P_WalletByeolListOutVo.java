@@ -11,6 +11,8 @@ public class P_WalletByeolListOutVo extends SearchVo {
     //output
     private String gubun;
     private int gold;
+    private String gold_new;
+    private String gold_old;
     private String room_no;
     private String mem_no;
     private String item_type;

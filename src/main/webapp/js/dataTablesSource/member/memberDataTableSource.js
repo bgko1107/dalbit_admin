@@ -909,31 +909,83 @@ var MemberDataTableSource = {
         'url': '/rest/member/wallet/byeol/list'
         , 'columns': [
             {'title': '회원번호', 'data': 'mem_no', 'render': function (data, type, row, meta) {
+                    if((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000"){
+                        return "";
+                    }
                     return util.memNoLink(data, row.mem_no);
                 }},
-            {'title': 'UserID', 'data': 'userId'},
-            {'title': 'User닉네임', 'data': 'nickName'},
+            {'title': 'UserID', 'data': 'userId','render' : function (data,type,row,meta){
+                    if((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000"){
+                        return "";
+                    }
+                    return data;
+                }},
+            {'title': 'User닉네임', 'data': 'nickName', 'render':function (data, type, row, meta){
+                    if((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000"){
+                        return "";
+                    }
+                    return data;
+                }},
             {'title': '성별', 'data': 'mem_sex', 'width':'70px', 'render': function (data, type, row, meta) {
+                    if((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000"){
+                        return "";
+                    }
                     return common.sexIcon(data, row.mem_birth_year);
                 }},
             {'title': '구분', 'data': 'gubun', 'render': function (data, type, row, meta) {
+                    if((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000"){
+                        return "";
+                    }
                     return util.getCommonCodeLabel(data, mem_wallet_byeol_code);
                 }},
             {'title': '비공개', 'data': 'secret', 'render': function (data, type, row, meta) {
+                    if((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000"){
+                        return "";
+                    }
                     return data == '' ? "X" : data == 1 ? "O" : common.addComma(data);
                 }},
             {'title': '이미지', 'data': 'item_thumbnail','width':'50px','render' : function (data, type, row, meta) {
+                    if((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000"){
+                        return "";
+                    }
                     var imgurl = common.isEmpty(data) ? "https://image.dalbitlive.com/ani/thumbs/star_thumb.jpg" : data;
                     return '<img class="" src="'+ imgurl +'" width="50px" height="50px"/>';
                 }},
             {'title': '아이템명', 'data': 'itemName'},
-            {'title': '선물 건', 'data': 'itemCnt', 'render': function (data) {
+            {'title': '선물 건', 'data': 'itemCnt', 'render': function (data, type, row, meta) {
+                    if((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000"){
+                        return "";
+                    }
                     return common.addComma(data) + " 개"
                 }},
-            {'title': '선물 별', 'data': 'gold', 'render': function (data) {
+            {'title': '선물 별', 'data': 'gold', 'render': function (data, type, row, meta) {
+                    if((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000"){
+                        return "";
+                    }
                     return common.addComma(data) + " 별"
                 }},
-            {'title': '선물 일시', 'data': 'giftDateFormat'},
+            {'title': '선물 전', 'data': 'gold_old', 'render': function (data) {
+                    return common.addComma(data) + " 달"
+                }},
+            {'title': '선물 후', 'data': 'gold_new', 'render': function (data) {
+                    return common.addComma(data) + " 달"
+                }},
+            {'title': '선물 일시', 'data': 'giftDateFormat', 'render': function (data, type, row, meta) {
+                    if ((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
+                        || row.gubun == "19" || row.gubun == "20") && row.mem_no == "10000000000000") {
+                        return "";
+                    }
+                    return data;
+                }},
         ]
         ,'createdRow' : function( row, data, dataIndex ) {
             if (data.inner == 1) {    // 테스트계정 row 색상 표시
