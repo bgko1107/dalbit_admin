@@ -4,7 +4,10 @@
 
 <ul class="nav nav-tabs nav-tabs-custom-colored mt5">
     <li class="active" id="li_dal"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="memberWalletList('dal');">달</a></li>
-    <li  id="li_byeol"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="memberWalletList('byeol');">별</a></li>
+    <li id="li_byeol"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="memberWalletList('byeol');">별</a></li>
+
+    <li id="li_newDal"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="newWalletList('dal');">new달</a></li>
+    <li id="li_newByeol"><a href="#newWallet" role="tab" data-toggle="tab" onclick="newWalletList('byeol');">new별</a></li>
 
 </ul>
 <div class="tab-content no-padding">
@@ -25,6 +28,19 @@
             <button class="btn btn-default btn-sm print-btn pull-right mb10" type="button" id="walletExcelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
         </div>
     </div>
+
+
+    <%--<div class="widget widget-table" id="newWallet">--%>
+        <%--<div class="widget-content">--%>
+            <%--<span id="table_newWallet_summaryArea"></span>--%>
+
+            <%--<input type="hidden" name="startNewWalletDate" id="startNewWalletDate">--%>
+            <%--<input type="hidden" name="endNewWalletDate" id="endNewWalletDate" />--%>
+
+            <%--<span id="newWalletList"></span>--%>
+            <%--<button class="btn btn-default btn-sm print-btn pull-right mb10" type="button" id="newWalletExcelDownBtn"><i class="fa fa-print"></i>Excel Down</button>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 </div>
 <script>
     $(document).ready(function() {
@@ -33,6 +49,8 @@
     function memberWalletInit(tmp){
         $("#li_dal").addClass("active");
         $("#li_byeol").removeClass("active");
+        $("#li_newDal").removeClass("active");
+        $("#li_newByeol").removeClass("active");
         memberWalletList('dal');
     }
     var walletList_gubun="dal";
@@ -198,9 +216,39 @@
             dtList_info_detail.reload(byeol_summary_table,true);
         }
     }
-    $('#bt_searchWallet').click( function() {       //검색
 
-    });
+
+
+    function newWalletList(tmp){
+        slct_typeTxt = '';
+        walletList_gubun = tmp;
+        console.log("--------------------------------------------   /   " + tmp);
+        var dtList_info_detail_data = function (data) {
+            data.mem_no = memNo;
+            data.walletType = walletType;
+            data.slct_type = slct_type;
+            data.slct_typeTxt = slct_typeTxt;
+            data.startDate = sDate;
+            data.endDate = eDate;
+            data.walletDataType = $("#slctWalletDateType").find("select").val();
+
+        };
+        var tmp_summary;
+        dtList_info_detail.destroy();
+        if(tmp == "dal" ){
+            dtList_info_detail = new DalbitDataTable($("#wallet_info_detail"), dtList_info_detail_data, MemberDataTableSource.newWalletDalDetail);
+            tmp_summary = dal_summary_table;
+        }else if(tmp == "byeol"){
+            dtList_info_detail = new DalbitDataTable($("#wallet_info_detail"), dtList_info_detail_data, MemberDataTableSource.newWalletByeolDetail);
+            tmp_summary = byeol_summary_table;
+        }
+        dtList_info_detail.useCheckBox(false);
+        dtList_info_detail.useIndex(true);
+        dtList_info_detail.setPageLength(50);
+        dtList_info_detail.createDataTable(tmp_summary);
+
+        initDataTableTop_select_wallet()
+    }
 
 </script>
 

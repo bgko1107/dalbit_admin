@@ -76,4 +76,26 @@ public class Mem_WalletRestController {
         return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
     }
 
+
+
+
+    /**
+     * 내지갑 달 사용 목록
+     */
+    @PostMapping("/new/dal/list")
+    public String newDalList(P_WalletDalVo dalVo){
+        String result = mem_walletService.getNewDalList(dalVo);
+        return result;
+
+    }
+
+    /**
+     * 내지갑 별 사용 목록
+     */
+    @PostMapping("/new/byeol/list")
+    public String newByeolList(P_WalletByeolVo pByeolVo){
+        String result = mem_walletService.getNewByeolList(pByeolVo);
+        return result;
+
+    }
 }

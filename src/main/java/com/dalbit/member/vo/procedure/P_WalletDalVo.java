@@ -17,4 +17,7 @@ public class P_WalletDalVo extends SearchVo {
     private String sDate;
     private String eDate;
     private int walletDataType;
+
+    private String startDate;
+    private String endDate;
 }
