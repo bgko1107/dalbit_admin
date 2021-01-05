@@ -27,7 +27,7 @@
  **/
 
 
-function DalbitDataTable(dom, param, columnsInfo, searchForm) {
+function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
     this.dom = dom;
     this.columnsInfo = columnsInfo;
     this.isInitResetCallback = true;
@@ -75,6 +75,10 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm) {
 
                     console.log("[DataTable ajax 통신 결과]url : " + url);
                     console.log(json);
+
+                    if(!common.isEmpty(afterFn)){
+                        afterFn(json);
+                    }
 
                     return JSON.stringify( json ); // return JSON string
                 }catch (e) {

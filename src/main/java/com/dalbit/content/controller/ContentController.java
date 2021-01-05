@@ -236,4 +236,7 @@ public class ContentController {
 
     @GetMapping("/newvilevel/info")
     public String newvilevelInfo() {return "content/newvilevel/info";}
+
+    @GetMapping("/fanrank/onOffList")
+    public String fanrankOnOffList() {return "content/fanrank/onOffList";}
 }
