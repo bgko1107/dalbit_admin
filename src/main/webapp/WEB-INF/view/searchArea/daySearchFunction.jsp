@@ -248,16 +248,6 @@
     }
 
     function dayButtonPrev(isPrev){
-        day = Number(day) + isPrev;
-
-        var lastDay = new Date(year,common.lpad(month,2,"0"),-1).getDate() + 1;
-        if(day < 1){
-            day = 1;
-        }
-        if(day > lastDay){
-            day = lastDay;
-        }
-
         var yearIdx = $("#div_dayButton").find("#search_year option").index( $("#div_dayButton").find("#search_year option:selected") );
         isPrev == 1 ? yearIdx -= 1 : yearIdx += 1;
         if(common.lpad(month,2,"0") + common.lpad(day,2,"0") == "0101"){
@@ -273,19 +263,19 @@
             day = "01";
             monthClick("",year, month, day);
         }else{
+            day = Number(day) + isPrev;
+
+            var lastDay = new Date(year,common.lpad(month,2,"0"),-1).getDate() + 1;
+            if(day < 1){
+                day = 1;
+            }
+            if(day > lastDay){
+                day = lastDay;
+            }
             dayClick("", year, common.lpad(month,2,"0"), common.lpad(day,2,"0"));
         }
     }
     function monthButtonPrev(isPrev){
-        month = Number(month) + isPrev;
-
-        if(month < 1){
-            month = 1;
-        }
-        if(month > 12){
-            month = 12;
-        }
-
         var yearIdx = $("#div_monthButton").find("#search_year option").index( $("#div_monthButton").find("#search_year option:selected") );
         isPrev == 1 ? yearIdx -= 1 : yearIdx += 1;
         if(common.lpad(month,2,"0") == "01"){
@@ -301,6 +291,14 @@
             day = "01";
             monthClick("",year, month, day);
         }else{
+            month = Number(month) + isPrev;
+
+            if(month < 1){
+                month = 1;
+            }
+            if(month > 12){
+                month = 12;
+            }
             monthClick("",$("#search_year").val(), common.lpad(month,2,"0"), common.lpad(day,2,"0"));
         }
 
