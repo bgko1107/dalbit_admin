@@ -363,7 +363,11 @@
                 if(i == 1){
                     tmpDay = Number(moment($("#month_new_th_1").text()).add('months', 1).add('days', -1).format('DD'));
                 }else{
-                    tmpDay = Number(moment($("#month_new_th_0").text()).add('months', 1).add('days', -1).format('DD'));
+                    if (moment(dateTime).format("YYYY.MM") == $("#month_new_th_0").text()){
+                        tmpDay = Number(moment(dateTime).format("DD"));
+                    } else {
+                        tmpDay = Number(moment($("#month_new_th_0").text()).add('months', 1).add('days', -1).format('DD'));
+                    }
                 }
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 1) + ")").html(common.addComma(sum_succCnt));
                 $("#monthTableBody_new tr:eq(0) td:eq(" + (i * 6 + 2) + ")").html(common.addComma(sum_succCmt));

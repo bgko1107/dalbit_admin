@@ -15,5 +15,8 @@ public class P_WalletByeolVo extends PagingVo {
 
     private String sDate;
     private String eDate;
+
+    private String startDate;
+    private String endDate;
     private int walletDataType;
 }

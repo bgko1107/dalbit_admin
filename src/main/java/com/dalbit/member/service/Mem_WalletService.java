@@ -7,10 +7,7 @@ import com.dalbit.excel.service.ExcelService;
 import com.dalbit.excel.vo.ExcelVo;
 import com.dalbit.member.dao.Mem_WalletDao;
 import com.dalbit.member.vo.MemberVo;
-import com.dalbit.member.vo.procedure.P_WalletByeolListOutVo;
-import com.dalbit.member.vo.procedure.P_WalletByeolVo;
-import com.dalbit.member.vo.procedure.P_WalletDalListOutVo;
-import com.dalbit.member.vo.procedure.P_WalletDalVo;
+import com.dalbit.member.vo.procedure.*;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +61,6 @@ public class Mem_WalletService {
         }
         return result;
     }
-
 
     /**
      * 내지갑 달 내역 엑셀 출력
@@ -299,6 +295,49 @@ public class Mem_WalletService {
         return model;
     }
 
+    /**
+     * new 내지갑 달 내역 조회
+     */
+    public String getNewDalList(P_WalletDalVo pDalVo) {
+        int totalCnt = mem_walletDao.callNewWalletDal_totalCnt(pDalVo);
+        pDalVo.setTotalCnt(totalCnt);
+        List<P_NewWalletDalListOutVo> outVoList = mem_walletDao.callNewWalletDal(pDalVo);
+        HashMap summary = mem_walletDao.getResultNewDalSummary(pDalVo);
 
+        if(DalbitUtil.isEmpty(outVoList) || outVoList.size() <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.내지갑_달사용내역조회_없음, new ArrayList<P_NewWalletDalListOutVo>(), new PagingVo(pDalVo.getTotalCnt(), pDalVo.getPageNo(), pDalVo.getPageCnt())));
+        }
+
+        String result;
+        if(outVoList.size() > 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_달사용내역조회_성공, outVoList, new PagingVo(pDalVo.getTotalCnt(), pDalVo.getPageNo(), pDalVo.getPageCnt()),summary));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_달사용내역조회_실패));
+        }
+        return result;
+    }
+
+    /**
+     * new 내지갑 별 내역 조회
+     */
+    public String getNewByeolList(P_WalletByeolVo pByeolVo) {
+        int totalCnt = mem_walletDao.callNewWalletByeol_totalCnt(pByeolVo);
+        pByeolVo.setTotalCnt(totalCnt);
+        List<P_NewWalletByeolListOutVo> outVoList = mem_walletDao.callNewWalletByeol(pByeolVo);
+
+        HashMap summary = mem_walletDao.getResultNewByeolSummary(pByeolVo);
+
+        if(DalbitUtil.isEmpty(outVoList) || outVoList.size() <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.내지갑_별사용내역조회_없음, new ArrayList<P_NewWalletByeolListOutVo>(), new PagingVo(pByeolVo.getTotalCnt(), pByeolVo.getPageNo(), pByeolVo.getPageCnt()), summary));
+        }
+
+        String result;
+        if(outVoList.size() > 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_별사용내역조회_성공, outVoList, new PagingVo(pByeolVo.getTotalCnt(), pByeolVo.getPageNo(), pByeolVo.getPageCnt()), summary));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_별사용내역조회_실패));
+        }
+        return result;
+    }
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %></c:set>
 
 <script type="text/javascript" src="/js/code/money/exchangeCodeList.js?${dummyData}"></script>
 
@@ -242,6 +243,7 @@
     }
 
     function dayButtonPrev(isPrev){
+        var tmpDay = day;
         day = Number(day) + isPrev;
 
         var lastDay = new Date(year,common.lpad(month,2,"0"),-1).getDate() + 1;
@@ -252,9 +254,26 @@
             day = lastDay;
         }
 
-        dayClick("", year, common.lpad(month,2,"0"), common.lpad(day,2,"0"));
+        var yearIdx = $("#div_dayButton").find("#search_year option").index( $("#div_dayButton").find("#search_year option:selected") );
+        isPrev == 1 ? yearIdx -= 1 : yearIdx += 1;
+        if(common.lpad(month,2,"0") + common.lpad(tmpDay,2,"0") == "0101" && isPrev == -1){
+            $("#div_dayButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
+            year = year - 1;
+            month = "12";
+            day = "31";
+            monthClick("",year, month, day);
+        }else if(common.lpad(month,2,"0") + common.lpad(tmpDay,2,"0") == "1231" && isPrev == 1){
+            $("#div_dayButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
+            year = year + 1;
+            month = "01";
+            day = "01";
+            monthClick("",year, month, day);
+        }else{
+            dayClick("", year, common.lpad(month,2,"0"), common.lpad(day,2,"0"));
+        }
     }
     function monthButtonPrev(isPrev){
+        var tmpMonth = month;
         month = Number(month) + isPrev;
 
         if(month < 1){
@@ -264,7 +283,24 @@
             month = 12;
         }
 
-        monthClick("",$("#search_year").val(), common.lpad(month,2,"0"), common.lpad(day,2,"0"));
+        var yearIdx = $("#div_monthButton").find("#search_year option").index( $("#div_monthButton").find("#search_year option:selected") );
+        isPrev == 1 ? yearIdx -= 1 : yearIdx += 1;
+        if(common.lpad(tmpMonth,2,"0") == "01" && isPrev == -1){
+            $("#div_monthButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
+            year = year - 1;
+            month = "12";
+            day = "31";
+            monthClick("",year, month, day);
+        }else if(common.lpad(tmpMonth,2,"0") == "12" && isPrev == 1){
+            $("#div_monthButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
+            year = year + 1;
+            month = "01";
+            day = "01";
+            monthClick("",year, month, day);
+        }else{
+            monthClick("",$("#search_year").val(), common.lpad(month,2,"0"), common.lpad(day,2,"0"));
+        }
+
     }
     function yearButtonPrev(isPrev){
         year = Number($("#search_year").val()) + isPrev;

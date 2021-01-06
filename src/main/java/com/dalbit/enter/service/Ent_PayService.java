@@ -190,11 +190,9 @@ public class Ent_PayService {
                     }
                 }else if(pPayTotalInPutVo.getSlctType() == 2) {
                     zeroSw = false;
-                    int tmp_k = 0;
-                    for (int k = 0; k < 12; k++) {
+                    for (int k = 1; k < 13; k++) {
                         if(!DalbitUtil.isEmpty(detailList.get(j).getMonthly())) {
                             if (detailList.get(j).getMonthly() == k) {
-                                tmp_k = k;
                                 zeroSw = true;
                                 break;
                             }
@@ -203,17 +201,17 @@ public class Ent_PayService {
                         }
                     }
                     if(zeroSw) {
-                        sum[tmp_k].setHour(tmp_k);
-                        sum[tmp_k].setDay(tmp_k);
-                        sum[tmp_k].setMonthly(tmp_k);
-                        sum[tmp_k].setSuccCnt(sum[tmp_k].getSuccCnt() + detailList.get(j).getSuccCnt());
-                        sum[tmp_k].setSuccCmt(sum[tmp_k].getSuccCmt() + detailList.get(j).getSuccCmt());
-                        sum[tmp_k].setSuccAmt(sum[tmp_k].getSuccAmt() + detailList.get(j).getSuccAmt());
-                        sum[tmp_k].setAccumAmt(sum[tmp_k].getAccumAmt() + detailList.get(j).getAccumAmt());
-                        sum[tmp_k].setCancCnt(sum[tmp_k].getCancCnt() + detailList.get(j).getCancCnt());
-                        sum[tmp_k].setCancCmt(sum[tmp_k].getCancCmt() + detailList.get(j).getCancCmt());
-                        sum[tmp_k].setCancAmt(sum[tmp_k].getCancAmt() + detailList.get(j).getCancAmt());
-                        sum[tmp_k].setFailCnt(sum[tmp_k].getFailCnt() + detailList.get(j).getFailCnt());
+                        sum[j].setHour(j);
+                        sum[j].setDay(j);
+                        sum[j].setMonthly(j);
+                        sum[j].setSuccCnt(sum[j].getSuccCnt() + detailList.get(j).getSuccCnt());
+                        sum[j].setSuccCmt(sum[j].getSuccCmt() + detailList.get(j).getSuccCmt());
+                        sum[j].setSuccAmt(sum[j].getSuccAmt() + detailList.get(j).getSuccAmt());
+                        sum[j].setAccumAmt(sum[j].getAccumAmt() + detailList.get(j).getAccumAmt());
+                        sum[j].setCancCnt(sum[j].getCancCnt() + detailList.get(j).getCancCnt());
+                        sum[j].setCancCmt(sum[j].getCancCmt() + detailList.get(j).getCancCmt());
+                        sum[j].setCancAmt(sum[j].getCancAmt() + detailList.get(j).getCancAmt());
+                        sum[j].setFailCnt(sum[j].getFailCnt() + detailList.get(j).getFailCnt());
                     }else{
                         sum[j].setHour(j);
                         sum[j].setDay(j);
@@ -222,10 +220,10 @@ public class Ent_PayService {
                         sum[j].setSuccCmt(0);
                         sum[j].setSuccAmt(0);
                         sum[j].setAccumAmt(0);
-                        sum[tmp_k].setCancCnt(0);
-                        sum[tmp_k].setCancCmt(0);
-                        sum[tmp_k].setCancAmt(0);
-                        sum[tmp_k].setFailCnt(0);
+                        sum[j].setCancCnt(0);
+                        sum[j].setCancCmt(0);
+                        sum[j].setCancAmt(0);
+                        sum[j].setFailCnt(0);
                     }
                 }
             }
