@@ -9707,7 +9707,17 @@
                     otherStaticBar: '',
                     // toolbar
                     //toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'help']]],
-                    toolbar: [['font', ['bold', 'underline', 'strikethrough', 'clear']], ['fontname', ['fontname']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'help']]],
+                    toolbar: [
+                        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']]
+                        , ['fontname', ['fontname']]
+                        , ['fontsize', ['fontsize']]
+                        , ['color', ['color']]
+                        , ['para', ['ul', 'ol', 'paragraph']]
+                        , ['table', ['table']]
+                        , ['insert', ['link', 'picture', 'video']]
+                        , ['view', ['fullscreen', 'codeview', 'help']]
+                        , ['height', ['height']]
+                    ],
                     // popover
                     popatmouse: true,
                     popover: {
@@ -9736,7 +9746,7 @@
                     maxTextLength: 0,
                     blockquoteBreakingLevel: 2,
                     spellCheck: true,
-                    disableGrammar: false,
+                    disableGrammar: true,
                     placeholder: null,
                     inheritPlaceholder: false,
                     // TODO: need to be documented
@@ -9747,7 +9757,7 @@
                     hintSelect: 'after',
                     hintDirection: 'bottom',
                     styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-                    fontNames: ['돋움', '돋움체', '굴림', '굴림체', '바탕', '바탕체', '궁서'],
+                    fontNames: ['돋움', '돋움체', '굴림', '굴림체', '바탕', '바탕체', '궁서', 'Verdana'],
                     fontNamesIgnoreCheck: [],
                     addDefaultFonts: true,
                     fontSizes: ['8', '9', '10', '11', '12', '13', '14', '18', '24', '36'],
