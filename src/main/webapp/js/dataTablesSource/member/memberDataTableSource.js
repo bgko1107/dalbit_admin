@@ -777,6 +777,10 @@ var MemberDataTableSource = {
                         return '<span style=color:blue;>완료</span>';
                     }else if(data == 2){
                         return '<span style=color:red;>불가</span>';
+                    }else if(data == 3){
+                        return '<span style=color:red;>관리자취소</span>';
+                    }else if(state == 4){
+                        return '<span style=color:blue;>본인취소</span>'
                     }
                 }},
             {'title': '처리자', 'data': 'op_name'},
