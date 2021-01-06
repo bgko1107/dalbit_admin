@@ -5,7 +5,7 @@
     <div id="page-wrapper">
         <div class="container-fluid">
             <!-- serachBox -->
-            <div class="col-lg-12">
+            <div class="col-lg-12 no-padding">
             <form id="searchForm">
                 <%--<div class="row col-lg-12 form-inline">--%>
                     <input type="hidden" name="pageStart" id="pageStart">

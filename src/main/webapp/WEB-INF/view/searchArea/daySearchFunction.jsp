@@ -149,28 +149,29 @@
         $("#th_bottonList").hide();
         $("#rangeDatepicker").hide();
 
-        if(paramSlctType == 0){                 // 일검색
-            setDayButton("day");
-            $("#onedayDate").show();
-            $("#div_dayButton").show();
-            $("#th_bottonList").show();
-        }else if(paramSlctType == 1){           // 월 검색
-            setDayButton("month");
-            $("#monthDate").show();
-            $("#div_monthButton").show();
-            $("#th_bottonList").show();
-        }else if(paramSlctType == 2){           // 년도 검색
-            setDayButton("year");
-            $("#yearDate").show();
-            $("#div_yearButton").show();
-            $("#th_bottonList").show();
-        }else if(paramSlctType == 3){           // 기간 검색
-            setTimeDate(dateTime);
-            $("#rangeDatepicker").show();
-            $("#bt_search").click();
-        }else if(paramSlctType == 99){          // 99 : 검색창만
-            $("#bt_search").click();
-        }else if(common.isEmpty(paramSlctType)){
+        // 날짜 유지 없이 버튼 새로 불러올때 초기화 하기
+        // if(paramSlctType == 0){                 // 일검색
+        //     setDayButton("day");
+        //     $("#onedayDate").show();
+        //     $("#div_dayButton").show();
+        //     $("#th_bottonList").show();
+        // }else if(paramSlctType == 1){           // 월 검색
+        //     setDayButton("month");
+        //     $("#monthDate").show();
+        //     $("#div_monthButton").show();
+        //     $("#th_bottonList").show();
+        // }else if(paramSlctType == 2){           // 년도 검색
+        //     setDayButton("year");
+        //     $("#yearDate").show();
+        //     $("#div_yearButton").show();
+        //     $("#th_bottonList").show();
+        // }else if(paramSlctType == 3){           // 기간 검색
+        //     setTimeDate(dateTime);
+        //     $("#rangeDatepicker").show();
+        //     $("#bt_search").click();
+        // }else if(paramSlctType == 99){          // 99 : 검색창만
+        //     $("#bt_search").click();
+        // }else if(common.isEmpty(paramSlctType)){
             if(slctType == 0 || slctType == 4){
                 setDayButton();
                 $("#onedayDate").show();
@@ -182,19 +183,19 @@
                 $("#div_monthButton").show();
                 $("#th_bottonList").show();
             }else if(slctType == 2){
+                setTimeDate(dateTime);
                 setDayButton();
                 $("#yearDate").show();
                 $("#div_yearButton").show();
                 $("#th_bottonList").show();
             }else if(slctType == 3){
-                setTimeDate(dateTime);
                 $("#rangeDatepicker").show();
                 $("#bt_search").click();
             }else if(slctType == 99){
                 setTimeDate(dateTime);
                 $("#bt_search").click();
             }
-        }
+        // }
 
         $(".labelMonthButton" + common.lpad(month,2,"0")).addClass('active');
         $(".labelDayButton" + common.lpad(day,2,"0")).addClass('active');

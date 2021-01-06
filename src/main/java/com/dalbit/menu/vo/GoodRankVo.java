@@ -13,6 +13,7 @@ public class GoodRankVo extends PagingVo {
     private String searchText;
     private String rankingDate;
     private int searchType;
+    private int pageNo;
 
     /* output */
     private int rank;

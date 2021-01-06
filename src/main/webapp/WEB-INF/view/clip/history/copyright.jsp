@@ -2,26 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 클립관리 > 클립내역관리 > 저작권 청취내역 -->
-<div class="widget widget-table mb10">
-    <div class="widget-content mt10">
-        <span class="_searchDate" style="display: none;"></span>
+<div class="widget-content mt10">
+    <span class="_searchDate" style="display: none;"></span>
 
-        <div class="row  col-lg-12 mb10">
-            <span id="search_clipStateType" name="search_clipStateType" class="pull-left ml5"></span>
-            <select id="search_clipSubjectType" name="search_clipSubjectType" class="form-control pull-left ml5"></select>
-            <span id="search_clipOrderByType" name="search_clipOrderByType" class="pull-left ml5"></span>
-        </div>
-        <div class="row  col-lg-12">
-            <div class="dataTables_paginate paging_full_numbers" id="copyrightList_paginate_top"></div>
-            <div id="clipCopyrightList"></div>
-            <div class="dataTables_paginate paging_full_numbers" id="copyrightList_paginate"></div>
-        </div>
+    <div class="col-lg-12 no-padding">
+        <span id="search_clipStateType" name="search_clipStateType" class="pull-left ml5"></span>
+        <select id="search_clipSubjectType" name="search_clipSubjectType" class="form-control pull-left ml5"></select>
+        <span id="search_clipOrderByType" name="search_clipOrderByType" class="pull-left ml5"></span>
     </div>
-    <div class="widget-footer">
-        <span>
-            <button class="btn btn-default print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
-        </span>
+    <div class="col-lg-12 no-padding">
+        <div class="dataTables_paginate paging_full_numbers" id="copyrightList_paginate_top"></div>
+        <div id="clipCopyrightList"></div>
+        <div class="dataTables_paginate paging_full_numbers" id="copyrightList_paginate"></div>
     </div>
+</div>
+<div class="widget-footer">
+    <span>
+        <button class="btn btn-default print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
+    </span>
 </div>
 
 <script type="text/javascript" src="/js/code/clip/clipCodeList.js?${dummyData}"></script>
@@ -192,19 +190,19 @@
 <script id="tmp_clipCopyrightList" type="text/x-handlebars-template">
     <table id="clip_history_copyright_list_info" class="table table-sorting table-hover table-bordered">
         <colgroup>
-            <col width="2"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
-            <col width="5"/>
+            <col width="2%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
+            <col width="5%"/>
         </colgroup>
         <thead>
         <tr>

@@ -9,6 +9,11 @@
 </div>
 
 <script type="text/javascript">
+
+    $(document).ready(function() {
+        setTimeDate(dateTime);
+    });
+
     $("#displayDate").statsDaterangepicker(
         function(start, end, t1) {
             $("#startDate").val(start.format('YYYY.MM.DD'));

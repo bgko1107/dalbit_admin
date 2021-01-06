@@ -118,7 +118,10 @@
             $('#searchText, #bt_search').show();
         }else if(tabId == 'tab_copyright'){
             slctType = 1;
-            $('#searchText, #bt_search').hide();
+            $("._prevSearch").show();
+            $("._todaySearch").show();
+            $("._nextSearch").show();
+            $('#searchText').hide();
             initClipHistory();
             $("#page-wrapper").css("height", "90px");
         }
@@ -145,6 +148,7 @@
         }else if(tabId == 'tab_remove'){
             getHistoryRemove();
         }else if(tabId == 'tab_copyright') {
+            copyrightPagingInfo.pageNo = 1;
             getHistoryCopyright();
         }
     });

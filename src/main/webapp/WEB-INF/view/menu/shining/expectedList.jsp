@@ -67,11 +67,11 @@
 
         var dtList_info_data = function(data) {
             data.checkDate = $('#onedayDate').val();
-            data.pageCnt = 50;
         };
         dtList_info = new DalbitDataTable($("#expectedList"), dtList_info_data, shiningDataTableSource.expectedList, $("#searchForm"));
         dtList_info.useCheckBox(true);
         dtList_info.useIndex(true);
+        dtList_info.setPageLength(50);
         dtList_info.createDataTable();
 
         ui.checkBoxInit('reqSpecialList');
