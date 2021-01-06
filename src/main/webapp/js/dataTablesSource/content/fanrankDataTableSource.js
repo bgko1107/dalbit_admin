@@ -24,6 +24,12 @@ var fanrank = {
             , {'title': '미 반영 횟수', 'data': 'not_applyCnt', 'render' : function(data) {
                     return data;
                 }}
+            , {'title': '누적 결제(취소)', 'data': 'payCnt', 'render' : function(data, type, row) {
+                    return common.addComma(data) + '(' + common.addComma(row.cancelCnt) + ')';
+                }}
+            , {'title': '누적 결제(취소) 금액', 'data': 'payAmt', 'render' : function(data, type, row) {
+                    return common.addComma(data) + '(' + common.addComma(row.cancelAmt) + ')';
+                }}
         ]
         , 'comments': ''
     },

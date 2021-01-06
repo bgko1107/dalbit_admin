@@ -9707,7 +9707,17 @@
                     otherStaticBar: '',
                     // toolbar
                     //toolbar: [['style', ['style']], ['font', ['bold', 'underline', 'clear']], ['fontname', ['fontname']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'help']]],
-                    toolbar: [['font', ['bold', 'underline', 'strikethrough', 'clear']], ['fontname', ['fontname']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['table', ['table']], ['insert', ['link', 'picture', 'video']], ['view', ['fullscreen', 'codeview', 'help']]],
+                    toolbar: [
+                        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']]
+                        , ['fontname', ['fontname']]
+                        , ['fontsize', ['fontsize']]
+                        , ['color', ['color']]
+                        , ['para', ['ul', 'ol', 'paragraph']]
+                        , ['table', ['table']]
+                        , ['insert', ['link', 'picture', 'video']]
+                        , ['view', ['fullscreen', 'codeview', 'help']]
+                        , ['height', ['height']]
+                    ],
                     // popover
                     popatmouse: true,
                     popover: {
@@ -9736,7 +9746,7 @@
                     maxTextLength: 0,
                     blockquoteBreakingLevel: 2,
                     spellCheck: true,
-                    disableGrammar: false,
+                    disableGrammar: true,
                     placeholder: null,
                     inheritPlaceholder: false,
                     // TODO: need to be documented

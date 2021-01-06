@@ -242,6 +242,10 @@ Handlebars.registerHelper("fontColor", function(value, minValue, fontColor) {
     return common.fontColor(value, minValue, fontColor);
 });
 
+Handlebars.registerHelper("setFontColor", function(value, fontColor) {
+    return common.setFontColor(value, fontColor);
+});
+
 Handlebars.registerHelper("memNoLink", function(display, value) {
     return util.memNoLink(display,value);
 });
