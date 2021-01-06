@@ -134,8 +134,19 @@ public class Men_RankRestController {
         return menRankService.callAwardsDjRegist(awardsVoteVo);
     }
 
+
     /**
-     * 달빛 어워즈 수상DJ 소감 등록
+     * 달빛 어워즈 수상DJ 소감/팬 소개 조회
+     * @param awardsVoteVo
+     * @return
+     */
+    @RequestMapping("awards/dj/sel/impression")
+    public String awardsDjSelImpression(AwardsVoteVo awardsVoteVo) {
+        return menRankService.callAwardsDjSelImpression(awardsVoteVo);
+    }
+
+    /**
+     * 달빛 어워즈 수상DJ 소감/팬 소개 등록
      * @param awardsVoteVo
      * @return
      */
@@ -143,16 +154,5 @@ public class Men_RankRestController {
     public String awardsDjImpression(AwardsVoteVo awardsVoteVo) {
         return menRankService.callAwardsDjImpression(awardsVoteVo);
     }
-
-    /**
-     * 달빛 어워즈 수상팬 소개 등록
-     * @param awardsVoteVo
-     * @return
-     */
-    @RequestMapping("awards/fan/add/introduce")
-    public String awardsFanIntroduce(AwardsVoteVo awardsVoteVo) {
-        return menRankService.callAwardsFanIntroduce(awardsVoteVo);
-    }
-
 
 }

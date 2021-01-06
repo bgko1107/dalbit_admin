@@ -203,22 +203,39 @@
         $("#myModal").modal("show");
         $("#mem_no").html('<a href="javascript://" class="_openMemberPop" data-memNo="' + mem_no + '"> ' + data.data('memno') + '</a>');
         $("#mem_nick").text(data.data('memnick'));
+
+        var data = {
+            mem_no : mem_no
+            , slctType : 2
+            , selectYear : $("#startDate").val().substr(0,4)
+        };
+
+        console.log(data);
+        util.getAjaxData("impression", "/rest/menu/rank/awards/dj/sel/impression", data, fn_selImpression_success);
+    }
+
+    function fn_selImpression_success(dst_id, response, param){
+        console.log(response);
+        $("#fanIntroduce").val(response.data.title);
     }
 
     function addAwardsIntroduce(){
         var data = {
             mem_no : mem_no
             , selectYear : $("#startDate").val().substr(0,4)
+            , slctType : 2
+            , title : $("#fanIntroduce").val()
         };
 
         console.log(data);
-        util.getAjaxData("regist", "/rest/menu/rank/awards/fan/add/introduce", data, fn_introduce_success);
+        util.getAjaxData("regist", "/rest/menu/rank/awards/dj/add/impression", data, fn_introduce_success);
 
     }
 
     function fn_introduce_success(dst_id, response){
         if(response.result == "success"){
             alert("청취자 소개글 등록");
+            $("#myModal").modal("hide");
             $('#bt_search').click();
         }
     }
@@ -308,7 +325,7 @@
     </tr>
     {{else}}
     <tr>
-        <td colspan="11">{{isEmptyData}}</td>
+        <td colspan="12">{{isEmptyData}}</td>
     </tr>
     {{/each}}
     </tbody>

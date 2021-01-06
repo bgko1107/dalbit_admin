@@ -69,7 +69,9 @@ public interface Men_RankDao {
 
     ProcedureVo callAwardsDjRegist(ProcedureVo procedureVo);
 
+    @Transactional(readOnly = true)
+    ProcedureVo callAwardsDjSelImpression(ProcedureVo procedureVo);
+
     ProcedureVo callAwardsDjImpression(ProcedureVo procedureVo);
 
-    ProcedureVo callAwardsFanIntroduce(ProcedureVo procedureVo);
 }
