@@ -60,5 +60,8 @@ public class AdministrateController {
         return "administrate/testId/list";
     }
 
-
+    @GetMapping("/revenueProcess/info")
+    public String revenueProcessInfo() {
+        return "administrate/revenueProcess/info";
+    }
 }

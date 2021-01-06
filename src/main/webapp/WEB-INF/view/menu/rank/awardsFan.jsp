@@ -74,12 +74,43 @@
     </div>
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="_layerTitle">청취자 소개 등록</h4>
+            </div>
+            <div class="modal-body no-padding">
+                <table class="table table-sorting table-hover table-bordered no-margin">
+                    <tr>
+                        <th>회원번호</th>
+                        <td><span id="mem_no"></span></td>
+                        <th>회원닉네임</th>
+                        <td><span id="mem_nick"></span></td>
+                    </tr>
+                    <tr>
+                        <th colspan="4">청취자 소개</th>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><textarea type="textarea" class="form-control" id="fanIntroduce" name="fanIntroduce" style="width: 100%; height: 100%; min-height: 100px"></textarea></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer no-margin">
+                <button type="button" class="btn btn-custom-primary" onclick="addAwardsIntroduce();"><i class="fa fa-check-circle"></i> 저장</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <jsp:include page="/WEB-INF/view/common/util/select_specialList.jsp"></jsp:include>
 
 <script type="text/javascript" src="/js/code/menu/menuCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
     listPagingInfo = new PAGING_INFO(0, 1, 50);
 
+    var mem_no;
     $(function(){
         slctType = 2;
         dateType();
@@ -167,6 +198,31 @@
         }
     }
 
+    function awardsIntroduce(data){
+        mem_no = data.data('memno');
+        $("#myModal").modal("show");
+        $("#mem_no").html('<a href="javascript://" class="_openMemberPop" data-memNo="' + mem_no + '"> ' + data.data('memno') + '</a>');
+        $("#mem_nick").text(data.data('memnick'));
+    }
+
+    function addAwardsIntroduce(){
+        var data = {
+            mem_no : mem_no
+            , selectYear : $("#startDate").val().substr(0,4)
+        };
+
+        console.log(data);
+        util.getAjaxData("regist", "/rest/menu/rank/awards/fan/add/introduce", data, fn_introduce_success);
+
+    }
+
+    function fn_introduce_success(dst_id, response){
+        if(response.result == "success"){
+            alert("청취자 소개글 등록");
+            $('#bt_search').click();
+        }
+    }
+
     /*=============엑셀==================*/
     /*$('#excelDownBtn').on('click', function(){
         var formElement = document.querySelector("form");
@@ -204,6 +260,7 @@
             <th>부스터 사용</th>
             <th>청취시간</th>
             <th>어워즈<br/>팬 해제</th>
+            <th>청취자 소개</th>
         </tr>
     </thead>
     <tbody id="listBody">
@@ -237,6 +294,15 @@
         <td>
             <a href="javascript://" onclick="awardsClick($(this));" data-memno="{{memNo}}" data-memnick="{{memNick}}" data-type="1">
                 해제
+            </a>
+        </td>
+        <td>
+            <a href="javascript://" onclick="awardsIntroduce($(this));" data-memno="{{memNo}}" data-memnick="{{memNick}}">
+                {{#dalbit_if existsMsg '==' 0}}
+                    등록
+                {{else}}
+                    수정
+                {{/dalbit_if}}
             </a>
         </td>
     </tr>

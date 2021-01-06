@@ -326,4 +326,26 @@ public class Men_RankService {
 
         return gsonUtil.toJson(new JsonOutputVo(Status.수정));
     }
+
+    /**
+     * DJ 어워즈 소감 등록
+     */
+    public String callAwardsDjImpression(AwardsVoteVo awardsVoteVo) {
+        awardsVoteVo.setOpName(MemberVo.getMyMemNo());
+        ProcedureVo procedureVo = new ProcedureVo(awardsVoteVo);
+        menRankDao.callAwardsDjImpression(procedureVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.수정));
+    }
+
+    /**
+     * FAN 어워즈 소개 등록
+     */
+    public String callAwardsFanIntroduce(AwardsVoteVo awardsVoteVo) {
+        awardsVoteVo.setOpName(MemberVo.getMyMemNo());
+        ProcedureVo procedureVo = new ProcedureVo(awardsVoteVo);
+        menRankDao.callAwardsFanIntroduce(procedureVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.수정));
+    }
 }
