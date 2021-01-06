@@ -1144,7 +1144,7 @@ public class DalbitUtil {
 
         long cashBasic = star * 60;
         long specialBenefit = (long) Math.floor(Math.floor(cashBasic * 0.05) / 10) * 10;
-        long residentTax = (long)  Math.floor(Math.floor(cashBasic * 0.033) / 10) * 10;
+        long residentTax = (long)  Math.floor(Math.floor(cashBasic * 0.03) / 10) * 10;
         long total = 0;
 
         if(isSpecial != 0){     // 스페셜 DJ

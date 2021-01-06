@@ -529,7 +529,7 @@ common.division = function(lvalue,rvalue, dot) {
 common.exchangeAmt = function(star, isSpecial){
     var cashBasic = star * 60;
     var specialBenefit = Math.trunc(cashBasic * 0.05, -1);
-    var residentTax = Math.trunc(cashBasic * 0.033, -1);
+    var residentTax = Math.trunc(cashBasic * 0.03, -1);
 
     var total = 0;
 
