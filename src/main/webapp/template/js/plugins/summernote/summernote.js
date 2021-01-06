@@ -9747,7 +9747,7 @@
                     hintSelect: 'after',
                     hintDirection: 'bottom',
                     styleTags: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-                    fontNames: ['돋움', '돋움체', '굴림', '굴림체', '바탕', '바탕체', '궁서'],
+                    fontNames: ['돋움', '돋움체', '굴림', '굴림체', '바탕', '바탕체', '궁서', 'Verdana'],
                     fontNamesIgnoreCheck: [],
                     addDefaultFonts: true,
                     fontSizes: ['8', '9', '10', '11', '12', '13', '14', '18', '24', '36'],
