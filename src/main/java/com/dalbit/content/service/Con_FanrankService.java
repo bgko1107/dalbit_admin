@@ -35,6 +35,7 @@ public class Con_FanrankService {
         paramMap.put("slctType", DalbitUtil.getIntMap(hashMap, "slctType"));
         paramMap.put("pageNo", DalbitUtil.getIntMap(hashMap, "pageNo"));
         paramMap.put("pageCnt", DalbitUtil.getIntMap(hashMap, "pageCnt"));
+        paramMap.put("state", DalbitUtil.getIntMap(hashMap, "state"));
 
         ProcedureVo procedureVo = new ProcedureVo(paramMap);
         String result;
