@@ -99,12 +99,6 @@
     }
 
     function dayClick(id, paramYear, paramMonth, paramDay){
-
-        console.log("-------------------------------------");
-        console.log(paramYear);
-        console.log(paramMonth);
-        console.log(paramDay);
-
         var lastDay = new Date(paramYear,paramMonth,-1).getDate() + 1;
 
         for(var i=1; i<lastDay + 1;i++){
@@ -248,57 +242,61 @@
     }
 
     function dayButtonPrev(isPrev){
+        var tmpDay = day;
+        day = Number(day) + isPrev;
+
+        var lastDay = new Date(year,common.lpad(month,2,"0"),-1).getDate() + 1;
+        if(day < 1){
+            day = 1;
+        }
+        if(day > lastDay){
+            day = lastDay;
+        }
+
         var yearIdx = $("#div_dayButton").find("#search_year option").index( $("#div_dayButton").find("#search_year option:selected") );
         isPrev == 1 ? yearIdx -= 1 : yearIdx += 1;
-        if(common.lpad(month,2,"0") + common.lpad(day,2,"0") == "0101"){
+        if(common.lpad(month,2,"0") + common.lpad(tmpDay,2,"0") == "0101" && isPrev == -1){
             $("#div_dayButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
             year = year - 1;
             month = "12";
             day = "31";
             monthClick("",year, month, day);
-        }else if(common.lpad(month,2,"0") + common.lpad(day,2,"0") == "1231"){
+        }else if(common.lpad(month,2,"0") + common.lpad(tmpDay,2,"0") == "1231" && isPrev == 1){
             $("#div_dayButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
             year = year + 1;
             month = "01";
             day = "01";
             monthClick("",year, month, day);
         }else{
-            day = Number(day) + isPrev;
-
-            var lastDay = new Date(year,common.lpad(month,2,"0"),-1).getDate() + 1;
-            if(day < 1){
-                day = 1;
-            }
-            if(day > lastDay){
-                day = lastDay;
-            }
             dayClick("", year, common.lpad(month,2,"0"), common.lpad(day,2,"0"));
         }
     }
     function monthButtonPrev(isPrev){
+        var tmpMonth = month;
+        month = Number(month) + isPrev;
+
+        if(month < 1){
+            month = 1;
+        }
+        if(month > 12){
+            month = 12;
+        }
+
         var yearIdx = $("#div_monthButton").find("#search_year option").index( $("#div_monthButton").find("#search_year option:selected") );
         isPrev == 1 ? yearIdx -= 1 : yearIdx += 1;
-        if(common.lpad(month,2,"0") == "01"){
+        if(common.lpad(tmpMonth,2,"0") == "01" && isPrev == -1){
             $("#div_monthButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
             year = year - 1;
             month = "12";
             day = "31";
             monthClick("",year, month, day);
-        }else if(common.lpad(month,2,"0") == "12"){
+        }else if(common.lpad(tmpMonth,2,"0") == "12" && isPrev == 1){
             $("#div_monthButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
             year = year + 1;
             month = "01";
             day = "01";
             monthClick("",year, month, day);
         }else{
-            month = Number(month) + isPrev;
-
-            if(month < 1){
-                month = 1;
-            }
-            if(month > 12){
-                month = 12;
-            }
             monthClick("",$("#search_year").val(), common.lpad(month,2,"0"), common.lpad(day,2,"0"));
         }
 
