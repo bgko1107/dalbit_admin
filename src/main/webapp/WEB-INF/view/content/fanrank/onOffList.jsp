@@ -52,6 +52,13 @@
                                     <a href="javascript://" class="_prevSearch">[이전]</a>
                                     <a href="javascript://" class="_todaySearch">[오늘]</a>
                                     <a href="javascript://" class="_nextSearch">[다음]</a>
+
+                                    <span id="searchCheck">
+                                        <label class="control-inline fancy-checkbox custom-color-green">
+                                            <input type="checkbox" name="state" id="state" value="1" checked="true">
+                                            <span>미 반영 중 회원보기</span>
+                                        </label>
+                                    </span>
                                 </td>
                             </tr>
                         </table>
@@ -68,10 +75,12 @@
                             <tr>
                                 <th>미 반영 중복 합계</th>
                                 <th>미 반영 비중복 합계</th>
+                                <th>미 반영 중 회원</th>
                             </tr>
                             <tr>
                                 <td><span id="summary_allCnt">0</span></td>
                                 <td><span id="summary_uniqueCnt">0</span></td>
+                                <td><span id="summary_nowCnt">0</span></td>
                             </tr>
                         </table>
                     </div>
@@ -121,6 +130,10 @@
         initOnOffList();
     });
 
+    $(document).on('click', '#state', function(){
+        initOnOffList();
+    });
+
     var dtList_info_data = function (data) {
         var slctType = $('input[name="slctType"]:checked').val();
 
@@ -137,6 +150,7 @@
             slctType : slctType
             , mem_no : 0
             , checkDate : checkDate
+            , state : $("#state").prop('checked') ? 1 : 0
         }
         
         return data;
@@ -157,10 +171,12 @@
         if(common.isEmpty(json.summary)){
             $("#summary_allCnt").html(common.addComma(0));
             $("#summary_uniqueCnt").html(common.addComma(0));
+            $("#summary_nowCnt").html(common.addComma(0));
         }else{
             var _summary = json.summary;
             $("#summary_allCnt").html(common.addComma(_summary.allCnt));
             $("#summary_uniqueCnt").html(common.addComma(_summary.uniqueCnt));
+            $("#summary_nowCnt").html(common.addComma(_summary.nowCnt));
         }
 
     }
