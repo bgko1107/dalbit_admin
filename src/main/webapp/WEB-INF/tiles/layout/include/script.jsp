@@ -44,7 +44,7 @@
 <%--<script src="/template/js/king-form-layouts.js"></script>--%>
 
 <!-- Editor -->
-<script src="/template/js/plugins/summernote/summernote.js"></script>
+<script src="/template/js/plugins/summernote/summernote.js?${dummyData}"></script>
 <script src="/template/js/plugins/summernote/lang/summernote-ko-KR.js"></script>
 
 <script src="/template/js/plugins/markdown/markdown.js"></script>
