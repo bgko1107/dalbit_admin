@@ -978,10 +978,10 @@ var MemberDataTableSource = {
                     return common.addComma(data) + " 별"
                 }},
             {'title': '선물 전', 'data': 'gold_old', 'render': function (data) {
-                    return common.addComma(data) + " 달"
+                    return common.addComma(data) + " 별"
                 }},
             {'title': '선물 후', 'data': 'gold_new', 'render': function (data) {
-                    return common.addComma(data) + " 달"
+                    return common.addComma(data) + " 별"
                 }},
             {'title': '선물 일시', 'data': 'giftDateFormat', 'render': function (data, type, row, meta) {
                     if ((row.gubun == "2" || row.gubun == "14" || row.gubun == "17"
