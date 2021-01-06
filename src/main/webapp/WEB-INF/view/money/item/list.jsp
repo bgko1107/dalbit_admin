@@ -119,7 +119,7 @@
     });
 
     function getParameter(){
-        return data = {
+         var data = {
             searchText : $("#searchText").val()
             , searchType : ""
             , innerType : $('input[name="search_testId"]').prop('checked') ? 1 : 0
@@ -130,6 +130,10 @@
             , pageCnt : itemPagingInfo.pageCnt
             , autoType : $("#changeAutoSetting").val()
         };
+
+        console.log(data);
+
+        return data;
     }
 
     function getList(){
@@ -199,8 +203,9 @@
     }
 
     function handlebarsPaging(targetId, pagingInfo){
+        console.log(" --------------------- ");
         console.log(targetId);
-        if(targetId == "list_info_paginate_top"){
+        if(targetId == "list_info_paginate_top" || targetId == "list_info_paginate"){
             itemPagingInfo = pagingInfo;
             getList();
         }else{

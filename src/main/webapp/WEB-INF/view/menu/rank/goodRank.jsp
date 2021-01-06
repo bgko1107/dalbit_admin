@@ -104,11 +104,14 @@
         var data = {
              slctType : $('input:radio[name="rankType"]:checked').val()
             , searchType : 0
-            , pageStart : goodRankListPagingInfo.pageNo
+            , pageNo : goodRankListPagingInfo.pageNo
             , pageCnt : goodRankListPagingInfo.pageCnt
             , searchText : $("#searchText").val()
             , rankingDate : $("#startDate").val()
         };
+
+        console.log(data);
+
         util.getAjaxData("goodRank", "/rest/menu/rank/goodRank", data, fn_succ_list);
     }
 

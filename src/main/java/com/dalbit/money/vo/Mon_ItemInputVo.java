@@ -18,6 +18,7 @@ public class Mon_ItemInputVo extends PagingVo {
     private String limitDay;
     private String excelYn;
     private int orderType;
+    private int pageNo;
 
 
     private String searchText;

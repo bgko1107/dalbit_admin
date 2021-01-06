@@ -93,7 +93,7 @@
         dtList_info = new DalbitDataTable($('#attendanceList'), dtList_info_data, EventDataTableSource.giftconList, $('#searchForm'));
         dtList_info.useCheckBox(false);
         dtList_info.useIndex(true);
-        dtList_info.setPageLength(50);
+        dtList_info.onlyTableView();
         dtList_info.useInitReload(true);
         dtList_info.createDataTable();
 
