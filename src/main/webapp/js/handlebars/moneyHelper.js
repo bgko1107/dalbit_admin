@@ -52,7 +52,7 @@ Handlebars.registerHelper("specialBenefit", function (star, isSpecial) {
     if(common.isEmpty(isSpecial) || isSpecial == 0){
         return 0;
     }
-    var benefit = Number(Math.floor(star * 60 * 0.005)) * 10;
+    var benefit = Number(Math.floor(Math.floor(star * 60 * 0.05) / 10) * 10);
     return common.addComma(benefit);
 });
 

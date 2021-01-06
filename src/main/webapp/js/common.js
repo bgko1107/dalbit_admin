@@ -527,26 +527,31 @@ common.division = function(lvalue,rvalue, dot) {
 };
 
 common.exchangeAmt = function(star, isSpecial){
+    var cashBasic = star * 60;
+    var specialBenefit = Math.trunc(cashBasic * 0.05, -1);
+    var residentTax = Math.trunc(cashBasic * 0.033, -1);
 
-    var cashBasic = Number(star * 60);
-    var specialBenefit = 0;
+    var total = 0;
 
-    //스페셜DJ 혜택
-    if(!common.isEmpty(isSpecial) && isSpecial != 0){
-        specialBenefit = Number(Math.floor(star * 60 * 0.005)) * 10;
+    if(isSpecial != 0){     // 스페셜 DJ
+        total = cashBasic + regularChange(specialBenefit,"0") - regularChange(residentTax,"0");
+    }else if(isSpecial == 0){     // 스페셜 DJ
+        total = cashBasic - regularChange(residentTax,0);
     }
-
-    var sum = Number(cashBasic + specialBenefit);
-    var incomeTax = Number(Math.floor(sum * 0.003)) * 10;
-    var residentTax = Number(Math.floor(incomeTax * 0.01)) * 10;
-
-    var taxCash = incomeTax + residentTax; //원천징수세액
-    var feeCash = 500; //이체수수료
-
-    var total = Number(sum - taxCash - feeCash);
 
     return common.addComma(total);
 };
+
+//정규식 변환
+function regularChange(val, replaceTxt) {
+    if (val == undefined || val === '') {
+        return '';
+    }
+    var pattern = /.{1}$/; // 정규식
+    val = Number(String(val).replace(pattern, replaceTxt));
+    return val;
+}
+
 
 common.koreaAge = function(birthDate){
     if(birthDate == null){

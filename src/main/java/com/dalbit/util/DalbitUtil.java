@@ -1143,21 +1143,15 @@ public class DalbitUtil {
     public static long computeExchangeAmt(long star, int isSpecial){
 
         long cashBasic = star * 60;
-        long specialBenefit = 0;
+        long specialBenefit = (long) Math.floor(Math.floor(cashBasic * 0.05) / 10) * 10;
+        long residentTax = (long)  Math.floor(Math.floor(cashBasic * 0.033) / 10) * 10;
+        long total = 0;
 
-        //스페셜DJ 혜택
-        if(isSpecial == 1){
-            specialBenefit = (long) (Math.floor(cashBasic * 0.005) * 10);
+        if(isSpecial != 0){     // 스페셜 DJ
+            total = cashBasic + specialBenefit - residentTax;
+        }else if(isSpecial == 0){     // 스페셜 DJ
+            total = cashBasic - residentTax;
         }
-
-        long sum = cashBasic + specialBenefit;
-
-        long incomeTax = (long) (Math.floor(sum * 0.003) * 10);
-        long residentTax = (long) (Math.floor(incomeTax * 0.01) * 10);
-        long taxCash = incomeTax + residentTax; //원천징수세액
-        long feeCash = 500; //이체수수료
-
-        long total = sum - taxCash - feeCash;
 
         return total;
     }
