@@ -254,6 +254,7 @@
         ];
 
         var ageAmt = [
+            common.charVatMinus(detailData.sum_age00Amt),
             common.charVatMinus(detailData.sum_age10Amt),
             common.charVatMinus(detailData.sum_age20Amt),
             common.charVatMinus(detailData.sum_age30Amt),
@@ -262,6 +263,7 @@
             common.charVatMinus(detailData.sum_age60Amt),
         ];
         var ageType = [
+            "10대 미만",
             "10대",
             "20대",
             "30대",

@@ -669,7 +669,7 @@
     </tr>
     <tr>
         <th>선물(금액)</th>
-        <td>{{addComma sum_giftCnt}} ({{sum_giftAmount}} 달)</td>
+        <td>{{addComma sum_giftCnt}} ({{addComma sum_giftAmount}} 달)</td>
         <td class="{{upAndDownClass inc_sum_giftCnt}}"><i class="fa {{upAndDownIcon inc_sum_giftCnt}}"></i> {{addComma inc_sum_giftCnt}}</td>
     </tr>
 </script>
