@@ -109,19 +109,31 @@ public class Mon_ExchangeService {
                 for(int i=0; i < summaryList.size(); i++){
                     exchangeTotal += summaryList.get(i).getCount();
                     exchangeByeolTotal += summaryList.get(i).getGeneral() + summaryList.get(i).getSpecial();
-                    exchangeAmtTotal += 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
+
+                    long tmp_1 = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
+                    long tmp_2 = 0 < summaryList.get(i).getSpecial() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getSpecial(), 1): 0;
+                    exchangeAmtTotal += tmp_1 + tmp_2;
                     if(i == 0){
                         notExchangeMemberCnt = summaryList.get(i).getCount();
                         notExchangeMemberByeol = summaryList.get(i).getGeneral() + summaryList.get(i).getSpecial();
-                        notExchangeMemberAmt = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
+
+                        tmp_1 = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
+                        tmp_2 = 0 < summaryList.get(i).getSpecial() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getSpecial(), 1): 0;
+                        notExchangeMemberAmt =  tmp_1 + tmp_2;
                     }else if(i == 1){
                         month3ExchangeMemberCnt = summaryList.get(i).getCount();
                         month3ExchangeMemberByeol = summaryList.get(i).getGeneral() + summaryList.get(i).getSpecial();
-                        month3ExchangeMemberAmt = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
+
+                        tmp_1 = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
+                        tmp_2 = 0 < summaryList.get(i).getSpecial() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getSpecial(), 1): 0;
+                        month3ExchangeMemberAmt = tmp_1 + tmp_2;
                     }else if(i == 2){
                         monthNot3ExchangeMemberCnt = summaryList.get(i).getCount();
                         monthNot3ExchangeMemberByeol = summaryList.get(i).getGeneral() + summaryList.get(i).getSpecial();
-                        monthNot3ExchangeMemberAmt = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
+
+                        tmp_1 = 0 < summaryList.get(i).getGeneral() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getGeneral(), 0): 0;
+                        tmp_2 = 0 < summaryList.get(i).getSpecial() ? DalbitUtil.computeExchangeAmt(summaryList.get(i).getSpecial(), 1): 0;
+                        monthNot3ExchangeMemberAmt = tmp_1 + tmp_2;
                     }
                 }
 
