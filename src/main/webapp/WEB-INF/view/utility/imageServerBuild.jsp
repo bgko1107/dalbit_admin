@@ -55,8 +55,11 @@
                     <input type="text" class="form-control" style="width:400px;" id="imageName" />
                     <br />
                     <button type="button" class="_imageViewBtn">이미지 확인</button>
-                    <br />
-                    <div id="imageViewArea"></div>
+                    <br /><br /><br />
+                    이미지 경로확인(복사해서 쓰세요)
+                    <input type="text" class="form-control" style="width:400px;" id="imageUrl" />
+                    <div id="imageViewArea" class="mt15 mb15"></div>
+
                 </div>
             </div>
         </div>
@@ -77,7 +80,7 @@
         var preFix = 'https://image.dalbitlive.com'
         var filePath = $("#imageFilePath").val();
         if(!filePath.startsWith("/")){
-            filePath += '/';
+            filePath = '/' + filePath;
         }
         if(filePath.startsWith("/public_html")){
             filePath = common.replace(filePath, '/public_html', '')
@@ -87,7 +90,8 @@
         var imageUrl = preFix + filePath + imageName;
 
         var imageRender = '<img src="'+preFix + filePath + imageName+ '" style="max-width:100%; height:auto;border: solid 1px black;" />'
-        $("#imageViewArea").html(imageUrl + '<br />' + imageRender);
+        $("#imageViewArea").html(imageRender);
+        $("#imageUrl").val(imageUrl);
 
     });
 
