@@ -202,7 +202,7 @@
 
         var json = {
             values: chartData.sumAge,
-            labels: ['10대', '20대', '30대', '40대', '50대', '60대'],
+            labels: ['10대 미만', '10대', '20대', '30대', '40대', '50대', '60대'],
             type: 'pie',
             hole: .6
         }
@@ -213,7 +213,7 @@
 
     function getLoginAgeChart(detailData, param) {
         //x축
-        var sumAge = [detailData.sum_age10Cnt, detailData.sum_age20Cnt, detailData.sum_age30Cnt, detailData.sum_age40Cnt, detailData.sum_age50Cnt, detailData.sum_age60Cnt];
+        var sumAge = [detailData.sum_age00Cnt, detailData.sum_age10Cnt, detailData.sum_age20Cnt, detailData.sum_age30Cnt, detailData.sum_age40Cnt, detailData.sum_age50Cnt, detailData.sum_age60Cnt];
         var resultData = { sumAge : sumAge };
         return resultData;
     }

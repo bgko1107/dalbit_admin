@@ -662,6 +662,16 @@
         <td>{{addComma sum_listenerCnt}}</td>
         <td class="{{upAndDownClass inc_sum_listenerCnt}}"><i class="fa {{upAndDownIcon inc_sum_listenerCnt}}"></i> {{addComma inc_sum_listenerCnt}}</td>
     </tr>
+    <tr>
+        <th>게스트</th>
+        <td>{{addComma sum_guestCnt}}</td>
+        <td class="{{upAndDownClass inc_sum_guestCnt}}"><i class="fa {{upAndDownIcon inc_sum_guestCnt}}"></i> {{addComma inc_sum_guestCnt}}</td>
+    </tr>
+    <tr>
+        <th>선물(금액)</th>
+        <td>{{addComma sum_giftCnt}} ({{sum_giftAmount}} 달)</td>
+        <td class="{{upAndDownClass inc_sum_giftCnt}}"><i class="fa {{upAndDownIcon inc_sum_giftCnt}}"></i> {{addComma inc_sum_giftCnt}}</td>
+    </tr>
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_paymentCancel_tableBody">

@@ -29,6 +29,15 @@
         <span class="font-bold mt5">* 성별(청취자/비중복)</span>
         <div id='listenerGenderUniqueChart'></div>
     </div>
+
+    <div class="col-md-6 no-padding">
+        <span class="font-bold mt5">* 성별(게스트)</span>
+        <div id='guestGenderChart'></div>
+    </div>
+    <div class="col-md-6 no-padding">
+        <span class="font-bold mt5">* 성별(게스트/비중복)</span>
+        <div id='guestGenderUniqueChart'></div>
+    </div>
     <!-- end chart placeholder-->
     <hr class="separator">
 </div>
@@ -113,6 +122,26 @@
         var data = [json];
         var layout = { title: '', };
         Plotly.newPlot('listenerGenderUniqueChart', data, layout);
+
+        var json = {
+            values: chartData.sumGuestGender,
+            labels: ['남', '여', '알수없음'],
+            type: 'pie',
+            hole: .6
+        }
+        var data = [json];
+        var layout = { title: '', };
+        Plotly.newPlot('guestGenderChart', data, layout);
+
+        var json = {
+            values: chartData.sumGuestGenderUnique,
+            labels: ['남', '여', '알수없음'],
+            type: 'pie',
+            hole: .6
+        }
+        var data = [json];
+        var layout = { title: '', };
+        Plotly.newPlot('guestGenderUniqueChart', data, layout);
     }
 
     function getLoginListenChart(detailData, param) {
@@ -121,7 +150,9 @@
         var sumGenderUnique = [detailData.total_unique_dj_mCnt, detailData.total_unique_dj_fCnt, detailData.total_unique_dj_nCnt];
         var sumListenerGender = [detailData.total_listener_mCnt, detailData.total_listener_fCnt, detailData.total_listener_nCnt];
         var sumListenerGenderUnique = [detailData.total_unique_listener_mCnt, detailData.total_unique_listener_fCnt, detailData.total_unique_listener_nCnt];
-        var resultData = { sumGender : sumGender,sumGenderUnique : sumGenderUnique, sumListenerGender:sumListenerGender,sumListenerGenderUnique: sumListenerGenderUnique  };
+        var sumGuestGender = [detailData.total_guest_mCnt, detailData.total_guest_fCnt, detailData.total_guest_nCnt];
+        var sumGuestGenderUnique = [detailData.total_guest_unique_mCnt, detailData.total_guest_unique_fCnt, detailData.total_guest_unique_nCnt];
+        var resultData = { sumGender : sumGender,sumGenderUnique : sumGenderUnique, sumListenerGender:sumListenerGender,sumListenerGenderUnique: sumListenerGenderUnique, sumGuestGender: sumGuestGender, sumGuestGenderUnique: sumGuestGenderUnique };
         return resultData;
     }
 

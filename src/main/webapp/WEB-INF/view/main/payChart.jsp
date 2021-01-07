@@ -38,7 +38,8 @@
         var chartData = getPayWayChart(detailData, param);
 
         var color = [
-            '#00ffbc'
+            '#186dd0'
+            ,'#00ffbc'
             ,'#00ff4a'
             ,'#3dff00'
             ,'#8fff00'
@@ -141,6 +142,7 @@
             common.charVatMinus(detailData.sum_cashbeeAmt),
             common.charVatMinus(detailData.sum_paycoAmt),
             common.charVatMinus(detailData.sum_kakaopayAmt),
+            common.charVatMinus(detailData.sum_kakaomoneyAmt),
         ];
 
         var max_x;
@@ -160,6 +162,7 @@
             common.charVatMinus(detailData.sum_cashbeeAmt),
             common.charVatMinus(detailData.sum_paycoAmt),
             common.charVatMinus(detailData.sum_kakaopayAmt),
+            common.charVatMinus(detailData.sum_kakaomoneyAmt),
         ];
         var arrayList_xCnt = [
             detailData.sum_mcCnt,
@@ -174,6 +177,7 @@
             detailData.sum_cashbeeCnt,
             detailData.sum_paycoCnt,
             detailData.sum_kakaopayCnt,
+            detailData.sum_kakaomoneyCnt,
         ];
 
         //y축
@@ -189,7 +193,8 @@
             "티머니",
             "캐시비",
             "페이코",
-            "카카오페이",
+            "카카오페이(카드)",
+            "카카오페이(머니)",
         ];
 
         var resultData = {
