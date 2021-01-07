@@ -42,6 +42,9 @@
                         </span>
                     </div>
                     <div class="widget-content mt10">
+
+                        <button type="button" id="allChk" class="btn btn-default btn-sm print-btn mb10">전체선택</button>
+                        <button type="button" id="allChk_content" class="btn btn-default btn-sm print-btn mb10 ml10">콘텐츠사업부 선택</button>
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <tr>
@@ -241,6 +244,19 @@
                 alert(response.message);
             });
         }
+    });
+
+    $(document).on('click', '#allChk', function(){
+        $('#tableBody input[type="checkbox"]').prop('checked', 'checked');
+    });
+
+    $(document).on('click', '#allChk_content', function(){
+        $('#tableBody tr').each(function(){
+            if($(this).hasClass('4000') || $(this).hasClass('4001') || $(this).hasClass('4002') || $(this).hasClass('4003') || $(this).hasClass('4004') || $(this).hasClass('4005')){
+                $(this).find('input[type="checkbox"]').prop('checked', 'checked');
+            }
+        })
+
     });
 </script>
 
