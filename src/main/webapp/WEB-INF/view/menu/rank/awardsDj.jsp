@@ -101,7 +101,7 @@
                         <th colspan="4">수상소감</th>
                     </tr>
                     <tr>
-                        <td colspan="4"><textarea type="textarea" class="form-control" id="awards_impression" name="awardsImpression" style="width: 100%; height: 100%; min-height: 250px"></textarea></td>
+                        <td colspan="4"><textarea type="textarea" class="form-control" id="awardsImpression" name="awardsImpression" style="width: 100%; height: 100%; min-height: 250px"></textarea></td>
                     </tr>
                 </table>
             </div>
@@ -209,12 +209,29 @@
         $("#myModal").modal("show");
         $("#mem_no").html('<a href="javascript://" class="_openMemberPop" data-memNo="' + mem_no + '"> ' + data.data('memno') + '</a>');
         $("#mem_nick").text(data.data('memnick'));
+
+        var data = {
+            mem_no : mem_no
+            , slctType : 1
+            , selectYear : $("#startDate").val().substr(0,4)
+        };
+
+        console.log(data);
+        util.getAjaxData("impression", "/rest/menu/rank/awards/dj/sel/impression", data, fn_selImpression_success);
     }
 
+    function fn_selImpression_success(dst_id, response, param){
+        console.log(response);
+        $("#djIntroduce").val(response.data.title);
+        $("#awardsImpression").val(response.data.msg);
+    }
     function addAwardsImpression(){
         var data = {
             mem_no : mem_no
             , selectYear : $("#startDate").val().substr(0,4)
+            , slctType : 1
+            , title : $("#djIntroduce").val()
+            , msg : $("#awardsImpression").val()
         };
 
         console.log(data);
@@ -225,6 +242,7 @@
     function fn_impression_success(dst_id, response){
         if(response.result == "success"){
             alert("어워즈 소감 등록");
+            $("#myModal").modal("hide");
             $('#bt_search').click();
         }
     }
