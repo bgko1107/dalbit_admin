@@ -9,7 +9,7 @@
     </span>
 </div>
 <div class="col-md-1 no-padding">
-    <span id="recomm_status_area"></span>
+    <span id="recomm_status_area" onchange="getList();"></span>
 </div>
 <div class="col-md-1 no-padding pull-right">
     <button type="button" class="btn btn-primary pull-right" id="memSearch" name="memSearch"><i class="fa fa-search"></i>운영자 직접 등록</button>
@@ -26,7 +26,7 @@
     <span id="recommMemberInfo" ></span>
 </div>
 
-<jsp:include page="/WEB-INF/view/common/util/select_specialList.jsp"></jsp:include>
+<%--<jsp:include page="/WEB-INF/view/common/util/select_specialList.jsp"></jsp:include>--%>
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/menu/menuCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/money/exchangeCodeList.js?${dummyData}"></script>
@@ -42,19 +42,13 @@
     var dtList;
     function getList() {
         var dtList_info_data = function (data) {
-            slctType = $("#recomm_status").val();
+            data.slctType = $("#recomm_status").val();
         };
         dtList = new DalbitDataTable($("#table_recomm_list"), dtList_info_data, recommDataTableSource.recommList);
         dtList.useCheckBox(true);
         dtList.useIndex(true);
         dtList.setPageLength(50);
         dtList.createDataTable();
-
-        // var template = $('#tmp_recommMemberInfo').html();
-        // var templateScript = Handlebars.compile(template);
-        // var html = templateScript();
-        // $("#recommMemberInfo").html(html);
-        // ui.paintColor();
 
     }
 
