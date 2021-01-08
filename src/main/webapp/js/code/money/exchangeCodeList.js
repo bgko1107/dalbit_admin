@@ -142,3 +142,9 @@ var gender = [
     , new COMMON_CODE('f', 'f', '여')
     , new COMMON_CODE('n', 'n', '알수없음')
 ]
+
+var memSex = [
+    new COMMON_CODE(null, 'memSex', '성별')
+    , new COMMON_CODE('m', 'm', '남')
+    , new COMMON_CODE('f', 'f', '여')
+]

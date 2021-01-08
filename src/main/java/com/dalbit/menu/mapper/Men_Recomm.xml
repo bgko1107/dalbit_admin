@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dalbit.menu.dao.Men_RecommDao" >
+
+    <select id="callRecommList" statementType="CALLABLE" parameterType="ProcedureVo" resultType="com.dalbit.menu.vo.RecommVo">
+        call rd_admin.sp_admin_recommend_dj_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callRecommDetail" statementType="CALLABLE" parameterType="ProcedureVo" resultType="ProcedureVo">
+        call rd_admin.sp_admin_recommend_dj_detail(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callEditRecomm" statementType="CALLABLE" parameterType="ProcedureVo" resultType="ProcedureVo">
+        call rd_admin.sp_admin_recommend_dj_edit(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+    <select id="callDeleteRecomm" statementType="CALLABLE" parameterType="ProcedureVo" resultType="ProcedureVo">
+        call rd_admin.sp_admin_recommend_dj_delete(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+</mapper>

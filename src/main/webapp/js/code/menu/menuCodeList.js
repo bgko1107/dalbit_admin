@@ -17,6 +17,21 @@ var timeRound = [
     , new COMMON_CODE('3', '3', '19시~00시')
 ];
 
+var recomm_status = [
+    new COMMON_CODE(null, 'recomm_status', '추천DJ 게시 상태')
+    , new COMMON_CODE('0', '0', '전체')
+    , new COMMON_CODE('1', '1', '게시 ON')
+    , new COMMON_CODE('2', '2', '게시 OFF')
+];
+
+var ageType = [
+    new COMMON_CODE(null, 'ageType', '나이대')
+    , new COMMON_CODE('1', '1', '10대')
+    , new COMMON_CODE('2', '2', '20대')
+    , new COMMON_CODE('3', '3', '30대')
+    , new COMMON_CODE('4', '4', '40대이상')
+];
+
 /** =------ special ---------- */
 var special_state = [
     new COMMON_CODE(null, 'stateType', '상태구분')
