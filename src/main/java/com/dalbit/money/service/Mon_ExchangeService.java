@@ -519,7 +519,6 @@ public class Mon_ExchangeService {
 
             hm.put("no", i+1);
             hm.put("id", DalbitUtil.isEmpty(exchangeVo.getMem_userid()) ? "" : exchangeVo.getMem_userid());
-            hm.put("username", DalbitUtil.isEmpty(exchangeVo.getMem_name()) ? "" : exchangeVo.getMem_name());
             /*hm.put("name", DalbitUtil.isEmpty(exchangeVo.getMem_name()) ? "" : exchangeVo.getMem_name());
             hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getSocial_no()) ? "" : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))));*/
             hm.put("name", DalbitUtil.isEmpty(exchangeVo.getPrevAccountName()) ? exchangeVo.getAccount_name() : exchangeVo.getPrevAccountName());
@@ -565,7 +564,6 @@ public class Mon_ExchangeService {
             HashMap totalMap = new LinkedHashMap();
             totalMap.put("no", "");
             totalMap.put("id", "합계");
-            totalMap.put("username", "");
             totalMap.put("name", "");
             totalMap.put("socialNo", "");
             totalMap.put("accountName", "");
@@ -611,7 +609,6 @@ public class Mon_ExchangeService {
 
             hm.put("no", i+1);
             hm.put("id", DalbitUtil.isEmpty(exchangeVo.getMem_userid()) ? "" : exchangeVo.getMem_userid());
-            hm.put("username", DalbitUtil.isEmpty(exchangeVo.getMem_name()) ? "" : exchangeVo.getMem_name());
             hm.put("name", DalbitUtil.isEmpty(exchangeVo.getPrevAccountName()) ? exchangeVo.getAccount_name() : exchangeVo.getPrevAccountName());
             hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getSocial_no()) ? "" : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))));
 
@@ -654,7 +651,6 @@ public class Mon_ExchangeService {
             HashMap totalMap = new LinkedHashMap();
             totalMap.put("no", "");
             totalMap.put("id", "");
-            totalMap.put("username", "");
             totalMap.put("name", "");
             totalMap.put("socialNo", "");
             totalMap.put("accountName", "합계");

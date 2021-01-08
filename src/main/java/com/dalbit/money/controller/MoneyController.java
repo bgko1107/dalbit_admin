@@ -55,14 +55,14 @@ public class MoneyController {
         String[] colums = null;
         String fileName = "";
         if(monExchangeInputVo.getIsSpecial() == 1) {
-            colums = new String[]{"No", "아이디","본인인증이름", "신규예금주", "주민번호", "예금주", "금액",
+            colums = new String[]{"No", "아이디", "신규예금주", "주민번호", "예금주", "금액",
                     "스페셜DJ혜택", "과세금액", "소득세", "주민세", "수수료",
                     "실지급액", "연락처", "은행명", "계좌번호",
                     "주소","신청일자"};
 
             fileName = "스페셜DJ 환전내역";
         }else{
-            colums = new String[]{"No", "아이디","본인인증이름", "신규예금주", "주민번호", "예금주", "금액",
+            colums = new String[]{"No", "아이디", "신규예금주", "주민번호", "예금주", "금액",
                     /*"스페셜DJ혜택", "과세금액",*/ "소득세", "주민세", "수수료",
                     "실지급액", "연락처", "은행명", "계좌번호",
                     "주소","신청일자"};
@@ -91,7 +91,7 @@ public class MoneyController {
             return mv;
         }
 
-        String[] colums = new String[]{"No", "아이디" ,"본인인증이름", "신규예금주" , "주민번호", "예금주", "금액",
+        String[] colums = new String[]{"No", "아이디" , "신규예금주" , "주민번호", "예금주", "금액",
                 "스페셜DJ혜택", "과세금액", "소득세", "주민세", "수수료",
                 "실지급액", "연락처", "은행명", "계좌번호",
                 "주소", "신청일자"};
