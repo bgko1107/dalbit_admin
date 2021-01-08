@@ -109,4 +109,11 @@ public class Mon_ExchangeRestController {
         String result = monExchangeService.callExchangeList(monExchangeInputVo);
         return result;
     }
+
+    @PostMapping("opdate/update")
+    public String opdateUpdate(Mon_ExchangeOutputVo monExchangeOutputVo){
+        monExchangeOutputVo.setOp_name(MemberVo.getMyMemNo());
+        String result = monExchangeService.opdateUpdate(monExchangeOutputVo);
+        return result;
+    }
 }

@@ -200,6 +200,8 @@
             , exchange.resident_tax
             , exchange.transfer_fee
             , exchange.cash_real
+            , (select account_name from rd_data.tb_member_exchange where mem_no = ifnull(basic.mem_no,withdrawal.mem_no) and latest_idx = 0 and `state` = 1 order by idx desc limit 1) prevAccountName
+            , (select social_no from rd_data.tb_member_exchange where mem_no = ifnull(basic.mem_no,withdrawal.mem_no) and latest_idx = 0 and `state` = 1 order by idx desc limit 1) prevSocialNo
             , exchange.social_no
             , exchange.phone_no
             , exchange.bank_code
@@ -1037,4 +1039,13 @@
         /* M_Member.xml - callExchangeList */
         call rd_admin.sp_admin_member_all_exchange_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
+
+
+    <update id="opdateUpdate" parameterType="com.dalbit.money.vo.Mon_ExchangeOutputVo">
+        /* Mon_Exchange.xml - opdateUpdate */
+        update rd_data.tb_member_exchange
+        set op_date = #{op_date}
+          , op_name = #{op_name}
+        where idx = #{idx}
+    </update>
 </mapper>

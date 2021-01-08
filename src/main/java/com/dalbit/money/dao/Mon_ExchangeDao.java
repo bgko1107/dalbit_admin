@@ -52,6 +52,7 @@ public interface Mon_ExchangeDao {
 
     int updateExchangeMultiComplete(Mon_ExchangeInputVo monExchangeInputVo);
 
+
     ProcedureVo callExchangeCancel(ProcedureVo procedureVo);
 
     @Transactional(readOnly = true)
@@ -60,10 +61,8 @@ public interface Mon_ExchangeDao {
     @Transactional(readOnly = true)
     ArrayList<Mon_EnableSummaryVo> selectEnableSummary(Mon_EnableSummaryVo monEnableSummaryVo);
 
-
-
-
     @Transactional(readOnly = true)
     ArrayList<Mon_ExchangeOutputVo> callExchangeList(ProcedureVo procedureVo);
 
+    int opdateUpdate(Mon_ExchangeOutputVo monExchangeOutputVo);
 }
