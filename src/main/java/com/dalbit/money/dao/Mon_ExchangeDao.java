@@ -2,7 +2,6 @@ package com.dalbit.money.dao;
 
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.money.vo.*;
-import com.dalbit.payment.vo.Pay_CancelVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,4 +64,6 @@ public interface Mon_ExchangeDao {
     ArrayList<Mon_ExchangeOutputVo> callExchangeList(ProcedureVo procedureVo);
 
     int opdateUpdate(Mon_ExchangeOutputVo monExchangeOutputVo);
+
+    int imageUpload(Mon_ExchangeOutputVo monExchangeOutputVo);
 }

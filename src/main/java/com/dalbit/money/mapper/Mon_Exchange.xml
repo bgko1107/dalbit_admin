@@ -42,6 +42,7 @@
         exchange.address_2,
         exchange.add_file1,
         exchange.add_file2,
+        exchange.add_file3,
         exchange.terms_agree,
         exchange.os_type,
         exchange.ip,
@@ -1047,5 +1048,16 @@
         set op_date = #{op_date}
           , op_name = #{op_name}
         where idx = #{idx}
+    </update>
+
+    <update id="imageUpload" parameterType="com.dalbit.money.vo.Mon_ExchangeOutputVo">
+        /* Mon_Exchange.xml - imageUpload */
+       update rd_data.tb_member_exchange
+          set add_file1 = #{add_file1}
+            , add_file2 = #{add_file2}
+            , add_file3 = #{add_file3}
+            , op_name = #{op_name}
+            , op_date = now()
+         where idx = #{idx}
     </update>
 </mapper>
