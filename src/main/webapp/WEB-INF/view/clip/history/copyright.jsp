@@ -102,6 +102,7 @@
 
     $(document).on('click', '._adminCover', function() {
         var idx = $(this).data('idx');
+        var clip_no = $(this).data('clipno');
         var admin_cover_title = $("#coverTitle_" + idx).val()
         var admin_cover_singer = $("#coverSinger_" + idx).val()
 
@@ -120,13 +121,13 @@
         if(valid()) {
             if (confirm('수정하시겠습니까?')) {
                 var data = {
-                    idx: idx
-                    , admin_cover_title: admin_cover_title
-                    , admin_cover_singer: admin_cover_singer
+                    cast_no : clip_no
+                    , editSlct : 9
+                    , admin_cover_title : admin_cover_title
+                    , admin_cover_singer : admin_cover_singer
                 }
-                util.getAjaxData("editAdminCover", "/rest/clip/history/copyright/cover/edit", data, function fn_editAdminCover_success(dst_id, response) {
+                util.getAjaxData("saveAdminCoverInfo", "/rest/clip/history/info/edit", data, function(dist_id, response){
                     alert(response.message);
-                    getHistoryCopyright();
                 });
             }
         }
@@ -212,8 +213,6 @@
             <th>녹음시간<br />[듣기]</th>
             <th>클립정보</th>
             <th>등록일시</th>
-            <th>커버 곡명<br />(유저)</th>
-            <th>커버 가수<br />(유저)</th>
             <th>커버 곡명<br />(관리자)</th>
             <th>커버 가수<br />(관리자)</th>
             <th>저장</th>
@@ -235,11 +234,9 @@
                     <br />{{title}}
                 </td>
                 <td>{{convertToDate regDate "YYYY-MM-DD"}}</td>
-                <td>{{userCoverTitle}}</td>
-                <td>{{userCoverSinger}}</td>
                 <td><input type="text" class="form-control _trim" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" maxlength="50" /></td>
                 <td><input type="text" class="form-control _trim" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" maxlength="50" /></td>
-                <td><button type="button" class="_adminCover btn btn-primary" data-idx="{{clipIdx}}">저장</button></td>
+                <td><button type="button" class="_adminCover btn btn-primary" data-idx="{{clipIdx}}" data-clipno="{{cast_no}}">저장</button></td>
                 <td>
                     {{^equal playCnt '0'}}
                     <a href="javascript://" class="_openClipCopyrightDetailPop" data-clipno="{{../cast_no}}" data-year="{{../../year}}" data-month="{{../../month}}">{{addComma ../playCnt}}</a>

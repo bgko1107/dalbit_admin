@@ -388,9 +388,41 @@
         getClipDetailInfo();
     }
 
+    $(document).on('click', '#saveAdminCoverBtn', function(){
+         if(confirm('저장하시겠습니까?')){
+             var data = {
+                 cast_no : clipNo
+                 , editSlct : 9
+                 , admin_cover_title : $("#admin_cover_title").val()
+                 , admin_cover_singer : $("#admin_cover_singer").val()
+             }
+             util.getAjaxData("saveAdminCoverInfo", "/rest/clip/history/info/edit", data, function(dist_id, response){
+                 alert(response.message);
+             });
+
+         }
+    });
+
+    $(document).on('click', '#saveUciAlbumCodeBtn', function(){
+        if(confirm('저장하시겠습니까?')){
+            var data = {
+                cast_no : clipNo
+                , editSlct : 10
+                , uci_album_code : $("#uci_album_code").val()
+            }
+            util.getAjaxData("saveAdminCoverInfo", "/rest/clip/history/info/edit", data, function(dist_id, response){
+                alert(response.message);
+            });
+
+        }
+    });
+
+    $(document).on('click', '#searchUciBtn', function(){
+        var url = 'http://uci.k-pop.or.kr/search/music?content_nm='+$("#admin_cover_title").val()+'&artist_nm='+$("#admin_cover_singer").val();
+        util.windowOpen(url, 1050, 730, 'kPopUciSearch');
+    });
+
 </script>
-
-
 
 <script id="tmp_memberInfoFrm" type="text/x-handlebars-template">
 
@@ -409,7 +441,7 @@
         </colgroup>
         <tbody>
         <tr>
-            <th rowspan="5" colspan="1">
+            <th rowspan="5">
                 클립 이미지
                 <br><button type="button" id="bt_edit_clipImg" class="btn btn-default btn-sm no-margin" style="margin-left: 10px" data-memno="{{mem_no}}" data-nickname="{{nickName}}">초기화</button>
                 <br><button type="button" id="bt_detail_clipImg" class="btn btn-default btn-sm mt5" data-memno="{{mem_no}}" data-nickname="{{nickName}}" data-userId="{{userId}}">상세</button>
@@ -419,11 +451,11 @@
             </td>
         </tr>
         <tr>
-            <th colspan="1">클립 번호</th>
+            <th>클립 번호</th>
             <td colspan="4">{{castNo}}</td>
         </tr>
         <tr>
-            <th colspan="1">클립 상태</th>
+            <th>클립 상태</th>
             <td colspan="2" style="text-align: left; border-right-color:white;border-right-width:0px;">
                 {{{getCommonCodeLabel state 'clip_stateType'}}}<br>
                 {{#dalbit_if hide '==' 1}} 숨기기 중 ({{hideOpName}}) {{/dalbit_if}}
@@ -438,62 +470,62 @@
             </td>
         </tr>
         <tr>
-            <th colspan="1">클립 제목</th>
+            <th>클립 제목</th>
             <td colspan="3" style="text-align: left; border-right-color:white;border-right-width:0px;">
                 {{replaceHtml title}}
             </td>
-            <td colspan="1">
+            <td>
                 <button type="button" id="bt_edit_title" class="btn btn-default btn-sm no-margin pull-right" style="margin-left: 10px" data-memno="{{mem_no}}" data-nickname="{{nickName}}">초기화</button>
             </td>
         </tr>
         <tr>
-            <th colspan="1">클립 주제</th>
-            <td colspan="1" style="text-align: left; border-right-color:white;border-right-width:0px; ">
+            <th>클립 주제</th>
+            <td style="text-align: left; border-right-color:white;border-right-width:0px; ">
                 <select id="clipSubjectType" name="clipSubjectType" class="form-control pull-left"></select>
             </td>
-            <td colspan="1">
+            <td>
                 <button type="button" id="bt_edit_subject" class="btn btn-default btn-sm no-margin pull-right" style="margin-left: 10px" data-memno="{{mem_no}}" data-nickname="{{nickName}}">변경</button>
             </td>
-            <th colspan="1">청취 제한</th>
-            <td colspan="1" style="text-align: left; border-right-color:white;border-right-width:0px;">
+            <th>청취 제한</th>
+            <td style="text-align: left; border-right-color:white;border-right-width:0px;">
                 {{{getCommonCodeLabel entryType 'clip_entryType'}}}
             </td>
         </tr>
         <tr>
-            <th colspan="1">회원번호</th>
+            <th>회원번호</th>
             <td colspan="4" style="text-align: left">
                 <a href="javascript://" class="_openMemberPop" data-memno="{{cast_mem_no}}">{{cast_mem_no}}</a>
             </td>
-            <th colspan="1">클립 등록일</th>
+            <th>클립 등록일</th>
             <td colspan="4" style="text-align: left">{{startDate}}</td>
         </tr>
         <tr>
-            <th colspan="1">회원 닉네임</th>
+            <th>회원 닉네임</th>
             <td colspan="3" style="text-align: left;border-right-color:white;border-right-width:0px;">
                 {{cast_nickName}}
             </td>
-            <td colspan="1">
+            <td>
                 <button type="button" id="bt_edit_nick" class="btn btn-default btn-sm pull-right" data-memno="{{mem_no}}" data-nickname="{{nickName}}" data-userId="{{userId}}">초기화</button>
             </td>
-            <th colspan="1">클립 파일명</th>
+            <th>클립 파일명</th>
             <td colspan="2" style="text-align: left; word-break:break-all">
                 {{fileName}}
             </td>
-            <th colspan="1">플랫폼</th>
-            <td colspan="1" style="border-right-color:white;border-right-width:0px;">
+            <th>플랫폼</th>
+            <td style="border-right-color:white;border-right-width:0px;">
                 {{{getCommonCodeLabel osType 'clip_platformType'}}}
             </td>
         </tr>
         <tr>
-            <th colspan="1">성별(나이)</th>
+            <th>성별(나이)</th>
             <td colspan="4" style="text-align: left">{{{sexIcon cast_memSex cast_birth_year}}}</td>
-            <th colspan="1">클립 용량</th>
+            <th>클립 용량</th>
             <td colspan="4" style="text-align: left">
                 {{fileSize}}
             </td>
         </tr>
         <tr>
-            <th colspan="1" rowspan="2">공개여부</th>
+            <th rowspan="2">공개여부</th>
             <td colspan="4" rowspan="2" style="text-align: left;border-left-color:white;border-left-width:0px;">
                 {{{getCommonCodeLabel openType 'clip_typeOpen_clipDetail'}}}
                 <button type="button" id="bt_edit_view" class="btn btn-default btn-sm pull-right" data-openType="{{openType}}">
@@ -515,12 +547,12 @@
             <td style="text-align:center"><a href="javascript:$('#tab_reply').click();">{{addComma boardCnt}} 건</a></td>
         </tr>
         <tr>
-            <th colspan="1">클립재생</th>
+            <th>클립재생</th>
             <td colspan="4">
                 <a class="_openClipPlayerPop" id="play_{{castNo}}" data-clipNo="{{castNo}}" data-clipPath="{{filePath}}" href="javascript:;" >[ <i class="fa fa-play"></i> 듣기]</a> {{playTime}}
             </td>
 
-            <th colspan="1">운영자 관리 여부</th>
+            <th>운영자 관리 여부</th>
             <td colspan="2" style="text-align: left">
                 {{{getCommonCodeLabel confirm 'clip_confirmType'}}}
                 <button type="button" id="bt_edit_opCheck" class="btn btn-default btn-sm pull-right" data-confirm="{{confirm}}">
@@ -528,9 +560,57 @@
                     {{#dalbit_if confirm '==' 1}} 미인증 {{/dalbit_if}}
                 </button>
             </td>
-            <th colspan="1">인증 관리자</th>
-            <td colspan="1" style="text-align: left">
+            <th>인증 관리자</th>
+            <td style="text-align: left">
                 {{confirmOpName}}
+            </td>
+        </tr>
+        <tr>
+            <th>커버 곡명<br >(유저)</th>
+            <td colspan="4">
+                {{cover_title}}
+            </td>
+
+            <th>커버 가수<br >(유저)</th>
+            <td colspan="2" style="text-align: left">
+                {{cover_singer}}
+            </td>
+            <th>UCI 검색<br >(유저입력)</th>
+            <td style="text-align: left">
+                <button type="button" class="btn btn-default btn-sm _openKpopUciSearch" data-title="{{cover_title}}" data-singer="{{cover_singer}}">검색</button>
+            </td>
+        </tr>
+        <tr>
+            <th>커버 곡명<br >(관리자)</th>
+            <td colspan="4">
+                <input type="text" class="form-control" id="admin_cover_title" value="{{admin_cover_title}}" maxlength="50" />
+            </td>
+
+            <th>커버 가수<br >(관리자)</th>
+            <td colspan="2" style="text-align: left">
+                <input type="text" class="form-control" id="admin_cover_singer" value="{{admin_cover_singer}}" maxlength="50" />
+            </td>
+            <th>저장</th>
+            <td style="text-align: left">
+                <button type="button" class="btn btn-default btn-sm" id="saveAdminCoverBtn">저장</button>
+            </td>
+        </tr>
+        <tr>
+            <th>UCI 앨범 코드<br >(관리자)</th>
+            <td colspan="3">
+                <input type="text" class="form-control" id="uci_album_code" maxlength="50" value="{{uci_album_code}}" />
+            </td>
+            <td>
+                <button type="button" id="saveUciAlbumCodeBtn" class="btn btn-default btn-sm">저장</button>
+            </td>
+
+            <th>UCI 검색<br >(관리자 입력)</th>
+            <td style="text-align: left">
+                <button type="button" id="searchUciBtn" class="btn btn-default btn-sm">검색</button>
+            </td>
+            <th>정보수정일시</th>
+            <td colspan="2" style="text-align: left">
+
             </td>
         </tr>
         <tr>
@@ -538,7 +618,7 @@
             <td colspan="7" style="text-align: left;border-right-color:white;border-right-width:0px;">
                 {{lastOpName}}
             </td>
-            <td colspan="1">
+            <td>
                 <button type="button" id="bt_detail_opName" class="btn btn-default btn-sm pull-right" data-memno="{{mem_no}}" data-nickname="{{nickName}}" data-userId="{{userId}}">자세히</button>
             </td>
         </tr>
