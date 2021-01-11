@@ -74,4 +74,9 @@ public class MenuController {
         return "menu/rank/popup/voteDetail";
     }
 
+    @RequestMapping("/recomm/list")
+    public String recommList(){
+        return "menu/recomm/list";
+    }
+
 }

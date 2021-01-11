@@ -70,21 +70,27 @@
         var html = templateScript(data);
         $("#recommMemberInfo").html(html);
         ui.paintColor();
+
+
+        var scrollPosition = $("#recommMemberInfo").offset();
+        util.scrollPostion(scrollPosition.top);
     }
     function recommEdit() {
-        var data = {
-            mem_no: $("#recomm_mem_no").text()
-            , memSex: $("input[name='memSex']:checked").val()
-            , ageType: $("input[name='ageType']:checked").val()
-            , ageDesc: $("#age_desc").val()
-            , title: $("#broadcastTitle").val()
-            , desc: $("#desc").val()
-            , viewYn: $("input[name='view_yn']:checked").val()
-        };
+        if(confirm('추천 DJ를 저장 하시겠습니까?')) {
+            var data = {
+                mem_no: $("#recomm_mem_no").text()
+                , memSex: $("input[name='memSex']:checked").val()
+                , ageType: $("input[name='ageType']:checked").val()
+                , ageDesc: $("#age_desc").val()
+                , title: $("#broadcastTitle").val()
+                , desc: $("#desc").val()
+                , viewYn: $("input[name='view_yn']:checked").val()
+            };
 
-        console.log(data);
+            console.log(data);
 
-        util.getAjaxData("recomm", "/rest/menu/recomm/edit", data, fn_recommEdit_success);
+            util.getAjaxData("recomm", "/rest/menu/recomm/edit", data, fn_recommEdit_success);
+        }
     }
 
 
@@ -100,15 +106,21 @@
 
         var checkDatas = dtList.getCheckedData();
 
-        var memNoList = "";
-        for(var i=0;i<checkDatas.length;i++){
-            memNoList += checkDatas[i].mem_no + "@@";
+        if(checkDatas.length == 0){
+            alert('삭제할 추천 DJ를 Check 하세요.');
+            return;
         }
-        var data = {
-            memNoList : memNoList
-        };
+        if(confirm('선택한 추천 DJ를 삭제 하시겠습니까?')){
+            var memNoList = "";
+            for(var i=0;i<checkDatas.length;i++){
+                memNoList += checkDatas[i].mem_no + "@@";
+            }
+            var data = {
+                memNoList : memNoList
+            };
 
-        util.getAjaxData("recomm", "/rest/menu/recomm/delete", data, fn_recommEdit_success);
+            util.getAjaxData("recomm", "/rest/menu/recomm/delete", data, fn_recommEdit_success);
+        }
     }
 
 </script>
@@ -124,44 +136,44 @@
             <col width="10%"><col width="10%"><col width="10%"><col width="10%"><col width="10%">
         </colgroup>
         <tr>
-            <th class="_bgColor" data-bgcolor="#8faadc">No</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">No</th>
             <td>{{idx}}</td>
-            <th class="_bgColor" data-bgcolor="#8faadc">회원번호</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">회원번호</th>
             <td><a href="javascript://" class="_openMemberPop" data-memno="{{mem_no}}" id="recomm_mem_no">{{mem_no}}</a></td>
-            <th class="_bgColor" data-bgcolor="#8faadc">닉네임</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">닉네임</th>
             <td>{{memNick}}</td>
-            <th class="_bgColor" data-bgcolor="#8faadc">등록일시<br/>최종수정일시</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">등록일시<br/>최종수정일시</th>
             <td>{{regDate}}<br/>{{updDate}}</td>
-            <th class="_bgColor" data-bgcolor="#8faadc">등록자<br/>최종수정자</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">등록자<br/>최종수정자</th>
             <td>{{reg_opName}}<br/>{{upd_opName}}</td>
         </tr>
         <tr>
-            <th colspan="6" class="_bgColor" data-bgcolor="#8faadc">추천 DJ 정보</th>
-            <th class="_bgColor" data-bgcolor="#8faadc">성별</th>
+            <th colspan="6" class="_bgColor" data-bgcolor="#c6d9f1">추천 DJ 정보</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">성별</th>
             <td>{{{getCommonCodeRadio memSex 'memSex'}}}</td>
-            <th class="_bgColor" data-bgcolor="#8faadc">게시여부</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">게시여부</th>
             <td>{{{getCommonCodeRadio viewYn 'content_viewOn' 'N' 'view_yn'}}}</td>
         </tr>
         <tr>
-            <th colspan="2" class="_bgColor" data-bgcolor="#8faadc">나이</th>
+            <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">나이</th>
             <td colspan="2">{{{getCommonCodeRadio ageType 'ageType'}}}</td>
-            <th class="_bgColor" data-bgcolor="#8faadc">나이소개</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">나이소개</th>
             <td><input type="text" class="form-control" name="desc" id="age_desc" value="{{ageDesc}}"></td>
-            <th class="_bgColor" data-bgcolor="#8faadc">최근 방송일시</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">최근 방송일시</th>
             <td>{{last_broadcast}}</td>
-            <th class="_bgColor" data-bgcolor="#8faadc">추천 팬 등록수</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">추천 팬 등록수</th>
             <td>{{addComma fanCnt}} 명</td>
         </tr>
         <tr>
-            <th colspan="2" class="_bgColor" data-bgcolor="#8faadc">방송정보</th>
+            <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">방송정보</th>
             <td colspan="4"><input type="text" class="form-control" name="desc" id="desc" value="{{desc}}"></td>
-            <th class="_bgColor" data-bgcolor="#8faadc">최근 3개월 방송시간</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">최근 3개월 방송시간</th>
             <td>{{timeStampDay broadcastTime}}</td>
-            <th class="_bgColor" data-bgcolor="#8faadc">최근 3개월 방송횟수</th>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">최근 3개월 방송횟수</th>
             <td>{{addComma broadcastCnt}} 회</td>
         </tr>
         <tr>
-            <th colspan="2" class="_bgColor" data-bgcolor="#8faadc">소개문구</th>
+            <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">소개문구</th>
             <td colspan="8"><textarea type="textarea" class="form-control" id="broadcastTitle" name="broadcastTitle" style="width: 100%; height: 100%">{{broadcastTitle}}</textarea></td>
         </tr>
     </table>
