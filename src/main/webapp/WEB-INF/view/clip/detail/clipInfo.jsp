@@ -610,7 +610,7 @@
             </td>
             <th>정보수정일시</th>
             <td colspan="2" style="text-align: left">
-
+                {{lastOpDate}}
             </td>
         </tr>
         <tr>
