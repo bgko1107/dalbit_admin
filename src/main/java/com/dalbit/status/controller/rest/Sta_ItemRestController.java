@@ -4,6 +4,7 @@ import com.dalbit.common.vo.StatVo;
 import com.dalbit.status.service.Sta_ItemService;
 import com.dalbit.status.vo.procedure.P_ItemBroadInputVo;
 import com.dalbit.status.vo.procedure.P_ItemClipInputVo;
+import com.dalbit.status.vo.procedure.P_MailboxVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.dalbit.util.MessageUtil;
@@ -112,6 +113,20 @@ public class Sta_ItemRestController {
             pItemClipInputVo.setStartDate(null);
         }
         String result = sta_ItemService.callItemClip(pItemClipInputVo);
+        return result;
+    }
+
+    /**
+     * 아이템 우체통
+     * @param pItemClipInputVo
+     * @return
+     */
+    @PostMapping("/mailbox/list")
+    public String mailboxList(P_MailboxVo pMailboxVo){
+        if(DalbitUtil.isEmpty(pMailboxVo.getStartDate())){
+            pMailboxVo.setStartDate(null);
+        }
+        String result = sta_ItemService.callMailboxList(pMailboxVo);
         return result;
     }
 }

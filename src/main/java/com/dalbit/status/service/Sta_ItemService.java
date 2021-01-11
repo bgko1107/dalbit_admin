@@ -137,4 +137,23 @@ public class Sta_ItemService {
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
     }
+
+    /**
+     * 우체통 총계
+     */
+    public String callMailboxList(P_MailboxVo pMailboxVo){
+        ProcedureVo procedureVo = new ProcedureVo(pMailboxVo);
+        ArrayList<P_MailboxVo> detailList = sta_ItemDao.callMailboxList(procedureVo);
+        P_MailboxVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_MailboxVo.class);
+
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
 }

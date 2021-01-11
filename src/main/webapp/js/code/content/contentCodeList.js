@@ -186,16 +186,17 @@ var push_push_slct = [
 
 var status_simple_push_type = [
     new COMMON_CODE(null, 'status_simple_push_type', '카테고리')
-    ,new COMMON_CODE('11','11','마이스타')
+    ,new COMMON_CODE('11, 18, 24, 30','11, 18, 24, 30','마이스타')
     ,new COMMON_CODE('15','15','선물')
     ,new COMMON_CODE('16','16','팬 등록')
-    ,new COMMON_CODE('17','17','팬 보드')
-    ,new COMMON_CODE('31','31','클립')
+    ,new COMMON_CODE('17, 21, 22, 23','17, 21, 22, 23','팬 보드')
+    ,new COMMON_CODE('31, 32, 33','31, 32, 33','클립')
+    ,new COMMON_CODE('34, 35','34, 35','우체통')
     ,new COMMON_CODE('20','20','랭킹')
-    ,new COMMON_CODE('19','19','서비스')
-    ,new COMMON_CODE('62','62','환전')
-    ,new COMMON_CODE('53','53','운영자 (자동)')
-    ,new COMMON_CODE('61','61','운영자 (직접)')
+    ,new COMMON_CODE('19, 51, 52, 60','19, 51, 52, 60','서비스')
+    ,new COMMON_CODE('62, 63','62, 63','환전')
+    ,new COMMON_CODE('53, 54, 55, 56, 57, 58','53, 54, 55, 56, 57, 58','운영자 (자동)')
+    ,new COMMON_CODE('61, 92, 93, 94, 95, 96','61, 92, 93, 94, 95, 96','운영자 (직접)')
 ];
 
 var status_detail_push_type = [
@@ -213,6 +214,8 @@ var status_detail_push_type = [
     ,new COMMON_CODE('31','31','좋아요')
     ,new COMMON_CODE('32','32','댓글')
     ,new COMMON_CODE('33','33','선물')
+    ,new COMMON_CODE('34','34','메시지 도착')
+    ,new COMMON_CODE('35','35','선물 대상')
     ,new COMMON_CODE('20','20','DJ/FAN')
     ,new COMMON_CODE('19','19','생일 축하')
     ,new COMMON_CODE('51','51','공지 가입>15일 간 미접속')

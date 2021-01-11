@@ -122,7 +122,7 @@
     }
 
     function radioChange(){
-        if(tabId != 'tab_broadcastDetail' && tabId != 'tab_clipDetail') {
+        if(tabId != 'tab_broadcastDetail' && tabId != 'tab_clipDetail' && tabId != 'tab_mailbox') {
             slctType = $('input[name="slctType"]:checked').val();
             if ($('input[name="slctType"]:checked').val() == 0) {
                 $("#oneDayDatePicker").show();
@@ -141,7 +141,19 @@
             }
         }
         dateType();
-        $("#bt_search").click();
+    }
+
+    function handlebarsPaging(targetId, pagingInfo){
+        if(targetId == 'list_broadcast_paginate'){
+            giftClipListPagingInfo = pagingInfo;
+            getBroadList();
+        }else if(targetId == 'list_clip_paginate'){
+            giftClipListPagingInfo = pagingInfo;
+            getClipList();
+        }else if(targetId == 'list_mailbox_paginate'){
+            giftMailboxListPagingInfo = pagingInfo;
+            getMailboxList();
+        }
     }
 
 </script>

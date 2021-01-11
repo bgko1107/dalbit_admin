@@ -27,4 +27,7 @@ public interface Sta_ItemDao {
 
     @Transactional(readOnly = true)
     ArrayList<P_ItemClipOutDetailVo> callItemClip(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<P_MailboxVo> callMailboxList(ProcedureVo procedureVo);
 }

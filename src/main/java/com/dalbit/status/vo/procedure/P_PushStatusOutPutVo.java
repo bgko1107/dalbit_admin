@@ -91,6 +91,11 @@ public class P_PushStatusOutPutVo {
     private int p96Succ;
     private int p96Fail;
 
+    private int p34Succ;
+    private int p34Fail;
+    private int p35Succ;
+    private int p35Fail;
+
     private String year;
     private String month;
     private String day;

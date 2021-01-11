@@ -16,6 +16,7 @@
                     <%--<li><a href="#storeEtc" role="tab" data-toggle="tab" id="tab_storeEtcDetail">스토어/기타</a></li>--%>
                     <%--<li><a href="#item" role="tab" data-toggle="tab" id="tab_itemDetail">아이템 전체</a></li>--%>
                     <%--<li><a href="#buyHistory" role="tab" data-toggle="tab" id="tab_buyHistoryDetail">구매 내역</a></li>--%>
+                    <li><a href="#mailbox" role="tab" data-toggle="tab" id="tab_mailbox">우체통</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="total"><jsp:include page="total.jsp"/></div>      <!-- 총계 -->
@@ -26,6 +27,7 @@
                     <div class="tab-pane fade" id="storeEtc"><jsp:include page="storeEtc.jsp"/></div>    <!-- 스토어/기타 -->
                     <div class="tab-pane fade" id="item"><jsp:include page="item.jsp"/></div>    <!-- 아이템 전체 -->
                     <div class="tab-pane fade" id="buyHistory"><jsp:include page="buyHistory.jsp"/></div>    <!-- 구매 내역 -->
+                    <div class="tab-pane fade" id="mailbox"><jsp:include page="mailbox.jsp"/></div>    <!-- 우체통 -->
                 </div>
             </div>
         </div>
@@ -41,10 +43,7 @@
         $("#slctTypeArea").show();
         $("#slctTypeArea2").hide();
 
-        if(tabId == 'tab_broadcastDetail'){
-            $("#slctTypeArea").hide();
-            $("#slctTypeArea2").show();
-        }else if(tabId == 'tab_clipDetail') {
+        if(tabId == 'tab_broadcastDetail' || tabId == 'tab_clipDetail' || tabId == 'tab_mailbox'){
             $("#slctTypeArea").hide();
             $("#slctTypeArea2").show();
         }
@@ -80,6 +79,8 @@
         }else if(tabId == 'tab_storeEtcDetail') {
         }else if(tabId == 'tab_itemDetail') {
         }else if(tabId == 'tab_buyHistoryDetail') {
+        }else if(tabId == 'tab_mailbox') {
+            getMailboxList();
         }
     });
 </script>

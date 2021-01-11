@@ -18,4 +18,6 @@ public class P_ItemTotalOutVo {
     private int sum_broadgiftAmt;
     private int sum_castgiftCnt;
     private int sum_castgiftAmt;
+    private int sum_mailboxCnt;
+    private int sum_mailboxAmt;
 }

@@ -23,6 +23,9 @@ public class P_ItemTotalOutDetailVo {
     private int broadgiftAmt;
     private int castgiftCnt;
     private int castgiftAmt;
+
+    private int mailboxCnt;
+    private int mailboxAmt;
 }
 
 

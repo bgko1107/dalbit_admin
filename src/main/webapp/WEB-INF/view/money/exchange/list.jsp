@@ -1523,18 +1523,9 @@
 <script type="text/x-handlebars-template" id="tmp_enableTable">
     <table id="list_info" class="table table-sorting table-hover table-bordered">
         <colgroup>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="10%"/>
-            <col width="10%"/>
-            <col width="10%"/>
-            <col width="7%"/>
-            <col width="10%"/>
-            <col width="10%"/>
-            <col width="10%"/>
-            <col width="10%"/>
-            <col width="5%"/>
-            <!--<col width="10%"/>-->
+            <col width="5%"/><col width="5%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
+            <col width="7.1%"/><col width="8.5%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
+            <col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
         </colgroup>
 
         <thead id="tableTop">
@@ -1545,6 +1536,9 @@
             <th>아이디</th>
             <th>닉네임</th>
             <th>성별</th>
+            <th>최근 환전일시(완료)</th>
+            <th>최근 환전별 수</th>
+            <th>최근 환전 (실수령)금액</th>
             <th>신청가능 별 수</th>
             <th>신청 가능금액</th>
             <th>스페셜DJ혜택</th>
@@ -1570,6 +1564,9 @@
             <td>{{data.mem_userid}}</td>
             <td>{{data.mem_nick}}</td>
             <td>{{{sexIcon data.mem_sex data.mem_birth_year}}}</td>
+            <td>{{op_date}}</td>
+            <td>{{#dalbit_if byeol '!=' 0}} {{addComma byeol}} {{/dalbit_if}}</td>
+            <td>{{#dalbit_if cash_real '!=' 0}} {{addComma cash_real}} {{/dalbit_if}}</td>
             <td>{{addComma data.gold}}별</td>
             <td>{{math data.gold "*" 60}}원</td>
             <td>{{specialBenefit data.gold data.specialCnt}}원</td>

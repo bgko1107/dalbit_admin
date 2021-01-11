@@ -22,9 +22,9 @@
                 <%--<th>누적 판매 달수</th>--%>
             </tr>
             </thead>
-            <tbody id="clipTableBody"></tbody>
+            <tbody id="mailboxTableBody"></tbody>
         </table>
-        <div class="dataTables_paginate paging_full_numbers" id="list_clip_paginate"></div>
+        <div class="dataTables_paginate paging_full_numbers" id="list_mailbox_paginate"></div>
     </div>
     <div class="widget-footer">
         <span>
@@ -35,61 +35,62 @@
 
 <script type="text/javascript">
     $(function(){
-        getClipList();
+        // getMailboxList();
     });
 
-    giftClipListPagingInfo = new PAGING_INFO(0, 1, 50);
+    giftMailboxListPagingInfo = new PAGING_INFO(0, 1, 50);
 
-    function getClipList(){
+    function getMailboxList(){
 
-        $("#searchForm #pageNo").val(giftClipListPagingInfo.pageNo);
-        $("#searchForm #pageCnt").val(giftClipListPagingInfo.pageCnt);
+        $("#searchForm #pageNo").val(giftMailboxListPagingInfo.pageNo);
+        $("#searchForm #pageCnt").val(giftMailboxListPagingInfo.pageCnt);
 
         var data = {};
         data.slctType = $('input[name="slctType2"]:checked').val();
         data.startDate = $("#startDate").val();
         data.endDate = $("#endDate").val();
-        data.pageNo = giftClipListPagingInfo.pageNo;
-        data.pageCnt = giftClipListPagingInfo.pageCnt;
-        util.getAjaxData("itemClipList", "/rest/status/item/clip/list", data, fn_clipJoin_success);
+        data.pageNo = giftMailboxListPagingInfo.pageNo;
+        data.pageCnt = giftMailboxListPagingInfo.pageCnt;
+        util.getAjaxData("itemMailboxList", "/rest/status/item/mailbox/list", data, fn_mailboxJoin_success);
     }
 
-    function fn_clipJoin_success(data, response){
+    function fn_mailboxJoin_success(data, response){
+
         var isDataEmpty = response.data.detailList == null;
-        $("#clipTableBody").empty();
+        $("#mailboxTableBody").empty();
         if(!isDataEmpty){
-            var template = $('#tmp_clipTotal').html();
+            var template = $('#tmp_mailboxTotal').html();
             var templateScript = Handlebars.compile(template);
             var totalContext = response.data.totalInfo;
             var totalHtml = templateScript(totalContext);
-            $("#clipTableBody").append(totalHtml);
+            $("#mailboxTableBody").append(totalHtml);
 
             response.data.detailList.slctType = $('input[name="slctType"]:checked').val()
         }
 
-        var template = $('#tmp_clipDetailList').html();
+        var template = $('#tmp_mailboxDetailList').html();
         var templateScript = Handlebars.compile(template);
         var detailContext = response.data.detailList;
         var html=templateScript(detailContext);
-        $("#clipTableBody").append(html);
+        $("#mailboxTableBody").append(html);
 
         if(response.data != ''){
             var pagingInfo = response.data.totalInfo;
-            giftClipListPagingInfo.totalCnt = pagingInfo.totalCnt;
-            util.renderPagingNavigation('list_clip_paginate', giftClipListPagingInfo);
+            giftMailboxListPagingInfo.totalCnt = pagingInfo.totalCnt;
+            util.renderPagingNavigation('list_mailbox_paginate', giftMailboxListPagingInfo);
 
             detailContext.totalCnt = pagingInfo.totalCnt;
         }
 
         if(isDataEmpty){
-            $("#clipTableBody td:last").remove();
+            $("#mailboxTableBody td:last").remove();
         }else{
-            $("#clipTableBody").append(totalHtml);
+            $("#mailboxTableBody").append(totalHtml);
         }
     }
 
 </script>
-<script type="text/x-handlebars-template" id="tmp_clipTotal">
+<script type="text/x-handlebars-template" id="tmp_mailboxTotal">
     <tr class="success font-bold">
         <td>소계</td>
         <td></td>
@@ -102,7 +103,7 @@
     </tr>
 </script>
 
-<script type="text/x-handlebars-template" id="tmp_clipDetailList">
+<script type="text/x-handlebars-template" id="tmp_mailboxDetailList">
     {{#each this as |data|}}
     <tr>
         <td class="font-bold">{{rowNum}}</td>

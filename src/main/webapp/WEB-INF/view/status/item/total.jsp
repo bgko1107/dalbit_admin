@@ -18,6 +18,7 @@
                 <%--<th colspan="2">구독</th>--%>
                 <th colspan="2">방송 선물</th>
                 <th colspan="2">클립 선물</th>
+                <th colspan="2">우체통 선물</th>
             </tr>
 
             <tr>
@@ -27,6 +28,8 @@
                 <th>달수</th>
                 <%--<th>건수</th>--%>
                 <%--<th>달수</th>--%>
+                <th>건수</th>
+                <th>달수</th>
                 <th>건수</th>
                 <th>달수</th>
                 <th>건수</th>
@@ -92,6 +95,8 @@
         <td>{{addComma sum_broadgiftAmt}}</td>
         <td>{{addComma sum_castgiftCnt}}</td>
         <td>{{addComma sum_castgiftAmt}}</td>
+        <td>{{addComma sum_mailboxCnt}}</td>
+        <td>{{addComma sum_mailboxAmt}}</td>
     </tr>
 </script>
 
@@ -114,6 +119,8 @@
         <td>{{addComma broadgiftAmt}}</td>
         <td>{{addComma castgiftCnt}}</td>
         <td>{{addComma castgiftAmt}}</td>
+        <td>{{addComma mailboxCnt}}</td>
+        <td>{{addComma mailboxAmt}}</td>
     </tr>
     {{else}}
     <%--<tr>--%>

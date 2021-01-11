@@ -24,6 +24,13 @@ public class Mon_EnableOutputVo {
     private int type;
     private String memtype;
 
+    private int byeol;
+    private int cash_real;
+    private String last_upd_date;
+    private String op_date;
+    private String opName;
+
+
     private int enableCnt;
     private long totalGold;
     private int totalSpecialCnt;
