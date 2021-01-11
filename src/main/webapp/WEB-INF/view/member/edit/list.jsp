@@ -49,6 +49,9 @@
         }else if(selectType == 4){
             $("#editHistory").find("#searchText").val("프로필이미지|배경이미지|프로필메세지");
             searchType = "2";
+        }else if(selectType == 6){
+            $("#editHistory").find("#searchText").val("환전");
+            searchType = "1";
         }
 
         var dtList_info_detail_data = function (data) {

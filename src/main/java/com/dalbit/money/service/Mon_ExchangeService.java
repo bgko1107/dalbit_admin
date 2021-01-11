@@ -12,6 +12,7 @@ import com.dalbit.excel.vo.ExcelVo;
 import com.dalbit.exception.GlobalException;
 import com.dalbit.member.dao.Mem_MemberDao;
 import com.dalbit.member.vo.MemberVo;
+import com.dalbit.member.vo.procedure.P_MemberEditorVo;
 import com.dalbit.member.vo.procedure.P_MemberParentsAgreeInputVo;
 import com.dalbit.member.vo.procedure.P_MemberParentsAgreeOutputVo;
 import com.dalbit.money.dao.Mon_ExchangeDao;
@@ -715,6 +716,31 @@ public class Mon_ExchangeService {
     public String opdateUpdate(Mon_ExchangeOutputVo monExchangeOutputVo){
         try {
             monExchangeDao.opdateUpdate(monExchangeOutputVo);
+            return gsonUtil.toJson(new JsonOutputVo(Status.수정));
+        }catch(Exception e){
+            return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+    }
+
+    /* 환전 접수서류 변경 */
+    public String imageUpload(Mon_ExchangeOutputVo monExchangeOutputVo){
+        try {
+
+            monExchangeOutputVo.setOp_name(MemberVo.getMyMemNo());
+            monExchangeDao.imageUpload(monExchangeOutputVo);
+
+            String ediContents = "환전 접수서류 변경 : 1번 파일 : " + monExchangeOutputVo.getBefore_add_file1() + " > " + monExchangeOutputVo.getAdd_file1() +
+                                    " 2번 파일 : " + monExchangeOutputVo.getBefore_add_file2() + " > " + monExchangeOutputVo.getAdd_file2() +
+                                    " 3번 파일 : " + monExchangeOutputVo.getBefore_add_file3() + " > " + monExchangeOutputVo.getAdd_file3();
+
+            P_MemberEditorVo pMemberEditorVo = new P_MemberEditorVo();
+            pMemberEditorVo.setMem_no(monExchangeOutputVo.getMem_no());
+            pMemberEditorVo.setEditContents(ediContents);
+            pMemberEditorVo.setType(0);
+            pMemberEditorVo.setOpName(monExchangeOutputVo.getOp_name());
+
+            mem_MemberDao.callMemberEditHistoryAdd(pMemberEditorVo);
+
             return gsonUtil.toJson(new JsonOutputVo(Status.수정));
         }catch(Exception e){
             return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));

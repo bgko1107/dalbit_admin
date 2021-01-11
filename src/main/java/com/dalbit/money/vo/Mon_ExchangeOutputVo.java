@@ -38,6 +38,7 @@ public class Mon_ExchangeOutputVo{
     private String address_2;
     private String add_file1;
     private String add_file2;
+    private String add_file3;
     private int terms_agree;
     private int os_type;
     private String ip;
@@ -68,5 +69,10 @@ public class Mon_ExchangeOutputVo{
     private String inner;
 
     private String totalCnt;
+
+
+    private String before_add_file1;
+    private String before_add_file2;
+    private String before_add_file3;
 
 }

@@ -13,7 +13,6 @@ import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -114,6 +113,12 @@ public class Mon_ExchangeRestController {
     public String opdateUpdate(Mon_ExchangeOutputVo monExchangeOutputVo){
         monExchangeOutputVo.setOp_name(MemberVo.getMyMemNo());
         String result = monExchangeService.opdateUpdate(monExchangeOutputVo);
+        return result;
+    }
+
+    @PostMapping("image/upload")
+    public String imageUpload(Mon_ExchangeOutputVo monExchangeOutputVo){
+        String result = monExchangeService.imageUpload(monExchangeOutputVo);
         return result;
     }
 }
