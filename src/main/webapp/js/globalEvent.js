@@ -89,6 +89,14 @@ $(document).on('click', '._openClipCopyrightDetailPop', function(){
     util.windowOpen(url, 1050, 730, 'clipPlayCntInfo');
 });
 
+/*저작권 협회 UCL검색 팝업*/
+$(document).on('click', '._openKpopUciSearch', function(){
+    var me = $(this);
+    var url = 'http://uci.k-pop.or.kr/search/music?content_nm='+me.data('title')+'&artist_nm='+me.data('singer');
+
+    util.windowOpen(url, 1050, 730, 'kPopUciSearch');
+});
+
 /*문자 발송 팝업*/
 $(document).on('click', '._openSmsSendPop', function(){
     var url = "/customer/sms/popup/smsSendPopup?cmid="+encodeURIComponent($(this).data('cmid'))+"&rownum="+encodeURIComponent($(this).data('rownum'))+"&logtable="+encodeURIComponent($(this).data('logtable'));;

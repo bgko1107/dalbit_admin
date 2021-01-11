@@ -17,6 +17,9 @@ public class P_ClipHistoryDetailInfoEditVo extends SearchVo {
     private String hide;				    // 숨기기(1: 숨기기, 0:정상)
     private String title;				    // 제목초기화
     private String subjectType;		// 주제변경
+    private String admin_cover_title;		// 제목
+    private String admin_cover_singer;		// 가수
+    private String uci_album_code;		// uci 앨범 코드
     private String confirm;				// 확인(1)
     private String sendNoti;			    // 알림보내기여부(1:보냄, 0: 안보냄)
     private String notiContents;		// 이미지초기화 조치 안내,

@@ -43,4 +43,9 @@ public class P_ClipHistoryDetailInfoOutPutVo extends BaseVo {
     private String cast_deviceUuid;
     private String cast_ip;
 
+    private String cover_title;         //커버제목
+    private String cover_singer;        //커버가수
+    private String admin_cover_title;   //어드민 커버제목
+    private String admin_cover_singer;  //어드민 커버가수
+    private String uci_album_code;      //uci 앨범 코드
 }
