@@ -66,6 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     , "**.js"
                     , "**.map"
                     , "/login"
+                    , "/common/ctrl/check/service"
             );
     }
 
