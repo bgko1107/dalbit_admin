@@ -2,7 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="col-lg-12 no-padding">
     <div class="widget widget-table" id="main_table">
-        <span id="gift_summaryArea"></span>
+        <div class="col-lg-12 no-padding">
+            <select id="itemType" name="itemType" class="form-control searchType ml5 mt5" onchange="itemTypeChange();">
+                <option value="0" selected="selected">전체</option>
+                <option value="1">선물</option>
+                <option value="2">부스터</option>
+            </select>
+            <span id="gift_summaryArea"></span>
+        </div>
         <div class="widget-content">
             <table id="list_info_detail" class="table table-sorting table-hover table-bordered datatable">
                 <thead id="tableTop_detail">
@@ -18,10 +25,16 @@
     });
 
     function getBroadHistory_gift(tmp) {     // 상세보기
+        console.log(type);
+        if(type == 5){
+            $('#itemType').val(1);
+        }
+
         if(tmp.indexOf("_") > 0){ tmp = tmp.split("_"); tmp = tmp[1]; }
         var source = BroadcastDataTableSource[tmp];
         var dtList_info_detail_data = function (data) {
             data.room_no = room_no;
+            data.itemType = $("#itemType").val();
         }
         dtList_info_detail = new DalbitDataTable($("#"+tmp).find("#list_info_detail"), dtList_info_detail_data, source);
         dtList_info_detail.useCheckBox(false);
@@ -40,6 +53,10 @@
         }
         var html = templateScript(data);
         $("#gift_summaryArea").html(html);
+    }
+
+    function itemTypeChange(){
+        dtList_info_detail.reload(gift_summary_table);
     }
 
 </script>

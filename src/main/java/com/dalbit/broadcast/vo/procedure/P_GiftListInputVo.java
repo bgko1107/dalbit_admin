@@ -11,6 +11,7 @@ public class P_GiftListInputVo extends PagingVo {
     /*  intput  */
     private String room_no;
     private int pageNo;
+    private String itemType;
 }
 
 
