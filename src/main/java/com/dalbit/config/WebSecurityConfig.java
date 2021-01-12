@@ -67,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     , "**.map"
                     , "/login"
                     , "/common/ctrl/check/service"
+                    , "/common/dbCheck/bySocket"
             );
     }
 

@@ -89,4 +89,8 @@
         where `type` = #{type}
             and code = #{code}
     </update>
+
+    <select id="callBroadCastRoomList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="java.util.HashMap">
+        call rd_data.sp_broadcast_room_list_je(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
 </mapper>
