@@ -753,15 +753,31 @@ var MemberDataTableSource = {
             {'title': '실수령액', 'data': 'cash_real', 'render': function(data) {
                     return common.addComma(data) + "원";
                 }},
+            {'title': '이전 별 수', 'data': 'gold_old', 'render': function(data) {
+                    return common.addComma(data) + "별";
+                }},
             {'title': '신청 별 수', 'data': 'byeol', 'render': function(data) {
                     return common.addComma(data) + "별";
                 }},
+            {'title': '이후 별 수', 'data': 'mod_gold', 'render': function(data) {
+                return common.addComma(data) + "별";
+            }},
             {'title': '현재 별 수', 'data': 'gold', 'render': function(data) {
                     return common.addComma(data) + "별";
                 }},
             {'title': '환전횟수', 'data': 'exchangeCnt', 'render': function(data) {
                     return common.addComma(data) + "번";
                 }},
+
+            {'title': '환전 누적금액', 'data': 'totalCashReal', 'render': function(data) {
+                    return common.addComma(data) + "원";
+                }},
+            {'title': '이전 환전일자', 'data': 'last_reg_date'},
+            {'title': '재 신청기간', 'data': 'reapply_exchage', 'render': function(data) {
+                    return common.timeStampDay(data);
+                }},
+
+
             {'title': '신청일자', 'data': 'reg_date', 'render': function(data) {
                     return common.convertToDate(data);
                 }},

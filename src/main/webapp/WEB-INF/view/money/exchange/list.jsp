@@ -1283,8 +1283,8 @@
                                             {{phoneNumHyphen detail.phone_no}}
                                             / {{phoneNumHyphen detail.mem_phone}}
                                         </td>
-                                        <th>수정일자<br/>수정자</th>
-                                        <td>{{detail.last_upd_date}}<br/>{{detail.op_name}}</td>
+                                        <th>수정일자</th>
+                                        <td>{{detail.last_upd_date}} ({{detail.op_name}})</td>
                                     </tr>
 
                                     <tr>

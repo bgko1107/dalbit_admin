@@ -11,15 +11,15 @@ public class Mon_ExchangeSummaryOutputVo {
     private int sumCashReal;
     private int sumByeol;
 
-    private int ready_cnt;
-    private int ready_byeol;
-    private int ready_amt;
-    private int confirm_cnt;
-    private int confirm_byeol;
-    private int confirm_amt;
-    private int cancel_cnt;
-    private int cancel_byeol;
-    private int cancel_amt;
-    private int now_byeol;
-    private int now_amt;
+    private long ready_cnt;
+    private long ready_byeol;
+    private long ready_amt;
+    private long confirm_cnt;
+    private long confirm_byeol;
+    private long confirm_amt;
+    private long cancel_cnt;
+    private long cancel_byeol;
+    private long cancel_amt;
+    private long now_byeol;
+    private long now_amt;
 }
