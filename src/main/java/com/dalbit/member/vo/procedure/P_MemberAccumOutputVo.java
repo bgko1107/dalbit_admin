@@ -20,6 +20,7 @@ public class P_MemberAccumOutputVo{
     private int byeolCnt;
     private int listenerCnt;
     private int goodCnt;
+    private int boostCnt;
     private int listenCnt;
     private int listenTime;
     private int dalCnt;

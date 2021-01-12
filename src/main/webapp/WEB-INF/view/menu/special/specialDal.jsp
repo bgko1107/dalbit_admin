@@ -9,22 +9,13 @@
     <%--</div>--%>
         <div class="row col-md-12 mt15">
             <div class="pull-left ml5 mb15">
-                ㆍ 매달 최소 10일, 20시간 이상 방송한 달D입니다. <br/>
-                ㆍ 기간 정지 3회 이상 혹은 영구 정지 시 박탈처리 합니다. <br/>
-                ㆍ ()안의 내용은 스페셜 DJ 기준입니다. <br/>
+                ㆍ 해당 월의 스페셜 DJ입니다. <br/>
+                ㆍ 운영자 직접 등록 시 해당 월 1일부터 바로 스페셜 DJ가 적용됩니다. <br/>
+                ㆍ 스페셜 DJ 자격은 1개월(당월 1일~당월 말일) 동안 유지됩니다.
             </div>
 
             <!-- summary & 운영자 등록 버튼 -->
             <div class="pull-right ml5 mb15">
-                <table class="table table-bordered table-summary pull-right">
-                    <thead>
-                    <th>승인 달D</th>
-                    <th style="color: #ff0000;">총 신청 달D</th>
-                    </thead>
-                    <tbody id="summaryTableBody">
-                    </tbody>
-                </table>
-                <button type="button" class="btn btn-primary pull-right mt10 mr15" id="bt_edit" ><i class="fa fa-floppy-o"></i>적용</button>
                 <button type="button" class="btn btn-primary pull-right mt10 mr15" id="memSearch" name="memSearch"><i class="fa fa-search"></i>운영자 직접 등록</button>
             </div>
             <!-- //summary -->
@@ -43,12 +34,13 @@
                     <th>회원번호</th>
                     <th>User닉네임</th>
                     <th>성별</th>
-                    <th>보유팬<br/>(1000명 이상)</th>
-                    <th>누적 방송시간<br/>(360시간 이상)</th>
-                    <th>누적 받은 별<br/>(100,000개 이상)</th>
-                    <th>받은 좋아요<br/>(300,000개 이상)</th>
-                    <th>최근 3개월 내 방송일<br/>(60일 이상)</th>
-                    <th>정지기록<br/>(없음)</th>
+                    <th>보유팬</th>
+                    <th>누적 방송시간</th>
+                    <th>누적 받은 별</th>
+                    <th>받은 좋아요</th>
+                    <th>받은 부스터</th>
+                    <th>최근 3개월 내 방송일</th>
+                    <th>정지기록</th>
                     <th>관리자 등록여부</th>
                     <th>등록자</th>
                     <th style="display:none;">순서</th>
@@ -76,7 +68,6 @@
     var specialDjPagingInfo = new PAGING_INFO(0, 1, 99999);
 
     function init() {
-        getSummary();
         specialList();
     }
 
@@ -93,25 +84,8 @@
 
     function specialList() {
         util.getAjaxData("special", "/rest/menu/special/dalList", getParam(), fn_dalList_success);
-        util.getAjaxData("summary", "/rest/menu/special/summary", getParam(), fn_compareSummary);
     }
 
-    function getSummary(){
-        var data = {
-             select_year:  common.substr($("#startDate").val(),0,4)
-            , select_month: common.substr($("#startDate").val(),5,2)
-        };
-        util.getAjaxData("summary", "/rest/menu/special/summary", data, fn_summary_success);
-    }
-
-    function fn_summary_success(dst_id, response){
-        var template = $('#tmp_summary').html();
-        var templateScript = Handlebars.compile(template);
-        var context = response;
-        var html = templateScript(context);
-
-        $("#summaryTableBody").empty().append(html);
-    }
 
     var totalCnt;
     function fn_dalList_success(dst_id, response) {
@@ -136,10 +110,6 @@
             $("#list_info_paginate").show();
             $("#list_info_paginate_top").show();
         }
-
-        // drag and drop, No setting
-        resetNo();
-
     }
 
     var approveDal;
@@ -224,42 +194,6 @@
         getList();
     }
 
-    function allowDrop(event) {
-        event.preventDefault();
-    }
-
-    function drag(event) {
-        event.dataTransfer.setData("text", event.target.id);
-    }
-
-    function drop(event) {
-        event.preventDefault();
-
-        var data = event.dataTransfer.getData("text");
-        var idx = data.split("_")[1];
-        var targetIdx = $('#specialList').find(event.target).parent("tr").attr("id").split("_")[1];
-
-        if(parseInt(targetIdx) < parseInt(idx)){
-            $('#specialList').find(event.target).parent("tr").before($('#specialList').find("#"+data));
-        }else{
-            $('#specialList').find(event.target).parent("tr").after($('#specialList').find("#"+data));
-        }
-
-        resetNo();
-    }
-
-    function resetNo(){
-        $('#specialList').find('._noTd').each(function (index) {
-            var html = '<input type="hidden" name="sortNo" value="'+(index+1)+'">';
-            html += (index+1);
-            $(this).html(html);
-        });
-
-        $('#specialList').find('._noTr').each(function (index) {
-            $(this).attr("id", "row_" + (index + 1));
-        });
-    }
-
     $('#bt_edit').on('click', function() {
         if(approveDal > totalCnt) {
             alert('순위 변경은 스페셜 DJ 전체목록에서 가능합니다.');
@@ -309,7 +243,7 @@
 
 <script id="tmp_specialList" type="text/x-handlebars-template">
     {{#each this as |data|}}
-    <tr {{#dalbit_if inner '==' 1}} class="_noTr bg-testMember" {{else}} class="_noTr" {{/dalbit_if}} id="row_{{order}}" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)">
+    <tr {{#dalbit_if inner '==' 1}} class="_noTr bg-testMember" {{else}} class="_noTr" {{/dalbit_if}} id="row_{{order}}">
         <td class=" dt-body-center"><input type="checkbox"/></td>
         <td class="_noTd">
             <input type="hidden" name="sortNo" value="{{sortNo}}"/>
@@ -324,9 +258,10 @@
         <td>{{mem_nick}}</td>
         <td>{{{sexIcon mem_sex mem_birth_year}}}</td>
         <td>{{addComma fanCnt}} 명</td>
-        <td>{{timeStamp airTime}}</td>
+        <td>{{timeStampDay airTime}}</td>
         <td>{{addComma giftedRuby}} 개</td>
         <td>{{addComma likeCnt}} 개</td>
+        <td>{{addComma boostCnt}} 개</td>
         <td>{{addComma broadcastCnt}} 일</td>
         <td>{{addComma reportCnt}} 회</td>
         <td>{{{getCommonCodeLabel is_force 'special_isForce'}}}</td>
