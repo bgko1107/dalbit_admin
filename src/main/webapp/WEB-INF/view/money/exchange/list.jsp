@@ -1532,18 +1532,16 @@
 <script type="text/x-handlebars-template" id="tmp_enableTable">
     <table id="list_info" class="table table-sorting table-hover table-bordered">
         <colgroup>
-            <col width="5%"/><col width="5%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
-            <col width="7.1%"/><col width="8.5%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
-            <col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
+            <col width="5%"/><col width="5%"/><col width="8.1%"/><col width="8.1%"/><col width="8.1%"/>
+            <col width="8.1%"/><col width="8.1%"/><col width="8.1%"/><col width="8.1%"/><col width="8.1%"/>
+            <col width="8.1%"/><col width="8.1%"/><col width="8.1%"/>
         </colgroup>
 
         <thead id="tableTop">
         <tr>
             <th>No</th>
             <th>상태</th>
-            <th>회원번호</th>
-            <th>아이디</th>
-            <th>닉네임</th>
+            <th>회원정보</th>
             <th>성별</th>
             <th>최근 완료 환전일시</th>
             <th>최근 환전 별 수</th>
@@ -1570,9 +1568,7 @@
             <td>
                 {{{getMemStateName data.mem_state}}}
             </td>
-            <td><a href="javascript://" class="_openMemberPop" data-memno="{{data.mem_no}}">{{data.mem_no}}</a></td>
-            <td>{{data.mem_userid}}</td>
-            <td>{{data.mem_nick}}</td>
+            <td><a href="javascript://" class="_openMemberPop" data-memno="{{data.mem_no}}">{{data.mem_no}}</a> <br/> {{data.mem_nick}}</td>
             <td>{{{sexIcon data.mem_sex data.mem_birth_year}}}</td>
             <td>{{data.op_date}}</td>
             <td>{{#dalbit_if data.byeol '!=' 0}} {{addComma data.byeol}} {{/dalbit_if}}</td>
