@@ -136,17 +136,16 @@
                         and 5400<![CDATA[<=]]>airtime
                         and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00')<![CDATA[<=]]>start_date
                         and start_date<![CDATA[<=]]>DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) broadcastCnt
-            , ifnull((select count(*)
-                        from rd_data.tb_broadcast_room_good good
-                        where dj_mem_no = basic.mem_no
-                        and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00')<![CDATA[<=]]>last_upd_date
-                        and last_upd_date<![CDATA[<=]]>DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) goodCnt
-            , ifnull((select count(*) * 10
-                        from rd_data.tb_member_broadcast_item item
-                        where item.gifted_mem_no = basic.mem_no
-                        and item.item_type = 2
-                        and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> item.last_upd_date
-                        and item.last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) boostGoodCnt
+            , ifnull(((select sum(good)
+                        from rd_data.tb_member_broadcast_broadcasting
+                        where mem_no = basic.mem_no
+                        and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
+                        and last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) goodCnt
+            , ifnull(((select sum(booster) * 10
+                        from rd_data.tb_member_broadcast_broadcasting
+                        where mem_no = basic.mem_no
+                        and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
+                        and last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) boostGoodCnt
             /*, ifnull((select count(*)
                         from rd_data.tb_member_fanstar
                         where mem_no_star = basic.mem_no), 0) fanCnt*/
@@ -349,7 +348,7 @@
         (select ifnull(sum(airtime), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS airTime,
         (select ifnull(sum(gold), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS giftedRuby,
         (select ifnull(sum(good), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS likeCnt,
-        (select sum(item_cnt) as boostCnt from rd_data.tb_member_broadcast_item a where mem_no= dj.mem_no and item_type ='2') as boostCnt,
+        (select sum(booster) as boostCnt from rd_data.tb_member_broadcast_broadcasting a where mem_no= dj.mem_no) as boostCnt,
         (SELECT
         count(distinct(DATE( last_upd_date )))
         FROM rd_data.tb_member_broadcast_broadcasting
@@ -714,17 +713,16 @@
                                 and 5400 <![CDATA[<=]]> airtime
                                 and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> start_date
                                 and start_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) broadcastCnt
-                    , ifnull((select count(*)
-                                from rd_data.tb_broadcast_room_good good
-                                where dj_mem_no = basic.mem_no
+                    , ifnull((select sum(good)
+                                from rd_data.tb_member_broadcast_broadcasting
+                                where mem_no = basic.mem_no
                                 and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
                                 and last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) goodCnt
-                    , ifnull((select count(*) * 10
-                                from rd_data.tb_member_broadcast_item item
-                                where item.gifted_mem_no = basic.mem_no
-                                and item.item_type = 2
-                                and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> item.last_upd_date
-                                and item.last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) boostGoodCnt
+                    , ifnull((select sum(booster) * 10
+                                from rd_data.tb_member_broadcast_broadcasting
+                                where mem_no = basic.mem_no
+                                and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
+                                and last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) boostGoodCnt
                     , ifnull((select count(*)
                                 from rd_data.tb_member_fanstar
                                 where mem_no_star = basic.mem_no), 0) fanCnt
@@ -811,12 +809,11 @@
                                 where dj_mem_no = basic.mem_no
                                 and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
                                 and last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) goodCnt
-                    , ifnull((select count(*) * 10
-                                from rd_data.tb_member_broadcast_item item
-                                where item.gifted_mem_no = basic.mem_no
-                                and item.item_type = 2
-                                and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> item.last_upd_date
-                                and item.last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) boostGoodCnt
+                    , ifnull((select sum(booster) * 10
+                                from rd_data.tb_member_broadcast_broadcasting
+                                where mem_no = basic.mem_no
+                                and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
+                                and last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) boostGoodCnt
                     , ifnull((select count(*)
                                 from rd_data.tb_member_fanstar
                                 where mem_no_star = basic.mem_no), 0) fanCnt
