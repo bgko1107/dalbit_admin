@@ -39,8 +39,8 @@ public class SitebanRestController {
     GsonUtil gsonUtil;
 
     @PostMapping("list")
-    public String list() {
-        SitebanVo sitebanVo = sitebanService.selectBanword();
+    public String list(SitebanVo paramSitebanVo) {
+        SitebanVo sitebanVo = sitebanService.selectBanword(paramSitebanVo);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, sitebanVo));
     }
@@ -49,15 +49,15 @@ public class SitebanRestController {
     public String update(SitebanVo sitebanVo) {
         sitebanService.updateBanword(sitebanVo);
 
-        return gsonUtil.toJson(new JsonOutputVo(Status.수정, sitebanService.selectBanword()));
+        return gsonUtil.toJson(new JsonOutputVo(Status.수정, sitebanService.selectBanword(sitebanVo)));
     }
 
     /**
      * 엑셀
      */
     @PostMapping("listExcel")
-    public String listExcel(HttpServletRequest request, HttpServletResponse response, Model model) throws GlobalException {
-        Model resultModel = sitebanService.getListExcel(model);
+    public String listExcel(HttpServletRequest request, HttpServletResponse response, Model model, SitebanVo sitebanVo) throws GlobalException {
+        Model resultModel = sitebanService.getListExcel(model, sitebanVo);
 
         excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
         return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));

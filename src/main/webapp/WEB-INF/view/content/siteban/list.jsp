@@ -7,7 +7,8 @@
     <div id="page-wrapper">
         <div id="headerTab">
             <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist">
-                <li class="active"><a href="#sitebanList" role="tab" data-toggle="tab">사이트 금지어 관리</a></li>
+                <li class="active _tab" data-slcttype="0"><a href="javascript://">사이트 금지어 관리</a></li>
+                <li class="_tab" data-slcttype="1"><a href="javascript://">방송방 금지어 관리</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="sitebanList">
@@ -81,14 +82,26 @@
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/handlebars/contentHelper.js?${dummyData}"></script>
 <script type="text/javascript">
+    var slctType = 0;
     $(document).ready(function() {
         init();
     });
 
     //=------------------------------ Init / Event--------------------------------------------
 
+    $("._tab").on('click', function(){
+       $('._tab').removeClass('active');
+       $(this).addClass('active');
+
+       slctType = $(this).data('slcttype');
+       init();
+    });
+
     function init() {
-        util.getAjaxData('siteban', '/rest/content/siteban/list', null, fn_succ_list);
+        var data = {
+            slctType : slctType
+        }
+        util.getAjaxData('siteban', '/rest/content/siteban/list', data, fn_succ_list);
     }
 
     function fn_succ_list(dst_id, response){
@@ -211,6 +224,7 @@
         var formElement = document.querySelector("form");
         var formData = new FormData(formElement);
         formData.append("banword", $("#banword").val());
+        formData.append("slctType", slctType);
         util.excelDownload($(this), "/rest/content/siteban/listExcel", formData, fn_success_excel, fn_fail_excel);
     });
 

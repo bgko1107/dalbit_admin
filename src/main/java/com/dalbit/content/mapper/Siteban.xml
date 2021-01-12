@@ -11,6 +11,7 @@
             , `count`
         from rd_data.tbl_banword
         where is_use = 1
+            and slct_type = #{slctType}
         order by idx desc
         limit 1
     </select>
@@ -29,6 +30,7 @@
         select ban_word
         from rd_data.tbl_banword
         where is_use = 1
+          and slct_type = #{slctType}
         order by idx desc
     </select>
 </mapper>

@@ -10,6 +10,7 @@ public class SitebanVo{
     private String ban_word;
     private String is_use;
     private String count;
+    private int slctType;
 
     private String[] ban_words;
 }
