@@ -166,4 +166,20 @@ public class CommonService {
     public int updateCodeDefine(CodeListVo codeListVo){
         return commonDao.updateCodeDefine(codeListVo);
     }
+
+    public String dbCheckBySocket(HttpServletRequest request){
+
+        ProcedureVo procedureVo = new ProcedureVo();
+
+        List<HashMap> list = commonDao.callBroadCastRoomList(procedureVo);
+
+        String result="";
+        if(0 <= Integer.parseInt(procedureVo.getRet())) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+
+        return result;
+    }
 }

@@ -34,4 +34,6 @@ public interface CommonDao {
 
     int updateCodeDefine(CodeListVo codeListVo);
 
+    List<HashMap> callBroadCastRoomList(ProcedureVo procedureVo);
+
 }
