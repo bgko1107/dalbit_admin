@@ -1286,21 +1286,21 @@
                                         <td colspan="3">
                                             <div class="col-lg-4" style="border:solid 1px black">
                                                 <a href="javascript://">
-                                                    <img class="no-margin thumbnail" src="{{renderImage detail.add_file1}}" style="width:170px;height:116px;" class="_fullWidth _openImagePop thumbnail" />
+                                                    <img class="_fullWidth _openImagePop thumbnail" src="{{renderImage detail.add_file1}}" style="width:170px;height:116px;" />
                                                 </a>
                                                 <input id="files1" type="file" onchange="photoSubmit($(this))">
                                                 <input type="hidden" class="_hidden_filename" name="add_file1" id="add_file1" value="{{detail.add_file1}}" />
                                             </div>
                                             <div class="col-lg-4" style="border:solid 1px black">
                                                 <a href="javascript://">
-                                                    <img class="no-margin thumbnail"  src="{{renderImage detail.add_file2}}" style="width:170px;height:116px;" class="_fullWidth _openImagePop thumbnail" />
+                                                    <img class="_fullWidth _openImagePop thumbnail"  src="{{renderImage detail.add_file2}}" style="width:170px;height:116px;"/>
                                                 </a>
                                                 <input id="files2" type="file" onchange="photoSubmit($(this))"/>
                                                 <input type="hidden" class="_hidden_filename" name="add_file2" id="add_file2" value="{{detail.add_file2}}" />
                                             </div>
                                             <div class="col-lg-4" style="border:solid 1px black">
                                                 <a href="javascript://">
-                                                    <img class="no-margin thumbnail"  src="{{renderImage detail.add_file3}}" style="width:170px;height:116px;" class="_fullWidth _openImagePop thumbnail" />
+                                                    <img class="_fullWidth _openImagePop thumbnail"  src="{{renderImage detail.add_file3}}" style="width:170px;height:116px;" />
                                                 </a>
                                                 <input id="files3" type="file" onchange="photoSubmit($(this))"/>
                                                 <input type="hidden" class="_hidden_filename" name="add_file3" id="add_file3" value="{{detail.add_file3}}" />
@@ -1536,9 +1536,9 @@
             <th>아이디</th>
             <th>닉네임</th>
             <th>성별</th>
-            <th>최근 환전일시(완료)</th>
-            <th>최근 환전별 수</th>
-            <th>최근 환전 (실수령)금액</th>
+            <th>최근 완료 환전일시</th>
+            <th>최근 환전 별 수</th>
+            <th>최근 환전 수령금액</th>
             <th>신청가능 별 수</th>
             <th>신청 가능금액</th>
             <th>스페셜DJ혜택</th>
