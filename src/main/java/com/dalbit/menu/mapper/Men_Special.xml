@@ -345,10 +345,11 @@
         dj.select_year        as select_year,
         dj.select_month       as select_month,
         (select COUNT(*) from rd_data.tb_broadcast_room_live_list WHERE mem_no = dj.mem_no AND state <![CDATA[<]]> 4)  as onAir,
-        (select COUNT(*) from rd_data.tb_member_fanstar WHERE mem_no_star= dj.mem_no) as fanCnt,
+        (select COUNT(*) from rd_data.tb_member_fanstar fan, rd_data.tb_member_basic basic WHERE fan.mem_no_fan = basic.mem_no and fan.mem_no_star= dj.mem_no and basic.mem_state != 5) as fanCnt,
         (select ifnull(sum(airtime), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS airTime,
         (select ifnull(sum(gold), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS giftedRuby,
         (select ifnull(sum(good), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS likeCnt,
+        (select sum(item_cnt) as boostCnt from rd_data.tb_member_broadcast_item a where mem_no= dj.mem_no and item_type ='2') as boostCnt,
         (SELECT
         count(distinct(DATE( last_upd_date )))
         FROM rd_data.tb_member_broadcast_broadcasting
