@@ -1093,14 +1093,14 @@
             {{#dalbit_if selectTab '==' 1}}<th>스페셜DJ<br />혜택</th>{{/dalbit_if}}
             <th>실수령액</th>
             <th>환전<br />누적금액</th>
-            <th>이전 별 수</th>
-            <th>신청 별 수</th>
-            <th>이후 별 수</th>
-            <th>현재 별 수</th>
+            <th>신청 전 별</th>
+            <th>신청 별</th>
+            <th>신청 후 별</th>
+            <th>현재 별</th>
             <th>환전횟수</th>
-            <th>신청일자</th>
             <th>이전 환전일자</th>
             <th>재 신청기간</th>
+            <th>신청일자</th>
             <th>처리일자</th>
             <th>처리현황</th>
             <th>처리자</th>
@@ -1157,9 +1157,9 @@
         <td>{{addComma data.mod_gold}}별</td>
         <td>{{addComma data.gold}}별</td>
         <td>{{addComma data.exchangeCnt}}번</td>
-        <td>{{convertToDate data.reg_date 'YYYY-MM-DD HH:mm:ss'}}</td>
         <td>{{#dalbit_if data.last_reg_date '!=' ''}}{{convertToDate data.last_reg_date 'YYYY-MM-DD HH:mm:ss'}}{{/dalbit_if}}</td>
         <td>{{#dalbit_if data.reapply_exchage '!=' ''}}{{timeStampDay data.reapply_exchage}}{{/dalbit_if}}</td>
+        <td>{{convertToDate data.reg_date 'YYYY-MM-DD HH:mm:ss'}}</td>
         <td>{{convertToDate data.op_date 'YYYY-MM-DD HH:mm:ss'}}</td>
         <td>{{{stateName data.state}}}</td>
         <td>{{data.op_name}}</td>
