@@ -45,6 +45,8 @@ var exchange_sort = [
     , new COMMON_CODE('1', '1', '신청 별 수 많은 순으로')
     , new COMMON_CODE('2', '2', '보유 별 수 많은 순으로')
     , new COMMON_CODE('3', '3', '최근 처리일 순으로')
+    , new COMMON_CODE('6', '6', '재 신청기간 짧은 순')
+    , new COMMON_CODE('7', '7', '환전 횟수 많은 순')
 ]
 
 var inforex_bank_code = [

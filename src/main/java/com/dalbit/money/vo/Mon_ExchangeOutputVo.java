@@ -56,6 +56,11 @@ public class Mon_ExchangeOutputVo{
     private int last_reject;
     private String recant_yn;
 
+    private int gold_old;
+    private int mod_gold;            // 나머지 별
+    private String last_reg_date;
+    private String reapply_exchage;
+
     private String prevAccountName; //최근 환전승인 이름
     private String prevSocialNo;    //최근 환전승인 주민번호
 

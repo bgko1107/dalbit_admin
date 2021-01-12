@@ -1062,7 +1062,7 @@
             , add_file2 = #{add_file2}
             , add_file3 = #{add_file3}
             , op_name = #{op_name}
-            , op_date = now()
+            , last_upd_date = now()
          where idx = #{idx}
     </update>
 </mapper>
