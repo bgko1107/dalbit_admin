@@ -162,8 +162,10 @@
 
     slctType = 1;
 
+    var selectTab;
     $(function(){
 
+        console.log(tabType);
         if(!common.isEmpty(tabType)){
             $('#topBotton li:eq(' + tabType + ') a').tab('show');
         }
@@ -256,10 +258,11 @@
     }
 
     function getList(tmp){
-
         var targetAnchor = $('._tab.active').find('a');
+        selectTab = targetAnchor.data('specialdj');
+        console.log("-------------------------------");
+        console.log(selectTab);
 
-        // console.log("-------------------------------");
         // console.log(targetAnchor.data('specialdj'));
         // console.log(targetAnchor.prop('id'));
 
@@ -331,9 +334,14 @@
             ui.tableHeightSet();
         }
 
+        var data = {
+            selectTab : selectTab
+        }
+
         var template = $('#tmp_exchangeTable').html();
         var templateScript = Handlebars.compile(template);
-        var html = templateScript();
+        var context = data;
+        var html = templateScript(context);
         $("#listTable").html(html);
 
         ui.paintColor();
@@ -420,6 +428,7 @@
         /*}*/
 
         response.data.limitDay = limitDay;
+        response.data.selectTab = selectTab;
 
         var template = $('#tmp_exchangeList').html();
         var templateScript = Handlebars.compile(template);
@@ -1042,30 +1051,30 @@
 <script type="text/x-handlebars-template" id="tmp_exchangeTable">
     <table id="list_info" class="table table-sorting table-hover table-bordered">
         <colgroup>
-            <col width="3%"/>
-            <col width="3%"/>
-            <col width="3%"/>
-            <col width="3%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="6%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="3%"/>
-            <col width="3%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="5%"/>
-            <col width="4%"/>
-            <col width="4%"/>
-            <col width="5%"/>
+            <%--<col width="3%"/>--%>
+            <%--<col width="3%"/>--%>
+            <%--<col width="1%"/>--%>
+            <%--<col width="3%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="6%"/>--%>
+            <%--<col width="3%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="3%"/>--%>
+            <%--<col width="3%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="5%"/>--%>
+            <%--<col width="4%"/>--%>
+            <%--<col width="4%"/>--%>
+            <%--<col width="5%"/>--%>
         </colgroup>
 
         <thead id="tableTop">
@@ -1077,21 +1086,21 @@
             <c:if test="${fn:contains('|이형원|전유신|고병권|이재호|', principal.getUserInfo().getName())}">
                 <th>신분증</th>
             </c:if>
-            <th>회원번호</th>
-            <th>닉네임</th>
-            <th>성별</th>
-            <th>가입시<br />생년월일</th>
+            <th>회원정보</th>
             <th>미성년자<br />여부</th>
             <th>예금주</th>
             <th>신청금액</th>
-            <th>스페셜DJ<br />혜택</th>
+            {{#dalbit_if selectTab '==' 1}}<th>스페셜DJ<br />혜택</th>{{/dalbit_if}}
             <th>실수령액</th>
-            <th>신청 별 수</th>
-            <th>현재 별 수</th>
-            <th>테스트ID<br />등록이력</th>
-            <th>환전횟수</th>
             <th>환전<br />누적금액</th>
+            <th>이전 별 수</th>
+            <th>신청 별 수</th>
+            <th>이후 별 수</th>
+            <th>현재 별 수</th>
+            <th>환전횟수</th>
             <th>신청일자</th>
+            <th>이전 환전일자</th>
+            <th>재 신청기간</th>
             <th>처리일자</th>
             <th>처리현황</th>
             <th>처리자</th>
@@ -1136,23 +1145,21 @@
     <img src="{{renderImage data.add_file1}}" style="max-width:50px;max-height:50px;" class="thumbnail fullSize_background no-padding no-margin" />
     </td>
 </c:if>
-        <td><a href="javascript://" class="_openMemberPop" data-memno="{{data.mem_no}}">{{data.mem_no}}</a></td>
-        <td>{{data.mem_nick}}</td>
-        <td>{{{sexIcon data.mem_sex data.mem_birth_year}}}</td>
-
-        <td>{{data.birth}}</td>
+        <td><a href="javascript://" class="_openMemberPop" data-memno="{{data.mem_no}}">{{data.mem_no}}</a><br/>{{data.mem_nick}}</td>
         <td>{{{calcAge data.birth}}}{{#equal data.recant_yn 'y'}}<br /><span style='font-weight:bold'>[철회됨]</span>{{/equal}}</td>
-
         <td>{{data.account_name}}</td>
         <td>{{addComma data.cash_basic}}원</td>
-        <td>{{addComma data.benefit}}원</td>
+        {{#dalbit_if ../selectTab '==' 1}}<td>{{addComma data.benefit}}원</td>{{/dalbit_if}}
         <td>{{addComma data.cash_real}}원</td>
-        <td>{{addComma data.byeol}}별</td>
-        <td>{{addComma data.gold}}별</td>
-        <td>{{data.testid_history}}</td>
-        <td>{{addComma data.exchangeCnt}}번</td>
         <td>{{addComma data.totalCashReal}}원</td>
+        <td>{{addComma data.gold_old}}별</td>
+        <td>{{addComma data.byeol}}별</td>
+        <td>{{addComma data.mod_gold}}별</td>
+        <td>{{addComma data.gold}}별</td>
+        <td>{{addComma data.exchangeCnt}}번</td>
         <td>{{convertToDate data.reg_date 'YYYY-MM-DD HH:mm:ss'}}</td>
+        <td>{{#dalbit_if data.last_reg_date '!=' ''}}{{convertToDate data.last_reg_date 'YYYY-MM-DD HH:mm:ss'}}{{/dalbit_if}}</td>
+        <td>{{#dalbit_if data.reapply_exchage '!=' ''}}{{timeStampDay data.reapply_exchage}}{{/dalbit_if}}</td>
         <td>{{convertToDate data.op_date 'YYYY-MM-DD HH:mm:ss'}}</td>
         <td>{{{stateName data.state}}}</td>
         <td>{{data.op_name}}</td>
@@ -1189,9 +1196,9 @@
                             <table id="list_info" class="table table-sorting table-hover table-bordered">
                                 <colgroup>
                                     <col width="13%">
-                                    <col width="20%">
+                                    <col width="31%">
                                     <col width="13%">
-                                    <col width="54%">
+                                    <col width="47%">
                                 </colgroup>
                                 <tbody id="tableBody">
                                     <tr>
@@ -1271,11 +1278,13 @@
 
                                     <tr>
                                         <th>전화번호</th>
-                                        <td colspan="3">
+                                        <td>
                                             <input type="hidden" name="phone_no" value="{{phoneNumHyphen detail.phone_no}}" />
                                             {{phoneNumHyphen detail.phone_no}}
                                             / {{phoneNumHyphen detail.mem_phone}}
                                         </td>
+                                        <th>수정일자<br/>수정자</th>
+                                        <td>{{detail.last_upd_date}}<br/>{{detail.op_name}}</td>
                                     </tr>
 
                                     <tr>
@@ -1319,7 +1328,7 @@
                                             {{#dalbit_if detail.op_date '==' ''}}
                                                 -
                                             {{else}}
-                                                <div id="div_opDate">
+                                                <div class="no-padding" id="div_opDate">
                                                     <div class="input-group date" id="opDate">
                                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                         <input type="text" class="form-control" id="txt_opDate" style="width:83px; height:35px;">
@@ -1327,7 +1336,7 @@
                                                     {{{getCommonCodeSelect 00 'timeHour'}}}
                                                     <span> : </span>
                                                     {{{getCommonCodeSelect 00 'timeMinute'}}}
-                                                    <button type="button" class="btn btn-danger btn-xm pull-right" onclick="opDateUpdate($(this));" data-idx="{{detail.idx}}" data-regdate="{{detail.reg_date}}">변경</button>
+                                                    <button type="button" class="btn btn-danger btn-xm pull-right mt5" onclick="opDateUpdate($(this));" data-idx="{{detail.idx}}" data-regdate="{{detail.reg_date}}">변경</button>
                                                 </div>
                                             {{/dalbit_if}}
                                         </td>
