@@ -190,6 +190,7 @@
                         and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> listen.start_date
                         and listen.start_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')
                         and 1800 <![CDATA[<=]]> listen.listentime), 0) listenCnt30
+            , (select count(*) from rd_admin.tb_special_dj where mem_no = dj.mem_no) specialCnt
         from rd_admin.tb_req_special_dj dj
         , rd_data.tb_member_profile profile
         , rd_data.tb_member_basic basic
@@ -206,6 +207,21 @@
         order by idx desc
         ) a
         limit #{pageStart}, #{pageCnt}
+    </select>
+
+    <select id="getSpecialDjAddpoint" parameterType="com.dalbit.menu.vo.SpecialReqVo" resultType="java.lang.Double">
+        /* Men_Special.xml - getSpecialDjAddpoint */
+        SELECT ifnull(SUM(a.addPoint), 0) as addPoint
+        FROM (SELECT (case rank when 1 then 1.5 when 2 then 0.5 when 3 then 0.3 ELSE 0 END) AS addPoint
+            FROM rd_data.tb_ranking_time_dj
+                , rd_admin.tb_req_special_dj_manage dj_manage
+            WHERE dj_manage.select_year = #{select_year}
+            and dj_manage.select_month = #{select_month}
+            and DATE_FORMAT(dj_manage.condition_start_date, '%Y-%m-%d') <![CDATA[<=]]> DATE_FORMAT(ranking_date, '%Y-%m-%d')
+            AND DATE_FORMAT(ranking_date, '%Y-%m-%d') <![CDATA[<=]]> DATE_FORMAT(dj_manage.condition_end_date, '%Y-%m-%d')
+            AND mem_no = #{mem_no}
+            AND `rank` <![CDATA[<=]]> 3
+        ) AS a
     </select>
 
     <select id="getReqSpecialListCnt" parameterType="com.dalbit.menu.vo.SpecialReqVo" resultType="integer">
