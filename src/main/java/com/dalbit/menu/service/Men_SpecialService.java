@@ -86,14 +86,16 @@ public class Men_SpecialService {
         List<SpecialReqVo> list = menSpecialDao.getReqSpecialList(specialReqVo);
 
         String[] headers = {"No", "회원번호", "닉네임", "신청일", "이름"
-                , "연락처", "누적 방송시간", "90분 이상 방송 횟수", "좋아요 수"/*, "팬 수"*/
-                , "누적 청취자 수", "순수 청취자 수", "신고횟수", "받은 별"/*, "채팅횟수"*/
-                , "방송횟수", "30분 이상 청취자 수", "방송소개" , "내가 스페셜 DJ가 된다면", "상태"
+                , "연락처", "누적 방송시간", "90분 이상 방송 횟수", "좋아요 수", "순수 좋아요 수", "부스터 횟수"
+                , "누적 청취자 수", "순수 청취자 수", "신고횟수", "받은 별"
+                , "방송횟수", "30분 이상 청취자 수", "가산점", "스디 횟수"
+                , "방송소개" , "내가 스페셜 DJ가 된다면", "상태"
                 , "처리자", "처리일시"};
         int[] headerWidths = {3000, 5000, 5000, 6000, 3000
-                , 5000, 3000, 3000, 3000/*, 3000*/
-                , 3000, 3000, 3000, 3000/*, 3000*/
-                , 3000, 4000, 5000, 6000, 3000
+                , 5000, 3000, 3000, 3000, 3000, 3000
+                , 3000, 3000, 3000, 3000
+                , 3000, 4000, 3000, 3000
+                , 5000, 6000, 3000
                 , 5000, 6000};
 
         List<Object[]> bodies = new ArrayList<>();
@@ -105,12 +107,16 @@ public class Men_SpecialService {
             hm.put("mem_nick", DalbitUtil.isEmpty(list.get(i).getMem_nick()) ? "" : list.get(i).getMem_nick());
             hm.put("reg_date", DalbitUtil.isEmpty(list.get(i).getReg_date()) ? "" : list.get(i).getReg_date());
             hm.put("mem_name", DalbitUtil.isEmpty(list.get(i).getMem_name()) ? "" : list.get(i).getMem_name());
-            hm.put("mem_phone", DalbitUtil.isEmpty(list.get(i).getMem_phone()) ? "" : list.get(i).getMem_phone());
 
+            hm.put("mem_phone", DalbitUtil.isEmpty(list.get(i).getMem_phone()) ? "" : list.get(i).getMem_phone());
             hm.put("airTime", DalbitUtil.isEmpty(list.get(i).getAirTime()) ? "" : list.get(i).getAirTime());
             hm.put("broadcastCnt", DalbitUtil.isEmpty(list.get(i).getBroadcastCnt()) ? "" : list.get(i).getBroadcastCnt());
+            hm.put("goodSumCnt", DalbitUtil.isEmpty(list.get(i).getGoodCnt() + list.get(i).getBoostGoodCnt()) ? "" : list.get(i).getGoodCnt() + list.get(i).getBoostGoodCnt());
             hm.put("goodCnt", DalbitUtil.isEmpty(list.get(i).getGoodCnt()) ? "" : list.get(i).getGoodCnt());
+            hm.put("boostGoodCnt", DalbitUtil.isEmpty(list.get(i).getBoostGoodCnt()) ? "" : list.get(i).getBoostGoodCnt());
+
             /*hm.put("fanCnt", DalbitUtil.isEmpty(list.get(i).getFanCnt()) ? "" : list.get(i).getFanCnt());*/
+
             hm.put("allListenCnt", DalbitUtil.isEmpty(list.get(i).getAllListenCnt()) ? "" : list.get(i).getAllListenCnt());
             hm.put("listenCnt", DalbitUtil.isEmpty(list.get(i).getListenCnt()) ? "" : list.get(i).getListenCnt());
             hm.put("reportCnt", DalbitUtil.isEmpty(list.get(i).getReportCnt()) ? "" : list.get(i).getReportCnt());
@@ -119,6 +125,13 @@ public class Men_SpecialService {
             /*hm.put("chatCnt", DalbitUtil.isEmpty(list.get(i).getChatCnt()) ? "" : list.get(i).getChatCnt());*/
             hm.put("broadCnt", DalbitUtil.isEmpty(list.get(i).getBroadCnt()) ? "" : list.get(i).getBroadCnt());
             hm.put("listenCnt30", DalbitUtil.isEmpty(list.get(i).getListenCnt30()) ? "" : list.get(i).getListenCnt30());
+
+            SpecialReqVo addPointParamVo = new SpecialReqVo();
+            addPointParamVo.setSelect_year(specialReqVo.getSelect_year());
+            addPointParamVo.setSelect_month(specialReqVo.getSelect_month());
+            addPointParamVo.setMem_no(list.get(i).getMem_no());
+            hm.put("addPoint", menSpecialDao.getSpecialDjAddpoint(addPointParamVo));
+            hm.put("specialCnt", DalbitUtil.isEmpty(list.get(i).getSpecialCnt()) ? "" : list.get(i).getSpecialCnt());
 
             hm.put("title", DalbitUtil.isEmpty(list.get(i).getTitle()) ? "" : list.get(i).getTitle());
             hm.put("contents", DalbitUtil.isEmpty(list.get(i).getContents()) ? "" : list.get(i).getContents());

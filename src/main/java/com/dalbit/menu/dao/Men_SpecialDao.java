@@ -13,6 +13,10 @@ public interface Men_SpecialDao {
 
     @Transactional(readOnly = true)
     List<SpecialReqVo> getReqSpecialList(SpecialReqVo specialReqVo);
+
+    @Transactional(readOnly = true)
+    Double getSpecialDjAddpoint(SpecialReqVo specialReqVo);
+
     @Transactional(readOnly = true)
     int getReqSpecialListCnt(SpecialReqVo specialReqVo);
 
