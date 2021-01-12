@@ -329,9 +329,9 @@
                             <table id="list_info" class="table table-sorting table-hover table-bordered">
                                 <colgroup>
                                     <col width="13%">
-                                    <col width="20%">
+                                    <col width="31%">
                                     <col width="13%">
-                                    <col width="54%">
+                                    <col width="47%">
                                 </colgroup>
                                 <tbody id="tableBody">
                                 <tr>
@@ -411,11 +411,13 @@
 
                                 <tr>
                                     <th>전화번호</th>
-                                    <td colspan="3">
+                                    <td>
                                         <input type="hidden" name="phone_no" value="{{phoneNumHyphen detail.phone_no}}" />
                                         {{phoneNumHyphen detail.phone_no}}
                                         / {{phoneNumHyphen detail.mem_phone}}
                                     </td>
+                                    <th>수정일자</th>
+                                    <td>{{detail.last_upd_date}} ({{detail.op_name}})</td>
                                 </tr>
 
                                 <tr>
@@ -426,21 +428,21 @@
                                     <td colspan="3">
                                         <div class="col-lg-4" style="border:solid 1px black">
                                             <a href="javascript://">
-                                                <img class="no-margin thumbnail" src="{{renderImage detail.add_file1}}" style="width:170px;height:116px;" class="_fullWidth _openImagePop thumbnail" />
+                                                <img class="_fullWidth _openImagePop thumbnail" src="{{renderImage detail.add_file1}}" style="width:170px;height:116px;" />
                                             </a>
                                             <input id="files1" type="file" onchange="photoSubmit($(this))">
                                             <input type="hidden" class="_hidden_filename" name="add_file1" id="add_file1" value="{{detail.add_file1}}" />
                                         </div>
                                         <div class="col-lg-4" style="border:solid 1px black">
                                             <a href="javascript://">
-                                                <img class="no-margin thumbnail"  src="{{renderImage detail.add_file2}}" style="width:170px;height:116px;" class="_fullWidth _openImagePop thumbnail" />
+                                                <img class="_fullWidth _openImagePop thumbnail"  src="{{renderImage detail.add_file2}}" style="width:170px;height:116px;"/>
                                             </a>
                                             <input id="files2" type="file" onchange="photoSubmit($(this))"/>
                                             <input type="hidden" class="_hidden_filename" name="add_file2" id="add_file2" value="{{detail.add_file2}}" />
                                         </div>
                                         <div class="col-lg-4" style="border:solid 1px black">
                                             <a href="javascript://">
-                                                <img class="no-margin thumbnail"  src="{{renderImage detail.add_file3}}" style="width:170px;height:116px;" class="_fullWidth _openImagePop thumbnail" />
+                                                <img class="_fullWidth _openImagePop thumbnail"  src="{{renderImage detail.add_file3}}" style="width:170px;height:116px;" />
                                             </a>
                                             <input id="files3" type="file" onchange="photoSubmit($(this))"/>
                                             <input type="hidden" class="_hidden_filename" name="add_file3" id="add_file3" value="{{detail.add_file3}}" />
@@ -459,7 +461,7 @@
                                         {{#dalbit_if detail.op_date '==' ''}}
                                         -
                                         {{else}}
-                                        <div id="div_opDate">
+                                        <div class="no-padding" id="div_opDate">
                                             <div class="input-group date" id="opDate">
                                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                 <input type="text" class="form-control" id="txt_opDate" style="width:83px; height:35px;">
@@ -467,7 +469,7 @@
                                             {{{getCommonCodeSelect 00 'timeHour'}}}
                                             <span> : </span>
                                             {{{getCommonCodeSelect 00 'timeMinute'}}}
-                                            <button type="button" class="btn btn-danger btn-xm pull-right" onclick="opDateUpdate($(this));" data-idx="{{detail.idx}}" data-regdate="{{detail.reg_date}}">변경</button>
+                                            <button type="button" class="btn btn-danger btn-xm pull-right mt5" onclick="opDateUpdate($(this));" data-idx="{{detail.idx}}" data-regdate="{{detail.reg_date}}">변경</button>
                                         </div>
                                         {{/dalbit_if}}
                                     </td>

@@ -180,53 +180,51 @@
     </sql>
 
     <sql id="fanCondition">
-      from rd_data.tb_member_basic mem
-        left join rd_admin.tb_admin_test_account test on mem.mem_no = test.mem_no
-        left join rd_data.tb_member_profile prof on mem.mem_no = prof.mem_no
-        left join rd_data.tb_member_level lev on mem.mem_no = lev.mem_no
-
+        from
         <if test='rankType == "1"'>
             <if test='liveCnt != 0'>
-                left join rd_data.tb_ranking_fan_live_data_day fan
+                rd_data.tb_ranking_fan_live_data_day fan
             </if>
             <if test='liveCnt == 0'>
-                left join rd_data.tb_ranking_fan_day fan
+                rd_data.tb_ranking_fan_day fan
             </if>
         </if>
         <if test='rankType == "2"'>
             <if test='liveCnt != 0'>
-                left join rd_data.tb_ranking_fan_live_data_week fan
+                rd_data.tb_ranking_fan_live_data_week fan
             </if>
             <if test='liveCnt == 0'>
-                left join rd_data.tb_ranking_fan_week fan
+                 rd_data.tb_ranking_fan_week fan
             </if>
         </if>
         <if test='rankType == "3"'>
             <if test='liveCnt != 0'>
-                left join rd_data.tb_ranking_fan_live_data_month fan
+                rd_data.tb_ranking_fan_live_data_month fan
             </if>
             <if test='liveCnt == 0'>
-                left join rd_data.tb_ranking_fan_month fan
+                rd_data.tb_ranking_fan_month fan
             </if>
         </if>
         <if test='rankType == "4"'>
             <if test='liveCnt != 0'>
-                left join rd_data.tb_ranking_fan_live_data_year fan
+                rd_data.tb_ranking_fan_live_data_year fan
             </if>
             <if test='liveCnt == 0'>
-                left join rd_data.tb_ranking_fan_year fan
+                rd_data.tb_ranking_fan_year fan
             </if>
         </if>
         <if test='rankType == "5"'>
             <if test='liveCnt != 0'>
-                left join  rd_data.tb_ranking_time_fan_live_data fan
+                rd_data.tb_ranking_time_fan_live_data fan
             </if>
             <if test='liveCnt == 0'>
-                left join rd_data.tb_ranking_time_fan fan
+                rd_data.tb_ranking_time_fan fan
             </if>
         </if>
-        on mem.mem_no = fan.mem_no
-
+        left join rd_data.tb_member_basic mem on fan.mem_no = mem.mem_no
+        left join rd_admin.tb_admin_test_account test on fan.mem_no = test.mem_no
+        left join rd_data.tb_member_profile prof on fan.mem_no = prof.mem_no
+        left join rd_data.tb_member_level lev on fan.mem_no = lev.mem_no
         <if test='rankType == "1"'>
             <if test='liveCnt != 0'>
                 where date_format(fan.upd_date,'%Y.%m.%d') = #{sDate}

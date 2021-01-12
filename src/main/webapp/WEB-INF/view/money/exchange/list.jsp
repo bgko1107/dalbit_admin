@@ -1093,14 +1093,14 @@
             {{#dalbit_if selectTab '==' 1}}<th>스페셜DJ<br />혜택</th>{{/dalbit_if}}
             <th>실수령액</th>
             <th>환전<br />누적금액</th>
-            <th>이전 별 수</th>
-            <th>신청 별 수</th>
-            <th>이후 별 수</th>
-            <th>현재 별 수</th>
+            <th>신청 전 별</th>
+            <th>신청 별</th>
+            <th>신청 후 별</th>
+            <th>현재 별</th>
             <th>환전횟수</th>
-            <th>신청일자</th>
             <th>이전 환전일자</th>
             <th>재 신청기간</th>
+            <th>신청일자</th>
             <th>처리일자</th>
             <th>처리현황</th>
             <th>처리자</th>
@@ -1157,9 +1157,9 @@
         <td>{{addComma data.mod_gold}}별</td>
         <td>{{addComma data.gold}}별</td>
         <td>{{addComma data.exchangeCnt}}번</td>
-        <td>{{convertToDate data.reg_date 'YYYY-MM-DD HH:mm:ss'}}</td>
         <td>{{#dalbit_if data.last_reg_date '!=' ''}}{{convertToDate data.last_reg_date 'YYYY-MM-DD HH:mm:ss'}}{{/dalbit_if}}</td>
         <td>{{#dalbit_if data.reapply_exchage '!=' ''}}{{timeStampDay data.reapply_exchage}}{{/dalbit_if}}</td>
+        <td>{{convertToDate data.reg_date 'YYYY-MM-DD HH:mm:ss'}}</td>
         <td>{{convertToDate data.op_date 'YYYY-MM-DD HH:mm:ss'}}</td>
         <td>{{{stateName data.state}}}</td>
         <td>{{data.op_name}}</td>
@@ -1283,8 +1283,8 @@
                                             {{phoneNumHyphen detail.phone_no}}
                                             / {{phoneNumHyphen detail.mem_phone}}
                                         </td>
-                                        <th>수정일자<br/>수정자</th>
-                                        <td>{{detail.last_upd_date}}<br/>{{detail.op_name}}</td>
+                                        <th>수정일자</th>
+                                        <td>{{detail.last_upd_date}} ({{detail.op_name}})</td>
                                     </tr>
 
                                     <tr>
@@ -1532,22 +1532,21 @@
 <script type="text/x-handlebars-template" id="tmp_enableTable">
     <table id="list_info" class="table table-sorting table-hover table-bordered">
         <colgroup>
-            <col width="5%"/><col width="5%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
-            <col width="7.1%"/><col width="8.5%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
-            <col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
+            <col width="5%"/><col width="5%"/><col width="8.1%"/><col width="8.1%"/><col width="8.1%"/>
+            <col width="8.1%"/><col width="8.1%"/><col width="8.1%"/><col width="8.1%"/><col width="8.1%"/>
+            <col width="8.1%"/><col width="8.1%"/><col width="8.1%"/>
         </colgroup>
 
         <thead id="tableTop">
         <tr>
             <th>No</th>
             <th>상태</th>
-            <th>회원번호</th>
-            <th>아이디</th>
-            <th>닉네임</th>
+            <th>회원정보</th>
             <th>성별</th>
             <th>최근 완료 환전일시</th>
             <th>최근 환전 별 수</th>
             <th>최근 환전 수령금액</th>
+            <th>환전 누적금액</th>
             <th>신청가능 별 수</th>
             <th>신청 가능금액</th>
             <th>스페셜DJ혜택</th>
@@ -1569,13 +1568,12 @@
             <td>
                 {{{getMemStateName data.mem_state}}}
             </td>
-            <td><a href="javascript://" class="_openMemberPop" data-memno="{{data.mem_no}}">{{data.mem_no}}</a></td>
-            <td>{{data.mem_userid}}</td>
-            <td>{{data.mem_nick}}</td>
+            <td><a href="javascript://" class="_openMemberPop" data-memno="{{data.mem_no}}">{{data.mem_no}}</a> <br/> {{data.mem_nick}}</td>
             <td>{{{sexIcon data.mem_sex data.mem_birth_year}}}</td>
-            <td>{{op_date}}</td>
-            <td>{{#dalbit_if byeol '!=' 0}} {{addComma byeol}} {{/dalbit_if}}</td>
-            <td>{{#dalbit_if cash_real '!=' 0}} {{addComma cash_real}} {{/dalbit_if}}</td>
+            <td>{{data.op_date}}</td>
+            <td>{{#dalbit_if data.byeol '!=' 0}} {{addComma data.byeol}} {{/dalbit_if}}</td>
+            <td>{{#dalbit_if data.cash_real '!=' 0}} {{addComma data.cash_real}} {{/dalbit_if}}</td>
+            <td>{{#dalbit_if data.totalCashReal '!=' 0}} {{addComma data.totalCashReal}}원 {{/dalbit_if}}</td>
             <td>{{addComma data.gold}}별</td>
             <td>{{math data.gold "*" 60}}원</td>
             <td>{{specialBenefit data.gold data.specialCnt}}원</td>
