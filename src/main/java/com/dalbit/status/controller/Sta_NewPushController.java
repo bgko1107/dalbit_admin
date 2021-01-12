@@ -15,5 +15,10 @@ public class Sta_NewPushController {
         return "status/newPush/info";
     }
 
+    @GetMapping("/popup/detail")
+    public String popupDetail() {
+        return "status/newPush/popup/detail";
+    }
+
 
 }

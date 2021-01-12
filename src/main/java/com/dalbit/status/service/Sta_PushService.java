@@ -87,7 +87,6 @@ public class Sta_PushService {
         return result;
     }
 
-
     /** PUSH 발송 내역 상세 조회 */
     public String callPushHistoryDetail(P_PushHistoryInputVo pPushHistoryInputVo) {
         String result;
@@ -407,5 +406,22 @@ public class Sta_PushService {
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
     }
 
+    /**
+     * PUSH 발송 회원 알림받기 회원 상세내역
+     */
+    public String callMemeberNoticeDetail(P_PushHistoryInputVo pPushHistoryInputVo) {
 
+        ProcedureVo procedureVo = new ProcedureVo(pPushHistoryInputVo);
+        ArrayList<P_PushHistoryOutputVo> list = sta_PushDao.callMemeberNoticeDetail(procedureVo);
+        P_PushHistoryOutputVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_PushHistoryOutputVo.class);
+
+        String result;
+        if(list != null && list.size() > 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(totalInfo.getTotalCnt(), totalInfo.getPageStart(), totalInfo.getPageCnt()), totalInfo));
+        }else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, new ArrayList<P_PushHistoryOutputVo>(), new PagingVo(pPushHistoryInputVo.getTotalCnt(), pPushHistoryInputVo.getPageStart(), pPushHistoryInputVo.getPageCnt()),totalInfo));
+        }
+
+        return result;
+    }
 }

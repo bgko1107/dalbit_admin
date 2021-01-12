@@ -39,8 +39,6 @@
         <div class="tab-pane fade active in" id="historyDetail"></div>     <!-- 상세 -->
     </div>
 </div>
-
-
 <script type="text/javascript">
     $(document).on('click', "._getPushHistoryDetail", function(){
         var code = $(this).data('idx');
@@ -109,6 +107,10 @@
         dtList_info.reload(pushHistorySummary);
     }
 
+    function memberNoticePopup(data){
+        var popupUrl = "/status/newPush/popup/detail?mem_no=" + data.memno;
+        util.windowOpen(popupUrl,"900","550","알림받기 회원 상세내역");
+    }
 </script>
 
 <script id="pushHistory_tableSummary" type="text/x-handlebars-template">

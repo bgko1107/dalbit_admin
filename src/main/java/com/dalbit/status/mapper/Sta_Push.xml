@@ -96,6 +96,7 @@
                 ,history.ins_date
                 ,history.last_upd_date
                 ,ifnull(admin.op_name,'자동') AS opName
+                ,(SELECT COUNT(*) FROM rd_data.tb_member_recv_alert WHERE mem_no_star = history.mem_no AND alert_yn = 1) AS memberNotice
             FROM
                 rd_stmp.smtp_push_history AS history
             LEFT JOIN
@@ -296,6 +297,11 @@
     <select id="callDayDetailPopup" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.status.vo.procedure.P_PushStatusOutVo">
         /* Sta_Push.xml - callDayDetailPopup */
         call rd_admin.sp_admin_stat_push_time_detail(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callMemeberNoticeDetail" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.status.vo.procedure.P_PushHistoryOutputVo">
+        /* Sta_Push.xml - callMemeberNoticeDetail */
+        call rd_admin.sp_admin_recv_alert_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
 </mapper>

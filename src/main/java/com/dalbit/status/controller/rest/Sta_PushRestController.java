@@ -141,4 +141,20 @@ public class Sta_PushRestController {
         String result = sta_PushService.callDayDetailPopup(pPushStatusInPutVo);
         return result;
     }
+
+
+
+
+    /**
+     * push발송 회원 알림받기 상세 목록
+     * @param pPushHistoryInputVo
+     * @return
+     */
+    @PostMapping("history/member/notice/detail")
+    public String memeberNoticeDetail(P_PushHistoryInputVo pPushHistoryInputVo){
+
+        String result = sta_PushService.callMemeberNoticeDetail(pPushHistoryInputVo);
+
+        return result;
+    }
 }
