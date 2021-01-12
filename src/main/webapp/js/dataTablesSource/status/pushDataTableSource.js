@@ -1,7 +1,6 @@
 var PushDataTableSource = {
     'historyList': {
         'url': '/rest/status/push/history/list'
-
         , 'columns': [
             {'title': '발송일시', 'data' : 'send_date', 'render' : function(data, type, row, meta){
                     return common.convertToDate(data);
@@ -29,6 +28,13 @@ var PushDataTableSource = {
                 }}
             ,{'title': '푸시타입', 'data' : 'push_type', 'render' : function(data, type, row, meta){
                     return util.getCommonCodeLabel(data, push_slctPush3);
+                }}
+            ,{'title': '알림받기', 'data' : 'memberNotice', 'render' : function(data, type, row, meta){
+                    if(data > 0){
+                        return '<a href="javascript://" onclick="memberNoticePopup($(this).data())" data-memno="' + row.mem_no + '"><span class="font-bold" style="color: red;">' + common.addComma(data) + "명" + '</span></a>';
+                    }else{
+                        return 'N';
+                    }
                 }}
             ,{'title': '발송형태', 'data' : 'send_type', 'render' : function(data, type, row, meta){
                     return util.getCommonCodeLabel(data, push_sendType);
@@ -58,6 +64,24 @@ var PushDataTableSource = {
                     return data + "%";
                 }}
             ,{'title': '발송자', 'data' : 'opName'}
+        ]
+    },
+
+
+    'memberNoticeDetail': {
+        'url': '/rest/status/push/history/member/notice/detail'
+
+        , 'columns': [
+            {'title': '회원번호', 'data' : 'mem_no_fan', 'render' : function(data, type, row, meta){
+                    return data;
+                }}
+            ,{'title': '회원닉네임', 'data' : 'mem_nick', 'render' : function(data, type, row, meta){
+                    return data;
+                }}
+            ,{'title': '성별', 'data' : 'mem_sex', 'render' : function(data, type, row, meta){
+                    return common.sexIcon(data, row.mem_birth_year);
+                }}
+            ,{'title': '등록일시', 'data' : 'last_upd_date'}
         ]
     },
 }

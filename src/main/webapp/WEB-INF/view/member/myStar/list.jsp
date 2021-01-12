@@ -42,7 +42,16 @@
             <div class="widget widget-table" id="mynotice_table">
                 <div class="widget-content">
                     <div class="col-md-12 no-padding mt10">
-                        <span id="liveNoticeTotal"></span>
+                        <div class="col-md-6 no-padding">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <span id="liveNoticeTotal"></span>
+                        </div>
+                        <div class="col-md-2 no-padding pull-right">
+                            <span id="summaryArea"></span>
+                        </div>
                     </div>
                     <table id="table" class="table table-sorting table-hover table-bordered datatable">
                         <thead></thead>
@@ -99,7 +108,7 @@
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
-        }
+        };
         dtList_info_detail2 = new DalbitDataTable($("#myfan").find("#list_myfan"), dtList_info_detail_data, MemberDataTableSource.myfan);
         dtList_info_detail2.useCheckBox(false);
         dtList_info_detail2.useIndex(true);
@@ -118,12 +127,13 @@
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
-        }
-        dtList_info_detail3 = new DalbitDataTable($("#mynotice").find("#table"), dtList_info_detail_data, MemberDataTableSource.mynotice);
+            data.slctType = 0;
+        };
+        dtList_info_detail3 = new DalbitDataTable($("#mynotice").find("#table"), dtList_info_detail_data, MemberDataTableSource.myNotice);
         dtList_info_detail3.useCheckBox(false);
         dtList_info_detail3.useIndex(true);
         dtList_info_detail3.setPageLength(50);
-        dtList_info_detail3.createDataTable(fn_liveNoticeTotal);
+        dtList_info_detail3.createDataTable(fn_myNoticeTotal);
     }
 
     function fn_liveMystarTotal(json){
@@ -134,8 +144,35 @@
         $("#liveFanTotal").text("현재 등록 My Fan : " + json.summary);
     }
 
-    function fn_liveNoticeTotal(json){
-        $("#liveNoticeTotal").text("알림받기 설정 회원 : " + json.summary);
+    function fn_myNoticeTotal(json){
+        $("#mynotice").find("#summaryArea").empty();
+        $("#liveNoticeTotal").text("알림받기 설정 회원 : " + json.pagingVo.totalCnt);
+
+        var template = $('#tmp_mynoticeSummary').html();
+        var templateScript = Handlebars.compile(template);
+        var detailContext = json.summary;
+        var html=templateScript(detailContext);
+        $("#mynotice").find("#summaryArea").append(html);
+        ui.paintColor();
     }
 
+</script>
+
+
+<script type="text/x-handlebars-template" id="tmp_mynoticeSummary">
+    <table id="summary" class="table table-sorting table-hover table-bordered datatable">
+        <tr>
+            <th colspan="3" class="_bgColor _fontColor" data-bgcolor="#4472c4" data-fontcolor="white">알림받기 회원</th>
+        </tr>
+        <tr>
+            <th class="_bgColor" data-bgcolor="#b4c7e7">총합</th>
+            <th class="_bgColor" data-bgcolor="#b4c7e7">등록</th>
+            <th class="_bgColor" data-bgcolor="#b4c7e7">삭제</th>
+        </tr>
+        <tr>
+            <td>{{addComma totalCnt}}</td>
+            <td>{{addComma yCnt}}</td>
+            <td>{{addComma nCnt}}</td>
+        </tr>
+    </table>
 </script>

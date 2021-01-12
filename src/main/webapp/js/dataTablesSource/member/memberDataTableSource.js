@@ -1375,4 +1375,32 @@ var MemberDataTableSource = {
             }
         }
     },
+
+
+
+    'myNotice': {
+        'url': '/rest/status/push/history/member/notice/detail'
+        , 'columns': [
+            {'title': '설정회원', 'data': 'mem_no_fan', 'render': function (data, type, row, meta) {
+                    return util.memNoLink(data, data) + '<br/>' + row.mem_nick;
+                }},
+            {'title': '성별(나이)', 'data': 'mem_sex', 'width':'70px', 'render': function (data, type, row, meta) {
+                    return common.sexIcon(data, row.mem_birth_year);
+                }},
+            {'title': '설정일시', 'data': 'reg_date'},
+            {'title': '최근수정일시', 'data': 'last_upd_date'},
+            {'title': '등록상태', 'data': 'alert_yn', 'render': function (data, type, row, meta) {
+                    if(data == 0){
+                        return '<span style="color: red">해제<span>';
+                    }else{
+                        return '<span style="color: blue">등록<span>';
+                    }
+                }},
+        ]
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
+    },
 }

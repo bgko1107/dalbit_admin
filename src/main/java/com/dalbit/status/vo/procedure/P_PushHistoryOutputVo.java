@@ -37,6 +37,23 @@ public class P_PushHistoryOutputVo extends BaseVo {
     private String ins_date; 		                // '등록일자'
     private String last_upd_date; 	            // '변경일자'
 
+    private int memberNotice;
+
+    private String mem_no_fan;
+    private String mem_sex;
+    private String mem_birth_year;
+    private String alert_yn;
+    private String reg_date;
+
+
     private List<P_MemberListOutputVo> setMem_info;
+
+    private int totalCnt;
+    private int pageStart;
+    private int pageCnt;
+    private int yCnt;
+    private int nCnt;
+
+
 
 }
