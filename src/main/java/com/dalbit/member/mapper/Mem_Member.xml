@@ -786,11 +786,9 @@
                     ,sum(gold) AS byeolCnt
                     ,sum(listener) as listenerCnt
                     ,sum(good) as goodCnt
+                    ,sum(booster) as boostCnt
                    from rd_data.tb_member_broadcast_broadcasting
                   where mem_no=#{mem_no}) b
-             , ( select sum(item_cnt) as boostCnt
-                from rd_data.tb_member_broadcast_item a
-                where mem_no=#{mem_no} and item_type ='2') bb
              , ( select count(*) as listenCnt
                     , sum(listentime) as listenTime
                     , sum(gift_ruby) as dalCnt
