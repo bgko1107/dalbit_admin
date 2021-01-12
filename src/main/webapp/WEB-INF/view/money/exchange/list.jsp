@@ -1548,6 +1548,7 @@
             <th>최근 완료 환전일시</th>
             <th>최근 환전 별 수</th>
             <th>최근 환전 수령금액</th>
+            <th>환전 누적금액</th>
             <th>신청가능 별 수</th>
             <th>신청 가능금액</th>
             <th>스페셜DJ혜택</th>
@@ -1573,9 +1574,10 @@
             <td>{{data.mem_userid}}</td>
             <td>{{data.mem_nick}}</td>
             <td>{{{sexIcon data.mem_sex data.mem_birth_year}}}</td>
-            <td>{{op_date}}</td>
-            <td>{{#dalbit_if byeol '!=' 0}} {{addComma byeol}} {{/dalbit_if}}</td>
-            <td>{{#dalbit_if cash_real '!=' 0}} {{addComma cash_real}} {{/dalbit_if}}</td>
+            <td>{{data.op_date}}</td>
+            <td>{{#dalbit_if data.byeol '!=' 0}} {{addComma data.byeol}} {{/dalbit_if}}</td>
+            <td>{{#dalbit_if data.cash_real '!=' 0}} {{addComma data.cash_real}} {{/dalbit_if}}</td>
+            <td>{{#dalbit_if data.totalCashReal '!=' 0}} {{addComma data.totalCashReal}}원 {{/dalbit_if}}</td>
             <td>{{addComma data.gold}}별</td>
             <td>{{math data.gold "*" 60}}원</td>
             <td>{{specialBenefit data.gold data.specialCnt}}원</td>
