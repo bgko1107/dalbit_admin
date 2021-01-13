@@ -30,7 +30,6 @@ public interface Con_TimeEventDao {
     @Transactional(readOnly = true)
     int selectTimeEventDuplTimeCheck(TimeEventVo timeEventVo);
 
-    @Transactional(readOnly = true)
     int copyBanner(P_bannerUpdateVo pBannerUpdateVo);
 
     int copyTimeEvent(TimeEventVo timeEventVo);
