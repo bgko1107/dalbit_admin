@@ -404,7 +404,7 @@
         <if test='type == "16" or type == "17"'>
             <if test='type == "16"'>
               where (state = '2' and date_format(b.op_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(b.op_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate})
-                or (state = 4 and date_format(b.op_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(b.op_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate} )
+                or (state = 4 and date_format(b.last_upd_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(b.last_upd_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate} )
             </if>
             <if test='type == "17"'>
               where state = '1' and date_format(b.op_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(b.op_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate}
