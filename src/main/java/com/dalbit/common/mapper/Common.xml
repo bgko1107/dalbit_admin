@@ -79,7 +79,7 @@
     </select>
 
     <select id="callLiveBadgeSelect" statementType="CALLABLE" parameterType="java.util.HashMap" resultType="com.dalbit.common.vo.FanBadgeVo">
-      call rd_data.sp_member_live_badge(#{mem_no, mode=IN, jdbcType=INTEGER}, #{type, mode=IN, jdbcType=INTEGER})
+      call rd_data.sp_member_live_badge_icon(#{mem_no, mode=IN, jdbcType=INTEGER}, #{type, mode=IN, jdbcType=INTEGER})
     </select>
 
     <update id="updateCodeDefine" parameterType="com.dalbit.common.vo.CodeListVo">

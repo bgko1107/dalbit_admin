@@ -312,20 +312,20 @@
     }
 
     function summary_table(json){
+        if(!common.isEmpty(json.summary)){
+            json.summary.liveState = liveState;
+            var template = $("#live_tableSummary").html();
+            var templateScript = Handlebars.compile(template);
+            var data = {
+                content : json.summary
+                , length : json.recordsTotal
+            };
+            var html = templateScript(data);
+            $("#live_summaryArea").html(html);
 
-        json.summary.liveState = liveState;
-        var template = $("#live_tableSummary").html();
-        var templateScript = Handlebars.compile(template);
-        var data = {
-            content : json.summary
-            , length : json.recordsTotal
-        };
-        var html = templateScript(data);
-        $("#live_summaryArea").html(html);
-
-
-        var data = {};
-        util.getAjaxData("inspection", "/rest/member/broadcast/inspection/check",data, fn_inspection_check_success);
+            var data = {};
+            util.getAjaxData("inspection", "/rest/member/broadcast/inspection/check",data, fn_inspection_check_success);
+        }
 
     }
 

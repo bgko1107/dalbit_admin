@@ -541,24 +541,26 @@
         select '1' type , count(*) AS totalCnt      <!--사연-->
           from rd_data.tb_broadcast_room bro
          inner join rd_data.tb_broadcast_room_story sto on sto.room_no = bro.room_no
-         inner join rd_data.tb_member_basic bas on bro.mem_no = bas.mem_no
-            <include refid="storyCondition"/>
+         <where>
+            <if test='start_sel != null and start_sel !=""'>
+                and sto.write_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
+            </if>
+            <if test='end_sel != null and end_sel != ""'>
+                and sto.write_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
+            </if>
+            <if test='broState != 0'>
+                <if test='broState == 1'>
+                    and bro.state != 4
+                </if>
+                <if test='broState == 2'>
+                    and bro.state = 4
+                </if>
+            </if>
+         </where>
         ) aa,
         ( select '2' type , count(*) AS totalCnt<!--팬보드-->
         from rd_data.tb_member_fanboard fan
              <where>
-              <if test='txt_search != null and txt_search != ""'>
-                  (select mem_no from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_id from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_no from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_id from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-              </if>
               <if test='start_sel != null and start_sel != ""'>
                   and fan.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
               </if>
@@ -571,18 +573,6 @@
         (select '3' type , count(*) AS totalCnt<!--팬보드 댓글-->
         from rd_data.tb_member_fanboard as fan
             <where>
-              <if test='txt_search != null and txt_search != ""'>
-                  (select mem_no from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_id from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_no from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_id from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                  or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-              </if>
               <if test='start_sel != null and start_sel != ""'>
                   and fan.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
               </if>
@@ -594,9 +584,7 @@
         ) cc,
         (select '4' type , count(*) AS totalCnt    <!--방송방 공지-->
                   From rd_data.tb_broadcast_room a
-                  left join rd_data.tb_member_basic b on a.mem_no = b.mem_no
                  where CHAR_LENGTH(a.notice) > 0
-                   and (b.mem_no like CONCAT('%',#{txt_search},'%') OR b.mem_userid like CONCAT('%',#{txt_search},'%') OR b.mem_nick like CONCAT('%',#{txt_search},'%'))
                     <if test='start_sel != null and start_sel !=""'>
                         and a.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
                         and a.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
@@ -604,12 +592,12 @@
         ) dd,
         (select '5' type , count(*) AS totalCnt    <!--회원공지-->
                   From rd_data.tb_member_broadcast_notice a
-                  left join rd_data.tb_member_basic b on a.mem_no = b.mem_no
-                 where (b.mem_no like CONCAT('%',#{txt_search},'%') OR b.mem_userid like CONCAT('%',#{txt_search},'%') OR b.mem_nick like CONCAT('%',#{txt_search},'%'))
-                    <if test='start_sel != null and start_sel !=""'>
-                        and a.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
-                        and a.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
-                    </if>
+            <where>
+                <if test='start_sel != null and start_sel !=""'>
+                    and a.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
+                    and a.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
+                </if>
+            </where>
         ) ee,
         (select '6' type , count(*) AS totalCnt<!--프로필메시지-->
            from rd_data.tb_member_basic basic
@@ -622,59 +610,29 @@
           where session.mem_no is not null
             and profile.msg_profile is not null
             and profile.msg_profile != ''
-        <if test='txt_search != null and txt_search != ""'>
-                    and (basic.mem_no like CONCAT('%',#{txt_search},'%')
-                    OR basic.mem_userid like CONCAT('%',#{txt_search},'%')
-                    OR basic.mem_nick like CONCAT('%',#{txt_search},'%')
-                    OR basic.mem_id like CONCAT('%',#{txt_search},'%')
-                    OR basic.mem_phone like CONCAT('%',#{txt_search},'%'))
-                </if>
-                <if test='start_sel != null and start_sel !=""'>
-                    and date_format(profile.last_upd_date,'%Y.%m.%d') <![CDATA[>=]]> #{start_sel}
-                </if>
-                <if test='end_sel != null and end_sel != ""'>
-                    and date_format(profile.last_upd_date,'%Y.%m.%d') <![CDATA[<=]]> #{end_sel}
-                </if>
+            <if test='start_sel != null and start_sel !=""'>
+                and date_format(profile.last_upd_date,'%Y.%m.%d') <![CDATA[>=]]> #{start_sel}
+            </if>
+            <if test='end_sel != null and end_sel != ""'>
+                and date_format(profile.last_upd_date,'%Y.%m.%d') <![CDATA[<=]]> #{end_sel}
+            </if>
         ) ff,
         (select '7' type , count(*) AS totalCnt    <!--클립댓글-->
               from rd_data.tb_cast_room a
               join rd_data.tb_cast_room_board b on a.cast_no = b.cast_no
-              left join rd_data.tb_member_basic castMem on b.cast_mem_no = castMem.mem_no
-              left join rd_data.tb_member_basic writerMem on b.writer_mem_no = writerMem.mem_no
               inner join (select @RNUM := 0) r
-            where ((castMem.mem_no like CONCAT('%',#{txt_search},'%')
-                    OR castMem.mem_userid like CONCAT('%',#{txt_search},'%')
-                    OR castMem.mem_nick like CONCAT('%',#{txt_search},'%')
-                    OR castMem.mem_id like CONCAT('%',#{txt_search},'%')
-                    OR castMem.mem_phone like CONCAT('%',#{txt_search},'%'))
-                    or (writerMem.mem_no like CONCAT('%',#{txt_search},'%')
-                    OR writerMem.mem_userid like CONCAT('%',#{txt_search},'%')
-                    OR writerMem.mem_nick like CONCAT('%',#{txt_search},'%')
-                    OR writerMem.mem_id like CONCAT('%',#{txt_search},'%')
-                    OR writerMem.mem_phone like CONCAT('%',#{txt_search},'%'))
-                )
-            <if test='start_sel != null and start_sel !=""'>
-                and date_format(b.write_date,'%Y.%m.%d') <![CDATA[>=]]> #{start_sel}
-            </if>
-            <if test='end_sel != null and end_sel != ""'>
-                and date_format(b.write_date,'%Y.%m.%d') <![CDATA[<=]]> #{end_sel}
-            </if>
+            <where>
+                <if test='start_sel != null and start_sel !=""'>
+                    and date_format(b.write_date,'%Y.%m.%d') <![CDATA[>=]]> #{start_sel}
+                </if>
+                <if test='end_sel != null and end_sel != ""'>
+                    and date_format(b.write_date,'%Y.%m.%d') <![CDATA[<=]]> #{end_sel}
+                </if>
+            </where>
         ) gg,
         (select '8' type, count(*) AS totalCnt      <!-- 회원공지 댓글 -->
             from rd_data.tb_member_broadcast_notice_reply rep
             <where>
-                <if test='txt_search != null and txt_search != ""'>
-                    (select mem_no from rd_data.tb_member_basic where mem_no = rep.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_userid from rd_data.tb_member_basic where mem_no = rep.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_nick from rd_data.tb_member_basic where mem_no = rep.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_id from rd_data.tb_member_basic where mem_no = rep.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_phone from rd_data.tb_member_basic where mem_no = rep.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_no from rd_data.tb_member_basic where mem_no = rep.writer_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_userid from rd_data.tb_member_basic where mem_no = rep.writer_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_nick from rd_data.tb_member_basic where mem_no = rep.writer_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_id from rd_data.tb_member_basic where mem_no = rep.writer_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_phone from rd_data.tb_member_basic where mem_no = rep.writer_no) like concat ('%',#{txt_search},'%')
-                </if>
                 <if test='start_sel != null and start_sel != ""'>
                     and rep.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
                 </if>
@@ -688,18 +646,6 @@
             select chat_no
             from rd_data.tb_mailbox_chatroom_msg msg
             <where>
-                <if test='txt_search != null and txt_search != ""'>
-                    (select mem_no from rd_data.tb_member_basic where mem_no = msg.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_userid from rd_data.tb_member_basic where mem_no = msg.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_nick from rd_data.tb_member_basic where mem_no = msg.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_id from rd_data.tb_member_basic where mem_no = msg.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_phone from rd_data.tb_member_basic where mem_no = msg.mem_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_no from rd_data.tb_member_basic where mem_no = msg.writer_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_userid from rd_data.tb_member_basic where mem_no = msg.writer_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_nick from rd_data.tb_member_basic where mem_no = msg.writer_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_id from rd_data.tb_member_basic where mem_no = msg.writer_no) like concat ('%',#{txt_search},'%')
-                    or (select mem_phone from rd_data.tb_member_basic where mem_no = msg.writer_no) like concat ('%',#{txt_search},'%')
-                </if>
                 <if test='start_sel != null and start_sel != ""'>
                     and msg.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
                 </if>
