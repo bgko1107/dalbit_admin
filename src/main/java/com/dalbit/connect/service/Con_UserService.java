@@ -73,7 +73,8 @@ public class Con_UserService {
         con_UserDao.callCurrentLiveSummary(procedureVo2);
         P_ConnectNonBroadOutDetailVo detailList = new Gson().fromJson(procedureVo2.getExt(), P_ConnectNonBroadOutDetailVo.class);
 
-        for(int i=0;i<currentList.size();i++) {
+        //DB 부하로 인해 뱃지리스트 주석처리
+        /*for(int i=0;i<currentList.size();i++) {
 //            fanBadgeList   주간/일간 탑DJ/팽 1,2,3
             HashMap fanBadgeMap = new HashMap();
             fanBadgeMap.put("mem_no", currentList.get(i).getMem_no());
@@ -92,7 +93,7 @@ public class Con_UserService {
                 }
             }
             currentList.get(i).setLiveBadgeList(liveBadgeList);
-        }
+        }*/
 
         String result;
         if(Integer.parseInt(procedureVo.getRet()) > 0) {

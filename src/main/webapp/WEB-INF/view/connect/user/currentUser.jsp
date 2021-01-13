@@ -68,12 +68,12 @@
         console.log($('input[name="testId"]:checked').val());
         var dtList_data = function (data) {
             data.slctType = slctType;
-            data.pageCnt = 100;
+            data.pageCnt = 10;
             data.searchText = $("#searchText").val();
             data.inner = $('input[name="search_testId"]').is(":checked") ? "0" : "-1";
         };
         dtList_info_detail = new DalbitDataTable($("#tableList"), dtList_data, connectDataTableSource.current);
-        dtList_info_detail.setPageLength(100);
+        dtList_info_detail.setPageLength(10);
         dtList_info_detail.useCheckBox(false);
         dtList_info_detail.useIndex(true);
         dtList_info_detail.createDataTable();
