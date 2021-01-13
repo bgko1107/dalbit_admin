@@ -94,14 +94,16 @@ public class Bro_BroadcastService {
         for(int i=0;i < broadList.size(); i++){
 
 //            fanBadgeList   주간/일간 탑DJ/팽 1,2,3
-            HashMap fanBadgeMap = new HashMap();
+            //DB부하로 인해 주석처리
+            /*HashMap fanBadgeMap = new HashMap();
             fanBadgeMap.put("mem_no", broadList.get(i).getDj_mem_no());
             fanBadgeMap.put("type", -1);
             List fanBadgeList = commonDao.callMemberBadgeSelect(fanBadgeMap);
-            broadList.get(i).setFanBadgeList(fanBadgeList);
+            broadList.get(i).setFanBadgeList(fanBadgeList);*/
 
 //            liveBadgeList    실시간1,2,3 / 회장,부회장,사장,부장,팀장
-            HashMap liveBadgeMap = new HashMap();
+            //DB부하로 인해 주석처리
+            /*HashMap liveBadgeMap = new HashMap();
             liveBadgeMap.put("mem_no", broadList.get(i).getDj_mem_no());
             liveBadgeMap.put("type", -1);
             List liveBadgeList = commonDao.callLiveBadgeSelect(liveBadgeMap);
@@ -109,8 +111,8 @@ public class Bro_BroadcastService {
                 if(DalbitUtil.isEmpty(((FanBadgeVo)liveBadgeList.get(j)).getIcon())){
                     liveBadgeList.remove(j);
                 }
-            }
-            broadList.get(i).setLiveBadgeList(liveBadgeList);
+            }*/
+            broadList.get(i).setLiveBadgeList(null);
 
             if(DalbitUtil.isEmpty(broadList.get(i).getDj_nickname())){
                 MemberVo memInfoOutVo = mem_MemberDao.getMemberInfo(broadList.get(i).getDj_mem_no());
