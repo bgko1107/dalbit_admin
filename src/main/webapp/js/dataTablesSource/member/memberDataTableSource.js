@@ -1351,7 +1351,7 @@ var MemberDataTableSource = {
                     return data == '0' ? "X" : "O";
                 }},
             {'title': '이미지', 'data': 'item_thumbnail','width':'50px','render' : function (data, type, row, meta) {
-                    var imgurl = common.isEmpty(data) ? "https://image.dalbitlive.com/ani/thumbs/moon_thumb.jpg" : data;
+                    var imgurl = common.isEmpty(data) ? "https://image.dalbitlive.com/ani/thumbs/star_thumb.jpg" : data;
                     return '<img class="" src="'+ imgurl +'" width="50px" height="50px"/>';
                 }},
             {'title': '아이템명', 'data': 'itemName'},
