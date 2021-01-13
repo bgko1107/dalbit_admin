@@ -113,7 +113,7 @@ public class Men_SpecialService {
             hm.put("broadcastCnt", DalbitUtil.isEmpty(list.get(i).getBroadcastCnt()) ? "" : list.get(i).getBroadcastCnt());
             hm.put("goodSumCnt", DalbitUtil.isEmpty(list.get(i).getGoodCnt() + list.get(i).getBoostGoodCnt()) ? "" : list.get(i).getGoodCnt() + list.get(i).getBoostGoodCnt());
             hm.put("goodCnt", DalbitUtil.isEmpty(list.get(i).getGoodCnt()) ? "" : list.get(i).getGoodCnt());
-            hm.put("boostGoodCnt", DalbitUtil.isEmpty(list.get(i).getBoostGoodCnt()) ? "" : list.get(i).getBoostGoodCnt());
+            hm.put("boostGoodCnt", DalbitUtil.isEmpty(list.get(i).getBoostGoodCnt()) ? "" : list.get(i).getBoostGoodCnt() / 10);
 
             /*hm.put("fanCnt", DalbitUtil.isEmpty(list.get(i).getFanCnt()) ? "" : list.get(i).getFanCnt());*/
 
