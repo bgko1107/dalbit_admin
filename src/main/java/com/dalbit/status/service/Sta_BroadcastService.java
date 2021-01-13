@@ -4,10 +4,8 @@ package com.dalbit.status.service;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.member.vo.MemberVo;
 import com.dalbit.status.dao.Sta_BroadcastDao;
 import com.dalbit.status.vo.procedure.*;
-import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.dalbit.util.MessageUtil;
 import com.google.gson.Gson;
@@ -188,15 +186,15 @@ public class Sta_BroadcastService {
         ProcedureVo procedureVo = new ProcedureVo(pStatVo);
         ArrayList<P_BroadcastGiftHistoryOutputDetailVo> broadList = sta_BroadcastDao.callBroadcastGiftHistory(procedureVo);
 
-        for(int i=0;i<broadList.size();i ++ ) {
-            MemberVo memInfoOutVo = DalbitUtil.getMemInfo(broadList.get(i).getMem_no());
-            if (!DalbitUtil.isEmpty(memInfoOutVo)) {
-                broadList.get(i).setMem_sex(memInfoOutVo.getMem_sex());
-                broadList.get(i).setMem_birth_year(memInfoOutVo.getMem_birth_year());
-                broadList.get(i).setMem_birth_month(memInfoOutVo.getMem_birth_month());
-                broadList.get(i).setMem_birth_day(memInfoOutVo.getMem_birth_day());
-            }
-        }
+//        for(int i=0;i<broadList.size();i ++ ) {
+//            MemberVo memInfoOutVo = DalbitUtil.getMemInfo(broadList.get(i).getMem_no());
+//            if (!DalbitUtil.isEmpty(memInfoOutVo)) {
+//                broadList.get(i).setMem_sex(memInfoOutVo.getMem_sex());
+//                broadList.get(i).setMem_birth_year(memInfoOutVo.getMem_birth_year());
+//                broadList.get(i).setMem_birth_month(memInfoOutVo.getMem_birth_month());
+//                broadList.get(i).setMem_birth_day(memInfoOutVo.getMem_birth_day());
+//            }
+//        }
 
         P_BroadcastGiftHistoryOutputVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_BroadcastGiftHistoryOutputVo.class);
         if(Integer.parseInt(procedureVo.getRet()) <= 0){
