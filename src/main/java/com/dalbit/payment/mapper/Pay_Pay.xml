@@ -173,52 +173,16 @@
         /* Pay_Pay.xml - getPayListCnt */
         SELECT
 			COUNT(*)
-        FROM (SELECT pay.order_id,
-                   pay.mem_no,
-                   pay.pay_way,
-                   pay.pay_dt_comein,
-                   pay.pay_yn,
-                   pay.pay_ok_date,
-                   pay.pay_ok_time,
-                   pay.pay_slct,
-                   floor(pay.pay_amt) as pay_amt,
-                   pay.item_amt,
-                   pay.pay_code,
-                   pay.app_ver,
-                   pay.first_pay_yn,
-                   pay.card_no,
-                   pay.card_nm,
-                   pay.phone_no,
-                   pay.bank_code,
-                   pay.account_no,
-                   pay.rcpt_dt,
-                   pay.rcpt_nm,
-                   pay.store_id,
-                   pay.cancel_dt,
-                   pay.cancel_state,
-                   pay.fail_msg,
-                   pay.op_name,
-                   pay.bill_id,
-                   pay.os,
-                   pay.dal_cnt,
-                   pay.pay_info,
-                   CASE
-                       WHEN pay.pay_way = 'CN' THEN pay.card_no
-                       WHEN pay.pay_way = 'MC' THEN pay.phone_no
-                       WHEN pay.pay_way = 'VA' THEN pay.account_no
-                       WHEN pay.pay_way = 'InApp'
-                           THEN pay.bill_id END AS pay_info_no,
-                   CASE
-                       WHEN pay.pay_way = 'CN' THEN pay.card_nm
-                       WHEN pay.pay_way = 'VA'
-                           THEN pay.bank_code END AS pay_info_nm,
-						(SELECT count(mem_no)
-						 FROM rd_data.tb_payment_succ
-						 WHERE pay_yn = 'Y' AND mem_no = pay.mem_no) AS 'count',
-						(SELECT sum(pay_amt) paySum
-						 FROM rd_data.tb_payment_succ
-						 WHERE pay_yn = 'Y' AND mem_no = pay.mem_no) AS amount,
-                    money+ruby as tot_dal_cnt
+        FROM (SELECT
+                    pay.mem_no,
+                    pay.pay_way,
+                    pay.pay_dt_comein,
+                    pay.pay_ok_date,
+                    pay.pay_ok_time,
+                    pay.cancel_dt,
+                    pay.cancel_state,
+                    pay.pay_yn,
+                    floor(pay.pay_amt) as pay_amt
             FROM rd_data.tb_payment_succ pay
                   LEFT JOIN  rd_data.tb_member_wallet wallet ON pay.mem_no = wallet.mem_no
 					) payAll
@@ -241,52 +205,16 @@
             sum(case when cancel_state = 'F' then pay_amt end) as totalPayCancelCannotAmt,
             ifnull(count(case when pay_yn = 'Y' then 1 end),0) - ifnull(count(case when cancel_state = 'Y' then 1 end),0)       AS totalRealPayCnt,
             ifnull(sum(case when pay_yn = 'Y' then pay_amt end),0) - ifnull(sum(case when cancel_state = 'Y' then pay_amt end),0) AS totalRealPayAmt
-        FROM (SELECT pay.order_id,
-                   pay.mem_no,
-                   pay.pay_way,
-                   pay.pay_dt_comein,
-                   pay.pay_yn,
-                   pay.pay_ok_date,
-                   pay.pay_ok_time,
-                   pay.pay_slct,
-                   floor(pay.pay_amt) as pay_amt,
-                   pay.item_amt,
-                   pay.pay_code,
-                   pay.app_ver,
-                   pay.first_pay_yn,
-                   pay.card_no,
-                   pay.card_nm,
-                   pay.phone_no,
-                   pay.bank_code,
-                   pay.account_no,
-                   pay.rcpt_dt,
-                   pay.rcpt_nm,
-                   pay.store_id,
-                   pay.cancel_dt,
-                   pay.cancel_state,
-                   pay.fail_msg,
-                   pay.op_name,
-                   pay.bill_id,
-                   pay.os,
-                   pay.dal_cnt,
-                   pay.pay_info,
-                   CASE
-                       WHEN pay.pay_way = 'CN' THEN pay.card_no
-                       WHEN pay.pay_way = 'MC' THEN pay.phone_no
-                       WHEN pay.pay_way = 'VA' THEN pay.account_no
-                       WHEN pay.pay_way = 'InApp'
-                           THEN pay.bill_id END AS pay_info_no,
-                   CASE
-                       WHEN pay.pay_way = 'CN' THEN pay.card_nm
-                       WHEN pay.pay_way = 'VA'
-                           THEN pay.bank_code END AS pay_info_nm,
-						(SELECT count(mem_no)
-						 FROM rd_data.tb_payment_succ
-						 WHERE pay_yn = 'Y' AND mem_no = pay.mem_no) AS 'count',
-						(SELECT sum(pay_amt) paySum
-						 FROM rd_data.tb_payment_succ
-						 WHERE pay_yn = 'Y' AND mem_no = pay.mem_no) AS amount,
-                    money+ruby as tot_dal_cnt
+        FROM (SELECT
+                    pay.mem_no,
+                    pay.pay_way,
+                    pay.pay_dt_comein,
+                    pay.pay_ok_date,
+                    pay.pay_ok_time,
+                    pay.cancel_dt,
+                    pay.cancel_state,
+                    pay.pay_yn,
+                    floor(pay.pay_amt) as pay_amt
             FROM rd_data.tb_payment_succ pay
                   LEFT JOIN  rd_data.tb_member_wallet wallet ON pay.mem_no = wallet.mem_no
 					) payAll
