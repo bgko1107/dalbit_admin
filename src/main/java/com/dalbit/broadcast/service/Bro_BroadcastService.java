@@ -473,7 +473,8 @@ public class Bro_BroadcastService {
         ArrayList<P_LiveListenerListOutputVo> liveListenerList = bro_BroadcastDao.callLiveListenerList(procedureVo);
         P_LiveListenerListOutputVo summary = new Gson().fromJson(procedureVo.getExt(), P_LiveListenerListOutputVo.class);
 
-        for(int i=0;i<liveListenerList.size();i++) {
+        //DB 부하로 인해 뱃지리스트 주석처리
+        /*for(int i=0;i<liveListenerList.size();i++) {
 //            fanBadgeList   주간/일간 탑DJ/팽 1,2,3
             HashMap fanBadgeMap = new HashMap();
             fanBadgeMap.put("mem_no", liveListenerList.get(i).getMemNo());
@@ -492,7 +493,7 @@ public class Bro_BroadcastService {
                 }
             }
             liveListenerList.get(i).setLiveBadgeList(liveBadgeList);
-        }
+        }*/
         String result = "";
         if(liveListenerList.size() > 0) {
             result = gsonUtil.toJson(new JsonOutputVo(Status.생방송청취자목록보기_성공, liveListenerList, new PagingVo(procedureVo.getRet()),summary));
