@@ -403,12 +403,13 @@
         </if>
         <if test='type == "16" or type == "17"'>
             <if test='type == "16"'>
-              where state = '2'
+              where (state = '2' and date_format(b.op_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(b.op_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate})
+                or (state = 4 and date_format(b.op_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(b.op_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate} )
             </if>
             <if test='type == "17"'>
-              where state = '1'
+              where state = '1' and date_format(b.op_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(b.op_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate}
             </if>
-              and date_format(b.op_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(b.op_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate}
+
         </if>
         <if test='searchText != null and searchText != ""'>
             and ( (base.mem_no like CONCAT('%',#{searchText},'%') or base.mem_nick like CONCAT('%',#{searchText},'%')) or (withdrawal.mem_no like CONCAT('%',#{searchText},'%') or withdrawal.mem_nick like CONCAT('%',#{searchText},'%')))
