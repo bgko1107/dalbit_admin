@@ -33,12 +33,8 @@ public class SitebanService {
     @Autowired
     JwtUtil jwtUtil;
 
-    public SitebanVo selectBanword(){
-        SitebanVo sitebanVo = sitebanDao.selectBanword();
-
-        sitebanVo.getBan_word();
-        sitebanVo.getCount();
-
+    public SitebanVo selectBanword(SitebanVo paramSitebanVo){
+        SitebanVo sitebanVo = sitebanDao.selectBanword(paramSitebanVo);
         return sitebanVo;
     }
 
@@ -64,8 +60,8 @@ public class SitebanService {
     /**
      * 엑셀
      */
-    public Model getListExcel(Model model) {
-        String banWord = sitebanDao.excelBanword();
+    public Model getListExcel(Model model, SitebanVo sitebanVo) {
+        String banWord = sitebanDao.excelBanword(sitebanVo);
 
         //List<String> list = new ArrayList<String>();
         String[] splitStr = banWord.split("\\|");

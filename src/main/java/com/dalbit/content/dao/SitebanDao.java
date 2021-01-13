@@ -8,10 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 public interface SitebanDao {
 
     @Transactional(readOnly = true)
-    SitebanVo selectBanword();
+    SitebanVo selectBanword(SitebanVo sitebanVo);
 
     int updateBanword(SitebanVo sitebanVo);
 
     @Transactional(readOnly = true)
-    String excelBanword();
+    String excelBanword(SitebanVo sitebanVo);
 }
