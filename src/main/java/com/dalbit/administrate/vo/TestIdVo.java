@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 public class TestIdVo extends PagingVo {
     private String mem_no;
-    private int emp_no;
+    private String emp_no;
     private String emp_name;
     private int relation;
     private int inner;

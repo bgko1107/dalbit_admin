@@ -140,7 +140,7 @@ public class Adm_AuthorityService {
         return memberList;
     }
 
-    public List<MenuVo> getMemberAuthInfo(int empNo){
+    public List<MenuVo> getMemberAuthInfo(String empNo){
         return admAuthorityDao.getMemberAuthInfo(empNo);
     }
 
@@ -148,7 +148,7 @@ public class Adm_AuthorityService {
         return admAuthorityDao.getMenuAuthInfo(menuIdx);
     }
 
-    public List<MenuVo> getLnbMemberAuthInfo(int empNo){
+    public List<MenuVo> getLnbMemberAuthInfo(String empNo){
 
         List<MenuVo> menuAuthList = getMemberAuthInfo(empNo);
         List<MenuVo> authList = menuAuthList.stream().filter(one -> one.getDepth() == 1).collect(Collectors.toList());

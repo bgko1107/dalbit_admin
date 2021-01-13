@@ -497,9 +497,9 @@ public class Mem_MemberService {
 
         // 신고 -----
         InforexLoginUserInfoVo inforexLoginUserInfoVo = MemberVo.getUserInfo();
-        log.info(Integer.toString(inforexLoginUserInfoVo.getEmp_no()));
-        pMemberReportVo.setMem_no(Integer.toString(inforexLoginUserInfoVo.getEmp_no()));        // 신고자
-        pMemberReportVo.setMem_userid(Integer.toString(inforexLoginUserInfoVo.getEmp_no()));
+        log.info(inforexLoginUserInfoVo.getEmp_no());
+        pMemberReportVo.setMem_no(inforexLoginUserInfoVo.getEmp_no());        // 신고자
+        pMemberReportVo.setMem_userid(inforexLoginUserInfoVo.getEmp_no());
         pMemberReportVo.setMem_nick(MemberVo.getMyMemNo());
         pMemberReportVo.setReported_mem_no(memberInfo.getMem_no());
         pMemberReportVo.setReported_userid(memberInfo.getUserId());

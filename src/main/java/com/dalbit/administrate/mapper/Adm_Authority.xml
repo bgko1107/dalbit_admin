@@ -31,7 +31,7 @@
         )
     </insert>
 
-    <select id="getMemberAuthInfo" parameterType="int" resultType="com.dalbit.common.vo.MenuVo">
+    <select id="getMemberAuthInfo" parameterType="String" resultType="com.dalbit.common.vo.MenuVo">
         /* Adm_Authority.xml - getMemberAuthInfo */
         SELECT
             MENU.IDX
