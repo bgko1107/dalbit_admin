@@ -136,12 +136,12 @@
                         and 5400<![CDATA[<=]]>airtime
                         and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00')<![CDATA[<=]]>start_date
                         and start_date<![CDATA[<=]]>DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) broadcastCnt
-            , ifnull(((select sum(good)
+            , ifnull((select sum(good)
                         from rd_data.tb_member_broadcast_broadcasting
                         where mem_no = basic.mem_no
                         and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
                         and last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) goodCnt
-            , ifnull(((select sum(booster) * 10
+            , ifnull((select sum(booster) * 10
                         from rd_data.tb_member_broadcast_broadcasting
                         where mem_no = basic.mem_no
                         and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
