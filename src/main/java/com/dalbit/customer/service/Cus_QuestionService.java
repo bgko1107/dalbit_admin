@@ -23,7 +23,6 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.ui.Model;
 
 import java.io.BufferedReader;
@@ -72,13 +71,13 @@ public class Cus_QuestionService {
                 questionList.get(i).setAdminMemoCnt(outVo2.getAdminMemoCnt());
             }
 
-            MemberVo memInfoOutVo = DalbitUtil.getMemInfo(questionList.get(i).getMem_no());
-            if(!DalbitUtil.isEmpty(memInfoOutVo)) {
-                questionList.get(i).setMem_userid(memInfoOutVo.getMem_userid());
-                questionList.get(i).setMem_birth_year(memInfoOutVo.getMem_birth_year());
-                questionList.get(i).setMem_birth_month(memInfoOutVo.getMem_birth_month());
-                questionList.get(i).setMem_birth_day(memInfoOutVo.getMem_birth_day());
-            }
+//            MemberVo memInfoOutVo = DalbitUtil.getMemInfo(questionList.get(i).getMem_no());
+//            if(!DalbitUtil.isEmpty(memInfoOutVo)) {
+//                questionList.get(i).setMem_userid(memInfoOutVo.getMem_userid());
+//                questionList.get(i).setMem_birth_year(memInfoOutVo.getMem_birth_year());
+//                questionList.get(i).setMem_birth_month(memInfoOutVo.getMem_birth_month());
+//                questionList.get(i).setMem_birth_day(memInfoOutVo.getMem_birth_day());
+//            }
         }
 
         String result;
