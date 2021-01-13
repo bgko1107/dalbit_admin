@@ -216,6 +216,7 @@
                 ,c.mem_nick		AS nickName
                 ,c.mem_sex
                 ,c.inner
+                ,c.mem_birth_year
             FROM
             (
                 SELECT
@@ -309,9 +310,9 @@
                 a.item_code = b.item_code
             LEFT JOIN
                 (
-                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic
+                    select mem_no, mem_userid ,mem_nick ,mem_sex, mem_birth_year, `inner` from rd_data.tb_member_basic
                     union
-                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak
+                    select mem_no, mem_userid ,mem_nick ,mem_sex, mem_birth_year, `inner` FROM rd_data.tb_member_withdrawal_bak
                 ) AS c
             ON
                 a.mem_no = c.mem_no
@@ -466,9 +467,9 @@
             a.item_code = b.item_code
         LEFT JOIN
             (
-                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic
+                select mem_no, mem_userid ,mem_nick ,mem_sex,mem_birth_year, `inner` from rd_data.tb_member_basic
                 union
-                select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak
+                select mem_no, mem_userid ,mem_nick ,mem_sex,mem_birth_year, `inner` FROM rd_data.tb_member_withdrawal_bak
             ) AS c
         ON
             a.mem_no = c.mem_no
@@ -531,6 +532,7 @@
                 ,c.mem_nick		AS nickName
                 ,c.mem_sex
                 ,c.inner
+                ,c.mem_birth_year
             FROM
             (
                 SELECT
@@ -581,9 +583,9 @@
                 a.item_code = b.item_code
             LEFT JOIN
                 (
-                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` from rd_data.tb_member_basic
+                    select mem_no, mem_userid ,mem_nick ,mem_sex,mem_birth_year, `inner` from rd_data.tb_member_basic
                     union
-                    select mem_no, mem_userid ,mem_nick ,mem_sex, `inner` FROM rd_data.tb_member_withdrawal_bak
+                    select mem_no, mem_userid ,mem_nick ,mem_sex,mem_birth_year, `inner` FROM rd_data.tb_member_withdrawal_bak
                 ) AS c
             ON
                 a.mem_no = c.mem_no
@@ -682,13 +684,13 @@
                       ,ABS( (a.money_new - a.money_old) + (a.ruby_new - a.ruby_old) ) AS ruby
                       ,( a.money_new + a.ruby_new ) AS ruby_new
                       , b.room_no
-                      , ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end ) AS mem_no
-                      , (select `level` From rd_data.tb_member_level where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS `level`
-                      , (select `grade` From rd_data.tb_member_level where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS `grade`
-                      , (select mem_userid From rd_data.tb_member_basic where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS userId
-                      , (select mem_nick From rd_data.tb_member_basic where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS nickName
-                      , (select mem_sex From rd_data.tb_member_basic where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS mem_sex
-                      , (select mem_birth_year From rd_data.tb_member_basic where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS mem_birth_year
+                      , ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' ) AS mem_no
+                      , (select `level` From rd_data.tb_member_level where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS `level`
+                      , (select `grade` From rd_data.tb_member_level where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS `grade`
+                      , (select mem_userid From rd_data.tb_member_basic where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS userId
+                      , (select mem_nick From rd_data.tb_member_basic where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS nickName
+                      , (select mem_sex From rd_data.tb_member_basic where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS mem_sex
+                      , (select mem_birth_year From rd_data.tb_member_basic where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS mem_birth_year
                       , a.last_upd_date
                       , b.item_code
                       , b.item_cnt
@@ -760,9 +762,9 @@
     <select id="callNewWalletByeol_totalCnt" parameterType="com.dalbit.member.vo.procedure.P_WalletByeolVo" resultType="integer">
         select count(*) AS totalCnt
              From rd_data.tb_member_wallet_gold a
-        left join rd_data.tb_member_broadcast_item b on a.link_idx = b.idx
+        left join rd_data.tb_member_broadcast_item b on a.link_idx = b.idx and a.type != 3
         LEFT JOIN rd_data.tbl_gift_item c ON b.item_code = c.item_code
-            where (link_idx > 0 or type in (4, 5, 6, 7, 8, 21, 22, 23))
+            where (link_idx > 0 or type in (3, 4, 5, 6, 7, 8, 21, 22, 23))
             <include refid="condition_newByeol"/>
     </select>
 
@@ -775,13 +777,13 @@
                       ,ABS( a.gold_new - a.gold_old) AS gold
                       ,a.gold_new
                       , b.room_no
-                      , ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end ) AS mem_no
-                      , (select `level` From rd_data.tb_member_level where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS `level`
-                      , (select `grade` From rd_data.tb_member_level where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS `grade`
-                      , (select mem_userid From rd_data.tb_member_basic where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS userId
-                      , (select mem_nick From rd_data.tb_member_basic where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS nickName
-                      , (select mem_sex From rd_data.tb_member_basic where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS mem_sex
-                      , (select mem_birth_year From rd_data.tb_member_basic where mem_no = ( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else '10000000000000' end )) AS mem_birth_year
+                      , IFNULL( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' ) AS mem_no
+                      , (select `level` From rd_data.tb_member_level where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end , '10000000000000')) AS `level`
+                      , (select `grade` From rd_data.tb_member_level where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS `grade`
+                      , (select mem_userid From rd_data.tb_member_basic where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS userId
+                      , (select mem_nick From rd_data.tb_member_basic where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS nickName
+                      , (select mem_sex From rd_data.tb_member_basic where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS mem_sex
+                      , (select mem_birth_year From rd_data.tb_member_basic where mem_no = ifnull( case when a.mem_no = b.mem_no then if(b.gifted_mem_no = 1, '10000000000000', b.gifted_mem_no) when a.mem_no = b.gifted_mem_no then b.mem_no else b.gifted_mem_no end, '10000000000000' )) AS mem_birth_year
                       , a.last_upd_date
                       , b.item_code
                       , b.item_cnt
@@ -795,14 +797,16 @@
                                    then concat('받은 별 ',b.gold)
                                    when b.item_type=9
                                    then a.use_contents
+                                   when a.type=3
+                                   then a.use_contents
                                    else c.item_name
                                    end
                         ) AS itemName
                         , c.item_thumbnail
                  From rd_data.tb_member_wallet_gold a
-            left join rd_data.tb_member_broadcast_item b on a.link_idx = b.idx
+            left join rd_data.tb_member_broadcast_item b on a.link_idx = b.idx and a.type != 3
             LEFT JOIN rd_data.tbl_gift_item c ON b.item_code = c.item_code
-                where (link_idx > 0 or type in (4, 5, 6, 7, 8, 21, 22, 23))
+                where (link_idx > 0 or type in (3, 4, 5, 6, 7, 8, 21, 22, 23))
                 <include refid="condition_newByeol"/>
                 order by a.last_upd_date desc
                 limit #{pageStart}, #{pageCnt}
