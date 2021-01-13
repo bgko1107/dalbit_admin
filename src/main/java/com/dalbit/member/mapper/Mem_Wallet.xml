@@ -787,7 +787,7 @@
                       , a.last_upd_date
                       , b.item_code
                       , b.item_cnt
-                      , if(a.link_idx = 0, 0, secret) AS secret
+                      , if(a.link_idx = 0, 0, if(a.`type`=3, 0 , secret)) AS secret
                       , if(a.link_idx = 0, a.use_contents,
                               case when b.item_type=5
                                    then concat('별 교환 ',b.gold)
