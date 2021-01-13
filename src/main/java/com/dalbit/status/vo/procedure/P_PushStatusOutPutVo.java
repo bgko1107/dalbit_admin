@@ -34,6 +34,8 @@ public class P_PushStatusOutPutVo {
     private int p31Fail;
     private int p20Succ;
     private int p20Fail;
+    private int p25Succ;
+    private int p25Fail;
     private int p19Succ;
     private int p19Fail;
     private int p62Succ;
@@ -191,6 +193,12 @@ public class P_PushStatusOutPutVo {
     private int rateSet_10n;
     private int sumSet_10y;
     private int sumSet_10yn;
+    private int Set_11y;
+    private int Set_11n;
+    private int rateSet_11y;
+    private int rateSet_11n;
+    private int sumSet_11y;
+    private int sumSet_11yn;
 
 
 }

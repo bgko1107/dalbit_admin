@@ -12,15 +12,16 @@
         <div id="div_yearStateSimpleTable">
             <table class="table table-bordered _tableHeight" data-height="23px" id="simpleDayTable">
                 <colgroup>
-                    <col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
-                    <col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
-                    <col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
+                    <col width="6.1%"/><col width="6.1%"/><col width="6.1%"/><col width="6.1%"/><col width="6.1%"/>
+                    <col width="6.1%"/><col width="6.1%"/><col width="6.1%"/><col width="6.1%"/><col width="6.1%"/>
+                    <col width="6.1%"/><col width="6.1%"/><col width="6.1%"/><col width="6.1%"/><col width="6.1%"/>
                 </colgroup>
                 <thead>
                 <tr>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">구분</th>
                     <th class="_bgColor" data-bgColor="#b4c7e7">성별</th>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">마이스타</th>
+                    <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">알림받기</th>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">선물</th>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">팬 등록</th>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">팬 보드</th>
@@ -39,22 +40,24 @@
         </div>
 
         <div id="div_yearStateDetailTable" class="col-md-12 no-padding" style="display: none">
-            <table class="table table-bordered _tableHeight yearStateTable" data-height="23px" style="width: 3500px;">
+            <table class="table table-bordered _tableHeight yearStateTable" data-height="23px" style="width: 3770px;">
                 <colgroup>
-                    <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                    <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                    <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                    <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                    <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                    <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                    <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                    <col width="2.7%"/><col width="2.7%"/>
+                    <col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/>
+                    <col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/>
+                    <col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/>
+                    <col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/>
+                    <col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/>
+                    <col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/>
+                    <col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/>
+                    <col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/><col width="2.4%"/>
+                    <col width="2.4%"/>
                 </colgroup>
                 <thead>
                 <tr>
                     <th rowspan="3" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">구분</th>
                     <th rowspan="3" class="_bgColor" data-bgColor="#b4c7e7">성별</th>
                     <th colspan="4" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">마이스타</th>
+                    <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">알림받기</th>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">선물</th>
                     <th class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">팬 등록</th>
                     <th colspan="4" class="_bgColor _fontColor" data-bgColor="#4472c4" data-fontcolor="white">팬 보드</th>
@@ -72,6 +75,7 @@
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">신규공지 등록</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">공지댓글</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">클립 등록</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">방송 시작</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">수신</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">최초 1회</th>
                     <th colspan="2" class="_bgColor" data-bgColor="#b4c7e7">신규 글 등록</th>
@@ -81,7 +85,7 @@
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">선물</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">DJ/FAN</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">생일 축하</th>
-                    <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">공지 가입>15일 간 미접속</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">공지 가입<br/>15일 간 미접속</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">이벤트 알림</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">1:1 문의 답변</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#b4c7e7">완료</th>
@@ -303,7 +307,7 @@
         $("#div_yearStateDetailTable").hide();
         $("#div_yearStateSimpleTable").hide();
         if( $("#div_yearScroll").find("#bt_tableSw").html() == "전체보기"){
-            $("#div_yearScroll").css('width','3500px');
+            $("#div_yearScroll").css('width','3800px');
             $("#div_yearScroll").find("#bt_tableSw").html('간략하게');
             $("#div_yearScroll").find("#div_yearStateDetailTable").show();
         }else{
@@ -364,6 +368,7 @@
         <td class="_bgColor" data-bgcolor="#bfbfbf">총합</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">성공수치</span><br/>(수신거부)<br/>(거부비율%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p25Succ}}</span><br/>({{addComma p25Fail}})<br/>({{average p25Fail p25Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%)</td>
@@ -384,6 +389,7 @@
         <td class="year _bgColor font-bold" data-bgcolor="#b4c7e7">{{data.the_date}}</td>
         <td class="_fontColor _bgColor" data-bgColor="#dae3f3" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{{sexIcon data.gb}}}</td>
         <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="11, 18, 24, 30"          data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p11Succ '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{else}}{{#dalbit_if p11Fail '!=' 0}}<span class="font-bold">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+        <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="25"                      data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p25Succ '!=' 0}}<span class="font-bold">{{addComma p25Succ}}</span><br/>({{addComma p25Fail}})<br/>({{average p25Fail p25Succ}}%){{else}}{{#dalbit_if p25Fail '!=' 0}}<span class="font-bold">{{addComma p25Succ}}</span><br/>({{addComma p25Fail}})<br/>({{average p25Fail p25Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
         <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="15"                      data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p15Succ '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{else}}{{#dalbit_if p15Fail '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
         <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="16"                      data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p16Succ '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{else}}{{#dalbit_if p16Fail '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
         <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateSimplePopup($(this))" data-type="17, 21, 22, 23"          data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p17Succ '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{else}}{{#dalbit_if p17Fail '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
@@ -414,6 +420,7 @@
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p18Succ}}</span><br/>({{addComma p18Fail}})<br/>({{average p18Fail p18Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p24Succ}}</span><br/>({{addComma p24Fail}})<br/>({{average p24Fail p24Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p30Succ}}</span><br/>({{addComma p30Fail}})<br/>({{average p30Fail p30Succ}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p25Succ}}</span><br/>({{addComma p25Fail}})<br/>({{average p25Fail p25Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%)</td>
@@ -457,6 +464,7 @@
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateDetailPopup($(this))" data-type="18" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p18Succ '!=' 0}}<span class="font-bold">{{addComma p18Succ}}</span><br/>({{addComma p18Fail}})<br/>({{average p18Fail p18Succ}}%){{else}}{{#dalbit_if p18Fail '!=' 0}}<span class="font-bold">{{addComma p18Succ}}</span><br/>({{addComma p18Fail}})<br/>({{average p18Fail p18Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateDetailPopup($(this))" data-type="24" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p24Succ '!=' 0}}<span class="font-bold">{{addComma p24Succ}}</span><br/>({{addComma p24Fail}})<br/>({{average p30Fail p24Succ}}%){{else}}{{#dalbit_if p24Fail '!=' 0}}<span class="font-bold">{{addComma p24Succ}}</span><br/>({{addComma p24Fail}})<br/>({{average p24Fail p24Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateDetailPopup($(this))" data-type="30" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p30Succ '!=' 0}}<span class="font-bold">{{addComma p30Succ}}</span><br/>({{addComma p30Fail}})<br/>({{average p30Fail p30Succ}}%){{else}}{{#dalbit_if p30Fail '!=' 0}}<span class="font-bold">{{addComma p30Succ}}</span><br/>({{addComma p30Fail}})<br/>({{average p30Fail p30Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
+    <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateDetailPopup($(this))" data-type="25" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p25Succ '!=' 0}}<span class="font-bold">{{addComma p25Succ}}</span><br/>({{addComma p25Fail}})<br/>({{average p25Fail p25Succ}}%){{else}}{{#dalbit_if p25Fail '!=' 0}}<span class="font-bold">{{addComma p25Succ}}</span><br/>({{addComma p25Fail}})<br/>({{average p25Fail p25Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateDetailPopup($(this))" data-type="15" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p15Succ '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{else}}{{#dalbit_if p15Fail '!=' 0}}<span class="font-bold">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateDetailPopup($(this))" data-type="16" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p16Succ '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{else}}{{#dalbit_if p16Fail '!=' 0}}<span class="font-bold">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>
     <td class="_fontColor" onmouseover="mouseover($(this));" onmouseout="mouseout($(this));" onclick="yearStateDetailPopup($(this))" data-type="17" data-startdate="{{the_date}}" data-fontcolor="{{#dalbit_if data.gb '==' 'm'}}blue{{/dalbit_if}}{{#dalbit_if data.gb '==' 'f'}}red{{/dalbit_if}}">{{#dalbit_if p17Succ '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{else}}{{#dalbit_if p17Fail '!=' 0}}<span class="font-bold">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%){{/dalbit_if}}{{/dalbit_if}}</td>

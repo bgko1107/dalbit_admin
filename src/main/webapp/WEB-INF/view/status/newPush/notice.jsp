@@ -6,10 +6,11 @@
     <div class="widget-content mt10">
         <table class="table table-bordered _tableHeight" data-height="23px">
             <colgroup>
-                <col width="5.5%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
-                <col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
-                <col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
-                <col width="5%"/><col width="5%"/><col width="4.5%"/><col width="5%"/><col width="5%"/>
+                <col width="5.5%"/><col width="4.2%"/><col width="4.2%"/><col width="4.2%"/><col width="4.2%"/>
+                <col width="4.2%"/><col width="4.2%"/><col width="4.2%"/><col width="4.2%"/><col width="4.2%"/>
+                <col width="4.2%"/><col width="4.2%"/><col width="4.2%"/><col width="4.2%"/><col width="4.2%"/>
+                <col width="4.2%"/><col width="4.2%"/><col width="4.2%"/><col width="4.2%"/><col width="4.2%"/>
+                <col width="4.2%"/><col width="4.2%"/>
             </colgroup>
             <thead>
             <tr>
@@ -24,8 +25,11 @@
                 <th colspan="2" class="_bgColor" data-bgcolor="#b4c7e7">팬보드 댓글 등록</th>
                 <th colspan="2" class="_bgColor" data-bgcolor="#b4c7e7">선물 도착</th>
                 <th colspan="2" class="_bgColor" data-bgcolor="#b4c7e7">1:1 문의 답변 도착</th>
+                <th colspan="2" class="_bgColor" data-bgcolor="#b4c7e7">알림받기<br/>방송시작</th>
             </tr>
             <tr>
+                <th class="_bgColor" data-bgcolor="#f3f1f6"><span style="color: #d9450c;">설정(비율)</span><br/>해제(비율)</th>
+                <th class="_bgColor" data-bgcolor="#f3f1f6">설정<br/>총계</th>
                 <th class="_bgColor" data-bgcolor="#f3f1f6"><span style="color: #d9450c;">설정(비율)</span><br/>해제(비율)</th>
                 <th class="_bgColor" data-bgcolor="#f3f1f6">설정<br/>총계</th>
                 <th class="_bgColor" data-bgcolor="#f3f1f6"><span style="color: #d9450c;">설정(비율)</span><br/>해제(비율)</th>
@@ -131,6 +135,12 @@
         {{#dalbit_if data.gender '==' 'm'}} <td rowspan="3" class="font-bold"><span style="color: #d9450c">{{addComma data.sumSet_8y}}</span><br/>{{addComma data.sumSet_8yn}} </td> {{/dalbit_if}}
         <td><span style="color: {{#dalbit_if data.gender '==' 'm'}} blue {{/dalbit_if}}{{#dalbit_if data.gender '==' 'f'}} red {{/dalbit_if}};"><span class="font-bold">{{addComma data.Set_9y}}</span> ({{data.rateSet_9y}})</span><br/>{{addComma data.Set_9n}} ({{data.rateSet_9n}})</td>
         {{#dalbit_if data.gender '==' 'm'}} <td rowspan="3" class="font-bold"><span style="color: #d9450c">{{addComma data.sumSet_9y}}</span><br/>{{addComma data.sumSet_9yn}} </td> {{/dalbit_if}}
+
+        <%--<td><span style="color: {{#dalbit_if data.gender '==' 'm'}} blue {{/dalbit_if}}{{#dalbit_if data.gender '==' 'f'}} red {{/dalbit_if}};"><span class="font-bold">{{addComma data.Set_10y}}</span> ({{data.rateSet_10y}})</span><br/>{{addComma data.Set_10n}} ({{data.rateSet_10n}})</td>--%>
+        <%--{{#dalbit_if data.gender '==' 'm'}} <td rowspan="3" class="font-bold"><span style="color: #d9450c">{{addComma data.sumSet_10y}}</span><br/>{{addComma data.sumSet_10yn}} </td> {{/dalbit_if}}--%>
+
+        <td><span style="color: {{#dalbit_if data.gender '==' 'm'}} blue {{/dalbit_if}}{{#dalbit_if data.gender '==' 'f'}} red {{/dalbit_if}};"><span class="font-bold">{{addComma data.Set_11y}}</span> ({{data.rateSet_11y}})</span><br/>{{addComma data.Set_11n}} ({{data.rateSet_11n}})</td>
+        {{#dalbit_if data.gender '==' 'm'}} <td rowspan="3" class="font-bold"><span style="color: #d9450c">{{addComma data.sumSet_11y}}</span><br/>{{addComma data.sumSet_11yn}} </td> {{/dalbit_if}}
     </tr>
     {{/each}}
 </script>
