@@ -187,6 +187,7 @@ var push_push_slct = [
 var status_simple_push_type = [
     new COMMON_CODE(null, 'status_simple_push_type', '카테고리')
     ,new COMMON_CODE('11, 18, 24, 30','11, 18, 24, 30','마이스타')
+    ,new COMMON_CODE('25','알림받기')
     ,new COMMON_CODE('15','15','선물')
     ,new COMMON_CODE('16','16','팬 등록')
     ,new COMMON_CODE('17, 21, 22, 23','17, 21, 22, 23','팬 보드')
@@ -205,6 +206,7 @@ var status_detail_push_type = [
     ,new COMMON_CODE('18','18','신규공지 등록')
     ,new COMMON_CODE('30','30','클립 등록')
     ,new COMMON_CODE('15','15','수신')
+    ,new COMMON_CODE('25','25','알림받기')
     ,new COMMON_CODE('16','16','최초 1회')
     ,new COMMON_CODE('17','17','신규 글 등록(일반)')
     ,new COMMON_CODE('21','21','신규 글 등록(비밀)')
