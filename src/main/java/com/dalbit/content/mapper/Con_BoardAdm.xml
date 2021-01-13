@@ -541,6 +541,7 @@
         select '1' type , count(*) AS totalCnt      <!--사연-->
           from rd_data.tb_broadcast_room bro
          inner join rd_data.tb_broadcast_room_story sto on sto.room_no = bro.room_no
+         INNER JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
          <where>
             <if test='start_sel != null and start_sel !=""'>
                 and sto.write_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
