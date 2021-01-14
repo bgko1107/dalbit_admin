@@ -4,6 +4,7 @@ var question_status = [
     , new COMMON_CODE('0', '0', '미처리')
     , new COMMON_CODE('1', '1', '처리완료')
     , new COMMON_CODE('2', '2', '처리중')
+    , new COMMON_CODE('3', '3', '임시처리')
 ];
 
 

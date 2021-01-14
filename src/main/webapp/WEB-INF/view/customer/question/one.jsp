@@ -421,7 +421,12 @@
                     <td>{{write_date}}</td>
 
                     <th>처리상태</th>
-                    <td>{{{getCommonCodeLabel state 'question_status'}}}
+                    <td>
+                        {{#dalbit_if state '==' 3}}
+                            <span style="color:blue">{{{getCommonCodeLabel state 'question_status'}}}</span>
+                        {{else}}
+                            {{{getCommonCodeLabel state 'question_status'}}}
+                        {{/dalbit_if}}
                         <c:if test="${insertYn eq 'Y'}">
                             {{#equal state '2'}}
                             <button type="button" class="btn-sm btn btn-default bt_chatchRelease">해제</button>
@@ -436,6 +441,7 @@
                             <button type="button" class="btn-sm btn btn-default bt_chatchRelease">해제</button>
                             {{/equal}}
                         </c:if>
+
                     </td>
                 </tr>
                 <tr>

@@ -66,7 +66,11 @@ var questionDataTableSource = {
                     return data;
                 }},
             {'title': '처리상태', 'data': 'state','width':'60px','render' : function(data){
-                    return util.getCommonCodeLabel(data, question_status);
+                    if(data == 3){
+                        return '<span style="color: blue;">' + util.getCommonCodeLabel(data, question_status) + '</span>';
+                    }else{
+                        return util.getCommonCodeLabel(data, question_status);
+                    }
                 }},
             {'title': '처리자', 'data': 'op_name','width':'90px'},
         ]
