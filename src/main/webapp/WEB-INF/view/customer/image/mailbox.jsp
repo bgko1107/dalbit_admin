@@ -101,7 +101,7 @@
                         <a href="javascript://" onclick="mailboxPopUp($(this))" data-chatno="{{data.chat_no}}">{{data.chat_no}}</a>
                     </h4>
                     <ul class="list-unstyled">
-                        <li><strong>작성일시:</strong> <br />{{data.last_upd_date}}</li>
+                        <li><strong>작성일시:</strong> <br />{{substr data.last_upd_date 0 19}}</li>
                         <li><strong>Nick:</strong> {{replaceHtml data.mem_nick}}</li>
                         <li><strong>No:</strong>
                             <a href="javascript://" class="_openMemberPop" data-memno="{{data.mem_no}}" >

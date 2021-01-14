@@ -143,8 +143,14 @@
                     <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">이미지 전송</a>
                 {{/dalbit_if}}
                 {{#dalbit_if msgType '==' 3}}       <!-- 아이템 -->
-                    <img class="_webpImage" src="{{item_thumbnail}}" width="50" height="50" data-webpImage="{{webp_image}}"/>
-                    <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">아이템 전송</a>
+                    <%--<img class="_webpImage" src="{{item_thumbnail}}" width="50" height="50" data-webpImage="{{webp_image}}"/>--%>
+                    <%--<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">아이템 전송</a>--%>
+
+                    <div style="display:flex; margin-left:40px;">
+                        <img src="{{item_thumbnail}}" width="50" height="50" data-webpImage="{{webp_image}}" />
+                        <p>{{{viewMailBoxItemJson memNick data4}}}</p>
+                    </div>
+
                 {{/dalbit_if}}
             </td>
             <td>{{substr lastChatDate 0 19}}</td>

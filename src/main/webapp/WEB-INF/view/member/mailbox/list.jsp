@@ -78,7 +78,7 @@
         </tr>
         <tr>
             <th class="_bgColor" data-bgcolor="#dae3f3">참여회원 수</th>
-            <th class="_bgColor" data-bgcolor="#dae3f3">대화 수</th>
+            <th class="_bgColor" data-bgcolor="#dae3f3">건 수</th>
             <th class="_bgColor" data-bgcolor="#dae3f3">보낸 달</th>
             <th class="_bgColor" data-bgcolor="#dae3f3">받은 별</th>
         </tr>

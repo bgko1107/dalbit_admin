@@ -1230,7 +1230,7 @@ var MemberDataTableSource = {
             {'title': '개설회원', 'data': 'memNo', 'render': function (data, type, row, meta) {
                     return util.memNoLink(data, data) + '<br/>' + row.memNick;
                 }},
-            {'title': '참여회원', 'data': 'targetMemNo', 'width':'100px', 'render': function (data, type, row, meta) {
+            {'title': '참여회원', 'data': 'targetMemNo', 'render': function (data, type, row, meta) {
                     return util.memNoLink(data, data) + '<br/>' + row.target_mem_nick;
                 }},
             {'title': '대화내용', 'data': 'msg', 'render': function (data, type, row, meta) {
@@ -1243,7 +1243,7 @@ var MemberDataTableSource = {
                     }
                 }},
             {'title': '기간', 'data': 'diffDate', 'render': function (data, type, row, meta) {
-                    return common.timeStampDay(data);
+                    return common.timeStampDay(data) + ' 전';
                 }},
             {'title': '상태', 'data': 'state', 'render': function (data, type, row, meta) {
                     if(data == "0"){
