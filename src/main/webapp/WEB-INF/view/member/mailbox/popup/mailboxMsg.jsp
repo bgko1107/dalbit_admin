@@ -210,7 +210,7 @@
             <img class="fullSize_background thumbnailImg" alt="your image" src="{{renderImage itemThumbnail}}" style='height:68px; width:68px; margin: auto;' />
             {{/dalbit_if}}
             {{#dalbit_if type '==' 3}}       <!-- 아이템 -->
-                <div style="display:flex; margin-left:40px;">
+                <div style="display:flex;">
                     <img src="{{itemThumbnail}}" width="50" height="50" data-webpImage="{{webpImage}}" />
                     <p>{{{viewMailBoxItemJson mem_nick data4}}}</p>
                 </div>

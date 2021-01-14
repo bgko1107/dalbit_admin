@@ -146,7 +146,7 @@
                     <%--<img class="_webpImage" src="{{item_thumbnail}}" width="50" height="50" data-webpImage="{{webp_image}}"/>--%>
                     <%--<a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">아이템 전송</a>--%>
 
-                    <div style="display:flex; margin-left:40px;">
+                    <div style="display:flex;">
                         <img src="{{item_thumbnail}}" width="50" height="50" data-webpImage="{{webp_image}}" />
                         <p>{{{viewMailBoxItemJson memNick data4}}}</p>
                     </div>
