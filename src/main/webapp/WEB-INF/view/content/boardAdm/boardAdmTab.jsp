@@ -5,8 +5,7 @@
 
 
 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
-    <li class="active"><a href="#mailboxList" role="tab" data-toggle="tab" id="tab_mailboxList">우체통</a></li>
-    <li><a href="#storyList" role="tab" data-toggle="tab" id="tab_storyList">사연</a></li>
+    <li class="active"><a href="#storyList" role="tab" data-toggle="tab" id="tab_storyList">사연</a></li>
     <li><a href="#fanBoardList" role="tab" data-toggle="tab" id="tab_fanBoardList">팬보드</a></li>
     <li><a href="#fanBoardReply" role="tab" data-toggle="tab" id="tab_fanBoardReply">팬보드댓글</a></li>
     <li><a href="#noticeList" role="tab" data-toggle="tab" id="tab_noticeList">방송방공지</a></li>
@@ -14,10 +13,10 @@
     <li><a href="#broadNoticeReply" role="tab" data-toggle="tab" id="tab_broadNoticeReply">회원공지댓글</a></li>   <!-- 2020.11.10 추가 -->
     <li><a href="#profileMsgList" role="tab" data-toggle="tab" id="tab_profileMsgList">프로필메세지</a></li>
     <li><a href="#clipReply" role="tab" data-toggle="tab" id="tab_clipReply">클립댓글</a></li> <!-- 클립댓글-->
+    <li><a href="#mailboxList" role="tab" data-toggle="tab" id="tab_mailboxList">우체통</a></li>
 </ul>
 <div class="tab-content no-padding">
-    <div class="tab-pane fade in active" id="mailboxList"><jsp:include page="mailboxList.jsp"/></div>
-    <div class="tab-pane fade" id="storyList"><jsp:include page="storyList.jsp"/></div>
+    <div class="tab-pane fade in active" id="storyList"><jsp:include page="storyList.jsp"/></div>
     <div class="tab-pane fade" id="fanBoardList"><jsp:include page="fanBoardList.jsp"/></div>
     <div class="tab-pane fade" id="fanBoardReply"><jsp:include page="fanBoardReply.jsp"/></div>
     <div class="tab-pane fade" id="noticeList"><jsp:include page="noticeList.jsp"/></div>
@@ -25,11 +24,12 @@
     <div class="tab-pane fade" id="broadNoticeReply"><jsp:include page="broadNoticeReply.jsp"/></div>
     <div class="tab-pane fade" id="profileMsgList"><jsp:include page="profileMsgList.jsp"/></div>
     <div class="tab-pane fade" id="clipReply"><jsp:include page="clipReply.jsp"/></div>
+    <div class="tab-pane fade" id="mailboxList"><jsp:include page="mailboxList.jsp"/></div>
 </div>
 
 
 <script type="text/javascript">
-    var tabId = "tab_mailboxList" ;
+    var tabId = "tab_storyList" ;
     $("#tablist_con li a").on('click', function(){
         tabId = $(this).prop('id');
 

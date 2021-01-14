@@ -37,6 +37,7 @@ public class P_DeclarationListOutputVo extends BaseVo {
     private Date regDate;
     private String opDateFormat;
     private String regDateFormat;
+    private String roomType;
 
     private int inner;
     private int reported_inner;

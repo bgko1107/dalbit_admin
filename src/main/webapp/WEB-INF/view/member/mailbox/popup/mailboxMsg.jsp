@@ -63,16 +63,16 @@
             <div class="dataTables_paginate paging_full_numbers" id="mailbox_paginate_top"></div>
             <table id="list_info" class="table table-sorting table-hover table-bordered">
                 <colgroup>
-                    <col width="16%"><col width="12%"><col width="30%"><col width="10%"><col width="16%">
+                    <col width="10%"><col width="16%"><col width="12%"><col width="30%"><col width="16%">
                     <col width="7%">
                 </colgroup>
                 <thead>
                 <tr>
+                    <th>일시</th>
                     <th>작성자</th>
                     <th>성별</th>
                     <th>내용</th>
                     <th>기간</th>
-                    <th>일시</th>
                     <th>상태</th>
                 </tr>
                 </thead>
@@ -92,6 +92,13 @@
         mailboxPagingInfo.pageNo = 1;
         msgList();
     });
+
+    $('input[id="txt_search"]').keydown(function() {
+        if (event.keyCode === 13) {
+            msgList();
+        };
+    });
+
     $(document).ready(function() {
         slctType = 3;
         dateType();
@@ -115,7 +122,7 @@
         data.startDate = $("#startDate").val() + " 00:00:00";
         data.endDate = $("#endDate").val() + " 23:59:59";
         data.inner = $('input[name="search_testId"]').is(":checked") ? "0" : "-1";
-        data.searchText = common.isEmpty($("#searchText").val()) ? "" : $("#searchText").val();
+        data.searchText = common.isEmpty($("#txt_search").val()) ? "" : $("#txt_search").val();
         data.pageNo = mailboxPagingInfo.pageNo;
         data.pageCnt = mailboxPagingInfo.pageCnt;
         data.msgType = $("#msgType").val();
@@ -154,33 +161,62 @@
         msgList(pagingInfo.pageNo);
     }
 
+    // thumbnail 명칭 겹쳐서 thumbnailImg 로 세팅
+    var xOffset = 10;
+    var yOffset = 30;
+    var height = 0;
+    $(document).on("mouseover",".thumbnailImg",function(e){ //마우스 오버
+        if(common.isEmpty($(this).attr("src"))){
+            return;
+        }
+
+        $("body").append("<p id='preview'><img id='previewImage' src='"+ $(this).attr("src") +"' width='300px' /></p>"); //이미지
+
+        $("#previewImage").load(function () {
+            height = $(this).height();
+        });
+
+        $("#preview")
+            .css("top",(e.pageY - ((height/2) + (height/2)) + 30) + "px")
+            .css("left",(e.pageX + yOffset) + "px")
+            .fadeIn("fast");
+    });
+    $(document).on("mousemove",".thumbnailImg",function(e){ //마우스 이동
+        $("#preview")
+            .css("top",(e.pageY - ((height/2) + (height/2)) + 30) + "px")
+            .css("left",(e.pageX + yOffset) + "px");
+    });
+    $(document).on("mouseout",".thumbnailImg",function(){ //마우스 아웃
+        $("#preview").remove();
+    });
+
 </script>
 
 <script id="tmp_list" type="text/x-handlebars-template">
     {{#each this}}
     <tr {{#dalbit_if inner '==' 1}} class="bg-testMember" {{/dalbit_if}}>
+        <td>{{substr last_upd_date 0 19}}</td>
         <td>
             {{{memNoLink mem_no mem_no}}}
             <br/>
             {{mem_nick}}
         </td>
         <td>{{{sexIcon mem_sex mem_birth_year}}}</td>
-        <td style="word-break:break-all">
+        <td style="word-break:break-all;text-align: left">
             {{#dalbit_if type '==' 1}}       <!-- 메시지 -->
             {{{replaceEnter msg}}}
             {{/dalbit_if}}
             {{#dalbit_if type '==' 2}}       <!-- 이미지 -->
-            <img class="fullSize_background thumbnail" alt="your image" src="{{renderImage itemThumbnail}}" style='height:68px; width:68px; margin: auto;vertical-align:middle;' />
+            <img class="fullSize_background thumbnailImg" alt="your image" src="{{renderImage itemThumbnail}}" style='height:68px; width:68px; margin: auto;' />
             {{/dalbit_if}}
             {{#dalbit_if type '==' 3}}       <!-- 아이템 -->
-                <div style="display:flex; align-items:center;margin-left:40px;">
+                <div style="display:flex; margin-left:40px;">
                     <img src="{{itemThumbnail}}" width="50" height="50" data-webpImage="{{webpImage}}" />
                     <p>{{{viewMailBoxItemJson mem_nick data4}}}</p>
                 </div>
             {{/dalbit_if}}
         </td>
-        <td>{{timeStampDay time}}</td>
-        <td>{{substr last_upd_date 0 19}}</td>
+        <td>{{timeStampDay time}} 전</td>
         <td>
             <!--{{#dalbit_if delete_yn '==' 0}}
                 정상

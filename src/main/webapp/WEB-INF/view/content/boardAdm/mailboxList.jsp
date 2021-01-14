@@ -9,15 +9,16 @@
         <table id="mailboxTable" class="table table-sorting table-hover table-bordered mt10">
             <colgroup>
                 <col width="5%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="35%"/>
-                <col width="10%"/><col width="4%"/>
+                <col width="10%"/><col width="8%"/><col width="5%"/>
             </colgroup>
             <thead>
             <tr>
                 <th>No</th>
-                <th>대화일시</th>
+                <th>우체통번호</th>
                 <th>개설회원</th>
                 <th>참여회원</th>
                 <th>대화내용</th>
+                <th>대화일시</th>
                 <th>기간</th>
                 <th>상태</th>
             </tr>
@@ -122,7 +123,9 @@
     {{#each this.data as |data|}}
         <tr {{#dalbit_if inner '==' 1}} style="background-color : #dae3f3" {{/dalbit_if}}>
             <td>{{indexDesc ../pagingVo/totalCnt rowNum}}</td>
-            <td>{{lastChatDate}}</td>
+            <td>
+                <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">{{chatNo}}</a>
+            </td>
             <td>
                 {{{memNoLink memNo memNo}}}<br/>
                 {{memNick}}
@@ -131,7 +134,7 @@
                 {{{memNoLink targetMemNo targetMemNo}}}<br/>
                 {{target_mem_nick}}
             </td>
-            <td>
+            <td class="word-break" style="text-align: left; width: 300px">
                 {{#dalbit_if msgType '==' 1}}       <!-- 메시지 -->
                     <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">{{{replaceEnter msg}}}</a>
                 {{/dalbit_if}}
@@ -144,7 +147,8 @@
                     <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">아이템 전송</a>
                 {{/dalbit_if}}
             </td>
-            <td>{{timeStampDay diffDate}}</td>
+            <td>{{substr lastChatDate 0 19}}</td>
+            <td>{{timeStampDay diffDate}} 전</td>
             <td>
                 {{#dalbit_if state '==' 0}}
                     대화전

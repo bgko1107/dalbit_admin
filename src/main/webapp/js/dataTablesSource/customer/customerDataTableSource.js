@@ -43,9 +43,18 @@ var customerDataTableSource = {
             ,{'title': '처리 상태', 'data': 'op_code', 'name': 'slctType', 'render' : function(data) {
                 return util.getCommonCodeLabel(data, declaration_slctType);
                 }}
-            ,{'title': '방송방', 'data': 'room_no', 'defaultContent':'-', 'render': function(data) {
-                if(common.isEmpty(data)){return "-"}
-                return util.roomNoLink(data, data);
+            ,{'title': '방송/클립/우체통', 'data': 'room_no', 'defaultContent':'-', 'render': function(data,type,row,meta){
+                if(common.isEmpty(data)){
+                    return "-"
+                }
+                if(row.roomType == "bro"){
+                    return util.roomNoLink(data, data);
+                }else if(row.roomType == "clip"){
+                    return '<a href="javascript://" class="_openClipInfoPop" data-clipNo="' + data + '">' + data + '</a>';
+                }else if(row.roomType == "mail"){
+                    var tmp = "/member/mailbox/popup/mailboxMsg?chatNo="+ data;
+                    return util.popupLink(data,tmp,"950","1000");
+                }
             }}
             ,{'title': '처리자', 'data': 'opName', 'defaultContent':'-'}
             ,{'title': '상세', 'data': '', 'render' : function(data) {
