@@ -158,7 +158,7 @@
 
 <script id="tmp_list" type="text/x-handlebars-template">
     {{#each this}}
-    <tr>
+    <tr {{#dalbit_if inner '==' 1}} class="bg-testMember" {{/dalbit_if}}>
         <td>
             {{{memNoLink mem_no mem_no}}}
             <br/>

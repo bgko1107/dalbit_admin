@@ -86,10 +86,9 @@
             {{/dalbit_if}}
                 <div>
                     <label>NO.{{indexDesc ../../pagingVo.totalCnt data.rowNum}}</label>
-                    {{#dalbit_if data.delete_yn '==' 1}}
+                    {{#dalbit_if data.data2 '==' 'y'}}
                         <label class="pull-right" style="background-color: #fff7e5">상태 : <span style="color:red;">삭제</span></label>
-                    {{/dalbit_if}}
-                    {{#dalbit_if data.delete_yn '!=' 1}}
+                    {{else}}
                         <label class="pull-right" style="background-color: #fff7e5">상태 : 정상</label>
                     {{/dalbit_if}}
                 </div>
