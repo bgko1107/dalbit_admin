@@ -1328,7 +1328,9 @@
                                             {{#dalbit_if detail.op_date '==' ''}}
                                                 -
                                             {{else}}
-                                                <div class="no-padding" id="div_opDate">
+
+                                                {{detail.op_date}}
+                                            <%--    <div class="no-padding" id="div_opDate">
                                                     <div class="input-group date" id="opDate">
                                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                         <input type="text" class="form-control" id="txt_opDate" style="width:83px; height:35px;">
@@ -1337,7 +1339,7 @@
                                                     <span> : </span>
                                                     {{{getCommonCodeSelect 00 'timeMinute'}}}
                                                     <button type="button" class="btn btn-danger btn-xm pull-right mt5" onclick="opDateUpdate($(this));" data-idx="{{detail.idx}}" data-regdate="{{detail.reg_date}}">변경</button>
-                                                </div>
+                                                </div>--%>
                                             {{/dalbit_if}}
                                         </td>
                                     </tr>
