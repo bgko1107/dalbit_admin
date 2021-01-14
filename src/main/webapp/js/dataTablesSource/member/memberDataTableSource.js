@@ -166,7 +166,7 @@ var MemberDataTableSource = {
              {'title': '회원상태', 'data': 'mem_state',  'width':'60px', 'render': function (data, type, row) {
                     var tmpData = data;
                     if(tmpData == 5 && row.block_type == 1){
-                        tmpData = 6;
+                        tmpData = 51;
                     }
                      return util.getCommonCodeLabel(tmpData, mem_state);
                  }},

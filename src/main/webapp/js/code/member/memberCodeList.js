@@ -14,6 +14,7 @@ var mem_state = [
     , new COMMON_CODE('2', '2', '경고')
     , new COMMON_CODE('3', '3', '정지')
     , new COMMON_CODE('5', '5', '영구정지')
+    , new COMMON_CODE('51', '51', '임시정지')
     , new COMMON_CODE('4', '4', '탈퇴')
     , new COMMON_CODE('6', '6', '휴면상태')
     , new COMMON_CODE('7', '7', '자동탈퇴')
