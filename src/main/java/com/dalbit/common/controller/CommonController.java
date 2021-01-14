@@ -75,8 +75,4 @@ public class CommonController {
         return gsonUtil.toJson(new JsonOutputVo(Status.수정, resultMap));
     }
 
-    @GetMapping("/dbCheck/bySocket")
-    public String dbCheckBySocket(HttpServletRequest request){
-        return commonService.dbCheckBySocket(request);
-    }
 }
