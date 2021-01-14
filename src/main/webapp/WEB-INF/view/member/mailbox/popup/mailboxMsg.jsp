@@ -99,6 +99,10 @@
         $("#chat_no").html('${param.chatNo}');
     });
 
+    $(document).on('change', '#msgType', function(){
+        msgList();
+    });
+
     function msgList(pagingNo){
         if(!common.isEmpty(pagingNo)){
             mailboxPagingInfo.pageNo = pagingNo;
@@ -156,7 +160,8 @@
     {{#each this}}
     <tr>
         <td>
-            {{mem_no}}<br/>
+            {{{memNoLink mem_no mem_no}}}
+            <br/>
             {{mem_nick}}
         </td>
         <td>{{{sexIcon mem_sex mem_birth_year}}}</td>

@@ -9,7 +9,7 @@
         <div class="row col-lg-12 form-inline mb15">
             <div class="widget-content">
                 <div class="dataTables_paginate paging_full_numbers" id="mailboxList_info_paginate_top"></div>
-                <div class="row list-group king-gallery">
+                <div class="row list-group">
                 <%--<div class="row list-group">--%>
                     <form id="mailboxForm"></form>
                 </div>
@@ -98,9 +98,9 @@
                     <img class="list-group-image thumbnailImg fullSize_background" style="width:360px; height:225px;" src="{{renderImage data.imageUrl}}" alt="" data-toggle="modal" data-target="#imgModal" />
                 </div>
                 <div>
-                    <h3 class="inner list-group-item-heading broadcast_title">
+                    <h4 class="inner list-group-item-heading broadcast_title">
                         <a href="javascript://" onclick="mailboxPopUp($(this))" data-chatno="{{data.chat_no}}">{{data.chat_no}}</a>
-                    </h3>
+                    </h4>
                     <ul class="list-unstyled">
                         <li><strong>작성일시:</strong> <br />{{data.last_upd_date}}</li>
                         <li><strong>Nick:</strong> {{replaceHtml data.mem_nick}}</li>
