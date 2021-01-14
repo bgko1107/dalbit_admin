@@ -36,4 +36,6 @@ public interface CommonDao {
 
     List<HashMap> callBroadCastRoomList(ProcedureVo procedureVo);
 
+    List<HashMap> callMainRankingPage(ProcedureVo procedureVo);
+
 }
