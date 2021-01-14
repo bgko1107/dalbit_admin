@@ -1224,7 +1224,9 @@ var MemberDataTableSource = {
         'url': '/rest/member/mailbox/list'
 
         , 'columns': [
-            {'title': '대화일시', 'data': 'lastChatDate'},
+            {'title': '대화일시', 'data': 'lastChatDate', 'render': function (data, type, row, meta) {
+                    return data.substr(0,19);
+                }},
             {'title': '개설회원', 'data': 'memNo', 'render': function (data, type, row, meta) {
                     return util.memNoLink(data, data) + '<br/>' + row.memNick;
                 }},
