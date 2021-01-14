@@ -761,3 +761,9 @@ util.getFileName = function(pathInFileName, includeExt){
     }
     return fileName;
 }
+
+util.viewMailBoxItemJson = function(mem_nick, jsonString){
+    var json = JSON.parse(jsonString);
+    console.log(json);
+    return mem_nick + '님이 '+ json.item_name + ' x ' + json.item_cnt + '개<br />(달 '+ json.item_price +'개)를 선물하였습니다.';
+}

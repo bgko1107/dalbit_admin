@@ -33,6 +33,12 @@ public class P_MailboxMsgVo extends SearchVo {
     private String itemThumbnail;
     private String webpImage;
     private String time;
+    private String data1;
+    private String data2;
+    private String data3;
+    private String data4;
+    private String data5;
+    private String data6;
 
     // mailboxMember
     private String readCnt;

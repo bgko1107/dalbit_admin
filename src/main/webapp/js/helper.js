@@ -396,3 +396,7 @@ Handlebars.registerHelper("getPlatformName", function(platform){
 Handlebars.registerHelper("popupLink", function(display, url, width, height){
     return util.popupLink(display, url, width, height);
 });
+
+Handlebars.registerHelper("viewMailBoxItemJson", function(memNick, jsonString){
+    return util.viewMailBoxItemJson(memNick, jsonString);
+});

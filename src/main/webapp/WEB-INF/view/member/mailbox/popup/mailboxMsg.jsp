@@ -173,16 +173,29 @@
             <img class="fullSize_background thumbnail" alt="your image" src="{{renderImage itemThumbnail}}" style='height:68px; width:68px; margin: auto;vertical-align:middle;' />
             {{/dalbit_if}}
             {{#dalbit_if type '==' 3}}       <!-- 아이템 -->
-            <img class="_webpImage" src="{{itemThumbnail}}" width="50" height="50" data-webpImage="{{webpImage}}"/>
+                <div style="display:flex; align-items:center;margin-left:40px;">
+                    <img src="{{itemThumbnail}}" width="50" height="50" data-webpImage="{{webpImage}}" />
+                    <p>{{{viewMailBoxItemJson mem_nick data4}}}</p>
+                </div>
             {{/dalbit_if}}
         </td>
         <td>{{timeStampDay time}}</td>
         <td>{{substr last_upd_date 0 19}}</td>
         <td>
-            {{#dalbit_if delete_yn '==' 0}}
+            <!--{{#dalbit_if delete_yn '==' 0}}
                 정상
             {{else}}
                 <span style="color: red;">삭제</span>
+            {{/dalbit_if}}-->
+
+            {{#dalbit_if type '==' 2}}
+                {{#dalbit_if data2 '==' 'y'}}
+                    <span style="color: red;">삭제</span>
+                {{else}}
+                    정상
+                {{/dalbit_if}}
+            {{else}}
+                정상
             {{/dalbit_if}}
 
         </td>
