@@ -72,15 +72,6 @@ public class Adm_TestIdService {
                 testIdList.get(i).setChargeDate(chargeVo.getChargeDate());
                 testIdList.get(i).setLastOpName(chargeVo.getLastOpName());
             }
-            TestIdListVo itemVo = admTestIdDao.getItem(testIdList.get(i).getMem_no());
-            if(!DalbitUtil.isEmpty(itemVo)) {
-                testIdList.get(i).setDal(itemVo.getDal());
-                testIdList.get(i).setByeol(itemVo.getByeol());
-            }
-            TestIdListVo updateVo = admTestIdDao.getLastUpdate(testIdList.get(i).getMem_no());
-            if(!DalbitUtil.isEmpty(updateVo)) {
-                testIdList.get(i).setLastOpDate(updateVo.getLastOpDate());
-            }
         }
 
         return testIdList;
@@ -115,16 +106,6 @@ public class Adm_TestIdService {
                 list.get(i).setType(chargeVo.getType());
                 list.get(i).setCharge(chargeVo.getCharge());
                 list.get(i).setChargeDate(chargeVo.getChargeDate());
-            }
-            TestIdListVo itemVo = admTestIdDao.getItem(list.get(i).getMem_no());
-            if(!DalbitUtil.isEmpty(itemVo)) {
-                list.get(i).setDal(itemVo.getDal());
-                list.get(i).setByeol(itemVo.getByeol());
-            }
-            TestIdListVo updateVo = admTestIdDao.getLastUpdate(list.get(i).getMem_no());
-            if(!DalbitUtil.isEmpty(updateVo)) {
-                list.get(i).setLastOpDate(updateVo.getLastOpDate());
-                list.get(i).setLastOpName(updateVo.getLastOpName());
             }
         }
 

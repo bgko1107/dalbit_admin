@@ -116,11 +116,16 @@
             , level.level
             , level.grade
             , DATE_FORMAT((select max(session.last_upd_date) from rd_data.tb_member_session session where session.mem_no = mem.mem_no), "%Y.%m.%d %T") lastLoginDatetime
+            , wallet.ruby as dal
+            , wallet.gold as byeol
+            , (select DATE_FORMAT(last_upd_date, '%Y-%m-%d %H:%i:%s') from rd_data.tb_member_profile_edit_history where mem_no = mem.mem_no and `type` = 0 order by last_upd_date desc limit 1) as lastOpDate
         from rd_data.tb_member_basic mem
             , rd_admin.tb_admin_test_account test
             , rd_data.tb_member_level level
+            , rd_data.tb_member_wallet wallet
         where mem.mem_no = test.mem_no
             and mem.mem_no = level.mem_no
+            and mem.mem_no = wallet.mem_no
             <if test='searchText != null and searchText != ""'>
                 <choose>
                     <when test='searchType == 0'>
@@ -179,16 +184,6 @@
          where mem_no=#{mem_no} and `type` in (1,7) and op_name is not null
         order by chargeDate desc
         limit 1
-    </select>
-    <select id="getItem" parameterType="string" resultType="com.dalbit.administrate.vo.TestIdListVo">
-        select ruby as dal, gold as byeol from rd_data.tb_member_wallet where mem_no=#{mem_no}
-    </select>
-
-    <select id="getLastUpdate" parameterType="string" resultType="com.dalbit.administrate.vo.TestIdListVo">
-        select DATE_FORMAT(last_upd_date, '%Y-%m-%d %H:%i:%s') as lastOpDate
-          from rd_data.tb_member_profile_edit_history
-         where mem_no = #{mem_no} and type=0
-         order by last_upd_date desc limit 1
     </select>
 
     <update id="updateAdminId" parameterType="com.dalbit.administrate.vo.AdminIdVo">
