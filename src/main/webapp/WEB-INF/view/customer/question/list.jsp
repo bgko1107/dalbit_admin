@@ -63,8 +63,9 @@
                         <li><a href="/status/question/info?tabType=3" id="tab_platformDetail">플랫폼별</a></li>
                         <li><a href="/status/question/info?tabType=4" id="tab_untreatedDetail">미처리</a></li>
                         <li><a href="" role="tab" data-toggle="tab" onclick="tab_questionClick(0)" >전체 문의</a></li>
-                        <li><a href="" role="tab" data-toggle="tab" onclick="tab_questionClick(1)" >회원 문의</a></li>
-                        <li><a href="" role="tab" data-toggle="tab" onclick="tab_questionClick(2)">비회원 문의</a></li>
+                        <%--<li><a href="" role="tab" data-toggle="tab" onclick="tab_questionClick(1)" >회원 문의</a></li>--%>
+                        <%--<li><a href="" role="tab" data-toggle="tab" onclick="tab_questionClick(2)">비회원 문의</a></li>--%>
+                        <li><a href="/customer/question/macro?tabType=0" title="매크로 관리 페이지로 이동합니다.">매크로 관리</a></li>
                     </ul>
                 </div>
             </div>

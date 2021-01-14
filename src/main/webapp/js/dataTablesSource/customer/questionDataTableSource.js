@@ -225,6 +225,31 @@ var questionDataTableSource = {
         , 'comments': 'ㆍ1:1 문의 처리 및 상세정보 확인 후 해당 정보를 확인 및 답변, 수정할 수 있습니다.'
     },
 
+
+    'macroList': {
+        'url': '/rest/customer/question/macro/list'
+        , 'columns': [
+            {'title': '구분', 'data': '','render': function (data, type, row, meta) {
+                    return '자동 답변';
+                }},
+            {'title': '문의제목', 'className':'break-word', 'data': 'title',  'render': function (data, type, row, meta) {
+                    return '<a href="javascript://" class="getMacroDetail" onclick="getMacroDetail('+row.idx+', '+ row.rowNum +');">'+data+'</a>'
+                }},
+            {'title': '시간설정', 'data': 'timeValue','render': function (data, type, row, meta) {
+                    return data + ' 분 후';
+                }},
+            {'title': '등록일시', 'data': 'regDate','render': function (data, type, row, meta) {
+                    return data.substr(0,19);
+                }},
+            {'title': '수정일시', 'data': 'updDate','render': function (data, type, row, meta) {
+                    return data.substr(0,19);
+                }},
+            {'title': '자동 답변', 'data': 'viewYn','render': function (data, type, row, meta) {
+                    return util.renderOnOff(data);
+                }},
+            {'title': '등록자명', 'data': 'opName'},
+        ]
+    },
 }
 
 

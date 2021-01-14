@@ -61,6 +61,10 @@ public class CustomerController {
         return "customer/sms/popup/smsSendPopup";
     }
 
+    @GetMapping("/question/macro")
+    public String macro(Model model) {
+        return "customer/question/macro";
+    }
 
     /**
      * Declaration List

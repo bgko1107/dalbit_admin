@@ -113,7 +113,7 @@
         </div>
         <div class="row col-md-12">
             <div class="col-md-8 no-padding">
-                <div class="col-md-2 no-padding lb_style"><label>메크로 답변하기</label></div>
+                <div class="col-md-2 no-padding lb_style"><label>매크로 답변하기</label></div>
                 <div class="col-md-3">
                     <select class="form-control" name="searchType" id="searchType">
                         <option value="9999">문의구분</option>

@@ -4,16 +4,13 @@ import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.customer.service.Cus_QuestionService;
 import com.dalbit.customer.vo.FaqVo;
-import com.dalbit.customer.vo.procedure.P_QuestionDeleteVo;
-import com.dalbit.customer.vo.procedure.P_QuestionDetailInputVo;
-import com.dalbit.customer.vo.procedure.P_QuestionListInputVo;
-import com.dalbit.customer.vo.procedure.P_QuestionOperateVo;
+import com.dalbit.customer.vo.procedure.*;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.exception.GlobalException;
 import com.dalbit.util.GsonUtil;
-import org.springframework.ui.Model;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -171,6 +168,40 @@ public class Cus_QuestionRestController {
     @PostMapping("file/del")
     public String fileDel(P_QuestionOperateVo pQuestionOperateVo){
         return cus_questionService.callQustionFileDel(pQuestionOperateVo);
+    }
+
+
+
+    /**
+     *  자동답변 목록
+     */
+    @PostMapping("macro/list")
+    public String macroList(P_MacroVo pMacroVo){
+        return cus_questionService.callMacroList(pMacroVo);
+    }
+
+    /**
+     *  자동답변 상세 정보
+     */
+    @PostMapping("macro/detail")
+    public String macroDetail(P_MacroVo pMacroVo){
+        return cus_questionService.callMacroDetail(pMacroVo);
+    }
+
+    /**
+     *  자동답변 상세 등록/수정
+     */
+    @PostMapping("macro/edit")
+    public String macroEdit(P_MacroVo pMacroVo){
+        return cus_questionService.callMacroEdit(pMacroVo);
+    }
+
+    /**
+     *  자동답변 목록 삭제
+     */
+    @PostMapping("macro/del")
+    public String macroDel(P_MacroVo pMacroVo){
+        return cus_questionService.callMacroDel(pMacroVo);
     }
 
 }

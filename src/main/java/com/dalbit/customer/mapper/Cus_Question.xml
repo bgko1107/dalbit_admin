@@ -120,4 +120,22 @@
     <update id="callQuestionFileDel" parameterType="com.dalbit.customer.vo.procedure.P_QuestionOperateVo">
          update rd_data.tb_service_center_qna_v25 set add_file1='', add_file2='', add_file3='', file_name1='', file_name1='', file_name1='' where idx=#{qnaIdx}
     </update>
+
+    <select id="callMacroList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.customer.vo.procedure.P_MacroVo">
+        call rd_admin.sp_admin_service_qna_macro_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callMacroDetail" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.customer.vo.procedure.P_MacroVo">
+        call rd_admin.sp_admin_service_qna_macro_detail(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callMacroEdit" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.common.vo.ProcedureVo">
+        call rd_admin.sp_admin_service_qna_macro_edit(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <delete id="callMacroDel" parameterType="com.dalbit.customer.vo.procedure.P_MacroVo">
+        delete From rd_admin.tb_admin_service_qna_macro
+        where idx = #{idx}
+    </delete>
+
 </mapper>
