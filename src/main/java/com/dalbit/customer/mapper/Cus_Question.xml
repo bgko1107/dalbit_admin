@@ -134,7 +134,7 @@
     </select>
 
     <delete id="callMacroDel" parameterType="com.dalbit.customer.vo.procedure.P_MacroVo">
-        delete From rd_data.tb_admin_service_qna_macro
+        delete From rd_admin.tb_admin_service_qna_macro
         where idx = #{idx}
     </delete>
 
