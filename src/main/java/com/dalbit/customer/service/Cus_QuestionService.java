@@ -451,4 +451,66 @@ public class Cus_QuestionService {
 
         return result;
     }
+
+
+
+    public String callMacroList(P_MacroVo pMacroVo) {
+        ProcedureVo procedureVo = new ProcedureVo(pMacroVo);
+        ArrayList<P_MacroVo> list = cus_questionDao.callMacroList(procedureVo);
+        P_MacroVo ext = new Gson().fromJson(procedureVo.getExt(), P_MacroVo.class);
+
+        String result;
+
+        if(Integer.parseInt(procedureVo.getRet()) > 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(procedureVo.getRet()),ext));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+
+        return result;
+    }
+
+    public String callMacroDetail(P_MacroVo pMacroVo) {
+        ProcedureVo procedureVo = new ProcedureVo(pMacroVo);
+        cus_questionDao.callMacroDetail(procedureVo);
+        P_MacroVo ext = new Gson().fromJson(procedureVo.getExt(), P_MacroVo.class);
+
+        String result;
+
+        if(Integer.parseInt(procedureVo.getRet()) == 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, ext));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+
+        return result;
+    }
+
+    public String callMacroEdit(P_MacroVo pMacroVo) {
+        pMacroVo.setOpName(MemberVo.getMyMemNo());
+        ProcedureVo procedureVo = new ProcedureVo(pMacroVo);
+        cus_questionDao.callMacroEdit(procedureVo);
+        P_MacroVo ext = new Gson().fromJson(procedureVo.getExt(), P_MacroVo.class);
+
+        String result;
+
+        if(Integer.parseInt(procedureVo.getRet()) == 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.처리완료, ext));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+
+        return result;
+    }
+
+    public String callMacroDel(P_MacroVo pMacroVo) {
+
+        String[] idxs = pMacroVo.getIdxs().split("@");
+        for(int i=0; i < idxs.length; i++) {
+            pMacroVo.setIdx(Integer.parseInt(idxs[i]));
+            cus_questionDao.callMacroDel(pMacroVo);
+        }
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+    }
 }

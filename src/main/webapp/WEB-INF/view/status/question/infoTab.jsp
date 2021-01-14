@@ -13,8 +13,9 @@
                     <li><a href="#platform" role="tab" data-toggle="tab" id="tab_platformDetail">플랫폼별</a></li>
                     <li><a href="#untreated" role="tab" data-toggle="tab" id="tab_untreatedDetail">미처리</a></li>
                     <li><a href="/customer/question/list?tabType=0" title="전체 문의 페이지로 이동합니다.">전체 문의</a></li>
-                    <li><a href="/customer/question/list?tabType=1" title="회원 문의 페이지로 이동합니다.">회원 문의</a></li>
-                    <li><a href="/customer/question/list?tabType=2" title="비회원 문의 페이지로 이동합니다.">비회원 문의</a></li>
+                    <%--<li><a href="/customer/question/list?tabType=1" title="회원 문의 페이지로 이동합니다.">회원 문의</a></li>--%>
+                    <%--<li><a href="/customer/question/list?tabType=2" title="비회원 문의 페이지로 이동합니다.">비회원 문의</a></li>--%>
+                    <li><a href="/customer/question/macro?tabType=0" title="매크로 관리 페이지로 이동합니다.">매크로 관리</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="total"><jsp:include page="total.jsp"/></div>       <!-- 총계 -->

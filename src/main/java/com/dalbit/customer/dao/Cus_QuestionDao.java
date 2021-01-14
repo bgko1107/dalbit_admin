@@ -55,4 +55,16 @@ public interface Cus_QuestionDao {
     int callQuestionAdminList_totalCnt(P_QuestionOperateVo pQuestionOperateVo);
 
     int callQuestionFileDel(P_QuestionOperateVo pQuestionOperateVo);
+
+
+
+    @Transactional(readOnly = true)
+    ArrayList<P_MacroVo> callMacroList(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    P_MacroVo callMacroDetail(ProcedureVo procedureVo);
+
+    ProcedureVo callMacroEdit(ProcedureVo procedureVo);
+
+    int callMacroDel(P_MacroVo pMacroVo);
 }
