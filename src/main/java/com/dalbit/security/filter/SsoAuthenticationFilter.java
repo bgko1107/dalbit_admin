@@ -41,7 +41,7 @@ public class SsoAuthenticationFilter implements Filter {
 
     @Value("${dalbit.cookie.name}")
     private String KEY_NAME;
-    private final String[] IGNORE_URLS = {"/login", "/logout", "/template", "/css", "/js"};
+    private final String[] IGNORE_URLS = {"/login", "/logout", "/template", "/css", "/js", "/socket/dbCheck/bySocket"};
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
