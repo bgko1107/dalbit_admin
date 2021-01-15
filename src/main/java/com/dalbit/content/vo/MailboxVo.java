@@ -13,6 +13,7 @@ public class MailboxVo extends PagingVo {
     /* input */
     private String startDate;
     private String searchText;
+    private int pageNo;
 
     /* output */
     private String lastChatDate;

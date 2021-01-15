@@ -101,6 +101,10 @@
         }else if(targetId == "noticeReply_paginate_top" || targetId == "noticeReply_paginate"){
             noticeReplyPagingInfo = pagingInfo;
             broadNoticeReply(pagingInfo.pageNo);
+
+        }else if(targetId == "mailbox_paginate_top" || targetId == "mailbox_paginate"){
+            mailboxPagingInfo = pagingInfo;
+            mailboxList(pagingInfo.pageNo);
         }
     }
 
