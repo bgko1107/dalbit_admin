@@ -299,7 +299,7 @@
         data.gubun = $("select[name='selectGubun']").val()
     };
 
-    dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, FaqDataTableSource.faqInfo, $("#searchForm"));
+    dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, FaqDataTableSource.macroFaqInfo, $("#searchForm"));
     dtList_info.useCheckBox(true);
     dtList_info.useIndex(true);
     dtList_info.createDataTable();
