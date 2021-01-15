@@ -65,25 +65,38 @@
 
 
 <script>
+
+    var mystarTabId = "getHistory_mystarDetail";
     $(document).ready(function() {
         $('input[id="txt_starFanSearch"]').keydown(function() {
             if (event.keyCode === 13) {
-                getHistory_mystarDetail();
+                console.log(mystarTabId);
+                if(mystarTabId == "getHistory_mystarDetail" ) {
+                    getHistory_mystarDetail("getHistory_mystarDetail");
+                }else if(mystarTabId == "getHistory_myfanDetail" ){
+                    getHistory_myfanDetail("getHistory_mystarDetail");
+                }else if(mystarTabId == "getHistory_myNoticeDetail" ){
+                    getHistory_myNoticeDetail("getHistory_mystarDetail");
+                }
             };
         });
         <!-- 버튼 -->
         $('#bt_starFanSearch').click( function() {       //검색
-            getHistory_mystarDetail();
+
+            console.log(mystarTabId);
+            if(mystarTabId == "getHistory_mystarDetail" ) {
+                getHistory_mystarDetail("getHistory_mystarDetail");
+            }else if(mystarTabId == "getHistory_myfanDetail" ){
+                getHistory_myfanDetail("getHistory_mystarDetail");
+            }else if(mystarTabId == "getHistory_myNoticeDetail" ){
+                getHistory_myNoticeDetail("getHistory_mystarDetail");
+            }
         });
         <!-- 버튼 끝 -->
     });
 
     function getHistory_mystarDetail(tmp) {     // 상세보기
-        if(!common.isEmpty(tmp)) {
-            if (tmp == "getHistory_mystarDetail") {
-                $("#txt_starFanSearch").val("");
-            }
-        }
+        mystarTabId = "getHistory_mystarDetail";
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
@@ -99,12 +112,7 @@
 
     var dtList_info_detail2;
     function getHistory_myfanDetail(tmp) {     // 상세보기
-        if(!common.isEmpty(tmp)) {
-            if (tmp == "getHistory_myfanDetail") {
-                $("#txt_starFanSearch").val("");
-            }
-        }
-
+        mystarTabId = tmp;
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
@@ -118,12 +126,7 @@
 
     var dtList_info_detail3;
     function getHistory_myNoticeDetail(tmp) {     // 상세보기
-        if(!common.isEmpty(tmp)) {
-            if (tmp == "getHistory_myNoticeDetail") {
-                $("#txt_starFanSearch").val("");
-            }
-        }
-
+        mystarTabId = tmp;
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
@@ -137,11 +140,11 @@
     }
 
     function fn_liveMystarTotal(json){
-        $("#liveMystarTotal").text("현재 등록 My Star : " + json.summary);
+        $("#liveMystarTotal").text("현재 등록 My Star : " + json.pagingVo.totalCnt);
     }
 
     function fn_liveFanTotal(json){
-        $("#liveFanTotal").text("현재 등록 My Fan : " + json.summary);
+        $("#liveFanTotal").text("현재 등록 My Fan : " + json.pagingVo.totalCnt);
     }
 
     function fn_myNoticeTotal(json){
