@@ -123,7 +123,7 @@ public class Cus_QuestionService {
 
         pQuestionOperateVo.setAnswer(pQuestionOperateVo.getAnswer().replaceAll("\\'","\'"));
         pQuestionOperateVo.setAnswer(pQuestionOperateVo.getAnswer().replaceAll("\n","<br>"));
-        if(outVo.getState() == 0 || (outVo.getState() == 2 && MemberVo.getMyMemNo().equals(outVo.getOp_name()))){
+        if(outVo.getState() == 0 || outVo.getState() == 3 || (outVo.getState() == 2 && MemberVo.getMyMemNo().equals(outVo.getOp_name()))){
 
             ProcedureVo procedureVo = new ProcedureVo(pQuestionOperateVo,true);
             cus_questionDao.callServiceCenterQnaOperate(procedureVo);
