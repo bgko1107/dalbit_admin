@@ -362,7 +362,7 @@ public class Mem_MemberService {
                     tmp.put("image", pMemberEditorVo.getBeforProfileImage());
                 }
                 tmp.put("sex", pMemberEditorVo.getMemSex());
-                tmp.put("nk", pMemberEditorVo.getNickName());
+                tmp.put("nk", pMemberEditorVo.getBeforNickName());
                 String message =  gson.toJson(tmp);
 
                 socketUtil.setSocket(param, "reqMyInfo", message, jwtUtil.generateToken(pMemberEditorVo.getMem_no(), true, true));
