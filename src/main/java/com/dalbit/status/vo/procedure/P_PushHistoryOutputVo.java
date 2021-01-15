@@ -39,6 +39,7 @@ public class P_PushHistoryOutputVo extends BaseVo {
 
     private int memberNotice;
 
+    private String mem_no_star;
     private String mem_no_fan;
     private String mem_sex;
     private String mem_birth_year;
