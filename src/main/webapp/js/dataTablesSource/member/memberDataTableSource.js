@@ -1383,7 +1383,7 @@ var MemberDataTableSource = {
     'myNotice': {
         'url': '/rest/status/push/history/member/notice/detail'
         , 'columns': [
-            {'title': '설정회원', 'data': 'mem_no_fan', 'render': function (data, type, row, meta) {
+            {'title': '설정회원', 'data': 'mem_no_star', 'render': function (data, type, row, meta) {
                     return util.memNoLink(data, data) + '<br/>' + row.mem_nick;
                 }},
             {'title': '성별(나이)', 'data': 'mem_sex', 'width':'70px', 'render': function (data, type, row, meta) {
