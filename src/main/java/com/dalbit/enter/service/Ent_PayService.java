@@ -877,8 +877,6 @@ public class Ent_PayService {
             HashMap hm = new LinkedHashMap();
             hm.put("mem1",  "합계");
             hm.put("mem2",  "");
-            hm.put("mem1",  totalInfo.getMem_no());
-            hm.put("mem2",  totalInfo.getNickName());
             hm.put("mem3",  totalInfo.getOldByeol());
             hm.put("mem4",  totalInfo.getAddTotal());
             hm.put("mem5",  totalInfo.getAddEvent());
