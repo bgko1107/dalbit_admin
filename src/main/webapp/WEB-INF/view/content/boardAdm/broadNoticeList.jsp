@@ -162,15 +162,14 @@
                 noticeType: $(this).data('type')
             };
 
-            console.log(data);
-            util.getAjaxData("delete", "/rest/member/notice/delete", data, broadNoticeDel_success);
+            util.getAjaxData("delete", "/rest/member/notice/delete", data, function (dst_id, response){
+                alert(response.message);
+                broadNoticeList(broadNoticePagingInfo.pageNo);
+            });
         }else return;
     });
 
-    function broadNoticeDel_success(dst_id, response){
-        alert(response.message);
-        broadNoticeList();
-    }
+
     $('#boardRoomStatus').on('change', function () {
         broadNoticeList();
     });

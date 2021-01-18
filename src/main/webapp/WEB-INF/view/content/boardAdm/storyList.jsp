@@ -80,7 +80,7 @@
             StoryPagingInfo.totalCnt = response.pagingVo.totalCnt;
             util.renderPagingNavigation('story_paginate_top', StoryPagingInfo);
             util.renderPagingNavigation('story_paginate', StoryPagingInfo);
-            StoryPagingInfo.pageNo=1;
+            //StoryPagingInfo.pageNo=1;
 
             if(response.data.length == 0) {
                 $("storyList").find("#story_paginate_top").hide();
@@ -110,7 +110,7 @@
             };
             util.getAjaxData("deleteStory", "/rest/content/boardAdm/deleteStory", data, function(dst_id, response){
                 alert(response.message);
-                storyList();
+                storyList(StoryPagingInfo.pageNo);
             });
         }
         return false;
