@@ -9,4 +9,5 @@ import lombok.Setter;
 public class P_MemberListenInputVo extends SearchVo {
     private int pageNo;
     private String mem_no;
+    private String room_no;
 }

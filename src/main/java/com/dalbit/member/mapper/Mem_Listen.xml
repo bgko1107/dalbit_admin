@@ -8,12 +8,13 @@
         call rd_admin.sp_admin_member_all_listen_history(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
-    <select id="callListenList" parameterType="com.dalbit.member.vo.MemberVo" resultType="com.dalbit.member.vo.procedure.P_MemberListenOutputVo">
+    <select id="callListenList" parameterType="com.dalbit.member.vo.procedure.P_MemberListenInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberListenOutputVo">
         /* Mem_Listen.xml - callListenList */
         select a.room_no
               ,a.mem_no
               ,ifnull(b.mem_nick,(select aa.mem_nick From rd_data.tb_member_withdrawal_bak aa where aa.mem_no = a.mem_no)) as mem_nick
               ,c.mem_no as dj_mem_no
+              ,c.state as state
               ,ifnull(d.mem_nick,(select aa.mem_nick From rd_data.tb_member_withdrawal_bak aa where aa.mem_no = c.mem_no)) as dj_nickname
           from rd_data.tb_broadcast_room_member a
                 left join rd_data.tb_member_basic b on a.mem_no = b.mem_no
@@ -21,9 +22,22 @@
                 left join rd_data.tb_member_basic d on c.mem_no = d.mem_no
          where a.mem_no= #{mem_no}
            and a.auth != 3
+            <if test='room_no != null and room_no != ""'>
+                and a.room_no = #{room_no}
+            </if>
            -- and a.join_date > DATE_SUB(now(), INTERVAL 2 DAY)
          order by a.join_date desc
            limit 30
     </select>
+
+    <update id="updateExitRoomMember" parameterType="com.dalbit.member.vo.procedure.P_MemberListenInputVo">
+        /* Mem_Listen.xml - updateExitRoomMember */
+        UPDATE rd_data.tb_broadcast_room_member
+        SET
+            `state` = 1
+        WHERE
+            room_no = #{room_no}
+            and mem_no = #{mem_no}
+    </update>
 
 </mapper>

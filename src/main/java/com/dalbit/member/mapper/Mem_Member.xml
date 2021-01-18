@@ -54,7 +54,7 @@
          where a.mem_no=#{mem_no}
            and a.state=0
            and a.auth != 3
-           and b.state != 4
+           /*and b.state != 4*/
          order by a.last_upd_date desc
          limit 1;
     </select>

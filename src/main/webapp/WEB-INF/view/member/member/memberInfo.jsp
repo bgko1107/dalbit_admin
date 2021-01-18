@@ -856,7 +856,7 @@
             var data = {};
             data.mem_no = memNo;
             util.getAjaxData("forcedEnd", "/rest/member/broadcast/forcedEnd",data, forced_success);
-        }else return false
+        }
     }
 
     function forcedListenExit(){
@@ -864,8 +864,22 @@
             var data = {};
             data.mem_no = memNo;
             util.getAjaxData("forcedExit", "/rest/member/listen/forcedExit", data, forced_success);
-        }else return false
+        }
     }
+
+    $(document).on('click', '#bt_listenExit', function(){
+        var listen_title = $(this).data('listen_title');
+        var listen_room_no = $(this).data('listen_room_no');
+        if(confirm(listen_title + "방에 청취를 종료 하시겠습니까?")) {
+            var data = {};
+            data = {
+                mem_no : memNo
+                , room_no : listen_room_no
+            }
+            util.getAjaxData("forcedExit", "/rest/member/listen/forcedExit", data, forced_success);
+        }
+    });
+
     function forced_success(dst_id, response) {
         alert(response.message);
         getAdminMemoList("bt_adminMemoList", "운영자메모");
@@ -1125,6 +1139,10 @@
                 {{{icon_listeningState}}}
                 {{#equal listeningState 'ON'}}
                 - 방송제목 : {{{roomNoLink ../listen_title ../listen_room_no}}}
+                <button type="button" id="bt_listenExit"
+                        class="btn btn-danger btn-sm pull-right"
+                        data-listen_title="{{../listen_title}}"
+                        data-listen_room_no="{{../listen_room_no}}">청취종료</button>
                 {{/equal}}
             </td>
             <td>

@@ -18,6 +18,7 @@ import com.dalbit.util.JwtUtil;
 import com.dalbit.util.SocketUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,12 +73,12 @@ public class Mem_ListenService {
     /**
      * 회원 청취 강제 종료
      */
-    public String forcedExit(MemberVo MemberVo) {
-        ArrayList<P_MemberListenOutputVo> list = mem_ListenDao.callListenList(MemberVo);
+    public String forcedExit(P_MemberListenInputVo pMemberListenInputVo) {
+        ArrayList<P_MemberListenOutputVo> list = mem_ListenDao.callListenList(pMemberListenInputVo);
 
         P_MemberAdminMemoAddVo pMemberAdminMemoAddVo = new P_MemberAdminMemoAddVo();
         pMemberAdminMemoAddVo.setOpName(MemberVo.getMyMemNo());
-        pMemberAdminMemoAddVo.setMem_no(MemberVo.getMem_no());
+        pMemberAdminMemoAddVo.setMem_no(pMemberListenInputVo.getMem_no());
         pMemberAdminMemoAddVo.setMemo("운영자에 의한 회원 청취 강제 종료 시도");
         ProcedureVo procedureVo = new ProcedureVo(pMemberAdminMemoAddVo);
         mem_MemberDao.callMemAdminMemoAdd(procedureVo);
@@ -87,7 +88,7 @@ public class Mem_ListenService {
             P_ListenForceLeaveVo pListenForceLeaveVo = new P_ListenForceLeaveVo();
             pListenForceLeaveVo.setOpName(MemberVo.getMyMemNo());
             pListenForceLeaveVo.setRoom_no(list.get(i).getRoom_no());
-            pListenForceLeaveVo.setMem_no(MemberVo.getMem_no());
+            pListenForceLeaveVo.setMem_no(pMemberListenInputVo.getMem_no());
             pListenForceLeaveVo.setMem_nickName(list.get(i).getMem_nick());
             pListenForceLeaveVo.setNotificationYn("N");
             pListenForceLeaveVo.setRoomBlock("N");
@@ -98,6 +99,14 @@ public class Mem_ListenService {
 
             if(listenForceExitResult.equals("error") || listenForceExitResult.equals("noAuth")){
                 break;
+            }
+
+            //이미 강제종료된 방에서는 바로 종료처리
+            if(list.get(i).getState() == 4){
+                var exitRoomMemberVo = new P_MemberListenInputVo();
+                exitRoomMemberVo.setRoom_no(list.get(i).getRoom_no());
+                exitRoomMemberVo.setMem_no(pMemberListenInputVo.getMem_no());
+                mem_ListenDao.updateExitRoomMember(exitRoomMemberVo);
             }
 
             //TODO - api에서는 reqChangeCount로 팬랭킹을 내려주는데. 일단 관리자에서는 제외한다.

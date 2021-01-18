@@ -38,7 +38,7 @@ public class Mem_ListenRestController {
     *  회원 청취 강제 종료
     */
     @PostMapping("forcedExit")
-    public String forcedExit(MemberVo MemberVo){
-        return mem_ListenService.forcedExit(MemberVo);
+    public String forcedExit(P_MemberListenInputVo pMemberListenInputVo){
+        return mem_ListenService.forcedExit(pMemberListenInputVo);
     }
 }
