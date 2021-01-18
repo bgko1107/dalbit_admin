@@ -12,6 +12,7 @@ public class P_PushHistoryInputVo extends SearchVo {
     private String startDate;
     private String endDate;
     private String push_send_user;
+    private int state;
 
     private String idx; 			                    // 'push Idx'
     private String send_date; 		                // '발송일자[예약발송일자]'
