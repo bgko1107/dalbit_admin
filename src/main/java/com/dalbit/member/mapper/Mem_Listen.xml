@@ -38,6 +38,7 @@
         WHERE
             room_no = #{room_no}
             and mem_no = #{mem_no}
+            and `state` = 0
     </update>
 
 </mapper>
