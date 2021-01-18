@@ -25,6 +25,9 @@
         fnc_pushDetail.target.find("#targetForm").attr("id", fnc_pushDetail.targetId + "Form");
         this.formId = fnc_pushDetail.targetId + "Form";
 
+
+        fnc_pushDetail.insertDetail();
+
         // if(common.isEmpty(getSelectDataInfo())){
         //     fnc_pushDetail.insertDetail();
         // }else{
@@ -934,7 +937,7 @@
                 <td colspan="5">
                     <div class="col-md-4 no-padding"><input id="files1" type="file" onchange="photoSubmit($(this))"></div>
                     <input class="_hidden_filename form-control hide" name="send_url" id="send_url" value="{{send_url}}" />
-                    {{#dalbit_if send_url "!=" ""}}<img class="thumbnail fullSize_background no-padding no-margin" id="previewImage" src="{{renderImage send_url}}" alt="your image" style="width: 50px;height: 50px" />{{/dalbit_if}}
+                    {{#dalbit_if send_url "!=" null}}<img class="thumbnail fullSize_background no-padding no-margin" id="previewImage" src="{{renderImage send_url}}" alt="your image" style="width: 50px;height: 50px" />{{/dalbit_if}}
                 </td>
             </tr>
 
