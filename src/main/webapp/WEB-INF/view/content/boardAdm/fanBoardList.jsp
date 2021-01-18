@@ -126,7 +126,7 @@
         fanBoardPagingInfo.totalCnt = response.pagingVo.totalCnt;
         util.renderPagingNavigation('fanBoard_paginate_top', fanBoardPagingInfo);
         util.renderPagingNavigation('fanBoard_paginate', fanBoardPagingInfo);
-        fanBoardPagingInfo.pageNo=1;
+        //fanBoardPagingInfo.pageNo=1;
 
         if(response.data.length == 0) {
             $("#fanBoard_paginate_top").hide();
@@ -217,15 +217,14 @@
             var data = {
                 'idx' : $(this).data('idx')
             };
-            util.getAjaxData("deleteFanBoard", "/rest/member/fanboard/delete", data, fn_success_deleteFanBoard);
+
+            util.getAjaxData("deleteFanBoard", "/rest/member/fanboard/delete", data, function(dist_id, response){
+                alert(response.message);
+                fanBoardList(fanBoardPagingInfo.pageNo);
+            });
         }
         return false;
     });
-
-    function fn_success_deleteFanBoard(dst_id, response) {
-        alert(response.message);
-        fanBoardList();
-    }
 
     $('#fanBoardStatus').on('change', function () {
         fanBoardList();

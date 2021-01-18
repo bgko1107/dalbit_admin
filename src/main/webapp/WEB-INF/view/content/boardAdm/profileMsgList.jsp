@@ -121,14 +121,12 @@
             };
 
             console.log(data);
-            util.getAjaxData("delete", "/rest/content/boardAdm/profileMsg/del", data, profileMsgDel_success);
+            util.getAjaxData("delete", "/rest/content/boardAdm/profileMsg/del", data, function(dst_id, response){
+                alert(response.message);
+                profileMsgList(profilePagingInfo.pageNo);
+            });
         }else return;
     });
-
-    function profileMsgDel_success(dst_id, response){
-        alert(response.message);
-        profileMsgList();
-    }
 
     $(document).on('click', '._profileEditList', function() {
         var mem_no = $(this).data('memno');

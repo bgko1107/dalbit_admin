@@ -128,7 +128,10 @@
                 noticeType: $(this).data('type'),
                 roomNo: $(this).data('roomno')
             };
-            util.getAjaxData("delete", "/rest/member/notice/delete", data, noticeDel_success);
+            util.getAjaxData("delete", "/rest/member/notice/delete", data, function (dst_id, response){
+                alert(response.message);
+                noticeList(noticePagingInfo.pageNo);
+            });
         }else return;
     });
 
@@ -140,11 +143,6 @@
         console.log(url);
         util.windowOpen(url,"1200","450","");
     });
-
-    function noticeDel_success(dst_id, response){
-        alert(response.message);
-        noticeList();
-    }
 
 </script>
 

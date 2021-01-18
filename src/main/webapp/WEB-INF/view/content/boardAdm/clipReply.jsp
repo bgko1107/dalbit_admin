@@ -136,14 +136,13 @@
             };
 
             console.log(data);
-            util.getAjaxData("delete", "/rest/content/boardAdm/clipReplyList/del", data, clipReplyDel_success);
+            util.getAjaxData("delete", "/rest/content/boardAdm/clipReplyList/del", data, function(dst_id, response){
+                alert(response.message);
+                clipReplyList(clipPagingInfo.pageNo);
+            });
         }else return;
     });
 
-    function clipReplyDel_success(dst_id, response){
-        alert(response.message);
-        clipReplyList();
-    }
     $('#clipReplayStatus').on('change', function () {
         clipReplyList();
     });

@@ -116,15 +116,15 @@
                 'replyIdx' : $(this).data('idx')
                 , 'status' : 1
             };
-            util.getAjaxData("deleteFanBoard", "/rest/content/boardAdm/noticeReplyList/delete", data, fn_success_deleteNoticeReply);
+            util.getAjaxData("deleteFanBoard", "/rest/content/boardAdm/noticeReplyList/delete", data, function (dst_id, response) {
+                alert(response.message);
+                broadNoticeReply(noticeReplyPagingInfo.pageNo);
+            });
         }
         return false;
     });
 
-    function fn_success_deleteNoticeReply(dst_id, response) {
-        alert(response.message);
-        broadNoticeReply();
-    }
+
 
     $('#noticeReplayStatus').on('change', function () {
         broadNoticeReply();
