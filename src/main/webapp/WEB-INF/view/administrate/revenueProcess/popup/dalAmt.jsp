@@ -153,6 +153,42 @@
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_dalAmtDetailList">
+    <tr class="_bgColor font-bold" data-bgcolor="#f2f2f2">
+        <td>합계</td>
+        <td>{{addComma totalInfo.oldPayDal}}</td>
+        <td>{{addComma totalInfo.oldFreeDal}}</td>
+        <td>{{addComma totalInfo.addTotalDal}}</td>
+        <td>{{addComma totalInfo.addPayTotal}}</td>
+        <td>{{addComma totalInfo.addPayPg}}</td>
+        <td>{{addComma totalInfo.addPayChange}}</td>
+        <td>{{addComma totalInfo.addPayGift}}</td>
+        <td>{{addComma totalInfo.addPayOp}}</td>
+        <td>{{addComma totalInfo.addFreeTotal}}</td>
+        <td>{{addComma totalInfo.addFreeEvent}}</td>
+        <td>{{addComma totalInfo.addFreeGift}}</td>
+        <td>{{addComma totalInfo.addFreeOp}}</td>
+        <td>{{addComma totalInfo.subTotalDal}}</td>
+        <td>{{addComma totalInfo.subPayTotal}}</td>
+        <td>{{addComma totalInfo.subPayBroad}}</td>
+        <td>{{addComma totalInfo.subPayClip}}</td>
+        <td>{{addComma totalInfo.subPayMailbox}}</td>
+        <td>{{addComma totalInfo.subPayGift}}</td>
+        <td>{{addComma totalInfo.subPayCancel}}</td>
+        <td>{{addComma totalInfo.subPayWithdrawal}}</td>
+        <td>{{addComma totalInfo.subPayWithdrawalSleep}}</td>
+        <td>{{addComma totalInfo.subPayOp}}</td>
+        <td>{{addComma totalInfo.subFreeTotal}}</td>
+        <td>{{addComma totalInfo.subFreeBroad}}</td>
+        <td>{{addComma totalInfo.subFreeClip}}</td>
+        <td>{{addComma totalInfo.subFreeMailbox}}</td>
+        <td>{{addComma totalInfo.subFreeGift}}</td>
+        <td>{{addComma totalInfo.subFreeCancel}}</td>
+        <td>{{addComma totalInfo.subFreeWithdrawal}}</td>
+        <td>{{addComma totalInfo.subFreeWithdrawlSleep}}</td>
+        <td>{{addComma totalInfo.subFreeOp}}</td>
+        <td>{{addComma totalInfo.newPayDal}}</td>
+        <td>{{addComma totalInfo.newFreeDal}}</td>
+    </tr>
     {{#each this.detailList as |data|}}
     <tr>
         <td>
