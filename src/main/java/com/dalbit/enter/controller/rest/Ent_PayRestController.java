@@ -1,18 +1,23 @@
 package com.dalbit.enter.controller.rest;
 
+import com.dalbit.common.code.Status;
+import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.enter.service.Ent_PayService;
-import com.dalbit.enter.vo.procedure.P_PayTotalInPutVo;
-import com.dalbit.enter.vo.procedure.P_PayTotalWayInPutVo;
-import com.dalbit.enter.vo.procedure.P_PayTryInPutVo;
-import com.dalbit.enter.vo.procedure.P_StatVo;
+import com.dalbit.enter.vo.procedure.*;
+import com.dalbit.excel.service.ExcelService;
+import com.dalbit.exception.GlobalException;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.dalbit.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @RestController
@@ -27,6 +32,9 @@ public class Ent_PayRestController {
 
     @Autowired
     Ent_PayService ent_PayService;
+
+    @Autowired
+    ExcelService excelService;
 
     @PostMapping("info")
     public String payInfo(P_StatVo pStatVo){
@@ -110,6 +118,65 @@ public class Ent_PayRestController {
     @PostMapping("/month/way")
     public String payMonthWay(P_PayTotalWayInPutVo pPayTotalWayInPutVo){
         String result = ent_PayService.callPayMonthWay(pPayTotalWayInPutVo);
+        return result;
+    }
+
+    // 수익인식 프로세스 ---------------------------------------------------------
+    // 달 양식
+    @PostMapping("/dalForm")
+    public String dalForm(P_RevenueProcessVo pRevenueProcessVo){
+        String result = ent_PayService.callDalForm(pRevenueProcessVo);
+        return result;
+    }
+
+    // 달 수
+    @PostMapping("/dal/count")
+    public String dalCount(P_RevenueProcessVo pRevenueProcessVo){
+        String result = ent_PayService.callDalCount(pRevenueProcessVo);
+        return result;
+    }
+
+    // 달 금액
+    @PostMapping("/dal/amt")
+    public String dalAmt(P_RevenueProcessVo pRevenueProcessVo){
+        String result = ent_PayService.callDalAmt(pRevenueProcessVo);
+        return result;
+    }
+
+    // 달 금액 엑셀 다운로드
+    @PostMapping("/dal/amtListExcel")
+    public String dalAmtListExcel(HttpServletRequest request, HttpServletResponse response, Model model, P_RevenueProcessVo pRevenueProcessVo) throws GlobalException {
+        Model resultModel = ent_PayService.callDalAmtListExcel(pRevenueProcessVo, model);
+        excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
+        return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
+
+    // 별 수
+    @PostMapping("/byeol/count")
+    public String byeolCount(P_RevenueProcessVo pRevenueProcessVo){
+        String result = ent_PayService.callByeolCount(pRevenueProcessVo);
+        return result;
+    }
+
+    // 별 금액 엑셀 다운로드
+    @PostMapping("/byeol/amtListExcel")
+    public String byeolAmtListExcel(HttpServletRequest request, HttpServletResponse response, Model model, P_RevenueProcessVo pRevenueProcessVo) throws GlobalException {
+        Model resultModel = ent_PayService.callByeolAmtListExcel(pRevenueProcessVo, model);
+        excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
+        return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
+
+    // 별 금액
+    @PostMapping("/byeol/amt")
+    public String byeolAmt(P_RevenueProcessVo pRevenueProcessVo){
+        String result = ent_PayService.callByeolAmt(pRevenueProcessVo);
+        return result;
+    }
+
+    // 달 금액
+    @PostMapping("/dal/sales")
+    public String dalSales(P_RevenueProcessVo pRevenueProcessVo){
+        String result = ent_PayService.callDalSales(pRevenueProcessVo);
         return result;
     }
 }

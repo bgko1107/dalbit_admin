@@ -6,18 +6,20 @@ import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.enter.dao.Ent_PayDao;
 import com.dalbit.enter.vo.procedure.*;
+import com.dalbit.excel.service.ExcelService;
+import com.dalbit.excel.vo.ExcelVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.dalbit.util.MessageUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -29,6 +31,9 @@ public class Ent_PayService {
     GsonUtil gsonUtil;
     @Autowired
     Ent_PayDao ent_PayDao;
+
+    @Autowired
+    ExcelService excelService;
 
     /**
      * 결제/환불 고정
@@ -621,5 +626,251 @@ public class Ent_PayService {
         resultList.add(result);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, resultList));
+    }
+
+    // 수익인식 프로세스 ---------------------------------------------------------
+    // 달 양식
+    public String callDalForm(P_RevenueProcessVo pRevenueProcessVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+        List<P_RevenueProcessVo> detailList =  ent_PayDao.callDalForm(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
+
+    // 달 수
+    public String callDalCount(P_RevenueProcessVo pRevenueProcessVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+        List<P_RevenueProcessVo> detailList =  ent_PayDao.callDalCount(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
+
+    // 달 금액
+    public String callDalAmt(P_RevenueProcessVo pRevenueProcessVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+        List<P_RevenueProcessVo> detailList =  ent_PayDao.callDalAmt(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
+
+
+    // 달 금액 엑셀 다운로드
+    public Model callDalAmtListExcel(P_RevenueProcessVo pRevenueProcessVo, Model model) {
+        pRevenueProcessVo.setPageCnt(100000);
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+
+        List<P_RevenueProcessVo> list = ent_PayDao.callDalAmt(procedureVo);
+
+        String[] headers = {"회원번호"
+                            ,"닉네임"
+                            ,"기초(유료)"
+                            ,"기초(무료)"
+                            ,"증가(전체합계)"
+                            ,"증가-유료(합계)"
+                            ,"증가-유료(PG사결제)"
+                            ,"증가-유료(달전환)"
+                            ,"증가-유료(선물하기)"
+                            ,"증가-유료(관리자지급)"
+                            ,"증가-무료(합계)"
+                            ,"증가-무료(이벤트)"
+                            ,"증가-무료(선물하기)"
+                            ,"증가-무료(관리자지급)"
+                            ,"감소(전체합계)"
+                            ,"감소-유료(합계)"
+                            ,"감소-유료(방송)"
+                            ,"감소-유료(클립)"
+                            ,"감소-유료(우체통)"
+                            ,"감소-유료(선물하기)"
+                            ,"감소-유료(환불)"
+                            ,"감소-유료(회원탈퇴)"
+                            ,"감소-유료(휴면탈퇴)"
+                            ,"감소-유료(관리자회수)"
+                            ,"감소-무료(합계)"
+                            ,"감소-무료(방송)"
+                            ,"감소-무료(클립)"
+                            ,"감소-무료(우체통)"
+                            ,"감소-무료(선물하기)"
+                            ,"감소-무료(환불)"
+                            ,"감소-무료(회원탈퇴)"
+                            ,"감소-무료(휴면탈퇴)"
+                            ,"감소-무료(관리자회수)"
+                            ,"기말(유료)"
+                            ,"기말(무료)"
+        };
+        int[] headerWidths = {3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000
+                                , 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000
+                                , 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000
+                                , 3000, 3000, 3000, 3000, 3000};
+
+        List<Object[]> bodies = new ArrayList<>();
+        for(int i = 0; i < list.size(); i++){
+            HashMap hm = new LinkedHashMap();
+            hm.put("mem1",  list.get(i).getMem_no());
+            hm.put("mem2",  list.get(i).getNickName());
+            hm.put("mem3",  list.get(i).getOldPayDal());
+            hm.put("mem4",  list.get(i).getOldFreeDal());
+            hm.put("mem5",  list.get(i).getAddTotalDal());
+            hm.put("mem6",  list.get(i).getAddPayTotal());
+            hm.put("mem7",  list.get(i).getAddPayPg());
+            hm.put("mem8",  list.get(i).getAddPayChange());
+            hm.put("mem9",  list.get(i).getAddPayGift());
+            hm.put("mem10",  list.get(i).getAddPayOp());
+            hm.put("mem11",  list.get(i).getAddFreeTotal());
+            hm.put("mem12",  list.get(i).getAddFreeEvent());
+            hm.put("mem13",  list.get(i).getAddFreeGift());
+            hm.put("mem14",  list.get(i).getAddFreeOp());
+            hm.put("mem15",  list.get(i).getSubTotalDal());
+            hm.put("mem16",  list.get(i).getSubPayTotal());
+            hm.put("mem17",  list.get(i).getSubPayBroad());
+            hm.put("mem18",  list.get(i).getSubPayClip());
+            hm.put("mem19",  list.get(i).getSubPayMailbox());
+            hm.put("mem20",  list.get(i).getSubPayGift());
+            hm.put("mem21",  list.get(i).getSubPayCancel());
+            hm.put("mem22",  list.get(i).getSubPayWithdrawal());
+            hm.put("mem23",  list.get(i).getSubPayWithdrawalSleep());
+            hm.put("mem24",  list.get(i).getSubPayOp());
+            hm.put("mem25",  list.get(i).getSubFreeTotal());
+            hm.put("mem26",  list.get(i).getSubFreeBroad());
+            hm.put("mem27",  list.get(i).getSubFreeClip());
+            hm.put("mem28",  list.get(i).getSubFreeMailbox());
+            hm.put("mem29",  list.get(i).getSubFreeGift());
+            hm.put("mem30",  list.get(i).getSubFreeCancel());
+            hm.put("mem31",  list.get(i).getSubFreeWithdrawal());
+            hm.put("mem32",  list.get(i).getSubFreeWithdrawlSleep());
+            hm.put("mem33",  list.get(i).getSubFreeOp());
+            hm.put("mem34",  list.get(i).getNewPayDal());
+            hm.put("mem35",  list.get(i).getNewFreeDal());
+            bodies.add(hm.values().toArray());
+        }
+        ExcelVo vo = new ExcelVo(headers, headerWidths, bodies);
+        SXSSFWorkbook workbook = excelService.excelDownload("목록",vo);
+        model.addAttribute("locale", Locale.KOREA);
+        model.addAttribute("workbook", workbook);
+        model.addAttribute("workbookName", "달빛Live_수익인식Process(달금액)_" + pRevenueProcessVo.getStartDate());
+
+        return model;
+    }
+
+    // 별 수
+    public String callByeolCount(P_RevenueProcessVo pRevenueProcessVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+        List<P_RevenueProcessVo> detailList =  ent_PayDao.callByeolCount(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
+
+    // 별 금액
+    public String callByeolAmt(P_RevenueProcessVo pRevenueProcessVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+        List<P_RevenueProcessVo> detailList =  ent_PayDao.callByeolAmt(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
+
+    // 별 금액 엑셀 다운로드
+    public Model callByeolAmtListExcel(P_RevenueProcessVo pRevenueProcessVo, Model model) {
+        pRevenueProcessVo.setPageCnt(100000);
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+
+        List<P_RevenueProcessVo> list = ent_PayDao.callByeolAmt(procedureVo);
+
+        String[] headers = {"회원번호"
+                ,"닉네임"
+                ,"기초"
+                ,"증가-합계"
+                ,"증가-방송"
+                ,"증가-이벤트"
+                ,"증가-클립"
+                ,"증가-우체통"
+                ,"증가-관리자지급"
+                ,"감소-합계"
+                ,"감소-환전"
+                ,"감소-달로 변환"
+                ,"감소-회원탈퇴"
+                ,"감소-휴면탈퇴"
+                ,"감소-관리자회수"
+                ,"기말"
+        };
+        int[] headerWidths = {3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000
+                , 3000, 3000, 3000, 3000, 3000, 3000};
+
+        List<Object[]> bodies = new ArrayList<>();
+        for(int i = 0; i < list.size(); i++){
+            HashMap hm = new LinkedHashMap();
+            hm.put("mem1",  list.get(i).getMem_no());
+            hm.put("mem2",  list.get(i).getNickName());
+            hm.put("mem3",  list.get(i).getOldByeol());
+            hm.put("mem4",  list.get(i).getAddTotal());
+            hm.put("mem5",  list.get(i).getAddEvent());
+            hm.put("mem6",  list.get(i).getAddBroad());
+            hm.put("mem7",  list.get(i).getAddClip());
+            hm.put("mem8",  list.get(i).getAddMailbox());
+            hm.put("mem9",  list.get(i).getAddOp());
+            hm.put("mem10",  list.get(i).getSubTotal());
+            hm.put("mem11",  list.get(i).getSubExchange());
+            hm.put("mem12",  list.get(i).getSubChange());
+            hm.put("mem13",  list.get(i).getSubWithdrawal());
+            hm.put("mem14",  list.get(i).getSubWithdrawalSleep());
+            hm.put("mem15",  list.get(i).getSubOp());
+            hm.put("mem16",  list.get(i).getNewByeol());
+            bodies.add(hm.values().toArray());
+        }
+        ExcelVo vo = new ExcelVo(headers, headerWidths, bodies);
+        SXSSFWorkbook workbook = excelService.excelDownload("목록",vo);
+        model.addAttribute("locale", Locale.KOREA);
+        model.addAttribute("workbook", workbook);
+        model.addAttribute("workbookName", "달빛Live_수익인식Process(별금액)_" + pRevenueProcessVo.getStartDate());
+
+        return model;
+    }
+
+    // 달 매출
+    public String callDalSales(P_RevenueProcessVo pRevenueProcessVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+        List<P_RevenueProcessVo> detailList =  ent_PayDao.callDalSales(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
     }
 }
