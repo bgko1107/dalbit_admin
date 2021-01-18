@@ -189,7 +189,7 @@
                         and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> listen.start_date
                         and listen.start_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')
                         and 1800 <![CDATA[<=]]> listen.listentime), 0) listenCnt30
-            , (select count(*) from rd_admin.tb_special_dj where mem_no = dj.mem_no and concat(select_year, select_month) <![CDATA[<]]> concat(#{select_year}, #{select_month})) specialCnt
+            , (select count(*) from rd_admin.tb_special_dj where mem_no = dj.mem_no and concat(select_year, select_month) <![CDATA[<=]]> concat(#{select_year}, #{select_month})) specialCnt
         from rd_admin.tb_req_special_dj dj
         , rd_data.tb_member_profile profile
         , rd_data.tb_member_basic basic
