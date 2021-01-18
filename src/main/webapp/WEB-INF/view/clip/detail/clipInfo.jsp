@@ -395,26 +395,13 @@
                  , editSlct : 9
                  , admin_cover_title : $("#admin_cover_title").val()
                  , admin_cover_singer : $("#admin_cover_singer").val()
+                 , uci_album_code : $("#uci_album_code").val()
              }
              util.getAjaxData("saveAdminCoverInfo", "/rest/clip/history/info/edit", data, function(dist_id, response){
                  alert(response.message);
              });
 
          }
-    });
-
-    $(document).on('click', '#saveUciAlbumCodeBtn', function(){
-        if(confirm('저장하시겠습니까?')){
-            var data = {
-                cast_no : clipNo
-                , editSlct : 10
-                , uci_album_code : $("#uci_album_code").val()
-            }
-            util.getAjaxData("saveAdminCoverInfo", "/rest/clip/history/info/edit", data, function(dist_id, response){
-                alert(response.message);
-            });
-
-        }
     });
 
     $(document).on('click', '#searchUciBtn', function(){
@@ -597,11 +584,8 @@
         </tr>
         <tr>
             <th>UCI 앨범 코드<br >(관리자)</th>
-            <td colspan="3">
+            <td colspan="4">
                 <input type="text" class="form-control" id="uci_album_code" maxlength="50" value="{{uci_album_code}}" />
-            </td>
-            <td>
-                <button type="button" id="saveUciAlbumCodeBtn" class="btn btn-default btn-sm">저장</button>
             </td>
 
             <th>UCI 검색<br >(관리자 입력)</th>
