@@ -554,7 +554,7 @@ util.editorInit = function(type) {
                 var formData = new FormData();
                 formData.append("file", files[0]);
                 formData.append("uploadType", type);    //ex) type : notice-detail
-                util.fileUpdate(PHOTO_SERVER_URL + "/upload", formData, function (data) {
+                util.fileUpdate(EDITOR_PHOTO_SERVER_URL + "/upload", formData, function (data) {
                     var json = jQuery.parseJSON(data);
                     //console.log(json);
                     if (json.code != "0") {
