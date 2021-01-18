@@ -38,4 +38,24 @@ public interface Ent_PayDao {
 
     @Transactional(readOnly = true)
     List<P_PayTryOutDetailVo> callPayTry(ProcedureVo procedureVo);
+
+
+    // 수익인식 프로세스
+    @Transactional(readOnly = true)
+    List<P_RevenueProcessVo> callDalForm(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    List<P_RevenueProcessVo> callDalCount(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    List<P_RevenueProcessVo> callDalAmt(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    List<P_RevenueProcessVo> callByeolCount(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    List<P_RevenueProcessVo> callByeolAmt(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    List<P_RevenueProcessVo> callDalSales(ProcedureVo procedureVo);
 }
