@@ -5,9 +5,7 @@
 <!-- 결제환불 > 총계 -->
 <div class="widget widget-table mb10">
     <div class="widget-content mt10" id="divByeolCount">
-        <%--<a href="javascript://" class="_prevSearch">[이전]</a>--%>
         <span class="_searchDate"></span>
-        <%--<a href="javascript://" class="_nextSearch">[다음]</a>--%>
         <table class="table table-bordered">
             <colgroup>
                 <%--<col width="2.7%"/>--%>
@@ -42,12 +40,13 @@
         </table>
     </div>
 </div>
-<a id='byeolCountExcel' type='button' class="btn btn-default print-btn pull-right" download="" href="#" onclick="return ExcellentExport.excel(this, 'divByeolCount', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
+<a type='button' class="btn btn-default print-btn pull-left byeolCountExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divByeolCount', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
+<a type='button' class="btn btn-default print-btn pull-right byeolCountExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divByeolCount', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
 
 <script type="text/javascript">
 
     function getByeolCountList(){
-        $("#byeolCountExcel").attr('download' , "달빛Live_수익인식Process(별금액)_" + moment($("#startDate").val()).add('days', 0).format('YYYY.MM.DD') + ".xls");
+        $(".byeolCountExcel").attr('download' , "달빛Live_수익인식Process(별금액)_" + moment($("#startDate").val()).add('days', 0).format('YYYY.MM.DD') + ".xls");
 
         var data = {
             slctType : slctType

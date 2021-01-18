@@ -681,6 +681,7 @@ public class Ent_PayService {
         ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
 
         List<P_RevenueProcessVo> list = ent_PayDao.callDalAmt(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
 
         String[] headers = {"회원번호"
                             ,"닉네임"
@@ -724,6 +725,46 @@ public class Ent_PayService {
                                 , 3000, 3000, 3000, 3000, 3000};
 
         List<Object[]> bodies = new ArrayList<>();
+        if(!DalbitUtil.isEmpty(totalInfo)){
+            HashMap hm = new LinkedHashMap();
+            hm.put("mem1",  "합계");
+            hm.put("mem2",  "");
+            hm.put("mem3",  totalInfo.getOldPayDal());
+            hm.put("mem4",  totalInfo.getOldFreeDal());
+            hm.put("mem5",  totalInfo.getAddTotalDal());
+            hm.put("mem6",  totalInfo.getAddPayTotal());
+            hm.put("mem7",  totalInfo.getAddPayPg());
+            hm.put("mem8",  totalInfo.getAddPayChange());
+            hm.put("mem9",  totalInfo.getAddPayGift());
+            hm.put("mem10",  totalInfo.getAddPayOp());
+            hm.put("mem11",  totalInfo.getAddFreeTotal());
+            hm.put("mem12",  totalInfo.getAddFreeEvent());
+            hm.put("mem13",  totalInfo.getAddFreeGift());
+            hm.put("mem14",  totalInfo.getAddFreeOp());
+            hm.put("mem15",  totalInfo.getSubTotalDal());
+            hm.put("mem16",  totalInfo.getSubPayTotal());
+            hm.put("mem17",  totalInfo.getSubPayBroad());
+            hm.put("mem18",  totalInfo.getSubPayClip());
+            hm.put("mem19",  totalInfo.getSubPayMailbox());
+            hm.put("mem20",  totalInfo.getSubPayGift());
+            hm.put("mem21",  totalInfo.getSubPayCancel());
+            hm.put("mem22",  totalInfo.getSubPayWithdrawal());
+            hm.put("mem23",  totalInfo.getSubPayWithdrawalSleep());
+            hm.put("mem24",  totalInfo.getSubPayOp());
+            hm.put("mem25",  totalInfo.getSubFreeTotal());
+            hm.put("mem26",  totalInfo.getSubFreeBroad());
+            hm.put("mem27",  totalInfo.getSubFreeClip());
+            hm.put("mem28",  totalInfo.getSubFreeMailbox());
+            hm.put("mem29",  totalInfo.getSubFreeGift());
+            hm.put("mem30",  totalInfo.getSubFreeCancel());
+            hm.put("mem31",  totalInfo.getSubFreeWithdrawal());
+            hm.put("mem32",  totalInfo.getSubFreeWithdrawlSleep());
+            hm.put("mem33",  totalInfo.getSubFreeOp());
+            hm.put("mem34",  totalInfo.getNewPayDal());
+            hm.put("mem35",  totalInfo.getNewFreeDal());
+            bodies.add(hm.values().toArray());
+        }
+
         for(int i = 0; i < list.size(); i++){
             HashMap hm = new LinkedHashMap();
             hm.put("mem1",  list.get(i).getMem_no());
@@ -808,6 +849,7 @@ public class Ent_PayService {
         ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
 
         List<P_RevenueProcessVo> list = ent_PayDao.callByeolAmt(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
 
         String[] headers = {"회원번호"
                 ,"닉네임"
@@ -830,6 +872,29 @@ public class Ent_PayService {
                 , 3000, 3000, 3000, 3000, 3000, 3000};
 
         List<Object[]> bodies = new ArrayList<>();
+
+        if(!DalbitUtil.isEmpty(totalInfo)){
+            HashMap hm = new LinkedHashMap();
+            hm.put("mem1",  "합계");
+            hm.put("mem2",  "");
+            hm.put("mem1",  totalInfo.getMem_no());
+            hm.put("mem2",  totalInfo.getNickName());
+            hm.put("mem3",  totalInfo.getOldByeol());
+            hm.put("mem4",  totalInfo.getAddTotal());
+            hm.put("mem5",  totalInfo.getAddEvent());
+            hm.put("mem6",  totalInfo.getAddBroad());
+            hm.put("mem7",  totalInfo.getAddClip());
+            hm.put("mem8",  totalInfo.getAddMailbox());
+            hm.put("mem9",  totalInfo.getAddOp());
+            hm.put("mem10",  totalInfo.getSubTotal());
+            hm.put("mem11",  totalInfo.getSubExchange());
+            hm.put("mem12",  totalInfo.getSubChange());
+            hm.put("mem13",  totalInfo.getSubWithdrawal());
+            hm.put("mem14",  totalInfo.getSubWithdrawalSleep());
+            hm.put("mem15",  totalInfo.getSubOp());
+            hm.put("mem16",  totalInfo.getNewByeol());
+            bodies.add(hm.values().toArray());
+        }
         for(int i = 0; i < list.size(); i++){
             HashMap hm = new LinkedHashMap();
             hm.put("mem1",  list.get(i).getMem_no());

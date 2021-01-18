@@ -20,6 +20,9 @@
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">DJ</th>
                 <th colspan="3" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">달</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">별</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">선수금(P)</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">미지급</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">매출액(S)</th>
             </tr>
             <tr>
                 <th class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">유료(Q)</th>
@@ -31,12 +34,13 @@
         </table>
     </div>
 </div>
-<a id='dalbitSalesExcel' type='button' class="btn btn-default print-btn pull-right" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalbitSales', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
+<a type='button' class="btn btn-default print-btn pull-left dalbitSalesExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalbitSales', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
+<a type='button' class="btn btn-default print-btn pull-right dalbitSalesExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalbitSales', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
 
 <script type="text/javascript">
 
     function getDalbitSalesList(){
-        $("#dalbitSalesExcel").attr('download' , "달빛Live_수익인식Process(달매출)_" + moment($("#startDate").val()).add('days', 0).format('YYYY.MM.DD') + ".xls");
+        $(".dalbitSalesExcel").attr('download' , "달빛Live_수익인식Process(달매출)_" + moment($("#startDate").val()).add('days', 0).format('YYYY.MM.DD') + ".xls");
 
         var data = {
             slctType : slctType
@@ -94,6 +98,9 @@
         <td>{{addComma freeDal 'Y'}}</td>
         <td>{{addComma totalDal 'Y'}}</td>
         <td>{{addComma totalByeol 'Y'}}</td>
+        <td>{{addComma firstAmt 'Y'}}</td>
+        <td>{{addComma unpaidAmt 'Y'}}</td>
+        <td>{{addComma salesAmt 'Y'}}</td>
     </tr>
     {{/each}}
 </script>

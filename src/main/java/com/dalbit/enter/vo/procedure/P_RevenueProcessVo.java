@@ -89,4 +89,6 @@ public class P_RevenueProcessVo {
     private long newByeol;
     private long errorByeol;
 
+    private long firstAmt;
+
 }

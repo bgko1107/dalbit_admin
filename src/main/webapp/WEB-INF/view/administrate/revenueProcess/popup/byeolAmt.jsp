@@ -46,7 +46,8 @@
             <div class="dataTables_paginate paging_full_numbers" id="byeolAmt_paginate"></div>
     </div>
 </div>
-<button class="btn btn-default btn-sm print-btn pull-left" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
+<button class="btn btn-default btn-sm print-btn pull-left excelDownBtn" type="button"><i class="fa fa-print"></i>Excel Down</button>
+<button class="btn btn-default btn-sm print-btn pull-right excelDownBtn" type="button"><i class="fa fa-print"></i>Excel Down</button>
 
 <script type="text/javascript">
     var byeolAmtPagingInfo = new PAGING_INFO(0,1,100);
@@ -101,7 +102,7 @@
         }
     }
 
-    $('#excelDownBtn').on('click', function(){
+    $('.excelDownBtn').on('click', function(){
 
         var formData = new FormData();
         formData.append("startDate", '${param.startDate}');
