@@ -10,8 +10,8 @@
         <%--<a href="javascript://" class="_nextSearch">[다음]</a>--%>
         <table class="table table-bordered">
             <colgroup>
-                <col width="12.5%"/><col width="12.5%"/><col width="12.5%"/><col width="12.5%"/><col width="12.5%"/>
-                <col width="12.5%"/><col width="12.5%"/><col width="12.5%"/>
+                <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
+                <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
             </colgroup>
             <thead>
             <tr>
