@@ -872,7 +872,7 @@
     $(document).on('click', '#bt_listenExit', function(){
         var listen_title = $(this).data('listen_title');
         var listen_room_no = $(this).data('listen_room_no');
-        if(confirm(listen_title + "방에 청취를 종료 하시겠습니까?")) {
+        if(confirm(listen_title + "방 청취를 종료 하시겠습니까?")) {
             var data = {};
             data = {
                 mem_no : memNo
