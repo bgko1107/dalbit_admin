@@ -9,6 +9,11 @@
         <li><a href="#mynotice" role="tab" data-toggle="tab" id="getHistory_myNoticeDetail" onclick="getHistory_myNoticeDetail(this.id);"> 알림받기 회원 </a></li>
     </ul>
     <div class="tab-content">
+        <select id="fanStarSetting" name="fanStarSetting" class="form-control searchType" style="width: 60px;" onchange="fanStarSettingChange();">
+            <option value="-1">전체</option>
+            <option value="0">등록</option>
+            <option value="1">해제</option>
+        </select>
         <label><input type="text" class="form-control" id="txt_starFanSearch"></label>
         <button type="submit" class="btn btn-success" id="bt_starFanSearch">검색</button>
         <div class="tab-pane fade in active" id="mystar">
@@ -70,14 +75,7 @@
     $(document).ready(function() {
         $('input[id="txt_starFanSearch"]').keydown(function() {
             if (event.keyCode === 13) {
-                console.log(mystarTabId);
-                if(mystarTabId == "getHistory_mystarDetail" ) {
-                    getHistory_mystarDetail("getHistory_mystarDetail");
-                }else if(mystarTabId == "getHistory_myfanDetail" ){
-                    getHistory_myfanDetail("getHistory_mystarDetail");
-                }else if(mystarTabId == "getHistory_myNoticeDetail" ){
-                    getHistory_myNoticeDetail("getHistory_mystarDetail");
-                }
+                $('#bt_starFanSearch').click();
             };
         });
         <!-- 버튼 -->
@@ -87,9 +85,9 @@
             if(mystarTabId == "getHistory_mystarDetail" ) {
                 getHistory_mystarDetail("getHistory_mystarDetail");
             }else if(mystarTabId == "getHistory_myfanDetail" ){
-                getHistory_myfanDetail("getHistory_mystarDetail");
+                getHistory_myfanDetail("getHistory_myfanDetail");
             }else if(mystarTabId == "getHistory_myNoticeDetail" ){
-                getHistory_myNoticeDetail("getHistory_mystarDetail");
+                getHistory_myNoticeDetail("getHistory_myNoticeDetail");
             }
         });
         <!-- 버튼 끝 -->
@@ -100,6 +98,7 @@
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
+            data.state = $("#fanStarSetting").val();
         }
         dtList_info_detail = new DalbitDataTable($("#mystar").find("#list_mystar"), dtList_info_detail_data, MemberDataTableSource.mystar);
         dtList_info_detail.useCheckBox(false);
@@ -116,6 +115,7 @@
         var dtList_info_detail_data = function (data) {
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
+            data.state = $("#fanStarSetting").val();
         };
         dtList_info_detail2 = new DalbitDataTable($("#myfan").find("#list_myfan"), dtList_info_detail_data, MemberDataTableSource.myfan);
         dtList_info_detail2.useCheckBox(false);
@@ -131,6 +131,7 @@
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
             data.slctType = 0;
+            data.state = $("#fanStarSetting").val();
         };
         dtList_info_detail3 = new DalbitDataTable($("#mynotice").find("#table"), dtList_info_detail_data, MemberDataTableSource.myNotice);
         dtList_info_detail3.useCheckBox(false);
@@ -140,11 +141,11 @@
     }
 
     function fn_liveMystarTotal(json){
-        $("#liveMystarTotal").text("현재 등록 My Star : " + json.pagingVo.totalCnt);
+        $("#liveMystarTotal").text("현재 등록 My Star : " + json.summary);
     }
 
     function fn_liveFanTotal(json){
-        $("#liveFanTotal").text("현재 등록 My Fan : " + json.pagingVo.totalCnt);
+        $("#liveFanTotal").text("현재 등록 My Fan : " + json.summary);
     }
 
     function fn_myNoticeTotal(json){
@@ -157,6 +158,11 @@
         var html=templateScript(detailContext);
         $("#mynotice").find("#summaryArea").append(html);
         ui.paintColor();
+    }
+
+    function fanStarSettingChange(){
+        console.log(mystarTabId);
+        $('#bt_starFanSearch').click();
     }
 
 </script>

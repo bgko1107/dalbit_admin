@@ -439,8 +439,17 @@ var MemberDataTableSource = {
                 }},
             {'title': 'Mystar등록일', 'data': 'regDateFormat'},
             {'title': '삭제일', 'data': 'delDateFormat'},
+            {'title': '해제여부', 'data': 'state', 'render': function (data, type, row, meta) {
+                if(data == "0"){
+                    return "해제";
+                }
+            }},
             {'title': '삭제자', 'data': 'delMemNo', 'render': function (data, type, row, meta) {
-                    return util.memNoLink(row.delMemNick, data);
+                    if(row.mem_no_fan == data){
+                        return '본인';
+                    }else{
+                        return util.memNoLink(row.delMemNick, data);
+                    }
                 }},
         ]
         ,'createdRow' : function( row, data, dataIndex ) {
@@ -468,8 +477,17 @@ var MemberDataTableSource = {
                 }},
             {'title': 'Fan 등록일', 'data': 'regDateFormat'},
             {'title': '삭제일', 'data': 'delDateFormat'},
+            {'title': '해제여부', 'data': 'state', 'render': function (data, type, row, meta) {
+                    if(data == "0"){
+                        return "해제";
+                    }
+                }},
             {'title': '삭제자', 'data': 'delMemNo', 'render': function (data, type, row, meta) {
-                    return util.memNoLink(row.delMemNick, data);
+                    if(row.mem_no_star == data){
+                        return '본인';
+                    }else {
+                        return util.memNoLink(row.delMemNick, data);
+                    }
                 }},
         ]
         ,'createdRow' : function( row, data, dataIndex ) {
