@@ -252,6 +252,8 @@
 
         var template = $('#tmp_memberAccumData2').html();
         var templateScript = Handlebars.compile(template);
+        var goodTotal = response.data.goodCnt + response.data.boostCnt * 10
+        response.data.goodTotal = goodTotal;
         var context = response.data;
         var html = templateScript(context);
         $("#memberAccumData2").html(html);
@@ -1562,7 +1564,7 @@
 <script id="tmp_memberAccumData2" type="text/x-handlebars-template">
     <table class="table table-sorting table-hover table-bordered borderBlack _tableHeight" style="width: 75%;margin-bottom: 5px;" data-height="23px">
         <tr>
-            <th colspan="6" class="_bgColor" data-bgcolor="#b4c6e7">방송</th>
+            <th colspan="7" class="_bgColor" data-bgcolor="#b4c6e7">방송</th>
             <th colspan="3" class="_bgColor" data-bgcolor="#fff5a3">청취</th>
             <th colspan="4" class="_bgColor" data-bgcolor="#b4c6e7">클립</th>
         </tr>
@@ -1571,8 +1573,9 @@
             <th class="_bgColor" data-bgcolor="#d9e2f4">누적 방송 시간</th>
             <th class="_bgColor" data-bgcolor="#d9e2f4">방송중 받은 별</th>
             <th class="_bgColor" data-bgcolor="#d9e2f4">누적 청취자</th>
-            <th class="_bgColor" data-bgcolor="#d9e2f4">누적 좋아요</th>
-            <th class="_bgColor" data-bgcolor="#d9e2f4">받은 부스터</th>
+            <th class="_bgColor" data-bgcolor="#f4d9d9">좋아요 합계</th>
+            <th class="_bgColor" data-bgcolor="#f4d9d9">누적 좋아요</th>
+            <th class="_bgColor" data-bgcolor="#f4d9d9">받은 부스터</th>
             <th class="_bgColor" data-bgcolor="#fff2cc">총 청취</th>
             <th class="_bgColor" data-bgcolor="#fff2cc">누적 청취 시간</th>
             <th class="_bgColor" data-bgcolor="#fff2cc">청취 중 보낸 달</th>
@@ -1586,6 +1589,7 @@
             <td>{{timeStampDay broadTime}}</td>
             <td>{{addComma byeolCnt}}</td>
             <td>{{addComma listenerCnt}}</td>
+            <td>{{addComma goodTotal}}</td>
             <td>{{addComma goodCnt}}</td>
             <td>{{addComma boostCnt}} 개</td>
             <td>{{addComma listenCnt}}</td>
