@@ -76,12 +76,13 @@
         </table>
     </div>
 </div>
-<a id='dalCountExcel' type='button' class="btn btn-default print-btn pull-right" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalCount', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
+<a type='button' class="btn btn-default print-btn pull-left dalCountExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalCount', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
+<a type='button' class="btn btn-default print-btn pull-right dalCountExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalCount', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
 
 <script type="text/javascript">
 
     function getDalCountList(){
-        $("#dalCountExcel").attr('download' , "달빛Live_수익인식Process(달수)_" + moment($("#startDate").val()).add('days', 0).format('YYYY.MM.DD') + ".xls");
+        $(".dalCountExcel").attr('download' , "달빛Live_수익인식Process(달수)_" + moment($("#startDate").val()).add('days', 0).format('YYYY.MM.DD') + ".xls");
 
         var data = {
             slctType : slctType
