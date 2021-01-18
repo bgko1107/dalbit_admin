@@ -19,20 +19,20 @@
             </tr>
             <tr>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기초</th>
-                <th colspan="5" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">증가</th>
-                <th colspan="7" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">감소</th>
+                <th colspan="6" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">증가</th>
+                <th colspan="6" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">감소</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기말</th>
             </tr>
             <tr>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">합계</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">이벤트</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">방송</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">클립</th>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">이관</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">우체통</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">관리자지급</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">합계</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">환전</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">달로 변환</th>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">이관</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">회원탈퇴</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">휴면탈퇴</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">관리자회수</th>

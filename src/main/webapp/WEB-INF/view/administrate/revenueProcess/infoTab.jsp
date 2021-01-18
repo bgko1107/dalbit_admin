@@ -14,7 +14,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="dalForm"><jsp:include page="dalForm.jsp"/></div>
-                <div class="tab-pane fade" id="dalCount" style="width: 3600px;"><jsp:include page="dalCount.jsp"/></div>
+                <div class="tab-pane fade" id="dalCount" style="width: 3000px;"><jsp:include page="dalCount.jsp"/></div>
                 <div class="tab-pane fade" id="byeolCount"><jsp:include page="byeolCount.jsp"/></div>
                 <div class="tab-pane fade" id="dalbitSales"><jsp:include page="dalbitSales.jsp"/></div>
             </div>

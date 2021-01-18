@@ -117,6 +117,23 @@
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_byeolAmtDetailList">
+    <tr class="_bgColor font-bold" data-bgcolor="#f2f2f2">
+        <td>합계</td>
+        <td>{{addComma totalInfo.oldByeol}}</td>
+        <td>{{addComma totalInfo.addTotal}}</td>
+        <td>{{addComma totalInfo.addEvent}}</td>
+        <td>{{addComma totalInfo.addBroad}}</td>
+        <td>{{addComma totalInfo.addClip}}</td>
+        <td>{{addComma totalInfo.addMailbox}}</td>
+        <td>{{addComma totalInfo.addOp}}</td>
+        <td>{{addComma totalInfo.subTotal}}</td>
+        <td>{{addComma totalInfo.subExchange}}</td>
+        <td>{{addComma totalInfo.subChange}}</td>
+        <td>{{addComma totalInfo.subWithdrawal}}</td>
+        <td>{{addComma totalInfo.subWithdrawalSleep}}</td>
+        <td>{{addComma totalInfo.subOp}}</td>
+        <td>{{addComma totalInfo.newByeol}}</td>
+    </tr>
     {{#each this.detailList as |data|}}
     <tr>
         <td>
