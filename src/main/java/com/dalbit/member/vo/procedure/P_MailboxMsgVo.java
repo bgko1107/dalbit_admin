@@ -15,6 +15,7 @@ public class P_MailboxMsgVo extends SearchVo {
     private String endDate;
     private int inner;
     private int msgType;
+    private int msgSort;
 
     // output
     private String idx;

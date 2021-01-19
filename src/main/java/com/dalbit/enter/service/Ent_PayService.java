@@ -936,4 +936,125 @@ public class Ent_PayService {
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
     }
+
+    // 탈퇴 달
+    public String callWithdrawalDal(P_RevenueProcessVo pRevenueProcessVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+        List<P_RevenueProcessVo> detailList =  ent_PayDao.callWithdrawalDal(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
+
+    // 탈퇴 달 엑셀 다운로드
+    public Model callWithdrawalDalListExcel(P_RevenueProcessVo pRevenueProcessVo, Model model) {
+        pRevenueProcessVo.setPageCnt(100000);
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+
+        List<P_RevenueProcessVo> list = ent_PayDao.callWithdrawalDal(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+
+        String[] headers = {"회원번호"
+                ,"닉네임"
+                ,"달-유료"
+                ,"달-무료"
+                ,"달-합계"
+                ,"달 금액"
+        };
+        int[] headerWidths = {3000, 3000, 3000, 3000, 3000, 3000};
+
+        List<Object[]> bodies = new ArrayList<>();
+
+        if(!DalbitUtil.isEmpty(totalInfo)){
+            HashMap hm = new LinkedHashMap();
+            hm.put("mem1",  "합계");
+            hm.put("mem2",  "");
+            hm.put("mem3",  totalInfo.getPayDal());
+            hm.put("mem4",  totalInfo.getFreeDal());
+            hm.put("mem5",  totalInfo.getTotalDal());
+            hm.put("mem6",  totalInfo.getDalAmt());
+            bodies.add(hm.values().toArray());
+        }
+        for(int i = 0; i < list.size(); i++){
+            HashMap hm = new LinkedHashMap();
+            hm.put("mem1",  list.get(i).getMem_no());
+            hm.put("mem2",  list.get(i).getNickName());
+            hm.put("mem3",  list.get(i).getPayDal());
+            hm.put("mem4",  list.get(i).getFreeDal());
+            hm.put("mem5",  list.get(i).getTotalDal());
+            hm.put("mem6",  list.get(i).getDalAmt());
+            bodies.add(hm.values().toArray());
+        }
+        ExcelVo vo = new ExcelVo(headers, headerWidths, bodies);
+        SXSSFWorkbook workbook = excelService.excelDownload("목록",vo);
+        model.addAttribute("locale", Locale.KOREA);
+        model.addAttribute("workbook", workbook);
+        model.addAttribute("workbookName", "달빛Live_수익인식Process(탈퇴달)_" + pRevenueProcessVo.getStartDate());
+
+        return model;
+    }
+
+
+    // 탈퇴 별
+    public String callWithdrawalByeol(P_RevenueProcessVo pRevenueProcessVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+        List<P_RevenueProcessVo> detailList =  ent_PayDao.callWithdrawalByeol(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
+
+    // 탈퇴 달 엑셀 다운로드
+    public Model callWithdrawalByeolListExcel(P_RevenueProcessVo pRevenueProcessVo, Model model) {
+        pRevenueProcessVo.setPageCnt(100000);
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+
+        List<P_RevenueProcessVo> list = ent_PayDao.callWithdrawalByeol(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+
+        String[] headers = {"회원번호"
+                ,"닉네임"
+                ,"별-수량"
+                ,"별-금액"
+        };
+        int[] headerWidths = {3000, 3000, 3000, 3000, 3000, 3000};
+
+        List<Object[]> bodies = new ArrayList<>();
+
+        if(!DalbitUtil.isEmpty(totalInfo)){
+            HashMap hm = new LinkedHashMap();
+            hm.put("mem1",  "합계");
+            hm.put("mem2",  "");
+            hm.put("mem3",  totalInfo.getByeol());
+            hm.put("mem4",  totalInfo.getByeolAmt());
+            bodies.add(hm.values().toArray());
+        }
+        for(int i = 0; i < list.size(); i++){
+            HashMap hm = new LinkedHashMap();
+            hm.put("mem1",  list.get(i).getMem_no());
+            hm.put("mem2",  list.get(i).getNickName());
+            hm.put("mem3",  list.get(i).getByeol());
+            hm.put("mem4",  list.get(i).getByeolAmt());
+            bodies.add(hm.values().toArray());
+        }
+        ExcelVo vo = new ExcelVo(headers, headerWidths, bodies);
+        SXSSFWorkbook workbook = excelService.excelDownload("목록",vo);
+        model.addAttribute("locale", Locale.KOREA);
+        model.addAttribute("workbook", workbook);
+        model.addAttribute("workbookName", "달빛Live_수익인식Process(탈퇴별)_" + pRevenueProcessVo.getStartDate());
+
+        return model;
+    }
 }

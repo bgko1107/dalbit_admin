@@ -66,10 +66,9 @@
 
     var clickTab = false;
 
-
     $(function(){
         slctType = 1;
-        setDayButton();
+        dateType();
 
         $('input[id="txt_search"]').keydown(function() {
             if (event.keyCode === 13) {
@@ -103,5 +102,22 @@
         }
         setDayButton();
     }
+
+    function handlebarsPaging(targetId, pagingInfo) {
+        if(targetId == "byeolAmt_paginate_top" || targetId == "byeolAmt_paginate") {
+            byeolAmtPagingInfo = pagingInfo;
+            getByeolAmtList(pagingInfo.pageNo);
+        }else if(targetId == "dalAmt_paginate_top" || targetId == "dalAmt_paginate") {
+            dalAmtPagingInfo = pagingInfo;
+            getDalAmtList(pagingInfo.pageNo);
+        }else if(targetId == "withdrawalDal_paginate_top" || targetId == "withdrawalDal_paginate") {
+            withdrawalDalPagingInfo = pagingInfo;
+            getWithdrawalDalList(pagingInfo.pageNo);
+        }else if(targetId == "withdrawalByeol_paginate_top" || targetId == "withdrawalByeol_paginate") {
+            withdrawalByeolPagingInfo = pagingInfo;
+            getWithdrawalByeolList(pagingInfo.pageNo);
+        }
+    }
+
 </script>
 

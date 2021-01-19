@@ -51,14 +51,19 @@
             </div>
         </div>
 
-        <div class="col-md-2 no-padding">
-            <select id="msgType" name="msgType" class="form-control" style="width: 130px">
+        <div class="col-md-12 no-padding">
+            <select id="msgType" name="msgType" class="form-control searchType" style="width: 130px; display: inline">
                 <option value="0">대화내용(전체)</option>
                 <option value="1">대화 만</option>
                 <option value="3">선물 만</option>
                 <option value="2">이미지 만</option>
             </select>
+            <select id="msgSort" name="msgSort" class="form-control searchType" style="width: 130px; display: inline">
+                <option value="0">오래된 글 순</option>
+                <option value="1">최신 글 순</option>
+            </select>
         </div>
+
         <div class="widget-content mt10 col-md-12 no-padding">
             <div class="dataTables_paginate paging_full_numbers" id="mailbox_paginate_top"></div>
             <table id="list_info" class="table table-sorting table-hover table-bordered">
@@ -110,6 +115,10 @@
         msgList();
     });
 
+    $(document).on('change', '#msgSort', function(){
+        msgList();
+    });
+
     function msgList(pagingNo){
         if(!common.isEmpty(pagingNo)){
             mailboxPagingInfo.pageNo = pagingNo;
@@ -126,6 +135,7 @@
         data.pageNo = mailboxPagingInfo.pageNo;
         data.pageCnt = mailboxPagingInfo.pageCnt;
         data.msgType = $("#msgType").val();
+        data.msgSort = $("#msgSort").val();
 
         console.log(data);
         util.getAjaxData("mailboxMsg", "/rest/member/mailbox/msg", data, fn_list_success);

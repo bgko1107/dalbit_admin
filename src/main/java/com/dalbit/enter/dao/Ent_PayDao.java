@@ -58,4 +58,10 @@ public interface Ent_PayDao {
 
     @Transactional(readOnly = true)
     List<P_RevenueProcessVo> callDalSales(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    List<P_RevenueProcessVo> callWithdrawalDal(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    List<P_RevenueProcessVo> callWithdrawalByeol(ProcedureVo procedureVo);
 }
