@@ -26,8 +26,8 @@
             </tr>
             <tr>
                 <th rowspan="2" colspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기초</th>
-                <th colspan="11" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">증가</th>
-                <th colspan="18" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">감소</th>
+                <th colspan="10" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">증가</th>
+                <th colspan="19" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">감소</th>
                 <th rowspan="2" colspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기말</th>
             </tr>
             <tr>
