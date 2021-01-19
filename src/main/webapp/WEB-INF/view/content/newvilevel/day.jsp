@@ -56,6 +56,10 @@
 
     function fn_getDay_success(data, response){
 
+        if(common.isEmpty(response.data.list)){
+            $("#dayTableBody").html('<td colspan="10" class="noData">'+response.message+'<td>')
+            return false;
+        }
         for(var i=0;i<response.data.list.length;i++){
             $("#dayTableBody tr._tr_" + response.data.list[i].theDate + "_" + response.data.list[i].eventType + " td:eq(" + 1 + ")").html(common.addComma(response.data.list[i].maleCnt));
             $("#dayTableBody tr._tr_" + response.data.list[i].theDate + "_" + response.data.list[i].eventType + " td:eq(" + 2 + ")").html(common.addComma(response.data.list[i].maleDal));
@@ -98,6 +102,13 @@
         $("#dayTableBody tr._tr_total_10 th:eq(" + 8 + ")").html(common.addComma(response.data.summary.totalLevel10MaleDal + response.data.summary.totalLevel10FemaleDal));
         $("#dayTableBody tr._tr_total_10 th:eq(" + 9 + ")").html(common.addComma(response.data.summary.totalLevel10MalePay + response.data.summary.totalLevel10FemalePay));
 
+        $("[class^=_tr_]").each(function(){
+            var me = $(this);
+            var data = me.find('td:eq(2)').html();
+            if(data == ''){
+                me.hide();
+            }
+        });
     }
 
     function dayRowspan(className){
