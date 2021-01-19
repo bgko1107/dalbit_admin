@@ -13,6 +13,8 @@
             <div class="widget-content">
                 <button class="btn btn-primary btn-lg _layerOpen" data-toggle="modal" data-target="#myModal">누르면 나와요</button>
 
+                <button class="example2 btn btn-primary" onclick="testConfirm()">example confirm</button>
+
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -58,4 +60,26 @@
         $("#_layerTitle").html('제목이에요');
         $("#_layerBody").html("여기에 내용을 넣어주세요.");
     });
+
+    function testConfirm(){
+        $.confirm({
+            title: 'Confirm!',
+            content: 'Simple confirm!',
+            buttons: {
+                confirm: function () {
+                    $.alert('Confirmed!');
+                },
+                cancel: function () {
+                },
+                somethingElse: {
+                    text: 'Something else',
+                    btnClass: 'btn-blue',
+                    keys: ['enter', 'shift'],
+                    action: function(){
+                        $.alert('Something else?');
+                    }
+                }
+            }
+        });
+    }
 </script>
