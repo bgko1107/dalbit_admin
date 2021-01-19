@@ -3,7 +3,6 @@ package com.dalbit.content.controller.rest;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
-import com.dalbit.content.service.SplashService;
 import com.dalbit.content.vo.SplashVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
@@ -21,9 +20,6 @@ import java.util.Date;
 @RestController
 @RequestMapping("rest/content/splash")
 public class SplashRestController {
-
-    @Autowired
-    SplashService service;
 
     @Autowired
     GsonUtil gsonUtil;

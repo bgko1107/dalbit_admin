@@ -17,7 +17,6 @@ public interface Mem_ListenDao {
     @Transactional(readOnly = true)
     ArrayList<P_MemberListenOutputVo> callListenList(P_MemberListenInputVo pMemberListenInputVo);
 
-    @Transactional(readOnly = true)
     void updateExitRoomMember(P_MemberListenInputVo pMemberListenInputVo);
 
 }
