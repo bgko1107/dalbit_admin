@@ -1,7 +1,5 @@
 package com.dalbit.member.dao;
 
-import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.member.vo.procedure.P_MemberBroadcastInputVo;
 import com.dalbit.member.vo.procedure.P_MemberFanboardDeleteVo;
 import com.dalbit.member.vo.procedure.P_MemberFanboardInputVo;
 import com.dalbit.member.vo.procedure.P_MemberFanboardOutputVo;

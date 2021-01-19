@@ -1,6 +1,5 @@
 package com.dalbit.content.vo;
 
-import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.SearchVo;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,13 +1,12 @@
 package com.dalbit.administrate.dao;
 
-import com.dalbit.administrate.vo.*;
-import com.dalbit.common.vo.SearchVo;
-import com.dalbit.member.vo.MemberVo;
+import com.dalbit.administrate.vo.TestDalByeolListVo;
+import com.dalbit.administrate.vo.TestIdVo;
+import com.dalbit.administrate.vo.TestResourceSendListVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Repository
 public interface Adm_TestDalByeolDao {

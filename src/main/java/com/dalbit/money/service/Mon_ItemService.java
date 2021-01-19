@@ -10,7 +10,6 @@ import com.dalbit.money.dao.Mon_ItemDao;
 import com.dalbit.money.vo.Mon_AutoChangeOutputVo;
 import com.dalbit.money.vo.Mon_ItemInputVo;
 import com.dalbit.money.vo.Mon_ItemOutputVo;
-import com.dalbit.money.vo.procedure.P_memberDataListOutVo;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;

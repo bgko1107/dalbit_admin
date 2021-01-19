@@ -1,7 +1,6 @@
 package com.dalbit.content.controller.rest;
 
 import com.dalbit.content.service.Con_RouletteEventService;
-import com.dalbit.content.vo.AttendanceCalendarVo;
 import com.dalbit.content.vo.RouletteApplyVo;
 import com.dalbit.content.vo.RouletteCalendarVo;
 import com.dalbit.content.vo.procedure.P_RouletteRateVo;

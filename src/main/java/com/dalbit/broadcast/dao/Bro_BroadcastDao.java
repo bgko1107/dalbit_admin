@@ -2,11 +2,9 @@ package com.dalbit.broadcast.dao;
 
 import com.dalbit.broadcast.vo.procedure.*;
 import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.member.vo.LoginHistoryVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 

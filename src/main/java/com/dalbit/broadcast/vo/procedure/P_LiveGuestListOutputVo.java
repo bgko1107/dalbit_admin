@@ -4,8 +4,6 @@ import com.dalbit.common.vo.PagingVo;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 public class P_LiveGuestListOutputVo extends PagingVo {

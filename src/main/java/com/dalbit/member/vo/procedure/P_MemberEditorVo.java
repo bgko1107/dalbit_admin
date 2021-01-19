@@ -4,11 +4,8 @@ import com.dalbit.common.vo.BaseVo;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 @Getter
 @Setter

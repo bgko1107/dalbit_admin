@@ -1,10 +1,6 @@
 package com.dalbit.content.dao;
 
 import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.content.vo.BoardAdmFanBoardDeleteVo;
-import com.dalbit.content.vo.BoardAdmFanBoardReplyVo;
-import com.dalbit.content.vo.BoardAdmFanBoardVo;
-import com.dalbit.content.vo.BoardAdmStoryVo;
 import com.dalbit.content.vo.procedure.P_BroadCastTipOutputVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

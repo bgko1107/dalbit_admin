@@ -8,9 +8,6 @@ import okhttp3.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.URL;
-import java.net.URLConnection;
 
 public class OkHttpClientUtil {
 

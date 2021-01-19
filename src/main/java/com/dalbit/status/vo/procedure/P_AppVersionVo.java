@@ -1,7 +1,6 @@
 package com.dalbit.status.vo.procedure;
 
 import com.dalbit.common.vo.PagingVo;
-import com.dalbit.common.vo.SearchVo;
 import lombok.Getter;
 import lombok.Setter;
 

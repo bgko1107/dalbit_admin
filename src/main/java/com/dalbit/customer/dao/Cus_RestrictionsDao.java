@@ -1,6 +1,5 @@
 package com.dalbit.customer.dao;
 
-import com.dalbit.customer.vo.SmsHistoryVo;
 import com.dalbit.customer.vo.procedure.P_ForcedListInputVo;
 import com.dalbit.customer.vo.procedure.P_ForcedListOutputVo;
 import com.dalbit.customer.vo.procedure.P_WithdrawalListInputVo;

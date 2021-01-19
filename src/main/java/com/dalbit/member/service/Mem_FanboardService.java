@@ -3,7 +3,6 @@ package com.dalbit.member.service;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
-import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.member.dao.Mem_FanboardDao;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.member.vo.procedure.P_MemberFanboardDeleteVo;

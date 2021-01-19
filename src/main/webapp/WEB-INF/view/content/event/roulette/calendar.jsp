@@ -138,7 +138,7 @@
 
             <div class="widget">
                 <div class="widget-header mb10">
-                    <h3><i class="fa fa-calendar"></i> 출석체크 이벤트 현황</h3>
+                    <h3><i class="fa fa-calendar"></i> 룰렛 이벤트 현황</h3>
                 </div>
                 <div class="widget-content">
                     <div class="calendar"></div>

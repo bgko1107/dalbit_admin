@@ -1,6 +1,5 @@
 package com.dalbit.member.dao;
 
-import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.member.vo.procedure.P_MemberChargeInputVo;
 import com.dalbit.member.vo.procedure.P_MemberChargeOutputVo;
 import com.dalbit.member.vo.procedure.P_MemberGiftInputVo;

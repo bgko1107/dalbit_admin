@@ -5,7 +5,6 @@ import com.dalbit.common.dao.SmsDao;
 import com.dalbit.common.vo.SmsVo;
 import com.dalbit.exception.GlobalException;
 import com.dalbit.util.DalbitUtil;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

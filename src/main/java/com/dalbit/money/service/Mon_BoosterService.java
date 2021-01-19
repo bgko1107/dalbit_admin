@@ -1,12 +1,10 @@
 package com.dalbit.money.service;
 
-import com.dalbit.clip.vo.ClipHistoryTotalVo;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.money.dao.Mon_BoosterDao;
 import com.dalbit.money.vo.procedure.*;
-import com.dalbit.status.vo.procedure.P_NewBroadcastTimeOutVo;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;

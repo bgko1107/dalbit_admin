@@ -29,7 +29,8 @@ public interface CommonDao {
     @Transactional(readOnly = true)
     List<FanBadgeVo> callMemberBadgeSelect(HashMap param);
 
-    @Transactional(readOnly = true)
+    //API가 master라서 같이 마스터 바라보도록 주석처리 2021.01.19
+    /*@Transactional(readOnly = true)*/
     List<FanBadgeVo> callLiveBadgeSelect(HashMap param);
 
     int updateCodeDefine(CodeListVo codeListVo);

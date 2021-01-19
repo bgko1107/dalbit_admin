@@ -7,7 +7,6 @@ import com.dalbit.main.vo.PayStatusOutputVo;
 import com.dalbit.main.vo.procedure.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.dalbit.main.vo.procedure.P_StatVo;
 
 import java.util.List;
 

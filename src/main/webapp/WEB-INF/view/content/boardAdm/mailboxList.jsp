@@ -148,7 +148,11 @@
 
                     <div style="display:flex;">
                         <img src="{{item_thumbnail}}" width="50" height="50" data-webpImage="{{webp_image}}" />
-                        <p>{{{viewMailBoxItemJson memNick data4}}}</p>
+                        <p>
+                            <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">
+                                {{{viewMailBoxItemJson memNick data4}}}
+                            </a>
+                        </p>
                     </div>
 
                 {{/dalbit_if}}

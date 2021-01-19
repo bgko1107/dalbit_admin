@@ -1,25 +1,16 @@
 package com.dalbit.administrate.service;
 
 import com.dalbit.administrate.dao.Adm_TestDalByeolDao;
-import com.dalbit.administrate.dao.Adm_TestIdDao;
 import com.dalbit.administrate.vo.*;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
-import com.dalbit.common.vo.SearchVo;
-import com.dalbit.excel.service.ExcelService;
-import com.dalbit.excel.vo.ExcelVo;
-import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.dalbit.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
-import lombok.var;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import java.util.*;
 

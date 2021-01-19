@@ -1,9 +1,7 @@
 package com.dalbit.member.controller.rest;
 
 import com.dalbit.excel.service.ExcelService;
-import com.dalbit.member.service.Mem_BroadcastService;
 import com.dalbit.member.service.Mem_FanboardService;
-import com.dalbit.member.vo.procedure.P_MemberBroadcastInputVo;
 import com.dalbit.member.vo.procedure.P_MemberFanboardDeleteVo;
 import com.dalbit.member.vo.procedure.P_MemberFanboardInputVo;
 import com.dalbit.util.GsonUtil;
