@@ -179,4 +179,34 @@ public class Ent_PayRestController {
         String result = ent_PayService.callDalSales(pRevenueProcessVo);
         return result;
     }
+
+    // 탈퇴 달 금액
+    @PostMapping("/withdrawal/dal")
+    public String withdrawalDal(P_RevenueProcessVo pRevenueProcessVo){
+        String result = ent_PayService.callWithdrawalDal(pRevenueProcessVo);
+        return result;
+    }
+
+    // 탈퇴 달 엑셀 다운로드
+    @PostMapping("/withdrawal/dal/listExcel")
+    public String withdrawalDalListExcel(HttpServletRequest request, HttpServletResponse response, Model model, P_RevenueProcessVo pRevenueProcessVo) throws GlobalException {
+        Model resultModel = ent_PayService.callWithdrawalDalListExcel(pRevenueProcessVo, model);
+        excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
+        return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
+
+    // 탈퇴 달 금액
+    @PostMapping("/withdrawal/byeol")
+    public String withdrawalByeol(P_RevenueProcessVo pRevenueProcessVo){
+        String result = ent_PayService.callWithdrawalByeol(pRevenueProcessVo);
+        return result;
+    }
+
+    // 달 금액 엑셀 다운로드
+    @PostMapping("/withdrawal/byeol/listExcel")
+    public String withdrawalByeolListExcel(HttpServletRequest request, HttpServletResponse response, Model model, P_RevenueProcessVo pRevenueProcessVo) throws GlobalException {
+        Model resultModel = ent_PayService.callWithdrawalByeolListExcel(pRevenueProcessVo, model);
+        excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
+        return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
 }

@@ -84,4 +84,12 @@
     <select id="callDalSales" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.enter.vo.procedure.P_RevenueProcessVo">
         call rd_admin.sp_admin_accounting_sales(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
+
+    <select id="callWithdrawalDal" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.enter.vo.procedure.P_RevenueProcessVo">
+        call rd_admin.sp_admin_accounting_withdrawal_dal_member(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callWithdrawalByeol" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.enter.vo.procedure.P_RevenueProcessVo">
+        call rd_admin.sp_admin_accounting_withdrawal_byeol_member(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
 </mapper>

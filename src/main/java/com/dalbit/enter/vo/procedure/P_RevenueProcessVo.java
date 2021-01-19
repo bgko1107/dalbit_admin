@@ -29,6 +29,9 @@ public class P_RevenueProcessVo {
     private long totalByeol;
     private long unpaidAmt;
     private long salesAmt;
+    private long byeol;
+    private long dalAmt;
+    private long byeolAmt;
 
     private String mem_no;
     private String nickName;
@@ -90,5 +93,8 @@ public class P_RevenueProcessVo {
     private long errorByeol;
 
     private long firstAmt;
+    private long withdrawalPayDal;
+    private long withdrawalFreeDal;
+    private long withdrawalByeol;
 
 }

@@ -20,13 +20,13 @@
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">DJ</th>
                 <th colspan="3" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">달</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">별</th>
-                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">선수금(P)</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">선수금</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">미지급</th>
-                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">매출액(S)</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">매출액</th>
             </tr>
             <tr>
-                <th class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">유료(Q)</th>
-                <th class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">무료(Q)</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">유료</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">무료</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">합계</th>
             </tr>
             </thead>

@@ -8,15 +8,18 @@
         <span class="_searchDate"></span>
         <table class="table table-bordered">
             <colgroup>
-                <%--<col width="2.7%"/>--%>
+                <col width="7.6%"/><col width="7.6%"/><col width="7.6%"/><col width="7.6%"/><col width="7.6%"/>
+                <col width="7.6%"/><col width="7.6%"/><col width="7.6%"/><col width="7.6%"/><col width="7.6%"/>
+                <col width="7.6%"/><col width="7.6%"/><col width="7.6%"/>
             </colgroup>
             <thead>
             <tr>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#00b050" data-fontcolor="white">조회일자</th>
-                <th colspan="6" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">총계</th>
+                <th colspan="6" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">선수금</th>
                 <th rowspan="3" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">별수</th>
                 <th rowspan="3" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">미지급비용</th>
                 <th rowspan="3" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">매출액</th>
+                <th colspan="3" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">탈퇴</th>
             </tr>
             <tr>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">Ⅰ. 총달수</th>
@@ -28,15 +31,9 @@
                     금액<br/>
                     (①+②+③)
                 </th>
-            </tr>
-            <tr>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">Reference</th>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white"></th>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white"></th>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white"></th>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white"></th>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white"></th>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white"><span id="totalAmt"></span></th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">유료달</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">무료달</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">별</th>
             </tr>
             </thead>
             <tbody id="dalFormTableBody"></tbody>
@@ -67,9 +64,6 @@
         var detailContext = response.data.detailList;
         var html=templateScript(detailContext);
         $("#dalFormTableBody").append(html);
-
-        $("#totalAmt").html(common.addComma(response.data.detailList[0].totalAmt));
-
         ui.tableHeightSet();
     }
 </script>
@@ -87,6 +81,9 @@
         <td>{{addComma totalByeol 'Y'}}</td>
         <td>{{addComma unpaidAmt 'Y'}}</td>
         <td>{{addComma salesAmt 'Y'}}</td>
+        <td>{{addComma withdrawalPayDal 'Y'}}</td>
+        <td>{{addComma withdrawalFreeDal 'Y'}}</td>
+        <td>{{addComma withdrawalByeol 'Y'}}</td>
     </tr>
     {{/each}}
 </script>
