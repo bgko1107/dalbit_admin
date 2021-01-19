@@ -1,9 +1,7 @@
 package com.dalbit.common.vo;
 
-import com.dalbit.util.DalbitUtil;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.SneakyThrows;
 import lombok.ToString;
 
 import java.io.UnsupportedEncodingException;

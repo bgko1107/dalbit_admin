@@ -3,7 +3,6 @@ package com.dalbit.content.dao;
 import com.dalbit.content.vo.BannerOrderVo;
 import com.dalbit.content.vo.BannerStatVo;
 import com.dalbit.content.vo.procedure.*;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -6,7 +6,6 @@ import com.dalbit.member.vo.MemberVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 @Repository

@@ -1,6 +1,5 @@
 package com.dalbit.content.controller.rest;
 
-import com.dalbit.content.service.Con_AttendEventService;
 import com.dalbit.content.service.Con_ChuseokEventService;
 import com.dalbit.content.vo.*;
 import com.dalbit.excel.service.ExcelService;

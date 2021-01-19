@@ -3,8 +3,6 @@ package com.dalbit.payment.vo;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
-
 @Getter
 @Setter
 public class Pay_IosAttempOutputVo {

@@ -7,7 +7,6 @@ import com.dalbit.administrate.vo.procedure.P_TermsListOutputVo;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
-import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.GsonUtil;

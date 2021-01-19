@@ -2,8 +2,6 @@ package com.dalbit.content.dao;
 
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.vo.procedure.P_MarketingVo;
-import com.dalbit.content.vo.procedure.P_noticeDetailOutputVo;
-import com.dalbit.content.vo.procedure.P_noticeListOutputVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

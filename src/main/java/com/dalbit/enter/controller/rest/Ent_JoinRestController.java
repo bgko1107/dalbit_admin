@@ -2,13 +2,11 @@ package com.dalbit.enter.controller.rest;
 
 import com.dalbit.enter.service.Ent_JoinService;
 import com.dalbit.enter.vo.procedure.P_StatVo;
-import com.dalbit.member.vo.procedure.P_MemberBanwordInputVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.dalbit.util.MessageUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

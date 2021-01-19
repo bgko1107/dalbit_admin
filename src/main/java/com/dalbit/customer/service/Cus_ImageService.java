@@ -17,7 +17,6 @@ import com.dalbit.customer.vo.procedure.P_ImageBroadcastListOutputVo;
 import com.dalbit.customer.vo.procedure.P_ImageProfileListInputVo;
 import com.dalbit.customer.vo.procedure.P_ImageProfileListOutputVo;
 import com.dalbit.exception.GlobalException;
-import com.dalbit.member.dao.Mem_NoticeDao;
 import com.dalbit.member.service.Mem_MemberService;
 import com.dalbit.member.vo.MemberNoticeImgDeleteVo;
 import com.dalbit.member.vo.MemberVo;
@@ -29,8 +28,6 @@ import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.ArrayList;
 

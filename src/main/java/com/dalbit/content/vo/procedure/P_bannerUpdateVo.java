@@ -4,8 +4,6 @@ import com.dalbit.common.vo.BaseVo;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 public class P_bannerUpdateVo extends BaseVo {

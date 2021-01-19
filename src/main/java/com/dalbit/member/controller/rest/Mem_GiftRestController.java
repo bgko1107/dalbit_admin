@@ -3,7 +3,6 @@ package com.dalbit.member.controller.rest;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.member.service.Mem_GiftService;
 import com.dalbit.member.vo.procedure.P_MemberChargeInputVo;
-import com.dalbit.member.vo.procedure.P_MemberExchangeInputVo;
 import com.dalbit.member.vo.procedure.P_MemberGiftInputVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;

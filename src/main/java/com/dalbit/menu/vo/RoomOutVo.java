@@ -4,12 +4,9 @@ import com.dalbit.common.vo.ImageVo;
 import com.dalbit.common.vo.PagingVo;
 import com.dalbit.menu.vo.procedure.P_RoomListVo;
 import com.dalbit.util.DalbitUtil;
-import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.HashMap;
 
 @Getter @Setter @ToString
 public class RoomOutVo {

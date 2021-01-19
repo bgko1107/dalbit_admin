@@ -10,7 +10,6 @@ import com.dalbit.content.vo.procedure.*;
 import com.dalbit.exception.GlobalException;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.menu.dao.Men_LiveDao;
-import com.dalbit.menu.vo.RoomListVo;
 import com.dalbit.menu.vo.procedure.P_RoomListVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;

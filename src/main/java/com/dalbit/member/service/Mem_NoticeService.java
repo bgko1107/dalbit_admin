@@ -5,7 +5,6 @@ import com.dalbit.broadcast.vo.procedure.P_BroadcastEditInputVo;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
-import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.member.dao.Mem_NoticeDao;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.member.vo.procedure.P_MemberNoticeDeleteVo;

@@ -3,7 +3,6 @@ package com.dalbit.administrate.dao;
 import com.dalbit.administrate.vo.procedure.P_TermsDetailInputVo;
 import com.dalbit.administrate.vo.procedure.P_TermsListInputVo;
 import com.dalbit.administrate.vo.procedure.P_TermsListOutputVo;
-import com.dalbit.common.vo.ProcedureVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

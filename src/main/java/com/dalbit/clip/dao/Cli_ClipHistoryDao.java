@@ -5,7 +5,6 @@ import com.dalbit.clip.vo.procedure.P_ClipCopyrightDetailOutputVo;
 import com.dalbit.clip.vo.procedure.P_ClipCopyrightOutputVo;
 import com.dalbit.clip.vo.procedure.P_ClipHistoryDetailInfoEditHistoryVo;
 import com.dalbit.common.vo.ProcedureVo;
-import org.apache.tomcat.jni.Proc;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

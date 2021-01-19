@@ -4,7 +4,6 @@ package com.dalbit.status.service;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.connect.vo.procedure.P_LoginBrowserOutDetailVo;
 import com.dalbit.status.dao.Sta_ExchangeDao;
 import com.dalbit.status.vo.procedure.*;
 import com.dalbit.util.DalbitUtil;
@@ -16,7 +15,6 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

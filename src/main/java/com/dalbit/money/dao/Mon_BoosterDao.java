@@ -1,9 +1,6 @@
 package com.dalbit.money.dao;
 
 import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.money.vo.Mon_AutoChangeOutputVo;
-import com.dalbit.money.vo.Mon_ItemInputVo;
-import com.dalbit.money.vo.Mon_ItemOutputVo;
 import com.dalbit.money.vo.procedure.P_memberBoostHistListOutputVo;
 import com.dalbit.money.vo.procedure.P_memberBoostStatOutputVo;
 import org.springframework.stereotype.Repository;

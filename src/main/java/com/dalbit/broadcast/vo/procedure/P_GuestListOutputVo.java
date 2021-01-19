@@ -1,11 +1,8 @@
 package com.dalbit.broadcast.vo.procedure;
 
 import com.dalbit.common.vo.PagingVo;
-import com.dalbit.util.DalbitUtil;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter

@@ -1,7 +1,6 @@
 package com.dalbit.member.dao;
 
 import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.content.vo.procedure.P_EventMemberListOutputVo;
 import com.dalbit.member.vo.procedure.P_DormancyOutputVo;
 import com.dalbit.member.vo.procedure.P_MemberJoinInputVo;
 import com.dalbit.member.vo.procedure.P_MemberJoinOutputVo;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @Repository
 public interface Mem_JoinDao {

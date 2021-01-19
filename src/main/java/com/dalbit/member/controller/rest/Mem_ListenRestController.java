@@ -2,7 +2,6 @@ package com.dalbit.member.controller.rest;
 
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.member.service.Mem_ListenService;
-import com.dalbit.member.vo.MemberVo;
 import com.dalbit.member.vo.procedure.P_MemberListenInputVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
