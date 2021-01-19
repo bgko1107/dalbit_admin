@@ -19,6 +19,7 @@
 <link href="/css/bootstrap-datetimepicker.css?${dummyData}" rel="stylesheet" type="text/css">
 <link href="/css/common_DataTable.css?${dummyData}" rel="stylesheet" type="text/css">
 <link href="/css/dalbitAdmin.css?${dummyData}" rel="stylesheet" type="text/css">
+<link href="/css/jquery-confirm.min.css?${dummyData}" rel="stylesheet" type="text/css">
 
 
 <!--[if lte IE 9]>

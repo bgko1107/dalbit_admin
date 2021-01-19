@@ -55,6 +55,7 @@
 <!-- plugin -->
 <script src="/js/lib/bootstrap-datepicker.kr.js"></script>
 <script src="/js/lib/bootstrap-datetimepicker.js"></script>
+<script src="/js/lib/jquery-confirm.min.js?${dummyData}"></script>
 
 <!-- dataTable -->
 <script src="/js/lib/dataTable/buttons.html5-1.5.2.min.js"></script>

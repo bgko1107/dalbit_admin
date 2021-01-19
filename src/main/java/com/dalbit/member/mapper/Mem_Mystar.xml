@@ -12,7 +12,8 @@
               a.*,
              (select ifnull(mem_nick, '') FROM rd_data.tb_member_basic WHERE mem_no = delMemNo) as delMemNick
          from (	SELECT
-					a.mem_no_star
+					a.mem_no_fan
+					,a.mem_no_star
 					,ifnull(mem_userid ,(select mem_userid From rd_data.tb_member_withdrawal_bak where mem_no = a.mem_no_star )) as mem_no_start_id
 					,ifnull(mem_nick, (select mem_nick From rd_data.tb_member_withdrawal_bak where mem_no = a.mem_no_star )) as mem_no_start_nick
 					,(select count(*) AS accumCnt from rd_data.tb_member_broadcast_item where mem_no = mem_no_fan and gifted_mem_no = a.mem_no_star) as accumCnt
@@ -32,6 +33,14 @@
             <if test='searchText != null and searchText != ""'>
                 and (b.mem_no like concat('%', #{searchText}, '%') or b.mem_nick like concat('%', #{searchText}, '%'))
             </if>
+            <if test='state == 0'>
+                and mem_no_fan in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
+                and mem_no_star in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
+            </if>
+            <if test='state == 1'>
+                and mem_no_fan in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
+                and mem_no_star not in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
+            </if>
            group BY a.mem_no_fan , mem_no_star
            ) as a
           order by totalItemCnt desc, last_upd_date desc
@@ -48,13 +57,24 @@
                 <if test='searchText != null and searchText != ""'>
                     and (b.mem_no like concat('%', #{searchText}, '%') or b.mem_nick like concat('%', #{searchText}, '%'))
                 </if>
-                   group BY a.mem_no_fan , mem_no_star
+                <if test='state == 0'>
+                    and mem_no_fan in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
+                    and mem_no_star in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
+                </if>
+                <if test='state == 1'>
+                    and mem_no_fan in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
+                    and mem_no_star not in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
+                </if>
+               group BY a.mem_no_fan , mem_no_star
            ) as a
 
     </select>
 
     <select id="callMystar_totalCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberMystarInputVo" resultType="integer">
-        select count(*) as totalCnt From rd_data.tb_member_fanstar a join rd_data.tb_member_basic b on a.mem_no_star = b.mem_no where a.mem_no_fan = #{mem_no} and b.mem_state != 5
+        select count(*) as totalCnt
+          From rd_data.tb_member_fanstar a
+          join rd_data.tb_member_basic b on a.mem_no_star = b.mem_no
+         where a.mem_no_fan = #{mem_no} and b.mem_state != 5
     </select>
 
     <!--<select id="callMyfanHistory" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_MemberMystarOutputVo">-->
@@ -68,6 +88,7 @@
               (select ifnull(mem_nick, '') FROM rd_data.tb_member_basic WHERE mem_no = delMemNo) as delMemNick
          from (	SELECT
 					a.mem_no_fan
+                    ,a.mem_no_star
 					,ifnull(mem_userid ,(select mem_userid From rd_data.tb_member_withdrawal_bak where mem_no = a.mem_no_fan )) as mem_no_fan_id
 					,ifnull(mem_nick, (select mem_nick From rd_data.tb_member_withdrawal_bak where mem_no = a.mem_no_fan )) as mem_no_fan_nick
 					,(select count(*) AS accumCnt from rd_data.tb_member_broadcast_item where mem_no = mem_no_fan and gifted_mem_no = a.mem_no_star) as accumCnt
@@ -87,6 +108,14 @@
             <if test='searchText != null and searchText != ""'>
                 and (b.mem_no like concat('%', #{searchText}, '%') or b.mem_nick like concat('%', #{searchText}, '%'))
             </if>
+            <if test='state == 0'>
+                and mem_no_star in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
+                and mem_no_fan in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
+            </if>
+            <if test='state == 1'>
+                and mem_no_star in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
+                and mem_no_fan not in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
+            </if>
            group BY a.mem_no_fan , mem_no_star
            ) as a
           order by totalItemCnt desc, last_upd_date desc
@@ -102,11 +131,22 @@
                 <if test='searchText != null and searchText != ""'>
                     and (b.mem_no like concat('%', #{searchText}, '%') or b.mem_nick like concat('%', #{searchText}, '%'))
                 </if>
+                <if test='state == 0'>
+                    and mem_no_star in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
+                    and mem_no_fan in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
+                </if>
+                <if test='state == 1'>
+                    and mem_no_star in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
+                    and mem_no_fan not in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
+                </if>
                   group BY a.mem_no_fan , mem_no_star
                ) as a
     </select>
 
     <select id="callMyfan_totalCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberMystarInputVo" resultType="integer">
-        select count(*) as totalCnt From rd_data.tb_member_fanstar a join rd_data.tb_member_basic b on a.mem_no_fan = b.mem_no where a.mem_no_star = #{mem_no} and b.mem_state != 5
+        select count(*) as totalCnt
+          From rd_data.tb_member_fanstar a
+          join rd_data.tb_member_basic b on a.mem_no_fan = b.mem_no
+         where a.mem_no_star = #{mem_no} and b.mem_state != 5
     </select>
 </mapper>
