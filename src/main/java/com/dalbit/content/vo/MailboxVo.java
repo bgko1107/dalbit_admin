@@ -20,8 +20,10 @@ public class MailboxVo extends PagingVo {
     private String chatNo;
     private String memNo;
     private String memNick;
+    private String memInner;
     private String targetMemNo;
     private String target_mem_nick;
+    private String target_mem_inner;
     private String msgType;
     private String msg;
     private String data1;

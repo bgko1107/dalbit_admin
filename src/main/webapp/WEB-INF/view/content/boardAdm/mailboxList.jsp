@@ -127,11 +127,11 @@
             <td>
                 <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">{{chatNo}}</a>
             </td>
-            <td>
+            <td class="{{#equal data.memInner 1}}bg-testMember{{/equal}}">
                 {{{memNoLink memNo memNo}}}<br/>
                 {{memNick}}
             </td>
-            <td>
+            <td class="{{#equal data.target_mem_inner 1}}bg-testMember{{/equal}}">
                 {{{memNoLink targetMemNo targetMemNo}}}<br/>
                 {{target_mem_nick}}
             </td>
