@@ -51,4 +51,13 @@ public class Mem_FanboardRestController {
         return mem_FanboardService.getFanboardDelete(pMemberFanboardDeleteVo);
 
     }
+
+    /**
+     * 회원 팬보드 여러개 삭제
+     */
+    @PostMapping("multi/delete")
+    public String multiDelete(P_MemberFanboardDeleteVo pMemberFanboardDeleteVo){
+        return mem_FanboardService.callFanboardMultiDelete(pMemberFanboardDeleteVo);
+
+    }
 }

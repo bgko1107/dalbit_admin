@@ -8,4 +8,5 @@ import lombok.Setter;
 public class P_StoryDeleteVo {
     private String room_no;
     private String storyIdx;
+    private String storyIdxs;
 }

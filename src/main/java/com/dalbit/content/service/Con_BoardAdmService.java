@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -148,6 +149,20 @@ public class Con_BoardAdmService {
         } else {
             result = gsonUtil.toJson(new JsonOutputVo(Status.생방송_사연삭제_방번호틀림));
         }
+        return result;
+    }
+
+    /**
+     * 사연 여러개 삭제
+     */
+    public String callStoryMultiDelete(P_StoryDeleteVo pStoryDeleteVo) {
+
+        String[] storyIdxArr = pStoryDeleteVo.getStoryIdxs().split(",");
+
+        Arrays.asList(storyIdxArr).parallelStream().forEach(storyIdx -> {
+            conBoardAdmDao.callStoryDelete(storyIdx);
+        });
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.생방송_사연삭제_성공));
         return result;
     }
 

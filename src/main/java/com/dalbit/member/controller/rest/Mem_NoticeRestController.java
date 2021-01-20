@@ -42,4 +42,12 @@ public class Mem_NoticeRestController {
         return mem_NoticeService.getNoticeDelete(pMemberNoticeDeleteVo);
 
     }
+    /**
+     * 회원 공지 여러개 삭제
+     */
+    @PostMapping("multi/delete")
+    public String multiDelete(P_MemberNoticeDeleteVo pMemberNoticeDeleteVo){
+        return mem_NoticeService.getNoticeMultiDelete(pMemberNoticeDeleteVo);
+
+    }
 }

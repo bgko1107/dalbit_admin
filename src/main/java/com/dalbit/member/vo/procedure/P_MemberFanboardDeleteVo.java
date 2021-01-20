@@ -10,5 +10,6 @@ public class P_MemberFanboardDeleteVo extends SearchVo {
 
     private String mem_no;
     private int idx;
+    private String idxs;
 
 }

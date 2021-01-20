@@ -12,10 +12,12 @@ import com.dalbit.member.vo.procedure.P_MemberNoticeInputVo;
 import com.dalbit.member.vo.procedure.P_MemberNoticeOutputVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @Slf4j
 @Service
@@ -39,8 +41,6 @@ public class Mem_NoticeService {
         log.info(result);
         return result;
     }
-
-
 
     /**
      * 회원 공지 삭제
@@ -67,6 +67,30 @@ public class Mem_NoticeService {
 
         String result;
             result = gsonUtil.toJson(new JsonOutputVo(Status.공지삭제_성공));
+        return result;
+    }
+
+    /**
+     * 회원 공지 삭제
+     */
+    public String getNoticeMultiDelete(P_MemberNoticeDeleteVo pMemberNoticeDeleteVo){
+
+        String opName = MemberVo.getMyMemNo();
+        String[] noticeIdxArr = pMemberNoticeDeleteVo.getNoticeIdxs().split(",");
+        String[] noticeTypeArr = pMemberNoticeDeleteVo.getNoticeTypes().split(",");
+        String[] roomNoArr = pMemberNoticeDeleteVo.getRoomNos().split(",");
+
+        for(int i=0; i<noticeIdxArr.length; i++){
+            var deleteVo = new P_MemberNoticeDeleteVo();
+            deleteVo.setNoticeIdx(noticeIdxArr[i]);
+            deleteVo.setNoticeType(noticeTypeArr[i]);
+            deleteVo.setRoomNo(roomNoArr[i]);
+            deleteVo.setOpName(opName);
+
+            getNoticeDelete(deleteVo);
+        }
+
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.공지삭제_성공));
         return result;
     }
 }
