@@ -174,7 +174,7 @@
         </tr>
     {{else}}
         <tr>
-            <td colspan="7">{{isEmptyData}}</td>
+            <td colspan="8">{{isEmptyData}}</td>
         </tr>
     {{/each}}
 </script>

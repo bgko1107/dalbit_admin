@@ -31,45 +31,37 @@
             </form>
             <!-- //serachBox -->
 
-            <!-- DATA TABLE -->
             <div class="row col-lg-12 form-inline">
+                <table class="table table-bordered table-summary pull-right no-margin" id="declarationSummary">
+                    <thead>
+                    <tr>
+                        <th rowspan="2">미처리 건</th>
+                        <th colspan="7">제재조치</th>
+                        <th rowspan="2">누적 처리 건</th>
+                    </tr>
+                    <tr>
+                        <th>확인완료 건</th>
+                        <th>경고 건</th>
+                        <th>1일 건</th>
+                        <th>3일 건</th>
+                        <th>7일 건</th>
+                        <th>영구정지 건</th>
+                        <th>강제탈퇴 건</th>
+                    </tr>
+                    </thead>
+                    <tbody id="summaryDataTable">
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- DATA TABLE -->
+            <div class="row col-lg-12 form-inline mt10">
                 <div class="widget widget-table">
                     <div class="widget-header">
                         <h3><i class="fa fa-desktop"></i> 검색결과</h3>
-                        <span class="pull-right">
-                            <h3>게시물 수 :
-                            <select id="dynamicPagingCnt" class="form-control searchType">
-                                <option>10</option>
-                                <option>50</option>
-                                <option>100</option>
-                            </select>
-                            </h3>
-                        </span>
                     </div>
                     <div class="widget-content">
-                        <table class="table table-bordered table-summary pull-right" id="declarationSummary">
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">미처리 건</th>
-                                    <th colspan="7">제재조치</th>
-                                    <th rowspan="2">누적 처리 건</th>
-                                </tr>
-                                <tr>
-                                    <th>확인완료 건</th>
-                                    <th>경고 건</th>
-                                    <th>1일 건</th>
-                                    <th>3일 건</th>
-                                    <th>7일 건</th>
-                                    <th>영구정지 건</th>
-                                    <th>강제탈퇴 건</th>
-                                </tr>
-                            </thead>
-                            <tbody id="summaryDataTable">
-
-                            </tbody>
-                        </table>
-
-
                         <table id="list_info" class="table table-sorting table-hover table-bordered">
                             <thead>
                             </thead>
@@ -110,7 +102,7 @@
 
     $(document).ready(function() {
 
-        init();
+        getReportList();
         ui.checkBoxUnbind('list_info', function(){
             var me = $(this);
             var check = $('#list_info tbody input[type="checkbox"]:not(".disabled")');
@@ -128,20 +120,22 @@
         });
     });
 
-    $(document).on('change', '#dynamicPagingCnt', function(){
-        init();
-    });
-
     /** Data Table **/
     var tmp_searchText = null;
     var tmp_searchType = null;
     var tmp_slctType = null;
     var tmp_slctReason = null;
     var tmp_slctPlatform = null;
-    function init() {
+    function getReportList() {
 
-        util.getAjaxData("summary", "/rest/customer/declaration/opCount", "", fn_success);
+        util.getAjaxData("summary", "/rest/customer/declaration/opCount", "", function (dst_id, response) {
+            var template = $('#tmp_declarationSummary').html();
+            var templateScript = Handlebars.compile(template);
+            var context = response;
+            var html = templateScript(context);
 
+            $("#summaryDataTable").html(html);
+        });
 
         var dtList_info_data = function ( data ) {
             data.searchText = tmp_searchText;
@@ -153,7 +147,9 @@
         dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, customerDataTableSource.DeclareList);
         dtList_info.useCheckBox(true);
         dtList_info.useIndex(true);
-        dtList_info.setPageLength($("#dynamicPagingCnt").val());
+        dtList_info.useInitReload(true);
+        dtList_info.setPageLength(10);
+        dtList_info.usePageLenght(10);
         dtList_info.createDataTable();
 
         // 검색조건 불러오기
@@ -195,16 +191,6 @@
 
     }
 
-    // $(document).on('click', '._getDeclarationDetail', function() {
-    //     $('#report_tab').addClass("show");
-    //
-    //     console.log($(this).data('rowNum'));
-    //     var data = {
-    //         'reportIdx' : $(this).data('idx')
-    //     };
-    //     util.getAjaxData("detail", "/rest/customer/declaration/detail", data, fn_detail_success);
-    // });
-
     function getDeclarationDetail(index){
         var data = dtList_info.getDataRow(index);
 
@@ -236,7 +222,7 @@
 
             util.getAjaxData('multiOperate', '/rest/customer/declaration/multi/operate', data, function(dist_id, response){
                 alert(response.message);
-                init();
+                getReportList();
             });
         }
 
@@ -248,7 +234,9 @@
         var formElement = document.querySelector("form");
         var formData = new FormData(formElement);
 
-        util.excelDownload($(this), "/rest/customer/declaration/listExcel", formData, fn_success_excel)
+        util.excelDownload($(this), "/rest/customer/declaration/listExcel", formData, function(){
+            console.log("fn_success_excel");
+        })
     });
 
     $("#excelBtn").on("click", function () {
@@ -263,22 +251,7 @@
         });
     });
 
-    function fn_success_excel(){
-        console.log("fn_success_excel");
-    }
     /*----------- 엑셀 ---------=*/
-
-
-
-    function fn_success(dst_id, response) {
-        dalbitLog(response);
-        var template = $('#tmp_declarationSummary').html();
-        var templateScript = Handlebars.compile(template);
-        var context = response;
-        var html = templateScript(context);
-
-        $("#summaryDataTable").append(html);
-    }
 
 </script>
 

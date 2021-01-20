@@ -30,25 +30,10 @@
 <script type="text/javascript" src="/js/message/customer/declarationMessage.js?${dummyData}"></script>
 
 <script type="text/javascript">
-    var dtList_info_detail;
-    var dtList_info_detail_data = function (data) {
-        // data.mem_no = detailData.mem_no;
-        data.room_no = "91585286445106";
-    }
-    dtList_info_detail = new DalbitDataTable($("#list_chat_detail"), dtList_info_detail_data, BroadcastDataTableSource.chatDetail);
-    dtList_info_detail.useCheckBox(false);
-    dtList_info_detail.useIndex(false);
-    dtList_info_detail.useInitReload(true);
-    dtList_info_detail.createDataTable();
-    $("#chatLeft").removeClass("col-md-6");
-    $("#chatLeft").addClass("col-md-12");
-    $("#chatRight").addClass("hide");
-
     //상세 버튼 처리
     $(document).on('click', '._detailBtn', function(){
         $(this).parent().parent().find('._getDeclarationDetail').click();
     })
-
 
     var detailData;
     function fn_detail_success(dst_id, response, params) {
