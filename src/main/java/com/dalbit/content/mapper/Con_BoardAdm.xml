@@ -644,17 +644,28 @@
         ) hh,
         (select '9' type, count(*) AS totalCnt      <!-- 우체통 대화 내용 -->
            from (
-            select chat_no
-            from rd_data.tb_mailbox_chatroom_msg msg
-            <where>
-                <if test='start_sel != null and start_sel != ""'>
-                    and msg.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
-                </if>
-                <if test='end_sel != null and end_sel != ""'>
-                    and msg.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
-                </if>
-            </where>
-        group by chat_no ) a ) ii
+                SELECT a.chat_no
+                FROM rd_data.tb_mailbox_chatroom a
+                INNER JOIN (
+                    SELECT chat_no, mem_no, target_mem_no
+                    FROM rd_data.tb_mailbox_chatroom_member
+                    WHERE idx IN (SELECT MIN(idx) FROM rd_data.tb_mailbox_chatroom_member GROUP BY chat_no)
+                ) b ON a.chat_no = b.chat_no
+                INNER JOIN (
+                    SELECT chat_no, mem_no, `type`, msg, data1, data2, data3, data4, data5, data6, delete_yn, read_yn, last_upd_date
+                    FROM rd_data.tb_mailbox_chatroom_msg
+                    WHERE idx IN (SELECT MAX(idx) FROM rd_data.tb_mailbox_chatroom_msg GROUP BY chat_no)
+                ) c ON a.chat_no = c.chat_no AND (b.mem_no = c.mem_no OR b.target_mem_no = c.mem_no)
+                <where>
+                    <if test='start_sel != null and start_sel != ""'>
+                        and c.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
+                    </if>
+                    <if test='end_sel != null and end_sel != ""'>
+                        and c.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
+                    </if>
+                </where>
+           ) a
+        ) ii
     </select>
 
     <select id="callMailbox" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.content.vo.MailboxVo">
