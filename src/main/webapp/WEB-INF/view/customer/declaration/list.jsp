@@ -36,6 +36,15 @@
                 <div class="widget widget-table">
                     <div class="widget-header">
                         <h3><i class="fa fa-desktop"></i> 검색결과</h3>
+                        <span class="pull-right">
+                            <h3>게시물 수 :
+                            <select id="dynamicPagingCnt" class="form-control searchType">
+                                <option>10</option>
+                                <option>50</option>
+                                <option>100</option>
+                            </select>
+                            </h3>
+                        </span>
                     </div>
                     <div class="widget-content">
                         <table class="table table-bordered table-summary pull-right" id="declarationSummary">
@@ -46,7 +55,7 @@
                                     <th rowspan="2">누적 처리 건</th>
                                 </tr>
                                 <tr>
-                                    <th>정상 건</th>
+                                    <th>확인완료 건</th>
                                     <th>경고 건</th>
                                     <th>1일 건</th>
                                     <th>3일 건</th>
@@ -74,6 +83,9 @@
                     </div>
                     <div class="widget-footer">
                         <span>
+                            <button class="btn btn-success btn-sm print-btn" type="button" id="checkProcBtn"><i class="fa fa-check"></i>선택 처리</button>
+                        </span>
+                        <span>
                             <button class="btn btn-default btn-sm print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
                         </span>
                     </div>
@@ -97,8 +109,27 @@
     var dtList_info;
 
     $(document).ready(function() {
+
         init();
-        ui.checkBoxInit('list_info');
+        ui.checkBoxUnbind('list_info', function(){
+            var me = $(this);
+            var check = $('#list_info tbody input[type="checkbox"]:not(".disabled")');
+
+            if(check.length == 0){
+                alert('목록에 미처리 신고건이 없습니다.');
+                return false;
+            }
+
+            if(me.prop('checked')){
+                check.prop('checked', true);
+            }else{
+                check.prop('checked', false)
+            }
+        });
+    });
+
+    $(document).on('change', '#dynamicPagingCnt', function(){
+        init();
     });
 
     /** Data Table **/
@@ -120,8 +151,9 @@
             data.strPlatform = tmp_slctPlatform;
         };
         dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, customerDataTableSource.DeclareList);
-        dtList_info.useCheckBox(false);
+        dtList_info.useCheckBox(true);
         dtList_info.useIndex(true);
+        dtList_info.setPageLength($("#dynamicPagingCnt").val());
         dtList_info.createDataTable();
 
         // 검색조건 불러오기
@@ -160,6 +192,7 @@
         /*검색결과 영역이 접혀 있을 시 열기*/
         ui.toggleSearchList();
         $("#declarationForm").empty();
+
     }
 
     // $(document).on('click', '._getDeclarationDetail', function() {
@@ -182,12 +215,31 @@
         util.getAjaxData("detail", "/rest/customer/declaration/detail", obj, fn_detail_success);
     }
 
-    $(document).on('click', '#list_info .dt-body-center input[type="checkbox"]', function() {
-        if($(this).prop('checked')){
-            $(this).parent().parent().find('._getDeclarationDetail').click();
-        } else {
-            $("#declarationForm").empty();
+    $(document).on('click', '#checkProcBtn', function(){
+        var checkSelector = $("#list_info tbody input[type='checkbox']:checked");
+        var checkedCnt = checkSelector.length;
+        if(checkedCnt < 1){
+            alert('선택된 신고내용이 없습니다.');
+            return false;
         }
+        if(confirm(checkedCnt + '건을 확인완료 처리 하시겠습니까?')){
+
+            var reportIdxs = '';
+            checkSelector.each(function(){
+               var idx = $(this).parent().parent().find('._getDeclarationDetail').data('reportidx');
+
+                reportIdxs += idx + ',';
+            });
+            var data = {
+                reportIdxs : reportIdxs
+            }
+
+            util.getAjaxData('multiOperate', '/rest/customer/declaration/multi/operate', data, function(dist_id, response){
+                alert(response.message);
+                init();
+            });
+        }
+
     });
 
     // /*=---------- 엑셀 ----------*/
@@ -234,7 +286,7 @@
     {{#data}}
     <tr>
         <td>{{addComma notOpCnt}}건</td> <%--미처리--%>
-        <td>{{addComma code_1_Cnt}}건</td> <%--정상--%>
+        <td>{{addComma code_1_Cnt}}건</td> <%--확인완료--%>
         <td>{{addComma code_2_Cnt}}건</td> <%--경고--%>
         <td>{{addComma code_3_Cnt}}건</td> <%--1일 정지--%>
         <td>{{addComma code_4_Cnt}}건</td> <%--3일 정지--%>

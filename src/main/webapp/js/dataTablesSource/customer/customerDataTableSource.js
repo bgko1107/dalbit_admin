@@ -20,7 +20,7 @@ var customerDataTableSource = {
                 }}
             ,{'title': '신고자 회원번호', 'data': 'mem_no', 'render': function (data, type, row, meta) {
                     return '<a href="javascript://" class="_openMemberPop" data-memNo="'+row.mem_no+'">' + data + '</a>' +
-                        '<a href="javascript://" style="display:none;" class="_getDeclarationDetail" onclick="getDeclarationDetail('+meta.row+');"></a>'}}
+                        '<a href="javascript://" style="display:none;" class="_getDeclarationDetail" data-reportidx="'+row.reportIdx+'" onclick="getDeclarationDetail('+meta.row+');"></a>'}}
             ,{'title': '신고자 User닉네임', 'data': 'mem_nick'}
             ,{'title': '성별', 'data': 'mem_sex', 'width':'70px', 'render': function (data, type, row, meta) {
                     return common.sexIcon(data, row.mem_birth_year);
@@ -69,6 +69,11 @@ var customerDataTableSource = {
             if (data.reported_inner == 1) {    // 테스트계정 row 색상 표시
                 $(row).addClass("bg-testMember");
             }
+            if(data.op_code != 0){
+                $(row).find("input[type='checkbox']").addClass('disabled').prop('disabled', true);
+            }
+
+            $("#list_info-select-all").prop('checked', false);
         }
     },
 

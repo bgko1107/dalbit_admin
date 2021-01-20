@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired private AuthenticationProvider authProvider;
     @Autowired private SsoAuthenticationFilter ssoAuthenticationFilter;
 
-    //private final static String REMEMBER_ME_KEY = "INFOREX_ADMIN_REMEMBER_ME";
+    private final String LOGIN_PAGE_URL = "/login";
 
     @Bean
     public DelegatingPasswordEncoder passwordEncoder() {
@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     , "**.css"
                     , "**.js"
                     , "**.map"
-                    , "/login"
+                    , LOGIN_PAGE_URL
                     , "/common/ctrl/check/service"
                     , "/socket/dbCheck/bySocket"
             );
@@ -81,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             .csrf().disable() // 기본값이 on인 csrf 취약점 보안을 해제한다. on으로 설정해도 되나 설정할경우 웹페이지에서 추가처리가 필요함.
             .formLogin() // 권한없이 페이지 접근하면 로그인 페이지로 이동한다.
-            .loginPage("/login")
+            .loginPage(LOGIN_PAGE_URL)
             .loginProcessingUrl("/login/authenticate")
             .defaultSuccessUrl("/login/success")
 
@@ -99,7 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .authorizeRequests()
                 .antMatchers(
-                    "/login"
+                        LOGIN_PAGE_URL
                 ).permitAll()
                 .antMatchers("/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
@@ -127,7 +127,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .sessionManagement()
                 .maximumSessions(1)
-                .expiredUrl("/login")
+                .expiredUrl(LOGIN_PAGE_URL)
         ;
     }
 
@@ -141,14 +141,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-    /*@Bean
-    public TokenBasedRememberMeServices tokenBasedRememberMeServices() {
-        TokenBasedRememberMeServices rememberMeServices = new TokenBasedRememberMeServices(REMEMBER_ME_KEY, userDetailsService);
-        rememberMeServices.setAlwaysRemember(true);
-        rememberMeServices.setParameter("remember-me-new");
-        rememberMeServices.setTokenValiditySeconds(31536000);
-        rememberMeServices.setCookieName(REMEMBER_ME_KEY);
-        return rememberMeServices;
-    }*/
 }

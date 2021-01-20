@@ -1136,7 +1136,7 @@ public class DalbitUtil {
 
     /**
      * 스페셜DJ 환전 실수령액 계산
-     * @param amt
+     * @param star
      * @param isSpecial
      * @return
      */
