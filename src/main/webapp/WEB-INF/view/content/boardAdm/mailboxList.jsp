@@ -113,7 +113,8 @@
     }
 
     function mailboxPopUp(data){
-        var popupUrl = "/member/mailbox/popup/mailboxMsg?chatNo="+ data.data('chatno');
+        var date = $("#onedayDate").val();
+        var popupUrl = "/member/mailbox/popup/mailboxMsg?chatNo="+ data.data('chatno')+"&searchDate="+date;
         util.windowOpen(popupUrl,"950", "1000","우체통");
     }
 
