@@ -26,7 +26,7 @@
     <span id="recommMemberInfo" ></span>
 </div>
 
-<%--<jsp:include page="/WEB-INF/view/common/util/select_specialList.jsp"></jsp:include>--%>
+<jsp:include page="/WEB-INF/view/common/util/select_specialList.jsp"></jsp:include>
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/menu/menuCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/money/exchangeCodeList.js?${dummyData}"></script>
