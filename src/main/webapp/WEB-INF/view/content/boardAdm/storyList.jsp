@@ -178,7 +178,7 @@
     <table id="tb_storyList" class="table table-sorting table-hover table-bordered mt10">
 
         <colgroup>
-            <col width="3%"/><col width="5%"/><col width="17%"/><col width="7%"/><col width="5%"/>
+            <col width="3%"/><col width="3%"/><col width="5%"/><col width="17%"/><col width="7%"/><col width="5%"/>
             <col width="10%"/><col width="5%"/><col width="29%"/><col width="7%"/><col width="4%"/>
             <col width="3%"/>
         </colgroup>

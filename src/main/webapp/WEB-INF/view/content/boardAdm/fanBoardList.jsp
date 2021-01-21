@@ -293,7 +293,7 @@
 <script id="tmp_fanBoardTable" type="text/x-handlebars-template">
     <table id="tb_fanBoardList" class="table table-sorting table-hover table-bordered mt10">
         <colgroup>
-            <col width="2%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
+            <col width="2%"/><col width="2%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
             <col width="5%"/><col width="34%"/><col width="8%"/><col width="4%"/><col width="4%"/>
         </colgroup>
         <thead>
@@ -316,7 +316,6 @@
         {{#each this.data as |data|}}
             <tr {{#dalbit_if fan_inner '==' 1}} style="background-color : #dae3f3" {{/dalbit_if}}>
                 <td><input type="checkbox" class="form-control _fanboard_chk {{#dalbit_if status '!=' 1}}disabled{{/dalbit_if}}" {{#dalbit_if status '!=' 1}}disabled{{/dalbit_if}} data-idx="{{data.idx}}" /></td>
-                <td>{{indexDesc ../pagingVo.totalCnt rowNum}}</td>
                 <td>{{indexDesc ../pagingVo.totalCnt rowNum}}</td>
                 <td>
                     {{{memNoLink star_mem_no star_mem_no}}}<br/>

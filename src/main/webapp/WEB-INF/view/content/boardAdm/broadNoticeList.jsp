@@ -38,7 +38,7 @@
         <div class="dataTables_paginate paging_full_numbers" id="broadNotice_paginate_top"></div>
         <table id="broadNoticeTable" class="table table-sorting table-hover table-bordered mt10">
             <colgroup>
-                <col width="4%"/><col width="10%"/><col width="5%"/><col width="50%"/><col width="10%"/>
+                <col width="4%"/><col width="4%"/><col width="10%"/><col width="5%"/><col width="50%"/><col width="10%"/>
                 <col width="5%"/><col width="5%"/><col width="5%"/>
             </colgroup>
             <thead>

@@ -219,7 +219,7 @@
 <script id="tmp_fanBoardReplyTable" type="text/x-handlebars-template">
     <table id="tb_fanBoardReply" class="table table-sorting table-hover table-bordered mt10">
         <colgroup>
-            <col width="2%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
+            <col width="2%"/><col width="2%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
             <col width="5%"/><col width="25%"/><col width="5%"/><col width="5%"/><col width="5%"/>
             <col width="25%"/><col width="5%"/>
         </colgroup>

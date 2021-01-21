@@ -26,7 +26,7 @@
         <div class="dataTables_paginate paging_full_numbers" id="notice_paginate_top"></div>
         <table id="noticeTable" class="table table-sorting table-hover table-bordered mt10">
             <colgroup>
-                <col width="4%"/><col width="10%"/><col width="6%"/><col width="10%"/><col width="46%"/>
+                <col width="4%"/><col width="4%"/><col width="10%"/><col width="6%"/><col width="10%"/><col width="46%"/>
                 <col width="10%"/><col width="5%"/><col width="5%"/>
             </colgroup>
             <thead>
