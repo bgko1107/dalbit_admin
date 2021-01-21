@@ -26,12 +26,7 @@
                             <option value="2">삭제</option>
                         </select>
 
-                        <select id="dynamicPageCntFanboard" class="form-control searchType">
-                            <option value="10">10 개씩</option>
-                            <option value="30">30 개씩</option>
-                            <option value="50">50 개씩</option>
-                            <option value="100">100 개씩</option>
-                        </select>
+                        <span id="dynamicPageAreaFanboard"></span>
 
                         <label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
                             <input type="checkbox" name="isSecret" id="isSecret" value="1">
@@ -92,8 +87,8 @@
 <script type="text/javascript">
     var fanBoardPagingInfo = new PAGING_INFO(0, 1, $("#dynamicPageCntFanboard").val());
 
-    $(document).ready(function() {
-        // $("#searchType_board").html(util.getCommonCodeSelect(-1, searchType_board));
+    $(function() {
+        $("#dynamicPageAreaFanboard").html(util.renderDynamicPageCntSelect('dynamicPageCntFanboard'));
     });
 
     function fanBoardList(pagingNo, _tabId) {
@@ -253,7 +248,7 @@
         fanBoardList();
     });
 
-    $('#dynamicPageCntFanboard').on('change', function () {
+    $(document).on('change', '#dynamicPageCntFanboard', function () {
         fanBoardPagingInfo.pageCnt = $(this).val();
         fanBoardList();
     });

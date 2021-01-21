@@ -10,6 +10,10 @@ import lombok.ToString;
 @ToString
 public class ClipReplyListVo extends SearchVo {
 
+    //multi delete
+    private String castReplyIdxs;
+    private String cast_nos;
+
     //input
     private String sDate;
     private String eDate;

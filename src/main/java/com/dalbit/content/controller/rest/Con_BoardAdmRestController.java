@@ -118,6 +118,14 @@ public class Con_BoardAdmRestController {
     }
 
     /**
+     * 회원공지댓글 여러개 삭제
+     */
+    @PostMapping("/noticeReplyList/multi/delete")
+    public String noticeReplyListMultiDelete(BoardAdmNoticeReplyDeleteVo boardAdmNoticeReplyDeleteVo) {
+        return conBoardAdmService.deleteMultiNoticeReplyList(boardAdmNoticeReplyDeleteVo);
+    }
+
+    /**
      * 공지 통계
      * @param pMemberNoticeInputVo
      * @return
@@ -162,6 +170,14 @@ public class Con_BoardAdmRestController {
     }
 
     /**
+     * 프로필메시지 여러개 삭제
+     */
+    @PostMapping("/profileMsg/multi/del")
+    public String profileMsgMultiDel(P_MemberProfileInputVo pMemberProfileInputVo) {
+        return conBoardAdmService.profileMultiDelete(pMemberProfileInputVo);
+    }
+
+    /**
      * 클립 목록 조회
      */
     @PostMapping("/clipReplyList")
@@ -178,11 +194,19 @@ public class Con_BoardAdmRestController {
     }
 
     /**
-     * 팬보드 삭제
+     * 클립댓글 삭제
      */
     @PostMapping("/clipReplyList/del")
     public String clipReplyListDel(ClipReplyListVo clipReplyListVo) {
         return conBoardAdmService.clipReplyListDel(clipReplyListVo);
+    }
+
+    /**
+     * 클립댓글 여러개 삭제
+     */
+    @PostMapping("/clipReplyList/multi/del")
+    public String clipReplyListMultiDel(ClipReplyListVo clipReplyListVo) {
+        return conBoardAdmService.clipReplyListMultiDel(clipReplyListVo);
     }
 
 

@@ -767,3 +767,14 @@ util.viewMailBoxItemJson = function(mem_nick, jsonString){
     console.log(json);
     return mem_nick + '님이 '+ json.item_name + ' x ' + json.item_cnt + '개<br />(달 '+ json.item_price +'개)를 선물하였습니다.';
 }
+
+util.renderDynamicPageCntSelect = function(selectId, defaultValue){
+    var html = '';
+    html += '<select id="'+selectId+'" class="form-control searchType">';
+    html +=     '<option value="10"' + (defaultValue==10 ? 'selected' : '') + '">10 개씩</option>';
+    html +=     '<option value="30"' + (defaultValue==30 ? 'selected' : '') + '">30 개씩</option>';
+    html +=     '<option value="50"' + (defaultValue==50 ? 'selected' : '') + '">50 개씩</option>';
+    html +=     '<option value="100"' + (defaultValue==100 ? 'selected' : '') + '">100 개씩</option>';
+    html += '</select>';
+    return html;
+}

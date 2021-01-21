@@ -6,7 +6,11 @@
 <div class="col-lg-12 no-padding">
     <div class="widget-content">
         <div class="col-md-12 no-padding mt10">
-            <span id ="profileMsgListCnt"></span>
+            <div class="col-md-10 no-padding">
+                <div id="profileMsgListCnt"></div>
+                <span id="dynamicPageProfileMsgArea"></span>
+            </div>
+
             <div class="col-md-2 no-padding pull-right">
                 <table class="table table-sorting table-hover table-bordered">
                     <colgroup>
@@ -22,6 +26,7 @@
         <table id="noticeTable" class="table table-sorting table-hover table-bordered mt10">
             <colgroup>
                 <col width="5%"/>
+                <col width="5%"/>
                 <col width="8%"/>
                 <col width="10%"/>
                 <col width="5%"/>
@@ -32,6 +37,7 @@
             </colgroup>
             <thead>
                 <tr>
+                    <th><input type="checkbox" class="form-control" id="allChkProfileMsg" /></th>
                     <th>No</th>
                     <th>프로필이미지</th>
                     <th>등록자</th>
@@ -47,15 +53,20 @@
         </table>
         <div class="dataTables_paginate paging_full_numbers" id="profile_paginate"></div>
     </div>
+    <div class="widget-footer">
+        <span>
+            <button class="btn btn-danger btn-sm print-btn" type="button" id="deleteProfileMsgBtn"><i class="fa fa-check"></i>선택 삭제</button>
+        </span>
+    </div>
 </div>
 <!-- //table -->
 
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
-    var profilePagingInfo = new PAGING_INFO(0,1,40);
+    var profilePagingInfo = new PAGING_INFO(0,1,$("#dynamicPageCntProfileMsg").val());
 
     $(document).ready(function() {
-        // profileMsgList();
+        $("#dynamicPageProfileMsgArea").html(util.renderDynamicPageCntSelect('dynamicPageCntProfileMsg'));
     });
 
     var memNo;
@@ -120,7 +131,6 @@
                 mem_no: $(this).data('memno')
             };
 
-            console.log(data);
             util.getAjaxData("delete", "/rest/content/boardAdm/profileMsg/del", data, function(dst_id, response){
                 alert(response.message);
                 profileMsgList(profilePagingInfo.pageNo);
@@ -133,11 +143,53 @@
         var url = "/content/boardAdm/popup/editList?type=2&mem_no=" + mem_no;
         util.windowOpen(url,"1200","450","");
     });
+
+    $(document).on('change', '#dynamicPageCntProfileMsg', function () {
+        profilePagingInfo.pageCnt = $(this).val();
+        profileMsgList();
+    });
+
+    $(document).on('click', '#allChkProfileMsg', function(){
+        var me = $(this);
+        var checkboxs = $('._profileMsg_chk:not(.disabled)');
+        if(me.prop('checked')){
+            checkboxs.prop('checked', true);
+        }else{
+            checkboxs.prop('checked', false);
+        }
+    });
+
+    $(document).on('click', '#deleteProfileMsgBtn', function(){
+        var checkboxs = $('._profileMsg_chk:checked');
+        if(checkboxs.length < 1){
+            alert('삭제할 회원 프로필을 선택해주세요.');
+            return false;
+        }
+
+        if(confirm(checkboxs.length + '건을 삭제 하시겠습니까?')){
+
+            var mem_nos = '';
+            checkboxs.each(function(){
+                var mem_no = $(this).data('memno');
+
+                mem_nos += mem_no + ',';
+            });
+            var data = {
+                mem_nos : mem_nos
+            }
+
+            util.getAjaxData('multiOperate', '/rest/content/boardAdm/profileMsg/multi/del', data, function(dist_id, response){
+                alert(response.message);
+                profileMsgList(profilePagingInfo.pageNo);
+            });
+        }
+    });
 </script>
 
 <script id="tmp_profileMsgTable" type="text/x-handlebars-template">
     {{#each this.data as |data|}}
         <tr {{#dalbit_if inner '==' 1}} style="background-color : #dae3f3" {{/dalbit_if}}>
+            <td><input type="checkbox" class="form-control _profileMsg_chk" data-memno="{{data.mem_no}}" /></td>
             <td>{{indexDesc ../pagingVo/totalCnt rowNum}}</td>
             <td><img class="thumbnail fullSize_background" alt="your image" src="{{renderProfileImage image_profile mem_sex}}" style='height:68px; width:68px; margin: auto;' /></td>
             <td>
