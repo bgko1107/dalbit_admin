@@ -35,14 +35,14 @@
                 <li><a href="#broadcastList" role="tab" data-toggle="tab" id="tab_broadcastList" onclick="onClickHeaderTab(this.id)">방송방 배경</a></li>
                 <li><a href="#clipList" role="tab" data-toggle="tab" id="tab_clipList" onclick="onClickHeaderTab(this.id)">클립</a></li>
                 <li><a href="#noticeList" role="tab" data-toggle="tab" id="tab_noticeList" onclick="onClickHeaderTab(this.id)">회원공지</a></li>
-                <li><a href="#mailbox" role="tab" data-toggle="tab" id="tab_mailbox" onclick="onClickHeaderTab(this.id)">우체통</a></li>
+                <%--<li><a href="#mailbox" role="tab" data-toggle="tab" id="tab_mailbox" onclick="onClickHeaderTab(this.id)">우체통</a></li>--%>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="profileList"><jsp:include page="/WEB-INF/view/customer/image/profileList.jsp"/></div>     <!-- 프로필 -->
                 <div class="tab-pane fade" id="broadcastList"><jsp:include page="/WEB-INF/view/customer/image/broadcastList.jsp"/></div>           <!-- 방송방 배경 -->
                 <div class="tab-pane fade" id="clipList"><jsp:include page="/WEB-INF/view/customer/image/clipList.jsp"/></div>                     <!-- 클립 -->
                 <div class="tab-pane fade" id="noticeList"><jsp:include page="/WEB-INF/view/customer/image/noticeList.jsp"/></div>                 <!-- 회원공지 -->
-                <div class="tab-pane fade" id="mailbox"><jsp:include page="/WEB-INF/view/customer/image/mailbox.jsp"/></div>                 <!-- 우체통 -->
+                <%--<div class="tab-pane fade" id="mailbox"><jsp:include page="/WEB-INF/view/customer/image/mailbox.jsp"/></div>                 <!-- 우체통 -->--%>
             </div>
         </div>
     </div>
@@ -218,7 +218,7 @@
         console.log("----------------------------- 1");
         if(targetId == "mailboxList_info_paginate_top" || targetId == "mailboxList_info_paginate"){
             mailboxPagingInfo = pagingInfo;
-            mailboxImgList();
+            mailboxImgList(pagingInfo.pageNo);
         }else{
             var targetName = targetId.split("_")[0];
             var targetFnc = eval("fnc_"+targetName);

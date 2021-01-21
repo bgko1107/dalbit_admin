@@ -80,4 +80,10 @@ public interface Con_BoardAdmDao {
 
     @Transactional(readOnly = true)
     ArrayList<MailboxVo> callMailbox(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<MailboxVo> callMailboxGift(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<BoardAdmTabCountVo> mailboxTabCount(BoardAdmTabCountVo boardAdmTabCountVo);
 }

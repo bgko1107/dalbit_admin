@@ -12,6 +12,7 @@ public class MailboxVo extends PagingVo {
 
     /* input */
     private String startDate;
+    private String endDate;
     private String searchText;
     private int pageNo;
 
@@ -38,6 +39,20 @@ public class MailboxVo extends PagingVo {
     private String state;
     private String item_thumbnail;
     private String webp_image;
+    private String chat_no;
+    private String mem_no;
+    private String memSex;
+    private String memAge;
+    private String giftDate;
+    private String target_mem_no;
+    private String target_memNick;
+    private String target_memSex;
+    private String target_memAge;
+    private String item_code;
+    private String item_image;
+    private String item_name;
+    private int giftCnt;
+    private int giftDal;
 
     /* summary */
     private int msg_mCnt;
@@ -61,5 +76,8 @@ public class MailboxVo extends PagingVo {
     private int male_byeolCnt;
     private int female_byeolCnt;
     private int none_byeolCnt;
+    private int male_giftDal;
+    private int female_giftDal;
+    private int none_giftDal;
 
 }

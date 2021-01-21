@@ -536,7 +536,6 @@
               ,ff.totalCnt AS profileMsgListCnt
               ,gg.totalCnt AS clipReplyCnt
               ,hh.totalCnt AS broadNoticeReplyCnt
-              ,ii.totalCnt AS mailboxCnt
         from (
         select '1' type , count(*) AS totalCnt      <!--사연-->
           from rd_data.tb_broadcast_room bro
@@ -641,8 +640,20 @@
                     and rep.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
                 </if>
             </where>
-        ) hh,
-        (select '9' type, count(*) AS totalCnt      <!-- 우체통 대화 내용 -->
+        ) hh
+    </select>
+
+    <select id="callMailbox" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.content.vo.MailboxVo">
+        call rd_admin.sp_admin_mailbox_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callMailboxGift" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.content.vo.MailboxVo">
+        call rd_admin.sp_admin_mailbox_gift_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="mailboxTabCount" parameterType="com.dalbit.content.vo.BoardAdmTabCountVo" resultType="com.dalbit.content.vo.BoardAdmTabCountVo">
+        /* Con_BoardAdm.xml - tabCount */
+        select '1' type, count(*) AS totalCnt
            from (
                 SELECT a.chat_no
                 FROM rd_data.tb_mailbox_chatroom a
@@ -656,20 +667,22 @@
                     FROM rd_data.tb_mailbox_chatroom_msg
                     WHERE idx IN (SELECT MAX(idx) FROM rd_data.tb_mailbox_chatroom_msg GROUP BY chat_no)
                 ) c ON a.chat_no = c.chat_no AND (b.mem_no = c.mem_no OR b.target_mem_no = c.mem_no)
-                <where>
-                    <if test='start_sel != null and start_sel != ""'>
-                        and c.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
-                    </if>
-                    <if test='end_sel != null and end_sel != ""'>
-                        and c.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
-                    </if>
-                </where>
+                where last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{startDate}, '%Y.%m.%d 00:00:00')
+                  and last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{endDate}, '%Y.%m.%d 23:59:59')
            ) a
-        ) ii
+        union
+        select '2' type, count(*) AS totalCnt
+         from rd_data.tb_mailbox_chatroom_msg
+        where `type`=2
+          and last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{startDate}, '%Y.%m.%d 00:00:00')
+          and last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{endDate}, '%Y.%m.%d 23:59:59')
+        union
+        select '3' type, count(*) AS totalCnt
+         from rd_data.tb_mailbox_chatroom_msg
+        where `type`=3
+          and last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{startDate}, '%Y.%m.%d 00:00:00')
+          and last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{endDate}, '%Y.%m.%d 23:59:59')
     </select>
 
-    <select id="callMailbox" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.content.vo.MailboxVo">
-        call rd_admin.sp_admin_mailbox_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
-    </select>
 
 </mapper>
