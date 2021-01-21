@@ -8,6 +8,7 @@
         <%--<a href="javascript://" class="_prevSearch">[이전]</a>--%>
         <span class="_searchDate"></span>
         <%--<a href="javascript://" class="_nextSearch">[다음]</a>--%>
+        <div class="dataTables_paginate paging_full_numbers" id="dalSales_paginate_top"></div>
         <table class="table table-bordered">
             <colgroup>
                 <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
@@ -32,20 +33,29 @@
             </thead>
             <tbody id="dalbitSalesTableBody"></tbody>
         </table>
+        <div class="dataTables_paginate paging_full_numbers" id="dalSales_paginate"></div>
     </div>
 </div>
-<a type='button' class="btn btn-default print-btn pull-left dalbitSalesExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalbitSales', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
-<a type='button' class="btn btn-default print-btn pull-right dalbitSalesExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalbitSales', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
+<button class="btn btn-default btn-sm print-btn pull-left excelDownBtn_dalSales" type="button"><i class="fa fa-print"></i>Excel Down</button>
+<button class="btn btn-default btn-sm print-btn pull-right excelDownBtn_dalSales" type="button"><i class="fa fa-print"></i>Excel Down</button>
 
 <script type="text/javascript">
 
-    function getDalbitSalesList(){
-        $(".dalbitSalesExcel").attr('download' , "달빛Live_수익인식Process(달매출)_" + moment($("#startDate").val()).add('days', 0).format('YYYY.MM.DD') + ".xls");
+    var dalSalesPagingInfo = new PAGING_INFO(0,1,100);
+
+    function getDalbitSalesList(pagingNo){
+        if(!common.isEmpty(pagingNo)){
+            dalSalesPagingInfo.pageNo = pagingNo;
+        }else{
+            dalSalesPagingInfo.pageNo = 1;
+        }
 
         var data = {
             slctType : slctType
             ,startDate : $("#startDate").val()
             ,endDate : $("#endDate").val()
+            , pageNo : dalSalesPagingInfo.pageNo
+            , pageCnt : dalSalesPagingInfo.pageCnt
         };
         util.getAjaxData("dalbitSales", "/rest/enter/pay/dal/sales", data, fn_dalbitSales_success);
     }
@@ -56,20 +66,55 @@
         response.data.detailList.slctType = slctType;
         var template = $('#tmp_dalbitSalesDetailList').html();
         var templateScript = Handlebars.compile(template);
-        var detailContext = response.data.detailList;
+        var detailContext = response.data;
         var html=templateScript(detailContext);
         $("#dalbitSalesTableBody").append(html);
 
+        dalSalesPagingInfo.totalCnt = response.data.totalInfo.totalCnt;
+        util.renderPagingNavigation('dalSales_paginate_top', dalSalesPagingInfo);
+        util.renderPagingNavigation('dalSales_paginate', dalSalesPagingInfo);
+        dalSalesPagingInfo.pageNo=1;
+
+        if(response.data.length == 0) {
+            $("#dalSales_paginate_top").hide();
+            $('#dalSales_paginate').hide();
+        } else {
+            $("#dalSales_paginate_top").show();
+            $('#dalSales_paginate').show();
+        }
+
         ui.tableHeightSet();
+        ui.paintColor();
     }
-    function dateClick(data){
-        var popupUrl = "/administrate/revenueProcess/popup/dalAmt?startDate=" + encodeURIComponent(data.thedate);
-        util.windowOpen(popupUrl,"1914","968","달 정보 데이터");
-    }
+
+    $('.excelDownBtn_dalSales').on('click', function(){
+        var formData = new FormData();
+        formData.append("startDate", $("#startDate").val());
+
+        util.excelDownload($(this), "/rest/enter/pay/dal/sales/listExcel", formData,
+            function () {
+                console.log("fn_success_excel");
+            }, function () {
+                console.log("fn_fail_excel");
+            });
+    });
+
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_dalbitSalesDetailList">
-    {{#each this as |data|}}
+    <tr class="_bgColor font-bold" data-bgcolor="#f2f2f2">
+        <td>합계</td>
+        <td></td>
+        <td></td>
+        <td>{{addComma totalInfo.payDal}}</td>
+        <td>{{addComma totalInfo.freeDal}}</td>
+        <td>{{addComma totalInfo.totalDal}}</td>
+        <td>{{addComma totalInfo.totalByeol}}</td>
+        <td>{{addComma totalInfo.firstAmt}}</td>
+        <td>{{addComma totalInfo.unpaidAmt}}</td>
+        <td>{{addComma totalInfo.salesAmt}}</td>
+    </tr>
+    {{#each this.detailList as |data|}}
     <tr>
         <td>
             <a href="javascript://" class="_openMemberPop" data-memNo="{{mem_no}}">{{mem_no}}</a><br/>
