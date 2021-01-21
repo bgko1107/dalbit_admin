@@ -22,11 +22,12 @@
         </tbody>
     </table>
 </div>
+<button type="button" class="btn btn-danger pull-left" id="recommDel" onclick="recommDel();">추천 DJ 삭제</button>
 <div class="col-md-12 no-padding">
     <span id="recommMemberInfo" ></span>
 </div>
 
-<%--<jsp:include page="/WEB-INF/view/common/util/select_specialList.jsp"></jsp:include>--%>
+<jsp:include page="/WEB-INF/view/common/util/select_specialList.jsp"></jsp:include>
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/menu/menuCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/money/exchangeCodeList.js?${dummyData}"></script>
@@ -74,6 +75,17 @@
 
         var scrollPosition = $("#recommMemberInfo").offset();
         util.scrollPostion(scrollPosition.top);
+
+        $('#title').on('keyup', function() {
+            if($(this).val().length > 95) {
+                $(this).val($(this).val().substring(0, 95));
+            }
+        });
+        $('#desc').on('keyup', function() {
+            if($(this).val().length > 250) {
+                $(this).val($(this).val().substring(0, 250));
+            }
+        });
     }
     function recommEdit() {
         if(confirm('추천 DJ를 저장 하시겠습니까?')) {
@@ -82,7 +94,7 @@
                 , memSex: $("input[name='memSex']:checked").val()
                 , ageType: $("input[name='ageType']:checked").val()
                 , ageDesc: $("#age_desc").val()
-                , title: $("#broadcastTitle").val()
+                , title: $("#title").val()
                 , desc: $("#desc").val()
                 , viewYn: $("input[name='view_yn']:checked").val()
             };
@@ -122,13 +134,11 @@
             util.getAjaxData("recomm", "/rest/menu/recomm/delete", data, fn_recommEdit_success);
         }
     }
-
 </script>
 
 <script id="tmp_recommMemberInfo" type="text/x-handlebars-template">
 
     <button type="button" class="btn btn-success pull-right" id="recommEdit" onclick="recommEdit();">저장</button>
-    <button type="button" class="btn btn-danger pull-right mr5" id="recommDel" onclick="recommDel();">추천 DJ 삭제</button>
 
     <table class="table table-bordered table-summary pull-right no-margin" style="width: 100%">
         <colgroup>
@@ -158,7 +168,7 @@
             <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">나이</th>
             <td colspan="2">{{{getCommonCodeRadio ageType 'ageType'}}}</td>
             <th class="_bgColor" data-bgcolor="#c6d9f1">나이소개</th>
-            <td><input type="text" class="form-control" name="desc" id="age_desc" value="{{ageDesc}}"></td>
+            <td><input type="text" class="form-control" name="age_desc" id="age_desc" value="{{ageDesc}}"></td>
             <th class="_bgColor" data-bgcolor="#c6d9f1">최근 방송일시</th>
             <td>{{last_broadcast}}</td>
             <th class="_bgColor" data-bgcolor="#c6d9f1">추천 팬 등록수</th>
@@ -166,7 +176,7 @@
         </tr>
         <tr>
             <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">방송정보</th>
-            <td colspan="4"><input type="text" class="form-control" name="desc" id="desc" value="{{desc}}"></td>
+            <td colspan="4"><input type="text" class="form-control" name="title" id="title" value="{{broadcastTitle}}"></td>
             <th class="_bgColor" data-bgcolor="#c6d9f1">최근 3개월 방송시간</th>
             <td>{{timeStampDay broadcastTime}}</td>
             <th class="_bgColor" data-bgcolor="#c6d9f1">최근 3개월 방송횟수</th>
@@ -174,7 +184,7 @@
         </tr>
         <tr>
             <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">소개문구</th>
-            <td colspan="8"><textarea type="textarea" class="form-control" id="broadcastTitle" name="broadcastTitle" style="width: 100%; height: 100%">{{broadcastTitle}}</textarea></td>
+            <td colspan="8"><textarea type="textarea" class="form-control" id="desc" name="desc" style="width: 100%; height: 100%">{{desc}}</textarea></td>
         </tr>
     </table>
 </script>
