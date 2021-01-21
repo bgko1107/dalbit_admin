@@ -19,4 +19,7 @@ public class P_StatVo {
     private String beforStartDate;
     private String beforEndDate;
 
+    private String dateList;
+    private int timeType;
+
 }

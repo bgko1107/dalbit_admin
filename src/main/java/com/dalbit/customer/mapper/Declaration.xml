@@ -38,4 +38,8 @@
              FROM rd_data.tb_member_report
             WHERE idx > 0 and (mem_no = #{mem_no} or reported_mem_no =#{mem_no})
     </select>
+
+    <select id="callImageList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.customer.vo.procedure.P_DeclarationListOutputVo">
+        call rd_admin.sp_admin_service_center_report_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
 </mapper>
