@@ -8,12 +8,18 @@
         <!-- DATA TABLE -->
         <div class="row col-lg-12 form-inline mb15">
             <div class="widget-content">
-                <div class="dataTables_paginate paging_full_numbers" id="mailboxList_info_paginate_top"></div>
-                <div class="row list-group">
-                <%--<div class="row list-group">--%>
-                    <form id="mailboxForm"></form>
+                <select id="slctType" name="slctType" class="form-control searchType mt5" style="width: 130px; display: inline" onchange="mailboxImgList();">
+                    <option value="0">상태(전체)</option>
+                    <option value="1">정상</option>
+                    <option value="2">삭제</option>
+                </select>
+                <div class="dataTables_paginate paging_full_numbers col-md-12" id="mailboxImgList_info_paginate_top"></div>
+                <div class="col-md-12 no-padding">
+                    <div class="list-group">
+                        <form id="mailboxForm"></form>
+                    </div>
                 </div>
-                <div class="dataTables_paginate paging_full_numbers" id="mailboxList_info_paginate"></div>
+                <div class="dataTables_paginate paging_full_numbers col-md-12" id="mailboxImgList_info_paginate"></div>
             </div>
         </div>
         <!-- DATA TABLE END -->
@@ -25,24 +31,26 @@
 
 <script>
     $(document).ready(function() {
-        init();
     });
 
 
 //=------------------------------ Init / Event--------------------------------------------
-    var mailboxPagingInfo= new PAGING_INFO(0, 1, 54);
+    var mailboxImgPagingInfo= new PAGING_INFO(0, 1, 54);
 
     function mailboxImgList(pagingNo) {
         if(!common.isEmpty(pagingNo)){
-            dalSalesPagingInfo.pageNo = pagingNo;
+            mailboxImgPagingInfo.pageNo = pagingNo;
         }else{
-            dalSalesPagingInfo.pageNo = 1;
+            mailboxImgPagingInfo.pageNo = 1;
         }
 
         var data = {
-            'pageNo' : mailboxPagingInfo.pageNo
-            , 'pageCnt' : mailboxPagingInfo.pageCnt
-            , 'searchText' : common.isEmpty($('#txt_search').val()) ? '' : $('#txt_search').val()
+             pageNo : mailboxImgPagingInfo.pageNo
+            , pageCnt : mailboxImgPagingInfo.pageCnt
+            , searchText : common.isEmpty($('#txt_search').val()) ? '' : $('#txt_search').val()
+            , startDate : $("#startDate").val()
+            , endDate : $("#endDate").val()
+            , slctType : $("#slctType").val()
         };
 
         console.log(data);
@@ -57,12 +65,21 @@
         var html = templateScript(context);
         $("#mailboxForm").html(html);
 
-        mailboxPagingInfo.totalCnt = response.pagingVo.totalCnt;
+        mailboxImgPagingInfo.totalCnt = response.pagingVo.totalCnt;
 
-        console.log(mailboxPagingInfo);
-        util.renderPagingNavigation("mailboxList_info_paginate_top", mailboxPagingInfo);
-        util.renderPagingNavigation("mailboxList_info_paginate", mailboxPagingInfo);
+        console.log(mailboxImgPagingInfo);
+        util.renderPagingNavigation("mailboxImgList_info_paginate_top", mailboxImgPagingInfo);
+        util.renderPagingNavigation("mailboxImgList_info_paginate", mailboxImgPagingInfo);
 
+        $("#summaryArea").empty();
+
+        var template = $('#tmp_mailboxImgSummary').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response.summary;
+        var html = templateScript(context);
+        $('#summaryArea').html(html);
+
+        ui.paintColor();
     };
 
 
@@ -72,11 +89,6 @@
         console.log(data, textStatus, jqXHR);
     };
 
-    // 공지제목 누르면 회원/방송공지 탭이 나오도록
-    function mailboxPopUp(data){
-        var popupUrl = "/member/mailbox/popup/mailboxMsg?chatNo="+ data.data('chatno');
-        util.windowOpen(popupUrl,"950", "1000","우체통");
-    }
 </script>
 
 
@@ -125,4 +137,38 @@
                 <label>{{isEmptyData}}</label>
             </div>
     {{/each}}
+</script>
+
+
+<script id="tmp_mailboxImgSummary" type="text/x-handlebars-template">
+    <table class="table table-sorting table-hover table-bordered">
+        <tr>
+            <th rowspan="2" class="_bgColor" data-bgcolor="#bfbfbf">구분</th>
+            <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">{{{sexIcon 'm'}}}</th>
+            <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">{{{sexIcon 'f'}}}</th>
+            <th colspan="2" class="_bgColor" data-bgcolor="#fff2cc">{{{sexIcon 'n'}}}</th>
+            <th colspan="2" class="_bgColor" data-bgcolor="#bfbfbf">총합</th>
+        </tr>
+        <tr>
+            <th class="_bgColor _fontColor" data-bgcolor="#f2f2f2" data-fontcolor="blue">회원</th>
+            <th class="_bgColor _fontColor" data-bgcolor="#f2f2f2" data-fontcolor="blue">건</th>
+            <th class="_bgColor _fontColor" data-bgcolor="#f2f2f2" data-fontcolor="red">회원</th>
+            <th class="_bgColor _fontColor" data-bgcolor="#f2f2f2" data-fontcolor="red">건</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">회원</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">건</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">회원</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">건</th>
+        </tr>
+        <tr>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">총 합</th>
+            <td class="_fontColor" data-fontcolor="blue">{{addComma mCnt}} 명</td>
+            <td class="_fontColor" data-fontcolor="blue">{{addComma mCntMsg}} 건</td>
+            <td class="_fontColor" data-fontcolor="red">{{addComma fCnt}} 명</td>
+            <td class="_fontColor" data-fontcolor="red">{{addComma fCntMsg}} 건</td>
+            <td>{{addComma nCnt}} 명</td>
+            <td>{{addComma nCntMsg}} 건</td>
+            <td class="_bgColor" data-bgcolor="#bfbfbf">{{addComma tCnt}} 명</td>
+            <td class="_bgColor" data-bgcolor="#bfbfbf">{{addComma totalCntMsg}} 건</td>
+        </tr>
+    </table>
 </script>

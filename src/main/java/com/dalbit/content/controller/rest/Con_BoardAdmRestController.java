@@ -237,4 +237,21 @@ public class Con_BoardAdmRestController {
         String result = conBoardAdmService.callMailbox(mailboxVo);
         return result;
     }
+
+    /**
+     * 우체통 선물 목록
+     */
+    @PostMapping("mailbox/gift")
+    public String mailboxGift(MailboxVo mailboxVo){
+        String result = conBoardAdmService.callMailboxGift(mailboxVo);
+        return result;
+    }
+
+    /**
+     * Mailbox Tab Count Select
+     */
+    @PostMapping("/mailbox/tab/count")
+    public String mailboxTabCount(BoardAdmTabCountVo boardAdmTabCountVo) {
+        return conBoardAdmService.mailboxTabCount(boardAdmTabCountVo);
+    }
 }

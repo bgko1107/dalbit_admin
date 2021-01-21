@@ -10,6 +10,8 @@ public class P_MailboxImgListVo extends SearchVo {
 
     //input
     private int pageNo;
+    private String startDate;
+    private String endDate;
 
     //output
     private String imageUrl;
@@ -22,5 +24,15 @@ public class P_MailboxImgListVo extends SearchVo {
     private String mem_no;
     private String data2;
     private int inner;
+
+    // summary
+    private int mCnt;
+    private int fCnt;
+    private int nCnt;
+    private int tCnt;
+    private int mCntMsg;
+    private int fCntMsg;
+    private int nCntMsg;
+    private int totalCntMsg;
 
 }
