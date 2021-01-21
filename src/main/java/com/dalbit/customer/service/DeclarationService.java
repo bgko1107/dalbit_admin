@@ -270,6 +270,31 @@ public class DeclarationService {
     }
 
     /**
+     * 여러개 신고 확인완료 처리
+     */
+    public String callServiceCenterReportMultiOperate(P_DeclarationOperateVo pDeclarationOperateVo) {
+
+        String[] reportIdxArr = pDeclarationOperateVo.getReportIdxs().split(",");
+        String memNo = MemberVo.getMyMemNo();
+
+        Arrays.asList(reportIdxArr).parallelStream().forEach(idx -> {
+            var declaration = new P_DeclarationOperateVo();
+            declaration.setReportIdx(Integer.valueOf(idx));
+            declaration.setOpName(memNo);
+            declaration.setOpCode(1);
+            declaration.setNotiContents("");
+
+            ProcedureVo procedureVo = new ProcedureVo(declaration);
+            declarationDao.callServiceCenterReportOperate(procedureVo);
+
+            log.error(new Gson().toJson(procedureVo));
+        });
+
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.신고처리_성공));
+        return result;
+    }
+
+    /**
      * 신고 처리 내역 건 수
      */
     public String callServiceCenterReportOpCount(ProcedureVo procedureVo) {

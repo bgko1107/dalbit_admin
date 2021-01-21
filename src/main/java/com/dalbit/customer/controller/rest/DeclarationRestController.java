@@ -86,6 +86,17 @@ public class DeclarationRestController {
     }
 
     /**
+     * 신고 처리
+     */
+    @PostMapping("multi/operate")
+    public String multiOperate(P_DeclarationOperateVo pDeclarationOperateVo) {
+
+        String result = declarationService.callServiceCenterReportMultiOperate(pDeclarationOperateVo);
+
+        return result;
+    }
+
+    /**
      * 신고 처리 내역 건 수
      */
     @PostMapping("opCount")

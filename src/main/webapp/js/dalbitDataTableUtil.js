@@ -49,9 +49,9 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
         pageLength: 10,                                                                  // 한 페이지에 기본으로 보여줄 항목 수
         bPaginate: true,                                                                // 페이징 처리 여부.
         bLengthChange: true,                                                        //  페이지 표시 건수 변동 기능 사용 여부
-        lengthMenu : [ [ 50, 30, 100 ], [ '50 건', '30 건', '100 건' ] ],                  // "bLengthChange" 리스트 항목을 구성할 옵션
+        lengthMenu : [ [ 10, 30, 50, 100 ], [ '10 건', '30 건', '50 건', '100 건' ] ],                  // "bLengthChange" 리스트 항목을 구성할 옵션
         bAutoWidth: false,                                                            // 자동 Width 계산 여부
-        processing: false,                                                              // Process 바 출력 여부
+        processing: true,                                                              // Process 바 출력 여부
         ordering: false,                                                                 // 정렬 사용 여부
         serverSide: true,                                                             // 서버에서 정렬한 데이터 그대로 사용할지 여부 (false : 서버에서 정렬한 데이터도 client에서 다시 재정렬)
         searching: false,                                                               // 서칭 기능 사용 여부
@@ -82,7 +82,7 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
 
                     return JSON.stringify( json ); // return JSON string
                 }catch (e) {
-                    dalbitLog(data);
+                    console.log(data);
                     //todo - 세션 만료 체크 로직 필요.
                     if(0 < data.indexOf('로그인')){
                         alert('세션이 만료되어 로그인 페이지로 이동합니다.');
@@ -92,9 +92,9 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
             }
         },
         fnServerParams: function ( aoData ) {
-            /*dalbitLog("[fnServerParams]");
-            dalbitLog("[URL] " + url);
-            dalbitLog("[DOM] " + dom.selector);*/
+            /*console.log("[fnServerParams]");
+            console.log("[URL] " + url);
+            console.log("[DOM] " + dom.selector);*/
             // 새로생성 시 1 페이지 유지를 위함
             if(aoData.draw == 1){
                 aoData.start = 0;
@@ -120,10 +120,10 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
             }
 
 
-            dalbitLog(aoData);
+            console.log(aoData);
         },
         fnPreDrawCallback: function(oSettings){
-            dalbitLog("[fnPreDrawCallback]");
+            console.log("[fnPreDrawCallback]");
             //loading bar start
             $('body').addClass('dalbit_module_loading')
 
@@ -135,7 +135,7 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
             });
         },
         fnDrawCallback: function(oSettings){
-            dalbitLog("[fnDrawCallback]");
+            console.log("[fnDrawCallback]");
             $('.dataTables_paginate > .pagination').addClass('borderless');
 
             // 조회 데이터 없을 경우
@@ -165,7 +165,7 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
             }
         },
         fnInitComplete: function(oSettings){
-            dalbitLog("[fnInitComplete]");
+            console.log("[fnInitComplete]");
 
             // 새로생성 시 1 페이지 유지를 위함
             this.fnPageChange(0, true);
@@ -267,11 +267,8 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
         var isInitResetCallback = this.isInitResetCallback;
 
         this.dataTableSource.ajax.complete = function (response) {
-                dalbitLog("[complete]");
-
-
+                console.log("[ajax complete]");
                 if(!common.isEmpty(response.responseJSON)){
-                    dalbitLog(response.responseJSON);
                     ui.toogleSearchListFooter(response.responseJSON.recordsTotal);
                 }
 
@@ -476,13 +473,13 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
 
     /* get Row Idx Data  */
     DalbitDataTable.prototype.getDataRow = function (idxRow) {
-        dalbitLog(this.dom.DataTable().row(idxRow).data());
+        console.log(this.dom.DataTable().row(idxRow).data());
         return this.dom.DataTable().row(idxRow).data();
     }
 
     /* get Rows Size  */
     DalbitDataTable.prototype.getRowSize = function(){
-        dalbitLog(this.dom.DataTable().row()[0].length);
+        console.log(this.dom.DataTable().row()[0].length);
         return this.dom.DataTable().row()[0].length;
     }
 
@@ -529,7 +526,7 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
     /* set Row Click Event 함수 지정, 이벤트 column 지정 */
     DalbitDataTable.prototype.setEventClick = function (eventFnc, column) {
         if(common.isEmpty(eventFnc)){
-            dalbitLog("[DalbitDataTable.prototype.setEventClick] eventFnc is Null!!");
+            console.log("[DalbitDataTable.prototype.setEventClick] eventFnc is Null!!");
             return;
         }
 
@@ -549,7 +546,7 @@ function DalbitDataTable(dom, param, columnsInfo, searchForm, afterFn) {
     }
 
     DalbitDataTable.prototype.setOrder = function (columnIdx, orderDir) {
-        dalbitLog("[Order] columnidx:" + columnIdx + " / orderDir :" + orderDir)
+        console.log("[Order] columnidx:" + columnIdx + " / orderDir :" + orderDir)
         if(common.isEmpty(orderDir)){orderDir = "desc"}
         this.dataTableSource.order = [[ columnIdx, orderDir ]] ;
     }

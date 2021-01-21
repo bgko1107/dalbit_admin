@@ -119,6 +119,13 @@ ui.checkBoxInit = function(tableId){
     });
 }
 
+ui.checkBoxUnbind = function(tableId, func){
+
+    $("#"+tableId+"-select-all").unbind('click');
+
+    $(document).on('click', '#'+tableId+' .dt-body-center input[type="checkbox"]', func);
+}
+
 ui.unCheck = function(tableId) {
     $('#' + tableId + ' .dt-body-center input[type="checkbox"]').prop('checked', false);
 }

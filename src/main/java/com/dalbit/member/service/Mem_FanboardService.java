@@ -10,10 +10,12 @@ import com.dalbit.member.vo.procedure.P_MemberFanboardInputVo;
 import com.dalbit.member.vo.procedure.P_MemberFanboardOutputVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @Slf4j
 @Service
@@ -50,6 +52,28 @@ public class Mem_FanboardService {
     public String getFanboardDelete(P_MemberFanboardDeleteVo pMemberFanboardDeleteVo){
         pMemberFanboardDeleteVo.setOpName(MemberVo.getMyMemNo());
         mem_FanboardDao.callFanboardDelete(pMemberFanboardDeleteVo);
+        String result;
+        result = gsonUtil.toJson(new JsonOutputVo(Status.Fanboard삭제성공));
+        return result;
+    }
+
+    /**
+     * 회원 공지 여러개 삭제
+     */
+    public String callFanboardMultiDelete(P_MemberFanboardDeleteVo pMemberFanboardDeleteVo){
+        pMemberFanboardDeleteVo.setOpName(MemberVo.getMyMemNo());
+
+        String[] idxArr = pMemberFanboardDeleteVo.getIdxs().split(",");
+        String opName = MemberVo.getMyMemNo();
+
+        Arrays.asList(idxArr).parallelStream().forEach(idxStr -> {
+            var deleteVo = new P_MemberFanboardDeleteVo();
+            deleteVo.setIdx(Integer.valueOf(idxStr));
+            deleteVo.setOpName(opName);
+
+            mem_FanboardDao.callFanboardDelete(deleteVo);
+        });
+
         String result;
         result = gsonUtil.toJson(new JsonOutputVo(Status.Fanboard삭제성공));
         return result;

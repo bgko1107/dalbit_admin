@@ -25,6 +25,14 @@
                             <option value="1">정상</option>
                             <option value="2">삭제</option>
                         </select>
+
+                        <select id="dynamicPageCntFanboard" class="form-control searchType">
+                            <option value="10">10 개씩</option>
+                            <option value="30">30 개씩</option>
+                            <option value="50">50 개씩</option>
+                            <option value="100">100 개씩</option>
+                        </select>
+
                         <label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
                             <input type="checkbox" name="isSecret" id="isSecret" value="1">
                             <span>비밀글 모아보기</span>
@@ -53,6 +61,12 @@
                     <div class="dataTables_paginate paging_full_numbers" id="fanBoard_paginate"></div>
                 </div>
             </div>
+
+            <div class="widget-footer">
+                <span>
+                    <button class="btn btn-danger btn-sm print-btn" type="button" id="deleteFanboardBtn"><i class="fa fa-check"></i>선택 삭제</button>
+                </span>
+            </div>
         </div>
     </div>
 </div>
@@ -76,7 +90,7 @@
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/member/memberCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
-    var fanBoardPagingInfo = new PAGING_INFO(0,1,100);
+    var fanBoardPagingInfo = new PAGING_INFO(0, 1, $("#dynamicPageCntFanboard").val());
 
     $(document).ready(function() {
         // $("#searchType_board").html(util.getCommonCodeSelect(-1, searchType_board));
@@ -239,6 +253,46 @@
         fanBoardList();
     });
 
+    $('#dynamicPageCntFanboard').on('change', function () {
+        fanBoardPagingInfo.pageCnt = $(this).val();
+        fanBoardList();
+    });
+
+    $(document).on('click', '#allChkFanboard', function(){
+        var me = $(this);
+        var checkboxs = $('._fanboard_chk:not(.disabled)');
+        if(me.prop('checked')){
+            checkboxs.prop('checked', true);
+        }else{
+            checkboxs.prop('checked', false);
+        }
+    });
+
+    $(document).on('click', '#deleteFanboardBtn', function(){
+        var checkboxs = $('._fanboard_chk:checked');
+        if(checkboxs.length < 1){
+            alert('삭제할 팬보드를 선택해주세요.');
+            return false;
+        }
+
+        if(confirm(checkboxs.length + '건을 삭제 하시겠습니까?')){
+
+            var idxs = '';
+            checkboxs.each(function(){
+                var idx = $(this).data('idx');
+
+                idxs += idx + ',';
+            });
+            var data = {
+                idxs : idxs
+            }
+
+            util.getAjaxData('multiOperate', '/rest/member/fanboard/multi/delete', data, function(dist_id, response){
+                alert(response.message);
+                fanBoardList(fanBoardPagingInfo.pageNo);
+            });
+        }
+    });
 </script>
 
 <script id="tmp_fanBoardTable" type="text/x-handlebars-template">
@@ -249,6 +303,7 @@
         </colgroup>
         <thead>
         <tr>
+            <th><input type="checkbox" class="form-control" id="allChkFanboard" /></th>
             <th>No</th>
             <th>팬보드주인</th>
             <th>성별</th>
@@ -265,6 +320,8 @@
         <tbody>
         {{#each this.data as |data|}}
             <tr {{#dalbit_if fan_inner '==' 1}} style="background-color : #dae3f3" {{/dalbit_if}}>
+                <td><input type="checkbox" class="form-control _fanboard_chk {{#dalbit_if status '!=' 1}}disabled{{/dalbit_if}}" {{#dalbit_if status '!=' 1}}disabled{{/dalbit_if}} data-idx="{{data.idx}}" /></td>
+                <td>{{indexDesc ../pagingVo.totalCnt rowNum}}</td>
                 <td>{{indexDesc ../pagingVo.totalCnt rowNum}}</td>
                 <td>
                     {{{memNoLink star_mem_no star_mem_no}}}<br/>
@@ -305,27 +362,3 @@
         </tbody>
     </table>
 </script>
-
-<%--<script id="fanboard_tableSummary" type="text/x-handlebars-template">--%>
-    <%--<table class="table table-bordered table-summary pull-right no-padding" style="width: 70%;margin-right: 0px">--%>
-        <%--<tr>--%>
-            <%--<th colspan="5" style="background-color: #8fabdd">팬보드 (비밀글) 현황</th>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<th style="background-color: #7f7f7f; color: white">총합</th>--%>
-            <%--<th style="background-color: #d9d9d9">일평균</th>--%>
-            <%--<th style="background-color: #d9d9d9">성별-남성/여성/알수없음</th>--%>
-            <%--<th style="background-color: #d9d9d9">총 삭제 글</th>--%>
-            <%--<th style="background-color: #d9d9d9">총 일평균 삭제</th>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td class="font-bold" style="background-color: #f4b282">{{addComma totalCnt}} ({{addComma secretTotalCnt}})</td>--%>
-            <%--<td>{{addComma avgTotalCnt}} ({{addComma secretAvgTotalCnt}})</td>--%>
-            <%--<td><span style="color: blue"><span class="font-bold">{{addComma maleCnt}}</span> ({{addComma secretMaleCnt}})</span>--%>
-                <%--/ <span style="color: red"><span class="font-bold">{{addComma femaleCnt}}</span> ({{addComma secretFemaleCnt}})</span>--%>
-                <%--/ <span class="font-bold">{{addComma noneCnt}}</span> ({{addComma secretNoneCnt}})</td>--%>
-            <%--<td>{{addComma totalDelCnt}} ({{addComma secretTotalDelCnt}})</td>--%>
-            <%--<td>{{addComma avgTotalDelCnt}} ({{addComma secretAvgTotalDelCnt}})</td>--%>
-        <%--</tr>--%>
-    <%--</table>--%>
-<%--</script>--%>

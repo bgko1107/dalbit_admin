@@ -113,7 +113,8 @@
     }
 
     function mailboxPopUp(data){
-        var popupUrl = "/member/mailbox/popup/mailboxMsg?chatNo="+ data.data('chatno');
+        var date = $("#onedayDate").val();
+        var popupUrl = "/member/mailbox/popup/mailboxMsg?chatNo="+ data.data('chatno')+"&searchDate="+date;
         util.windowOpen(popupUrl,"950", "1000","우체통");
     }
 
@@ -126,11 +127,11 @@
             <td>
                 <a href="javascript://"  onclick="mailboxPopUp($(this))" data-chatno="{{chatNo}}">{{chatNo}}</a>
             </td>
-            <td>
+            <td class="{{#equal data.memInner 1}}bg-testMember{{/equal}}">
                 {{{memNoLink memNo memNo}}}<br/>
                 {{memNick}}
             </td>
-            <td>
+            <td class="{{#equal data.target_mem_inner 1}}bg-testMember{{/equal}}">
                 {{{memNoLink targetMemNo targetMemNo}}}<br/>
                 {{target_mem_nick}}
             </td>
@@ -173,7 +174,7 @@
         </tr>
     {{else}}
         <tr>
-            <td colspan="7">{{isEmptyData}}</td>
+            <td colspan="8">{{isEmptyData}}</td>
         </tr>
     {{/each}}
 </script>

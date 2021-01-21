@@ -78,6 +78,14 @@ public class Con_BoardAdmRestController {
     }
 
     /**
+     * 사연 여러개 삭제
+     */
+    @PostMapping("/multi/deleteStory")
+    public String multiDeleteStory(P_StoryDeleteVo pStoryDeleteVo) {
+        return conBoardAdmService.callStoryMultiDelete(pStoryDeleteVo);
+    }
+
+    /**
      * 회원/방송공지 조회
      */
     @PostMapping("/noticeList")

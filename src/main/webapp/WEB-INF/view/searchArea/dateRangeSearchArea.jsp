@@ -11,7 +11,12 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-        setTimeDate(dateTime);
+        <c:if test="${not empty param.searchDate}">
+            setTimeDate('${param.searchDate}');
+        </c:if>
+        <c:if test="${empty param.searchDate}">
+            setTimeDate(dateTime);
+        </c:if>
     });
 
     $("#displayDate").statsDaterangepicker(
