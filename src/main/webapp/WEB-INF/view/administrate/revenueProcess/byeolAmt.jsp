@@ -60,8 +60,8 @@
         }
         var data = {
             startDate : $("#startDate").val()
-            , 'pageNo' : byeolAmtPagingInfo.pageNo
-            , 'pageCnt' : byeolAmtPagingInfo.pageCnt
+            , pageNo : byeolAmtPagingInfo.pageNo
+            , pageCnt : byeolAmtPagingInfo.pageCnt
         };
         util.getAjaxData("byeolAmt", "/rest/enter/pay/byeol/amt", data, fn_byeolAmt_success);
     }

@@ -173,11 +173,19 @@ public class Ent_PayRestController {
         return result;
     }
 
-    // 달 금액
+    // 달 매출
     @PostMapping("/dal/sales")
     public String dalSales(P_RevenueProcessVo pRevenueProcessVo){
         String result = ent_PayService.callDalSales(pRevenueProcessVo);
         return result;
+    }
+
+    // 달 매출 엑셀 다운로드
+    @PostMapping("/dal/sales/listExcel")
+    public String dalSalesListExcel(HttpServletRequest request, HttpServletResponse response, Model model, P_RevenueProcessVo pRevenueProcessVo) throws GlobalException {
+        Model resultModel = ent_PayService.callDalSalesListExcel(pRevenueProcessVo, model);
+        excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
+        return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
     }
 
     // 탈퇴 달 금액

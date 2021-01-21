@@ -94,8 +94,8 @@
 
         var data = {
             startDate : $("#startDate").val()
-            , 'pageNo' : dalAmtPagingInfo.pageNo
-            , 'pageCnt' : dalAmtPagingInfo.pageCnt
+            , pageNo : dalAmtPagingInfo.pageNo
+            , pageCnt : dalAmtPagingInfo.pageCnt
         };
         util.getAjaxData("dalAmt", "/rest/enter/pay/dal/amt", data, fn_dalAmt_success);
     }

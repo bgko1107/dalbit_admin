@@ -116,6 +116,9 @@
         }else if(targetId == "withdrawalByeol_paginate_top" || targetId == "withdrawalByeol_paginate") {
             withdrawalByeolPagingInfo = pagingInfo;
             getWithdrawalByeolList(pagingInfo.pageNo);
+        }else if(targetId == "dalSales_paginate_top" || targetId == "dalSales_paginate") {
+            dalSalesPagingInfo = pagingInfo;
+            getDalbitSalesList(pagingInfo.pageNo);
         }
     }
 
