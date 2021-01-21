@@ -21,6 +21,7 @@ public class P_ClipCopyrightOutputVo extends BaseVo {
     private String userCoverSinger; // 유저 커버 가수
     private String adminCoverTitle; // 어드민 커버 제목
     private String adminCoverSinger;// 어드민 커버 가수
+    private String uciAlbumCode;// UCI 앨범코드
     private int playCnt;        // 청취 회수
     private int regCnt;         // 등록된 클립 총 수
     private int state;          // 상태
