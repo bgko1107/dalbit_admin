@@ -26,12 +26,7 @@
                             <option value="2">삭제</option>
                         </select>
 
-                        <select id="dynamicPageCntFanboard" class="form-control searchType">
-                            <option value="10">10 개씩</option>
-                            <option value="30">30 개씩</option>
-                            <option value="50">50 개씩</option>
-                            <option value="100">100 개씩</option>
-                        </select>
+                        <span id="dynamicPageAreaFanboard"></span>
 
                         <label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
                             <input type="checkbox" name="isSecret" id="isSecret" value="1">
@@ -92,8 +87,8 @@
 <script type="text/javascript">
     var fanBoardPagingInfo = new PAGING_INFO(0, 1, $("#dynamicPageCntFanboard").val());
 
-    $(document).ready(function() {
-        // $("#searchType_board").html(util.getCommonCodeSelect(-1, searchType_board));
+    $(function() {
+        $("#dynamicPageAreaFanboard").html(util.renderDynamicPageCntSelect('dynamicPageCntFanboard'));
     });
 
     function fanBoardList(pagingNo, _tabId) {
@@ -253,7 +248,7 @@
         fanBoardList();
     });
 
-    $('#dynamicPageCntFanboard').on('change', function () {
+    $(document).on('change', '#dynamicPageCntFanboard', function () {
         fanBoardPagingInfo.pageCnt = $(this).val();
         fanBoardList();
     });
@@ -298,7 +293,7 @@
 <script id="tmp_fanBoardTable" type="text/x-handlebars-template">
     <table id="tb_fanBoardList" class="table table-sorting table-hover table-bordered mt10">
         <colgroup>
-            <col width="2%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
+            <col width="2%"/><col width="2%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
             <col width="5%"/><col width="34%"/><col width="8%"/><col width="4%"/><col width="4%"/>
         </colgroup>
         <thead>
@@ -321,7 +316,6 @@
         {{#each this.data as |data|}}
             <tr {{#dalbit_if fan_inner '==' 1}} style="background-color : #dae3f3" {{/dalbit_if}}>
                 <td><input type="checkbox" class="form-control _fanboard_chk {{#dalbit_if status '!=' 1}}disabled{{/dalbit_if}}" {{#dalbit_if status '!=' 1}}disabled{{/dalbit_if}} data-idx="{{data.idx}}" /></td>
-                <td>{{indexDesc ../pagingVo.totalCnt rowNum}}</td>
                 <td>{{indexDesc ../pagingVo.totalCnt rowNum}}</td>
                 <td>
                     {{{memNoLink star_mem_no star_mem_no}}}<br/>

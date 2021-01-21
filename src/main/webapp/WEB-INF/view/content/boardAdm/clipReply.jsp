@@ -12,6 +12,9 @@
                 <option value="1">정상</option>
                 <option value="2">삭제</option>
             </select>
+
+            <span id="dynamicPageClipReplyArea"></span>
+
             <div class="col-md-2 no-padding pull-right">
                 <table class="table table-sorting table-hover table-bordered">
                     <colgroup>
@@ -27,6 +30,7 @@
         <table id="noticeTable" class="table table-sorting table-hover table-bordered mt10">
             <colgroup>
                 <col width="5%"/>
+                <col width="5%"/>
                 <col width="10%"/>
                 <col width="8%"/>
                 <col width="15%"/>
@@ -40,6 +44,7 @@
             </colgroup>
             <thead>
                 <tr>
+                    <th><input type="checkbox" class="form-control" id="allChkClipReply" /></th>
                     <th>No</th>
                     <th>클립 주인</th>
                     <th>성별</th>
@@ -58,15 +63,20 @@
         </table>
         <div class="dataTables_paginate paging_full_numbers" id="clipReply_paginate"></div>
     </div>
+    <div class="widget-footer">
+        <span>
+            <button class="btn btn-danger btn-sm print-btn" type="button" id="deleteClipReplyBtn"><i class="fa fa-check"></i>선택 삭제</button>
+        </span>
+    </div>
 </div>
 <!-- //table -->
 
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
-    var clipPagingInfo = new PAGING_INFO(0,1,40);
+    var clipPagingInfo = new PAGING_INFO(0,1,$("#dynamicPageCntClipReply").val());
 
-    $(document).ready(function() {
-        // clipReplyList();
+    $(function() {
+        $("#dynamicPageClipReplyArea").html(util.renderDynamicPageCntSelect('dynamicPageCntClipReply'));
     });
 
     var memNo;
@@ -147,11 +157,54 @@
         clipReplyList();
     });
 
+    $(document).on('change', '#dynamicPageCntClipReply', function () {
+        clipPagingInfo.pageCnt = $(this).val();
+        clipReplyList();
+    });
+
+    $(document).on('click', '#allChkClipReply', function(){
+        var me = $(this);
+        var checkboxs = $('._clipReply_chk:not(.disabled)');
+        if(me.prop('checked')){
+            checkboxs.prop('checked', true);
+        }else{
+            checkboxs.prop('checked', false);
+        }
+    });
+
+    $(document).on('click', '#deleteClipReplyBtn', function(){
+        var checkboxs = $('._clipReply_chk:checked');
+        if(checkboxs.length < 1){
+            alert('삭제할 회원 프로필을 선택해주세요.');
+            return false;
+        }
+
+        if(confirm(checkboxs.length + '건을 삭제 하시겠습니까?')){
+
+            var castReplyIdxs = '';
+            var cast_nos = '';
+            checkboxs.each(function(){
+                castReplyIdxs += $(this).data('castreplyidx') + ',';
+                cast_nos += $(this).data('castno') + ',';
+            });
+            var data = {
+                castReplyIdxs : castReplyIdxs
+                , cast_nos : cast_nos
+            }
+
+            util.getAjaxData('multiOperate', '/rest/content/boardAdm/clipReplyList/multi/del', data, function(dist_id, response){
+                alert(response.message);
+                clipReplyList(clipPagingInfo.pageNo);
+            });
+        }
+    });
+    
 </script>
 
 <script id="tmp_clipReplyTable" type="text/x-handlebars-template">
     {{#each this.data as |data|}}
         <tr {{#dalbit_if writer_inner '==' 1}} style="background-color : #dae3f3" {{/dalbit_if}}>
+            <td><input type="checkbox" class="form-control _clipReply_chk {{#dalbit_if status '!=' 1}}disabled{{/dalbit_if}}" {{#dalbit_if status '!=' 1}}disabled{{/dalbit_if}} data-castno="{{data.cast_no}}" data-castreplyidx="{{data.castReplyIdx}}" /></td>
             <td>{{indexDesc ../pagingVo/totalCnt rowNum}}</td>
             <td>
                 {{{memNoLink cast_mem_no cast_mem_no}}}<br/>
@@ -182,7 +235,7 @@
         </tr>
     {{else}}
         <tr>
-            <td colspan="11">{{isEmptyData}}</td>
+            <td colspan="12">{{isEmptyData}}</td>
         </tr>
     {{/each}}
 </script>

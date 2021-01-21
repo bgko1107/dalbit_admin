@@ -522,8 +522,9 @@ public class Cli_ClipHistoryService {
 
         List<P_ClipCopyrightOutputVo> list = cliClipHistoryDao.callClipCopyright(procedureVo);
         String[] headers = {"No", "회원번호", "닉네임", "주제", "재생시간", "클립번호", "클립제목", "등록일시", "커버곡명(유저)", "커버가수(유저)"
-                , "커버곡명(관리자)", "커버가수(관리자)", "청취 횟수", "상태"};
-        int[] headerWidths = {2000, 5000, 3000, 4000, 3000, 5000, 4000, 5000, 4000, 4000, 4000, 4000, 2000, 4000};
+                , "커버곡명(관리자)", "커버가수(관리자)", "UCI 앨범코드", "청취 횟수", "상태"};
+        int[] headerWidths = {2000, 5000, 3000, 4000, 3000, 5000, 4000, 5000, 4000, 4000
+                , 4000, 4000, 4000, 2000, 4000};
 
         List<Object[]> bodies = new ArrayList<>();
         for(int i=0; i<list.size(); i++) {
@@ -573,6 +574,7 @@ public class Cli_ClipHistoryService {
             hm.put("cover_singer(user)", DalbitUtil.isEmpty(list.get(i).getUserCoverSinger()) ? "" : list.get(i).getUserCoverSinger());
             hm.put("cover_title(admin)", DalbitUtil.isEmpty(list.get(i).getAdminCoverTitle()) ? "" : list.get(i).getAdminCoverTitle());
             hm.put("cover_singer(admin)", DalbitUtil.isEmpty(list.get(i).getAdminCoverSinger()) ? "" : list.get(i).getAdminCoverSinger());
+            hm.put("uci_album_code", DalbitUtil.isEmpty(list.get(i).getUciAlbumCode()) ? "" : list.get(i).getUciAlbumCode());
             hm.put("listenCnt", DalbitUtil.isEmpty(list.get(i).getPlayCnt()) ? "" : list.get(i).getPlayCnt());
             hm.put("state", state);
 

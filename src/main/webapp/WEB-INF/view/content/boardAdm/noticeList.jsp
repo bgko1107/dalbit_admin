@@ -8,12 +8,8 @@
         <div class="col-md-12 no-padding mt10">
             <div class="col-md-10">
                 <div id="noticeListCnt"></div>
-                <select id="dynamicPageCntNotice" class="form-control searchType">
-                    <option value="10">10 개씩</option>
-                    <option value="30">30 개씩</option>
-                    <option value="50">50 개씩</option>
-                    <option value="100">100 개씩</option>
-                </select>
+
+                <span id="dynamicPageNoticeArea"></span>
             </div>
 
             <div class="col-md-2 no-padding pull-right">
@@ -30,7 +26,7 @@
         <div class="dataTables_paginate paging_full_numbers" id="notice_paginate_top"></div>
         <table id="noticeTable" class="table table-sorting table-hover table-bordered mt10">
             <colgroup>
-                <col width="4%"/><col width="10%"/><col width="6%"/><col width="10%"/><col width="46%"/>
+                <col width="4%"/><col width="4%"/><col width="10%"/><col width="6%"/><col width="10%"/><col width="46%"/>
                 <col width="10%"/><col width="5%"/><col width="5%"/>
             </colgroup>
             <thead>
@@ -63,8 +59,12 @@
 <script type="text/javascript">
     var noticePagingInfo = new PAGING_INFO(0, 1, $('#dynamicPageCntNotice').val());
     var tabId = 'tab_noticeBroadcastDetail';
-
     var memNo;
+
+    $(function(){
+        $('#dynamicPageNoticeArea').html(util.renderDynamicPageCntSelect('dynamicPageCntNotice'));
+    });
+
     function noticeList(pagingNo, _tabId) {
         if(!common.isEmpty(_tabId)){
             tabId = _tabId;
@@ -154,7 +154,7 @@
         util.windowOpen(url,"1200","450","");
     });
 
-    $('#dynamicPageCntNotice').on('change', function () {
+    $(document).on('change', '#dynamicPageCntNotice', function () {
         noticePagingInfo.pageCnt = $(this).val();
         noticeList();
     });

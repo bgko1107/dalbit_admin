@@ -21,6 +21,9 @@
                 <option value="1">정상</option>
                 <option value="2">삭제</option>
             </select>
+
+            <span id="dynamicPageBroadNoticeArea"></span>
+
             <div class="col-md-2 no-padding pull-right">
                 <table class="table table-sorting table-hover table-bordered">
                     <colgroup>
@@ -35,11 +38,12 @@
         <div class="dataTables_paginate paging_full_numbers" id="broadNotice_paginate_top"></div>
         <table id="broadNoticeTable" class="table table-sorting table-hover table-bordered mt10">
             <colgroup>
-                <col width="4%"/><col width="10%"/><col width="5%"/><col width="50%"/><col width="10%"/>
+                <col width="4%"/><col width="4%"/><col width="10%"/><col width="5%"/><col width="50%"/><col width="10%"/>
                 <col width="5%"/><col width="5%"/><col width="5%"/>
             </colgroup>
             <thead>
             <tr>
+                <th><input type="checkbox" class="form-control" id="allChkBroadNotice" /></th>
                 <th>No</th>
                 <th>등록 DJ</th>
                 <th>성별</th>
@@ -55,6 +59,11 @@
             </tbody>
         </table>
         <div class="dataTables_paginate paging_full_numbers" id="broadNotice_paginate"></div>
+    </div>
+    <div class="widget-footer">
+        <span>
+            <button class="btn btn-danger btn-sm print-btn" type="button" id="deleteBroadNoticeBtn"><i class="fa fa-check"></i>선택 삭제</button>
+        </span>
     </div>
 </div>
 <!-- //table -->
@@ -77,10 +86,11 @@
 
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
-    var broadNoticePagingInfo = new PAGING_INFO(0,1,40);
+    var broadNoticePagingInfo = new PAGING_INFO(0,1,$("#dynamicPageCntBroadNotice").val());
 
-    $(document).ready(function() {
+    $(function() {
         $("#searchType_broadNotice").html(util.getCommonCodeSelect(-1, searchType_notice, "N", "searchType_broadNotice"));
+        $("#dynamicPageBroadNoticeArea").html(util.renderDynamicPageCntSelect('dynamicPageCntBroadNotice'));
     });
 
     var memNo;
@@ -218,11 +228,57 @@
             $('#NoticeModal').modal("show");
         }
     }
+
+    $(document).on('change', '#dynamicPageCntBroadNotice', function () {
+        broadNoticePagingInfo.pageCnt = $(this).val();
+        broadNoticeList();
+    });
+
+    $(document).on('click', '#allChkBroadNotice', function(){
+        var me = $(this);
+        var checkboxs = $('._broadNotice_chk:not(.disabled)');
+        if(me.prop('checked')){
+            checkboxs.prop('checked', true);
+        }else{
+            checkboxs.prop('checked', false);
+        }
+    });
+
+    $(document).on('click', '#deleteBroadNoticeBtn', function(){
+        var checkboxs = $('._broadNotice_chk:checked');
+        if(checkboxs.length < 1){
+            alert('삭제할 회원공지를 선택해주세요.');
+            return false;
+        }
+
+        if(confirm(checkboxs.length + '건을 삭제 하시겠습니까?')){
+
+            var noticeIdxs = '';
+            var noticeTypes = '';
+            checkboxs.each(function(){
+                var noticeIdx = $(this).data('broadnoticeidx');
+                var noticeType = $(this).data('type');
+
+                noticeIdxs += noticeIdx + ',';
+                noticeTypes += noticeType + ',';
+            });
+            var data = {
+                noticeIdxs : noticeIdxs
+                , noticeTypes : noticeTypes
+            }
+
+            util.getAjaxData('multiOperate', '/rest/member/notice/multi/delete', data, function(dist_id, response){
+                alert(response.message);
+                broadNoticeList(broadNoticePagingInfo.pageNo);
+            });
+        }
+    });
 </script>
 
 <script id="tmp_broadNoticeTable" type="text/x-handlebars-template">
     {{#each this.data as |data|}}
         <tr {{#dalbit_if inner '==' 1}} style="background-color : #dae3f3" {{/dalbit_if}}>
+            <td><input type="checkbox" class="form-control _broadNotice_chk {{#dalbit_if data.status '!=' 0}}disabled{{/dalbit_if}}" {{#dalbit_if data.status '!=' 0}}disabled{{/dalbit_if}} data-broadnoticeidx="{{idx}}" data-type="{{type}}" /></td>
             <td>{{indexDesc ../pagingVo/totalCnt rowNum}}</td>
             <td>
                 {{{memNoLink mem_no mem_no}}}<br/>
@@ -254,7 +310,7 @@
         </tr>
     {{else}}
         <tr>
-            <td colspan="9">{{isEmptyData}}</td>
+            <td colspan="10">{{isEmptyData}}</td>
         </tr>
     {{/each}}
 </script>

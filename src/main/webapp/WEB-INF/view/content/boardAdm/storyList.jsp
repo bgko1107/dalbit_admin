@@ -13,12 +13,7 @@
                 <option value="2">방송 종료</option>
             </select>
 
-            <select id="dynamicPageCntStory" class="form-control searchType">
-                <option value="10">10 개씩</option>
-                <option value="30">30 개씩</option>
-                <option value="50">50 개씩</option>
-                <option value="100">100 개씩</option>
-            </select>
+            <span id="dynamicPageCntArea"></span>
 
             <div class="col-md-2 no-padding pull-right">
                 <table class="table table-sorting table-hover table-bordered">
@@ -51,6 +46,10 @@
 <script type="text/javascript">
     var StoryPagingInfo = new PAGING_INFO(0, 1, $("#dynamicPageCntStory").val());
 
+    $(function(){
+        $('#dynamicPageCntArea').html(util.renderDynamicPageCntSelect('dynamicPageCntStory'));
+    });
+
     function storyList(pagingNo, _tabId) {
 
         if(!common.isEmpty(_tabId)){
@@ -82,7 +81,6 @@
             , 'broState' : Number($("#broState option:selected").val())
         };
 
-        console.log(data);
         util.getAjaxData("storyList", "/rest/content/boardAdm/storyList", data, function (dst_id, response, param) {
             var template = $('#tmp_storyTable').html();
             var templateScript = Handlebars.compile(template);
@@ -133,7 +131,7 @@
         storyList();
     });
 
-    $('#dynamicPageCntStory').on('change', function () {
+    $(document).on('change', '#dynamicPageCntStory', function () {
         StoryPagingInfo.pageCnt = $(this).val();
         storyList();
     });
@@ -180,7 +178,7 @@
     <table id="tb_storyList" class="table table-sorting table-hover table-bordered mt10">
 
         <colgroup>
-            <col width="3%"/><col width="5%"/><col width="17%"/><col width="7%"/><col width="5%"/>
+            <col width="3%"/><col width="3%"/><col width="5%"/><col width="17%"/><col width="7%"/><col width="5%"/>
             <col width="10%"/><col width="5%"/><col width="29%"/><col width="7%"/><col width="4%"/>
             <col width="3%"/>
         </colgroup>

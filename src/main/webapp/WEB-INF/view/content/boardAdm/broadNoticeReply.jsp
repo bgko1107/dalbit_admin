@@ -16,6 +16,8 @@
                             <option value="1">정상</option>
                             <option value="2">삭제</option>
                         </select>
+
+                        <span id="dynamicPageBroadNoticeReplyArea"></span>
                     </div>
                     <div class="col-md-2 no-padding pull-right">
                         <table class="table table-sorting table-hover table-bordered">
@@ -32,6 +34,11 @@
                 <div id="noticeReplyTable"></div>
                 <div class="dataTables_paginate paging_full_numbers" id="noticeReply_paginate"></div>
             </div>
+            <div class="widget-footer">
+                <span>
+                    <button class="btn btn-danger btn-sm print-btn" type="button" id="deleteBroadNoticeReplyBtn"><i class="fa fa-check"></i>선택 삭제</button>
+                </span>
+            </div>
         </div>
     </div>
 </div>
@@ -40,10 +47,10 @@
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/member/memberCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
-    var noticeReplyPagingInfo = new PAGING_INFO(0,1,100);
+    var noticeReplyPagingInfo = new PAGING_INFO(0,1,$("#dynamicPageCntBroadNoticeReply").val());
 
     $(document).ready(function() {
-        // $("#searchType_boardReply").html(util.getCommonCodeSelect(-1, searchType_board, "N","searchType_boardReply"));
+        $("#dynamicPageBroadNoticeReplyArea").html(util.renderDynamicPageCntSelect('dynamicPageCntBroadNoticeReply'));
     });
 
     function broadNoticeReply(pagingNo, _tabId) {
@@ -124,17 +131,55 @@
         return false;
     });
 
-
-
     $('#noticeReplayStatus').on('change', function () {
         broadNoticeReply();
     });
 
+    $(document).on('change', '#dynamicPageCntBroadNoticeReply', function () {
+        noticeReplyPagingInfo.pageCnt = $(this).val();
+        broadNoticeReply();
+    });
+
+    $(document).on('click', '#allChkBroadNoticeReply', function(){
+        var me = $(this);
+        var checkboxs = $('._broadNoticeReply_chk:not(.disabled)');
+        if(me.prop('checked')){
+            checkboxs.prop('checked', true);
+        }else{
+            checkboxs.prop('checked', false);
+        }
+    });
+
+    $(document).on('click', '#deleteBroadNoticeReplyBtn', function(){
+        var checkboxs = $('._broadNoticeReply_chk:checked');
+        if(checkboxs.length < 1){
+            alert('삭제할 회원공지댓글을 선택해주세요.');
+            return false;
+        }
+
+        if(confirm(checkboxs.length + '건을 삭제 하시겠습니까?')){
+
+            var replyIdxs = '';
+            checkboxs.each(function(){
+                replyIdxs += $(this).data('idx') + ',';
+            });
+            var data = {
+                replyIdxs : replyIdxs
+            }
+
+            util.getAjaxData('multiOperate', '/rest/content/boardAdm/noticeReplyList/multi/delete', data, function(dist_id, response){
+                alert(response.message);
+                broadNoticeReply(noticeReplyPagingInfo.pageNo);
+            });
+        }
+    });
+    
 </script>
 
 <script id="tmp_noticeReplyTable" type="text/x-handlebars-template">
     <table id="tb_noticeReply" class="table table-sorting table-hover table-bordered mt10">
         <colgroup>
+            <col width="2%"/>
             <col width="2%"/>
             <col width="10%"/>
             <col width="5%"/>
@@ -149,6 +194,7 @@
         </colgroup>
         <thead>
         <tr>
+            <th><input type="checkbox" class="form-control" id="allChkBroadNoticeReply" /></th>
             <th>No</th>
             <th>공지등록자</th>
             <th>성별</th>
@@ -165,6 +211,7 @@
         <tbody>
         {{#each this.data as |data|}}
             <tr {{#dalbit_if replyInner '==' 1}} style="background-color : #dae3f3" {{/dalbit_if}}>
+                <td><input type="checkbox" class="form-control _broadNoticeReply_chk {{#dalbit_if data.replyStatus '==' 1}}disabled{{/dalbit_if}}" {{#dalbit_if data.replyStatus '==' 1}}disabled{{/dalbit_if}} data-idx="{{replyIdx}}" /></td>
                 <td>{{indexDesc ../pagingVo.totalCnt rowNum}}</td>
                 <td>
                     {{{memNoLink memNo memNo}}}<br/>
@@ -205,7 +252,7 @@
             </tr>
         {{else}}
             <tr>
-                <td colspan="11">{{isEmptyData}}</td>
+                <td colspan="12">{{isEmptyData}}</td>
             </tr>
         {{/each}}
         </tbody>

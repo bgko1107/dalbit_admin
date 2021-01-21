@@ -204,6 +204,7 @@
             <col width="5%"/>
             <col width="5%"/>
             <col width="5%"/>
+            <col width="5%"/>
         </colgroup>
         <thead>
         <tr>
@@ -216,6 +217,7 @@
             <th>커버 곡명<br />(관리자)</th>
             <th>커버 가수<br />(관리자)</th>
             <th>저장</th>
+            <th>UCI코드</th>
             <th>청취 횟수</th>
             <th>상태</th>
         </tr>
@@ -237,6 +239,7 @@
                 <td><input type="text" class="form-control _trim" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" maxlength="50" /></td>
                 <td><input type="text" class="form-control _trim" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" maxlength="50" /></td>
                 <td><button type="button" class="_adminCover btn btn-primary" data-idx="{{clipIdx}}" data-clipno="{{cast_no}}">저장</button></td>
+                <td>{{uciAlbumCode}}</td>
                 <td>
                     {{^equal playCnt '0'}}
                     <a href="javascript://" class="_openClipCopyrightDetailPop" data-clipno="{{../cast_no}}" data-year="{{../../year}}" data-month="{{../../month}}">{{addComma ../playCnt}}</a>

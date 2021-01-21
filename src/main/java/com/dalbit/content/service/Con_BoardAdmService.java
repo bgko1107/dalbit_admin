@@ -15,9 +15,11 @@ import com.dalbit.member.vo.procedure.*;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -225,6 +227,28 @@ public class Con_BoardAdmService {
     }
 
     /**
+     * 회원공지댓글 여러개 삭제
+     */
+    public String deleteMultiNoticeReplyList(BoardAdmNoticeReplyDeleteVo boardAdmNoticeReplyDeleteVo) {
+
+        String[] replyIdxs = boardAdmNoticeReplyDeleteVo.getReplyIdxs().split(",");
+        int status = 1;
+        String opName = MemberVo.getMyMemNo();
+
+        Arrays.asList(replyIdxs).parallelStream().forEach(replyIdx -> {
+            var deleteVo = new BoardAdmNoticeReplyDeleteVo();
+            deleteVo.setReplyIdx(Integer.valueOf(replyIdx));
+            deleteVo.setStatus(status);
+            deleteVo.setOpName(opName);
+
+            mem_NoticeDao.deleteNoticeReplyList(deleteVo);
+        });
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.공지댓글삭제_성공));
+
+    }
+
+    /**
      * 공지 통계
      */
     public String selectNoticeSummary(P_MemberNoticeInputVo pMemberNoticeInputVo) {
@@ -285,6 +309,24 @@ public class Con_BoardAdmService {
     }
 
     /**
+     * 프로필메시지 여러개 삭제
+     */
+    public String profileMultiDelete(P_MemberProfileInputVo pMemberNoticeInputVo) {
+
+        String[] memNoArr = pMemberNoticeInputVo.getMem_nos().split(",");
+        Arrays.asList(memNoArr).stream().forEach(memNo -> {
+            var paramInputVo = new P_MemberProfileInputVo();
+            paramInputVo.setMem_no(memNo);
+
+            profileDelete(paramInputVo);
+
+        });
+
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.삭제));
+        return result;
+    }
+
+    /**
      * 공지 통계
      */
     public String profileMsgListSummary(P_MemberProfileInputVo pMemberProfileInputVo) {
@@ -335,6 +377,26 @@ public class Con_BoardAdmService {
         } else {
             result = gsonUtil.toJson(new JsonOutputVo(Status.클립댓글삭제_실패));
         }
+        return result;
+    }
+
+    /**
+     * 클립댓글 삭제
+     */
+    public String clipReplyListMultiDel(ClipReplyListVo clipReplyListVo) {
+
+        String[] castNoArr = clipReplyListVo.getCast_nos().split(",");
+        String[] castReplyIdxArr = clipReplyListVo.getCastReplyIdxs().split(",");
+
+        for(int i=0; i<castNoArr.length; i++){
+            var deleteVo = new ClipReplyListVo();
+            deleteVo.setCast_no(castNoArr[i]);
+            deleteVo.setCastReplyIdx(Integer.valueOf(castReplyIdxArr[i]));
+
+            conBoardAdmDao.clipReplyDelete(deleteVo);
+        }
+
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.클립댓글삭제_성공));
         return result;
     }
 
