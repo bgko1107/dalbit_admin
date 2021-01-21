@@ -165,8 +165,8 @@
                         and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00')<![CDATA[<=]]>report.reg_date
                         and report.reg_date<![CDATA[<=]]>DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) reportCnt
             , ifnull((select sum(gold)
-                        from rd_data.tb_member_broadcast_item item
-                        where item.gifted_mem_no = basic.mem_no
+                        from rd_data.tb_member_broadcast_broadcasting broad
+                        where broad.mem_no = basic.mem_no
                         and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00')<![CDATA[<=]]>last_upd_date
                         and last_upd_date<![CDATA[<=]]>DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) receiveStar
             /*, ifnull((select count(*)
@@ -742,9 +742,8 @@
                                 and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> report.reg_date
                                 and report.reg_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) reportCnt
                     , ifnull((select sum(gold)
-                                from rd_data.tb_member_wallet_gold gold
-                                where gold.mem_no = basic.mem_no
-                                and gold.type = 2
+                                from rd_data.tb_member_broadcast_broadcasting broad
+                                where broad.mem_no = basic.mem_no
                                 and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
                                 and last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) receiveStar
                     , ifnull((select count(*)
@@ -833,9 +832,8 @@
                                 and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> report.reg_date
                                 and report.reg_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) reportCnt
                     , ifnull((select sum(gold)
-                                from rd_data.tb_member_wallet_gold gold
-                                where gold.mem_no = basic.mem_no
-                                and gold.type = 2
+                                from rd_data.tb_member_broadcast_broadcasting broad
+                                where broad.mem_no = basic.mem_no
                                 and DATE_FORMAT(manage.condition_start_date, '%Y-%m-%d 00:00:00') <![CDATA[<=]]> last_upd_date
                                 and last_upd_date <![CDATA[<=]]> DATE_FORMAT(manage.condition_end_date, '%Y-%m-%d 23:59:59')), 0) receiveStar
                     , ifnull((select count(*)
