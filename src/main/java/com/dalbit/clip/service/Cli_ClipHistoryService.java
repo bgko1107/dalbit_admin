@@ -521,10 +521,10 @@ public class Cli_ClipHistoryService {
         ProcedureVo procedureVo = new ProcedureVo(pClipCopyrightInputVo);
 
         List<P_ClipCopyrightOutputVo> list = cliClipHistoryDao.callClipCopyright(procedureVo);
-        String[] headers = {"No", "회원번호", "닉네임", "주제", "재생시간", "클립번호", "클립제목", "등록일시", "커버곡명(유저)", "커버가수(유저)", "UCI 앨범코드"
-                , "커버곡명(관리자)", "커버가수(관리자)", "청취 횟수", "상태"};
-        int[] headerWidths = {2000, 5000, 3000, 4000, 3000, 5000, 4000, 5000, 4000, 4000, 4000
-                , 4000, 4000, 2000, 4000};
+        String[] headers = {"No", "회원번호", "닉네임", "주제", "재생시간", "클립번호", "클립제목", "등록일시", "커버곡명(유저)", "커버가수(유저)"
+                , "커버곡명(관리자)", "커버가수(관리자)", "UCI 앨범코드", "청취 횟수", "상태"};
+        int[] headerWidths = {2000, 5000, 3000, 4000, 3000, 5000, 4000, 5000, 4000, 4000
+                , 4000, 4000, 4000, 2000, 4000};
 
         List<Object[]> bodies = new ArrayList<>();
         for(int i=0; i<list.size(); i++) {
