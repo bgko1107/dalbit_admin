@@ -3,11 +3,12 @@
 
 
 <ul class="nav nav-tabs nav-tabs-custom-colored mt5">
-    <li class="active" id="li_dal"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="memberWalletList('dal');">달</a></li>
-    <li id="li_byeol"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="memberWalletList('byeol');">별</a></li>
 
-    <li id="li_newDal"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="newWalletList('dal');">new달</a></li>
+    <li class="active" id="li_newDal"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="newWalletList('dal');">new달</a></li>
     <li id="li_newByeol"><a href="#newWallet" role="tab" data-toggle="tab" onclick="newWalletList('byeol');">new별</a></li>
+
+    <li id="li_dal"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="memberWalletList('dal');">달</a></li>
+    <li id="li_byeol"><a href="#wallet_main_table" role="tab" data-toggle="tab" onclick="memberWalletList('byeol');">별</a></li>
 
 </ul>
 <div class="tab-content no-padding">
@@ -47,11 +48,12 @@
     });
 
     function memberWalletInit(tmp){
-        $("#li_dal").addClass("active");
-        $("#li_byeol").removeClass("active");
-        $("#li_newDal").removeClass("active");
+        $("#li_newDal").addClass("active");
         $("#li_newByeol").removeClass("active");
-        memberWalletList('dal');
+
+        $("#li_dal").removeClass("active");
+        $("#li_byeol").removeClass("active");
+        newWalletList('dal');
     }
     var walletList_gubun="dal";
     var walletType = 0;
@@ -75,9 +77,9 @@
 
         };
         var tmp_summary;
-        try {
-            dtList_info_detail.destroy();
-        }catch (e) {}
+        // try {        // 없어도 될듯?
+        //     dtList_info_detail.destroy();
+        // }catch (e) {}
         if(walletList_gubun == "dal" ){
             dtList_info_detail = new DalbitDataTable($("#wallet_info_detail"), dtList_info_detail_data, MemberDataTableSource.walletDalDetail);
             tmp_summary = dal_summary_table;
@@ -236,7 +238,7 @@
 
         };
         var tmp_summary;
-        dtList_info_detail.destroy();
+        // dtList_info_detail.destroy();  // 없어도 될듯?
         if(tmp == "dal" ){
             dtList_info_detail = new DalbitDataTable($("#wallet_info_detail"), dtList_info_detail_data, MemberDataTableSource.newWalletDalDetail);
             tmp_summary = dal_summary_table;
