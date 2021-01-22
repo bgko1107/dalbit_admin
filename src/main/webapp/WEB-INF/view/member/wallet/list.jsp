@@ -75,7 +75,9 @@
 
         };
         var tmp_summary;
-        dtList_info_detail.destroy();
+        try {
+            dtList_info_detail.destroy();
+        }catch (e) {}
         if(walletList_gubun == "dal" ){
             dtList_info_detail = new DalbitDataTable($("#wallet_info_detail"), dtList_info_detail_data, MemberDataTableSource.walletDalDetail);
             tmp_summary = dal_summary_table;
