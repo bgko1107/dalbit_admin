@@ -34,6 +34,7 @@ public class P_MailboxVo extends SearchVo {
     // ----------------------------- stat ------------------------------
     // list
     private String the_date;
+    private int the_day;
     private int the_hr;
     private int Cnt00;
     private int Cnt10;

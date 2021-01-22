@@ -63,13 +63,25 @@ public class Sta_MailboxService {
                 for (int j = 0; j < slctType_date; j++) {
                     P_MailboxVo outVo = new P_MailboxVo();
                     for (int k = 0; k < detailList_size; k++){
-                        if (detailList.get(k).getThe_hr() == j) {
-                            zeroSw = true;
-                            break;
+                        if(pStatVo.getTimeType() == 0) {
+                            if (detailList.get(k).getThe_hr() == j) {
+                                zeroSw = true;
+                                break;
+                            }
+                        }else if(pStatVo.getTimeType() == 1){
+                            if (Integer.parseInt(detailList.get(k).getThe_date().substring(8)) == j) {
+                                detailList.get(k).setThe_day(j);
+                                zeroSw = true;
+                                break;
+                            }
                         }
                     }
                     if(!zeroSw){
-                        outVo.setThe_hr(j);
+                        if(pStatVo.getTimeType() == 0) {
+                            outVo.setThe_hr(j);
+                        }else if(pStatVo.getTimeType() == 1) {
+                            outVo.setThe_day(j);
+                        }
                         outVo.setMale_uniqueCnt(0);
                         outVo.setFemale_uniqueCnt(0);
                         outVo.setNone_uniqueCnt(0);
@@ -79,6 +91,13 @@ public class Sta_MailboxService {
                         outVo.setImgCnt(0);
                         outVo.setGiftCnt(0);
                         outVo.setGiftDal(0);
+                        outVo.setCnt00(0);
+                        outVo.setCnt10(0);
+                        outVo.setCnt20(0);
+                        outVo.setCnt30(0);
+                        outVo.setCnt40(0);
+                        outVo.setCnt50(0);
+                        outVo.setCnt60(0);
                         detailList.add(outVo);
                     }
                 }

@@ -13,7 +13,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="time"><jsp:include page="time.jsp"/></div>
-                <%--<div class="tab-pane fade" id="month"><jsp:include page="month.jsp"/></div>--%>
+                <div class="tab-pane fade" id="month"><jsp:include page="month.jsp"/></div>
             </div>
         </div>
     </div>
