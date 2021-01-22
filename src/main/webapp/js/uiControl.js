@@ -123,7 +123,7 @@ ui.checkBoxUnbind = function(tableId, func){
 
     $("#"+tableId+"-select-all").unbind('click');
 
-    $(document).on('click', '#'+tableId+' .dt-body-center input[type="checkbox"]', func);
+    $(document).on('click', "#"+tableId+"-select-all", func);
 }
 
 ui.unCheck = function(tableId) {
