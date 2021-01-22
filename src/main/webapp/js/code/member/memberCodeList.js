@@ -339,3 +339,11 @@ var member_saerch_type = [
     , new COMMON_CODE('4', '4', '닉네임')
     , new COMMON_CODE('5', '5', '연락처')
 ]
+
+var member_roulette_coupon_type = [
+    new COMMON_CODE('', 'couponType', '쿠폰타입')
+    , new COMMON_CODE('1', '1', '방송/청취')
+    , new COMMON_CODE('2', '2', '보름달')
+    , new COMMON_CODE('3', '3', '구매/결제')
+    , new COMMON_CODE('4', '4', '스페셜DJ')
+]

@@ -1217,8 +1217,14 @@ var MemberDataTableSource = {
             {'title': '구분', 'data': 'type', 'render': function (data, type, row, meta) {
                     return data == 1 ? '기본' : '이벤트';
                 }},
+            {'title': '내용', 'data': 'coupon_type', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, member_roulette_coupon_type);
+                }},
             {'title': '획득일시', 'data': 'issue_date', 'render': function(data, type, row, meta){
                     return data;
+                }},
+            {'title': '사용일시', 'data': 'last_upd_date', 'render': function(data, type, row, meta){
+                    return row.status == 1 ? data : '-';
                 }},
             {'title': '상태', 'data': 'status', 'render': function (data, type, row, meta) {
                     return data == 0 ? '미사용' : data == 1 ? common.setFontColor('사용', 'blue') : common.setFontColor('만료', 'red');
