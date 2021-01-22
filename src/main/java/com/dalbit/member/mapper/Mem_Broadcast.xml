@@ -28,7 +28,7 @@
     </select>
 
     <select id="getInspectionCheck" parameterType="com.dalbit.member.vo.procedure.P_AuthVo" resultType="com.dalbit.member.vo.procedure.P_AuthVo">
-        select is_use AS `type` From  rd_data.tbl_code_define where `type`='system_config' and `order` in (0)
+        select if(`value` = 'N',1,0) AS `type` From  rd_data.tbl_code_define where `type`='system_config' and `order`=0
     </select>
 
     <select id="getLiveBroadCastList" parameterType="com.dalbit.member.vo.procedure.P_AuthVo" resultType="com.dalbit.member.vo.procedure.P_MemberBroadcastOutputVo">
@@ -45,7 +45,7 @@
     </insert>
 
     <insert id="setUpdateCodeDefine" parameterType="com.dalbit.member.vo.MemberVo">
-        update rd_data.tbl_code_define set is_use=#{type} where `type`='system_config' and `order` in (0, 1)
+        update rd_data.tbl_code_define set `value` = if(#{type} = 1,'N','Y') where `type`='system_config'
     </insert>
 
 </mapper>
