@@ -23,7 +23,7 @@
             <th>청취 수<br/>(+1)</th>
             <th>선물 별<br/>(+2)</th>
             <th>좋아요<br/>(+3)</th>
-            <th>댓글<br/>(+10)</th>
+            <%--<th>댓글<br/>(+10)</th>--%>
             <th class="th_weekly" style="display: none">소감</th>
         </tr>
         </thead>
@@ -125,7 +125,7 @@
         <td><a href="javascript://" class="_openClipInfoPop" data-clipNo="{{cast_no}}" data-tabid="tab_listen">{{listenPoint}}</a></td>
         <td><a href="javascript://" class="_openClipInfoPop" data-clipNo="{{cast_no}}" data-tabid="tab_gift">{{giftPoint}}</a></td>
         <td><a href="javascript://" class="_openClipInfoPop" data-clipNo="{{cast_no}}" data-tabid="tab_good">{{goodPoint}}</a></td>
-        <td><a href="javascript://" class="_selectReply" data-reply="{{replyPoint}}" data-cast_no="{{cast_no}}">{{replyPoint}}</a></td>
+        <%--<td><a href="javascript://" class="_selectReply" data-reply="{{replyPoint}}" data-cast_no="{{cast_no}}">{{replyPoint}}</a></td>--%>
         {{#dalbit_if ../slctType '==' 4}}
         <td>
             {{#dalbit_if rowNum '<' 4}}
@@ -141,7 +141,7 @@
         {{#dalbit_if ../slctType '==' 4}}
             <td colspan="16" class="noData">{{isEmptyData}}<td>
         {{else}}
-            <td colspan="11" class="noData">{{isEmptyData}}<td>
+            <td colspan="10" class="noData">{{isEmptyData}}<td>
         {{/dalbit_if}}
     </tr>
     {{/each}}
