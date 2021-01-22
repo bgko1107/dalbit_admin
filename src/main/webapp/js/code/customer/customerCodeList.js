@@ -49,6 +49,14 @@ var declaration_reason = [
     , new COMMON_CODE('admin', '98', '관리자신고')
 ];
 
+var reportImageSlctType = [
+    new COMMON_CODE(null, 'slctType', '이미지 신고 구분')
+    , new COMMON_CODE('-1', '-1', '이미지선택(전체)')
+    , new COMMON_CODE('0', '0', '우체통')
+    , new COMMON_CODE('1', '1', '방송방')
+    , new COMMON_CODE('2', '2', '프로필 사진')
+];
+
 var block_scope = [
     new COMMON_CODE(null, 'blockScope_', '조치 범위')
     , new COMMON_CODE('mem_no', '3', '아이디(변경x)')
