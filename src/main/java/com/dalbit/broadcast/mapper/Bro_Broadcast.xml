@@ -188,4 +188,10 @@
                                  INNER JOIN rd_data.tb_broadcast_room_member s2 ON s1.room_no = s2.room_no AND s2.state = 0 AND s2.auth <![CDATA[<>]]> 3)
     </select>
 
+
+    <select id="callBroadcastVideoList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.broadcast.vo.procedure.P_BroadcastListOutputVo">
+        /* B_Broadcast.xml - callBroadcastList */
+        call rd_admin.sp_admin_broadcast_room_search_video(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
 </mapper>

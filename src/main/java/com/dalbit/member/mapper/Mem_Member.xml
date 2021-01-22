@@ -42,7 +42,7 @@
 
     <select id="callMemberRoom" parameterType="com.dalbit.member.vo.procedure.P_MemberInfoInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberInfoOutputVo">
         /* M_Member.xml - callMemberRoom */
-        select room_no,title from rd_data.tb_broadcast_room where state != 4 and mem_no =#{mem_no}
+        select room_no,title, type_media from rd_data.tb_broadcast_room where state != 4 and mem_no =#{mem_no}
     </select>
 
     <select id="callMemberRoomListen" parameterType="com.dalbit.member.vo.procedure.P_MemberInfoInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberInfoOutputVo">

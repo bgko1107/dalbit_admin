@@ -189,6 +189,13 @@ var MemberDataTableSource = {
             {'title': '제목', 'data': 'title', 'width':'250px', 'render': function (data, type, row, meta) {
                     return util.roomNoLink(data, row.room_no);
                 }},
+            {'title': '구분', 'data': 'type_media', 'width':'120px', 'render': function (data, type, row, meta) {
+                    if(data == "a"){
+                        return '라디오';
+                    }else if(data == "v"){
+                        return '비디오';
+                    }
+                }},
             {'title': '시작시간', 'data': 'startDateFormat', 'width':'120px'},
             {'title': '종료시간', 'data': 'endDateFormat', 'width':'120px'},
             {'title': '진행시간', 'data': 'airtime', 'width':'100px','render' : function(data){

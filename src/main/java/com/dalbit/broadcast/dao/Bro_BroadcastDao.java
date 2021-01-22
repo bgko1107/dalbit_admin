@@ -46,8 +46,10 @@ public interface Bro_BroadcastDao {
     @Transactional(readOnly = true)
     ArrayList<P_LiveGuestListOutputVo> callLiveGuestList(ProcedureVo procedureVo);
 
-
     @Transactional(readOnly = true)
     ArrayList<P_BroadcastListOutputVo> callLiveTabCount(P_BroadcastListInputVo pBroadcastListInputVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<P_BroadcastListOutputVo> callBroadcastVideoList(ProcedureVo procedureVo);
 
 }

@@ -1114,6 +1114,11 @@
                 {{#equal broadcastState 'ON'}}
                 - 방송제목 : {{{roomNoLink ../title ../room_no}}}
                 {{/equal}}
+                {{#dalbit_if type_media '==' 'a'}}
+                    오디오
+                {{else}}
+                    비디오
+                {{/dalbit_if}}
             </td>
             <th>마이크</th>
             <td colspan="2" style="border-right-color:white;border-right-width:0px;">

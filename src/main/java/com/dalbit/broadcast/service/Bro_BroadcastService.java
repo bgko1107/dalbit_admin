@@ -535,4 +535,24 @@ public class Bro_BroadcastService {
         }
         return result;
     }
+
+
+
+
+    /**
+     * 생방송 list 목록
+     */
+    public String callBroadcastVideoList(P_BroadcastListInputVo pBroadcastListInputVo){
+        ProcedureVo procedureVo = new ProcedureVo(pBroadcastListInputVo);
+        ArrayList<P_BroadcastListOutputVo> broadList = bro_BroadcastDao.callBroadcastVideoList(procedureVo);
+        P_BroadcastListOutputVo summary = new Gson().fromJson(procedureVo.getExt(), P_BroadcastListOutputVo.class);
+
+        String result;
+        if(Integer.parseInt(procedureVo.getRet()) > 0) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.방송기록보기성공, broadList, new PagingVo(procedureVo.getRet()),summary));
+        }else{
+            result = gsonUtil.toJson(new JsonOutputVo(Status.방송기록보기실패));
+        }
+        return result;
+    }
 }

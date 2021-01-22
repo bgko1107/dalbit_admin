@@ -529,6 +529,12 @@
                 {{^equal freezeMsg '0'}}
                     <button type="button" id="bt_freezing_off" class="btn btn-default btn-sm pull-right">얼리기 해제</button>
                 {{/equal}}
+
+                {{#dalbit_if type_media '==' 'a'}}
+                    오디오
+                {{else}}
+                    비디오
+                {{/dalbit_if}}
             </td>
         </tr>
         <tr>

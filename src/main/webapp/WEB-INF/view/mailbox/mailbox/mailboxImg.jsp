@@ -13,13 +13,13 @@
                     <option value="1">정상</option>
                     <option value="2">삭제</option>
                 </select>
-                <div class="dataTables_paginate paging_full_numbers col-md-12" id="mailboxImgList_info_paginate_top"></div>
+                <div class="dataTables_paginate paging_full_numbers" id="mailboxImgList_info_paginate_top"></div>
                 <div class="col-md-12 no-padding">
                     <div class="list-group">
                         <form id="mailboxForm"></form>
                     </div>
                 </div>
-                <div class="dataTables_paginate paging_full_numbers col-md-12" id="mailboxImgList_info_paginate"></div>
+                <div class="dataTables_paginate paging_full_numbers" id="mailboxImgList_info_paginate"></div>
             </div>
         </div>
         <!-- DATA TABLE END -->

@@ -28,6 +28,9 @@ var broadCast_summary = [
     , new COMMON_CODE('', 'totalGood', '좋아요')
     , new COMMON_CODE('', 'totalBooster', '부스터')
     , new COMMON_CODE('', 'totalBooster', '보름달 완료 수')
+    , new COMMON_CODE('', 'totalAudioBroadcastCnt', '라디오')
+    , new COMMON_CODE('', 'totalVideoBroadcastCnt', '비디오')
+    , new COMMON_CODE('', 'totalBroadCastCnt', '누적방송')
 ];
 
 var member_listen_summary = [
