@@ -23,6 +23,7 @@ import com.dalbit.member.vo.MemberVo;
 import com.dalbit.member.vo.procedure.*;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import lombok.extern.slf4j.Slf4j;
@@ -305,8 +306,9 @@ public class Cus_ImageService {
         String result;
         try {
             ArrayList<P_MailboxImgListVo> list = cusImageDao.callMailboxImgList(procedureVo);
+            P_MailboxImgListVo summary = new Gson().fromJson(procedureVo.getExt(), P_MailboxImgListVo.class);
             if(list != null && list.size() > 0) {
-                result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(procedureVo.getRet())));
+                result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(procedureVo.getRet()), summary));
             }else {
                 result = gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
             }
