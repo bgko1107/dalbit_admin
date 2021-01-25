@@ -27,6 +27,7 @@ public class P_BroadcastListOutputVo extends PagingVo {
     private int recommBadge;
     private int popularBadge;
     private int newjdBadge;
+    private int shiningdj_badge;
     private int state;
     private Date start_date;
     private String startDateFormat;

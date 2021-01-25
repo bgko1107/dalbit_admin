@@ -29,29 +29,32 @@ var BroadcastDataTableSource = {
             {'title': '프로필', 'data': 'dj_profileImage', 'width' : '50px', 'render' : function(data, type, row){
                     return '<img class="thumbnail fullSize_background" src="'+ common.profileImage(PHOTO_SERVER_URL,data,row.dj_memSex) +'" width="65px" height="65px" />';
                 }},
-            /*{'title': '보유뱃지', 'data': 'tag','width' : '45px', 'render': function (data, type, row, meta) {
+            {'title': '보유뱃지', 'data': 'tag','width' : '45px', 'render': function (data, type, row, meta) {
                     var tmp = "";
-                    /!*for(var i=0;i<row.fanBadgeList.length;i++){
+                    /*for(var i=0;i<row.fanBadgeList.length;i++){
                         tmp = tmp + util.getMemberBadge(row.fanBadgeList[i].startColor, row.fanBadgeList[i].endColor, null, row.fanBadgeList[i].text , "100%", "20px", 10, "15px", "15px" );
-                    }*!/
-                    for(var i=0;i<row.liveBadgeList.length;i++) {
-                        tmp = tmp + util.getMemberBadge(row.liveBadgeList[i].startColor, row.liveBadgeList[i].endColor, null, row.liveBadgeList[i].text, "100%", "20px", 10, "15px", "15px");
-                    }
+                    }*/
+                    // for(var i=0;i<row.liveBadgeList.length;i++) {
+                    //     tmp = tmp + util.getMemberBadge(row.liveBadgeList[i].startColor, row.liveBadgeList[i].endColor, null, row.liveBadgeList[i].text, "100%", "20px", 10, "15px", "15px");
+                    // }
 
-                    if(row.recommBadge == "1"){
-                        tmp = tmp + util.getMemberBadge("#d943c1", "#d943c1", null, "추천", "100%", "20px", 10, "15px", "15px");
-                    }
-                    if(row.popularBadge == "1"){
-                        tmp = tmp + util.getMemberBadge("#d943c1", "#3761d9", null, "인기", "100%", "20px", 10, "15px", "15px");
-                    }
-                    if(row.newdj_badge == "1"){
-                        tmp = tmp + util.getMemberBadge("#d943c1", "#d9c811", null, "신입", "100%", "20px", 10, "15px", "15px");
-                    }
+                    // if(row.recommBadge == "1"){
+                    //     tmp = tmp + util.getMemberBadge("#d943c1", "#d943c1", null, "추천", "100%", "20px", 10, "15px", "15px");
+                    // }
+                    // if(row.popularBadge == "1"){
+                    //     tmp = tmp + util.getMemberBadge("#d943c1", "#3761d9", null, "인기", "100%", "20px", 10, "15px", "15px");
+                    // }
+                    // if(row.newdj_badge == "1"){
+                    //     tmp = tmp + util.getMemberBadge("#d943c1", "#d9c811", null, "신입", "100%", "20px", 10, "15px", "15px");
+                    // }
                     if(row.specialdj_badge == "1"){
                         tmp = tmp + util.getMemberBadge("red", "red", null, "스페셜DJ", "100%", "20px", 10, "15px", "15px");
                     }
+                    if(row.shiningdj_badge == "1"){
+                        tmp = tmp + util.getMemberBadge("pink", "pink", null, "샤이닝DJ", "100%", "20px", 10, "15px", "15px");
+                    }
                     return tmp;
-                }},*/
+                }},
             {'title': '회원번호<br/>닉네임', 'data': 'dj_nickname','width' : '75px','render': function (data, type, row, meta) {
                     var tmp = util.memNoLink(row.dj_mem_no, row.dj_mem_no);
                     return tmp + '<br/>' + data + '<br/>' + common.sexIcon(row.dj_memSex, row.dj_birth_year);
