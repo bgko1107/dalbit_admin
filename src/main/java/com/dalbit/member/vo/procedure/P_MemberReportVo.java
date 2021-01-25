@@ -8,6 +8,8 @@ import lombok.Setter;
 public class P_MemberReportVo {
 
     private int idx;
+    private int deleteYn;
+    private int reportIdx;
     private String opName;
     private String mem_no;
     private String cast_no;

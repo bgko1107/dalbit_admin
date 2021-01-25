@@ -4,93 +4,98 @@
 
 <div id="wrapper">
     <div id="page-wrapper">
-        <div class="container-fluid">
-            <!-- serachBox -->
-            <form id="searchForm">
-                <div class="row col-lg-12 form-inline">
-                    <div class="widget widget-table searchBoxArea">
+        <!-- serachBox -->
+        <form id="searchForm">
+            <div class="col-lg-12 form-inline no-padding">
+                <div class="widget widget-table searchBoxArea">
 
-                        <table>
-                            <tr>
-                                <th rowspan="2" style="background-color:#4472c4;color:#e9ee17;width: 70px">
-                                    <i class="fa fa-search"></i><br/>검색
-                                </th>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left">
-                                    <span id="search_slct_type_aria"></span>
-                                    <span id="search_reason_aria"></span>
-                                    <span name="question_platform" id="question_platform"></span>
-                                    <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색할 정보를 입력하세요"></label>
-                                    <button type="button" class="btn btn-success" id="bt_search">검색</button>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </form>
-            <!-- //serachBox -->
-
-            <div class="row col-lg-12 form-inline">
-                <table class="table table-bordered table-summary pull-right no-margin" id="declarationSummary">
-                    <thead>
-                    <tr>
-                        <th rowspan="2">미처리 건</th>
-                        <th colspan="7">제재조치</th>
-                        <th rowspan="2">누적 처리 건</th>
-                    </tr>
-                    <tr>
-                        <th>확인완료 건</th>
-                        <th>경고 건</th>
-                        <th>1일 건</th>
-                        <th>3일 건</th>
-                        <th>7일 건</th>
-                        <th>영구정지 건</th>
-                        <th>강제탈퇴 건</th>
-                    </tr>
-                    </thead>
-                    <tbody id="summaryDataTable">
-
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- DATA TABLE -->
-            <div class="row col-lg-12 form-inline mt10">
-                <div class="widget widget-table">
-                    <div class="widget-header">
-                        <h3><i class="fa fa-desktop"></i> 검색결과</h3>
-                    </div>
-                    <div class="widget-content">
-                        <table id="list_info" class="table table-sorting table-hover table-bordered">
-                            <thead>
-                            </thead>
-                            <tbody id="tableBody">
-                            </tbody>
-                        </table>
-                        <span>
-                            <button class="hidden">111</button>
-                        </span>
-
-                    </div>
-                    <div class="widget-footer">
-                        <span>
-                            <button class="btn btn-success btn-sm print-btn" type="button" id="checkProcBtn"><i class="fa fa-check"></i>선택 처리</button>
-                        </span>
-                        <span>
-                            <button class="btn btn-default btn-sm print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
-                        </span>
-                    </div>
-                </div>
-            </div> <%-- #data table --%>
-
-            <div class="row col-lg-12 mt15">
-                <div class="tab-pane fade in active" id="report_tab">
-                    <!-- 상세 -->
-                    <jsp:include page="../../customer/declaration/report.jsp"/>
+                    <table>
+                        <tr>
+                            <th rowspan="2" style="background-color:#4472c4;color:#e9ee17;width: 70px">
+                                <i class="fa fa-search"></i><br/>검색
+                            </th>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left">
+                                <span id="search_slct_type_aria"></span>
+                                <span id="search_reason_aria"></span>
+                                <span name="question_platform" id="question_platform"></span>
+                                <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색할 정보를 입력하세요"></label>
+                                <button type="button" class="btn btn-success" id="bt_search">검색</button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-        </div> <%-- #container fluid--%>
+        </form>
+        <!-- //serachBox -->
+
+        <div class="col-md-6 no-padding">
+            <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist">
+                <li class="active"><a href="#report" role="tab" data-toggle="tab"> 회원신고 </a></li>
+                <li><a href="/customer/declaration/image">이미지신고</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-6 no-padding pull-right">
+            <table class="table table-bordered table-summary pull-right no-margin" id="declarationSummary">
+                <thead>
+                <tr>
+                    <th rowspan="2">미처리 건</th>
+                    <th colspan="7">제재조치</th>
+                    <th rowspan="2">누적 처리 건</th>
+                </tr>
+                <tr>
+                    <th>확인완료 건</th>
+                    <th>경고 건</th>
+                    <th>1일 건</th>
+                    <th>3일 건</th>
+                    <th>7일 건</th>
+                    <th>영구정지 건</th>
+                    <th>강제탈퇴 건</th>
+                </tr>
+                </thead>
+                <tbody id="summaryDataTable">
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- DATA TABLE -->
+        <div class="col-lg-12 no-padding mt10">
+            <div class="widget widget-table">
+                <div class="widget-header">
+                    <h3><i class="fa fa-desktop"></i> 검색결과</h3>
+                </div>
+                <div class="widget-content">
+                    <table id="list_info" class="table table-sorting table-hover table-bordered">
+                        <thead>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                    <span>
+                        <button class="hidden">111</button>
+                    </span>
+
+                </div>
+                <div class="widget-footer">
+                    <span>
+                        <button class="btn btn-success btn-sm print-btn" type="button" id="checkProcBtn"><i class="fa fa-check"></i>선택 처리</button>
+                    </span>
+                    <span>
+                        <button class="btn btn-default btn-sm print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
+                    </span>
+                </div>
+            </div>
+        </div> <%-- #data table --%>
+
+        <div class="col-lg-12 no-padding mt10">
+            <div class="tab-pane fade in active" id="report_tab">
+                <!-- 상세 -->
+                <jsp:include page="../../customer/declaration/report.jsp"/>
+            </div>
+        </div>
     </div> <%-- #page-wrapper --%>
 </div> <%-- #wapper --%>
 

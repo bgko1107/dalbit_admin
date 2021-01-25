@@ -30,4 +30,6 @@ public interface DeclarationDao {
 
     @Transactional(readOnly = true)
     ArrayList<P_DeclarationListOutputVo> callImageList(ProcedureVo procedureVo);
+
+    ProcedureVo callImageOperate(ProcedureVo procedureVo);
 }

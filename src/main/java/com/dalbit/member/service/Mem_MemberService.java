@@ -528,6 +528,10 @@ public class Mem_MemberService {
         mem_MemberDao.callMemberNotification_Add(pMemberReportVo);
         // 어드민 메모
         if(!DalbitUtil.isEmpty(pMemberReportVo.getMemo())){
+            P_MemberReportVo memo = new P_MemberReportVo();
+            memo.setMemo(pMemberReportVo.getMemo());
+            memo.setOpName(pMemberReportVo.getOpName());
+            memo.setMem_no(pMemberReportVo.getMem_no());
             mem_MemberDao.callMemAdminMemoAdd(procedureVo);
         }
 
