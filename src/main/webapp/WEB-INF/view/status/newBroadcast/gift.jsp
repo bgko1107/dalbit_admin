@@ -5,12 +5,15 @@
 <div class="widget widget-table mb10">
     <div class="widget-content mt10">
         <div class="col-md-12 no-padding mt5">
-            <div class="col-md-2 no-padding">
+            <div class="col-md-3 no-padding">
                 <div class="col-md-3 no-padding mr5">
-                    <span id="recvType" onchange="recvTypeChange();"></span>
+                    <span id="recvType" onchange="listReload();"></span>
                 </div>
-                <div class="col-md-8 no-padding">
-                    <span id="giftSort" onchange="giftSortChange();"></span>
+                <div class="col-md-3 no-padding mr5">
+                    <span id="mediaType" onchange="listReload();"></span>
+                </div>
+                <div class="col-md-5 no-padding">
+                    <span id="giftSort" onchange="listReload();"></span>
                 </div>
             </div>
             <div class="col-md-2 no-padding pull-right">
@@ -67,10 +70,17 @@
 
     $(function(){
         $("#recvType").html(util.getCommonCodeSelect(-1, recvType));
+        $("#mediaType").html(util.getCommonCodeSelect(-1, mediaType));
         $("#giftSort").html(util.getCommonCodeSelect(-1, giftSort));
     });
 
-    function getGiftHistoryList(){
+    function getGiftHistoryList(pagingInfo){
+        if(!common.isEmpty(pagingInfo)){
+            giftHistoryListPagingInfo.pageNo = pagingInfo;
+        }else{
+            giftHistoryListPagingInfo.pageNo = 1;
+        }
+
         var nowDay = moment(new Date()).format('YYYY') + "." + moment(new Date()).format('MM') + "." + moment(new Date()).format('DD');
         var timeDay = week[moment(nowDay).add('days', 0).day()];
         $("#timeDate").text(nowDay + "(" + timeDay + ")");
@@ -81,6 +91,7 @@
         data.pageNo = giftHistoryListPagingInfo.pageNo;
         data.pageCnt = giftHistoryListPagingInfo.pageCnt;
         data.recvType = $("select[name='recvType']").val();
+        data.type_media = $("select[name='mediaType']").val();
 
         console.log(data);
 
@@ -114,16 +125,11 @@
 
     function handlebarsPaging(targetId, pagingInfo){
         giftHistoryListPagingInfo = pagingInfo;
+        getGiftHistoryList(pagingInfo.pageNo);
+    }
+    function listReload(){
         getGiftHistoryList();
     }
-    function recvTypeChange(){
-        getGiftHistoryList();
-    }
-
-    function giftSortChange(){
-        getGiftHistoryList();
-    }
-
 
 </script>
 
@@ -143,7 +149,13 @@
             <a href="javascript://" class="_openBroadcastPop" data-roomno="{{room_no}}">{{room_no}}</a><br/>
             {{title}}
         </td>
-        <td>{{djguest}}</td>
+        <td>
+            {{#dalbit_if type_media '==' 'a'}}
+                <img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" /> {{djguest}}
+            {{else}}
+            <img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" /> {{djguest}}
+            {{/dalbit_if}}
+        </td>
         <td>
             <a href="javascript://" class="_openMemberPop" data-memNo="{{gifted_mem_no}}">{{gifted_mem_no}}</a><br/>
             {{gifted_mem_nick}}
@@ -152,13 +164,14 @@
 
         <td>
             {{^equal item_thumbnail ''}}
-            <img class="_webpImage" src="{{data.item_thumbnail}}" width="50" height="50" data-webpImage="{{data.webp_image}}"/>
+                <img class="_webpImage" src="{{data.item_thumbnail}}" width="50" height="50" data-webpImage="{{data.webp_image}}"/>
+                {{#dalbit_if secret '==' 1}} (비밀) {{/dalbit_if}}
             {{else}}
-            {{#equal data.item_name '부스터'}}
-            <img src="http://image.dalbitlive.com/ani/thumbs/broadcast_boost.png" width="50" height="50" />
-            {{else}}
-            -
-            {{/equal}}
+                {{#equal data.item_name '부스터'}}
+                    <img src="http://image.dalbitlive.com/ani/thumbs/broadcast_boost.png" width="50" height="50" />
+                {{else}}
+                    -
+                {{/equal}}
             {{/equal}}
         </td>
         <td>{{item_name}}</td>

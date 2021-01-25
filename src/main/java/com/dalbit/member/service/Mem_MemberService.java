@@ -199,6 +199,7 @@ public class Mem_MemberService {
         if(!DalbitUtil.isEmpty(room)) {
             memberInfo.setRoom_no(room.getRoom_no());
             memberInfo.setTitle(room.getTitle());
+            memberInfo.setType_media(room.getType_media());
         }
 
         // 청취중인 방번호

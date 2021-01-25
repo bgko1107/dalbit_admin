@@ -15,7 +15,13 @@ var BroadcastDataTableSource = {
                     return '<a href="javascript://" onclick="broadCastLivePopUp( ' + row.room_no + ', ' + 2 + ');">' + tmp + '</a>';
                 }},
             {'title': '주제<br/>제목', 'data': 'title','width' : '150px', 'render': function (data, type, row, meta) {
-                    return row.subject_name + '<br/>' + util.roomNoLink(data, row.room_no);
+                    var tmp_mediaType = "";
+                    if(row.mediaType == "a"){
+                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
+                    }else{
+                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />';
+                    }
+                    return tmp_mediaType + ' ' + row.subject_name + '<br/>' + util.roomNoLink(data, row.room_no);
                 }},
             {'title': '방송방', 'data': 'backgroundImage', 'width' : '50px', 'render' : function(data, type, row){
                     return '<img class="thumbnail fullSize_background" src="'+ PHOTO_SERVER_URL + data +'" width="65px" height="65px" />';
@@ -23,29 +29,32 @@ var BroadcastDataTableSource = {
             {'title': '프로필', 'data': 'dj_profileImage', 'width' : '50px', 'render' : function(data, type, row){
                     return '<img class="thumbnail fullSize_background" src="'+ common.profileImage(PHOTO_SERVER_URL,data,row.dj_memSex) +'" width="65px" height="65px" />';
                 }},
-            /*{'title': '보유뱃지', 'data': 'tag','width' : '45px', 'render': function (data, type, row, meta) {
+            {'title': '보유뱃지', 'data': 'tag','width' : '45px', 'render': function (data, type, row, meta) {
                     var tmp = "";
-                    /!*for(var i=0;i<row.fanBadgeList.length;i++){
+                    /*for(var i=0;i<row.fanBadgeList.length;i++){
                         tmp = tmp + util.getMemberBadge(row.fanBadgeList[i].startColor, row.fanBadgeList[i].endColor, null, row.fanBadgeList[i].text , "100%", "20px", 10, "15px", "15px" );
-                    }*!/
-                    for(var i=0;i<row.liveBadgeList.length;i++) {
-                        tmp = tmp + util.getMemberBadge(row.liveBadgeList[i].startColor, row.liveBadgeList[i].endColor, null, row.liveBadgeList[i].text, "100%", "20px", 10, "15px", "15px");
-                    }
+                    }*/
+                    // for(var i=0;i<row.liveBadgeList.length;i++) {
+                    //     tmp = tmp + util.getMemberBadge(row.liveBadgeList[i].startColor, row.liveBadgeList[i].endColor, null, row.liveBadgeList[i].text, "100%", "20px", 10, "15px", "15px");
+                    // }
 
-                    if(row.recommBadge == "1"){
-                        tmp = tmp + util.getMemberBadge("#d943c1", "#d943c1", null, "추천", "100%", "20px", 10, "15px", "15px");
-                    }
-                    if(row.popularBadge == "1"){
-                        tmp = tmp + util.getMemberBadge("#d943c1", "#3761d9", null, "인기", "100%", "20px", 10, "15px", "15px");
-                    }
-                    if(row.newdj_badge == "1"){
-                        tmp = tmp + util.getMemberBadge("#d943c1", "#d9c811", null, "신입", "100%", "20px", 10, "15px", "15px");
-                    }
+                    // if(row.recommBadge == "1"){
+                    //     tmp = tmp + util.getMemberBadge("#d943c1", "#d943c1", null, "추천", "100%", "20px", 10, "15px", "15px");
+                    // }
+                    // if(row.popularBadge == "1"){
+                    //     tmp = tmp + util.getMemberBadge("#d943c1", "#3761d9", null, "인기", "100%", "20px", 10, "15px", "15px");
+                    // }
+                    // if(row.newdj_badge == "1"){
+                    //     tmp = tmp + util.getMemberBadge("#d943c1", "#d9c811", null, "신입", "100%", "20px", 10, "15px", "15px");
+                    // }
                     if(row.specialdj_badge == "1"){
                         tmp = tmp + util.getMemberBadge("red", "red", null, "스페셜DJ", "100%", "20px", 10, "15px", "15px");
                     }
+                    if(row.shiningdj_badge == "1"){
+                        tmp = tmp + util.getMemberBadge("pink", "pink", null, "샤이닝DJ", "100%", "20px", 10, "15px", "15px");
+                    }
                     return tmp;
-                }},*/
+                }},
             {'title': '회원번호<br/>닉네임', 'data': 'dj_nickname','width' : '75px','render': function (data, type, row, meta) {
                     var tmp = util.memNoLink(row.dj_mem_no, row.dj_mem_no);
                     return tmp + '<br/>' + data + '<br/>' + common.sexIcon(row.dj_memSex, row.dj_birth_year);
@@ -56,11 +65,12 @@ var BroadcastDataTableSource = {
             {'title': '방송<br/>개설', 'data': 'broadCastCnt','width' : '30px', 'render': function (data, type, row, meta) {
                     return common.addComma(data);
                 }},
-            {'title': '상태', 'data': 'state', 'width':'35px', 'render': function (data, type, row, meta) {
+            {'title': '상태(Mic)<br/>/숨김', 'data': 'state', 'width':'35px', 'render': function (data, type, row, meta) {
+
                     if(row.freezeMsg == 1){
-                        return "채팅 얼리기";
+                        return "채팅 얼리기<br/>/ " + (row.hide == 0 ? 'N' : 'Y');
                     }else{
-                        return util.getCommonCodeLabel(data,room_state);
+                        return util.getCommonCodeLabel(data,room_state) + '<br/>/ ' + (row.hide == 0 ? ' N' : 'Y');
                     }
                 }},
             {'title': '보름달', 'data': 'complete_moon','width' : '50px', 'render': function (data, type, row, meta) {
@@ -79,16 +89,14 @@ var BroadcastDataTableSource = {
                     var totalByeolCnt = data + (row.boosterCnt * 10);
                     return '<a href="javascript://" onclick="broadCastLivePopUp( ' + row.room_no + ', ' + 5 + ');" style="color:#555555">' + common.addComma(totalByeolCnt) + '개' + '<br/>(' + tmp + '개)</a>';
                 }},
-            {'title': '방송랭킹<br/>점수', 'data': 'total','width' : '45px','render': function (data){
+            {'title': '랭킹점수', 'data': 'total','width' : '45px','render': function (data){
                     return common.addComma(data) + "점";
                 }},
-            {'title': '누적 청취<br/>(비회원)', 'data': 'totalListener','width' : '55px','render': function (data, type, row, meta) {
-                    var tmp = common.addComma(row.memTotalListener) + '명<br/>(' + common.addComma(row.notMemTotalListener) + '명)';
-                    return tmp;
+            {'title': '누적 청취', 'data': 'totalListener','width' : '55px','render': function (data, type, row, meta) {
+                    return common.addComma(row.memTotalListener) + '명';
                 }},
-            {'title': '<lable style="color:red">청취자<br/>(비회원)</lable>', 'data': 'liveListener','color': 'red','width' : '40px','render': function (data, type, row, meta) {
-                    var tmp = common.addComma(row.memLiveListener) + '명<br/>(' + common.addComma(row.notMemLiveListener) + '명)';
-                    return '<a href="javascript://" onclick="broadCastLivePopUp( ' + row.room_no + ', ' + 1 + ');" style="color:red">' + tmp + '</a>';
+            {'title': '<lable style="color:red">청취자</lable>', 'data': 'liveListener','color': 'red','width' : '40px','render': function (data, type, row, meta) {
+                    return '<a href="javascript://" onclick="broadCastLivePopUp( ' + row.room_no + ', ' + 1 + ');" style="color:red">' + common.addComma(row.memLiveListener) + '명' + '</a>';
                 }},
             {'title': '좋아요<br/>(부스터제외)', 'data': 'goodCnt','width' : '35px','render': function (data,type,row,meta){
                     var totalGoodCnt = data + (row.boosterCnt * 10);
@@ -136,10 +144,10 @@ var BroadcastDataTableSource = {
             {'title': '이어하기', 'data': 'continue_room','width' : '25px','render': function (data){
                     return common.fontColor(data, 0, 'blue') +'번';
                 }},
-            {'title': '숨김<br/>상태', 'data': 'hide', 'width':'30px', 'render': function (data, type, row, meta) {
-                    if(data == 0) return "N";
-                    else return "Y";
-                }},
+            // {'title': '숨김<br/>상태', 'data': 'hide', 'width':'30px', 'render': function (data, type, row, meta) {
+            //         if(data == 0) return "N";
+            //         else return "Y";
+            //     }},
         ]
         ,'createdRow' : function( row, data, dataIndex ) {
             if (data.inner == 1) {    // 테스트계정 row 색상 표시
@@ -161,7 +169,13 @@ var BroadcastDataTableSource = {
                 }},
             {'title': '주제', 'data': 'subject_name','width' : '65px'},
             {'title': '제목', 'data': 'title','width' : '150px', 'render': function (data, type, row, meta) {
-                    return util.roomNoLink(data, row.room_no);
+                    var tmp_mediaType = "";
+                    if(row.mediaType == "a"){
+                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
+                    }else{
+                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />';
+                    }
+                    return tmp_mediaType + ' ' + util.roomNoLink(data, row.room_no);
                 }},
             {'title': '배경', 'data': 'backgroundImage', 'width' : '50px', 'render' : function(data, type, row){
                     return '<img class="thumbnail fullSize_background" src="'+ PHOTO_SERVER_URL + data +'" width="65px" height="65px" />';

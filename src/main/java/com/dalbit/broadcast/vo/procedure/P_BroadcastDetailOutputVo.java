@@ -48,5 +48,6 @@ public class P_BroadcastDetailOutputVo extends BaseVo {
     private String recomm_badge;
     private String newdj_badge;
     private String specialdj_badge;
+    private String type_media;
 
 }

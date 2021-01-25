@@ -96,28 +96,28 @@
                     <br/>
                     <span id="liveSort" onchange="sortChange();"></span>
                     <span id="endSort" style="display: none" onchange="sortChange();"></span>
+                    <button class="btn btn-green btn-sm print-btn" type="button" id="videoList" onclick="videoList_click();" style="background-color: #8556f6;color: white;">영상 모아보기</button>
                 <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이상훈|', principal.getUserInfo().getName())}">
                     <button class="btn btn-danger btn-sm print-btn pull-right" type="button" id="inspection" onclick="inspection_click();">임시점검</button>
                 </c:if>
                 </div>
-                <div class="col-md-12">
-                    <div class="col-md-2 no-padding pull-right">
-                        <table class="table table-sorting table-hover table-bordered">
-                            <colgroup>
-                                <col width="15%"/><col width="65%"/>
-                            </colgroup>
-                            <tr>
-                                <td style="background-color: #dae3f3"></td><td>테스트 아이디</td>
-                            </tr>
+                <div id="div_allMedia">
+                    <div class="widget-content" style="border-top-width:0px;">
+                        <table id="list_info" class="table table-sorting table-hover table-bordered">
+                            <thead id="tableTop"></thead>
+                            <tbody id="tableBody"></tbody>
                         </table>
+                        <button class="btn btn-default btn-sm print-btn pull-right" type="button" id="liveexcelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
                     </div>
                 </div>
-                <div class="widget-content" style="border-top-width:0px;">
-                    <table id="list_info" class="table table-sorting table-hover table-bordered">
-                        <thead id="tableTop"></thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                    <button class="btn btn-default btn-sm print-btn pull-right" type="button" id="liveexcelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
+                <div id="div_video" style="display: none;" class="col-md-12 no-padding">
+                    <div class="dataTables_paginate paging_full_numbers" id="videoList_info_paginate_top"></div>
+                    <div class="col-md-12 no-padding">
+                        <div class="list-group">
+                            <form id="videoForm"></form>
+                        </div>
+                    </div>
+                    <div class="dataTables_paginate paging_full_numbers" id="videoList_info_paginate"></div>
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@
     var tmp_room_slctType = -1;
     var tmp_room_searchText;
     var tmp_searchText = "";
-
+    var mediaType = 0;
 
     $("#onedayDate").val(date.getFullYear() +"-"+ common.lpad(date.getMonth() + 1,2,"0") +"-"+ common.lpad(date.getDate(),2,"0"));
     $('#seldate').datetimepicker({
@@ -179,17 +179,7 @@
 
     $('input[id="searchText"]').keydown(function() {
         if (event.keyCode === 13) {
-            livePageTabCount();
-
-            if(liveState == 1 || liveState == 2){
-                getSearch();
-            }else if(liveState == 3){
-                getListenUserList_tabClick();
-            }else if(liveState == 4){
-                getLoginUserList_tabClick();
-            }else if(liveState == 5){
-                getliveGuest_tabClick();
-            }
+            $('#bt_search').click();
         };
     });
 
@@ -347,6 +337,11 @@
         //     tmp_room_slctType = $("select[name='searchBroad_broad']").val();
         // }
         dtList_info.reload(summary_table);
+
+        console.log(mediaType);
+        if(mediaType == 1){
+            videoList();
+        }
     }
 
     function sortChange(){
@@ -435,27 +430,141 @@
         $("#bt_search").click();
     }
 
+    //=------------------------------ video--------------------------------------------
+    var videoPagingInfo= new PAGING_INFO(0, 1, 54);
+
+    function videoList_click(){
+        $("#div_allMedia").hide();
+        $("#div_video").hide();
+        if($("#videoList").text() == "영상 모아보기"){
+            mediaType = 1;
+            $("#videoList").text("영상 모아보기 해제");
+            $("#div_video").show();
+        }else{
+            mediaType = 0;
+            $("#videoList").text("영상 모아보기");
+            $("#div_allMedia").show();
+        }
+        $('#bt_search').click();
+    }
+    function videoList(pagingNo) {
+        if(!common.isEmpty(pagingNo)){
+            videoPagingInfo.pageNo = pagingNo;
+        }else{
+            videoPagingInfo.pageNo = 1;
+        }
+
+        var data={};
+        var slctType = $('input[name="searchRadio"]:checked').val();
+        data.slctType = slctType;
+        if(slctType == "1"){      // DJ정보
+            data.dj_slctType = $("select[name='searchType_broad']").val();
+            data.dj_searchText = tmp_searchText;
+            data.room_slctType = -1;
+            data.room_searchText = "";
+            data.ortStartDate =2;
+        }else {                                                              // 방송정보
+            data.dj_slctType = -1;
+            data.dj_searchText = "";
+            data.room_slctType = $("select[name='searchBroad_broad']").val();
+            data.room_searchText = tmp_searchText;
+            data.ortStartDate =2;
+        }
+        data.room_liveType = 1;
+        /*
+        *   정렬 부분
+        */
+        if($("select[name='liveSort']").val() != 0){
+            if ($("select[name='liveSort']").val() == 1)
+                data.sortStartDate = 1;
+            if ($("select[name='liveSort']").val() == 2)
+                data.sortAirTime = 1;
+            if ($("select[name='liveSort']").val() == 3)
+                data.sortListener = 1;
+            if ($("select[name='liveSort']").val() == 4)
+                data.sortListener = 0;
+            if ($("select[name='liveSort']").val() == 5)
+                data.sortGift = 1;
+            if ($("select[name='liveSort']").val() == 6)
+                data.sortByeol = 1;
+            if ($("select[name='liveSort']").val() == 7)
+                data.sortMoon = 1;
+        }
+        data.startDate = $("#onedayDate").val() + ' 00:00:00';
+        data.endDate = $("#onedayDate").val() + ' 23:59:59';
+        data.pageNo = videoPagingInfo.pageNo;
+        data.pageCnt = videoPagingInfo.pageCnt;
+
+        console.log(data);
+        util.getAjaxData("video", "/rest/broadcast/broadcast/video/list", data, fn_video_success, fn_fail);
+    };
+
+    function fn_video_success(dst_id, response, dst_params){
+        // form 띄우기
+        var template = $('#tmp_videoSelectFrm').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response;
+        var html = templateScript(context);
+        $("#videoForm").html(html);
+
+        videoPagingInfo.totalCnt = response.pagingVo.totalCnt;
+
+        console.log(videoPagingInfo);
+        util.renderPagingNavigation("videoList_info_paginate_top", videoPagingInfo);
+        util.renderPagingNavigation("videoList_info_paginate", videoPagingInfo);
+
+        $("#summaryArea").empty();
+
+        var template = $('#tmp_videoSummary').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response.summary;
+        var html = templateScript(context);
+        $('#summaryArea').html(html);
+
+        ui.paintColor();
+    };
+
+    function handlebarsPaging(targetId, pagingInfo) {
+        if(targetId == "videoList_info_paginate_top" || targetId == "videoList_info_paginate"){
+            videoPagingInfo = pagingInfo;
+            videoList(pagingInfo.pageNo);
+        }
+    }
+
+    function fn_fail(data, textStatus, jqXHR){
+        alert(data.message);
+        console.log(data, textStatus, jqXHR);
+    }
+
+    function videoPopUp(data){
+        console.log(data);
+    }
+
+
 
 </script>
 
 <script id="live_tableSummary" type="text/x-handlebars-template">
     <table class="table table-bordered table-summary pull-right no-margin" style="width: 100%">
         <tr>
-            <th colspan="8" style="background-color: #8faadc">방송방</th>
+            <th colspan="10" style="background-color: #8faadc">방송방</th>
             <th colspan="4" style="background-color: #f4b183">청취자</th>
         </tr>
         <tr>
-            <th colspan="3" style="background-color: #dae3f3;">플랫폼</th>
+            <th colspan="2" style="background-color: #dae3f3;">방송구분</th>
             <th colspan="2" style="background-color: #dae3f3;">DJ구분</th>
+            <th colspan="3" style="background-color: #dae3f3;">플랫폼</th>
             <th colspan="3" style="background-color: #dae3f3;">DJ성별</th>
             <th colspan="4" style="background-color: #fbe5d6;">청취자(게스트)성별</th>
         </tr>
         <tr>
+            <th style="background-color: #b4c7e7">라디오</th>
+            <th style="background-color: #b4c7e7">영상</th>
+            <th style="background-color: #b4c7e7">일반(스페셜DJ)</th>
+            <th style="background-color: #b4c7e7">신입</th>
             <th style="background-color: #b4c7e7">Android</th>
             <th style="background-color: #b4c7e7">IOS</th>
             <th style="background-color: #b4c7e7">PC</th>
-            <th style="background-color: #b4c7e7">일반(스페셜DJ)</th>
-            <th style="background-color: #b4c7e7">신입</th>
             <th style="background-color: #b4c7e7">{{{sexIcon 'm'}}}</th>
             <th style="background-color: #b4c7e7">{{{sexIcon 'f'}}}</th>
             <th style="background-color: #b4c7e7">{{{sexIcon 'n'}}}</th>
@@ -465,11 +574,13 @@
             <th style="background-color: #f8cbad">{{{sexIcon 'n'}}}</th>
         </tr>
         <tr>
+            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalAudioCnt}}</td>
+            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalVideoCnt}}</td>
+            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.normalDjCnt}} ({{addComma content.specialDjCnt}})</td>
+            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.newDjCnt}}명</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalAosCnt}}</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalIosCnt}}</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalPcCnt}}</td>
-            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.normalDjCnt}} ({{addComma content.specialDjCnt}})</td>
-            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.newDjCnt}}명</td>
             <td>{{addComma content.broadMaleCnt}}</td>
             <td>{{addComma content.broadFemaleCnt}}</td>
             <td>{{addComma content.broadNoneCnt}}</td>
@@ -479,10 +590,49 @@
             <td>{{#dalbit_if content.liveState '==' 1}} {{addComma content.liveListenNoneCnt}} {{else}} {{addComma content.totalListenNoneCnt}} {{/dalbit_if}} ({{addComma content.guestNoneCnt}})</td>
         </tr>
         <tr>
-            <td class="font-bold" style="background-color: #d8d8d8;" colspan="3">총 수(방송중/끊김)</td>
-            <td class="font-bold" style="background-color: #f2f2f2; color: #ed7d31" colspan="5">{{addComma content.totalBroadCastCnt}} ({{addComma content.broadStateNomal}}/{{addComma content.broadBreak}})</td>
+            <td class="font-bold" style="background-color: #d8d8d8;" colspan="4">총 수(방송중/끊김)</td>
+            <td class="font-bold" style="background-color: #f2f2f2; color: #ed7d31" colspan="6">{{addComma content.totalBroadCastCnt}} ({{addComma content.broadStateNomal}}/{{addComma content.broadBreak}})</td>
             <td class="font-bold" style="background-color: #d8d8d8;" >총 수</td>
             <td class="font-bold" style="background-color: #f2f2f2; color: #ed7d31" colspan="3">{{#dalbit_if content.liveState '==' 1}} {{addComma content.liveListenerCnt}} {{else}} {{addComma content.totalListenerCnt}} {{/dalbit_if}} ({{addComma content.totalGuestCnt}})</td>
         </tr>
     </table>
+</script>
+
+
+<!-- =------------------ Handlebars ---------------------------------- -->
+<script id="tmp_videoSelectFrm" type="text/x-handlebars-template">
+    {{#each this.data as |data|}}
+    {{^equal data.image_path ''}}
+    {{#dalbit_if data.inner '==' 1}}
+        <div class="item col-md-2 col-sm-6 mb15 bg-testMember" style="padding-bottom: 15px;padding-right: 3px;padding-left: 3px">
+    {{else}}
+        <div class="item col-md-2 col-sm-6 mb15" style="padding-bottom: 15px;padding-right: 3px;padding-left: 3px">
+    {{/dalbit_if}}
+            <div>
+                <label>NO.{{indexDesc ../../pagingVo.totalCnt data.rowNum}}</label>
+                <a href="javascript://" onclick="videoPopUp($(this).data())" data-chatno="{{data.room_no}}"><i class="fa fa-play-circle-o" style="font-size: 20px"></i></a>
+            </div>
+            <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 360px;">
+                <div class="thumbnail" src="{{renderImage data.backgroundImage}}?360x360">
+                    <img class="list-group-image thumbnailImg fullSize_background" style="width:360px; height:225px;" src="{{renderImage data.backgroundImage}}" alt="" data-toggle="modal" data-target="#imgModal" />
+                </div>
+                <div>
+                    <h4 class="inner list-group-item-heading broadcast_title">
+                        {{{roomNoLink data.title data.room_no}}}
+                    </h4>
+                    <ul class="list-unstyled">
+                        <li><strong>작성일시:</strong> {{substr data.start_date 0 19}}</li>
+                        <li><strong>Nick:</strong> {{replaceHtml data.dj_nickname}}</li>
+                        <li><strong>No:</strong> <a href="javascript://" class="_openMemberPop" data-memno="{{data.dj_mem_no}}" >{{data.dj_mem_no}} </a> </li>
+                        <li class="sexType"><strong>Sex:</strong> {{{sexIcon data.dj_memSex}}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {{/equal}}
+        {{else}}
+        <div class="col-md-12" style="text-align:center">
+            <label>{{isEmptyData}}</label>
+        </div>
+        {{/each}}
 </script>

@@ -27,6 +27,7 @@ public class P_BroadcastListOutputVo extends PagingVo {
     private int recommBadge;
     private int popularBadge;
     private int newjdBadge;
+    private int shiningdj_badge;
     private int state;
     private Date start_date;
     private String startDateFormat;
@@ -65,6 +66,7 @@ public class P_BroadcastListOutputVo extends PagingVo {
     private int step;
     private int complete_moon; //보름달 상태
     private String complete_date; //보름달 완료일시
+    private String mediaType;       // 방송방 구분
 
     /* 회원 배지 */
     private int day_badge;
@@ -111,11 +113,12 @@ public class P_BroadcastListOutputVo extends PagingVo {
     private int broadNoneCnt;
     private int broadStateNomal;
     private int broadBreak;
-
     private int totalGuestCnt;
     private int guestMaleCnt;
     private int guestFemaleCnt;
     private int guestNoneCnt;
+    private int totalAudioCnt;
+    private int totalVideoCnt;
 
 
     private String tabType;

@@ -30,6 +30,8 @@ public class P_NewBroadcastGiftOutputVo extends BaseVo {
     private String inner;
     private String webp_image;
     private int totalCnt;
+    private String type_media;
+    private int secret;
 
     private String djguest;
     private String gifted_mem_sex;

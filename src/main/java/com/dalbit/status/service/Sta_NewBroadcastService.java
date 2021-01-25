@@ -72,7 +72,7 @@ public class Sta_NewBroadcastService {
         ArrayList<P_NewBroadcastGiftOutputVo> broadList = sta_NewBroadcastDao.callNewBroadcastGift(procedureVo);
 
         P_NewBroadcastGiftOutputVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_NewBroadcastGiftOutputVo.class);
-        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+        if(broadList.size() < 1){
             return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
         }
 

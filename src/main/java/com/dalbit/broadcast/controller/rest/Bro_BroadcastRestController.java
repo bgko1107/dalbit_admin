@@ -129,5 +129,14 @@ public class Bro_BroadcastRestController {
         return bro_BroadcastService.callLiveTabCount(pBroadcastListInputVo);
     }
 
+    /**
+     * 생방송 비디오 목록
+     * //@param model
+     * @return
+     */
+    @PostMapping("video/list")
+    public String videoList(P_BroadcastListInputVo pBroadcastListInputVo){
+        return bro_BroadcastService.callBroadcastVideoList(pBroadcastListInputVo);
+    }
 
 }

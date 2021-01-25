@@ -34,6 +34,8 @@
 
     function broadCast_summary_table(json){
         // dalbitLog(json);
+
+        json.summary.totalbroadCastCnt = json.summary.totalAudioBroadcastCnt + json.summary.totalVideoBroadcastCnt
         var template = $("#broad_tableSummary").html();
         var templateScript = Handlebars.compile(template);
         var data = {
@@ -52,7 +54,7 @@
     <table class="table table-bordered table-summary pull-right" id="declarationSummary" style="width: 500px;">
         <thead>
         <tr>
-            <th colspan="7" class="_bgColor" data-bgcolor="#8faadc">총 합</th>
+            <th colspan="10" class="_bgColor" data-bgcolor="#8faadc">총 합</th>
         </tr>
         <tr>
             {{#each this.header}}
@@ -68,6 +70,9 @@
             <td>{{#equal length '0'}}0{{/equal}}{{content.totalGood}} 개</td>
             <td>{{#equal length '0'}}0{{/equal}}{{content.totalBooster}} 개</td>
             <td>{{#equal length '0'}}0{{/equal}}{{content.totalCompleteMoonCnt}} 개</td>
+            <td>{{#equal length '0'}}0{{/equal}}{{content.totalAudioBroadcastCnt}} 개</td>
+            <td>{{#equal length '0'}}0{{/equal}}{{content.totalVideoBroadcastCnt}} 개</td>
+            <td>{{#equal length '0'}}0{{/equal}}{{content.totalbroadCastCnt}} 개</td>
         </tbody>
     </table>
 </script>

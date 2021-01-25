@@ -90,6 +90,7 @@ public class P_MemberInfoOutputVo extends SearchVo {
     private String room_no;
     private String title;
     private String hide;
+    private String type_media;
 
     // 청취중인 방
     private String listen_room_no;
