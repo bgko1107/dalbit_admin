@@ -5,7 +5,7 @@
     <div class="row col-lg-12 pl0 pr0 no-padding">
         <div class="col-lg-12 no-padding">
             <div class="col-lg-3 no-padding">
-                <table class="table table-bordered _tableHeight no-padding" data-height="19px">
+                <table class="table table-bordered _tableHeight no-padding" data-height="19px" style="display:none;">
                     <tr>
                         <th class="_bgColor" data-bgcolor="#dae3f3">달 자동교환 설정상태</th>
                         <td>
