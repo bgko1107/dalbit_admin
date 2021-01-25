@@ -531,9 +531,9 @@
                 {{/equal}}
 
                 {{#dalbit_if type_media '==' 'a'}}
-                    라디오
+                    <img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />
                 {{else}}
-                    비디오
+                    <img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />
                 {{/dalbit_if}}
             </td>
         </tr>
