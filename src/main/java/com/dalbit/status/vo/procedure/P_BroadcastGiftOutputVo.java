@@ -15,17 +15,19 @@ public class P_BroadcastGiftOutputVo extends BaseVo {
     private int totalGiftCnt;
     private int totalGiftCmt;
     private int totalGiftAmount;
-    private int normalGiftCnt;
-    private int normalGiftCmt;
-    private int normalGiftAmount;
+    private int djGiftCnt;
+    private int djGiftCmt;
+    private int djGiftAmount;
+    private int guestGiftCnt;
+    private int guestGiftCmt;
+    private int guestGiftAmount;
+    private int audioGiftCnt;
+    private int audioGiftCmt;
+    private int audioGiftGiftAmount;
+    private int vedioGiftCnt;
+    private int vedioGiftCmt;
+    private int vedioGiftGiftAmount;
     private int secretGiftCnt;
     private int secretGiftCmt;
     private int secretGiftAmount;
-    private int guest_normalGiftCnt;
-    private int guest_normalGiftCmt;
-    private int guest_normalGiftAmount;
-    private int guest_secretGiftCnt;
-    private int guest_secretGiftCmt;
-    private int guest_secretGiftAmount;
-
 }

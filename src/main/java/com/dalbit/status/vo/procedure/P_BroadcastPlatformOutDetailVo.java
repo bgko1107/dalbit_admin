@@ -12,13 +12,21 @@ public class P_BroadcastPlatformOutDetailVo {
     private String daily;
     private String monthly;
     private int hour;
-    private int totalCreateCnt;
-    private int androidCnt;
-    private int iosCnt;
     private int pcCnt;
-    private int totalBroadcastingTime;
-    private int androidTime;
-    private int iosTime;
     private int pcTime;
-    private int unique_dj_Cnt;
+    private int androidCnt;
+    private int androidTime;
+    private int iosCnt;
+    private int iosTime;
+    private int v_pcCnt;
+    private int v_pcTime;
+    private int v_androidCnt;
+    private int v_androidTime;
+    private int v_iosCnt;
+    private int v_iosTime;
+    private int totalCreateCnt;
+    private int totalBroadcastingTime;
+    private int v_totalCreateCnt;
+    private int v_totalBroadcastingTime;
+
 }

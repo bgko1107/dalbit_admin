@@ -13,9 +13,9 @@
                 <li><a href="#gift" role="tab" data-toggle="tab" id="tab_gift">방송 선물내역</a></li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade in active" id="time"><jsp:include page="time.jsp"/></div>
-                <div class="tab-pane fade" id="day"><jsp:include page="day.jsp"/></div>
-                <div class="tab-pane fade" id="year"><jsp:include page="year.jsp"/></div>
+                <div class="tab-pane fade in active" id="time" style="width: 2400px;"><jsp:include page="time.jsp"/></div>
+                <div class="tab-pane fade" id="day" style="width: 2600px;"><jsp:include page="day.jsp"/></div>
+                <div class="tab-pane fade" id="year" style="width: 2600px;"><jsp:include page="year.jsp"/></div>
                 <div class="tab-pane fade" id="gift"><jsp:include page="gift.jsp"/></div>
             </div>
         </div>

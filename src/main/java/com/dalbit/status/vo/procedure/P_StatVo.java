@@ -15,6 +15,7 @@ public class P_StatVo {
     private int pageNo;
     private int pageCnt;
     private int recvType;
+    private String type_media;
 
     private String beforStartDate;
     private String beforEndDate;

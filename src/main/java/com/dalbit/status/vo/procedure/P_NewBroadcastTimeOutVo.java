@@ -17,6 +17,12 @@ public class P_NewBroadcastTimeOutVo {
     private int unique_dj_fCnt;
     private int create_nCnt;
     private int unique_dj_nCnt;
+    private int v_create_mCnt;
+    private int v_unique_dj_mCnt;
+    private int v_create_fCnt;
+    private int v_unique_dj_fCnt;
+    private int v_create_nCnt;
+    private int v_unique_dj_nCnt;
     private int create_Cnt;
     private int unique_dj_Cnt;
     private int create_max_Cnt;
@@ -47,6 +53,12 @@ public class P_NewBroadcastTimeOutVo {
     private int total_create_fCnt;
     private int total_unique_dj_fCnt;
     private int total_create_nCnt;
+    private int v_total_create_mCnt;
+    private int v_total_unique_dj_mCnt;
+    private int v_total_create_fCnt;
+    private int v_total_unique_dj_fCnt;
+    private int v_total_create_nCnt;
+    private int v_total_unique_dj_nCnt;
     private int total_unique_dj_nCnt;
     private int total_create_totalCnt;
     private int total_unique_dj_Cnt;

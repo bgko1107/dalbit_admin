@@ -531,7 +531,7 @@
                 {{/equal}}
 
                 {{#dalbit_if type_media '==' 'a'}}
-                    오디오
+                    라디오
                 {{else}}
                     비디오
                 {{/dalbit_if}}
