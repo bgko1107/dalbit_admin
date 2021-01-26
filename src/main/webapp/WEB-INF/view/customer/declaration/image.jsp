@@ -152,7 +152,7 @@
                         var report = "/customer/declaration/popup/reportPopup?"
                             + "memNo=" + encodeURIComponent(report_mem_no)
                             + "&memId=" + encodeURIComponent(report_userid)
-                            + "&memNick=" + encodeURIComponent(common.replaceHtml(report_nick))
+                            + "&memNick=" + encodeURIComponent(report_nick)
                             + "&memSex=" + encodeURIComponent(report_sex)
                             + "&deviceUuid=" + encodeURIComponent(device_uuid)
                             + "&ip=" + encodeURIComponent(ip)
