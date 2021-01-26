@@ -134,7 +134,7 @@
                 삭제: function () {
                     if(confirm("확인 완료처리 됩니다. 삭제 처리 하시겠습니까?")){
                         var data = {
-                            reportIdx : data.reportidx
+                            reportIdx : reportidx
                             , deleteYn : 1
                             , opCode : 0
                             , sendNoti : 0
@@ -158,8 +158,6 @@
                             + "&ip=" + encodeURIComponent(ip)
                             + "&reportidx=" + reportidx
                             + "&fnCallBack=" + encodeURIComponent("reportImageList");
-
-
                         console.log(report);
                         util.windowOpen(report,"750","910","이미지신고");
 
