@@ -37,10 +37,10 @@
 
     <div id="page-wrapper">
         <!-- DATA TABLE -->
-        <div class="row col-lg-12 form-inline mb15">
+        <div class="col-lg-12 form-inline no-padding">
             <div class="widget-content">
                 <div class="dataTables_paginate paging_full_numbers" id="imageList_info_paginate_top"></div>
-                <div class="row list-group">
+                <div class="list-group">
                 <%--<div class="row list-group">--%>
                     <form id="imageForm"></form>
                 </div>
@@ -196,7 +196,7 @@
                     <label class="pull-right" style="background-color: #fff7e5">상태 : {{data.viewState}}</label>
                 {{/dalbit_if}}
             </div>
-            <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 447px;">
+            <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 470px;">
                 <div class="thumbnail" src="{{renderImage data.imageUrl}}?360x360">
                     <img class="list-group-image thumbnailImg fullSize_background" style="width:360px; height:225px;" src="{{renderImage data.imageUrl}}" alt="" data-toggle="modal" data-target="#imgModal" />
                 </div>
