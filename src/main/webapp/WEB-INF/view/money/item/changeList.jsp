@@ -15,7 +15,7 @@
                     <div class="col-md-3 no-padding mr10">
                         <span id="changeList_searchType" onchange="changeList_searchType_click();"></span>
                     </div>
-                    <div class="col-md-3 no-padding">
+                    <div class="col-md-3 no-padding" style="display: none">
                         <span>
                             <select id="changeAutoSetting" name="changeAutoSetting" class="form-control searchType" style="width: 100%" onchange="changeAutoSetting_change();">
                                 <option value="0">자동설정 전체</option>
@@ -32,7 +32,7 @@
                     <thead id="tableTop">
                     <tr>
                         <th>No</th>
-                        <th>자동설정</th>
+                        <%--<th>자동설정</th>--%>
                         <th>교환일시</th>
                         <th>회원번호</th>
                         <th>닉네임</th>
@@ -157,13 +157,13 @@
         <td>
             {{indexDesc ../totalInfo/totalCnt data.rowNum}}
         </td>
-        <td>
-            {{#dalbit_if auto '==' 0}}
-                OFF
-            {{else}}
-                <span class="font-bold" style="color: #7030a0;">ON</span>
-            {{/dalbit_if}}
-        </td>
+        <%--<td>--%>
+            <%--{{#dalbit_if auto '==' 0}}--%>
+                <%--OFF--%>
+            <%--{{else}}--%>
+                <%--<span class="font-bold" style="color: #7030a0;">ON</span>--%>
+            <%--{{/dalbit_if}}--%>
+        <%--</td>--%>
         <td>{{data.last_upd_date}}</td>
         <td><a href="javascript://" class="_openMemberPop" data-memno="{{data.mem_no}}">{{data.mem_no}}</a></td>
         <td>{{data.mem_nick}}</td>

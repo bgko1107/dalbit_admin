@@ -28,7 +28,7 @@
                 <div class="col-md-3 no-padding mr10">
                     <span id="changeList_searchType" onchange="changeList_searchType_click();"></span>
                 </div>
-                <div class="col-md-3 no-padding">
+                <div class="col-md-3 no-padding" style="display: none;">
                         <span>
                             <select id="changeAutoSettingFilter" name="changeAutoSettingFilter" class="form-control searchType" style="width: 100%" onchange="changeAutoSetting_change();">
                                 <option value="0">자동설정 전체</option>
@@ -56,7 +56,7 @@
             <thead id="tableTop">
             <tr>
                 <th>No</th>
-                <th>자동설정</th>
+                <%--<th>자동설정</th>--%>
                 <th>교환일시</th>
                 <th>회원번호</th>
                 <th>닉네임</th>
@@ -216,13 +216,13 @@
         <td>
             {{indexDesc ../totalInfo/totalCnt data.rowNum}}
         </td>
-        <td>
-            {{#dalbit_if auto '==' 1}}
-                <span class="font-bold" style="color: #7030a0;">ON</span>
-            {{else}}
-                OFF
-            {{/dalbit_if}}
-        </td>
+        <%--<td>--%>
+            <%--{{#dalbit_if auto '==' 1}}--%>
+                <%--<span class="font-bold" style="color: #7030a0;">ON</span>--%>
+            <%--{{else}}--%>
+                <%--OFF--%>
+            <%--{{/dalbit_if}}--%>
+        <%--</td>--%>
         <td>
             {{data.last_upd_date}}
         </td>
@@ -257,14 +257,16 @@
         </tr>
         <tr style="background-color: #cfd5ea">
             <td>구분</td>
-            <td>건 수(자동교환)</td>
+            <%--<td>건 수(자동교환)</td>--%>
+            <td>건 수</td>
             <td>별 수</td>
             <td>교환 달 수</td>
             <td>환전 가치 금액</td>
         </tr>
         <tr class="font-bold" style="color: #ff6600;">
             <th style="background-color: #d9d9d9">총합</th>
-            <th style="background-color: #f2f2f2">{{addComma content.totalCnt}}({{addComma content.auto_changeCnt}})건</th>
+            <%--<th style="background-color: #f2f2f2">{{addComma content.totalCnt}}({{addComma content.auto_changeCnt}})건</th>--%>
+            <th style="background-color: #f2f2f2">{{addComma content.totalCnt}}건</th>
             <th style="background-color: #f2f2f2">{{addComma content.totalByeolCnt}}별</th>
             <th style="background-color: #f2f2f2">{{addComma content.totalDalCnt}}달</th>
             <th style="background-color: #f2f2f2">{{addComma content.totalExchangeAmt}}원</th>

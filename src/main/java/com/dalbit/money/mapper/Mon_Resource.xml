@@ -104,13 +104,17 @@
               and date_format(a.cancel_dt,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(a.cancel_dt,'%Y.%m.%d') <![CDATA[<=]]> #{eDate}
         </if>
         <if test='type == "3"'>
-            where a.type='6'
-              and b.type='1'
+            where a.type in ('6','31')
+            and b.type in ('1','31')
         </if>
-        <if test='type == "3-1"'>
-            where a.type='31'
-              and b.type='31'
-        </if>
+        <!--<if test='type == "3"'>-->
+            <!--where a.type='6'-->
+              <!--and b.type='1'-->
+        <!--</if>-->
+        <!--<if test='type == "3-1"'>-->
+            <!--where a.type='31'-->
+              <!--and b.type='31'-->
+        <!--</if>-->
         <if test='type == "4"'>
             where a.type='15'
               and ruby + money <![CDATA[>]]> 0
@@ -393,11 +397,14 @@
             and gold <![CDATA[<]]> 0
         </if>
         <if test='type == "3"'>
-            where b.type='1'
+            where b.type in ('1' , '31')
         </if>
-        <if test='type == "3-1"'>
-            where b.type='31'
-        </if>
+        <!--<if test='type == "3"'>-->
+            <!--where b.type='1'-->
+        <!--</if>-->
+        <!--<if test='type == "3-1"'>-->
+            <!--where b.type='31'-->
+        <!--</if>-->
         <if test='type == "5" or type == "9-1" or type == "9" or type == "8" or type == "10" or type == "3" or type == "3-1" or type == "15"'>
               and date_format(b.last_upd_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(b.last_upd_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate}
         </if>
