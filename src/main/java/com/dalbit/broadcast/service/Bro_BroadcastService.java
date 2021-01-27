@@ -341,7 +341,7 @@ public class Bro_BroadcastService {
 
 
             //얼리기
-            if(!broadcastDetail.getFreezeMsg().equals(pBroadcastEditInputVo.getFreezeMsg())){
+            if(!DalbitUtil.isEmpty(pBroadcastEditInputVo.getFreezeMsg()) && !broadcastDetail.getFreezeMsg().equals(pBroadcastEditInputVo.getFreezeMsg())){
                 DalbitUtil.broadcastFreeze(pBroadcastEditInputVo);
             }
 
