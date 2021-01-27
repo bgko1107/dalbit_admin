@@ -68,6 +68,7 @@
             data.innerType = tmp_innerType_cansel;
             data.payWay = tmp_payWay_cansel;
             data.memberDataType = 99;
+            data.slctType = -1;
         };
         dtList_info_cancel = new DalbitDataTable($("#div_canselY").find("#list_info"), dtList_info_data, payDataTableSource.payHistory_cancel);
         dtList_info_cancel.useCheckBox(false);

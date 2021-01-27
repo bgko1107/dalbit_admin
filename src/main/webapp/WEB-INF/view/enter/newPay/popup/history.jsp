@@ -56,6 +56,7 @@
             data.ageStr = (age == "undefined" ? "null" : age);
             data.success = "Y";
             data.memberDataType = 99;
+            data.slctType = -1;
         };
         dtList_info = new DalbitDataTable($("#div_payY").find("#list_info"), dtList_info_data, payDataTableSource.payHistory);
         dtList_info.useCheckBox(false);
