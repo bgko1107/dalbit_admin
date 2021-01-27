@@ -27,14 +27,12 @@
                     <th colspan="9" class="_today">금월</th>
                 </tr>
                 <tr>
-                    <th colspan="3" class="_bgColor" data-bgcolor="#fbe5d6">참여회원 (명)</th>
-                    <th rowspan="2" class="_bgColor" data-bgcolor="#d9d9d9">총합</th>
+                    <th colspan="4" class="_bgColor" data-bgcolor="#fbe5d6">참여회원 (명)</th>
                     <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">개설 건</th>
                     <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">대화 건</th>
                     <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">이미지 건</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">선물</th>
-                    <th colspan="3" class="_bgColor" data-bgcolor="#dae3f3">참여회원 (명)</th>
-                    <th rowspan="2" class="_bgColor" data-bgcolor="#d9d9d9">총합</th>
+                    <th colspan="4" class="_bgColor" data-bgcolor="#dae3f3">참여회원 (명)</th>
                     <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">개설 건</th>
                     <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">대화 건</th>
                     <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">이미지 건</th>
@@ -44,11 +42,13 @@
                     <th class="_bgColor _sex_male" data-bgcolor="#f2f2f2"></th>
                     <th class="_bgColor _sex_female" data-bgcolor="#f2f2f2"></th>
                     <th class="_bgColor _sex_none" data-bgcolor="#f2f2f2"></th>
+                    <th class="_bgColor" data-bgcolor="#d9d9d9">총합</th>
                     <th class="_bgColor" data-bgcolor="#f2f2f2">건</th>
                     <th class="_bgColor" data-bgcolor="#f2f2f2">달</th>
-                    <th class="_sex_male data-bgcolor="#f2f2f2""></th>
-                    <th class="_sex_female" data-bgcolor="#f2f2f2"></th>
-                    <th class="_sex_none" data-bgcolor="#f2f2f2"></th>
+                    <th class="_bgColor _sex_male" data-bgcolor="#f2f2f2"></th>
+                    <th class="_bgColor _sex_female" data-bgcolor="#f2f2f2"></th>
+                    <th class="_bgColor _sex_none" data-bgcolor="#f2f2f2"></th>
+                    <th class="_bgColor" data-bgcolor="#d9d9d9">총합</th>
                     <th class="_bgColor" data-bgcolor="#f2f2f2">건</th>
                     <th class="_bgColor" data-bgcolor="#f2f2f2">달</th>
                 </tr>
@@ -194,7 +194,7 @@
         ui.tableHeightSet();
 
         for(var i = 1; i < 19 ; i ++){
-            $("#monthTableBody tr._tr_" + (Number(tmp_day.split(":")[0])) + " td:eq(" + i + ")").css("background-color", "#dae3f3");
+            $("#monthTableBody tr._tr_" + (Number(tmp_day.split(":")[0])) + " td:eq(" + i + ")").css("background-color", "#fff2cc");
             $("#monthTableBody tr._tr_" + (Number(tmp_day.split(":")[0])) + " td:eq(" + i + ")").css("font-weight", "bold");
         }
     }
@@ -266,7 +266,7 @@
         ui.tableHeightSet();
 
         for(var i = 1; i < 17 ; i ++){
-            $("#monthAgeTableBody tr._tr_" + (Number(tmp_day.split(":")[0])) + " td:eq(" + i + ")").css("background-color", "#dae3f3");
+            $("#monthAgeTableBody tr._tr_" + (Number(tmp_day.split(":")[0])) + " td:eq(" + i + ")").css("background-color", "#fff2cc");
             $("#monthAgeTableBody tr._tr_" + (Number(tmp_day.split(":")[0])) + " td:eq(" + i + ")").css("font-weight", "bold");
         }
     }
@@ -275,27 +275,27 @@
 <script type="text/x-handlebars-template" id="tmp_monthDetailList">
     <tr class="_tr_{{this}} font-bold" style="background-color: #d9d9d9">
         <td>총합</td>
-        <td style="color: red;"></td><td style="color: blue;"></td><td></td><td style="background-color: #d9d9d9"></td><td></td>
+        <td style="color: red;"></td><td style="color: blue;"></td><td></td><td></td><td></td>
         <td></td><td></td><td></td><td></td><td></td>
-        <td style="color: red;"></td><td style="color: blue;"></td><td style="background-color: #d9d9d9"></td><td></td><td></td><td></td>
+        <td style="color: red;"></td><td style="color: blue;"></td><td></td><td></td><td></td><td></td>
         <td></td><td></td>
     </tr>
 
     {{#each this.slctType_date}}
     <tr class="_tr_{{this}}">
         <td class="font-bold" style="background-color: #dae3f3">{{this}} 일</td>
-        <td style="color: red;"></td><td style="color: blue;"></td><td></td><td style="background-color: #d9d9d9"></td><td></td>
+        <td style="color: red;"></td><td style="color: blue;"></td><td></td><td></td><td></td>
         <td></td><td></td><td></td><td></td><td></td>
-        <td style="color: red;"></td><td style="color: blue;"></td><td style="background-color: #d9d9d9"></td><td></td><td></td><td></td>
+        <td style="color: red;"></td><td style="color: blue;"></td><td></td><td></td><td></td><td></td>
         <td></td><td></td>
     </tr>
     {{/each}}
 
     <tr class="_tr_{{this}} font-bold" style="background-color: #d9d9d9">
         <td>총합</td>
-        <td style="color: red;"></td><td style="color: blue;"></td><td></td><td style="background-color: #d9d9d9"></td><td></td>
+        <td style="color: red;"></td><td style="color: blue;"></td><td></td><td></td><td></td>
         <td></td><td></td><td></td><td></td><td></td>
-        <td style="color: red;"></td><td style="color: blue;"></td><td style="background-color: #d9d9d9"></td><td></td><td></td><td></td>
+        <td style="color: red;"></td><td style="color: blue;"></td><td></td><td></td><td></td><td></td>
         <td></td><td></td>
     </tr>
 </script>
