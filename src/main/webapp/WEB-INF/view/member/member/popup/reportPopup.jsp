@@ -4,12 +4,6 @@
 
 <%
     String in_memNo = request.getParameter("memNo");
-    String in_memId = request.getParameter("memId");
-    String in_memNick = request.getParameter("memNick");
-    String in_memSex = request.getParameter("memSex");
-    String in_deviceUuid = request.getParameter("deviceUuid");
-    String in_ip = request.getParameter("ip");
-
     String in_fnCallBack = request.getParameter("fnCallBack") == null ? "" : request.getParameter("fnCallBack");
 %>
 
@@ -86,23 +80,54 @@
 <script type="text/javascript" src="/js/message/customer/declarationMessage.js?${dummyData}"></script>
 
 <script>
+
+    var memNo =  '${param.memNo}';
+    var memId =  '';
+    var memNick =  '';
+    var memSex =  '';
+    var deviceUuid =  '';
+    var ip =  '';
+    var fnCallBack =  '${param.fnCallBack}';
+
     $(document).ready(function() {
+
+        getMemberInfo();
+
         $('#report_title').html("ㆍ운영자에 의해 경고 또는 정지/강제탈퇴 등의 처리가 가능합니다.<br/>ㆍ해당 유저를 제외한 경고/정지/탈퇴 처리 시 사유를 메모에 남겨주세요.");
+        $("#declaration_reason").html(util.getCommonCodeSelect(-1, declaration_reason,"Y"));
+        $("#blockScope_area").html(util.getCommonCodeCheck(-1, block_scope,"Y"));
+        $("#member_declaration_slctType").html(util.getCommonCodeRadio(2, member_declaration_slctType));
+        $("#declaration_Message").html(util.getCommonCodeCheck(-1, declaration_Message,"Y"));
 
-        $('#bt_complet').click(function() {           //운영자 메모 등록
-            bt_complet_click(this.id);
-        });
     });
-    var memNo =  '<%=in_memNo%>';
-    var memId =  '<%=in_memId%>';
-    var memNick =  '<%=in_memNick%>';
-    var memSex =  '<%=in_memSex%>';
-    var deviceUuid =  '<%=in_deviceUuid%>';
-    var ip =  '<%=in_ip%>';
-    var fnCallBack =  '<%=in_fnCallBack%>';
 
-    $("#declaration_reason").html(util.getCommonCodeSelect(-1, declaration_reason,"Y"));
-    $("#blockScope_area").html(util.getCommonCodeCheck(-1, block_scope,"Y"));
+    $('#bt_complet').on('click', function() {           //운영자 메모 등록
+        bt_complet_click(this.id);
+    });
+
+    function getMemberInfo(){
+        var data = {
+            mem_no : memNo
+        }
+        util.getAjaxData("info", "/rest/member/member/info", data, function(dist_id, response){
+
+            var resData = response.data;
+            memId = resData.userId;
+            memNick = resData.nickName;
+            memSex = resData.memSex;
+            deviceUuid = resData.deviceUuid;
+            ip = resData.ip;
+
+            $('#td_memId').html(memId);
+            $('#td_memNick').html(memNick);
+            if(memSex == "m")
+                $('#td_memSex').html("<label style=\"color: blue\">남</label>");
+            else if(memSex == "f")
+                $('#td_memSex').html("<label style=\"color: red\">여</lable>");
+            else
+                $('#td_memSex').html("알수없음");
+        });
+    }
 
     //아이디, 디바이스 아이디 default로 check한다.
     $("#blockScope_3").attr({
@@ -111,16 +136,8 @@
     });
     $("#blockScope_1").attr('checked', 'checked');
 
-    $("#member_declaration_slctType").html(util.getCommonCodeRadio(2, member_declaration_slctType));
-    $("#declaration_Message").html(util.getCommonCodeCheck(-1, declaration_Message,"Y"));
-    $('#td_memId').html(memId);
-    $('#td_memNick').html(memNick);
-    if(memSex == "m")
-        $('#td_memSex').html("<label style=\"color: blue\">남</label>");
-    else if(memSex == "f")
-        $('#td_memSex').html("<label style=\"color: red\">여</lable>");
-    else
-        $('#td_memSex').html("알수없음");
+
+
 
     function bt_complet_click(){
         // if (common.isEmpty($("#txt_adminMemo").val())) {
