@@ -257,7 +257,7 @@
             <td class="_bgColor" data-bgcolor="#d9d9d9"></td>
         </tr>
 
-        <tr>
+        <tr class="font-bold _bgColor" data-bgcolor="#d9d9d9">
             <th class="_bgColor" data-bgcolor="#f2f2f2">총 합</th>
             <td class="_fontColor" data-fontcolor="blue">{{addComma total_mCnt}} 명</td>
             <td class="_fontColor" data-fontcolor="blue">{{addComma total_male_Cnt}} 건</td>

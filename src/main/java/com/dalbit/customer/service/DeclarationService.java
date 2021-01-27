@@ -10,11 +10,14 @@ import com.dalbit.customer.dao.DeclarationDao;
 import com.dalbit.customer.vo.procedure.*;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.excel.vo.ExcelVo;
+import com.dalbit.exception.GlobalException;
 import com.dalbit.member.dao.Mem_MemberDao;
+import com.dalbit.member.service.Mem_MemberService;
 import com.dalbit.member.vo.LoginBlockHistVo;
 import com.dalbit.member.vo.LoginBlockVo;
 import com.dalbit.member.vo.LoginHistoryVo;
 import com.dalbit.member.vo.MemberVo;
+import com.dalbit.member.vo.procedure.P_MemberReportVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.dalbit.util.MessageUtil;
@@ -47,6 +50,9 @@ public class DeclarationService {
     Mem_MemberDao mem_MemberDao;
     @Autowired
     PushService pushService;
+
+    @Autowired
+    Mem_MemberService memMemberService;
 
     /**
      * 신고 목록 조회
@@ -297,6 +303,30 @@ public class DeclarationService {
             result = gsonUtil.toJson(new JsonOutputVo(Status.신고목록조회_데이터없음));
         } else {
             result = gsonUtil.toJson(new JsonOutputVo(Status.신고목록조회_에러));
+        }
+
+        return result;
+    }
+
+    /**
+     * 이미지 신고 처리
+     */
+    public String callImageOperate(P_MemberReportVo pMemberReportVo) throws GlobalException {
+
+        ProcedureVo procedureVo = new ProcedureVo(pMemberReportVo);
+        declarationDao.callImageOperate(procedureVo);
+        String result;
+
+        if(Status.신고처리_성공.getMessageCode().equals(procedureVo.getRet())) {
+            result = memMemberService.getMemberReport(pMemberReportVo);
+            log.debug(result);
+            result = gsonUtil.toJson(new JsonOutputVo(Status.신고처리_성공));
+        } else if(Status.신고처리_신고번호없음.getMessageCode().equals(procedureVo.getRet())) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.신고처리_신고번호없음));
+        } else if(Status.신고처리_이미처리되었음.getMessageCode().equals(procedureVo.getRet())) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.신고처리_이미처리되었음));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.신고처리_에러));
         }
 
         return result;

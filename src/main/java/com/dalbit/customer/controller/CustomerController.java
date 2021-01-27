@@ -85,4 +85,9 @@ public class CustomerController {
     public String declarationImage(Model model) {
         return "customer/declaration/image";
     }
+
+    @RequestMapping("/declaration/popup/reportPopup")
+    public String imagePopup(Model model, HttpServletRequest request) {
+        return "customer/declaration/popup/reportPopup";
+    }
 }

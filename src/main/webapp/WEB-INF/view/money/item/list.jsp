@@ -72,7 +72,7 @@
                     <div class="row widget-content col-md-6 no-padding mt10">
                         <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist">
                             <li class="active"><a href="#changeList" role="tab" data-toggle="tab" id="tab_changeList" onclick="tab_changeListClick(this.id)">교환내역</a></li>
-                            <li><a href="#changeAuto" role="tab" data-toggle="tab" id="tab_changeAuto" onclick="tab_changeListClick(this.id)"> 자동교환 설정내역</a></li>
+                            <%--<li><a href="#changeAuto" role="tab" data-toggle="tab" id="tab_changeAuto" onclick="tab_changeListClick(this.id)"> 자동교환 설정내역</a></li>--%>
                         </ul>
                         <div class="col-md-12 no-padding mt10">
                             <span style="color: red">* 환전 가치금액은 -500원의 수수료를 제외하여 산전된 금액입니다.</span>

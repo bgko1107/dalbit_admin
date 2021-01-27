@@ -10,6 +10,9 @@ import com.dalbit.customer.vo.procedure.P_DeclarationOperateCntInputVo;
 import com.dalbit.customer.vo.procedure.P_DeclarationOperateVo;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.exception.GlobalException;
+import com.dalbit.member.vo.MemberVo;
+import com.dalbit.member.vo.procedure.P_MemberReportVo;
+import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,6 +126,20 @@ public class DeclarationRestController {
     public String imageList(P_DeclarationListInputVo pDeclarationListInputVo) {
 
         String result = declarationService.callImageList(pDeclarationListInputVo);
+
+        return result;
+    }
+
+    /**
+     * 이미지 신고 처리
+     */
+    @PostMapping("image/operate")
+    public String imageOperate(P_MemberReportVo pMemberReportVo, HttpServletRequest request) throws GlobalException {
+
+        pMemberReportVo.setOpName(MemberVo.getMyMemNo());
+        pMemberReportVo.setBrowser(DalbitUtil.getUserAgent(request));
+
+        String result = declarationService.callImageOperate(pMemberReportVo);
 
         return result;
     }

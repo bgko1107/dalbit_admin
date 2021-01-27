@@ -7,7 +7,7 @@
 
     <!-- serachBox -->
     <form id="searchForm">
-        <div class="row col-lg-12 form-inline">
+        <div class="col-lg-12 no-padding form-inline">
             <div class="widget widget-table searchBoxArea">
                 <table>
                     <tr>
@@ -37,10 +37,10 @@
 
     <div id="page-wrapper">
         <!-- DATA TABLE -->
-        <div class="row col-lg-12 form-inline mb15">
+        <div class="col-lg-12 form-inline no-padding">
             <div class="widget-content">
                 <div class="dataTables_paginate paging_full_numbers" id="imageList_info_paginate_top"></div>
-                <div class="row list-group">
+                <div class="list-group">
                 <%--<div class="row list-group">--%>
                     <form id="imageForm"></form>
                 </div>
@@ -56,9 +56,18 @@
 
 <script>
     $(document).ready(function() {
+        $('input[id="searchText"]').on('keydown', function(e) {    // textBox 처리
+            if(e.keyCode == 13) {
+                $("#bt_search").click();
+            };
+        });
+
+        $("#bt_search").on('click', function() {  // 버튼의 클릭이벤트
+            reportImageList();
+        });
 
         $("#reportImageArea").html(util.getCommonCodeSelect(-1, reportImageSlctType));
-
+        reportImageList();
     });
 
 
@@ -105,6 +114,66 @@
         var popupUrl = "/member/image/popup/imageMsg?chatNo="+ data.data('chatno');
         util.windowOpen(popupUrl,"950", "1000","우체통");
     }
+
+    function delConfirm(data){
+
+        var reportidx = data.reportidx;
+        var report_mem_no = data.reportmemno;
+        var report_nick = data.reportnick;
+        var report_userid = data.reportuserid;
+        var report_sex = data.reportsex;
+        var device_uuid = data.deviceuuid;
+        var ip = data.ip;
+
+        $.confirm({
+            title: '이미지를 삭제 하시겠습니까?',
+            content: '',
+            buttons: {
+                취소: function () {
+                },
+                삭제: function () {
+                    if(confirm("확인 완료처리 됩니다. 삭제 처리 하시겠습니까?")){
+                        var data = {
+                            reportIdx : reportidx
+                            , deleteYn : 1
+                            , opCode : 0
+                            , sendNoti : 0
+                        };
+
+                        console.log(data);
+                        util.getAjaxData("image", "/rest/customer/declaration/image/operate", data, fn_reportImage_operate_success, fn_fail);
+                    }
+                },
+                somethingElse: {
+                    text: '삭제 후 신고',
+                    btnClass: 'btn-red',
+                    keys: ['enter'],
+                    action: function(){
+                        var report = "/customer/declaration/popup/reportPopup?"
+                            + "memNo=" + encodeURIComponent(report_mem_no)
+                            + "&memId=" + encodeURIComponent(report_userid)
+                            + "&memNick=" + encodeURIComponent(report_nick)
+                            + "&memSex=" + encodeURIComponent(report_sex)
+                            + "&deviceUuid=" + encodeURIComponent(device_uuid)
+                            + "&ip=" + encodeURIComponent(ip)
+                            + "&reportidx=" + reportidx
+                            + "&fnCallBack=" + encodeURIComponent("reportImageList");
+                        console.log(report);
+                        util.windowOpen(report,"750","910","이미지신고");
+
+                        // var data = {
+                        //     reportIdx : reportidx
+                        // };
+                        // util.getAjaxData("image", "/rest/customer/declaration/image/operate", data, fn_reportImage_operate_success, fn_fail);
+                    }
+                }
+            }
+        });
+    }
+
+    function fn_reportImage_operate_success(dst_id, response, dst_params){
+        $("#bt_search").click();
+    }
 </script>
 
 
@@ -112,45 +181,57 @@
 <!-- =------------------ Handlebars ---------------------------------- -->
 <script id="tmp_imageSelectFrm" type="text/x-handlebars-template">
     {{#each this.data as |data|}}
-        {{^equal data.image_path ''}}
-            {{#dalbit_if data.inner '==' 1}}
-            <div class="item col-md-2 col-sm-6 mb15 bg-testMember" style="padding-bottom: 15px;padding-right: 3px;padding-left: 3px">
-            {{else}}
-            <div class="item col-md-2 col-sm-6 mb15" style="padding-bottom: 15px;padding-right: 3px;padding-left: 3px">
-            {{/dalbit_if}}
-                <div>
-                    <label>NO.{{indexDesc ../../pagingVo.totalCnt data.rowNum}}</label>
-                    {{#dalbit_if data.data2 '==' 'y'}}
-                        <label class="pull-right" style="background-color: #fff7e5">상태 : <span style="color:red;">삭제</span></label>
-                    {{else}}
-                        <label class="pull-right" style="background-color: #fff7e5">상태 : 정상</label>
-                    {{/dalbit_if}}
-                </div>
-                <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 430px;">
+        <%--{{#dalbit_if data.inner '==' 1}}--%>
+        <%--<div class="item col-md-2 col-sm-6 mb15 bg-testMember" style="padding-bottom: 15px;padding-right: 3px;padding-left: 3px">--%>
+        <%--{{else}}--%>
+        <div class="item col-md-2 col-sm-6 mb15" style="padding-bottom: 15px;padding-right: 3px;padding-left: 3px">
+        <%--{{/dalbit_if}}--%>
+            <div>
+                <label>NO.{{indexDesc ../pagingVo.totalCnt data.rowNum}}</label>
+                {{#dalbit_if data.data2 '==' 'y'}}
+                    <label class="pull-right" style="background-color: #fff7e5">상태 : <span style="color:red;">{{data.viewState}}</span></label>
+                {{else}}
+                    <label class="pull-right" style="background-color: #fff7e5">상태 : {{data.viewState}}</label>
+                {{/dalbit_if}}
+            </div>
+            <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 470px;">
                 <div class="thumbnail" src="{{renderImage data.imageUrl}}?360x360">
                     <img class="list-group-image thumbnailImg fullSize_background" style="width:360px; height:225px;" src="{{renderImage data.imageUrl}}" alt="" data-toggle="modal" data-target="#imgModal" />
                 </div>
                 <div>
-                    <h4 class="inner list-group-item-heading broadcast_title">
-                        <a href="javascript://" onclick="imagePopUp($(this))" data-chatno="{{data.chat_no}}">{{data.chat_no}}</a>
-                    </h4>
                     <ul class="list-unstyled">
-                        <li><strong>작성일시:</strong> <br />{{substr data.last_upd_date 0 19}}</li>
-                        <li><strong>Nick:</strong> {{replaceHtml data.mem_nick}}</li>
-                        <li><strong>No:</strong>
-                            <a href="javascript://" class="_openMemberPop" data-memno="{{data.mem_no}}" >
-                            {{data.mem_no}}
-                            </a>
-                        </li>
-                        <li class="sexType"><strong>Sex:</strong> {{{sexIcon data.mem_sex data.mem_birth_year}}}</li>
+                        <strong>분류:</strong>
+                        {{#dalbit_if data.imageType '==' 1}}
+                            우체통
+                        {{/dalbit_if}}
+                        {{#dalbit_if data.data2 '!=' 'y'}}
+                            <a href="javascript://" class="btn btn-danger btn-xs pull-right" onclick="delConfirm($(this).data())"
+                               data-reportidx="{{data.reportIdx}}"
+                               data-reportmemno="{{data.report_mem_no}}"
+                               data-reportuserid="{{data.report_userid}}"
+                               data-reportnick="{{data.report_nick}}"
+                               data-reportsex="{{data.report_sex}}"
+                               data-ip="{{data.ip}}"
+                               data-deviceuuid="{{data.device_uuid}}"
+                            >삭제</a>
+                        {{/dalbit_if}}
+                        <br/>
+                        <strong>업로드 회원정보</strong><br/>
+                        {{data.upload_nick}} {{{sexIcon data.upload_sex}}} ({{upload_age}}세)<br/>
+                        <a href="javascript://" class="_openMemberPop" data-memno="{{data.upload_mem_no}}" > {{data.upload_mem_no}} </a><br/>
+                        <br/>
+                        업로드 일시 : {{substr uploadDate 0 19}}<br/>
+                        <br/>
+                        <strong>신고 회원정보</strong><br/>
+                        {{data.report_nick}} {{{sexIcon data.report_sex}}} ({{report_age}}세)<br/>
+                        <a href="javascript://" class="_openMemberPop" data-memno="{{data.report_mem_no}}" > {{data.report_mem_no}} </a><br/>
                     </ul>
                 </div>
-                </div>
             </div>
-        {{/equal}}
-        {{else}}
-            <div class="col-md-12" style="text-align:center">
-                <label>{{isEmptyData}}</label>
-            </div>
+        </div>
+    {{else}}
+    <div class="col-md-12" style="text-align:center">
+        <label>{{isEmptyData}}</label>
+    </div>
     {{/each}}
 </script>

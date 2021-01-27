@@ -769,7 +769,7 @@
                 <th rowspan="2" class="_bgColor" data-bgcolor="#b4c7e7">구분</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">달 결제</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">달 직접 선물</th>
-                <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">달 교환</th>
+                <th colspan="1" class="_bgColor" data-bgcolor="#dae3f3">달 교환</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">가입 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">레벨 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">랭킹 보상</th>
@@ -783,7 +783,7 @@
             </tr>
             <tr>
                 <th class="_bgColor" data-bgcolor="#dae3f3">일반</th>
-                <th class="_bgColor" data-bgcolor="#dae3f3">자동</th>
+                <%--<th class="_bgColor" data-bgcolor="#dae3f3">자동</th>--%>
                 <th class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">출석</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">룰렛</th>
@@ -795,7 +795,7 @@
                 <td onclick="resourceDalClick($(this).data())" data-type="1"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma charge_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="2-1" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma dalgiftget_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="3"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_mCnt 'Y'}}</span></a></td>
-                <td onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_mCnt 'Y'}}</span></a></td>
+                <%--<td onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_mCnt 'Y'}}</span></a></td>--%>
                 <td onclick="resourceDalClick($(this).data())" data-type="4"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma join_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_mCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_mCnt 'Y'}}</span></a></td>
@@ -820,7 +820,7 @@
                 <td onclick="resourceDalClick($(this).data())" data-type="1"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma charge_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="2-1" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma dalgiftget_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="3"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_fCnt 'Y'}}</span></a></td>
-                <td onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_fCnt 'Y'}}</span></a></td>
+                <%--<td onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_fCnt 'Y'}}</span></a></td>--%>
                 <td onclick="resourceDalClick($(this).data())" data-type="4"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma join_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_fCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_fCnt 'Y'}}</span></a></td>
@@ -839,7 +839,7 @@
                 <td onclick="resourceDalClick($(this).data())" data-type="1"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma charge_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="2-1" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma dalgiftget_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="3"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_nCnt 'Y'}}</span></a></td>
-                <td onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_nCnt 'Y'}}</span></a></td>
+                <%--<td onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_nCnt 'Y'}}</span></a></td>--%>
                 <td onclick="resourceDalClick($(this).data())" data-type="4"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma join_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_nCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_nCnt 'Y'}}</span></a></td>
@@ -858,7 +858,7 @@
                 <td onclick="resourceDalClick($(this).data())" data-type="1"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma charge_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="2-1" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma dalgiftget_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="3"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_tCnt 'Y'}}</span></a></td>
-                <td onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_tCnt 'Y'}}</span></a></td>
+                <%--<td onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_tCnt 'Y'}}</span></a></td>--%>
                 <td onclick="resourceDalClick($(this).data())" data-type="4"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma join_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_tCnt 'Y'}}</span></a></td>
                 <td onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_tCnt 'Y'}}</span></a></td>
@@ -877,7 +877,7 @@
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="1"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma charge_total_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="2-1" data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma dalgiftget_total_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="3"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_total_Cnt 'Y'}}</span></a></td>
-                <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_total_Cnt 'Y'}}</span></a></td>
+                <%--<td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="3-1" data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_total_Cnt 'Y'}}</span></a></td>--%>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="4"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma join_total_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="5"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma levelup_total_Cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceDalClick($(this).data())" data-type="6"   data-gender="a" ><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma ranking_total_Cnt 'Y'}}</span></a></td>
@@ -1061,7 +1061,7 @@
                 <th rowspan="7" class="_bgColor" data-bgcolor="#f4b183">별 감소</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#f8cbad">구분</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">환전 승인</th>
-                <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">교환</th>
+                <th colspan="1" class="_bgColor" data-bgcolor="#fbe5d6">교환</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">영구정지</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">탈퇴</th>
                 <td rowspan="7"></td>
@@ -1072,13 +1072,13 @@
             </tr>
             <tr>
                 <th class="_bgColor" data-bgcolor="#fbe5d6">일반</th>
-                <th class="_bgColor" data-bgcolor="#fbe5d6">자동</th>
+                <%--<th class="_bgColor" data-bgcolor="#fbe5d6">자동</th>--%>
             </tr>
             <tr>
                 <th class="_bgColor" data-bgcolor="#f8cbad">{{{sexIcon 'm'}}}</th>
                 <td onclick="resourceByeolClick($(this).data())" data-type="17" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma exchange_mcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="3"  data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_mcnt 'Y'}}</span></a></td>
-                <td onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_mcnt 'Y'}}</span></a></td>
+                <%--<td onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_mcnt 'Y'}}</span></a></td>--%>
                 <td onclick="resourceByeolClick($(this).data())" data-type="13" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma block_mcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="18" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma withdrawal_mcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="15" data-gender="m"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma test_out_mcnt 'Y'}}</span></a></td>
@@ -1090,7 +1090,7 @@
                 <th class="_bgColor" data-bgcolor="#f8cbad">{{{sexIcon 'f'}}}</th>
                 <td onclick="resourceByeolClick($(this).data())" data-type="17" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma exchange_fcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="3"  data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_fcnt 'Y'}}</span></a></td>
-                <td onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_fcnt 'Y'}}</span></a></td>
+                <%--<td onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_fcnt 'Y'}}</span></a></td>--%>
                 <td onclick="resourceByeolClick($(this).data())" data-type="13" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma block_fcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="18" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma withdrawal_fcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="15" data-gender="f"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma test_out_fcnt 'Y'}}</span></a></td>
@@ -1101,7 +1101,7 @@
                 <th class="_bgColor" data-bgcolor="#f8cbad">{{{sexIcon 'n'}}}</th>
                 <td onclick="resourceByeolClick($(this).data())" data-type="17" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma exchange_ncnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="3"  data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_ncnt 'Y'}}</span></a></td>
-                <td onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_ncnt 'Y'}}</span></a></td>
+                <%--<td onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_ncnt 'Y'}}</span></a></td>--%>
                 <td onclick="resourceByeolClick($(this).data())" data-type="13" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma block_ncnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="18" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma withdrawal_ncnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="15" data-gender="n"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma test_out_ncnt 'Y'}}</span></a></td>
@@ -1112,7 +1112,7 @@
                 <th class="_bgColor" data-bgcolor="#f8cbad">테스트</th>
                 <td onclick="resourceByeolClick($(this).data())" data-type="17" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma exchange_tcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="3"  data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_tcnt 'Y'}}</span></a></td>
-                <td onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_tcnt 'Y'}}</span></a></td>
+                <%--<td onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_tcnt 'Y'}}</span></a></td>--%>
                 <td onclick="resourceByeolClick($(this).data())" data-type="13" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma block_tcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="18" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma withdrawal_tcnt 'Y'}}</span></a></td>
                 <td onclick="resourceByeolClick($(this).data())" data-type="15" data-gender="t"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma test_out_tcnt 'Y'}}</span></a></td>
@@ -1123,7 +1123,7 @@
                 <th class="_bgColor" data-bgcolor="#dad9d7">총합</th>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceByeolClick($(this).data())" data-type="17" data-gender="a"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma exchange_total_cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceByeolClick($(this).data())" data-type="3"  data-gender="a"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma change_total_cnt 'Y'}}</span></a></td>
-                <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="a"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_total_cnt 'Y'}}</span></a></td>
+                <%--<td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceByeolClick($(this).data())" data-type="3-1" data-gender="a"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma autochange_total_cnt 'Y'}}</span></a></td>--%>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceByeolClick($(this).data())" data-type="13" data-gender="a"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma block_total_cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceByeolClick($(this).data())" data-type="18" data-gender="a"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma withdrawal_total_cnt 'Y'}}</span></a></td>
                 <td class="_bgColor" data-bgcolor="#dad9d7" onclick="resourceByeolClick($(this).data())" data-type="15" data-gender="a"><a href="javascript://"><span class="_data _fontColor" data-fontcolor="#555">{{addComma test_out_total_cnt 'Y'}}</span></a></td>
@@ -1145,7 +1145,7 @@
             <%--</colgroup>--%>
             <thead>
             <tr>
-                <th colspan="17" class="_bgColor" data-bgcolor="#8faadc">달 증가</th>
+                <th colspan="16" class="_bgColor" data-bgcolor="#8faadc">달 증가</th>
                 <th style="background-color: white; border-bottom: hidden;border-top: hidden;"></th>
                 <th colspan="9" class="_bgColor" data-bgcolor="#f4b183">달 감소</th>
             </tr>
@@ -1153,7 +1153,7 @@
                 <th rowspan="2" class="_bgColor" data-bgcolor="#b4c7e7">구분</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">달 결제</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">달 직접 선물</th>
-                <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">달 교환</th>
+                <th colspan="1" class="_bgColor" data-bgcolor="#dae3f3">달 교환</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">가입보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">레벨 보상</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#dae3f3">랭킹 보상</th>
@@ -1175,7 +1175,7 @@
             </tr>
             <tr>
                 <th class="_bgColor" data-bgcolor="#dae3f3">일반</th>
-                <th class="_bgColor" data-bgcolor="#dae3f3">자동</th>
+                <%--<th class="_bgColor" data-bgcolor="#dae3f3">자동</th>--%>
                 <th class="_bgColor" data-bgcolor="#dae3f3">스페셜DJ</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">출석</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">룰렛</th>
@@ -1187,7 +1187,7 @@
                 <td>{{addComma totalInfo.total_charge_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_dalgiftget_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_change_Cnt 'Y'}}</td>
-                <td>{{addComma totalInfo.total_changeAuto_Cnt 'Y'}}</td>
+                <%--<td>{{addComma totalInfo.total_changeAuto_Cnt 'Y'}}</td>--%>
                 <td>{{addComma totalInfo.total_join_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_levelup_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_ranking_Cnt 'Y'}}</td>
@@ -1225,7 +1225,7 @@
                     <td>{{addComma charge_Cnt 'Y'}}</td>
                     <td>{{addComma dalgiftget_Cnt 'Y'}}</td>
                     <td>{{addComma change_Cnt 'Y'}}</td>
-                    <td>{{addComma autochange_Cnt 'Y'}}</td>
+                    <%--<td>{{addComma autochange_Cnt 'Y'}}</td>--%>
                     <td>{{addComma join_Cnt 'Y'}}</td>
                     <td>{{addComma levelup_Cnt 'Y'}}</td>
                     <td>{{addComma ranking_Cnt 'Y'}}</td>
@@ -1259,7 +1259,7 @@
                     <td>{{addComma totalInfo.total_charge_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_dalgiftget_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_change_Cnt 'Y'}}</td>
-                    <td>{{addComma totalInfo.total_changeAuto_Cnt 'Y'}}</td>
+                    <%--<td>{{addComma totalInfo.total_changeAuto_Cnt 'Y'}}</td>--%>
                     <td>{{addComma totalInfo.total_join_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_levelup_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_ranking_Cnt 'Y'}}</td>
@@ -1315,7 +1315,7 @@
                 <th rowspan="2" style="background-color: white; border-bottom: hidden;border-top: hidden;"></th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#f8cbad">구분</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">환전 승인</th>
-                <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">교환</th>
+                <th colspan="1" class="_bgColor" data-bgcolor="#fbe5d6">교환</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">영구정지</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">탈퇴</th>
                 <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">테스트 회수</th>
@@ -1326,7 +1326,7 @@
                 <th class="_bgColor" data-bgcolor="#dae3f3">(자동)</th>
                 <th class="_bgColor" data-bgcolor="#dae3f3">(운영자 지급)</th>
                 <th class="_bgColor" data-bgcolor="#fbe5d6">일반</th>
-                <th class="_bgColor" data-bgcolor="#fbe5d6">자동</th>
+                <%--<th class="_bgColor" data-bgcolor="#fbe5d6">자동</th>--%>
             </tr>
             <tr class="font-bold" style="background-color: #d9d9d9">
                 <td>총합</td>
@@ -1342,7 +1342,7 @@
                 <td>총합</td>
                 <td>{{addComma totalInfo.total_exchange_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_change_Cnt 'Y'}}</td>
-                <td>{{addComma totalInfo.total_autochange_Cnt 'Y'}}</td>
+                <%--<td>{{addComma totalInfo.total_autochange_Cnt 'Y'}}</td>--%>
                 <td>{{addComma totalInfo.total_block_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_withdrawal_Cnt 'Y'}}</td>
                 <td>{{addComma totalInfo.total_testout_Cnt 'Y'}}</td>
@@ -1378,7 +1378,7 @@
                     </td>
                     <td>{{addComma exchange_Cnt 'Y'}}</td>
                     <td>{{addComma change_Cnt 'Y'}}</td>
-                    <td>{{addComma autochange_Cnt 'Y'}}</td>
+                    <%--<td>{{addComma autochange_Cnt 'Y'}}</td>--%>
                     <td>{{addComma block_Cnt 'Y'}}</td>
                     <td>{{addComma withdrawal_Cnt 'Y'}}</td>
                     <td>{{addComma testout_Cnt 'Y'}}</td>
@@ -1401,7 +1401,7 @@
                     <td>총합</td>
                     <td>{{addComma totalInfo.total_exchange_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_change_Cnt 'Y'}}</td>
-                    <td>{{addComma totalInfo.total_autochange_Cnt 'Y'}}</td>
+                    <%--<td>{{addComma totalInfo.total_autochange_Cnt 'Y'}}</td>--%>
                     <td>{{addComma totalInfo.total_block_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_withdrawal_Cnt 'Y'}}</td>
                     <td>{{addComma totalInfo.total_testout_Cnt 'Y'}}</td>

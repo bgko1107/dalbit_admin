@@ -6,7 +6,7 @@
 <div id="main-header">
     <div id="page-wrapper">
         <!-- DATA TABLE -->
-        <div class="row col-lg-12 form-inline mb15">
+        <div class="col-lg-12 form-inline no-padding">
             <div class="widget-content">
                 <select id="slctType" name="slctType" class="form-control searchType mt5" style="width: 130px; display: inline" onchange="mailboxImgList();">
                     <option value="0">상태(전체)</option>
