@@ -439,6 +439,7 @@
             , title
             , select_year
             , select_month
+            , notice_idx
             , DATE_FORMAT(req_start_date, '%Y-%m-%d') req_start_date
             , DATE_FORMAT(req_end_date, '%Y-%m-%d') req_end_date
             , DATE_FORMAT(condition_start_date, '%Y-%m-%d') condition_start_date
@@ -487,6 +488,7 @@
             title
             , select_year
             , select_month
+            , notice_idx
             , req_start_date
             , req_end_date
             , condition_start_date
@@ -506,6 +508,7 @@
             #{title}
             , #{select_year}
             , #{select_month}
+            , #{notice_idx}
             , #{req_start_date}
             , #{req_end_date}
             , #{condition_start_date}
@@ -528,6 +531,7 @@
         /* Men_Special.xml - updateManageInfo */
         update rd_admin.tb_req_special_dj_manage
         set title = #{title}
+            , notice_idx = #{notice_idx}
             , req_start_date = #{req_start_date}
             , req_end_date = #{req_end_date}
             , condition_start_date = #{condition_start_date}

@@ -12,6 +12,7 @@ public class SpecialDjManageVo extends PagingVo {
 
     private String idx;
     private String title;
+    private int notice_idx;
     private String select_year;
     private String select_month;
     private String req_start_date;

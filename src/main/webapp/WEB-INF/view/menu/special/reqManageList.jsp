@@ -474,8 +474,13 @@
                     </tr>
                     <tr>
                         <th>제목</th>
-                        <td colspan="3">
+                        <td>
                             <input type="text" class="form-control" style="width:100%" id="title" name="title" value="{{this.specialDjManageInfo.title}}" />
+                        </td>
+
+                        <th>공지사항 번호</th>
+                        <td>
+                            <input type="text" class="form-control" style="width:100px;" id="notice_idx" name="notice_idx" value="{{this.specialDjManageInfo.notice_idx}}" />
                         </td>
                     </tr>
                     <tr>
