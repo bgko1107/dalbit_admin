@@ -103,11 +103,13 @@
 
 
     function getPayList(tmp) {
+        var slctType = 0;
         if(tmp == "payment"){
             memberDataType = 99;
             $("#slctDateType").hide();
             $("#rangeMemberDatepicker").hide();
             $('#bt_searchMember').hide();
+            slctType = 0;
         }else{
             memberDataType = 0;
             $("#slctDateType").show();
@@ -116,6 +118,7 @@
             dateTime = moment(dateTime).format("YYYY.MM.DD");
             $("#startMemberDate").val(dateTime);
             $("#endMemberDate").val(dateTime);
+            slctType = 1;
         }
         var dtList_info_pay_data = function(data) {
             data.searchText = txt_search;                        // 검색명
@@ -126,6 +129,7 @@
             data.innerType = tmp_innerType;
             data.payWay = tmp_payWay;
             data.memberDataType = memberDataType;
+            data.slctType = slctType;
 
         };
         if(tmp == "payment"){

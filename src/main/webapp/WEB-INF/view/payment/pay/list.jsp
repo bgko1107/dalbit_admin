@@ -98,6 +98,7 @@
         tmp_sDate = sDate;
         tmp_eDate = eDate;
         memberDataType = 99;
+        slctType = 0;
         dtList_info_pay.reload(pay_listSummary);
     }
 

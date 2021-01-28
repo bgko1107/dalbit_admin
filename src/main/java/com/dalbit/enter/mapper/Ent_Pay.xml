@@ -7,13 +7,10 @@
     </select>
 
     <select id="callPayCancelInfo" parameterType="com.dalbit.enter.vo.procedure.P_StatVo" resultType="com.dalbit.enter.vo.procedure.P_PayInfoOutVo">
-        SELECT count(case when pay_yn = 'Y' then 1 end) as totalPayCnt
-              ,sum(case when pay_yn = 'Y' then pay_amt end) as totalPayAmt
-              ,count(case when cancel_state = 'Y' then 1 end) as cancelCnt
-              ,sum(case when cancel_state = 'Y' then pay_amt end) as cancelAmt
-          FROM ( SELECT pay.pay_yn, floor(pay.pay_amt) as pay_amt
-                       , ifnull(basic.inner,member.inner) as chrgr_yn
-                       , pay.cancel_dt , pay.cancel_state
+       SELECT count(case when pay_yn = 'Y' then 1 end) as totalPayCnt
+				  ,sum(case when pay_yn = 'Y' then pay_amt end) as totalPayAmt
+				  ,count(case when cancel_state = 'Y' then 1 end) as cancelCnt
+				  ,sum(case when cancel_state = 'Y' then pay_amt end) as cancelAmt
                    FROM rd_data.tb_payment_succ pay
                    LEFT JOIN (select mem_no, count(mem_no) memCnt, sum(pay_amt) paySum
                    FROM rd_data.tb_payment_succ
@@ -23,14 +20,11 @@
                      on pay.mem_no = basic.mem_no
                    LEFT JOIN rd_data.tb_member_withdrawal_bak member
                      ON pay.mem_no = member.mem_no
-                    LEFT JOIN (select mem_no, ruby
-                                 FROM rd_data.tb_member_wallet) wallet
-                                   ON pay.mem_no = wallet.mem_no , (select @rownum := 0) r
-                                order by pay_dt_comein desc ) a
-           WHERE DATE_FORMAT(cancel_dt, '%Y%m%d') >= STR_TO_DATE(#{startDate}, '%Y%m%d')
-             and DATE_FORMAT(cancel_dt, '%Y%m%d') <![CDATA[<=]]> STR_TO_DATE(#{endDate}, '%Y%m%d')
+        WHERE cancel_dt <![CDATA[>=]]> concat(#{startDate}, ' 00:00:00')
+             and cancel_dt <![CDATA[<=]]> concat(#{endDate}, ' 23:59:59')
              and cancel_state = 'Y'
-             and chrgr_yn = '0'
+             and ifnull(basic.inner,member.inner) = '0'
+
     </select>
 
     <select id="callPayTotal" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.enter.vo.procedure.P_PayTotalOutDetailVo">
