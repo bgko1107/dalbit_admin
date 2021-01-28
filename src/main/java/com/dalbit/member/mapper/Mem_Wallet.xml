@@ -647,10 +647,10 @@
         <if test='walletType != null and walletType != ""'>
             <choose>
                 <when test='walletType == "1"'>
-                    and (a.target_mem_no=#{mem_no} or (a.mem_no = #{mem_no} and `type` not in (2, 3, 4, 6, 9, 14, 17, 19, 20, 32 )))
+                    and ((a.mem_no = #{mem_no} and a.target_mem_no = '10000000000000') or a.target_mem_no = #{mem_no})
                 </when>
                 <when test='walletType == "2"'>
-                    and (a.mem_no = #{mem_no} and `type` in (2, 3, 4, 6, 9, 14, 17, 19, 20, 32 ))
+                    and (a.mem_no = #{mem_no} and a.target_mem_no != '10000000000000') and `type` in (2, 3, 4, 14, 17, 19, 20, 32)
                 </when>
                 <when test='walletType == "0"'>
                     AND (a.mem_no = #{mem_no} or a.target_mem_no=#{mem_no})
@@ -686,13 +686,13 @@
                      ,ABS( (a.money_new - a.money_old) + (a.ruby_new - a.ruby_old) ) AS ruby
                      ,( a.money_new + a.ruby_new ) AS ruby_new
                      , b.room_no
-                     , (CASE WHEN a.mem_no = b.mem_no THEN a.mem_no WHEN b.mem_no = a.target_mem_no THEN a.target_mem_no ELSE '' END ) AS mem_no
-                     , (SELECT `level` FROM rd_data.tb_member_level WHERE mem_no = ( CASE WHEN a.mem_no = b.mem_no THEN a.mem_no WHEN b.mem_no = a.target_mem_no THEN a.target_mem_no ELSE '' END )) AS `level`
-                     , (SELECT `grade` FROM rd_data.tb_member_level WHERE mem_no = ( CASE WHEN a.mem_no = b.mem_no THEN a.mem_no WHEN b.mem_no = a.target_mem_no THEN a.target_mem_no ELSE '' END )) AS `grade`
-                     , (SELECT mem_userid FROM rd_data.tb_member_basic WHERE mem_no = ( CASE WHEN a.mem_no = b.mem_no THEN a.mem_no WHEN b.mem_no = a.target_mem_no THEN a.target_mem_no ELSE '' END )) AS userId
-                     , (SELECT mem_nick FROM rd_data.tb_member_basic WHERE mem_no = ( CASE WHEN a.mem_no = b.mem_no THEN a.mem_no WHEN b.mem_no = a.target_mem_no THEN a.target_mem_no ELSE '' END )) AS nickName
-                     , (SELECT mem_sex FROM rd_data.tb_member_basic WHERE mem_no = ( CASE WHEN a.mem_no = b.mem_no THEN a.mem_no WHEN b.mem_no = a.target_mem_no THEN a.target_mem_no ELSE '' END )) AS mem_sex
-                     , (SELECT mem_birth_year FROM rd_data.tb_member_basic WHERE mem_no = ( CASE WHEN a.mem_no = b.mem_no THEN a.mem_no WHEN b.mem_no = a.target_mem_no THEN a.target_mem_no ELSE '' END  )) AS mem_birth_year
+                     , target_mem_no AS mem_no
+                     , (SELECT `level` FROM rd_data.tb_member_level WHERE mem_no = target_mem_no) AS `level`
+                     , (SELECT `grade` FROM rd_data.tb_member_level WHERE mem_no = target_mem_no) AS `grade`
+                     , (SELECT mem_userid FROM rd_data.tb_member_basic WHERE mem_no = target_mem_no) AS userId
+                     , (SELECT mem_nick FROM rd_data.tb_member_basic WHERE mem_no = target_mem_no) AS nickName
+                     , (SELECT mem_sex FROM rd_data.tb_member_basic WHERE mem_no = target_mem_no) AS mem_sex
+                     , (SELECT mem_birth_year FROM rd_data.tb_member_basic WHERE mem_no = target_mem_no) AS mem_birth_year
                      , a.last_upd_date
                      , b.item_code
                      , b.item_cnt
