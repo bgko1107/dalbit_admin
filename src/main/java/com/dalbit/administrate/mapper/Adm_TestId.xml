@@ -109,23 +109,22 @@
             , mem.mem_birth_year
             , mem.mem_birth_month
             , mem.mem_birth_day
-            , concat((date_format(now(),'%Y') - mem_birth_year) + 1,'') as koreanAge
+            , CONCAT((DATE_FORMAT(NOW(),'%Y') - mem_birth_year) + 1,'') AS koreanAge
             , mem.mem_phone
             , mem.mem_state
             , DATE_FORMAT(test.reg_date, '%Y-%m-%d %H:%i:%s') as reg_date
             , level.level
             , level.grade
-            , DATE_FORMAT((select max(session.last_upd_date) from rd_data.tb_member_session session where session.mem_no = mem.mem_no), "%Y.%m.%d %T") lastLoginDatetime
+            , DATE_FORMAT((SELECT MAX(session.last_upd_date) FROM rd_data.tb_member_session `session` WHERE session.mem_no = mem.mem_no), '%Y.%m.%d %T') lastLoginDatetime
             , wallet.ruby as dal
             , wallet.gold as byeol
-            , (select DATE_FORMAT(last_upd_date, '%Y-%m-%d %H:%i:%s') from rd_data.tb_member_profile_edit_history where mem_no = mem.mem_no and `type` = 0 order by last_upd_date desc limit 1) as lastOpDate
+            , bs.last_profile_upd_date AS lastOpDate
         from rd_data.tb_member_basic mem
-            , rd_admin.tb_admin_test_account test
-            , rd_data.tb_member_level level
-            , rd_data.tb_member_wallet wallet
-        where mem.mem_no = test.mem_no
-            and mem.mem_no = level.mem_no
-            and mem.mem_no = wallet.mem_no
+            JOIN rd_admin.tb_admin_test_account test ON mem.mem_no = test.mem_no
+            JOIN rd_data.tb_member_level level ON mem.mem_no = level.mem_no
+            JOIN rd_data.tb_member_wallet wallet ON mem.mem_no = wallet.mem_no
+            LEFT JOIN rd_data.tb_member_basic_stat bs ON mem.mem_no = bs.mem_no
+        <where>
             <if test='searchText != null and searchText != ""'>
                 <choose>
                     <when test='searchType == 0'>
@@ -156,6 +155,7 @@
             <if test="search_adminId == 1">
                 AND test.is_admin = #{search_adminId}
             </if>
+        </where>
         order by test.reg_date desc
     </select>
 
