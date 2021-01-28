@@ -16,9 +16,9 @@
             <tr>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#00b050" data-fontcolor="white">조회일자</th>
                 <th colspan="6" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">선수금</th>
-                <th rowspan="3" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">별수</th>
-                <th rowspan="3" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">미지급비용</th>
-                <th rowspan="3" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">매출액</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">별수</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">미지급비용</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">매출액</th>
                 <th colspan="3" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">탈퇴</th>
             </tr>
             <tr>
