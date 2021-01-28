@@ -48,6 +48,10 @@
                     AND history.send_type = #{send_type}
                 </if>
 
+                <if test='push_send_user == "3"'>
+                    and history.mem_no in (SELECT mem_no_star FROM rd_data.tb_member_recv_alert WHERE mem_no_star = history.mem_no AND alert_yn = 1)
+                </if>
+
                 <if test='push_slct != null and push_slct != "" and push_slct != "-1"'>
                     AND history.push_slct = #{push_slct}
                 </if>
@@ -128,6 +132,9 @@
                 <if test='push_send_user == "2"'>
                   AND admin.op_name is null
                 </if>
+                <if test='push_send_user == "3"'>
+                    and history.mem_no in (SELECT mem_no_star FROM rd_data.tb_member_recv_alert WHERE mem_no_star = history.mem_no AND alert_yn = 1)
+                </if>
 
                 <if test='searchText != null and searchText != ""'>
                     AND (history.send_title like concat ('%', #{searchText}, '%')
@@ -199,6 +206,10 @@
 
               <if test='send_type != null and send_type != "" and send_type != "-1"'>
                   AND history.send_type = #{send_type}
+              </if>
+
+              <if test='push_send_user == "3"'>
+                  and history.mem_no in (SELECT mem_no_star FROM rd_data.tb_member_recv_alert WHERE mem_no_star = history.mem_no AND alert_yn = 1)
               </if>
 
               <if test='push_slct != null and push_slct != "" and push_slct != "-1"'>

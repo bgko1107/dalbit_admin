@@ -606,6 +606,7 @@ var push_send_user = [
     , new COMMON_CODE('0', '0', '발송자구분(전체)')
     , new COMMON_CODE('1', '1', '운영자')
     , new COMMON_CODE('2', '2', '자동')
+    , new COMMON_CODE('3', '3', '알림받기')
 ];
 
 

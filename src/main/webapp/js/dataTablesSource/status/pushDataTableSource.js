@@ -72,8 +72,8 @@ var PushDataTableSource = {
         'url': '/rest/status/push/history/member/notice/detail'
 
         , 'columns': [
-            {'title': '회원번호', 'data' : 'mem_no_fan', 'render' : function(data, type, row, meta){
-                    return data;
+            {'title': '회원번호', 'data' : 'mem_no_star', 'render' : function(data, type, row, meta){
+                    return '<a href="javascript://" class="_openMemberPop" data-memNo="' + data + '">' + data + '</a>';
                 }}
             ,{'title': '회원닉네임', 'data' : 'mem_nick', 'render' : function(data, type, row, meta){
                     return data;

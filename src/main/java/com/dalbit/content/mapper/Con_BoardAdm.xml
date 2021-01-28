@@ -5,26 +5,16 @@
     <sql id="fanBoardCondition">
         <where>
             <if test='txt_search != null and txt_search != ""'>
-                (select mem_no from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat
-                ('%',#{txt_search},'%')
-                or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat
-                ('%',#{txt_search},'%')
-                or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat
-                ('%',#{txt_search},'%')
-                or (select mem_id from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat
-                ('%',#{txt_search},'%')
-                or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat
-                ('%',#{txt_search},'%')
-                or (select mem_no from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat
-                ('%',#{txt_search},'%')
-                or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat
-                ('%',#{txt_search},'%')
-                or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat
-                ('%',#{txt_search},'%')
-                or (select mem_id from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat
-                ('%',#{txt_search},'%')
-                or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat
-                ('%',#{txt_search},'%')
+                ((select mem_no from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
+                or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
+                or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
+                or (select mem_id from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
+                or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
+                or (select mem_no from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
+                or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
+                or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
+                or (select mem_id from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
+                or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%'))
             </if>
             <if test='start_sel != null and start_sel != ""'>
                 and fan.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
@@ -112,7 +102,6 @@
                     , (select contents from rd_data.tb_member_fanboard where idx=fan.board_no) as contents
                     , fan.contents as replyContents
                 </if>
-
                 , fan.view_yn
                 , fan.depth
                 , ifnull(fan.opName,'') as opName
@@ -212,10 +201,13 @@
     <sql id="storyCondition">
         <where>
             <if test='txt_search != null and txt_search != ""'>
-                (bas.mem_no like CONCAT('%',#{txt_search},'%') or sto.writer_no like CONCAT('%', #{txt_search}, '%')
-                OR bas.mem_userid like CONCAT('%',#{txt_search},'%') or sto.mem_userid like CONCAT('%', #{txt_search}, '%')
-                OR bas.mem_nick like CONCAT('%',#{txt_search},'%') or sto.mem_nick like CONCAT('%', #{txt_search}, '%')
-                OR bas.mem_id like CONCAT('%',#{txt_search},'%')
+                (bas.mem_no like = #{txt_search}
+                or sto.writer_no  = #{txt_search}
+                OR bas.mem_userid  = #{txt_search}
+                or sto.mem_userid  = #{txt_search}
+                OR bas.mem_nick like CONCAT('%',#{txt_search},'%')
+                or sto.mem_nick like CONCAT('%', #{txt_search}, '%')
+                OR bas.mem_id  = #{txt_search}
                 OR bas.mem_phone like CONCAT('%',#{txt_search},'%'))
             </if>
             <if test='start_sel != null and start_sel !=""'>
@@ -343,10 +335,10 @@
           and profile.msg_profile is not null
           and profile.msg_profile != ''
         <if test='searchText != null and searchText != ""'>
-            and (basic.mem_no like CONCAT('%',#{searchText},'%')
-            OR basic.mem_userid like CONCAT('%',#{searchText},'%')
+            and (basic.mem_no = #{searchText}
+            OR basic.mem_userid = #{searchText}
             OR basic.mem_nick like CONCAT('%',#{searchText},'%')
-            OR basic.mem_id like CONCAT('%',#{searchText},'%')
+            OR basic.mem_id = #{searchText}
             OR basic.mem_phone like CONCAT('%',#{searchText},'%'))
         </if>
         <if test='sDate != null and sDate !=""'>
@@ -417,15 +409,15 @@
           left join rd_data.tb_member_basic castMem on b.cast_mem_no = castMem.mem_no
           left join rd_data.tb_member_basic writerMem on b.writer_mem_no = writerMem.mem_no
           inner join (select @RNUM := #{pageStart}) r
-        where ((castMem.mem_no like CONCAT('%',#{searchText},'%')
-                OR castMem.mem_userid like CONCAT('%',#{searchText},'%')
+        where ((castMem.mem_no = #{searchText}
+                OR castMem.mem_userid = #{searchText}
                 OR castMem.mem_nick like CONCAT('%',#{searchText},'%')
-                OR castMem.mem_id like CONCAT('%',#{searchText},'%')
+                OR castMem.mem_id = #{searchText}
                 OR castMem.mem_phone like CONCAT('%',#{searchText},'%'))
-                or (writerMem.mem_no like CONCAT('%',#{searchText},'%')
-                OR writerMem.mem_userid like CONCAT('%',#{searchText},'%')
+                or (writerMem.mem_no = #{searchText}
+                OR writerMem.mem_userid = #{searchText}
                 OR writerMem.mem_nick like CONCAT('%',#{searchText},'%')
-                OR writerMem.mem_id like CONCAT('%',#{searchText},'%')
+                OR writerMem.mem_id = #{searchText}
                 OR writerMem.mem_phone like CONCAT('%',#{searchText},'%'))
             )
         <if test='sDate != null and sDate !=""'>
@@ -677,7 +669,7 @@
     </select>
 
     <select id="mailboxTabCount" parameterType="com.dalbit.content.vo.BoardAdmTabCountVo" resultType="com.dalbit.content.vo.BoardAdmTabCountVo">
-        /* Con_BoardAdm.xml - tabCount */
+        /* Con_BoardAdm.xml - mailboxTabCount */
         select '1' type, count(*) AS totalCnt
            from (
                 SELECT a.chat_no
