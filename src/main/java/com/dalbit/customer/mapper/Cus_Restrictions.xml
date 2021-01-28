@@ -182,27 +182,36 @@
         (
         SELECT
         listen.mem_no	 AS mem_no
-        ,IFNULL(basic.mem_userid, (SELECT mem_userid FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_userid
-        ,IFNULL(basic.mem_nick, (SELECT mem_nick FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_nick
-        ,IFNULL(basic.mem_name, (SELECT mem_name FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_name
-        , (SELECT device_uuid FROM rd_data.tb_member_session WHERE mem_no = listen.mem_no ORDER BY last_upd_date DESC LIMIT 1)	 AS device_uuid
-        ,IFNULL(basic.mem_phone, (SELECT mem_phone FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_phone
-        ,(SELECT ip FROM rd_data.tb_member_connect_state WHERE mem_no = listen.mem_no) AS mem_ip
+        ,IFNULL(basic.mem_userid, basicx.mem_userid) AS mem_userid
+        ,IFNULL(basic.mem_nick, basicx.mem_nick) AS mem_nick
+        ,IFNULL(basic.mem_sex, basicx.mem_sex) AS mem_sex
+        ,IFNULL(basic.mem_name, basicx.mem_name) AS mem_name
+        ,IFNULL(basic.mem_birth_year, basicx.mem_birth_year) AS mem_birth_year
+        ,IFNULL(basic.mem_birth_month, basicx.mem_birth_month) AS mem_birth_month
+        ,IFNULL(basic.mem_birth_day, basicx.mem_birth_day) AS mem_birth_day
+        ,IFNULL(basic.inner, basic.inner) AS `inner`
+        ,((DATE_FORMAT(NOW(),'%Y') - (IFNULL(basic.mem_birth_year, basicx.mem_birth_year))) + 1) AS mem_age
+        ,cstd.last_device_uuid AS device_uuid
+        ,IFNULL(basic.mem_phone, basicx.mem_phone) AS mem_phone
+        ,cst.ip AS mem_ip
         , dj_mem_no	 AS dj_mem_no
-        ,IFNULL(dj.mem_userid, (SELECT mem_userid FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_mem_userid
-        ,IFNULL(dj.mem_nick, (SELECT mem_nick FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_mem_nick
-        ,IFNULL(dj.mem_name, (SELECT mem_name FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_mem_name
-        ,IFNULL(dj.mem_phone, (SELECT mem_phone FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_mem_phone
-        ,(SELECT ip FROM rd_data.tb_member_connect_state WHERE mem_no = listen.dj_mem_no) AS dj_mem_ip
-        ,(SELECT device_uuid FROM rd_data.tb_member_session WHERE mem_no = listen.dj_mem_no ORDER BY last_upd_date DESC LIMIT 1)	AS dj_device_uuid
+        ,IFNULL(dj.mem_userid, djx.mem_userid) AS dj_mem_userid
+        ,IFNULL(dj.mem_nick, djx.mem_nick) AS dj_mem_nick
+        ,IFNULL(dj.mem_sex, djx.mem_sex) AS dj_mem_sex
+        ,IFNULL(dj.mem_name, djx.mem_name) AS dj_mem_name
+        ,IFNULL(dj.mem_phone, djx.mem_phone) AS dj_mem_phone
+        ,IFNULL(dj.inner, djx.inner) AS dj_inner
+        ,cstd.ip AS dj_mem_ip
+        ,cstd.last_device_uuid AS dj_device_uuid
         FROM
         rd_data.tb_member_broadcast_listening AS listen
-        LEFT JOIN
-        rd_data.tb_member_basic AS basic ON  listen.mem_no = basic.mem_no
-        LEFT JOIN
-        rd_data.tb_member_basic AS dj ON  listen.dj_mem_no = dj.mem_no
-        LEFT JOIN
-        rd_data.tb_broadcast_room AS room ON  listen.room_no = room.room_no
+        LEFT JOIN rd_data.tb_member_basic AS basic ON  listen.mem_no = basic.mem_no
+        LEFT JOIN rd_data.tb_member_basic AS dj ON  listen.dj_mem_no = dj.mem_no
+        LEFT JOIN rd_data.tb_member_basic AS basicx ON  listen.mem_no = basicx.mem_no
+        LEFT JOIN rd_data.tb_member_basic AS djx ON  listen.dj_mem_no = djx.mem_no
+        LEFT JOIN rd_data.tb_broadcast_room AS room ON  listen.room_no = room.room_no
+        LEFT JOIN rd_data.tb_member_connect_state AS cst ON listen.mem_no = cst.mem_no
+        LEFT JOIN rd_data.tb_member_connect_state AS cstd ON listen.dj_mem_no = cstd.mem_no
         <where>
             listen.forced = 'Y'
             <if test="startDate != '-1'">
@@ -304,38 +313,39 @@
         (
         SELECT
         listen.mem_no	 AS mem_no
-        ,IFNULL(basic.mem_userid, (SELECT mem_userid FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_userid
-        ,IFNULL(basic.mem_nick, (SELECT mem_nick FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_nick
-        ,IFNULL(basic.mem_sex, (SELECT mem_sex FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_sex
-        ,IFNULL(basic.mem_name, (SELECT mem_name FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_name
-        ,IFNULL(basic.mem_birth_year, (SELECT mem_birth_year FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_birth_year
-        ,IFNULL(basic.mem_birth_month, (SELECT mem_birth_month FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_birth_month
-        ,IFNULL(basic.mem_birth_day, (SELECT mem_birth_day FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_birth_day
-        ,IFNULL(basic.inner, (SELECT `inner` FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS `inner`
-        ,((date_format(now(),'%Y') - (IFNULL(basic.mem_birth_year, (SELECT mem_birth_year FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)))) + 1) AS mem_age
-        , (SELECT device_uuid FROM rd_data.tb_member_session WHERE mem_no = listen.mem_no ORDER BY last_upd_date DESC LIMIT 1)	 AS device_uuid
-        ,IFNULL(basic.mem_phone, (SELECT mem_phone FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.mem_no)) AS mem_phone
-        ,(SELECT ip FROM rd_data.tb_member_connect_state WHERE mem_no = listen.mem_no) AS mem_ip
+        ,IFNULL(basic.mem_userid, basicx.mem_userid) AS mem_userid
+        ,IFNULL(basic.mem_nick, basicx.mem_nick) AS mem_nick
+        ,IFNULL(basic.mem_sex, basicx.mem_sex) AS mem_sex
+        ,IFNULL(basic.mem_name, basicx.mem_name) AS mem_name
+        ,IFNULL(basic.mem_birth_year, basicx.mem_birth_year) AS mem_birth_year
+        ,IFNULL(basic.mem_birth_month, basicx.mem_birth_month) AS mem_birth_month
+        ,IFNULL(basic.mem_birth_day, basicx.mem_birth_day) AS mem_birth_day
+        ,IFNULL(basic.inner, basic.inner) AS `inner`
+        ,((DATE_FORMAT(NOW(),'%Y') - (IFNULL(basic.mem_birth_year, basicx.mem_birth_year))) + 1) AS mem_age
+        ,cstd.last_device_uuid AS device_uuid
+        ,IFNULL(basic.mem_phone, basicx.mem_phone) AS mem_phone
+        ,cst.ip AS mem_ip
         , listen.last_upd_date	 AS last_upd_date
         , listen.room_no	 AS room_no
         , room.title	 AS title
         , dj_mem_no	 AS dj_mem_no
-        ,IFNULL(dj.mem_userid, (SELECT mem_userid FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_mem_userid
-        ,IFNULL(dj.mem_nick, (SELECT mem_nick FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_mem_nick
-        ,IFNULL(dj.mem_sex, (SELECT mem_sex FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_mem_sex
-        ,IFNULL(dj.mem_name, (SELECT mem_name FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_mem_name
-        ,IFNULL(dj.mem_phone, (SELECT mem_phone FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_mem_phone
-        ,IFNULL(dj.inner, (SELECT `inner` FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = listen.dj_mem_no)) AS dj_inner
-        ,(SELECT ip FROM rd_data.tb_member_connect_state WHERE mem_no = listen.dj_mem_no) AS dj_mem_ip
-        ,(SELECT device_uuid FROM rd_data.tb_member_session WHERE mem_no = listen.dj_mem_no ORDER BY last_upd_date DESC LIMIT 1)	AS dj_device_uuid
+        ,IFNULL(dj.mem_userid, djx.mem_userid) AS dj_mem_userid
+        ,IFNULL(dj.mem_nick, djx.mem_nick) AS dj_mem_nick
+        ,IFNULL(dj.mem_sex, djx.mem_sex) AS dj_mem_sex
+        ,IFNULL(dj.mem_name, djx.mem_name) AS dj_mem_name
+        ,IFNULL(dj.mem_phone, djx.mem_phone) AS dj_mem_phone
+        ,IFNULL(dj.inner, djx.inner) AS dj_inner
+        ,cstd.ip AS dj_mem_ip
+        ,cstd.last_device_uuid AS dj_device_uuid
         FROM
         rd_data.tb_member_broadcast_listening AS listen
-        LEFT JOIN
-        rd_data.tb_member_basic AS basic ON  listen.mem_no = basic.mem_no
-        LEFT JOIN
-        rd_data.tb_member_basic AS dj ON  listen.dj_mem_no = dj.mem_no
-        LEFT JOIN
-        rd_data.tb_broadcast_room AS room ON  listen.room_no = room.room_no
+        LEFT JOIN rd_data.tb_member_basic AS basic ON  listen.mem_no = basic.mem_no
+        LEFT JOIN rd_data.tb_member_basic AS dj ON  listen.dj_mem_no = dj.mem_no
+        LEFT JOIN rd_data.tb_member_basic AS basicx ON  listen.mem_no = basicx.mem_no
+        LEFT JOIN rd_data.tb_member_basic AS djx ON  listen.dj_mem_no = djx.mem_no
+        LEFT JOIN rd_data.tb_broadcast_room AS room ON  listen.room_no = room.room_no
+        LEFT JOIN rd_data.tb_member_connect_state AS cst ON listen.mem_no = cst.mem_no
+        LEFT JOIN rd_data.tb_member_connect_state AS cstd ON listen.dj_mem_no = cstd.mem_no
         <where>
             listen.forced = 'Y'
             <if test="startDate != '-1'">
@@ -351,13 +361,13 @@
                 <if test='searchTarget != null and searchTarget != "" and searchTarget != "2" '>
                     <choose>
                         <when test='searchType == 1'>
-                            AND a.mem_no like concat ('%', #{searchText}, '%')
+                            AND a.mem_no = #{searchText}
                         </when>
                         <when test='searchType == 2'>
                             AND a.mem_name like concat ('%', #{searchText}, '%')
                         </when>
                         <when test='searchType == 3'>
-                            AND a.mem_userid like concat ('%', #{searchText}, '%')
+                            AND a.mem_userid = #{searchText}
                         </when>
                         <when test='searchType == 4'>
                             AND a.mem_nick like concat ('%', #{searchText}, '%')
@@ -374,9 +384,9 @@
                         <otherwise>
                             AND
                             (
-                            a.mem_no like concat ('%', #{searchText}, '%')
+                            a.mem_no = #{searchText}
                             OR a.mem_name like concat ('%', #{searchText}, '%')
-                            OR a.mem_userid like concat ('%', #{searchText}, '%')
+                            OR a.mem_userid = #{searchText}
                             OR a.mem_nick like concat ('%', #{searchText}, '%')
                             OR a.mem_phone like concat ('%', #{searchText}, '%')
                             OR a.device_uuid = #{searchText}
@@ -390,13 +400,13 @@
                     OR (
                     <choose>
                         <when test='searchType == 1'>
-                            a.dj_mem_no like concat ('%', #{searchText}, '%')
+                            a.dj_mem_no = #{searchText}
                         </when>
                         <when test='searchType == 2'>
                             a.dj_mem_name like concat ('%', #{searchText}, '%')
                         </when>
                         <when test='searchType == 3'>
-                            a.dj_mem_userid like concat ('%', #{searchText}, '%')
+                            a.dj_mem_userid = #{searchText}
                         </when>
                         <when test='searchType == 4'>
                             a.dj_mem_nick like concat ('%', #{searchText}, '%')
@@ -412,9 +422,9 @@
                         </when>
                         <otherwise>
                             (
-                            a.dj_mem_no like concat ('%', #{searchText}, '%')
+                            a.dj_mem_no = #{searchText}
                             OR a.dj_mem_name like concat ('%', #{searchText}, '%')
-                            OR a.dj_mem_userid like concat ('%', #{searchText}, '%')
+                            OR a.dj_mem_userid = #{searchText}
                             OR a.dj_mem_nick like concat ('%', #{searchText}, '%')
                             OR a.dj_mem_phone like concat ('%', #{searchText}, '%')
                             OR a.dj_device_uuid = #{searchText}

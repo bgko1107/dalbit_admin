@@ -6,22 +6,21 @@
         <where>
             <if test='sDate != null and sDate != ""'>
                 <if test="memberDataType == 1">
-                    and DATE_FORMAT(pay_dt_comein, '%Y.%m.%d') <![CDATA[>=]]> #{sDate}
-                    and DATE_FORMAT(pay_dt_comein, '%Y.%m.%d') <![CDATA[<=]]>  #{eDate}
+                    and pay_dt_comein BETWEEN concat(#{sDate},' 00:00:00') AND concat(#{eDate},' 23:59:59')
                 </if>
                 <if test="memberDataType == 2">
-                    and DATE_FORMAT(pay_ok_date, '%Y.%m.%d') <![CDATA[>=]]> #{sDate}
-                    and DATE_FORMAT(pay_ok_date, '%Y.%m.%d') <![CDATA[<=]]>  #{eDate}
+                    and pay_ok_date BETWEEN #{sDate} and #{eDate}
                 </if>
                 <if test="memberDataType == 99">
                     <choose>
                         <when test='success == "Y"'>
-                            and DATE_FORMAT(pay_ok_date, '%Y.%m.%d') <![CDATA[>=]]> #{sDate}
-                            and DATE_FORMAT(pay_ok_date, '%Y.%m.%d') <![CDATA[<=]]>  #{eDate}
+                            and pay_ok_date BETWEEN #{sDate} and #{eDate}
                         </when>
                         <otherwise>
-                            and if(cancel_dt !='',DATE_FORMAT(cancel_dt, '%Y.%m.%d'),if(pay_ok_date = '' ,DATE_FORMAT(pay_dt_comein, '%Y.%m.%d') ,DATE_FORMAT(pay_ok_date, '%Y.%m.%d'))) <![CDATA[>=]]> #{sDate}
-                            and if(cancel_dt !='',DATE_FORMAT(cancel_dt, '%Y.%m.%d'),if(pay_ok_date = '' ,DATE_FORMAT(pay_dt_comein, '%Y.%m.%d') ,DATE_FORMAT(pay_ok_date, '%Y.%m.%d'))) <![CDATA[<=]]>  #{eDate}
+                            and ( (cancel_dt BETWEEN concat(#{sDate},' 00:00:00') AND concat(#{eDate},' 23:59:59'))
+                                or ((pay_dt_comein BETWEEN concat(#{sDate},' 00:00:00') AND concat(#{eDate},' 23:59:59')) or (pay_ok_date BETWEEN #{sDate} and #{eDate} AND pay_yn ='Y') ) )
+                            <!--and if(cancel_dt !='',DATE_FORMAT(cancel_dt, '%Y.%m.%d'),if(pay_ok_date = '' ,DATE_FORMAT(pay_dt_comein, '%Y.%m.%d') ,DATE_FORMAT(pay_ok_date, '%Y.%m.%d'))) <![CDATA[>=]]> #{sDate}-->
+                            <!--and if(cancel_dt !='',DATE_FORMAT(cancel_dt, '%Y.%m.%d'),if(pay_ok_date = '' ,DATE_FORMAT(pay_dt_comein, '%Y.%m.%d') ,DATE_FORMAT(pay_ok_date, '%Y.%m.%d'))) <![CDATA[<=]]>  #{eDate}-->
                         </otherwise>
                     </choose>
                     <if test='timeStr != null and timeStr != "" and timeStr != "null"'>
@@ -83,7 +82,7 @@
                 <if test="slctType == 0">
                     and (((b.mem_nick like concat('%', #{searchText}, '%')
                     or b.mem_no = #{searchText}
-                    or b.mem_= #{searchText}
+                    or b.mem_id= #{searchText}
                     or b.mem_phone like concat('%', #{searchText}, '%'))
                     or (c.mem_nick like concat('%', #{searchText}, '%')
                     or c.mem_no = #{searchText}

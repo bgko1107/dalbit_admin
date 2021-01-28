@@ -29,48 +29,48 @@
                     <col width="15%"/><col width="22%"/><col width="15%"/><col width="22%"/><col width="15%"/><col width="21%"/>
                 </colgroup>
                 <tbody>
-                    <tr>
-                        <th colspan="6">대상자</th>
-                    <tr>
-                        <th>아이디</th>
-                        <td style="text-align: left" id="td_memId"></td>
-                        <th>닉네임</th>
-                        <td style="text-align: left" id="td_memNick"></td>
-                        <th>성별</th>
-                        <td style="text-align: left" id="td_memSex"></td>
-                    </tr>
-                    <tr>
-                        <th>신고사유</th>
-                        <td style="text-align: left"><span id="declaration_reason"></span></td>
+                <tr>
+                    <th colspan="6">대상자</th>
+                <tr>
+                    <th>아이디</th>
+                    <td style="text-align: left" id="td_memId"></td>
+                    <th>닉네임</th>
+                    <td style="text-align: left" id="td_memNick"></td>
+                    <th>성별</th>
+                    <td style="text-align: left" id="td_memSex"></td>
+                </tr>
+                <tr>
+                    <th>신고사유</th>
+                    <td style="text-align: left"><span id="declaration_reason"></span></td>
 
-                        <th>조치범위</th>
-                        <td colspan="3" style="text-align: left"><span id="blockScope_area"></span></td>
-                    </tr>
-                    <tr>
-                        <th>제재조치</th>
-                        <td colspan="5" style="text-align: left"><span id="member_declaration_slctType"></span></td>
-                    </tr>
-                    <tr>
-                        <th>조치사항 선택</th>
-                        <td colspan="5" style="text-align: left;height: 142px;">
-                            <span id="declaration_Message"></span>
-                            <input type="text" id="txt_declaration_message" class="form-control"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>운영자 메모</th>
-                        <td colspan="5" style="text-align: left;height: 142px;">
-                            <textarea type="textarea" class="form-control" id="txt_adminMemo" style="width: 100%;height: 100%"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>등록/처리일시</th>
-                        <td colspan="5" style="text-align: left" id="td_date"></td>
-                    </tr>
-                    <tr>
-                        <th>운영자명</th>
-                        <td colspan="5" style="text-align: left" id="td_adminName"></td>
-                    </tr>
+                    <th>조치범위</th>
+                    <td colspan="3" style="text-align: left"><span id="blockScope_area"></span></td>
+                </tr>
+                <tr>
+                    <th>제재조치</th>
+                    <td colspan="5" style="text-align: left"><span id="member_declaration_slctType"></span></td>
+                </tr>
+                <tr>
+                    <th>조치사항 선택</th>
+                    <td colspan="5" style="text-align: left;height: 142px;">
+                        <span id="declaration_Message"></span>
+                        <input type="text" id="txt_declaration_message" class="form-control"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>운영자 메모</th>
+                    <td colspan="5" style="text-align: left;height: 142px;">
+                        <textarea type="textarea" class="form-control" id="txt_adminMemo" style="width: 100%;height: 100%"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>등록/처리일시</th>
+                    <td colspan="5" style="text-align: left" id="td_date"></td>
+                </tr>
+                <tr>
+                    <th>운영자명</th>
+                    <td colspan="5" style="text-align: left" id="td_adminName"></td>
+                </tr>
                 </tbody>
             </table>
 
@@ -155,10 +155,10 @@
         var timestamp = date.getFullYear() + "-" +
             common.lpad(date.getMonth() + 1,2,"0") + "-" +
             common.lpad(date.getDate(),2,"0");
-            + " " +
-            common.lpad(date.getHours(),2,"0") + "." +
-            common.lpad(date.getMinutes(),2,"0") + "." +
-            common.lpad(date.getSeconds(),2,"0");
+        + " " +
+        common.lpad(date.getHours(),2,"0") + "." +
+        common.lpad(date.getMinutes(),2,"0") + "." +
+        common.lpad(date.getSeconds(),2,"0");
 
         var msgValue;
         var msgTitle;
