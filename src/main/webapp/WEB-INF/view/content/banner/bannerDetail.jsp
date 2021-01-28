@@ -714,7 +714,7 @@
 
             <tr>
                 <th>회원 노출 조건</th>
-                <th>회원가일 일 수</th>
+                <th>회원가입 일수</th>
                 <td colspan="2">회원 가입 <input type="text" class="_onlyNumber" id="memJoinInnerDate" name="memJoinInnerDate" maxlength="6" style="width:50px" value="{{memJoinInnerDate}}" />일 이내</td>
                 <th>회원레벨 범위</th>
                 <td colspan="3">
