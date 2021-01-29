@@ -891,6 +891,10 @@ public class Mem_MemberService {
     }
 
     public String selectLoginHistory(LoginHistoryVo loginHistoryVo){
+
+        loginHistoryVo.setPageStart(loginHistoryVo.getPageStart() -1);
+        loginHistoryVo.setPageStart(loginHistoryVo.getPageStart() * loginHistoryVo.getPageCnt());
+
         int loginHistCnt = mem_MemberDao.selectLoginHistoryCnt(loginHistoryVo);
         loginHistoryVo.setTotalCnt(loginHistCnt);
         ArrayList<LoginHistoryVo> loginHistList = mem_MemberDao.selectLoginHistory(loginHistoryVo);

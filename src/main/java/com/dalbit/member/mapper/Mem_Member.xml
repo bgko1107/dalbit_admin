@@ -525,11 +525,9 @@
 
     <select id="selectLoginHistory" parameterType="com.dalbit.member.vo.LoginHistoryVo" resultType="com.dalbit.member.vo.LoginHistoryVo">
         /* Mem_Member.xml - selectLoginHistory */
-        select *
+        select *, @rownum := @rownum + 1 as rowNum
           from(
-            select
-                @rownum := @rownum + 1 as rowNum
-                , a.idx
+            select a.idx
                 , a.mem_no
                 , b.mem_nick
                 , b.mem_sex
@@ -549,11 +547,11 @@
                 , a.ip
                 , DATE_FORMAT(a.last_upd_date, '%Y-%m-%d %H:%i:%s') last_upd_date
             from rd_data.tb_member_basic b left join rd_data.tb_member_session a on a.mem_no = b.mem_no
-            , (select @rownum := 0) AS b
+            , (select @rownum := #{pageStart}) AS b
           <include refid="baseLoginHistory"/>
         order by a.idx desc
         ) a
-        where a.rowNum between #{searchStartNo, jdbcType=INTEGER} and #{searchEndNo, jdbcType=INTEGER}
+        limit #{pageStart}, #{pageCnt}
     </select>
 
     <insert id="insertLoginBlock" parameterType="com.dalbit.member.vo.LoginBlockVo">
