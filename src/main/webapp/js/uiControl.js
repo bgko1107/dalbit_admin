@@ -102,6 +102,10 @@ ui.bottomScroll = function(){
     $('html').animate({scrollTop : $(document).height()}, 100);
 }
 
+ui.targetScroll = function(element){
+    $('html').animate({scrollTop : element.offset().top}, 100);
+}
+
 /* 원하는 element로 이동 */
 ui.scrollIntoView = function(elementId) {
     document.getElementById(elementId).scrollIntoView();
