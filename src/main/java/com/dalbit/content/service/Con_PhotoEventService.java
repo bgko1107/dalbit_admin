@@ -184,4 +184,13 @@ public class Con_PhotoEventService {
 
         return model;
     }
+
+    public String selectWebcamList(PhotoShotVo photoShotVo){
+
+        int totalCnt = con_photoEventDao.selectWebcamCnt(photoShotVo);
+        photoShotVo.setTotalCnt(totalCnt);
+        List<PhotoShotVo> giftconList = con_photoEventDao.selectWebcamList(photoShotVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, giftconList, new PagingVo(totalCnt)));
+    }
 }

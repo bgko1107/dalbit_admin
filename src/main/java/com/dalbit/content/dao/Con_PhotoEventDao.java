@@ -23,4 +23,7 @@ public interface Con_PhotoEventDao {
     List<EventMemberVo> selectEventMemberList(EventMemberVo eventMemberVo);
     int selectEventMemberCnt(EventMemberVo eventMemberVo);
 
+    List<PhotoShotVo> selectWebcamList(PhotoShotVo photoShotVo);
+    int selectWebcamCnt(PhotoShotVo photoShotVo);
+
 }

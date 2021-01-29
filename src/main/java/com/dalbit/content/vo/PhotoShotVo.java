@@ -4,6 +4,8 @@ import com.dalbit.common.vo.PagingVo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 public class PhotoShotVo extends PagingVo {
@@ -22,6 +24,8 @@ public class PhotoShotVo extends PagingVo {
     /* output */
     private int idx;
     private String mem_no;
+    private String mem_name;
+    private String mem_phone;
     private String mem_nick;
     private String image_url;
     private String image_url2;

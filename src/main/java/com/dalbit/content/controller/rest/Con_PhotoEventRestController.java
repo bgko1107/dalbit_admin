@@ -97,7 +97,7 @@ public class Con_PhotoEventRestController {
 
     @PostMapping("/member/list")
     public String selectEventMemberList(EventMemberVo eventMemberVo){
-        eventMemberVo.setEvent_idx(EventCode.방송장비.getEventIdx());
+        //eventMemberVo.setEvent_idx(EventCode.방송장비.getEventIdx());
         String result = con_photoEventService.selectEventMemberList(eventMemberVo);
         return result;
     }
@@ -111,4 +111,21 @@ public class Con_PhotoEventRestController {
         return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
 
     }
+
+    @PostMapping("/webcam/list")
+    public String photoWebcamList(PhotoShotVo photoShotVo) {
+        photoShotVo.setEvent_idx(EventCode.웹캠.getEventIdx());
+        //String result = con_photoEventService.selectWebcamList(photoShotVo);
+        String result = con_photoEventService.selectPhotoShotList(photoShotVo);
+        return result;
+    }
+
+    @PostMapping("/webcam/detail")
+    public String photoWebcamDetail(PhotoShotVo photoShotVo) {
+        photoShotVo.setEvent_idx(EventCode.웹캠.getEventIdx());
+        //String result = con_photoEventService.selectWebcamList(photoShotVo);
+        String result = con_photoEventService.selectPhotoShotDetail(photoShotVo);
+        return result;
+    }
+
 }
