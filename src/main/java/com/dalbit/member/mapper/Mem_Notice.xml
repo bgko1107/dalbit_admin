@@ -33,7 +33,9 @@
                 ) as replyCnt
           From rd_data.tb_member_broadcast_notice a
           left join rd_data.tb_member_basic b on a.mem_no = b.mem_no
-         where (b.mem_no like CONCAT('%',#{mem_no},'%') OR b.mem_userid like CONCAT('%',#{mem_no},'%') OR b.mem_nick like CONCAT('%',#{mem_no},'%'))
+          LEFT JOIN rd_data.tb_member_withdrawal_bak c ON a.mem_no = c.mem_no
+         where ((b.mem_no = #{mem_no} OR b.mem_userid = #{mem_no} OR b.mem_nick like CONCAT('%',#{mem_no},'%'))
+             or (c.mem_no = #{mem_no} OR c.mem_userid = #{mem_no} OR c.mem_nick like CONCAT('%',#{mem_no},'%')))
             <if test='sDate != null and sDate !=""'>
                 and a.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{sDate}, '%Y.%m.%d 00:00:00')
                 and a.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{eDate}, '%Y.%m.%d 23:59:59')
@@ -60,9 +62,11 @@
                     , a.notice as contents
                     , (select count(*) from rd_data.tb_broadcast_room_edit_history where room_no = a.room_no and edit_contents like '방송방공지변경%') as editCnt
               From rd_data.tb_broadcast_room a
-              left join rd_data.tb_member_basic b on a.mem_no = b.mem_no
+         left join rd_data.tb_member_basic b on a.mem_no = b.mem_no
+         LEFT JOIN rd_data.tb_member_withdrawal_bak c ON a.mem_no = c.mem_no
              where CHAR_LENGTH(a.notice) > 0
-               and (b.mem_no like CONCAT('%',#{mem_no},'%') OR b.mem_userid like CONCAT('%',#{mem_no},'%') OR b.mem_nick like CONCAT('%',#{mem_no},'%'))
+               and ((b.mem_no like CONCAT('%',#{mem_no},'%') OR b.mem_userid like CONCAT('%',#{mem_no},'%') OR b.mem_nick like CONCAT('%',#{mem_no},'%')) or
+                    (c.mem_no like CONCAT('%',#{mem_no},'%') OR c.mem_userid like CONCAT('%',#{mem_no},'%') OR c.mem_nick like CONCAT('%',#{mem_no},'%')))
                 <if test='sDate != null and sDate !=""'>
                     and a.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{sDate}, '%Y.%m.%d 00:00:00')
                     and a.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{eDate}, '%Y.%m.%d 23:59:59')
