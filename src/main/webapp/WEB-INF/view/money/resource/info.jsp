@@ -116,7 +116,11 @@
         if(!common.isEmpty(tabType)){
             $('#topTab li:eq(' + tabType + ') a').tab('show');
             _itemClick = 1;
-            dateType(slctType);
+            if(tabType == 3){
+                memberDataListTabClick()
+            }else{
+                dateType(slctType);
+            }
         }else{
             getResourceInfo();
         }
