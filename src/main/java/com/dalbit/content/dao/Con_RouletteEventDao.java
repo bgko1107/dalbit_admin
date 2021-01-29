@@ -26,6 +26,20 @@ public interface Con_RouletteEventDao {
     @Transactional(readOnly = true)
     RouletteCalendarVo selectRouletteWeekCalendarList(RouletteCalendarVo rouletteCalendarVo);
 
+    /**
+     * 어드민 쿼리 개선작업
+     *
+     * selectRouletteWeekCalendarList 쿼리를
+     *
+     * selectRouletteWeekCalendarList_item, selectRouletteWeekCalendarList_member 두개로 분리시킴
+     *
+     */
+    @Transactional(readOnly = true)
+    List<RouletteCalendarVo> selectRouletteWeekCalendarList_item(RouletteCalendarVo rouletteCalendarVo);
+
+    @Transactional(readOnly = true)
+    List<RouletteCalendarVo> selectRouletteWeekCalendarList_member(RouletteCalendarVo rouletteCalendarVo);
+
     @Transactional(readOnly = true)
     List<RouletteCalendarVo> selectRouletteCalendarList(RouletteCalendarVo rouletteCalendarVo);
 }

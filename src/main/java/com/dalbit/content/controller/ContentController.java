@@ -1,11 +1,14 @@
 package com.dalbit.content.controller;
 
+import com.dalbit.common.code.EventCode;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.content.service.AppService;
 import com.dalbit.content.service.IosAppService;
+import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -143,6 +146,11 @@ public class ContentController {
         return "content/event/time/timeList";
     }
 
+    @GetMapping("/event/webcam/list")
+    public String webcamEventList() {
+        return "content/event/webcam/list";
+    }
+
     @GetMapping("/message/list")
     public String messageList() {
         return "content/message/list";
@@ -239,4 +247,5 @@ public class ContentController {
 
     @GetMapping("/fanrank/onOffList")
     public String fanrankOnOffList() {return "content/fanrank/onOffList";}
+
 }

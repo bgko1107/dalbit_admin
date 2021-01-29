@@ -177,6 +177,46 @@
         ) a
     </select>
 
+    <select id="selectRouletteWeekCalendarList_item" parameterType="com.dalbit.content.vo.RouletteCalendarVo" resultType="com.dalbit.content.vo.RouletteCalendarVo">
+        SELECT DATE_FORMAT(apply.apply_date, '%Y-%m-%d') the_date
+             -- , (select count(*) from rd_data.stat_member_login_day where the_date = date_format(apply.apply_date, '%Y%m%d')) loginCnt
+             -- , (select count(distinct mem_no) from rd_data.tb_event_coupon_member_apply where  date_format(apply_date, '%Y%m%d') = date_format(apply.apply_date, '%Y%m%d')) applyCnt
+             , COUNT(apply.apply_date)  itemCnt
+             , SUM(item_no_1) itemNo1
+             , SUM(item_no_2) itemNo2
+             , SUM(item_no_3) itemNo3
+             , SUM(item_no_4) itemNo4
+             , SUM(item_no_5) itemNo5
+             , SUM(item_no_6) itemNo6
+             , SUM(item_no_7) itemNo7
+             , SUM(item_no_8) itemNo8
+             , SUM(item_no_9) itemNo9
+        FROM (
+                 SELECT
+                     apply.apply_date
+                      , IF(apply.item_no = 1, 1, 0) item_no_1
+                      , IF(apply.item_no = 2, 1, 0) item_no_2
+                      , IF(apply.item_no = 3, 1, 0) item_no_3
+                      , CASE WHEN apply.item_no IN(4, 14, 24, 34, 44, 54) THEN 1 ELSE 0 END item_no_4
+                      , CASE WHEN apply.item_no IN(5, 15, 25, 35, 45, 55) THEN 1 ELSE 0 END item_no_5
+                      , CASE WHEN apply.item_no IN(6, 16, 26, 36, 46, 56) THEN 1 ELSE 0 END item_no_6
+                      , CASE WHEN apply.item_no IN(7, 17, 27, 37, 47, 57) THEN 1 ELSE 0 END item_no_7
+                      , CASE WHEN apply.item_no IN(8, 18, 28, 38, 48, 58) THEN 1 ELSE 0 END item_no_8
+                      , CASE WHEN apply.item_no IN(9, 19, 29, 39, 49, 59) THEN 1 ELSE 0 END item_no_9
+                 FROM rd_data.tb_event_coupon_member_apply apply
+                          LEFT JOIN rd_data.tb_member_basic basic ON apply.mem_no = basic.mem_no
+                 WHERE  apply.apply_date BETWEEN #{search_startDate} AND #{search_endDate}
+             ) apply
+        GROUP BY DATE_FORMAT(apply.apply_date, '%Y-%m-%d')
+    </select>
+
+    <select id="selectRouletteWeekCalendarList_member" parameterType="com.dalbit.content.vo.RouletteCalendarVo" resultType="com.dalbit.content.vo.RouletteCalendarVo">
+        SELECT LEFT(apply_date,10), mem_sex, COUNT(*) cnt,COUNT(DISTINCT mem_no) mcnt
+        FROM  rd_data.tb_event_coupon_member_apply
+        WHERE apply_date BETWEEN #{search_startDate} AND #{search_endDate}
+        GROUP BY 1,2
+    </select>
+
     <select id="selectRouletteCalendarList" parameterType="com.dalbit.content.vo.RouletteCalendarVo" resultType="com.dalbit.content.vo.RouletteCalendarVo">
         /* Con_Event.xml - selectRouletteCalendarList */
         select date_format(apply.apply_date, '%Y-%m-%d') the_date

@@ -71,6 +71,8 @@
                  , photo.idx
                  , photo.event_idx
                  , photo.mem_no
+                 , photo.mem_name
+                 , photo.mem_phone
                  , photo.image_url
                  , photo.image_url2
                  , photo.image_url3
@@ -236,6 +238,35 @@
             left join rd_data.tb_member_withdrawal_bak outMem on evt.mem_no = outMem.mem_no
         where
             <include refid="memberListCondition" />
+    </select>
+
+
+    <select id="selectWebcamCnt" parameterType="com.dalbit.content.vo.EventMemberVo" resultType="int">
+        /* Con_Event.xml - selectWebcamCnt */
+        select
+            count(*)
+        from rd_admin.tb_event_member evt
+            left join rd_data.tb_member_basic mem on evt.mem_no = mem.mem_no
+            left join rd_data.tb_member_withdrawal_bak outMem on evt.mem_no = outMem.mem_no
+        where evt.event_idx = #{event_idx}
+    </select>
+
+    <select id="selectWebcamList" parameterType="com.dalbit.content.vo.PhotoShotVo" resultType="com.dalbit.content.vo.PhotoShotVo">
+        /* Con_Event.xml - selectWebcamList */
+        select
+            ifnull(mem.mem_no, outMem.mem_no) as mem_no
+            , mem.mem_nick
+            , mem.mem_sex
+            , mem.mem_birth_year
+            , evt.enter_date
+            , photo.mem_name
+            , photo.mem_phone
+            , photo.idx
+        from rd_admin.tb_event_member evt
+            join rd_admin.tb_event_photo photo on evt.event_idx = photo.event_idx and evt.idx = photo.event_member_idx
+            left join rd_data.tb_member_basic mem on evt.mem_no = mem.mem_no
+            left join rd_data.tb_member_withdrawal_bak outMem on evt.mem_no = outMem.mem_no
+        where evt.event_idx = #{event_idx}
     </select>
 
 </mapper>

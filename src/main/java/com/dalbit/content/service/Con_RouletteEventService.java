@@ -70,6 +70,11 @@ public class Con_RouletteEventService {
 
     public String selectRouletteWeekCalendarList(RouletteCalendarVo rouletteCalendarVo){
         RouletteCalendarVo weekRouletteCalendarVo = con_rouletteEventDao.selectRouletteWeekCalendarList(rouletteCalendarVo);
+
+        //두개 조합이 필요함.
+        //con_rouletteEventDao.selectRouletteWeekCalendarList_item(rouletteCalendarVo);
+        //con_rouletteEventDao.selectRouletteWeekCalendarList_member(rouletteCalendarVo);
+
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, weekRouletteCalendarVo));
     }
 
