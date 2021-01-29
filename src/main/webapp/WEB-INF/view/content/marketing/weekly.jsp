@@ -49,7 +49,7 @@
 
 <script type="text/javascript" src="/js/code/menu/menuCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
-    var weeklyPagingInfo = new PAGING_INFO(0,1,100);
+    var weeklyPagingInfo = new PAGING_INFO(0,1,10);
 
     $(function (){
         getMarketingList();
@@ -295,7 +295,6 @@
             var tabId = $("#tablist_con li.active a").prop('id');
             response.data.tabId = tabId;
 
-            console.log(response.data)
             var context = response.data;
             var html = templateScript(context);
             $("#weeklyForm").html(html);
@@ -307,6 +306,8 @@
                 $('._weekly_show').show();
             }
             ui.paintColor();
+
+            ui.targetScroll($("#detailArea"));
         });
     }
 
