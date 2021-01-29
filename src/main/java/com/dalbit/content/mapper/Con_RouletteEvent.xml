@@ -39,15 +39,9 @@
                 </otherwise>
             </choose>
         </if>
-
         <if test='startDate != null and startDate != ""'>
-            and DATE_FORMAT(evtApply.apply_date, '%Y-%m-%d') >= DATE_FORMAT(#{startDate}, '%Y-%m-%d')
-
+            AND evtApply.apply_date BETWEEN concat(#{startDate},' 00:00:00') AND concat(#{endDate},' 23:59:59')
         </if>
-        <if test='endDate != null and endDate != ""'>
-            and DATE_FORMAT(#{endDate}, '%Y-%m-%d') >= DATE_FORMAT(evtApply.apply_date, '%Y-%m-%d')
-        </if>
-
         <if test='winType == 1'>
             and evtApply.item_no in ('2', '3') /*1은 0달 꽝이라 제외*/
         </if>
