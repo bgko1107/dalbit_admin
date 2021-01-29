@@ -18,7 +18,7 @@
             </tr>
             <tr style="background-color: #dae3f3">
                 <th>소계</th>
-                <th>10대미만</th>
+                <th>미선택</th>
                 <th>10대</th>
                 <th>20대</th>
                 <th>30대</th>
@@ -42,7 +42,7 @@
             </tr>
             <tr style="background-color: #dae3f3">
                 <th>소계</th>
-                <th>10대미만</th>
+                <th>미선택</th>
                 <th>10대</th>
                 <th>20대</th>
                 <th>30대</th>

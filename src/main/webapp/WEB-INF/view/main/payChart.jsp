@@ -263,7 +263,7 @@
             common.charVatMinus(detailData.sum_age60Amt),
         ];
         var ageType = [
-            "10대 미만",
+            "미선택",
             "10대",
             "20대",
             "30대",
