@@ -438,7 +438,7 @@
             <th class="_bgColor" data-bgcolor="#F1E7FB">
                 <a href="javascript://" onclick="click_age();" class="_fontColor" data-fontcolor="black">◈ 결제 연령대 별</a>
             </th>
-            <th>10대미만</th>
+            <th>미선택</th>
             <th>10대</th>
             <th>20대</th>
             <th>30대</th>

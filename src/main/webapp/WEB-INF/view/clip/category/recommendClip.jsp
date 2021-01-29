@@ -245,7 +245,7 @@
     }
 
     function recommendList(){
-        location.href = "/clip/category/list?tabMove=3";
+        location.href = "/clip/category/list?tabMove=2";
     }
 
     function recommendSelect(){

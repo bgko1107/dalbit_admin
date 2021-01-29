@@ -34,7 +34,7 @@
                 <th rowspan="2" style="background-color: white; border-bottom: hidden;"></th>
                 <th rowspan="2" class="_stateTopTh"></th>
                 <th colspan="3" class="_stateSubTh">총계</th>
-                <th colspan="3" class="_stateSubTh">10대미만</th>
+                <th colspan="3" class="_stateSubTh">미선택</th>
                 <th colspan="3" class="_stateSubTh">10대</th>
                 <th colspan="3" class="_stateSubTh">20대</th>
                 <th colspan="3" class="_stateSubTh">30대</th>

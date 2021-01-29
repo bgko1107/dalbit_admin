@@ -13,7 +13,7 @@
     <tr>
         <%--<th class="_noBorder" style="width: 5px; border-left: hidden"></th>--%>
         <th style="background-color: #ebccd1; color:red;">◈ 연령대 별</th>
-        <th>10대미만</th>
+        <th>미선택</th>
         <th>10대</th>
         <th>20~24세</th>
         <th>25~29세</th>
