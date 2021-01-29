@@ -256,9 +256,9 @@
             (select count(*) from rd_data.tb_broadcast_room_story where room_no = bro.room_no) as storyCnt,
             (select count(*) from rd_data.tb_broadcast_room_story where writer_no = sto.writer_no) as sendStoryCnt,
             @RNUM := @RNUM + 1 as rowNum
-        from rd_data.tb_broadcast_room bro
-        inner join rd_data.tb_broadcast_room_story sto on sto.room_no = bro.room_no
-        inner join rd_data.tb_member_basic bas on bro.mem_no = bas.mem_no
+        FROM rd_data.tb_broadcast_room_story sto
+        JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
+        JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
         , (select @RNUM := 0) r
         <include refid="storyCondition"/>
         <if test="searchType == 0">
@@ -281,9 +281,9 @@
       /* Con_BoardAdm.xml - selectStoryListCnt*/
       select
         count(*)
-      from rd_data.tb_broadcast_room bro
-              inner join rd_data.tb_broadcast_room_story sto on sto.room_no = bro.room_no
-              inner join rd_data.tb_member_basic bas on bro.mem_no = bas.mem_no
+        FROM rd_data.tb_broadcast_room_story sto
+        JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
+        JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
         <include refid="storyCondition"/>
     </select>
 
@@ -293,9 +293,9 @@
               ,sum(if(bas.mem_sex = 'm',1,0)) as maleCnt
               ,sum(if(bas.mem_sex = 'f',1,0)) as femaleCnt
               ,sum(if(bas.mem_sex = 'n',1,0)) as noneCnt
-      from rd_data.tb_broadcast_room bro
-              inner join rd_data.tb_broadcast_room_story sto on sto.room_no = bro.room_no
-              inner join rd_data.tb_member_basic bas on bro.mem_no = bas.mem_no
+        FROM rd_data.tb_broadcast_room_story sto
+        JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
+        JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
         <include refid="storyCondition"/>
     </select>
 
@@ -310,9 +310,7 @@
     </update>
 
     <sql id="profileCondition">
-        select
-        @RNUM := @RNUM +1 as rowNum
-            , date_format(session.last_upd_date,'%Y.%m.%d %H:%i:%s') as last_upd_date
+        select date_format(session.last_upd_date,'%Y.%m.%d %H:%i:%s') as last_upd_date
             , session.mem_no as mem_no
             , profile.image_profile as image_profile
             , profile.msg_profile as msg_profile
@@ -324,13 +322,9 @@
             , basic.mem_phone as mem_phone
             , basic.inner
             , (SELECT count(*) FROM rd_data.tb_member_profile_edit_history  where mem_no=session.mem_no and edit_contents like '프로필메세지 변경%') as editCnt
-        from rd_data.tb_member_basic basic
-            inner join rd_data.tb_member_profile profile on basic.mem_no = profile.mem_no
-            inner join (select mem_no, max(last_upd_date) last_upd_date
-                            from rd_data.tb_member_session
-                            group by mem_no
-                            order by max(last_upd_date) desc) session on basic.mem_no = session.mem_no
-            inner join (select @RNUM := 0) r
+        FROM rd_data.tb_member_basic basic
+  INNER JOIN rd_data.tb_member_profile profile ON basic.mem_no = profile.mem_no
+        JOIN rd_data.tb_member_connect_state `session` ON basic.mem_no = session.mem_no
         where session.mem_no is not null
           and profile.msg_profile is not null
           and profile.msg_profile != ''
@@ -360,11 +354,12 @@
 
     <select id="selectProfileMsgList" parameterType="com.dalbit.member.vo.procedure.P_MemberProfileInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberProfileOutputVo">
         /* Con_BoardAdm.xml - selectProfileMsgList */
-        select *
+        select *,
+        @RNUM := @RNUM +1 as rowNum
         from (
           <include refid="profileCondition"/>
-        ) list
-        where list.rowNum between #{searchStartNo, jdbcType=INTEGER} and #{searchEndNo, jdbcType=INTEGER}
+        ) list INNER JOIN (SELECT @RNUM := #{pageStart}) r
+        limit #{pageStart}, #{pageCnt}
     </select>
 
     <select id="profileMsgListSummary" parameterType="com.dalbit.member.vo.procedure.P_MemberProfileInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberProfileOutputVo">
@@ -420,12 +415,7 @@
                 OR writerMem.mem_id = #{searchText}
                 OR writerMem.mem_phone like CONCAT('%',#{searchText},'%'))
             )
-        <if test='sDate != null and sDate !=""'>
-            and date_format(b.write_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate}
-        </if>
-        <if test='eDate != null and eDate != ""'>
-            and date_format(b.write_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate}
-        </if>
+        and b.write_date BETWEEN concat(#{sDate},' 00:00:00') AND concat(#{eDate},' 23:59:59')
         <if test='status != 0'>
             and `status` = #{status}
         </if>
@@ -592,23 +582,17 @@
                 </if>
             </where>
         ) ee,
-        (select '6' type , count(*) AS totalCnt<!--프로필메시지-->
-           from rd_data.tb_member_basic basic
-          inner join rd_data.tb_member_profile profile on basic.mem_no = profile.mem_no
-          inner join (select mem_no, max(last_upd_date) last_upd_date
-                        from rd_data.tb_member_session
-                       group by mem_no
-                       order by max(last_upd_date) desc) session on basic.mem_no = session.mem_no
-          inner join (select @RNUM := 0) r
-          where session.mem_no is not null
-            and profile.msg_profile is not null
-            and profile.msg_profile != ''
-            <if test='start_sel != null and start_sel !=""'>
-                and date_format(profile.last_upd_date,'%Y.%m.%d') <![CDATA[>=]]> #{start_sel}
-            </if>
-            <if test='end_sel != null and end_sel != ""'>
-                and date_format(profile.last_upd_date,'%Y.%m.%d') <![CDATA[<=]]> #{end_sel}
-            </if>
+        (
+        SELECT '6' TYPE ,COUNT(*) AS totalCnt
+        FROM rd_data.tb_member_basic basic
+  INNER JOIN rd_data.tb_member_profile profile ON basic.mem_no = profile.mem_no
+        JOIN rd_data.tb_member_connect_state `session` ON basic.mem_no = session.mem_no
+         WHERE profile.msg_profile IS NOT NULL
+           AND session.mem_no IS NOT NULL
+           AND profile.msg_profile != ''
+           AND profile.last_upd_date BETWEEN concat(#{start_sel},' 00:00:00') AND concat(#{end_sel},' 23:59:59')
+
+
         ) ff,
         (select '7' type , count(*) AS totalCnt    <!--클립댓글-->
               from rd_data.tb_cast_room a

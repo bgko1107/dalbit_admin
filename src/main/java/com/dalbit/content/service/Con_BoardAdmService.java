@@ -19,7 +19,6 @@ import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -271,6 +270,9 @@ public class Con_BoardAdmService {
      * 프로필메세지 조회
      */
     public String selectprofileMsgList(P_MemberProfileInputVo pMemberNoticeInputVo) {
+        pMemberNoticeInputVo.setPageStart(pMemberNoticeInputVo.getPageStart() -1);
+        pMemberNoticeInputVo.setPageStart(pMemberNoticeInputVo.getPageStart() * pMemberNoticeInputVo.getPageCnt());
+
         int profileMsgCount = conBoardAdmDao.selectprofileMsgListCnt(pMemberNoticeInputVo);
         pMemberNoticeInputVo.setTotalCnt(profileMsgCount);
         List<P_MemberProfileOutputVo> profileMsgList = conBoardAdmDao.selectProfileMsgList(pMemberNoticeInputVo);
