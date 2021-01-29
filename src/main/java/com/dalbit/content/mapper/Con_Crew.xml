@@ -116,16 +116,25 @@
         <if test='searchText != null and searchText != ""'>
             <choose>
                 <when test='searchType == 1'>
-                    and crewMember.mem_no like concat ('%', #{searchText}, '%')
+                    and (
+                        crewMember.mem_no like concat ('%', #{searchText})
+                        or crewMember.mem_no like concat (#{searchText}, '%')
+                    )
                 </when>
                 <when test='searchType == 2'>
-                    and (member.mem_userid like concat ('%', #{searchText}, '%')
-                        or outMember.mem_userid like concat ('%', #{searchText}, '%')
+                    and (
+                        member.mem_userid like concat ('%', #{searchText})
+                        or member.mem_userid like concat (#{searchText}, '%')
+                        or outMember.mem_userid like concat ('%', #{searchText})
+                        or outMember.mem_userid like concat (#{searchText}, '%')
                     )
                 </when>
                 <when test='searchType == 3'>
-                    and (member.mem_nick like concat ('%', #{searchText}, '%')
-                        or outMember.mem_nick like concat ('%', #{searchText}, '%')
+                    and (
+                        member.mem_nick like concat ('%', #{searchText})
+                        or member.mem_nick like concat (#{searchText}, '%')
+                        or outMember.mem_nick like concat ('%', #{searchText})
+                        or outMember.mem_nick like concat (#{searchText}, '%')
                     )
                 </when>
                 <when test='searchType == 4'>
@@ -153,29 +162,36 @@
     /* Con_Crew.xml - selectCrewMemberInfo */
         select *
         from (
-            select
-                crewMember.idx as idx
-                , crewbas.crew_name as crewName
-                , crewMember.mem_no as mem_no
-                , crewMember.leader_yn as leader_yn
-                , crewMember.crew_idx as crewIdx
-                , ifnull(member.mem_nick, outMember.mem_nick) as memNick
-                , ifnull(member.mem_state, outMember.mem_state) as memState
-                , date_format((select last_upd_date from rd_data.tb_member_session session where crewMember.mem_no = session.mem_no order by session.last_upd_date desc limit 1), '%Y-%m-%d %H:%i:%s') as lastLoginDate
-                , (select count(*) from rd_data.tb_member_session_history where crewMember.mem_no = mem_no and last_upd_date between date_add(now(), interval-1 week) and now()) as weekLoginCnt
-                , date_format((select start_date from rd_data.tb_broadcast_room where crewMember.mem_no = mem_no order by idx desc limit 1), '%Y-%m-%d %H:%i:%s') as broadDate
-                , (SELECT ifnull(sum(ruby_old - ruby_new), 0) FROM rd_data.tb_member_wallet_ruby where `type` in (2, 3, 4) and (mem_no = crewMember.mem_no)) as present
-                , (SELECT IFNULL(SUM(gold_new - gold_old), 0) FROM rd_data.tb_member_wallet_gold WHERE `type` in (2) AND (mem_no = crewMember.mem_no)) as receive
-                , ifnull((select rank from rd_data.tb_ranking_dj_day where ranking_date between date_add(now(), interval-2 day) and now() and mem_no = crewMember.mem_no), 9999) as ranking
+            SELECT
+                crewMember.idx AS idx
+                , crewbas.crew_name AS crewName
+                , crewMember.mem_no AS mem_no
+                , crewMember.leader_yn AS leader_yn
+                , crewMember.crew_idx AS crewIdx
+                , IFNULL(member.mem_nick, outMember.mem_nick) AS memNick
+                , IFNULL(member.mem_state, outMember.mem_state) AS memState
+                ,ts.loginCnt AS weekLoginCnt
+                ,s.last_login_date AS lastLoginDate
+                ,p.last_broadcast AS broadDate
+                ,ABS(st.dal_type_2+st.dal_type_3+st.dal_type_4) AS present
+                ,ABS(st.dal_type_2) AS receive
+                , IFNULL((SELECT RANK FROM rd_data.tb_ranking_dj_day WHERE ranking_date BETWEEN DATE_ADD(NOW(), INTERVAL-2 DAY) AND NOW() AND mem_no = crewMember.mem_no), 9999) AS ranking
                 , level.level
-                , date_format(ifnull(member.mem_join_date, outMember.mem_join_date), '%Y-%m-%d') mem_join_date
-                , @RNUM := @RNUM + 1 as rowNum
-            from rd_admin.tb_crew_member crewMember
-                inner join rd_admin.tb_crew_basic crewbas on crewMember.crew_idx = crewbas.idx
-                inner join rd_data.tb_member_level level on crewMember.mem_no = level.mem_no
-                left join rd_data.tb_member_basic member on crewMember.mem_no = member.mem_no
-                left join rd_data.tb_member_withdrawal_bak outMember on crewMember.mem_no = outMember.mem_no
-                , (select @RNUM := 0) r
+                , DATE_FORMAT(IFNULL(member.mem_join_date, outMember.mem_join_date), '%Y-%m-%d') mem_join_date
+                , @RNUM := @RNUM + 1 AS rowNum
+            FROM rd_admin.tb_crew_member crewMember
+                INNER JOIN rd_admin.tb_crew_basic crewbas ON crewMember.crew_idx = crewbas.idx
+                INNER JOIN rd_data.tb_member_level `level` ON crewMember.mem_no = level.mem_no
+                LEFT JOIN rd_data.tb_member_basic `member` ON crewMember.mem_no = member.mem_no
+                LEFT JOIN rd_data.tb_member_withdrawal_bak outMember ON crewMember.mem_no = outMember.mem_no
+                LEFT JOIN rd_data.tb_member_profile p ON crewMember.mem_no = p.mem_no
+                LEFT JOIN rd_data.tb_member_connect_state s ON crewMember.mem_no = s.mem_no
+                LEFT JOIN rd_data.tb_member_wallet_dal_type_stat st ON crewMember.mem_no = st.mem_no
+                LEFT JOIN (
+                    SELECT mem_no,SUM(login_cnt) AS loginCnt FROM rd_data.stat_member_login_day WHERE the_date BETWEEN DATE_SUB(NOW(), INTERVAL 1 WEEK) AND NOW()
+                    GROUP BY 1
+                ) AS ts ON crewMember.mem_no = ts.mem_no
+            , (SELECT @RNUM := 0) r
             where crewbas.delete_yn = 0
                   <include refid="crewMemberCondition"/>
             order by leader_yn desc, ranking asc
