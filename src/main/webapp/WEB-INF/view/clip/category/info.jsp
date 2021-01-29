@@ -89,8 +89,9 @@
     $(function(){
         // tab_id 이동
         if(!common.isEmpty(tabMove)){
-            if(tabMove == 3){
-                $('.nav-tabs li:eq(3) a').tab('show');
+            if(tabMove == 2){
+                tabId = 'tab_recommendList';
+                $('.nav-tabs li:eq(' + tabMove +') a').tab('show');
                 $("#sp_prevGroup").show();
                 slctType = 1;
             }else{
