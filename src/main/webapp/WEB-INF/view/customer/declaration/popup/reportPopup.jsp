@@ -10,6 +10,8 @@
     String in_deviceUuid = request.getParameter("deviceUuid");
     String in_ip = request.getParameter("ip");
     String in_reportidx = request.getParameter("reportidx");
+    String in_imageIdx = request.getParameter("imageIdx");
+    String in_chatNo = request.getParameter("chatNo");
 
     String in_fnCallBack = request.getParameter("fnCallBack") == null ? "" : request.getParameter("fnCallBack");
 %>
@@ -102,6 +104,8 @@
     var ip =  '<%=in_ip%>';
     var fnCallBack =  '<%=in_fnCallBack%>';
     var reportIdx =  '<%=in_reportidx%>';
+    var imageIdx =  '<%=in_imageIdx%>';
+    var chatNo =  '<%=in_chatNo%>';
 
     $("#declaration_reason").html(util.getCommonCodeSelect(-1, declaration_reason,"Y"));
     $("#blockScope_area").html(util.getCommonCodeCheck(-1, block_scope,"Y"));
@@ -209,6 +213,8 @@
             obj.reportIdx = Number(reportIdx);
             obj.ip = ip;
             obj.deviceUuid = deviceUuid;
+            obj.image_idx = imageIdx;
+            obj.chat_no = chatNo;
 
             console.log(obj);
             util.getAjaxData("image", "/rest/customer/declaration/image/operate",obj, update_success);

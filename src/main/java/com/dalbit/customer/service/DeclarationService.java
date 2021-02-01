@@ -318,6 +318,10 @@ public class DeclarationService {
         String result;
 
         if(Status.신고처리_성공.getMessageCode().equals(procedureVo.getRet())) {
+            if(pMemberReportVo.getDeleteYn() == 1){
+                DalbitUtil.sendChatImageDelete(pMemberReportVo);
+            }
+
             result = memMemberService.getMemberReport(pMemberReportVo);
             log.debug(result);
             result = gsonUtil.toJson(new JsonOutputVo(Status.신고처리_성공));

@@ -41,6 +41,7 @@ public class P_DeclarationListOutputVo extends BaseVo {
     private String device_uuid;
 
     private int inner;
+    private int image_idx;
     private int reported_inner;
 
     private int totalReportedCnt;
