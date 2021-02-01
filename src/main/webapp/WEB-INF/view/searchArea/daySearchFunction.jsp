@@ -189,6 +189,7 @@
                 $("#div_yearButton").show();
                 $("#th_bottonList").show();
             }else if(slctType == 3){
+                setTimeDate(dateTime);
                 $("#rangeDatepicker").show();
                 $("#bt_search").click();
             }else if(slctType == 99){
@@ -226,9 +227,7 @@
     });
 
     function prevNext(isPrev){
-
         var addDate = isPrev ? -1 : 1;
-
         if(slctType == 0) {                 // 일간
             dayButtonPrev(addDate);
         }else if(slctType == 1) {           // 월간
