@@ -138,7 +138,7 @@
                         var data = {
                             reportIdx : reportidx
                             , deleteYn : 1
-                            , opCode : 0
+                            , slctType : 0              // 신고처리 구분
                             , sendNoti : 0
                             , mem_no : report_mem_no
                             , image_idx : imageIdx
