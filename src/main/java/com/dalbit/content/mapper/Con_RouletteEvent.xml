@@ -264,8 +264,7 @@
                 , CASE WHEN apply.item_no in(9, 19, 29, 39, 49, 59) THEN 1 ELSE 0 END item_no_9
             from rd_data.tb_event_coupon_member_apply apply
             left join rd_data.tb_member_basic basic on apply.mem_no = basic.mem_no
-            where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(apply.apply_date, '%Y-%m-%d')
-                and date_format(apply.apply_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+            where apply.apply_date BETWEEN #{search_startDate} AND #{search_endDate}
         ) apply
         group by date_format(apply.apply_date, '%Y-%m-%d')
     </select>
