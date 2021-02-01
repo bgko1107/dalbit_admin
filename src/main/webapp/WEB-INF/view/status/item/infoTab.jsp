@@ -55,7 +55,7 @@
 
     $("#bt_search").on('click', function(){
 
-        if(tabId == 'tab_broadcastDetail' || tabId == 'tab_clipDetail') {
+        if(tabId == 'tab_broadcastDetail' || tabId == 'tab_clipDetail' || tabId == 'tab_mailbox') {
             if ($('input[name="slctType2"]:first').prop('checked')) {
                 $("._searchDate2").html($("#startDate").val() + " (" + toDay + ")");
             }
