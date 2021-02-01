@@ -262,10 +262,18 @@
             month = "12";
             day = "31";
             monthClick("",year, month, day);
-        }else if(common.lpad(month,2,"0") + common.lpad(tmpDay,2,"0") == "1231" && isPrev == 1){
+        }else if(common.lpad(month,2,"0") + common.lpad(tmpDay,2,"0") == "1231" && isPrev == 1) {
             $("#div_dayButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
             year = year + 1;
             month = "01";
+            day = "01";
+            monthClick("", year, month, day);
+        }else if(common.lpad(month,2,"0") !="01" && common.lpad(tmpDay,2,"0") == "01" && isPrev == -1){
+            month = common.lpad(Number(month) + isPrev,2,"0");
+            day = moment(year + "." + month + "." + day).add('months', 1).add('days', -1).format('DD');
+            monthClick("",year, month, day);
+        }else if(common.lpad(month,2,"0") !="12" && lastDay == tmpDay && isPrev == 1){
+            month = common.lpad(Number(month) + isPrev,2,"0");
             day = "01";
             monthClick("",year, month, day);
         }else{
