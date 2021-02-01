@@ -142,6 +142,14 @@ public class Cus_SmsService {
         return gsonUtil.toJson(new JsonOutputVo(Status.생성, resultMap));
     }
 
+    /**
+     * sms 예약문자 삭제
+     */
+    public String smsDel(SmsHistoryVo smsHistoryVo) {
+        cusSmsDao.smsDel(smsHistoryVo);
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.삭제));
+        return result;
+    }
 
     /**
      * sms 엑셀 출력

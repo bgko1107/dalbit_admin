@@ -56,7 +56,9 @@
                         <div class="tab-pane fade in active" id="smsDetail">
                             <div class="widget widget-table">
                                 <div class="widget-content mt10">
-                                    <button type="button" id="bt_smsSend" class="btn btn-success btn-sm pull-right _openSmsSendPop" data-cmid="" data-rownum="">운영자 문자발송</button>
+                                    <div class="col-md-12 no-padding">
+                                        <button type="button" id="bt_smsSend" class="btn btn-success btn-sm pull-right _openSmsSendPop" data-cmid="" data-rownum="">운영자 문자발송</button>
+                                    </div>
                                     <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate_top"></div>
                                     <table id="smsList" class="table table-sorting table-hover table-bordered datatable">
                                         <colgroup>
@@ -72,6 +74,7 @@
                                             <col width="450px"/>    <!-- 발송내용 -->
                                             <col width="110px"/>    <!-- 구분 -->
                                             <col width="100px"/>    <!-- 발신자 -->
+                                            <col width="70px"/>    <!-- 발신자 -->
                                         </colgroup>
                                         <thead>
                                             <th>No</th>
@@ -86,6 +89,7 @@
                                             <th>문자내용</th>
                                             <th>구분</th>
                                             <th>발신자</th>
+                                            <th>삭제</th>
                                         </thead>
                                         <tbody id="tableBody"></tbody>
                                     </table>
@@ -160,20 +164,25 @@
         var template = $("#tmp_smsList").html();
         var templateScript = Handlebars.compile(template);
 
-        if(!common.isEmpty(response.data)){
+        if(response.result == "success") {
+            console.log("-------------------- 1");
             response.data.totalCnt = response.pagingVo.totalCnt;
+            var context = response.data;
+            var html = templateScript(context);
+        }else{
+            var html = templateScript();
         }
-
-        var context = response.data;
-        var html = templateScript(context);
 
         $("#tableBody").html(html);
 
-        var pagingInfo = response.pagingVo;
-        listPagingInfo.totalCnt = pagingInfo.totalCnt;
-        dalbitLog(listPagingInfo);
-        util.renderPagingNavigation("list_info_paginate_top", listPagingInfo);
-        util.renderPagingNavigation("list_info_paginate", listPagingInfo);
+        if(response.result == "success") {
+            console.log("-------------------- 2");
+            var pagingInfo = response.pagingVo;
+            listPagingInfo.totalCnt = pagingInfo.totalCnt;
+            dalbitLog(listPagingInfo);
+            util.renderPagingNavigation("list_info_paginate_top", listPagingInfo);
+            util.renderPagingNavigation("list_info_paginate", listPagingInfo);
+        }
 
         var btn = $(".paginate_button");
         btn.find('a').click(function() {
@@ -190,6 +199,13 @@
     function handlebarsPaging(targetId, pagingInfo) {
         listPagingInfo = pagingInfo;
         smsList();
+    }
+
+    function smsDelClick(data){
+        if(confirm('예약문자를 삭제 하시겠습니까?')){
+            util.getAjaxData("del", "/rest/customer/sms/del", data, alert('삭제 완료'), fn_fail);
+            smsList(7);
+        }
     }
 
     function fn_fail(){
@@ -255,10 +271,17 @@
         {{else}}
             <td>자동</td>
         {{/if}}
+        <td>
+            {{#dalbit_if status '==' 3}}
+                <button type="button" id="bt_smsDel" class="btn btn-danger btn-sm" data-cmid="{{cmid}}" onclick="smsDelClick($(this).data());">예약삭제</button>
+            {{else}}
+                -
+            {{/dalbit_if}}
+        </td>
     </tr>
     {{else}}
         <tr>
-            <td colspan="12">{{isEmptyData}}</td>
+            <td colspan="13">{{isEmptyData}}</td>
         </tr>
     {{/each}}
 </script>

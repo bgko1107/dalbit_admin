@@ -178,4 +178,8 @@
         limit 0, 1
     </select>
 
+    <delete id="smsDel" parameterType="com.dalbit.customer.vo.SmsHistoryVo">
+        delete From rd_data.hp_msg where cmid=#{cmid}
+    </delete>
+
 </mapper>
