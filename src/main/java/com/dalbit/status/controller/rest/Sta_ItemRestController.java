@@ -118,7 +118,7 @@ public class Sta_ItemRestController {
 
     /**
      * 아이템 우체통
-     * @param pItemClipInputVo
+     * @param pMailboxVo
      * @return
      */
     @PostMapping("/mailbox/list")

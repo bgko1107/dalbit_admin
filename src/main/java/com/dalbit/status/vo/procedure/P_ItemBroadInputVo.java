@@ -10,4 +10,5 @@ public class P_ItemBroadInputVo extends SearchVo {
 
     private int pageNo;
     private String startDate;
+    private int itemType;
 }
