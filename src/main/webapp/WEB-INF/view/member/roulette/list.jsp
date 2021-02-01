@@ -67,8 +67,8 @@
             data.winType = $('#winType').val();   // 참여 구분
             data.searchType = -1;    // 검색 조건
             data.txt_search = memNo;                   // 검색 창
-            data.startDate =  $("#rouletteStartDate").val().replace(/\./gi,'');
-            data.endDate =  $("#rouletteEndDate").val().replace(/\./gi,'');
+            data.startDate =  $("#rouletteStartDate").val();
+            data.endDate =  $("#rouletteEndDate").val();
         };
 
         roulette_dtList_info = new DalbitDataTable($('#applyList'), dtList_info_data, EventRouletteDataTableSource.applyList, $('#searchForm'));
