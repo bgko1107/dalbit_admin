@@ -15,6 +15,8 @@ public interface Cus_SmsDao {
     @Transactional(readOnly = true)
     int getSmsListCnt(SmsHistoryVo smsHistoryVo);
 
+    int smsDel(SmsHistoryVo smsHistoryVo);
+
     @Transactional(readOnly = true)
     SmsHistoryVo getSmsDetail(SmsHistoryVo smsHistoryVo);
 }

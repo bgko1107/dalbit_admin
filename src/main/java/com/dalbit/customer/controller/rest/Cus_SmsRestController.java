@@ -59,6 +59,15 @@ public class Cus_SmsRestController {
     }
 
     /**
+     * sms 예약 삭제
+     */
+    @PostMapping("del")
+    public String smsDel(SmsHistoryVo smsHistoryVo) {
+        String result = cusSmsService.smsDel(smsHistoryVo);
+        return result;
+    }
+
+    /**
      * sms 엑셀 출력
      */
     @PostMapping("listExcel")
