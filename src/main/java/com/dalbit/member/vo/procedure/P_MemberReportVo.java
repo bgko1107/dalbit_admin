@@ -10,9 +10,11 @@ public class P_MemberReportVo {
     private int idx;
     private int deleteYn;
     private int reportIdx;
+    private int image_idx;
     private String opName;
     private String mem_no;
     private String cast_no;
+    private String chat_no;
     private String mem_userid;
     private String mem_nick;
     private String mem_sex;

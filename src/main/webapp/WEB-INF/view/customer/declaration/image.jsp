@@ -124,6 +124,8 @@
         var report_sex = data.reportsex;
         var device_uuid = data.deviceuuid;
         var ip = data.ip;
+        var imageIdx = data.imageidx;
+        var chatNo = data.chatno;
 
         $.confirm({
             title: '이미지를 삭제 하시겠습니까?',
@@ -138,6 +140,9 @@
                             , deleteYn : 1
                             , opCode : 0
                             , sendNoti : 0
+                            , mem_no : report_mem_no
+                            , image_idx : imageIdx
+                            , chat_no : chatNo
                         };
 
                         console.log(data);
@@ -157,14 +162,11 @@
                             + "&deviceUuid=" + encodeURIComponent(device_uuid)
                             + "&ip=" + encodeURIComponent(ip)
                             + "&reportidx=" + reportidx
+                            + "&imageIdx=" + imageIdx
+                            + "&chatNo=" + chatNo
                             + "&fnCallBack=" + encodeURIComponent("reportImageList");
                         console.log(report);
                         util.windowOpen(report,"750","910","이미지신고");
-
-                        // var data = {
-                        //     reportIdx : reportidx
-                        // };
-                        // util.getAjaxData("image", "/rest/customer/declaration/image/operate", data, fn_reportImage_operate_success, fn_fail);
                     }
                 }
             }
@@ -213,6 +215,8 @@
                                data-reportsex="{{data.report_sex}}"
                                data-ip="{{data.ip}}"
                                data-deviceuuid="{{data.device_uuid}}"
+                               data-imageidx="{{data.image_idx}}"
+                               data-chatno="{{data.room_no}}"
                             >삭제</a>
                         {{/dalbit_if}}
                         <br/>

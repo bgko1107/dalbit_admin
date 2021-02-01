@@ -201,14 +201,13 @@
     <sql id="storyCondition">
         <where>
             <if test='txt_search != null and txt_search != ""'>
-                (bas.mem_no like = #{txt_search}
+                (bas.mem_no = #{txt_search}
                 or sto.writer_no  = #{txt_search}
                 OR bas.mem_userid  = #{txt_search}
                 or sto.mem_userid  = #{txt_search}
                 OR bas.mem_nick like CONCAT('%',#{txt_search},'%')
                 or sto.mem_nick like CONCAT('%', #{txt_search}, '%')
-                OR bas.mem_id  = #{txt_search}
-                OR bas.mem_phone like CONCAT('%',#{txt_search},'%'))
+                )
             </if>
             <if test='start_sel != null and start_sel !=""'>
                  and sto.write_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
