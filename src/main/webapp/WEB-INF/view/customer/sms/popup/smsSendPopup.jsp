@@ -409,7 +409,11 @@
                     , "mem_nick": "직접입력"
                 };
 
-                if (choiceMemberIsValid_smsSend(data)) {
+                if(common.isEmpty(data.mem_phone) || data.mem_phone.length < 10 || !data.mem_phone.match("(01[016789])(\\d{3,4})(\\d{4})")) {
+                    alert("선택한 회원은 휴대폰번호가 비정상 이거나 존재하지 않습니다.\n" +
+                          "번호 : " + list[i].mem_phone);
+                    break;
+                }else{
                     choiceMember_smsSend(data);
                     $(".smsSendPopup").find("#add_phone").val("");
                 }
