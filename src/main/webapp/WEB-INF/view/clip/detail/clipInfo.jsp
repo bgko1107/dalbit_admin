@@ -564,18 +564,18 @@
             </td>
             <th>UCI 검색<br >(유저입력)</th>
             <td style="text-align: left">
-                <button type="button" class="btn btn-default btn-sm _openKpopUciSearch" data-title="{{cover_title}}" data-singer="{{cover_singer}}">검색</button>
+                <button type="button" class="btn btn-default btn-sm _openKpopUciSearch" data-title="{{{cover_title}}}" data-singer="{{{cover_singer}}}">검색</button>
             </td>
         </tr>
         <tr>
             <th>커버 곡명<br >(관리자)</th>
             <td colspan="4">
-                <input type="text" class="form-control" id="admin_cover_title" value="{{admin_cover_title}}" maxlength="50" />
+                <input type="text" class="form-control" id="admin_cover_title" value="{{{admin_cover_title}}}" maxlength="50" />
             </td>
 
             <th>커버 가수<br >(관리자)</th>
             <td colspan="2" style="text-align: left">
-                <input type="text" class="form-control" id="admin_cover_singer" value="{{admin_cover_singer}}" maxlength="50" />
+                <input type="text" class="form-control" id="admin_cover_singer" value="{{{admin_cover_singer}}}" maxlength="50" />
             </td>
             <th>저장</th>
             <td style="text-align: left">
@@ -585,7 +585,7 @@
         <tr>
             <th>UCI 앨범 코드<br >(관리자)</th>
             <td colspan="4">
-                <input type="text" class="form-control" id="uci_album_code" maxlength="50" value="{{uci_album_code}}" />
+                <input type="text" class="form-control" id="uci_album_code" maxlength="50" value="{{{uci_album_code}}}" />
             </td>
 
             <th>UCI 검색<br >(관리자 입력)</th>
