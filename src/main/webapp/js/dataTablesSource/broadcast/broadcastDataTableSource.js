@@ -133,8 +133,13 @@ var BroadcastDataTableSource = {
                 }},
 
             {'title': '입장/<br/>강제종료', 'data': '','width' : '55px','render': function (data, type, row, meta) {
-                    var tmp =  '<button type="button" id="bt_broadcastGo" class="btn btn-default btn-xs _openPlayerPop" style="width: 60px;margin-bottom: 1px" data-roomno="' + row.room_no + '" >입장</button><br/>';
-                    tmp = tmp + '<button type="button" class="btn btn-danger btn-xs" onclick="forcedEnd($(this).data());" data-memno= "' + row.dj_mem_no + '" data-roomno="' + row.room_no + '" >강제종료</button>';
+                    var tmp = '';
+                    if(row.mediaType == "a"){
+                        tmp += '<button type="button" id="bt_broadcastGo" class="btn btn-default btn-xs _openPlayerPop" style="width: 60px;margin-bottom: 1px" data-roomno="' + row.room_no + '" >입장</button><br/>';
+                    }else{
+                        tmp += '<button type="button" id="bt_broadcastGoVideo" class="btn btn-default btn-xs _openVideoPlayerPop" style="width: 60px;margin-bottom: 1px" data-roomno="' + row.room_no + '" >입장</button><br/>';
+                    }
+                    tmp += '<button type="button" class="btn btn-danger btn-xs" onclick="forcedEnd($(this).data());" data-memno= "' + row.dj_mem_no + '" data-roomno="' + row.room_no + '" >강제종료</button>';
 
                     return tmp;
                 }},
