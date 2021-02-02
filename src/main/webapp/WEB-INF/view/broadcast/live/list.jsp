@@ -610,7 +610,7 @@
     {{/dalbit_if}}
             <div>
                 <label>NO.{{indexDesc ../../pagingVo.totalCnt data.rowNum}}</label>
-                <a href="javascript://" onclick="videoPopUp($(this).data())" data-chatno="{{data.room_no}}"><i class="fa fa-play-circle-o" style="font-size: 20px"></i></a>
+                <a href="javascript://" class="_openVideoPlayerPop" data-roomno="{{data.room_no}}"><i class="fa fa-play-circle-o" style="font-size: 20px"></i></a>
             </div>
             <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 360px;">
                 <div class="thumbnail" src="{{renderImage data.backgroundImage}}?360x360">

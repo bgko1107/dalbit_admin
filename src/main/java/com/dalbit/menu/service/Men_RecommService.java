@@ -84,5 +84,13 @@ public class Men_RecommService {
 
     }
 
-
+    /**
+     * 추천 DJ 팬 목록
+     */
+    public String callRecommFanList(RecommVo recommVo) {
+        ProcedureVo procedureVo = new ProcedureVo(recommVo);
+        List<RecommVo> list = men_RecommDao.callRecommFanList(procedureVo);
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(procedureVo.getRet())));
+        return result;
+    }
 }

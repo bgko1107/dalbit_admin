@@ -20,4 +20,7 @@ public interface Men_RecommDao {
 
     ProcedureVo callDeleteRecomm(ProcedureVo procedureVo);
 
+    @Transactional(readOnly = true)
+    List<RecommVo> callRecommFanList(ProcedureVo procedureVo);
+
 }

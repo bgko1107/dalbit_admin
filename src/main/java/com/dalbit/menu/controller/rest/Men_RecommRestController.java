@@ -60,6 +60,14 @@ public class Men_RecommRestController {
         return result;
     }
 
+    /**
+     * 추천 DJ 팬 목록
+     */
 
+    @PostMapping("fan/list")
+    public String fanList(RecommVo recommVo){
+        String result = men_RecommService.callRecommFanList(recommVo);
+        return result;
+    }
 
 }
