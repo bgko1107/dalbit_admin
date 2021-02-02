@@ -612,7 +612,7 @@
                 <label>NO.{{indexDesc ../../pagingVo.totalCnt data.rowNum}}</label>
                 <a href="javascript://" class="_openVideoPlayerPop" data-roomno="{{data.room_no}}"><i class="fa fa-play-circle-o" style="font-size: 20px"></i></a>
             </div>
-            <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 360px;">
+            <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 405px;">
                 <div class="thumbnail" src="{{renderImage data.backgroundImage}}?360x360">
                     <img class="list-group-image thumbnailImg fullSize_background" style="width:360px; height:225px;" src="{{renderImage data.backgroundImage}}" alt="" data-toggle="modal" data-target="#imgModal" />
                 </div>

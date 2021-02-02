@@ -251,6 +251,9 @@ var MemberDataTableSource = {
             {'title': '성별', 'data': 'dj_mem_sex', 'width':'100px', 'render': function (data, type, row, meta) {
                     return common.sexIcon(data,row.dj_birth_year);
                 }},
+            {'title': '입장제한', 'data': 'type_entry','width' : '65px', 'render': function (data) {
+                    return util.getCommonCodeLabel(data, entryType);
+                }},
             {'title': '청취방주제', 'data': 'subject_type', 'width':'100px','render' : function(data){
                     return util.getCommonCodeLabel(data, subject_type);
                 }},
