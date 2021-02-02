@@ -130,7 +130,7 @@
 
 <script type="text/javascript" src="/js/code/broadcast/broadCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/member/memberCodeList.js?${dummyData}"></script>
-
+<script src="/js/webrtc_wowza_play.js"></script>
 <script>
     $("#searchType_broad").html(util.getCommonCodeSelect(-1, searchType_broad));
     $("#searchRadio").html(util.getCommonCodeRadio(1, searchRadio));
@@ -431,7 +431,7 @@
     }
 
     //=------------------------------ video--------------------------------------------
-    var videoPagingInfo= new PAGING_INFO(0, 1, 54);
+    var videoPagingInfo= new PAGING_INFO(0, 1, 12);
 
     function videoList_click(){
         $("#div_allMedia").hide();
@@ -507,6 +507,11 @@
         var html = templateScript(context);
         $("#videoForm").html(html);
 
+        //video play
+        $('._videoPlayer').each(function(){
+            videoPlay($(this));
+        });
+
         videoPagingInfo.totalCnt = response.pagingVo.totalCnt;
 
         console.log(videoPagingInfo);
@@ -524,6 +529,73 @@
         ui.paintColor();
     };
 
+    function videoPlay(me){
+        var video_state = $(me).parent().find('._video_state');
+
+        var adapter;
+        let wsUrl = 'wss://devwv.dalbitlive.com/webrtc-session.json';
+        let applicationName = 'edge';
+        let streamName = WOWZA_PREFIX+me.data('roomno')+WOWZA_SUFFIX;
+
+        let info = {
+            wsUrl,
+            applicationName,
+            streamName
+        };
+
+        adapter = WebRTCPlayAdapter();
+        adapter.on('error', error => {
+            //some of the possible errors, NotFoundError, SecurityError,PermissionDeniedError
+            console.log("error callback: " + error);
+            if(error !== undefined){
+                isReloadChat = false;
+                //alert("플레이어 실행 오류 발생");
+                // window.close();
+                video_state.text(++errorCnt + " [플레이어 실행 오류] " + error);
+
+                return false;
+            }
+        });
+
+        adapter.on('pcStateChange', state => {
+            console.log('pcStateChange => ', state);
+
+            //connecting
+            if(state == 'connecting'){
+                video_state.text("방송방 연결중....");
+            }
+
+            // 청취가 시작되었다. 뭔가하자.
+            if (state == 'connected') {
+                isReloadChat = true;
+
+                $("#play").text("stop");
+                $("#play").val("stop");
+
+                video_state.text("");
+
+                // 플레이어 세팅.
+                remoteVideo = document.getElementById('video_'+me.data('roomno'));
+                try{
+                    remoteVideo.srcObject = adapter.getStream();
+                } catch (error){
+                    remoteVideo.src = window.URL.createObjectURL(adapter.getStream());
+                }
+            }
+
+            // 끊어지거나 뭔가 잘못됐다.
+            if (state == 'disconnected' || state == 'failed') {
+                stop();
+                isReloadChat = false;
+                video_state.text("종료된 방송 입니다.");
+                return false;
+            }
+        });
+
+        adapter.start(info);
+        video_state.text("방송방 연결시도중..");
+    }
+
     function handlebarsPaging(targetId, pagingInfo) {
         if(targetId == "videoList_info_paginate_top" || targetId == "videoList_info_paginate"){
             videoPagingInfo = pagingInfo;
@@ -540,7 +612,10 @@
         console.log(data);
     }
 
-
+    $(document).on('click', '._refresh', function(){
+        var target = $("#video_"+$(this).data('roomno'));
+        videoPlay(target);
+    });
 
 </script>
 
@@ -611,11 +686,11 @@
             <div>
                 <label>NO.{{indexDesc ../../pagingVo.totalCnt data.rowNum}}</label>
                 <a href="javascript://" class="_openVideoPlayerPop" data-roomno="{{data.room_no}}"><i class="fa fa-play-circle-o" style="font-size: 20px"></i></a>
+                <a href="javascript://" class="_refresh" data-roomno="{{data.room_no}}"><i class="fa fa-refresh pull-right" style="font-size: 20px"></i></a>
             </div>
-            <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 405px;">
-                <div class="thumbnail" src="{{renderImage data.backgroundImage}}?360x360">
-                    <img class="list-group-image thumbnailImg fullSize_background" style="width:360px; height:225px;" src="{{renderImage data.backgroundImage}}" alt="" data-toggle="modal" data-target="#imgModal" />
-                </div>
+            <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 480px;">
+                <span class="_video_state"></span>
+                <video id="video_{{data.room_no}}" class="_videoPlayer" data-roomno={{data.room_no}} style="width:100%;height:auto;" autoplay="autoplay" controls="controls" muted></video>
                 <div>
                     <h4 class="inner list-group-item-heading broadcast_title">
                         {{{roomNoLink data.title data.room_no}}}
