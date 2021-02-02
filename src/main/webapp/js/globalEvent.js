@@ -43,6 +43,12 @@ $(document).on('click', '._openPlayerPop', function(){
     util.windowOpen(url, 530, 980, 'roomPlayer');
 });
 
+/*방송방플레이어 팝업*/
+$(document).on('click', '._openVideoPlayerPop', function(){
+    var url = "/broadcast/broadcast/popup/videoPlayerPopup?roomNo="+encodeURIComponent($(this).data('roomno'));
+    util.windowOpen(url, 530, 980, 'roomVideoPlayer');
+});
+
 /*클립 플레이어 팝업*/
 var clipPlayer;
 $(document).on('click', '._openClipPlayerPop', function(){

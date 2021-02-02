@@ -12,11 +12,14 @@ import com.dalbit.excel.service.ExcelService;
 import com.dalbit.excel.vo.ExcelVo;
 import com.dalbit.exception.GlobalException;
 import com.dalbit.member.dao.Mem_MemberDao;
+import com.dalbit.member.service.Mem_BroadcastService;
+import com.dalbit.member.service.Mem_ListenService;
 import com.dalbit.member.service.Mem_MemberService;
 import com.dalbit.member.vo.LoginBlockHistVo;
 import com.dalbit.member.vo.LoginBlockVo;
 import com.dalbit.member.vo.LoginHistoryVo;
 import com.dalbit.member.vo.MemberVo;
+import com.dalbit.member.vo.procedure.P_MemberListenInputVo;
 import com.dalbit.member.vo.procedure.P_MemberReportVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
@@ -53,6 +56,12 @@ public class DeclarationService {
 
     @Autowired
     Mem_MemberService memMemberService;
+    
+    @Autowired
+    Mem_ListenService mem_listenService;
+    
+    @Autowired
+    Mem_BroadcastService mem_BroadcastService;
 
     /**
      * 신고 목록 조회
@@ -179,7 +188,7 @@ public class DeclarationService {
             if((3 <= pDeclarationOperateVo.getOpCode() && pDeclarationOperateVo.getOpCode() <= 6) || pDeclarationOperateVo.getOpCode() == 8){
 
                 //회원번호
-                pDeclarationOperateVo.getReported_mem_no();
+                //pDeclarationOperateVo.getReported_mem_no();
 
                 LoginHistoryVo loginHistory = mem_MemberDao.memberLoginHistory(pDeclarationOperateVo.getReported_mem_no());
 
@@ -221,6 +230,31 @@ public class DeclarationService {
                             mem_MemberDao.insertLoginBlock(new LoginBlockVo(block_type, blockScopeTexts, blockDay, pDeclarationOperateVo.getOpName(), pDeclarationOperateVo.getReportIdx()));
                             mem_MemberDao.insertLoginBlockHistory(new LoginBlockHistVo(edit_contents, 0, pDeclarationOperateVo.getOpName(), pDeclarationOperateVo.getReportIdx()));
                         }
+                    }
+                }
+
+                // 신고 대상자가 방송 중인지
+                var pMemberReportVo = new P_MemberReportVo();
+                pMemberReportVo.setMem_no(pDeclarationOperateVo.getReported_mem_no());
+                
+                int broadCastingCheck = mem_MemberDao.callMemberBroadCasting_check(pMemberReportVo);
+                // 신고 대상자가 청취 중인지
+                int listeningCheck = mem_MemberDao.callMemberListening_check(pMemberReportVo);
+
+                // 경고를 제외한 정지, 탈퇴 시 방송강제종료, 청취강제종료 후 처리 되도록
+                if(pDeclarationOperateVo.getOpCode() > 2) {
+
+                    if(broadCastingCheck > 0) {
+                        //방송 강제 종료 처리
+                        MemberVo MemVo = new MemberVo();
+                        MemVo.setMem_no(pDeclarationOperateVo.getReported_mem_no());
+                        mem_BroadcastService.forcedEnd(MemVo);
+                    }
+                    if(listeningCheck > 0){
+                        // 청취 종료 처리
+                        P_MemberListenInputVo pMemberListenInputVo = new P_MemberListenInputVo();
+                        pMemberListenInputVo.setMem_no(pDeclarationOperateVo.getReported_mem_no());
+                        mem_listenService.forcedExit(pMemberListenInputVo);
                     }
                 }
             }

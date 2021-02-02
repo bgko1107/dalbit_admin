@@ -54,6 +54,17 @@ public class BroadcastController {
         }
     }
 
+    @RequestMapping("/broadcast/popup/videoPlayerPopup")
+    public String videoPlayerPopup(HttpServletRequest request) {
+        if(playerType.equals("wowza")){
+            bro_broadcastService.callBroadcastWowzaSimpleInfo(request);
+            return "broadcast/broadcast/popup/playerPopup_wowza_video";
+        }else{
+            bro_broadcastService.callBroadcastSimpleInfo(request);
+            return "broadcast/broadcast/popup/playerPopup";
+        }
+    }
+
     /**
      * 생방송 목록
      * @param model
