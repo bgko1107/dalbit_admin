@@ -26,7 +26,9 @@ var recommDataTableSource = {
                     return util.getCommonCodeLabel(data,'content_viewOn','N','view_yn');
                 }}
             , {'title': '추천팬등록수', 'data': 'recommendFanCnt', 'width':'5%', 'render': function (data, type, row, meta) {
-                    return common.addComma(data);
+                    var tmpUrl = "/menu/recomm/popup/recommendFanList?memNo=" + encodeURIComponent(row.mem_no);
+
+                    return '<a href="javascript://" class="_openPop" data-url="' + tmpUrl + '" data-width="600" data-height="400">' + common.addComma(data) + '</a>';
                 }}
             , {'title': '최근 방송일시', 'data': 'last_broadcast'}
             , {'title': '최근 7일 방송시간', 'data': 'broadcastTime', 'render': function(data, type, row) {
@@ -34,6 +36,28 @@ var recommDataTableSource = {
                 }}
             , {'title': '등록정보', 'data': 'reg_op_name', 'render': function(data, type, row) {
                     return data + '<br/>' + row.upd_op_name;
+                }}
+        ]
+        // , 'comments': ''
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
+    },
+
+    'recommFanList': {
+        'url': '/rest/menu/recomm/fan/list'
+        , 'columns': [
+            {'title': '회원번호', 'data': 'mem_no_fan', 'width' : '25%', 'render': function(data, type, row) {
+                    return '<a href="javascript://" class="_openMemberPop" data-memno="' + data + '">' + data + '</a>';
+                }}
+            , {'title': '닉네임', 'data': 'memNick', 'width' : '25%'}
+            , {'title': '성별', 'data': 'memSex', 'width':'25%', 'render': function (data, type, row, meta) {
+                    return common.sexIcon(data, row.mem_birth_year);
+                }}
+            , {'title': '팬등록일시', 'data': 'reg_date', 'width' : '25%', 'render': function (data, type, row, meta) {
+                    return common.substr(data,0,19);
                 }}
         ]
         // , 'comments': ''

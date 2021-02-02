@@ -13,8 +13,13 @@
     <select id="callEditRecomm" statementType="CALLABLE" parameterType="ProcedureVo" resultType="ProcedureVo">
         call rd_admin.sp_admin_recommend_dj_edit(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
+
     <select id="callDeleteRecomm" statementType="CALLABLE" parameterType="ProcedureVo" resultType="ProcedureVo">
         call rd_admin.sp_admin_recommend_dj_delete(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callRecommFanList" statementType="CALLABLE" parameterType="ProcedureVo" resultType="com.dalbit.menu.vo.RecommVo">
+        call rd_admin.sp_admin_recommend_dj_fan_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
 </mapper>

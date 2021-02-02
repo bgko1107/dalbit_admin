@@ -30,6 +30,8 @@ public class RecommVo extends PagingVo {
     private String upd_date;
     private String reg_op_name;
     private String upd_op_name;
+    private String mem_no_fan;
+    private String mem_birth_year;
 
     /* detail */
     private String idx;
