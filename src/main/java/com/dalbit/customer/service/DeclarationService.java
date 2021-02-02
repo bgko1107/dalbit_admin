@@ -355,10 +355,12 @@ public class DeclarationService {
             if(pMemberReportVo.getDeleteYn() == 1){
                 DalbitUtil.sendChatImageDelete(pMemberReportVo);
             }
-
-            result = memMemberService.getMemberReport(pMemberReportVo);
-            log.debug(result);
-            result = gsonUtil.toJson(new JsonOutputVo(Status.신고처리_성공));
+            if(pMemberReportVo.getSlctType() == 0){
+                result = gsonUtil.toJson(new JsonOutputVo(Status.삭제));
+            }else{
+                memMemberService.getMemberReport(pMemberReportVo);
+                result = gsonUtil.toJson(new JsonOutputVo(Status.신고처리_성공));
+            }
         } else if(Status.신고처리_신고번호없음.getMessageCode().equals(procedureVo.getRet())) {
             result = gsonUtil.toJson(new JsonOutputVo(Status.신고처리_신고번호없음));
         } else if(Status.신고처리_이미처리되었음.getMessageCode().equals(procedureVo.getRet())) {

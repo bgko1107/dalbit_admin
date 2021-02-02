@@ -156,6 +156,10 @@
         }
     }
 
+    function itemTypeChange(){
+        $("#bt_search").click();
+    }
+
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_live">

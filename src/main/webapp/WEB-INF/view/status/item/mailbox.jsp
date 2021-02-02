@@ -5,6 +5,12 @@
 <div class="widget widget-table mb10">
     <div class="widget-content mt10">
         <span class="_searchDate2"></span>
+        <select name="itemType_mailbox" class="form-control" onchange="itemTypeChange();">
+            <option value="0" selected="selected">전체</option>
+            <option value="1">일반</option>
+            <option value="2">콤보</option>
+            <option value="3">감정</option>
+        </select>
         <table class="table table-bordered">
             <colgroup>
                 <col width="6.2%"/><col width="13.4%"/><col width="13.4%"/><col width="13.4%"/><col width="13.4%"/>
@@ -51,6 +57,7 @@
         data.endDate = $("#endDate").val();
         data.pageNo = giftMailboxListPagingInfo.pageNo;
         data.pageCnt = giftMailboxListPagingInfo.pageCnt;
+        data.itemType = $('select[name=itemType_mailbox]').val();
         util.getAjaxData("itemMailboxList", "/rest/status/item/mailbox/list", data, fn_mailboxJoin_success);
     }
 

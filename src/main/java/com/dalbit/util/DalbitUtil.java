@@ -1097,7 +1097,10 @@ public class DalbitUtil {
 //            String url = "https://devm-bgko.dalbitlive.com:4431/admin/declaretion/imageDelete";
             Response response = okHttpClientUtil.sendPostApi(url, formBody, jwtUtil.generateToken(authMemNo, true));
             inforexLoginResult = response.body().string();
-            log.debug(inforexLoginResult);
+//            log.debug(inforexLoginResult);
+            log.info("-------------------------- imageDelete start ----------------------------");
+            log.info(inforexLoginResult);
+            log.info("-------------------------- imageDelete end   ----------------------------");
             return inforexLoginResult;
         }catch (IOException | GlobalException e){
             e.printStackTrace();

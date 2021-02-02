@@ -13,6 +13,7 @@ public class P_MailboxVo extends SearchVo {
     // input
     private int pageNo;
     private String startDate;
+    private int itemType;
 
     // output
     private String item_code;

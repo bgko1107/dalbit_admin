@@ -337,14 +337,18 @@
     // [수신대상 선택 - 지정회원] 회원 추가
     function choiceMember_smsSend(data) {
         console.log(data);
-        var html = '<p id="' + data.mem_phone + '" data-memno="'+ data.mem_no +'">' + data.mem_phone + '(' +data.mem_nick+ ') <a style="cursor: pointer;" onclick="delMember($(this))">[X]</a></p>'
+        if(!common.isEmpty(data.mem_phone)){
+            var html = '<p id="' + data.mem_phone + '" data-memno="'+ data.mem_no +'">' + data.mem_phone + '(' +data.mem_nick+ ') <a style="cursor: pointer;" onclick="delMember($(this))">[X]</a></p>'
 
-        // if($(".smsSendPopup").find("#div_selectTarget").find("p").length >= 20){
-        //     alert("수신대상자는 최대 20명까지 지정 가능합니다.");
-        //     return false;
-        // }
+            // if($(".smsSendPopup").find("#div_selectTarget").find("p").length >= 20){
+            //     alert("수신대상자는 최대 20명까지 지정 가능합니다.");
+            //     return false;
+            // }
 
-        $(".smsSendPopup").find("#div_selectTarget").append(html);
+            $(".smsSendPopup").find("#div_selectTarget").append(html);
+        }
+
+        $("#memberLength").text('총 : ' + $("#div_selectTarget").find('p').length + ' 명');
     };
 
     // [수신대상 선택 - 지정회원] 회원 삭제
@@ -357,8 +361,9 @@
         if(common.isEmpty(data.mem_phone) || data.mem_phone.length < 10 || !data.mem_phone.match("(01[016789])(\\d{3,4})(\\d{4})")){
             alert("선택한 회원은 휴대폰번호가 비정상 이거나 존재하지 않습니다.");
             return false;
+        }else{
+            return true;
         }
-        return true;
     }
 
 
@@ -374,6 +379,58 @@
         util.textareaResize(document.getElementById("smsSend-msg_body"));
 
         window.resizeTo(window.outerWidth, $(".container").height()+100);
+    }
+
+    function jsonDataExcel() {
+
+        let input = event.target;
+        let reader = new FileReader();
+        reader.onload = function () {
+            let data = reader.result;
+            let workBook = XLSX.read(data, { type: 'binary' });
+            workBook.SheetNames.forEach(function (sheetName) {
+                console.log('SheetName: ' + sheetName);
+                let rows = XLSX.utils.sheet_to_json(workBook.Sheets[sheetName]);
+                console.log(rows)
+                excelMemberListInfo(rows);
+            })
+        };
+        reader.readAsBinaryString(input.files[0]);
+    }
+
+    function excelMemberListInfo(list){
+        if(!common.isEmpty(list[0].mem_no)){
+            for(var i=0;i<list.length;i++){
+                util.getAjaxData("insert", "/rest/customer/member/info", list[i], fn_excelMemberListInfo_success, fn_fail);
+            }
+        }else if(!common.isEmpty(list[0].mem_phone)){
+            for(var i=0;i<list.length;i++) {
+                var data = {
+                    "mem_phone": list[i].mem_phone
+                    , "mem_no": "0"
+                    , "mem_nick": "직접입력"
+                };
+
+                if(common.isEmpty(data.mem_phone) || data.mem_phone.length < 10 || !data.mem_phone.match("(01[016789])(\\d{3,4})(\\d{4})")) {
+                    alert("선택한 회원은 휴대폰번호가 비정상 이거나 존재하지 않습니다.\n" +
+                          "번호 : " + list[i].mem_phone);
+                    break;
+                }else{
+                    choiceMember_smsSend(data);
+                    $(".smsSendPopup").find("#add_phone").val("");
+                }
+            }
+        }else{
+            alert('회원번호 : mem_no \n' +
+                  '휴대폰번호 : mem_phone \n' +
+                  'ex) mem_phone \n' +
+                  '    01012340000 \n' +
+                  '    01056780000 \n' +
+                  '형식으로 목록을 작성 해주십시오.');
+        }
+    }
+    function fn_excelMemberListInfo_success(dst_id, response){
+        choiceMember_smsSend(response.data);
     }
 </script>
 
@@ -423,7 +480,9 @@
                                 <span class="pr5 pl5"> | </span>
                                 <input type="text" class="form-control control-inline" name="add_phone" id="add_phone" placeholder="수신번호 입력" maxlength="11" style="width:130px; height:25px;">
                                 <input type="button" value="번호추가" class="btn btn-success btn-xs pl5" id="btn_addMember"/>
+                                <span class="ml15" id="memberLength"></span>
                             </div>
+                            <input type="file" id="file" onchange="jsonDataExcel()">
                             <%--
                             <div>
                                 <label class="control-inline fancy-radio custom-color-green"><input type="radio" value="8" id="is_all8" name="is_all" class="form-control" checked="checked"><span><i></i>직접입력</span></label>

@@ -10,4 +10,5 @@ public class P_ItemClipInputVo extends SearchVo {
 
     private int pageNo;
     private String startDate;
+    private int itemType;
 }

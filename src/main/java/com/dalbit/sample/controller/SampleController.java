@@ -117,6 +117,10 @@ public class SampleController {
         return "sample/player_ant";
     }
 
+    @GetMapping("excelUpload")
+    public String excelUpload(){return "sample/excelUpload";}
+
+
     @GetMapping("wowza/player")
     public String wowzaPlayer(HttpServletRequest request){
         bro_broadcastService.callBroadcastWowzaSimpleInfo(request);

@@ -199,7 +199,8 @@
         and profile.mem_no = dj.mem_no
         and basic.mem_no = profile.mem_no
         and dj.state <![CDATA[<>]]> 2
-        and concat(#{select_year}, #{select_month}) = DATE_FORMAT(dj.reg_date, '%Y%m')
+        <!--and concat(#{select_year}, #{select_month}) = DATE_FORMAT(dj.reg_date, '%Y%m')-->
+        and dj.reg_date between concat(#{select_year},'.', #{select_month},'.01', ' 00:00:00') and DATE_SUB( DATE_ADD(concat(#{select_year},'.', #{select_month},'.01'), INTERVAL 1 MONTH), INTERVAL 1 SECOND )
         and manage.select_year = #{select_year}
         and manage.select_month = #{select_month}
         <include refid="reqSpecial" />
@@ -231,7 +232,8 @@
         , rd_data.tb_member_basic basic
         where basic.mem_no = dj.mem_no
         and dj.state <![CDATA[<>]]> 2
-        and concat(#{select_year}, #{select_month}) = DATE_FORMAT(dj.reg_date, '%Y%m')
+        <!--and concat(#{select_year}, #{select_month}) = DATE_FORMAT(dj.reg_date, '%Y%m')-->
+        and dj.reg_date between concat(#{select_year},'.', #{select_month},'.01', ' 00:00:00') and DATE_SUB( DATE_ADD(concat(#{select_year},'.', #{select_month},'.01'), INTERVAL 1 MONTH), INTERVAL 1 SECOND )
         <include refid="reqSpecial" />
     </select>
 

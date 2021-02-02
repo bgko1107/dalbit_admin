@@ -253,7 +253,7 @@
                       op_msg,platform,browser,ip,op_name,op_date,reg_date)
          value (#{mem_no},#{mem_userid},#{mem_nick},'',1,'',#{reported_mem_no},#{reported_userid},
                 #{reported_nick},#{reported_phone},#{reported_level},#{reported_grade},null,#{slctReason},null,'2',#{slctType},
-                #{notiContents},'PC',#{browser},#{ip},#{opName},now(),now())
+                IFNULL(#{notiContents},''),'PC',#{browser},IFNULL(#{ip},''),#{opName},now(),now())
     </insert>
 
     <select id="callMemberBroadCasting_check" parameterType="com.dalbit.member.vo.procedure.P_MemberReportVo" resultType="integer">

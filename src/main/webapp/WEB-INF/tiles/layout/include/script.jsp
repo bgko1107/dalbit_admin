@@ -57,6 +57,10 @@
 <script src="/js/lib/bootstrap-datetimepicker.js"></script>
 <script src="/js/lib/jquery-confirm.min.js?${dummyData}"></script>
 
+<!-- excel upload -->
+<script type="text/javascript" src="/js/excel.min.js?${dummyData}"></script>
+<script type="text/javascript" src="/js/xlsx.full.min.js?${dummyData}"></script>
+
 <!-- dataTable -->
 <script src="/js/lib/dataTable/buttons.html5-1.5.2.min.js"></script>
 <script src="/js/lib/dataTable/dataTables.buttons-v1.5.2.min.js"></script>

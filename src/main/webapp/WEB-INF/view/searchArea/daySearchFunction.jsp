@@ -38,6 +38,7 @@
 
         toDay = week[moment($("#startDate").val()).add('days', 0).day()];
         $("._searchDate").html(dateTime + " (" + toDay + ")");
+        $("._searchDate2").html(dateTime + " (" + toDay + ")");
     }
 
     function setDayButton(today){
@@ -122,11 +123,13 @@
             $("#startDate").val(selectDate.substr(0,8) + "01");
             $("#endDate").val(selectDate.substr(0,8) + lastDay);
             $("._searchDate").html(moment($("#startDate").val()).format('YYYY년 MM월'));
+            $("._searchDate2").html(moment($("#startDate").val()).format('YYYY년 MM월'));
         }else if(slctType == 2){
             $("#yearDate").val(selectDate.substr(0,4));
             $("#startDate").val(selectDate.substr(0,5) + "01.01");
             $("#endDate").val(selectDate.substr(0,5) + "12.31");
             $("._searchDate").html(moment($("#startDate").val()).format('YYYY년'));
+            $("._searchDate2").html(moment($("#startDate").val()).format('YYYY년'));
         }else if(slctType == 4){
             $("#onedayDate").val(selectDate);
             var monday = getMonday(selectDate);       // 선택한 날의 월요일
@@ -262,10 +265,18 @@
             month = "12";
             day = "31";
             monthClick("",year, month, day);
-        }else if(common.lpad(month,2,"0") + common.lpad(tmpDay,2,"0") == "1231" && isPrev == 1){
+        }else if(common.lpad(month,2,"0") + common.lpad(tmpDay,2,"0") == "1231" && isPrev == 1) {
             $("#div_dayButton").find("#search_year option:eq(" + yearIdx + ")").prop("selected", true);
             year = year + 1;
             month = "01";
+            day = "01";
+            monthClick("", year, month, day);
+        }else if(common.lpad(month,2,"0") !="01" && common.lpad(tmpDay,2,"0") == "01" && isPrev == -1){
+            month = common.lpad(Number(month) + isPrev,2,"0");
+            day = moment(year + "." + month + "." + day).add('months', 1).add('days', -1).format('DD');
+            monthClick("",year, month, day);
+        }else if(common.lpad(month,2,"0") !="12" && lastDay == tmpDay && isPrev == 1){
+            month = common.lpad(Number(month) + isPrev,2,"0");
             day = "01";
             monthClick("",year, month, day);
         }else{
