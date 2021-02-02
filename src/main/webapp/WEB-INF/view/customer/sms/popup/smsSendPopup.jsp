@@ -347,6 +347,8 @@
 
             $(".smsSendPopup").find("#div_selectTarget").append(html);
         }
+
+        $("#memberLength").text('총 : ' + $("#div_selectTarget").find('p').length + ' 명');
     };
 
     // [수신대상 선택 - 지정회원] 회원 삭제
@@ -478,6 +480,7 @@
                                 <span class="pr5 pl5"> | </span>
                                 <input type="text" class="form-control control-inline" name="add_phone" id="add_phone" placeholder="수신번호 입력" maxlength="11" style="width:130px; height:25px;">
                                 <input type="button" value="번호추가" class="btn btn-success btn-xs pl5" id="btn_addMember"/>
+                                <span class="ml15" id="memberLength"></span>
                             </div>
                             <input type="file" id="file" onchange="jsonDataExcel()">
                             <%--
