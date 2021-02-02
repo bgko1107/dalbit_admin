@@ -139,11 +139,25 @@
         cursor: pointer;
     }
 
+
+    video#remoteVideo {
+        position: fixed; right: 0; bottom: 0;
+        min-width: 100%; min-height: 100%;
+        width: auto; height: auto; z-index: -100;
+        background-size: cover;
+    }
+
+    ._title {
+        background-color : #555;
+        color : white;
+    }
+
 </style>
 
 <div class="player">
     <div class="header clearfix">
-        <h3 class="text-muted" id="title"></h3>
+        <h3><span id="title" class="_title"></span></h3>
+        <button class="btn btn-info pull-right" id="chatToggle">채팅</button>
     </div>
     <div>
         <p>
@@ -160,9 +174,9 @@
             <input type="text" class="form-control" value="edge" id="applicationName" placeholder="edge or origin">
             <input type="text" class="form-control" value="" id="streamName" placeholder="streamName">
         </p>
-        <p>
-            <button onclick="loadChat()" class="btn btn-info" id="callChat" style="display: none">Chat</button>
-            <button onclick="go()" class="btn btn-info" id="play" value="play" style="display: none">Play</button>
+        <p style="display: none">
+            <button onclick="loadChat()" class="btn btn-info" id="callChat">Chat</button>
+            <button onclick="go()" class="btn btn-info" id="play" value="play">Play</button>
         </p>
     </div>
     <div class="liveChat no-padding">
@@ -176,9 +190,6 @@
     </div>
 </div>
 
-<script src="https://unpkg.com/video.js/dist/video.js"></script>
-<script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script>
-<script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
 <script>
     var pc_config = null;
     var broadInfo = <%=in_BroadInfo%>;
@@ -213,7 +224,7 @@
         $("#streamName").val(broadInfo.streamName);
 
         $("#title").html(broadInfo.title);
-        $(".liveChat").css("background-image", "url("+PHOTO_SERVER_URL + broadInfo.roomBgImg+")");
+        //$(".liveChat").css("background-image", "url("+PHOTO_SERVER_URL + broadInfo.roomBgImg+")");
 
         if(broadInfo.state == 4){
             alert("종료된 방송입니다.");
@@ -401,6 +412,16 @@
         $(".liveChat__btn").hide();
     }
 
+    $(document).on('click', '#chatToggle', function(){
+        var isvisible = 0 < $("#liveChat__cover:visible").length;
+        if(isvisible){
+            $("#liveChat__cover").hide();
+            $("#liveChat__chat").hide();
+        }else{
+            $("#liveChat__cover").show();
+            $("#liveChat__chat").show();
+        }
+    });
 
 </script>
 
