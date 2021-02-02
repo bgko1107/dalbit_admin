@@ -538,6 +538,14 @@ var item_itemSlct = [
     , new COMMON_CODE('dal', '3', '달 선물')
 ];
 
+var item_itemCategory = [
+    new COMMON_CODE(null, 'category', '아이템 카테고리')
+    , new COMMON_CODE('emotion', 'emotion', '감정')
+    , new COMMON_CODE('combo', 'combo', '콤보')
+    , new COMMON_CODE('normal', 'normal', '일반')
+    , new COMMON_CODE('text', 'text', '문자')
+];
+
 var item_useArea = [
     new COMMON_CODE(null, 'useArea', '사용영역')
     , new COMMON_CODE('default', '0', '기본')
