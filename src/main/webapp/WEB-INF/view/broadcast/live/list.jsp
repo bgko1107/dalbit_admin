@@ -533,48 +533,26 @@
         var video_state = $(me).parent().find('._video_state');
 
         var adapter;
-        let wsUrl = 'wss://devwv.dalbitlive.com/webrtc-session.json';
-        let applicationName = 'edge';
-        let streamName = WOWZA_PREFIX+me.data('roomno')+WOWZA_SUFFIX;
-
         let info = {
-            wsUrl,
-            applicationName,
-            streamName
+            wsUrl : 'wss://devwv.dalbitlive.com/webrtc-session.json',
+            applicationName : 'edge',
+            streamName : WOWZA_PREFIX+me.data('roomno')+WOWZA_SUFFIX
         };
 
         adapter = WebRTCPlayAdapter();
         adapter.on('error', error => {
-            //some of the possible errors, NotFoundError, SecurityError,PermissionDeniedError
-            console.log("error callback: " + error);
             if(error !== undefined){
-                isReloadChat = false;
-                //alert("플레이어 실행 오류 발생");
-                // window.close();
-                video_state.text(++errorCnt + " [플레이어 실행 오류] " + error);
-
+                video_state.text(" [플레이어 실행 오류] " + error);
                 return false;
             }
         });
 
         adapter.on('pcStateChange', state => {
-            console.log('pcStateChange => ', state);
-
-            //connecting
             if(state == 'connecting'){
                 video_state.text("방송방 연결중....");
             }
-
-            // 청취가 시작되었다. 뭔가하자.
             if (state == 'connected') {
-                isReloadChat = true;
-
-                $("#play").text("stop");
-                $("#play").val("stop");
-
                 video_state.text("");
-
-                // 플레이어 세팅.
                 remoteVideo = document.getElementById('video_'+me.data('roomno'));
                 try{
                     remoteVideo.srcObject = adapter.getStream();
@@ -582,13 +560,9 @@
                     remoteVideo.src = window.URL.createObjectURL(adapter.getStream());
                 }
             }
-
-            // 끊어지거나 뭔가 잘못됐다.
             if (state == 'disconnected' || state == 'failed') {
                 stop();
-                isReloadChat = false;
                 video_state.text("종료된 방송 입니다.");
-                return false;
             }
         });
 
