@@ -17,25 +17,51 @@
         <div class="tab-pane fade in active">
             <div class="widget-content">
                 <div class="col-md-12 no-padding mt10">
-                    <div class="col-md-4 no-padding">
+                    <div class="col-md-6 no-padding">
                         <span id="fanboardListCnt"></span><br/>
                         <span style="color: red">* 팬보드 작성 글 수(비밀글 수)를 표기한 정보입니다.</span><br/>
+
+                        <select id="fanBoardOwner" name="fanBoardOwner" class="form-control searchType">
+                            <option value="0" selected="selected">팬보드주인(전체)</option>
+                            <option value="1">주인</option>
+                            <option value="2">등록자</option>
+                        </select>
+
                         <select id="fanBoardStatus" name="fanBoardStatus" class="form-control searchType">
-                            <option value="0" selected="selected">게시글 전체</option>
+                            <option value="0" selected="selected">게시글(전체)</option>
                             <option value="1">정상</option>
                             <option value="2">삭제</option>
                         </select>
 
+                        <select id="isSecret" name="isSecret" class="form-control searchType">
+                            <option value="0" selected="selected">비밀글 여부(전체)</option>
+                            <option value="1">비밀 X</option>
+                            <option value="2">비밀 O</option>
+                        </select>
+
+                        <select id="isWithdarwal" name="isWithdarwal" class="form-control searchType">
+                            <option value="0" selected="selected">회원/탈퇴(전체)</option>
+                            <option value="1">회원</option>
+                            <option value="2">탈퇴</option>
+                        </select>
+
+                        <select id="isMemblock" name="isMemblock" class="form-control searchType">
+                            <option value="0" selected="selected">차단회원(전체)</option>
+                            <option value="1">차단 X</option>
+                            <option value="2">차단 O</option>
+                        </select>
+
+
                         <span id="dynamicPageAreaFanboard"></span>
 
-                        <label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
+                        <%--<label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
                             <input type="checkbox" name="isSecret" id="isSecret" value="1">
                             <span>비밀글 모아보기</span>
                         </label>
                         <label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
                             <input type="checkbox" name="isWithdarwal" id="isWithdarwal" value="1">
                             <span>탈퇴회원 모아보기</span>
-                        </label>
+                        </label>--%>
                     </div>
                     <div class="col-md-2 no-padding pull-right">
                         <table class="table table-sorting table-hover table-bordered">
@@ -121,8 +147,12 @@
             , 'searchType' : 0
             , 'boardType' : 1
             , 'status' : Number($("#fanBoardStatus option:selected").val())
-            , 'isSecret' : $('input:checkbox[name="isSecret"]').prop('checked') ? 0 : 1
-            , 'isWithdarwal' : $('input:checkbox[name="isWithdarwal"]').prop('checked') ? 1 : 0
+            // , 'isSecret' : $('input:checkbox[name="isSecret"]').prop('checked') ? 0 : 1
+            // , 'isWithdarwal' : $('input:checkbox[name="isWithdarwal"]').prop('checked') ? 1 : 0
+            , 'isSecret' : Number($("#isSecret option:selected").val())
+            , 'isWithdarwal' : Number($("#isWithdarwal option:selected").val())
+            , 'fanBoardOwner' : Number($("#fanBoardOwner option:selected").val())
+            , 'isMemblock' : Number($("#isMemblock option:selected").val())
         };
 
         console.log(data);
@@ -245,8 +275,19 @@
     $('#fanBoardStatus').on('change', function () {
         fanBoardList();
     });
-
-    $('#isSecret').on('change', function() {
+    $('#isSecret').on('change', function () {
+        fanBoardList();
+    });
+    $('#isWithdarwal').on('change', function () {
+        fanBoardList();
+    });
+    $('#fanBoardOwner').on('change', function () {
+        fanBoardList();
+    });
+    $('#isMemblock').on('change', function () {
+        fanBoardList();
+    });
+   /* $('#isSecret').on('change', function() {
        if($('input:checkbox[name="isSecret"]').prop('checked')) {
            $('#isSecret').val(0)
        } else {
@@ -261,7 +302,7 @@
            $('#isWithdarwal').val(0)
        }
         fanBoardList();
-    });
+    });*/
 
     $(document).on('change', '#dynamicPageCntFanboard', function () {
         fanBoardPagingInfo.pageCnt = $(this).val();
