@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class P_itemGiftInsertVo extends BaseVo {
+    private String category;			//아이템카테고리
     private String platform;			// 플랫폼(PC(Web포함)/Mobile-Android/Mobile-IOS)
     private String item_slct;				// 아이템구분(1: 방송방선물, 2: 방송방사용, 3: 달 선물)
     private String item_name;			// 상품명

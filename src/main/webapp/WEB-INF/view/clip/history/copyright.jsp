@@ -236,8 +236,8 @@
                     <br />{{title}}
                 </td>
                 <td>{{convertToDate regDate "YYYY-MM-DD"}}</td>
-                <td><input type="text" class="form-control _trim" id="coverTitle_{{clipIdx}}" value="{{adminCoverTitle}}" maxlength="50" /></td>
-                <td><input type="text" class="form-control _trim" id="coverSinger_{{clipIdx}}" value="{{adminCoverSinger}}" maxlength="50" /></td>
+                <td><input type="text" class="form-control _trim" id="coverTitle_{{clipIdx}}" value="{{{adminCoverTitle}}}" maxlength="50" /></td>
+                <td><input type="text" class="form-control _trim" id="coverSinger_{{clipIdx}}" value="{{{adminCoverSinger}}}" maxlength="50" /></td>
                 <td><button type="button" class="_adminCover btn btn-primary" data-idx="{{clipIdx}}" data-clipno="{{cast_no}}">저장</button></td>
                 <td>{{uciAlbumCode}}</td>
                 <td>
