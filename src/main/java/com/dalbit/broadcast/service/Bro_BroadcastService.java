@@ -43,6 +43,8 @@ public class Bro_BroadcastService {
     SocketUtil socketUtil;
     @Autowired
     JwtUtil jwtUtil;
+    @Autowired
+    SocketRestUtil socketRestUtil;
 
     @Value("${server.ant.url}")
     private String antServer;
@@ -53,10 +55,10 @@ public class Bro_BroadcastService {
     @Value("${ant.app.name}")
     private String antName;
 
-    @Value("${wowza.wss.url}")
-    private String WOWZA_WSS_URL;
-    @Value("${wowza.real.server}")
-    private String[] WOWZA_REAL_SERVER;
+    @Value("${wowza.audio.wss.url}")
+    private String WOWZA_AUDIO_WSS_URL;
+    @Value("${wowza.audio.server}")
+    private String[] WOWZA_AUDIO_SERVER;
     @Value("${wowza.prefix}")
     private String WOWZA_PREFIX;
     @Value("${wowza.suffix}")
@@ -321,7 +323,7 @@ public class Bro_BroadcastService {
                 // 방송 강제종료 api 호출
                 pBroadcastEditInputVo.setStart_date(broadcastDetail.getStartDate());
                 pBroadcastEditInputVo.setRoomExit("N");
-                forceExitResult = DalbitUtil.broadcastForceExit(pBroadcastEditInputVo);
+                forceExitResult = socketRestUtil.broadcastForceExit(pBroadcastEditInputVo);
                 if(forceExitResult.equals("error")){
                     return gsonUtil.toJson(new JsonOutputVo(Status.회원방송강제종료시도_실패));
                 }else if(forceExitResult.equals("noAuth")){
@@ -333,7 +335,7 @@ public class Bro_BroadcastService {
 
             //얼리기
             if(!DalbitUtil.isEmpty(pBroadcastEditInputVo.getFreezeMsg()) && !broadcastDetail.getFreezeMsg().equals(pBroadcastEditInputVo.getFreezeMsg())){
-                DalbitUtil.broadcastFreeze(pBroadcastEditInputVo);
+                socketRestUtil.broadcastFreeze(pBroadcastEditInputVo);
             }
 
             //option
@@ -385,8 +387,8 @@ public class Bro_BroadcastService {
         if(!DalbitUtil.isEmpty(roomNo)){
             HashMap broadInfo = bro_BroadcastDao.callBroadcastSimpleInfo(roomNo);
             if(broadInfo != null){
-                log.info("[WOWZA] Request URL : {}", WOWZA_WSS_URL );
-                broadInfo.put("wsUrl", WOWZA_WSS_URL);
+                log.info("[WOWZA] Request URL : {}", WOWZA_AUDIO_WSS_URL );
+                broadInfo.put("wsUrl", WOWZA_AUDIO_WSS_URL);
                 broadInfo.put("applicationName", "edge");
                 broadInfo.put("streamName", WOWZA_PREFIX + roomNo + WOWZA_SUFFIX);
                 request.setAttribute("BroadInfo", gsonUtil.toJson(broadInfo));

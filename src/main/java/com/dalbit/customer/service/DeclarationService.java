@@ -24,6 +24,7 @@ import com.dalbit.member.vo.procedure.P_MemberReportVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import com.dalbit.util.MessageUtil;
+import com.dalbit.util.SocketRestUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
@@ -62,6 +63,9 @@ public class DeclarationService {
     
     @Autowired
     Mem_BroadcastService mem_BroadcastService;
+
+    @Autowired
+    SocketRestUtil socketRestUtil;
 
     /**
      * 신고 목록 조회
@@ -256,6 +260,7 @@ public class DeclarationService {
                         pMemberListenInputVo.setMem_no(pDeclarationOperateVo.getReported_mem_no());
                         mem_listenService.forcedExit(pMemberListenInputVo);
                     }
+
                 }
             }
 
@@ -353,7 +358,7 @@ public class DeclarationService {
 
         if(Status.신고처리_성공.getMessageCode().equals(procedureVo.getRet())) {
             if(pMemberReportVo.getDeleteYn() == 1){
-                DalbitUtil.sendChatImageDelete(pMemberReportVo);
+                socketRestUtil.sendChatImageDelete(pMemberReportVo);
             }
             if(pMemberReportVo.getSlctType() == 0){
                 result = gsonUtil.toJson(new JsonOutputVo(Status.삭제));

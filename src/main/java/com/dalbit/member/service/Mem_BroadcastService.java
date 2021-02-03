@@ -38,6 +38,9 @@ public class Mem_BroadcastService {
     JwtUtil jwtUtil;
     @Autowired
     Bro_BroadcastDao bro_BroadcastDao;
+    @Autowired
+    SocketRestUtil socketRestUtil;
+
     @Value("${server.ant.url}")
     private String antServer;
 
@@ -105,7 +108,7 @@ public class Mem_BroadcastService {
             pBroadcastEditInputVo.setStart_date(broadcastDetail.getStartDate());
             pBroadcastEditInputVo.setOpName(MemberVo.getMyMemNo());
             pBroadcastEditInputVo.setRoomExit("Y");
-            forceExitResult = DalbitUtil.broadcastForceExit(pBroadcastEditInputVo);
+            forceExitResult = socketRestUtil.broadcastForceExit(pBroadcastEditInputVo);
             log.info(forceExitResult);
             if(forceExitResult.equals("error") || forceExitResult.equals("noAuth")){
                 break;
@@ -168,7 +171,7 @@ public class Mem_BroadcastService {
                 pBroadcastEditInputVo.setStart_date(broadcastDetail.getStartDate());
                 pBroadcastEditInputVo.setOpName(MemberVo.getMyMemNo());
                 pBroadcastEditInputVo.setRoomExit("Y");
-                forceExitResult = DalbitUtil.broadcastForceExit(pBroadcastEditInputVo);
+                forceExitResult = socketRestUtil.broadcastForceExit(pBroadcastEditInputVo);
                 log.info(forceExitResult);
                 if(forceExitResult.equals("error") || forceExitResult.equals("noAuth")){
                     break;

@@ -12,10 +12,7 @@ import com.dalbit.member.vo.MemberVo;
 import com.dalbit.member.vo.procedure.P_MemberAdminMemoAddVo;
 import com.dalbit.member.vo.procedure.P_MemberListenInputVo;
 import com.dalbit.member.vo.procedure.P_MemberListenOutputVo;
-import com.dalbit.util.DalbitUtil;
-import com.dalbit.util.GsonUtil;
-import com.dalbit.util.JwtUtil;
-import com.dalbit.util.SocketUtil;
+import com.dalbit.util.*;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import lombok.var;
@@ -40,6 +37,8 @@ public class Mem_ListenService {
     JwtUtil jwtUtil;
     @Autowired
     Bro_ListenerDao bro_ListenerDao;
+    @Autowired
+    SocketRestUtil socketRestUtil;
 
     public String getListenHistory(P_MemberListenInputVo pMemberListenInputVo) {
 
@@ -93,7 +92,7 @@ public class Mem_ListenService {
             pListenForceLeaveVo.setReport_title("");
             pListenForceLeaveVo.setReport_message("");
             pListenForceLeaveVo.setNotiMemo("");
-            listenForceExitResult = DalbitUtil.listenForceExit(pListenForceLeaveVo);
+            listenForceExitResult = socketRestUtil.listenForceExit(pListenForceLeaveVo);
 
             if(listenForceExitResult.equals("error") || listenForceExitResult.equals("noAuth")){
                 break;

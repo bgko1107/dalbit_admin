@@ -120,7 +120,8 @@
     var ANT_SERVER_URL = '${cfn:getProperty("server.ant.url")}';
     var ANT_APP_NAME = '${cfn:getProperty("ant.app.name")}';
 
-    var WOWZA_SERVER_URL = '${cfn:getProperty("wowza.wss.url")}';
+    var WOWZA_AUDIO_SERVER_URL = '${cfn:getProperty("wowza.audio.wss.url")}';
+    var WOWZA_VIDEO_SERVER_URL = '${cfn:getProperty("wowza.video.wss.url")}';
     var WOWZA_PREFIX = '${cfn:getProperty("wowza.prefix")}';
     var WOWZA_SUFFIX = '${cfn:getProperty("wowza.suffix")}';
 

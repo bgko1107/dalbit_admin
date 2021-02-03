@@ -71,6 +71,9 @@ public class Mem_MemberService {
     @Autowired
     CommonDao commonDao;
 
+    @Autowired
+    SocketRestUtil socketRestUtil;
+
     public ProcedureVo callMemberLogin(P_LoginVo pLoginVo) {
         ProcedureVo procedureVo = new ProcedureVo(pLoginVo);
         mem_MemberDao.callMemberLogin(procedureVo);
@@ -492,6 +495,10 @@ public class Mem_MemberService {
                 pMemberListenInputVo.setMem_no(pMemberReportVo.getMem_no());
                 mem_ListenService.forcedExit(pMemberListenInputVo);
             }
+
+            //2021.02.03
+            socketRestUtil.memberForceLogout(pMemberReportVo);
+
          }
 
         // 신고 대상자 정보

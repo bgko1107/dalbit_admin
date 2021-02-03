@@ -170,7 +170,7 @@
             <h5 class="text-muted" id="state" style="color:red;"></h5>
         </p>
         <p style="display:none;">
-            <input type="text" class="form-control" value="wss://devwv.dalbitlive.com/webrtc-session.json" id="sdpURL" placeholder="wowza URL">
+            <input type="text" class="form-control" id="sdpURL" placeholder="wowza URL">
             <input type="text" class="form-control" value="edge" id="applicationName" placeholder="edge or origin">
             <input type="text" class="form-control" value="" id="streamName" placeholder="streamName">
         </p>
@@ -211,20 +211,17 @@
     });
 
     $(window).load(function(){
-        console.log("load");
-        console.log(broadInfo);
 
         if(common.isEmpty(broadInfo)){
             alert("방송방 정보가 없습니다.");
             return false;
         }
 
-        //$("#sdpURL").val(broadInfo.wsUrl);
         //$("#applicationName").val(broadInfo.applicationName);
+        $("#sdpURL").val(WOWZA_VIDEO_SERVER_URL);
         $("#streamName").val(broadInfo.streamName);
 
         $("#title").html(broadInfo.title);
-        //$(".liveChat").css("background-image", "url("+PHOTO_SERVER_URL + broadInfo.roomBgImg+")");
 
         if(broadInfo.state == 4){
             alert("종료된 방송입니다.");

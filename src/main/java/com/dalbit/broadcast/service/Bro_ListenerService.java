@@ -39,6 +39,9 @@ public class Bro_ListenerService {
     JwtUtil jwtUtil;
     @Autowired
     Mem_MemberDao mem_MemberDao;
+    @Autowired
+    SocketRestUtil socketRestUtil;
+
     /**
      * 생방송 청취자 목록 조회
      */
@@ -144,7 +147,7 @@ public class Bro_ListenerService {
         pListenForceLeaveVo.setRoom_no(pListenForceLeaveVo.getRoom_no());
         pListenForceLeaveVo.setMem_no(pListenForceLeaveVo.getMem_no());
         pListenForceLeaveVo.setMem_nickName(pListenForceLeaveVo.getMem_nickName());
-        String listenForceExitResult = DalbitUtil.listenForceExit(pListenForceLeaveVo);
+        String listenForceExitResult = socketRestUtil.listenForceExit(pListenForceLeaveVo);
 
         String result = "";
         if(listenForceExitResult.equals("error")){

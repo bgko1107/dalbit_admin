@@ -37,6 +37,8 @@ public class Bro_GuestService {
     JwtUtil jwtUtil;
     @Autowired
     Mem_MemberDao mem_MemberDao;
+    @Autowired
+    SocketRestUtil socketRestUtil;
 
     /**
      * 방송 게스트 목록 조회
@@ -81,7 +83,7 @@ public class Bro_GuestService {
     public String callGuestOut(P_GuestListInputVo pGuestListInputVo) throws JsonProcessingException {
         pGuestListInputVo.setOpName(MemberVo.getMyMemNo());
         String result;
-        result = DalbitUtil.guestOut(pGuestListInputVo);
+        result = socketRestUtil.guestOut(pGuestListInputVo);
         log.info(result);
 
         ObjectMapper mapper = new ObjectMapper();
