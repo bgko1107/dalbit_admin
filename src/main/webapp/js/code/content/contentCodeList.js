@@ -27,6 +27,25 @@ var notice_slctType = [
 ];
 
 
+var policy_slctType = [
+    new COMMON_CODE(null, 'slctType', '공지구분')
+    , new COMMON_CODE('-1', '-1', '서비스구분(전체)')
+    , new COMMON_CODE('1', '1', '라디오 방송')
+    , new COMMON_CODE('2', '2', '영상 방송')
+    , new COMMON_CODE('3', '3', '우체통')
+    , new COMMON_CODE('4', '4', '랭킹')
+    , new COMMON_CODE('5', '5', '클립')
+    , new COMMON_CODE('6', '6', '마이페이지')
+    , new COMMON_CODE('7', '7', '스토어(달/별)')
+    , new COMMON_CODE('8', '8', '아이템')
+    , new COMMON_CODE('9', '9', '환전')
+    , new COMMON_CODE('10', '10', '교환')
+    , new COMMON_CODE('11', '11', '알림/푸시')
+    , new COMMON_CODE('12', '12', '검색')
+    , new COMMON_CODE('13', '13', '기타')
+];
+
+
 /** =------ PushMessage ---------- */
 var push_searchType = [
     new COMMON_CODE(null, 'searchType', '검색구분')
@@ -608,6 +627,16 @@ var content_platform5 = [
     , new COMMON_CODE('android/ios', '111', 'Android/IOS')
     , new COMMON_CODE('android', '110', 'Android')
     , new COMMON_CODE('ios', '101', 'IOS')
+];
+
+var content_platform6 = [
+    new COMMON_CODE(null, 'platform', '플랫폼구분')
+    , new COMMON_CODE('111', '111', '전체')
+    , new COMMON_CODE('100', '100', 'PC')
+    , new COMMON_CODE('110', '110', 'PC/Android')
+    , new COMMON_CODE('010', '010', 'Android')
+    , new COMMON_CODE('011', '011', 'Android/IOS')
+    , new COMMON_CODE('001', '001', 'IOS')
 ];
 
 var push_send_user = [

@@ -117,8 +117,9 @@
         select
             (select count(distinct mem_no)
                 from rd_data.stat_member_login_day
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')
-                    and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+                where the_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
+                <!--where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')-->
+                    <!--and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')-->
             ) loginCnt
             , sum(joinSum) joinSum
             , sum(dalSum) dalSum

@@ -657,11 +657,7 @@
            from (
                 SELECT a.chat_no
                 FROM rd_data.tb_mailbox_chatroom a
-                INNER JOIN (
-                    SELECT chat_no, mem_no, target_mem_no
-                    FROM rd_data.tb_mailbox_chatroom_member
-                    WHERE idx IN (SELECT MIN(idx) FROM rd_data.tb_mailbox_chatroom_member GROUP BY chat_no)
-                ) b ON a.chat_no = b.chat_no
+                INNER JOIN rd_data.tb_mailbox_chatroom_member b ON a.chat_no = b.chat_no AND a.mem_no = b.mem_no
                 INNER JOIN (
                     SELECT chat_no, mem_no, `type`, msg, data1, data2, data3, data4, data5, data6, delete_yn, read_yn, last_upd_date
                     FROM rd_data.tb_mailbox_chatroom_msg

@@ -101,6 +101,7 @@
 <script src="/js/dataTablesSource/payment/payDataTableSource.js?${dummyData}"></script>
 <script src="/js/dataTablesSource/money/resourceDataTableSource.js?${dummyData}"></script>
 <script src="/js/dataTablesSource/administrate/testDalByeolDataTableSource.js?${dummyData}"></script>
+<script src="/js/dataTablesSource/content/servicePolicyDataTableSource.js?${dummyData}"></script>
 <script src="/js/dalbitDataTableUtil.js?${dummyData}"></script>
 <script src="/js/code/commonCode.js?${dummyData}"></script>
 
