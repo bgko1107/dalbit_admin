@@ -17520,3 +17520,16 @@ ul.recent-file-list > li {
     text-align: center; }
 
 /*# sourceMappingURL=main.css.map */
+
+._spin{
+    -moz-transition: all 2s linear;
+    -webkit-transition: all 2s linear;
+    transition: all 2s linear;
+}
+
+._spin.rotate{
+    -ms-transform: rotate(1080deg);
+    -moz-transform: rotate(1080deg);
+    -webkit-transform: rotate(1080deg);
+    transform: rotate(1080deg);
+}

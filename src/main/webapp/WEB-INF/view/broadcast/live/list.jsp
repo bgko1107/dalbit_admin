@@ -1,11 +1,9 @@
-
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %></c:set>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cfn" uri="/WEB-INF/tld/comFunction.tld" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<sec:authentication var="principal" property="principal" />
 <sec:authentication var="principal" property="principal" />
 
 <!-- serachBox -->
@@ -562,7 +560,7 @@
             }
             if (state == 'disconnected' || state == 'failed') {
                 stop();
-                video_state.text("종료된 방송 입니다.");
+                video_state.text("연결이 종료되었습니다.");
             }
         });
 
@@ -587,10 +585,14 @@
     }
 
     $(document).on('click', '._refresh', function(){
-        var target = $("#video_"+$(this).data('roomno'));
+        var me = $(this);
+        var target = $("#video_"+me.data('roomno'));
         videoPlay(target);
-    });
 
+        var icon = me.find('i._spin');
+        icon.toggleClass('rotate');
+
+    });
 </script>
 
 <script id="live_tableSummary" type="text/x-handlebars-template">
@@ -660,7 +662,7 @@
             <div>
                 <label>NO.{{indexDesc ../../pagingVo.totalCnt data.rowNum}}</label>
                 <a href="javascript://" class="_openVideoPlayerPop" data-roomno="{{data.room_no}}"><i class="fa fa-play-circle-o" style="font-size: 20px"></i></a>
-                <a href="javascript://" class="_refresh" data-roomno="{{data.room_no}}"><i class="fa fa-refresh pull-right" style="font-size: 20px"></i></a>
+                <a href="javascript://" class="_refresh" data-roomno="{{data.room_no}}"><i class="fa fa-refresh _spin pull-right" style="font-size: 20px"></i></a>
             </div>
             <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;height: 480px;">
                 <span class="_video_state"></span>
