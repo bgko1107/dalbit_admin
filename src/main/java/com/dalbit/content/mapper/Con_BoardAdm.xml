@@ -5,16 +5,20 @@
     <sql id="fanBoardCondition">
         <where>
             <if test='txt_search != null and txt_search != ""'>
-                ((select mem_no from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                or (select mem_id from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
-                or (select mem_no from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                or (select mem_userid from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                or (select mem_id from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%')
-                or (select mem_phone from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%'))
+                <if test='fanBoardOwner == 0'>
+                    ((select mem_no from rd_data.tb_member_basic where mem_no = fan.mem_no) = #{txt_search}
+                    or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
+                    or (select mem_no from rd_data.tb_member_basic where mem_no = fan.writer_no) = #{txt_search}
+                    or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%'))
+                </if>
+                <if test='fanBoardOwner == 1'>
+                    ((select mem_no from rd_data.tb_member_basic where mem_no = fan.mem_no) = #{txt_search}
+                    or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%'))
+                </if>
+                <if test='fanBoardOwner == 2'>
+                    ((select mem_no from rd_data.tb_member_basic where mem_no = fan.writer_no) = #{txt_search}
+                    or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%'))
+                </if>
             </if>
             <if test='start_sel != null and start_sel != ""'>
                 and fan.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
@@ -37,19 +41,36 @@
             <if test='status != 0'>
                 and fan.`status` = #{status}
             </if>
-            <if test='isSecret == 0'>
-                and fan.view_yn = #{isSecret}
+            <if test='isSecret == 1'>
+                and fan.view_yn = 1
+            </if>
+            <if test='isSecret == 2'>
+                and fan.view_yn != 1
             </if>
 
             <if test="isWithdarwal == 1">
+                <if test="boardType == 1">
+                    and ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = fan.writer_no), 'Y') != 'Y'
+                </if>
+                <if test="boardType == 2">
+                    and (ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = fan.writer_no), 'Y') != 'Y'
+                    or ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = (select writer_no from rd_data.tb_member_fanboard where idx=fan.board_no)), 'Y') != 'Y')
+                </if>
+            </if>
+            <if test="isWithdarwal == 2">
                 <if test="boardType == 1">
                     and ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = fan.writer_no), 'Y') = 'Y'
                 </if>
                 <if test="boardType == 2">
                     and (ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = fan.writer_no), 'Y') = 'Y'
                      or ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = (select writer_no from rd_data.tb_member_fanboard where idx=fan.board_no)), 'Y') = 'Y')
-
                 </if>
+            </if>
+            <if test="isMemblock == 1">
+                and fan.writer_no not in (select black_mem_no from rd_data.tb_member_broadcast_black where mem_no = fan.mem_no)
+            </if>
+            <if test="isMemblock == 2">
+                and fan.writer_no in (select black_mem_no from rd_data.tb_member_broadcast_black where mem_no = fan.mem_no)
             </if>
 
         </where>

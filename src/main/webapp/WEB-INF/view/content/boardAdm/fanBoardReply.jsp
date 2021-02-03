@@ -17,17 +17,46 @@
         <div class="tab-pane fade in active">
             <div class="widget-content">
                 <div class="col-md-12 no-padding mt10">
-                    <div class="col-md-4 no-padding">
+                    <div class="col-md-6 no-padding">
                         <span id="fanboardReplyListCnt"></span><br/>
                         <span style="color: red">* 팬보드 작성 글 수(비밀글 수)를 표기한 정보입니다.</span><br/>
-                        <select id="fanBoardReplayStatus" name="fanBoardReplayStatus" class="form-control searchType">
-                            <option value="0" selected="selected">게시글 전체</option>
+
+                        <select id="fanReplyBoardOwner" name="fanReplayBoardOwner" class="form-control searchType">
+                            <option value="0" selected="selected">팬보드주인(전체)</option>
+                            <option value="1">주인</option>
+                            <option value="2">등록자</option>
+                        </select>
+
+                        <select id="fanReplyBoardStatus" name="fanReplayBoardStatus" class="form-control searchType">
+                            <option value="0" selected="selected">게시글(전체)</option>
                             <option value="1">정상</option>
                             <option value="2">삭제</option>
                         </select>
 
-                        <span id="dynamicPageFanboardReplyArea"></span>
-                        
+                        <select id="isReplySecret" name="isReplaySecret" class="form-control searchType">
+                            <option value="0" selected="selected">비밀글 여부(전체)</option>
+                            <option value="1">비밀 X</option>
+                            <option value="2">비밀 O</option>
+                        </select>
+
+                        <select id="isReplyWithdarwal" name="isReplayWithdarwal" class="form-control searchType">
+                            <option value="0" selected="selected">회원/탈퇴(전체)</option>
+                            <option value="1">회원</option>
+                            <option value="2">탈퇴</option>
+                        </select>
+
+                        <select id="isReplyMemblock" name="isReplayMemblock" class="form-control searchType">
+                            <option value="0" selected="selected">차단회원(전체)</option>
+                            <option value="1">차단 X</option>
+                            <option value="2">차단 O</option>
+                        </select>
+
+
+                        <%--<select id="fanBoardReplayStatus" name="fanBoardReplayStatus" class="form-control searchType">
+                            <option value="0" selected="selected">게시글 전체</option>
+                            <option value="1">정상</option>
+                            <option value="2">삭제</option>
+                        </select>
                         <label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
                             <input type="checkbox" name="replyIsSecret" id="replyIsSecret" value="1">
                             <span>비밀글 모아보기</span>
@@ -35,7 +64,8 @@
                         <label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
                             <input type="checkbox" name="replyIsWithdarwal" id="replyIsWithdarwal" value="1">
                             <span>탈퇴회원 모아보기</span>
-                        </label>
+                        </label>--%>
+                        <span id="dynamicPageFanboardReplyArea"></span>
                     </div>
                     <div class="col-md-2 no-padding pull-right">
                         <table class="table table-sorting table-hover table-bordered">
@@ -103,9 +133,15 @@
             , 'end_sel' : $("#endDate").val()
             , 'searchType' : 0
             , 'boardType' : 2
-            , 'status' : Number($("#fanBoardReplayStatus option:selected").val())
-            , 'isSecret' : $('input:checkbox[name="replyIsSecret"]').prop('checked') ? 0 : 1
-            , 'isWithdarwal' : $('input:checkbox[name="replyIsWithdarwal"]').prop('checked') ? 1 : 0
+            // , 'status' : Number($("#fanBoardReplayStatus option:selected").val())
+            // , 'isSecret' : $('input:checkbox[name="replyIsSecret"]').prop('checked') ? 0 : 1
+            // , 'isWithdarwal' : $('input:checkbox[name="replyIsWithdarwal"]').prop('checked') ? 1 : 0
+
+            , 'status' : Number($("#fanReplyBoardStatus option:selected").val())
+            , 'isSecret' : Number($("#isReplySecret option:selected").val())
+            , 'isWithdarwal' : Number($("#isReplyWithdarwal option:selected").val())
+            , 'fanBoardOwner' : Number($("#fanReplyBoardOwner option:selected").val())
+            , 'isMemblock' : Number($("#isReplyMemblock option:selected").val())
         };
         util.getAjaxData("fanBoardList", "/rest/content/boardAdm/fanBoardList", data, fn_success_fanBoardReply);
     }
@@ -164,12 +200,23 @@
         }
         return false;
     });
-
-    $('#fanBoardReplayStatus').on('change', function () {
+    $('#fanReplyBoardStatus').on('change', function () {
+        fanBoardReply();
+    });
+    $('#isReplySecret').on('change', function () {
+        fanBoardReply();
+    });
+    $('#isReplyWithdarwal').on('change', function () {
+        fanBoardReply();
+    });
+    $('#fanReplyBoardOwner').on('change', function () {
+        fanBoardReply();
+    });
+    $('#isReplyMemblock').on('change', function () {
         fanBoardReply();
     });
 
-    $('#replyIsSecret').on('change', function() {
+    /*$('#replyIsSecret').on('change', function() {
         if($('input:checkbox[name="replyIsSecret"]').prop('checked')) {
             $('#replyIsSecret').val(0)
         } else {
@@ -185,7 +232,7 @@
             $('#replyIsWithdarwal').val(0)
         }
         fanBoardReply();
-    });
+    });*/
 
     $(document).on('change', '#dynamicPageCntFanboardReply', function () {
         fanBoardReplyPagingInfo.pageCnt = $(this).val();
