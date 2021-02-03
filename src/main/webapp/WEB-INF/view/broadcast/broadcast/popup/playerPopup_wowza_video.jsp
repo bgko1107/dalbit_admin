@@ -253,10 +253,7 @@
     /**
      * player 연결
      * */
-    var errorCnt = 0;
     function play(){
-        console.log("Play")
-
         let wsUrl = $('#sdpURL').val();
         let applicationName = $('#applicationName').val();
         let streamName = $('#streamName').val();
@@ -275,7 +272,7 @@
                 isReloadChat = false;
                 //alert("플레이어 실행 오류 발생");
                 // window.close();
-                $("#state").text(++errorCnt + " [플레이어 실행 오류] " + error);
+                $("#state").text(" [플레이어 실행 오류] " + error);
 
                 return false;
             }
