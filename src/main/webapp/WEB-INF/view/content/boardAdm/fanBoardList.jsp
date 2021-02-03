@@ -32,6 +32,10 @@
                             <input type="checkbox" name="isSecret" id="isSecret" value="1">
                             <span>비밀글 모아보기</span>
                         </label>
+                        <label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
+                            <input type="checkbox" name="isWithdarwal" id="isWithdarwal" value="1">
+                            <span>탈퇴회원 모아보기</span>
+                        </label>
                     </div>
                     <div class="col-md-2 no-padding pull-right">
                         <table class="table table-sorting table-hover table-bordered">
@@ -108,7 +112,6 @@
         }else{
             txt_search = $('#txt_search').val();
         }
-
         var data = {
             'pageStart' : fanBoardPagingInfo.pageNo
             , 'pageCnt' : fanBoardPagingInfo.pageCnt
@@ -118,8 +121,12 @@
             , 'searchType' : 0
             , 'boardType' : 1
             , 'status' : Number($("#fanBoardStatus option:selected").val())
-            , 'isSecret' : Number($('#isSecret').val())
+            , 'isSecret' : $('input:checkbox[name="isSecret"]').prop('checked') ? 0 : 1
+            , 'isWithdarwal' : $('input:checkbox[name="isWithdarwal"]').prop('checked') ? 1 : 0
         };
+
+        console.log(data);
+
         util.getAjaxData("fanBoardList", "/rest/content/boardAdm/fanBoardList", data, fn_success_fanBoardList);
     }
 
@@ -247,6 +254,14 @@
        }
         fanBoardList();
     });
+    $('#isWithdarwal').on('change', function() {
+       if($('input:checkbox[name="isWithdarwal"]').prop('checked')) {
+           $('#isWithdarwal').val(1)
+       } else {
+           $('#isWithdarwal').val(0)
+       }
+        fanBoardList();
+    });
 
     $(document).on('change', '#dynamicPageCntFanboard', function () {
         fanBoardPagingInfo.pageCnt = $(this).val();
@@ -320,6 +335,9 @@
                 <td>
                     {{{memNoLink star_mem_no star_mem_no}}}<br/>
                     {{star_mem_nick}}
+                    {{#dalbit_if star_withdrawalType '==' 'Y'}}
+                        <br/><span style="color: RED;">(탈퇴)</span>
+                    {{/dalbit_if}}
                 </td>
                 <td>
                     {{{sexIcon star_mem_sex star_birth_year}}}
@@ -327,6 +345,9 @@
                 <td>
                     {{{memNoLink fan_mem_no fan_mem_no}}}<br/>
                     {{fan_mem_nick}}
+                    {{#dalbit_if fan_withdrawalType '==' 'Y'}}
+                        <br/><span style="color: RED;">(탈퇴)</span>
+                    {{/dalbit_if}}
                 </td>
                 <td>
                     {{{sexIcon fan_mem_sex fan_birth_year}}}

@@ -40,6 +40,18 @@
             <if test='isSecret == 0'>
                 and fan.view_yn = #{isSecret}
             </if>
+
+            <if test="isWithdarwal == 1">
+                <if test="boardType == 1">
+                    and ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = fan.writer_no), 'Y') = 'Y'
+                </if>
+                <if test="boardType == 2">
+                    and (ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = fan.writer_no), 'Y') = 'Y'
+                     or ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = (select writer_no from rd_data.tb_member_fanboard where idx=fan.board_no)), 'Y') = 'Y')
+
+                </if>
+            </if>
+
         </where>
     </sql>
 
@@ -56,7 +68,7 @@
                 , ifnull(member.mem_state, withdrawal_member.mem_state) as star_mem_state
                 , ifnull(member.mem_sex, withdrawal_member.mem_sex) as star_mem_sex
                 , ifnull(member.mem_birth_year, withdrawal_member.mem_birth_year) as star_birth_year
-
+                , ifnull(member.mem_userid, 'Y') as star_withdrawalType
                 <if test="boardType == 1">
                     , (select pro.image_profile from rd_data.tb_member_profile pro where pro.mem_no = fan.writer_no) as fan_image_profile
                     , fan.writer_no as fan_mem_no
@@ -66,6 +78,7 @@
                     , ifnull(writer_member.mem_sex, writer_withdrawal_member.mem_sex) as fan_mem_sex
                     , ifnull(writer_member.mem_birth_year, writer_withdrawal_member.mem_birth_year) as fan_birth_year
                     , ifnull(writer_member.inner, writer_withdrawal_member.inner) as fan_inner
+                    , ifnull(writer_member.mem_userid, 'Y') as fan_withdrawalType
                 </if>
                 <if test="boardType == 2">
                     , (select pro.image_profile from rd_data.tb_member_profile pro where pro.mem_no = (select writer_no from rd_data.tb_member_fanboard where idx=fan.board_no)) as fan_image_profile
@@ -80,6 +93,7 @@
                               (select mem_sex from rd_data.tb_member_withdrawal_bak a where a.mem_no = (select writer_no from rd_data.tb_member_fanboard where idx=fan.board_no))) as fan_mem_sex
                     , ifnull((select mem_birth_year from rd_data.tb_member_basic a where a.mem_no = (select writer_no from rd_data.tb_member_fanboard where idx=fan.board_no)),
                               (select mem_birth_year from rd_data.tb_member_withdrawal_bak a where a.mem_no = (select writer_no from rd_data.tb_member_fanboard where idx=fan.board_no))) as fan_birth_year
+                    , ifnull((select mem_userid from rd_data.tb_member_basic a where a.mem_no = (select writer_no from rd_data.tb_member_fanboard where idx=fan.board_no)), 'Y') as fan_withdrawalType
 
                     , (select pro.image_profile from rd_data.tb_member_profile pro where pro.mem_no = fan.writer_no) as fan_reply_image_profile
                     , fan.writer_no as fan_reply_mem_no
@@ -89,6 +103,7 @@
                     , ifnull(writer_member.mem_sex, writer_withdrawal_member.mem_sex) as fan_reply_mem_sex
                     , ifnull(writer_member.mem_birth_year, writer_withdrawal_member.mem_birth_year) as fan_reply_birth_year
                     , ifnull(writer_member.inner, writer_withdrawal_member.inner) as fan_inner
+                    , ifnull(writer_member.mem_userid, 'Y') as fan_reply_withdrawalType
                 </if>
                 , fan.last_upd_date
                 <if test="boardType == 1">

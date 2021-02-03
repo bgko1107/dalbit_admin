@@ -32,6 +32,10 @@
                             <input type="checkbox" name="replyIsSecret" id="replyIsSecret" value="1">
                             <span>비밀글 모아보기</span>
                         </label>
+                        <label class="control-inline fancy-checkbox custom-color-green ml15 mt5">
+                            <input type="checkbox" name="replyIsWithdarwal" id="replyIsWithdarwal" value="1">
+                            <span>탈퇴회원 모아보기</span>
+                        </label>
                     </div>
                     <div class="col-md-2 no-padding pull-right">
                         <table class="table table-sorting table-hover table-bordered">
@@ -100,7 +104,8 @@
             , 'searchType' : 0
             , 'boardType' : 2
             , 'status' : Number($("#fanBoardReplayStatus option:selected").val())
-            , 'isSecret' : Number($('#replyIsSecret').val())
+            , 'isSecret' : $('input:checkbox[name="replyIsSecret"]').prop('checked') ? 0 : 1
+            , 'isWithdarwal' : $('input:checkbox[name="replyIsWithdarwal"]').prop('checked') ? 1 : 0
         };
         util.getAjaxData("fanBoardList", "/rest/content/boardAdm/fanBoardList", data, fn_success_fanBoardReply);
     }
@@ -173,6 +178,15 @@
         fanBoardReply();
     });
 
+    $('#replyIsWithdarwal').on('change', function() {
+        if($('input:checkbox[name="replyIsWithdarwal"]').prop('checked')) {
+            $('#replyIsWithdarwal').val(1)
+        } else {
+            $('#replyIsWithdarwal').val(0)
+        }
+        fanBoardReply();
+    });
+
     $(document).on('change', '#dynamicPageCntFanboardReply', function () {
         fanBoardReplyPagingInfo.pageCnt = $(this).val();
         fanBoardReply();
@@ -219,9 +233,9 @@
 <script id="tmp_fanBoardReplyTable" type="text/x-handlebars-template">
     <table id="tb_fanBoardReply" class="table table-sorting table-hover table-bordered mt10">
         <colgroup>
-            <col width="2%"/><col width="2%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
-            <col width="5%"/><col width="25%"/><col width="5%"/><col width="5%"/><col width="5%"/>
-            <col width="25%"/><col width="5%"/>
+            <col width="2%"/><col width="2%"/><col width="6%"/><col width="4%"/><col width="6%"/>
+            <col width="4%"/><col width="5%"/><col width="25%"/><col width="3%"/><col width="6%"/>
+            <col width="4%"/><col width="25%"/><col width="5%"/>
         </colgroup>
         <thead>
         <tr>
@@ -250,6 +264,9 @@
                 <td>
                     {{{memNoLink star_mem_no star_mem_no}}}<br/>
                     {{star_mem_nick}}
+                    {{#dalbit_if star_withdrawalType '==' 'Y'}}
+                        <br/><span style="color: RED;">(탈퇴)</span>
+                    {{/dalbit_if}}
                 </td>
                 <td>
                     {{{sexIconBr star_mem_sex star_birth_year}}}
@@ -257,6 +274,9 @@
                 <td>
                     {{{memNoLink fan_mem_no fan_mem_no}}}<br/>
                     {{fan_mem_nick}}
+                    {{#dalbit_if fan_withdrawalType '==' 'Y'}}
+                        <br/><span style="color: RED;">(탈퇴)</span>
+                    {{/dalbit_if}}
                 </td>
                 <td>
                     {{{sexIconBr fan_mem_sex fan_birth_year}}}
@@ -277,6 +297,9 @@
                 <td>
                     {{{memNoLink fan_reply_mem_no fan_reply_mem_no}}}<br/>
                     {{fan_reply_mem_nick}}
+                    {{#dalbit_if fan_reply_withdrawalType '==' 'Y'}}
+                        <br/><span style="color: RED;">(탈퇴)</span>
+                    {{/dalbit_if}}
                 </td>
                 <td>
                     {{{sexIconBr fan_reply_mem_sex fan_reply_birth_year}}}

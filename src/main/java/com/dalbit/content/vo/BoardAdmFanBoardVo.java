@@ -18,6 +18,7 @@ public class BoardAdmFanBoardVo extends PagingVo {
     private String end_sel;
     private String boardType;
     private int isSecret;               // 비밀글 체크 여부
+    private int isWithdarwal;           // 탈퇴회원모아보기 체크 여부
 
     /* output */
     private int idx;                    // 게시글 번호
@@ -54,6 +55,9 @@ public class BoardAdmFanBoardVo extends PagingVo {
     private String replyCnt;                // 댓글 개수
     private String view_yn;                 // 공개여부
     private String depth;                   // 리플인지~
+    private String star_withdrawalType;     // 스타 탈퇴회원 구분
+    private String fan_withdrawalType;      // 팬보드 작성자 탈퇴회원 구분
+    private String fan_reply_withdrawalType;// 팬보드 댓글 작성자 탈퇴회원 구분
 
     /* summary */
 
