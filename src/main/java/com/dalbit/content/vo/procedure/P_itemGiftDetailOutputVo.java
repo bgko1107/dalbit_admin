@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 public class P_itemGiftDetailOutputVo extends BaseVo {
     private String item_code;			//아이템코드
+    private String category;			//카테고리
     private String item_name;			//아이템이름
     private String item_image;			//아이템이미지 경로
     private String item_thumbnail;		//아이템 썸네일이미지 경로
