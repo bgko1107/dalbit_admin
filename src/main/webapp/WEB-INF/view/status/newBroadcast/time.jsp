@@ -478,10 +478,10 @@
         <td class="_fontColor" data-fontColor="red">{{addComma unique_listener_fCnt 'Y'}}</td>
         <td>{{addComma listener_nCnt 'Y'}}</td>
         <td>{{addComma unique_listener_nCnt 'Y'}}</td>
-        <td>{{addComma guest_Cnt 'Y'}}</td>
-        <td>{{addComma guest_unique_Cnt 'Y'}}</td>
         <td>{{addComma listener_Cnt 'Y'}}</td>
         <td>{{addComma unique_listener_Cnt 'Y'}}</td>
+        <td>{{addComma guest_Cnt 'Y'}}</td>
+        <td>{{addComma guest_unique_Cnt 'Y'}}</td>
         <td>{{addComma listener_max_Cnt 'Y'}}</td>
         <td>{{addComma gift_Cnt 'Y'}}</td>
         <td>{{addComma gift_Amt 'Y'}}</td>
