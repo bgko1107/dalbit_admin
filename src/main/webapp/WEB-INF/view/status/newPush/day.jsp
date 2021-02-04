@@ -176,8 +176,6 @@
     }
 
     function fn_day_simple_success(data, response){
-        dalbitLog(response);
-
         var isDataEmpty = response.data.detailList == null;
         $("#tableDayBody_simple").empty();
         if(!isDataEmpty){
@@ -242,8 +240,6 @@
     }
 
     function fn_day_detail_success(data, response){
-        dalbitLog(response);
-
         var isDataEmpty = response.data.detailList == null;
         $("#tableDayBody_detail").empty();
         if(!isDataEmpty){

@@ -54,7 +54,6 @@
     }
 
     function fn_platform_success(data, response){
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         var sum_pcCnt_total = [
             response.data.totalInfo.sum_pcCnt,

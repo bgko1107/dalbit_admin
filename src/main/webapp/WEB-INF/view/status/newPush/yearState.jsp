@@ -173,7 +173,6 @@
     }
 
     function fn_yearState_simple_success(data, response){
-        dalbitLog(response);
 
         var isDataEmpty = response.data.detailList == null;
         $("#tableYearStateBody_simple").empty();
@@ -239,7 +238,6 @@
     }
 
     function fn_yearState_detail_success(data, response){
-        dalbitLog(response);
 
         var isDataEmpty = response.data.detailList == null;
         $("#tableYearStateBody_detail").empty();

@@ -263,7 +263,6 @@
     }
 
     function fn_broadcastGiftDay_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#giftDayListBody").empty();
         if(!isDataEmpty){
@@ -326,7 +325,6 @@
     }
 
     function fn_platformDayList_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#platformDayListBody").empty();
         if(!isDataEmpty){

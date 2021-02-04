@@ -205,7 +205,6 @@
 
     var clipInfoData = "";
     function fn_detailInfo_select_success(dst_id, response, dst_params) {
-        dalbitLog(response);
         clipInfoData = response.data;
         openClipReportPopup();
     }

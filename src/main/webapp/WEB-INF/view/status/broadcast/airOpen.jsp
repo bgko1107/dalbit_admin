@@ -49,7 +49,6 @@
     }
 
     function fn_airOpenList_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#airOpenBody").empty();
         if(!isDataEmpty){

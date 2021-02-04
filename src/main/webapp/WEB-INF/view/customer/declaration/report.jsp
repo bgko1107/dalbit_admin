@@ -37,8 +37,6 @@
 
     var detailData;
     function fn_detail_success(dst_id, response, params) {
-        dalbitLog(response);
-
         response.data["rowNum"] = params.rowNum;
 
         var template = $('#tmp_declarationFrm').html();

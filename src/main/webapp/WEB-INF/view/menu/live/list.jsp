@@ -195,7 +195,6 @@
     }
 
     function fn_succ_list(data, response, params) {
-        dalbitLog(response);
 
         var template = $('#tmp_liveList').html();
         var templateScript = Handlebars.compile(template);

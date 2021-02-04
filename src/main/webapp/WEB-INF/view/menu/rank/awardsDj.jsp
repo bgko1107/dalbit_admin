@@ -134,7 +134,6 @@
     }
 
     function fn_succ_list(dst_id, response, params) {
-        dalbitLog(response);
 
         var template = $('#tmp_list_info').html();
         var templateScript = Handlebars.compile(template);

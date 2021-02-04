@@ -243,7 +243,6 @@
     });
 
     function fn_insert_success(dst_id, response){
-        dalbitLog(response);
         alert(response.message);
 
         if(response.result == 'success'){

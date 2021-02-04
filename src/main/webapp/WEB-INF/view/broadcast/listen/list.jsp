@@ -197,7 +197,6 @@
         }
     }
     function forceLeave_success(dst_id, response){
-        dalbitLog(response);
         $('#forcedModal').modal('hide');
         $('#forced_message').val("");
         dtList_info_detail.reload(listen_summary_table);

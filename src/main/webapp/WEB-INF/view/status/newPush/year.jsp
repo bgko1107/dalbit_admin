@@ -50,7 +50,6 @@
     }
 
     function fn_year_success(data, response){
-        dalbitLog(response);
 
         var isDataEmpty = response.data.detailList == null;
         $("#tableYearBody").empty();

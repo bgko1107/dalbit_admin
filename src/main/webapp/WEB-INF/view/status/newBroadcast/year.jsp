@@ -254,7 +254,6 @@
     }
 
     function fn_broadcastgiftYear_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#giftYearListBody").empty();
         if(!isDataEmpty){
@@ -307,7 +306,6 @@
     }
 
     function fn_platformYearList_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#platformYearListBody").empty();
         if(!isDataEmpty){

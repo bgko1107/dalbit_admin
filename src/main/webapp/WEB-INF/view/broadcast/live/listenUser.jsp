@@ -129,7 +129,6 @@
     }
 
     function liveListenForced_success(dst_id, response){
-        dalbitLog(response);
         dtList_info_lisetnUser.reload(liveNextFunc);
     }
 

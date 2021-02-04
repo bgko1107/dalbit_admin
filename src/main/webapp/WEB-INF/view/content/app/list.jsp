@@ -133,7 +133,6 @@
     }
 
     function fn_detail_success(dst_id, response) {
-        dalbitLog(response);
         var template = $("#tmp_appList").html();
         var templateScript = Handlebars.compile(template);
         var context = response.data;

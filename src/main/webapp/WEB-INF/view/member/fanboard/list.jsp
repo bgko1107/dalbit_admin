@@ -82,7 +82,6 @@
     }
 
     function fanboardDel_success(dst_id, response){
-        dalbitLog(response);
         alert(response.message);
         dtList_info_detail.reload();
     }
@@ -99,7 +98,6 @@
     }
 
     function replyList_success(dst_id, response) {
-        // dalbitLog(response);
         $('#div_replyArea').empty();
         $('#div_fanboard').empty();
 

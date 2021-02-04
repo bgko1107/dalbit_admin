@@ -236,13 +236,10 @@
         data.insertTargets = insertTargets;
         data.deleteTargets = deleteTargets;
 
-        util.getAjaxData("memberList", "/rest/administrate/alarmtalk/edit", data, fn_editTarget_success);
-    }
+        util.getAjaxData("memberList", "/rest/administrate/alarmtalk/edit", data, function(data, response, params){
 
-    function fn_editTarget_success(data, response, params){
-        dalbitLog(response);
+        });
     }
-
 
     function getMemberList(){
         util.getAjaxData("memberList", "/rest/administrate/alarmtalk/list", $("#searchForm").serialize(), fn_memberList_success);

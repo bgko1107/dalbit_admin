@@ -74,7 +74,6 @@
     }
 
     function fn_untreated_success(data, response){
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
 
         var sum_type01Cnt_total = [

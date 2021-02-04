@@ -116,7 +116,6 @@
     }
 
     function fn_succ_list(dst_id, response, params) {
-        dalbitLog(response);
 
         response.data.rankType = $('input:radio[name="rankType"]:checked').val();
 

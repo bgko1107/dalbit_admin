@@ -237,7 +237,6 @@
     };
 
     fnc_eventReport.applyList_success= function(dst_id, response) {
-        dalbitLog(response);
         $('#div_report').empty();
         for (var i = 0; i < response.data.length; i++) {
             var tmp = '<div class="col-md-12 no-padding">';
@@ -320,7 +319,6 @@
     };
 
     fnc_eventReport.fn_insert_success= function(dst_id, response) {
-        dalbitLog(response);
         for(var i=0;i<fnc_eventReport.checkDatas.length;i++){
             util.getAjaxData("memberSelWin", "/rest/content/event/memberSelWin",fnc_eventReport.checkDatas[i], fnc_eventReport.event_win_success, fnc_eventReport.event_win_fail);
         }

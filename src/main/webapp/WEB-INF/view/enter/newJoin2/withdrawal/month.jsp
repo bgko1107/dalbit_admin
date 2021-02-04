@@ -96,9 +96,6 @@
     }
 
     function fn_month_success(dst_id, response){
-        dalbitLog("--------- fn_month_success ---------");
-        dalbitLog(response);
-
         accum_total_join_cnt = 0;
         accum_total_join_before_cnt = 0;
         accum_total_out_cnt = 0;

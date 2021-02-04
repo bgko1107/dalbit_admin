@@ -350,7 +350,6 @@
     }
 
     function fn_live_success(data, response){
-        dalbitLog(response);
 
         tmp_end = 0;
         tmp = 24;

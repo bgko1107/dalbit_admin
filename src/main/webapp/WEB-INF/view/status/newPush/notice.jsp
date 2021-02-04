@@ -77,7 +77,6 @@
     }
 
     function fn_notice_success(data, response){
-        dalbitLog(response);
         $("#tableNoticeBody").empty();
 
         response.data.detailList.nowMonth = Number(moment().format("MM"));

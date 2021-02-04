@@ -55,7 +55,6 @@
     }
 
     function noticeDel_success(dst_id, response){
-        dalbitLog(response);
         alert(response.message);
         dtList_info_detail.reload();
     }

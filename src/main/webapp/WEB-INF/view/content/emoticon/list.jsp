@@ -138,8 +138,6 @@
     }
 
     function fn_success_set_category(dst_id, response){
-        dalbitLog(response);
-        dalbitLog(response.data);
 
         var beforeSlct = $("select[name='category']").val();
 
@@ -170,8 +168,6 @@
     }
 
     function inssaticon_list_select_success(dst_id, response){
-        dalbitLog(response);
-        dalbitLog(response.data);
 
         var template = $('#tmp_inssaticonList_view_Frm').html();
         var templateScript = Handlebars.compile(template);

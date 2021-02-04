@@ -62,7 +62,6 @@
     }
 
     function fn_succ_list(dst_id, response, params) {
-        dalbitLog(response);
 
         response.data.totalCnt = response.pagingVo.totalCnt;
         var template = $('#tmp_list_info').html();

@@ -812,7 +812,6 @@
     }
 
     function dalbyeoladd_success(dst_id, response) {
-        dalbitLog(response);
         if(response.code == "0"){
             alert("지급이 정상 처리 되었습니다.");
         }else{
