@@ -27,7 +27,8 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
-                                    <span id="searchTypeArea"></span>
+                                    <span id="searchTypeArea" style="display: none"></span>
+                                    <span id="searchMemberArea" onchange="getErrorList();"></span>
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
 
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -94,6 +95,7 @@
     var slctType = 3;
     $(document).ready(function() {
         $("#searchTypeArea").html(util.getCommonCodeSelect(-1, attempSearchType));
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
 
         dateType(slctType);
     });
@@ -121,6 +123,7 @@
             ,txt_endSel : $('#endDate').val()
             ,searchType : $('#searchType').val()
             ,searchText : $("#searchText").val()
+            ,newSearchType : $("#searchMember").val()
         };
 
        util.getAjaxData("attempList", "/rest/payment/pay/iosAttempList", data, fn_success);

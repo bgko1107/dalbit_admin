@@ -37,7 +37,7 @@
                                 and mem_id = #{searchText}
                             </when>
                             <when test="newSearchType == 6">
-                                and mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                                and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
                             </when>
                             <otherwise>
                                 and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -99,7 +99,7 @@
                         and mem_id = #{searchText}
                     </when>
                     <when test="newSearchType == 6">
-                        and mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
                     </when>
                     <otherwise>
                         and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -162,7 +162,7 @@
                                 and mem_id = #{searchText}
                             </when>
                             <when test="newSearchType == 6">
-                                and mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                                and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
                             </when>
                             <otherwise>
                                 and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -223,7 +223,7 @@
                         and mem_id = #{searchText}
                     </when>
                     <when test="newSearchType == 6">
-                        and mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
                     </when>
                     <otherwise>
                         and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -273,7 +273,7 @@
                         and mem_id = #{searchText}
                     </when>
                     <when test="newSearchType == 6">
-                        and mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
                     </when>
                     <otherwise>
                         and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})

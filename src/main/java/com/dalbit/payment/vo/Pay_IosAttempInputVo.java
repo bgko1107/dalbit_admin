@@ -11,5 +11,6 @@ public class Pay_IosAttempInputVo {
     private String txt_endSel;
     private String searchType;
     private String searchText;
+    private int newSearchType;
 
 }

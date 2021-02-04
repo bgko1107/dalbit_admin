@@ -28,6 +28,7 @@
             data.startDate = $("#startDate").val();
             data.endDate = $("#endDate").val();
             data.slctType = $("#dormancyType").val();
+            data.newSearchType = $("#searchMember").val();
         };
         dtList_info2 = new DalbitDataTable($("#tb_dormancyList"), dtList_info_data2, MemberDataTableSource.dormancyList);
         dtList_info2.useCheckBox(false);

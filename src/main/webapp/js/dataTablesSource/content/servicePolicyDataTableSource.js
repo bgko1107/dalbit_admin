@@ -5,7 +5,9 @@ var servicePolicyDataTableSource = {
             {'title': '반영일시', 'data': 'apply_date', 'render': function (data, type, row, meta) {
                     return common.substr(data, 0, 19);
                 }}
-            ,{'title': '서비스구분', 'data': 'type_desc'}
+            ,{'title': '서비스구분', 'data': 'type', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, policy_slctType);
+                }}
             ,{'title': '플랫폼', 'data': 'platform', 'name': 'platform', 'render': function (data) {
                     return util.getPlatformName(data) ;
                 }}
