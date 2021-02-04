@@ -10,7 +10,7 @@ var servicePolicyDataTableSource = {
                     return util.getPlatformName(data) ;
                 }}
             ,{'title': '주요사안 (제목)', 'data': 'title', 'render': function (data, type, row, meta) {
-                    return '<a href="javascript://" onclick="policyDetail(' + row.idx + ', ' + 0 + ');">data</a>';
+                    return '<a href="javascript://" onclick="policyDetail(' + row.idx + ', ' + 0 + ');">' + data +'</a>';
                 }}
             ,{'title': '등록일시', 'data': 'reg_date', 'render': function (data, type, row, meta) {
                     return common.substr(data, 0, 19);
