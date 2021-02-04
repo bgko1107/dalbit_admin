@@ -634,6 +634,7 @@ var content_platform6 = [
     , new COMMON_CODE('111', '111', '전체')
     , new COMMON_CODE('100', '100', 'PC')
     , new COMMON_CODE('110', '110', 'PC/Android')
+    , new COMMON_CODE('101', '101', 'PC/IOS')
     , new COMMON_CODE('010', '010', 'Android')
     , new COMMON_CODE('011', '011', 'Android/IOS')
     , new COMMON_CODE('001', '001', 'IOS')
