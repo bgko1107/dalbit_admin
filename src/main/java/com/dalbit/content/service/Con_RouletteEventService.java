@@ -68,7 +68,7 @@ public class Con_RouletteEventService {
         return result;
     }
 
-    public String selectRouletteWeekCalendarList(RouletteCalendarVo rouletteCalendarVo){
+    public String selectRouletteWeekCalendarList_old(RouletteCalendarVo rouletteCalendarVo){
         RouletteCalendarVo weekRouletteCalendarVo = con_rouletteEventDao.selectRouletteWeekCalendarList(rouletteCalendarVo);
 
         //두개 조합이 필요함.
@@ -76,6 +76,27 @@ public class Con_RouletteEventService {
         //con_rouletteEventDao.selectRouletteWeekCalendarList_member(rouletteCalendarVo);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, weekRouletteCalendarVo));
+    }
+
+    public String selectRouletteWeekCalendarList(RouletteCalendarVo rouletteCalendarVo){
+        //RouletteCalendarVo weekRouletteCalendarVo = con_rouletteEventDao.selectRouletteWeekCalendarList(rouletteCalendarVo);
+
+        //두개 조합이 필요함.
+        RouletteCalendarVo itemInfo = con_rouletteEventDao.selectRouletteWeekCalendarList_item(rouletteCalendarVo);
+        List<RouletteCalendarVo> memberList = con_rouletteEventDao.selectRouletteWeekCalendarList_member(rouletteCalendarVo);
+
+        RouletteCalendarVo manInfo = memberList.stream().filter(vo->vo.getMem_sex().equals("m")).findAny().orElse(new RouletteCalendarVo());
+        RouletteCalendarVo femaleInfo = memberList.stream().filter(vo->vo.getMem_sex().equals("m")).findAny().orElse(new RouletteCalendarVo());
+        RouletteCalendarVo unknownInfo = memberList.stream().filter(vo->vo.getMem_sex().equals("m")).findAny().orElse(new RouletteCalendarVo());
+
+        itemInfo.setSex_man(manInfo.getMem_cnt());
+        itemInfo.setSex_female(femaleInfo.getMem_cnt());
+        itemInfo.setSex_unknown(unknownInfo.getMem_cnt());
+
+        int applyCnt = manInfo.getMem_unique_cnt() + femaleInfo.getMem_unique_cnt() + unknownInfo.getMem_unique_cnt();
+
+        itemInfo.setApplyCnt(applyCnt);
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, itemInfo));
     }
 
     public String selectRouletteCalendarList(RouletteCalendarVo rouletteCalendarVo){

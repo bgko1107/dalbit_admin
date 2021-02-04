@@ -168,31 +168,31 @@
     function getSummary(){
         util.getAjaxData("today_summary" , "/rest/content/event/roulette/calendar/week"
             , {
-                search_startDate : moment(new Date()).format('YYYY-MM-DD')
-                , search_endDate : moment(new Date()).format('YYYY-MM-DD')
+                search_startDate : moment(new Date()).format('YYYY-MM-DD 00:00:00')
+                , search_endDate : moment(new Date()).format('YYYY-MM-DD 23:59:59')
             }
             , getSummary_success);
 
         util.getAjaxData("yesterday_summary" , "/rest/content/event/roulette/calendar/week"
             , {
-                search_startDate : moment(new Date()).add('days', -1).format('YYYY-MM-DD')
-                , search_endDate : moment(new Date()).add('days', -1).format('YYYY-MM-DD')
+                search_startDate : moment(new Date()).add('days', -1).format('YYYY-MM-DD 00:00:00')
+                , search_endDate : moment(new Date()).add('days', -1).format('YYYY-MM-DD 23:59:59')
             }
             , getSummary_success);
 
-        var thisWeekStartDate = moment().startOf('week').add('days', 1).format('YYYY-MM-DD');
+        var thisWeekStartDate = moment().startOf('week').add('days', 1).format('YYYY-MM-DD 00:00:00');
         util.getAjaxData("thisWeek_summary" , "/rest/content/event/roulette/calendar/week"
             , {
                 search_startDate : thisWeekStartDate
-                , search_endDate : moment(thisWeekStartDate).add('days', 6).format('YYYY-MM-DD')
+                , search_endDate : moment(thisWeekStartDate).add('days', 6).format('YYYY-MM-DD 23:59:59')
             }
             , getSummary_success);
 
         var prevWeekStartDate = moment().startOf('week').add('days', -6).format('YYYY-MM-DD')
         util.getAjaxData("prevWeek_summary" , "/rest/content/event/roulette/calendar/week"
             , {
-                search_startDate : moment().startOf('week').add('days', -6).format('YYYY-MM-DD')
-                , search_endDate : moment(prevWeekStartDate).add('days', 6).format('YYYY-MM-DD')
+                search_startDate : moment().startOf('week').add('days', -6).format('YYYY-MM-DD 00:00:00')
+                , search_endDate : moment(prevWeekStartDate).add('days', 6).format('YYYY-MM-DD 23:59:59')
             }
             , getSummary_success);
     }
@@ -206,7 +206,7 @@
         var loginCnt = common.isEmpty(data.loginCnt) ? 0 : data.loginCnt;
         var joinCnt = common.isEmpty(data.applyCnt) ? 0 : data.applyCnt;
 
-        var joinRate = joinCnt == 0 ? 0 : (joinCnt / loginCnt * 100).toFixed(1);
+        var joinRate = (joinCnt == 0 || loginCnt == 0) ? '-' : (joinCnt / loginCnt * 100).toFixed(1);
 
         target.find('.joinRate').html(joinRate + "%");
         target.find('.sex_man').html(common.addComma(data.sex_man) + '명');

@@ -207,14 +207,20 @@
                           LEFT JOIN rd_data.tb_member_basic basic ON apply.mem_no = basic.mem_no
                  WHERE  apply.apply_date BETWEEN #{search_startDate} AND #{search_endDate}
              ) apply
-        GROUP BY DATE_FORMAT(apply.apply_date, '%Y-%m-%d')
+        <if test="is_list == 1">
+            GROUP BY DATE_FORMAT(apply.apply_date, '%Y-%m-%d')
+        </if>
     </select>
 
     <select id="selectRouletteWeekCalendarList_member" parameterType="com.dalbit.content.vo.RouletteCalendarVo" resultType="com.dalbit.content.vo.RouletteCalendarVo">
-        SELECT LEFT(apply_date,10), mem_sex, COUNT(*) cnt,COUNT(DISTINCT mem_no) mcnt
+        SELECT LEFT(apply_date,10), mem_sex, COUNT(*) mem_cnt, COUNT(DISTINCT mem_no) mem_unique_cnt
         FROM  rd_data.tb_event_coupon_member_apply
         WHERE apply_date BETWEEN #{search_startDate} AND #{search_endDate}
-        GROUP BY 1,2
+        GROUP BY
+        <if test="is_list == 1">
+            1,
+        </if>
+         2
     </select>
 
     <select id="selectRouletteCalendarList" parameterType="com.dalbit.content.vo.RouletteCalendarVo" resultType="com.dalbit.content.vo.RouletteCalendarVo">
