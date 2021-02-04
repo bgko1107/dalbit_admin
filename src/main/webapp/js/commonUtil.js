@@ -173,9 +173,6 @@ util.excelDownload = function(btn, url, data, successFunc, errorFunc) {
             }, 500)
         },
         failCallback: function (responseHtml, url, data) {
-            console.log(responseHtml);
-            console.log(url);
-            console.log(data);
             setTimeout(function () {
                 // btn.button('reset');
                 util.changeLoadingBtn(btn, 'reset');

@@ -325,7 +325,6 @@
     }
 
     function fn_submit_success(dst_id, response){
-        console.log(response.result);
         if(response.result =="success"){
             if(common.isEmpty($("#txt_idx").val())){
                 alert("주간 클립 테이블 등록이 완료되었습니다.");

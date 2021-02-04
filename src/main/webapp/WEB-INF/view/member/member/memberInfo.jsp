@@ -899,7 +899,6 @@
         var template = $('#tmp_layer_detail').html();
         var templateScript = Handlebars.compile(template);
         var context = response.data.detail;
-        console.log(response.data);
         var html = templateScript(context);
         $("#detailView").html(html);
 

@@ -220,7 +220,6 @@
     }
 
     function fn_selImpression_success(dst_id, response, param){
-        console.log(response);
         $("#djIntroduce").val(response.data.title);
         $("#awardsImpression").val(response.data.msg);
     }

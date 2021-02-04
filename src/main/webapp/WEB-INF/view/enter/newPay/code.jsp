@@ -380,7 +380,6 @@
             response.data.detailList[i]["sum_ios_total_amt"] = common.getListSum(sum_ios_total_amt);
         }
 
-        console.log(response.data);
         var isDataEmpty = response.data.detailList == null;
         $("#androidTableBody").empty();
         if(!isDataEmpty){

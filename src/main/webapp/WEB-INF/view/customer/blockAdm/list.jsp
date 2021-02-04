@@ -239,7 +239,6 @@
 
     function fn_insertBlock_success(dst_id, response) {
         alert(response.message);
-        console.log(response.data);
 
         getBlockList();
     }

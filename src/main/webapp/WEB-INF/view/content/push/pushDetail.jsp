@@ -769,8 +769,7 @@
             contentType: false,
             data: formData,
             success: function (response) {
-                console.log(response);
-                console.log(JSON.parse(response));
+                // console.log(JSON.parse(response));
                 response = JSON.parse(response);
                 alert(response.message);
                 if (response.result == "success") {

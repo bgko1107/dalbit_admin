@@ -139,7 +139,6 @@ var fnc_profileList = {};
     };
 
     fnc_profileList.fn_select_success= function(dst_id, response, dst_params){
-        console.log(response.data)
         // form 띄우기
         var template = $('#tmp_profileSelectFrm').html();
         var templateScript = Handlebars.compile(template);

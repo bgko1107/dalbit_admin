@@ -84,7 +84,6 @@
     }
     function fn_success_tabCntSelect(dst_id, response){
 
-        console.log(response);
         $("#tab_mailboxList").text("우체통" + "(" + response.data.mailboxCnt +")");
         $("#tab_storyList").text("사연" + "(" + response.data.storyListCnt +")");
         $("#tab_fanBoardList").text("팬보드" + "(" + response.data.fanBoardListCnt +")");

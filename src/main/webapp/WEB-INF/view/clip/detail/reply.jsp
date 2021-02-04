@@ -79,7 +79,6 @@
     }
 
     function fn_clipReply_delete_success(dst_id, response, dst_params) {
-        console.log(response);
         getClipDetailReply();
         alert(response.message);
     }

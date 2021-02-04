@@ -140,7 +140,6 @@ var fnc_broadcastList = {};
     };
 
     fnc_broadcastList.fn_select_success= function(dst_id, response, dst_params){
-        console.log(response.data)
         // form 띄우기
         var template = $('#tmp_broadcastSelectFrm').html();
         var templateScript = Handlebars.compile(template);

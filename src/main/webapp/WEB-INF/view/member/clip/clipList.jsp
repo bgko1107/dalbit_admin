@@ -256,7 +256,6 @@
     }
 
     function fn_detailInfo_Edit_success(dst_id, response, dst_params) {
-        console.log(response);
         dtList_info_detail.reload(selectCallback_clipHistoty, false);
         if(isAlertShow){alert(response.message)};
     }

@@ -214,7 +214,6 @@
     }
 
     function fn_selImpression_success(dst_id, response, param){
-        console.log(response);
         $("#fanIntroduce").val(response.data.title);
     }
 

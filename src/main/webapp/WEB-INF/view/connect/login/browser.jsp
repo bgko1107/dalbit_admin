@@ -71,7 +71,6 @@
 
         for(var i=0;i<response.data.detailList.length;i++){
             if(response.data.detailList[i].androidCnt == 0){
-                console.log(response.data.detailList[i].androidCnt);
                 response.data.detailList[i].androidCnt = "null";
             }
             if(response.data.detailList[i].iosCnt == 0){

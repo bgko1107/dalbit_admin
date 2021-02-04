@@ -551,7 +551,6 @@
     });
 
     function fn_success_excel(response) {
-        console.log(response);
     }
 
     function fn_fail_excel(response){
@@ -763,8 +762,7 @@
             contentType: false,
             data: formData,
             success: function (response) {
-                console.log(response);
-                console.log(JSON.parse(response));
+                // console.log(JSON.parse(response));
                 response = JSON.parse(response);
                 alert(response.message);
                 if (response.result == "success") {
@@ -806,7 +804,6 @@
     }
 
     function fn_pathChange_success(dst_id, response) {
-        console.log(response.data);
         $("#"+dst_id).val(response.data.path);
         $("#"+dst_id).parent().find('img.thumbnail').attr('src', response.data.url);
     }

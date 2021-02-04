@@ -159,7 +159,6 @@
     }
 
     function fn_detailInfo_Edit_success(dst_id, response, dst_params) {
-        console.log(response);
         // dtList_info.reload(selectCallback_hotHistory, false);
         $("#bt_search").click();
         if(isAlertShow){alert(response.message)};

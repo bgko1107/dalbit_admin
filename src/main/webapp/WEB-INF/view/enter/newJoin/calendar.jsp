@@ -49,8 +49,6 @@
                         slctType : 1
                     },
                     success: function(response) {
-                        console.log("[response] ------- /rest/enter/newJoin/info/calender -------");
-                        console.log(response);
                         if(!common.isEmpty(response.data.detailList)){
                             response.data.detailList.forEach(function(detail, detailIndex) {
                                 var the_date = detail.the_date;

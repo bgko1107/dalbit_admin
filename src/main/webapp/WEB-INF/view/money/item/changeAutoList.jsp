@@ -116,7 +116,6 @@
     });
 
     function fn_success_excel(response) {
-        console.log(response);
     }
 
     function autoChangeList_order_click(){

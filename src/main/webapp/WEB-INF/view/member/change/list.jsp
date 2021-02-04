@@ -166,7 +166,6 @@
     });
 
     function fn_success_excel(response) {
-        console.log(response);
     }
 
     function changeList_searchType_click(){

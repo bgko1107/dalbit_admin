@@ -100,7 +100,6 @@
     }
 
     function fn_success_policyDetail(dst_id, response){
-        console.log(response);
 
         var template = $("#tmp_policyDetail").html();
         var templateScript = Handlebars.compile(template);

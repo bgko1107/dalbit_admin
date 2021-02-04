@@ -80,7 +80,6 @@
                         , slctTab : 1
                     },
                     success: function(response) {
-                        console.log(response);
                         accum_total_join_cnt = 0;
                         accum_total_out_cnt = 0;
                         accum_total_join_before_cnt = 0;
@@ -126,7 +125,6 @@
                             });
                         }
 
-                        console.log(response.result);
                         if(response.result != "fail"){
                             if(moment(new Date()).format('YYYY.MM') == tmp_sDate.substring(0,7)){       // 같은달이면 전일 누적 / 전일 일수
                                 response.data.totalInfo.befor_accum_total_join_cnt = response.data.detailList[response.data.detailList.length - 2].accum_total_join_cnt;

@@ -338,7 +338,6 @@
     }
 
     function fn_chat_load_success(dst_id, response, dst_params){
-        console.log(response);
         // isReloadChat = true;
 
         if(response.result != "fail" && !common.isEmpty(response.data) && !response.data.length <= 0){

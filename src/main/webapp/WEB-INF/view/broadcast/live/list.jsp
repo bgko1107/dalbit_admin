@@ -318,7 +318,6 @@
     }
 
     function fn_inspection_check_success(dst_id, response){
-        console.log(response);
         response.data.type == "1" ? $("#inspection").text("임시점검") : $("#inspection").text("임시점검 해제");
     }
 

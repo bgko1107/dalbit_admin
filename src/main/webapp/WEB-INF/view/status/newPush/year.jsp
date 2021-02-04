@@ -68,7 +68,6 @@
         response.data.detailList.nowHour = Number(moment().format("HH"));
 
         for(var i=0;i<response.data.detailList.length;i++){
-            console.log(response.data.detailList[i].the_date.substr(8,2));
             response.data.detailList[i].day = response.data.detailList[i].the_date.substr(8,2);
             response.data.detailList[i].month = response.data.detailList[i].the_date.substr(5,2);
 

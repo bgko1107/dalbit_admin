@@ -553,8 +553,6 @@
         util.getAjaxData("codeList", "/common/codeList", data, fn_ClipSubjectTypeCode_success);
     }
     function fn_ClipSubjectTypeCode_success(dst_id, response){
-        console.log("=========================")
-        console.log(response);
         subjectCodeList = response.data;
 
         console.log(tabId);

@@ -67,7 +67,6 @@
                         slctType : 1
                     },
                     success: function(response) {
-                        console.log(response);
                         $("#totalTable").empty();
 
                         response.data.totalInfo.sum_reg_maleCnt= 0;

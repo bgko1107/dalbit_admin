@@ -393,8 +393,6 @@
                 response.data.detailList[i].color = 0;
             }
         }
-        console.log("---------------------------------");
-        console.log(response);
 
         var template = $('#tmp_weekDetailList').html();
         var templateScript = Handlebars.compile(template);

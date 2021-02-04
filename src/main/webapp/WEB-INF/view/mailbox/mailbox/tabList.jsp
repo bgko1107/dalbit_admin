@@ -53,7 +53,6 @@
         util.getAjaxData("storyList", "/rest/content/boardAdm/mailbox/tab/count", data, fn_success_tabCntSelect);
     }
     function fn_success_tabCntSelect(dst_id, response){
-        console.log(response);
         for(var i=0;i<response.data.length;i++){
             if(response.data[i].type == "1"){
                 $("#tab_mailboxList").text("우체통 대화방 내역" + "(" + response.data[i].totalCnt +")");

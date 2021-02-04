@@ -80,10 +80,6 @@
                         , slctTab : 2
                     },
                     success: function(response) {
-                        console.log("-----------------------------");
-                        console.log(response);
-                        console.log("-----------------------------");
-
                         accum_total_join_cnt = 0;
                         accum_total_out_cnt = 0;
                         accum_total_join_before_cnt = 0;
