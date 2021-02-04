@@ -46,8 +46,8 @@
                     <th colspan="2" class="_bgColor _sex_male" data-bgColor="#fbe5d6"></th>
                     <th colspan="2" class="_bgColor _sex_female" data-bgColor="#fbe5d6"></th>
                     <th colspan="2" class="_bgColor _sex_none" data-bgColor="#fbe5d6"></th>
-                    <th colspan="2" class="_bgColor" data-bgColor="#fbe5d6">게스트</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">소계</th>
+                    <th colspan="2" class="_bgColor" data-bgColor="#fbe5d6">게스트</th>
                 </tr>
                 <tr>
                     <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
