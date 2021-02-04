@@ -47,8 +47,8 @@
                     <th colspan="2" class="_bgColor _sex_male" data-bgColor="#fbe5d6"></th>
                     <th colspan="2" class="_bgColor _sex_female" data-bgColor="#fbe5d6"></th>
                     <th colspan="2" class="_bgColor _sex_none" data-bgColor="#fbe5d6"></th>
-                    <th colspan="2" class="_bgColor" data-bgColor="#fbe5d6">게스트</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">소계</th>
+                    <th colspan="2" class="_bgColor" data-bgColor="#fbe5d6">게스트</th>
                     <th rowspan="2" class="_bgColor" data-bgcolor="#fbe5d6">최대 청취자</th>
                 </tr>
                 <tr>
@@ -480,10 +480,10 @@
         <td class="_fontColor" data-fontColor="red">{{addComma unique_listener_fCnt 'Y'}}</td>
         <td>{{addComma listener_nCnt 'Y'}}</td>
         <td>{{addComma unique_listener_nCnt 'Y'}}</td>
-        <td>{{addComma guest_Cnt 'Y'}}</td>
-        <td>{{addComma guest_unique_Cnt 'Y'}}</td>
         <td>{{addComma listener_Cnt 'Y'}}</td>
         <td>{{addComma unique_listener_Cnt 'Y'}}</td>
+        <td>{{addComma guest_Cnt 'Y'}}</td>
+        <td>{{addComma guest_unique_Cnt 'Y'}}</td>
         <td>{{addComma listener_max_Cnt 'Y'}}</td>
         <td>{{addComma gift_Cnt 'Y'}}</td>
         <td>{{addComma gift_Amt 'Y'}}</td>
