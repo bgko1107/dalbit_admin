@@ -280,7 +280,7 @@
         </tr>
         <tr>
             <th>서비스 구분</th>
-            <td>{{{getCommonCodeSelect type 'policy_slctType' 'Y' 'policy_slctType'}}}</td>
+            <td>{{{getCommonCodeSelect slctType 'policy_slctType' 'Y' 'policy_slctType'}}}</td>
             <th>주요사안<br/>(제목)</th>
             <td colspan="3"><input type="text" class="form-control" id="title" value="{{title}}"> </td>
             <th>반영일자</th>
