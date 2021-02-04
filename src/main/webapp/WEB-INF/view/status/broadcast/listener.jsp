@@ -49,7 +49,6 @@
     }
 
     function fn_broadcastListener_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#listenerListBody").empty();
         if(!isDataEmpty){

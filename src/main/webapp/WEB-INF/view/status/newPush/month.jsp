@@ -57,7 +57,6 @@
     }
 
     function fn_month_success(data, response){
-        dalbitLog(response);
 
         var isDataEmpty = response.data.detailList == null;
         $("#tableMonthBody").empty();

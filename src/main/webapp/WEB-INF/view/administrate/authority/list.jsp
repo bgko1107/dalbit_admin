@@ -182,7 +182,6 @@
             response.data[i].url = "/member/member/popup/memberTestid?name=" + encodeURIComponent(response.data[i].emp_no);
         }
 
-        dalbitLog(response);
         var template = $('#tmp_memberList').html();
         var templateScript = Handlebars.compile(template);
         var context = response.data;
@@ -202,7 +201,6 @@
     });
 
     function fn_menuInfo_success(data, response, params){
-        dalbitLog(response);
         for(var i = 0 ;i<response.data.menuInfo.length;i++){
             if(response.data.menuInfo[i].idx == 12){
                 for(var j = 0 ;j<response.data.menuInfo[i].twoDepth.length;j++){
@@ -346,7 +344,6 @@
     });
 
     function fn_setAuth_success(data, response, params){
-        dalbitLog(response);
         alert(response.message);
         getMemberList();
         ui.topScroll();

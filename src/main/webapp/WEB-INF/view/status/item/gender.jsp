@@ -49,7 +49,6 @@
     }
 
     function fn_genderJoin_success(data, response){
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#genderTableBody").empty();
         if(!isDataEmpty){

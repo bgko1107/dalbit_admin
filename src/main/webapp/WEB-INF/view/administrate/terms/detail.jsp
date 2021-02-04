@@ -98,7 +98,6 @@
     }
 
     function fn_update_success(data, response, params){
-        dalbitLog(response);
         alert(response.message);
         dtList_info.reload();
         ui.topScroll();

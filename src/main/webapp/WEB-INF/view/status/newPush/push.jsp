@@ -59,7 +59,6 @@
     // }
 
     // function fn_total_success(data, response){
-    //     dalbitLog(response);
     //
     //     var isDataEmpty = response.data.detailList == null;
     //     $("#tableTotalBody").empty();

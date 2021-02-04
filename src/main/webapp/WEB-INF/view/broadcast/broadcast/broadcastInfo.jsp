@@ -72,7 +72,6 @@
     var detailData;
     var broadCast_responseData
     function info_sel_success(dst_id, response, param) {
-        dalbitLog(response);
         broadCast_responseData = response.data;
         $('#detailFrm').addClass("hid");
         room_no = param.room_no;
@@ -113,7 +112,6 @@
         if(response.data.specialdj_badge == "1") tmp_badge = tmp_badge + '<span class ="label" style="background-color:red">' + "스페셜DJ" + '</span>';
         response.data["dj_badge"] = tmp_badge;
 
-        dalbitLog(response);
         var template = $('#tmp_broadcast_detailFrm').html();
         var templateScript = Handlebars.compile(template);
         var context = response.data;
@@ -389,7 +387,6 @@
     }
 
     function update_success(dst_id, response) {
-        dalbitLog(response);
 
         $('#entryModal').modal('hide');
         $('#entry_message').val("");

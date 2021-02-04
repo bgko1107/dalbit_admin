@@ -56,7 +56,6 @@
     }
 
     function fn_totalJoin_success(data, response){
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#tableBody").empty();
         if(!isDataEmpty){

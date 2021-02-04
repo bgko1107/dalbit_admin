@@ -73,7 +73,6 @@
     }
 
     function fn_slct_success(data, response){
-        dalbitLog(response);
 
         var sum_type01Cnt_total = [
             response.data.totalInfo.sum_type01Cnt,

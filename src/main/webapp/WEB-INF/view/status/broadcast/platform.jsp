@@ -51,7 +51,6 @@
 
 
     function fn_platformList_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#platformListBody").empty();
         if(!isDataEmpty){

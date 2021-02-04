@@ -46,7 +46,6 @@
 
 
     function fn_totalJoin_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#totalListBody").empty();
         if(!isDataEmpty){

@@ -461,7 +461,6 @@
     }
 
     function fn_insert_success(dst_id, response) {
-        dalbitLog(response);
         alert(response.message);
         dtList_info.reload();
 
@@ -490,8 +489,6 @@
     });
 
     function fn_delete_success(dst_id, response) {
-        dalbitLog(response);
-
         alert(response.message +'\n- 성공 : ' + response.data.sucCnt + '건\n- 실패 : ' + response.data.failCnt +'건');
         dtList_info.reload();
 

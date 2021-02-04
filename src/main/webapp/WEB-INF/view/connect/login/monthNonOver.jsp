@@ -166,7 +166,6 @@
     }
 
     function fn_monthNonOver_success(data, response){
-        dalbitLog(response);
 
         var tmp_date = new Date();
         tmp_date = moment(tmp_date).format("YYYY.MM.DD HH:mm:SS");

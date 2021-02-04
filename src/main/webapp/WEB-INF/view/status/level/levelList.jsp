@@ -76,8 +76,6 @@
     }
 
     function fn_succ_list(data,response,param){
-        dalbitLog(response);
-
         // var tmp_url = '<a href="javascript://" class="_openPop" data-url="' + url + '" data-width="'+ width +'" data-height="'+ height +'">' + display + '</a>';
         // util.popupLink(common.addComma(data),"/status/level/popup/memLevelList?level=" + row.level,1600,900);
 

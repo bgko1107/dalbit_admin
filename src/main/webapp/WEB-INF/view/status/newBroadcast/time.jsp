@@ -259,7 +259,6 @@
     }
 
     function fn_broadcastGift_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#giftListBody").empty();
         if(!isDataEmpty){
@@ -324,7 +323,6 @@
     }
 
     function fn_platformTimeList_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#platformTimeListBody").empty();
         if(!isDataEmpty){

@@ -185,7 +185,6 @@
     }
 
     function update_success(dst_id, response) {
-        dalbitLog(response);
         alert(response.message);
 
         eval("window.opener.fnc_"+targetId +".selectMainList()");

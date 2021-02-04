@@ -217,8 +217,6 @@
     }
 
     function fn_totalPay_success(data, response){
-        dalbitLog(response);
-
         tmp_index = -1;
         var title = "평균 합계의 경우 반올림된 평균 데이터의 총합이라\n항목별 합계와 다소 오차가 생길 수 있습니다.";
 

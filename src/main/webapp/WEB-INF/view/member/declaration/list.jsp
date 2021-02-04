@@ -76,7 +76,6 @@
     }
 
     function declaration_fn_success(dst_id, response) {
-        dalbitLog(response);
         var template = $("#tmp_declarationSummary").html();
         var templateScript = Handlebars.compile(template);
         var data = {

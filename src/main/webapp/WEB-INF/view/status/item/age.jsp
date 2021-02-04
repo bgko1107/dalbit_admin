@@ -63,7 +63,6 @@
     }
 
     function fn_ageJoin_success(data, response){
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#ageTableBody").empty();
         if(!isDataEmpty){

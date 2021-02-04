@@ -130,8 +130,6 @@
 
     fnc_castList.fn_success= function(dst_id, response)
     {
-        dalbitLog(response);
-
         var template = fnc_castList.target.find('#tmp_list').html();
         var templateScript = Handlebars.compile(template);
         var html = templateScript(response);

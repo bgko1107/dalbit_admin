@@ -75,7 +75,6 @@
     }
 
     function fn_notice_success(data, response){
-        dalbitLog(response);
         $("#tableNoticeBody").empty();
 
         var template = $('#tmp_noticeDetail').html();

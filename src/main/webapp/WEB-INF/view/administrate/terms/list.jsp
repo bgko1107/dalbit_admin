@@ -133,7 +133,6 @@
         }else false;
     }
     function fn_delete_success(data, response, params){
-        dalbitLog(response);
         dtList_info.reload();
         $("#tab_termsTab").addClass('hide');
     }

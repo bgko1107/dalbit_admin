@@ -104,9 +104,6 @@
     }
 
     function fn_time_success(dst_id, response){
-        dalbitLog("--------- fn_time_success ---------");
-        dalbitLog(response);
-
         accum_total_join_cnt = 0;
         accum_total_join_before_cnt = 0;
 

@@ -39,7 +39,6 @@
     }
 
     function fn_succ_list(data,response,param){
-        dalbitLog(response);
         $("#quick_body").empty();
 
         var template = $('#tmp_quickBody').html();

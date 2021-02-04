@@ -54,7 +54,6 @@
     }
 
     function fn_broadcastDj_success(dst_id, response) {
-        dalbitLog(response);
         var isDataEmpty = response.data.detailList == null;
         $("#djListBody").empty();
         if(!isDataEmpty){

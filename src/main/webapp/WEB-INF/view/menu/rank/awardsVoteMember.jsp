@@ -91,7 +91,6 @@
     }
 
     function fn_succ_list(dst_id, response, params) {
-        dalbitLog(response);
 
         if(response.result == "success") {
             response.data.totalCnt = response.pagingVo.totalCnt;
