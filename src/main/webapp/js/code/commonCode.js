@@ -292,6 +292,76 @@ var searchFormRadio = [
     , new COMMON_CODE('2', '2', '날짜선택')
 ];
 
+
+// 검색 통합 code --------------------------
+var searchMember = [
+    new COMMON_CODE('', 'searchMember', '회원 검색')
+    , new COMMON_CODE('1', '1', '회원 번호')
+    , new COMMON_CODE('2', '2', '회원 닉네임')
+    , new COMMON_CODE('3', '3', '이름')
+    , new COMMON_CODE('4', '4', '연락처')
+    , new COMMON_CODE('5', '5', '아이디')
+    , new COMMON_CODE('6', '6', 'IP')
+    , new COMMON_CODE('7', '7', '모바일ID')
+];
+
+var searchBroad = [
+    new COMMON_CODE('', 'searchBroad', '방송 검색')
+    , new COMMON_CODE('1', '1', '방송 번호')
+    , new COMMON_CODE('2', '2', '방송 제목')
+];
+
+var searchMail = [
+    new COMMON_CODE('', 'searchMail', '우체통 검색')
+    , new COMMON_CODE('1', '1', '우체통 번호')
+];
+
+var searchClip = [
+    new COMMON_CODE('', 'searchClip', '클립 검색')
+    , new COMMON_CODE('1', '1', '클립 제목')
+    , new COMMON_CODE('2', '2', '클립 번호')
+];
+
+var searchQna = [
+    new COMMON_CODE('', 'searchQna', '1:1 문의 검색')
+    , new COMMON_CODE('1', '1', '문의 제목')
+    , new COMMON_CODE('2', '2', '문의 내용')
+];
+
+var searchMarketing = [
+    new COMMON_CODE('', 'searchMarketing', '마케팅 게시판 검색')
+    , new COMMON_CODE('1', '1', '마케팅 제목')
+];
+
+var searchTerms = [
+    new COMMON_CODE('', 'searchTerms', '약관 검색')
+    , new COMMON_CODE('1', '1', '약관 명')
+];
+
+var searchNotice = [
+    new COMMON_CODE('', 'searchNotice', '공지사항 검색')
+    , new COMMON_CODE('1', '1', '공지 제목')
+];
+
+var searchItem = [
+    new COMMON_CODE('', 'searchItem', '아이템 관리 검색')
+    , new COMMON_CODE('1', '1', '아이템명')
+    , new COMMON_CODE('2', '2', '상품코드')
+];
+
+var searchBroadTip = [
+    new COMMON_CODE('', 'searchBroadTip', '방송 Tip 검색')
+    , new COMMON_CODE('1', '1', 'Tip 내용')
+    , new COMMON_CODE('2', '2', '수정자명')
+];
+
+var searchBroadMsg = [
+    new COMMON_CODE('', 'searchBroadMsg', '방송 메시지 검색')
+    , new COMMON_CODE('1', '1', '메시지 제목')
+];
+
+// -------------------------------------------------------------
+
 var timeHour = getTimeHour();
 
 function getTimeHour() {

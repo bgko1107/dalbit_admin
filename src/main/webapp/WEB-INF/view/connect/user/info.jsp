@@ -12,6 +12,7 @@
                             <i class="fa fa-search"></i><br/>검색
                         </th>
                         <td style="text-align: left">
+                            <span id="searchMemberArea" onchange="getCurrenList();"></span>
                             <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." ></label>
 
                             <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -95,6 +96,8 @@
 
 <script type="text/javascript">
     $(function() {
+
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
 
         //현재 접속자 통계 현황
         getLoginLiveInfo();

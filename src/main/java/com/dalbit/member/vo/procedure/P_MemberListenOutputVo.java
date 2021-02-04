@@ -37,6 +37,7 @@ public class P_MemberListenOutputVo extends SearchVo {
     private String complete_date; //보름달 완료일시
     private int state;
     private String type_entry;
+    private String type_media;
 
     private int giftCnt;
     private int giftDal;

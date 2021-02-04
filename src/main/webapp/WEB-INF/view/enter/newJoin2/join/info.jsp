@@ -28,6 +28,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align: left">
+                                    <span id="searchMemberArea" onchange="getUserInfo();" style="display: none"></span>
 
                                     <jsp:include page="../../../searchArea/dateRangeSearchArea.jsp"/>
 
@@ -93,6 +94,8 @@
     var tabType = <%=in_tabType%>;
 
     $(function(){
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+
         setDayButton();
 
         $('input[id="searchText"]').keydown(function(e) {

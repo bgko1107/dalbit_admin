@@ -62,9 +62,9 @@
             data.memLoginIdSort = _memLoginIdSort;
             data.memIpSort = _memIpSort;
             data.memJoinPath = tmp_joinPath;
-
             data.sDate = tmp_sDate;
             data.eDate = tmp_eDate;
+            data.newSearchType = $("#searchMember").val();
         };
         dtList_info = new DalbitDataTable($("#tb_memberList"), dtList_info_data, MemberDataTableSource.joinList);
         dtList_info.useCheckBox(false);

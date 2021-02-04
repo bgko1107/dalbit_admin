@@ -27,4 +27,6 @@ public class SearchVo extends PagingVo {
     private String deptType;
     private String empNo;
     private Integer menuIdx;
+
+    private Integer newSearchType;
 }
