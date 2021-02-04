@@ -70,6 +70,7 @@
             data.eDate = tmp_eDate;
             data.withdrawalDateSort = _withdrawalDateSort;
             data.serviceDateSort = _serviceDateSort;
+            data.newSearchType = $("#searchMember").val();
         };
         dtList_info2 = new DalbitDataTable($("#tb_withdrawalList"), dtList_info_data2, MemberDataTableSource.withdrawalList);
         dtList_info2.useCheckBox(false);

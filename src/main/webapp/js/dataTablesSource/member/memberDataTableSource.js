@@ -260,6 +260,13 @@ var MemberDataTableSource = {
             {'title': '방송제목', 'data': 'title', 'width':'250px', 'render': function (data, type, row, meta) {
                     return util.roomNoLink(data, row.room_no);
                 }},
+            {'title': '구분', 'data': 'type_media', 'width':'60px', 'render': function (data, type, row, meta) {
+                    if(data == "a"){
+                        return '<img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
+                    }else if(data == "v"){
+                        return '<img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />';
+                    }
+                }},
             {'title': '청취시작시간', 'data': 'startDateFormat', 'width':'120px'},
             {'title': '청취종료시간', 'data': 'endDateFormat', 'width':'120px'},
             {'title': '청취진행시간', 'data': 'listentime', 'width':'80px', 'render': function (data) {

@@ -19,13 +19,38 @@
                         and a.join_path is not null
                         and a.join_path != ''
                     </if>
-                    and (mem_no like concat('%', #{searchText}, '%')
+                    <if test='searchText != null and searchText != ""'>
+                        <choose>
+                            <when test="newSearchType == 1">
+                                and mem_no = #{searchText}
+                            </when>
+                            <when test="newSearchType == 2">
+                                and mem_nick like concat('%', #{searchText}, '%')
+                            </when>
+                            <when test="newSearchType == 3">
+                                and mem_name = #{searchText}
+                            </when>
+                            <when test="newSearchType == 4">
+                                and mem_phone = #{searchText}
+                            </when>
+                            <when test="newSearchType == 5">
+                                and mem_id = #{searchText}
+                            </when>
+                            <when test="newSearchType == 6">
+                                and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                            </when>
+                            <otherwise>
+                                and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                            </otherwise>
+                        </choose>
+                    </if>
+                   <!-- and (mem_no like concat('%', #{searchText}, '%')
                        or mem_name like concat('%', #{searchText}, '%')
                        or mem_userid like concat('%', #{searchText}, '%')
                        or mem_nick like concat('%', #{searchText}, '%')
                        or mem_phone like concat('%', #{searchText}, '%')
                        or mem_id like concat('%', #{searchText}, '%')
-                       or mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText}))
+                       or mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText}))-->
                 )as c, (select @rownum := #{pageNo} ) AS d
 
 
@@ -56,13 +81,31 @@
                 and a.join_path is not null
                 and a.join_path != ''
             </if>
-            and (mem_no like concat('%', #{searchText}, '%')
-                or mem_name like concat('%', #{searchText}, '%')
-                or mem_userid like concat('%', #{searchText}, '%')
-                or mem_nick like concat('%', #{searchText}, '%')
-                or mem_phone like concat('%', #{searchText}, '%')
-                or mem_id like concat('%', #{searchText}, '%')
-                or mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText}))
+            <if test='searchText != null and searchText != ""'>
+                <choose>
+                    <when test="newSearchType == 1">
+                        and mem_no = #{searchText}
+                    </when>
+                    <when test="newSearchType == 2">
+                        and mem_nick like concat('%', #{searchText}, '%')
+                    </when>
+                    <when test="newSearchType == 3">
+                        and mem_name = #{searchText}
+                    </when>
+                    <when test="newSearchType == 4">
+                        and mem_phone = #{searchText}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and mem_id = #{searchText}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                    </when>
+                    <otherwise>
+                        and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                    </otherwise>
+                </choose>
+            </if>
     </select>
 
     <select id="callJoinList_slctCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberJoinInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberJoinOutputVo">
@@ -101,13 +144,31 @@
                        and a.join_path is not null
                        and a.join_path != ''
                    </if>
-                   and (mem_no like concat('%', #{searchText}, '%')
-                       or mem_name like concat('%', #{searchText}, '%')
-                       or mem_userid like concat('%', #{searchText}, '%')
-                       or mem_nick like concat('%', #{searchText}, '%')
-                       or mem_phone like concat('%', #{searchText}, '%')
-                       or mem_id like concat('%', #{searchText}, '%')
-                       or mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText}))
+                   <if test='searchText != null and searchText != ""'>
+                        <choose>
+                            <when test="newSearchType == 1">
+                                and mem_no = #{searchText}
+                            </when>
+                            <when test="newSearchType == 2">
+                                and mem_nick like concat('%', #{searchText}, '%')
+                            </when>
+                            <when test="newSearchType == 3">
+                                and mem_name = #{searchText}
+                            </when>
+                            <when test="newSearchType == 4">
+                                and mem_phone = #{searchText}
+                            </when>
+                            <when test="newSearchType == 5">
+                                and mem_id = #{searchText}
+                            </when>
+                            <when test="newSearchType == 6">
+                                and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                            </when>
+                            <otherwise>
+                                and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                            </otherwise>
+                        </choose>
+                    </if>
                 ) as c, (select @rownum := #{pageNo} ) AS d
 
         <trim prefix="ORDER BY" suffixOverrides=",">
@@ -144,13 +205,31 @@
                and a.join_path is not null
                and a.join_path != ''
            </if>
-           and (mem_no like concat('%', #{searchText}, '%')
-               or mem_name like concat('%', #{searchText}, '%')
-               or mem_userid like concat('%', #{searchText}, '%')
-               or mem_nick like concat('%', #{searchText}, '%')
-               or mem_phone like concat('%', #{searchText}, '%')
-               or mem_id like concat('%', #{searchText}, '%')
-               or mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText}))
+           <if test='searchText != null and searchText != ""'>
+                <choose>
+                    <when test="newSearchType == 1">
+                        and mem_no = #{searchText}
+                    </when>
+                    <when test="newSearchType == 2">
+                        and mem_nick like concat('%', #{searchText}, '%')
+                    </when>
+                    <when test="newSearchType == 3">
+                        and mem_name = #{searchText}
+                    </when>
+                    <when test="newSearchType == 4">
+                        and mem_phone = #{searchText}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and mem_id = #{searchText}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                    </when>
+                    <otherwise>
+                        and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                    </otherwise>
+                </choose>
+            </if>
     </select>
 
     <select id="callWithdrawalList_slctCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberJoinInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberJoinOutputVo">
@@ -176,13 +255,31 @@
            and a.join_path is not null
            and a.join_path != ''
          </if>
-           and (mem_no like concat('%', #{searchText}, '%')
-           or mem_name like concat('%', #{searchText}, '%')
-           or mem_userid like concat('%', #{searchText}, '%')
-           or mem_nick like concat('%', #{searchText}, '%')
-           or mem_phone like concat('%', #{searchText}, '%')
-           or mem_id like concat('%', #{searchText}, '%')
-           or mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText}))
+         <if test='searchText != null and searchText != ""'>
+                <choose>
+                    <when test="newSearchType == 1">
+                        and mem_no = #{searchText}
+                    </when>
+                    <when test="newSearchType == 2">
+                        and mem_nick like concat('%', #{searchText}, '%')
+                    </when>
+                    <when test="newSearchType == 3">
+                        and mem_name = #{searchText}
+                    </when>
+                    <when test="newSearchType == 4">
+                        and mem_phone = #{searchText}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and mem_id = #{searchText}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                    </when>
+                    <otherwise>
+                        and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                    </otherwise>
+                </choose>
+            </if>
     </select>
 
     <select id="callDormancyList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_DormancyOutputVo">

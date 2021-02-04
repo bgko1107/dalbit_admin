@@ -43,6 +43,7 @@
 
         $("#searchCheck").hide();
         $("#searchText").hide();
+        $("#searchMemberArea").hide();
         if(tabId == 'tab_time'){
             slctType = 0;
         }else if(tabId == 'tab_calendar' || tabId == 'tab_month') {
@@ -50,6 +51,7 @@
         }else if(tabId == 'tab_list' || tabId == 'tab_dormancy') {
             $("#searchCheck").show();
             $("#searchText").show();
+            $("#searchMemberArea").show();
             slctType = 3;
         }
 

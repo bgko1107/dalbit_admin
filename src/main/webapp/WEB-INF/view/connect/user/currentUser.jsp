@@ -71,6 +71,7 @@
             data.pageCnt = 10;
             data.searchText = $("#searchText").val();
             data.inner = $('input[name="search_testId"]').is(":checked") ? "0" : "-1";
+            data.newSearchType = $("#searchMember").val();
         };
         dtList_info_detail = new DalbitDataTable($("#tableList"), dtList_data, connectDataTableSource.current);
         dtList_info_detail.setPageLength(10);

@@ -142,7 +142,7 @@
 
         var template = $("#tmp_policyHisroyDetail").html();
         var templateScript = Handlebars.compile(template);
-        var context = response.data;
+        var context = response;
         var html = templateScript(context);
         $("#editHistorylist").html(html);
     }
@@ -306,7 +306,10 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th colspan="6" style="background-color: #dce6f2;">{{type_desc}}변경이력</th>
+            <th colspan="6" style="background-color: #dce6f2;">
+                <label class="font-bold">[{{{getCommonCodeLabel summary.slctType 'policy_slctType'}}}] </label>
+                변경이력
+            </th>
         </tr>
         <tr>
             <th>반영일자</th>
@@ -318,7 +321,7 @@
         </tr>
         </thead>
         <tbody>
-        {{#each this}}
+        {{#each this.data }}
         <tr>
             <td>{{substr apply_date 0 19}}</td>
             <td>{{{getCommonCodeLabel platform 'content_platform6'}}}</td>

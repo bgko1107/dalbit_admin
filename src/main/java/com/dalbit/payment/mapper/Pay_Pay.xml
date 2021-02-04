@@ -232,38 +232,35 @@
             left join rd_data.tb_member_profile profile on log.mem_no = profile.mem_no
             , (select @RNUM := 0) r
       where log.attempt_date between concat(#{txt_startSel},' 00:00:00') AND concat(#{txt_endSel},' 23:59:59')
-        <if test='searchText != null and searchText != ""'>
-            <choose>
-                <when test='searchType == "mem_no"'>
-                    and log.mem_no like  concat ('%', #{searchText}, '%')
-                </when>
-                <when test='searchType == "product_nm"'>
-                    and log.product_nm like concat ('%', upper(#{searchText}), '%')
-                </when>
-                <when test='searchType == "mem_nick"'>
-                    and (
-                        basic.mem_nick like concat ('%', upper(#{searchText}), '%')
-                        or withdrawal.mem_nick like concat ('%', upper(#{searchText}), '%')
-                    )
-                </when>
-                <when test='searchType == "mem_name"'>
-                    and (
-                        basic.mem_name like concat ('%', upper(#{searchText}), '%')
-                        or withdrawal.mem_name like concat ('%', upper(#{searchText}), '%')
-                    )
-                </when>
-                <otherwise>
-                    and (
-                        log.mem_no like concat ('%', #{searchText}, '%')
-                        or log.product_nm like concat ('%', upper(#{searchText}), '%')
-                        or basic.mem_nick like concat ('%', upper(#{searchText}), '%')
-                        or withdrawal.mem_nick like concat ('%', upper(#{searchText}), '%')
-                        or basic.mem_name like concat ('%', upper(#{searchText}), '%')
-                        or withdrawal.mem_name like concat ('%', upper(#{searchText}), '%')
-                    )
-                </otherwise>
-            </choose>
-        </if>
+
+      <if test='searchText != null and searchText != ""'>
+          <choose>
+              <when test="newSearchType == 1">
+                  and (basic.mem_no = #{searchText} or withdrawal.mem_no = #{searchText})
+              </when>
+              <when test="newSearchType == 2">
+                  and (basic.mem_nick like concat('%', #{searchText}, '%') or withdrawal.mem_nick like concat('%', #{searchText}, '%'))
+              </when>
+              <when test="newSearchType == 3">
+                  and (basic.mem_name = #{searchText} or withdrawal.mem_name = #{searchText})
+              </when>
+              <when test="newSearchType == 4">
+                  and (basic.mem_phone = #{searchText} or withdrawal.mem_phone = #{searchText})
+              </when>
+              <when test="newSearchType == 5">
+                  and (basic.mem_id = #{searchText} or withdrawal.mem_id = #{searchText})
+              </when>
+              <when test="newSearchType == 6">
+                  and (basic.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                    or withdrawal.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText}))
+              </when>
+              <otherwise>
+                  and (basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                    or withdrawal.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText}))
+              </otherwise>
+          </choose>
+      </if>
+
         order by idx desc
     </sql>
 

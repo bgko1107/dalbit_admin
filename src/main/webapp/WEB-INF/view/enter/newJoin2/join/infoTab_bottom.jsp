@@ -40,12 +40,14 @@
         tabId = $(this).prop('id');
 
         $("#searchText").hide();
+        $("#searchMemberArea").hide();
         if(tabId == 'tab_time'){
             slctType = 0;
         }else if(tabId == 'tab_calendar' || tabId == 'tab_month') {
             slctType = 1;
         }else if(tabId == 'tab_list') {
             $("#searchText").show();
+            $("#searchMemberArea").show();
             slctType = 3;
         }
 

@@ -27,7 +27,6 @@
                             </tr>
                             <tr>
                                 <td style="text-align: left">
-
                                     <jsp:include page="../../../searchArea/dateRangeSearchArea.jsp"/>
 
                                     <input type="text" class="form-control" id="onedayDate" name="onedayDate" style="display: none">
@@ -38,6 +37,7 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
+                                    <span id="searchMemberArea" onchange="getUserInfo();" style="display: none"></span>
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." style="display: none"></label>
 
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -97,6 +97,8 @@
     var tabType = <%=in_tabType%>;
 
     $(function(){
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+
         setDayButton();
     });
 
