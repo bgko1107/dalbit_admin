@@ -6,8 +6,9 @@
 <div class="widget-table mb10">
     <div class="col-md-1 no-padding">
         <select id="dateType" name="dateType" class="form-control" onchange="getPolicyList()">
-            <option value="0">최근 등록일자</option>
-            <option value="1">최근 수정일자</option>
+            <option value="0">반영일자</option>
+            <option value="1">최근 등록일자</option>
+            <option value="2">최근 수정일자</option>
         </select>
     </div>
     <div class="col-md-1 no-padding">
@@ -156,6 +157,32 @@
         // 시간 Select CSS 적용
         $("#timeHour").attr("class", "select-time");
         $("#timeMinute").attr("class", "select-time");
+
+        $("input[name='platform']").change(function () {
+            if ($(this).attr("id").indexOf("-1") > -1) {
+                if ($(this).is(":checked")) {
+                    $("input[name='platform']").each(function () {
+                        this.checked = true;
+                    });
+                } else {
+                    $("input[name='platform']").each(function () {
+                        this.checked = false;
+                    });
+                }
+            } else {
+                if ($(this).is(":checked")) {
+                    var cntTotal = $("input[name='platform']").length;
+                    var cntChecked = $("input[name='platform']:checked").length;
+                    if ((cntTotal) == (cntChecked + 1)) {
+                        $("input[name='platform'][id='platform-1']").prop("checked", true);
+                    }
+                } else {
+                    $("input[name='platform'][id='platform-1']").prop("checked", false);
+                }
+            }
+        });
+
+
         var scrollPosition = $("#policyDetailform").offset();
         util.scrollPostion(scrollPosition.top);
     }
@@ -253,7 +280,7 @@
         </tr>
         <tr>
             <th>서비스 구분</th>
-            <td>{{{getCommonCodeSelect type 'policy_slctType' 'Y' 'policy_slctType'}}}</td>
+            <td>{{{getCommonCodeSelect slctType 'policy_slctType' 'Y' 'policy_slctType'}}}</td>
             <th>주요사안<br/>(제목)</th>
             <td colspan="3"><input type="text" class="form-control" id="title" value="{{title}}"> </td>
             <th>반영일자</th>
