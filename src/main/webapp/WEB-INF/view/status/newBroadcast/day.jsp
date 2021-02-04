@@ -125,8 +125,9 @@
             <span class="font-bold">◈플랫폼 별</span>
             <table class="table table-bordered _tableHeight" data-height="23px">
                 <colgroup>
-                    <col width="9.1%"/><col width="11.1%"/><col width="11.1%"/><col width="11.1%"/><col width="11.1%"/>
-                    <col width="11.1%"/><col width="11.1%"/><col width="11.1%"/><col width="11.1%"/>
+                    <col width="6.6%"/><col width="6.6%"/><col width="6.6%"/><col width="6.6%"/><col width="6.6%"/>
+                    <col width="6.6%"/><col width="6.6%"/><col width="6.6%"/><col width="6.6%"/><col width="6.6%"/>
+                    <col width="6.6%"/><col width="6.6%"/><col width="6.6%"/><col width="6.6%"/><col width="6.6%"/>
                 </colgroup>
                 <thead>
                 <tr>

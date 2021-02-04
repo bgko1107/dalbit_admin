@@ -60,8 +60,7 @@ public class Con_ServicePolicyService {
      */
     public String callServicePolicyEdit(P_ServicePolicyVo pServicePolicyVo) {
         pServicePolicyVo.setOpName(MemberVo.getMyMemNo());
-        ProcedureVo procedureVo = new ProcedureVo(pServicePolicyVo);
-
+        ProcedureVo procedureVo = new ProcedureVo(pServicePolicyVo, true);
         conServicePolicyDao.callServicePolicyEdit(procedureVo);
 
         String result;
