@@ -277,6 +277,10 @@
             });
         }else false;
     }
+    $(document).on('click', '#contentDeleteBtn', function(){
+        $('.note-editable').empty();
+    });
+
 </script>
 
 
@@ -328,7 +332,10 @@
             </td>
         </tr>
         <tr>
-            <th colspan="8">변경내용</th>
+            <th colspan="8">
+                변경내용
+                <button class="btn btn-danger pull-right" type="button" id="contentDeleteBtn">내용삭제</button>
+            </th>
         </tr>
         <tr>
             <td colspan="8"><div class="_editor" id="editor" name="editor">{{{replaceHtml desc}}}</div></td>
