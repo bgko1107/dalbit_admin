@@ -33,20 +33,24 @@
     }
 
     function broadCast_summary_table(json){
-        // dalbitLog(json);
+        if(json.result == 'success'){
+            var totalAudioBroadcastCnt = null == json.summary.totalAudioBroadcastCnt ? 0 : json.summary.totalAudioBroadcastCnt;
+            var totalVideoBroadcastCnt = null == json.summary.totalVideoBroadcastCnt ? 0 : json.summary.totalVideoBroadcastCnt;
 
-        json.summary.totalbroadCastCnt = json.summary.totalAudioBroadcastCnt + json.summary.totalVideoBroadcastCnt
-        var template = $("#broad_tableSummary").html();
-        var templateScript = Handlebars.compile(template);
-        var data = {
-            header : broadCast_summary
-            , content : json.summary
-            , length : json.recordsTotal
-        };
-        var html = templateScript(data);
-        $("#broad_summaryArea").html(html);
+            json.summary.totalbroadCastCnt = totalAudioBroadcastCnt + totalVideoBroadcastCnt;
+            var template = $("#broad_tableSummary").html();
+            var templateScript = Handlebars.compile(template);
+            var data = {
+                header : broadCast_summary
+                , content : json.summary
+                , length : json.recordsTotal
+            };
+            var html = templateScript(data);
+            $("#broad_summaryArea").html(html);
 
-        ui.paintColor();
+            ui.paintColor();
+        }
+
     }
 </script>
 
