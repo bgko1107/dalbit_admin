@@ -152,8 +152,9 @@
         <td>
             {{#dalbit_if type_media '==' 'a'}}
                 <img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" /> {{djguest}}
-            {{else}}
-            <img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" /> {{djguest}}
+            {{/dalbit_if}}
+            {{#dalbit_if type_media '==' 'v'}}
+                <img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" /> {{djguest}}
             {{/dalbit_if}}
         </td>
         <td>
