@@ -35,7 +35,7 @@ public interface Con_RouletteEventDao {
      *
      */
     @Transactional(readOnly = true)
-    RouletteCalendarVo selectRouletteWeekCalendarList_item(RouletteCalendarVo rouletteCalendarVo);
+    List<RouletteCalendarVo> selectRouletteWeekCalendarList_item(RouletteCalendarVo rouletteCalendarVo);
 
     @Transactional(readOnly = true)
     List<RouletteCalendarVo> selectRouletteWeekCalendarList_member(RouletteCalendarVo rouletteCalendarVo);

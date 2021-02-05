@@ -53,17 +53,6 @@ public class Con_RouletteEventRestController {
     /**
      * 이벤트 현황 summary
      */
-    @Deprecated
-    @Description("안정화 후 제거 예정")
-    @PostMapping("/calendar/week/old")
-    public String attendanceCalendarWeek_old(RouletteCalendarVo rouletteCalendarVo) {
-        String result = con_rouletteEventService.selectRouletteWeekCalendarList_old(rouletteCalendarVo);
-        return result;
-    }
-
-    /**
-     * 이벤트 현황 summary
-     */
     @PostMapping("/calendar/week")
     public String attendanceCalendarWeek(RouletteCalendarVo rouletteCalendarVo) {
         String result = con_rouletteEventService.selectRouletteWeekCalendarList(rouletteCalendarVo);

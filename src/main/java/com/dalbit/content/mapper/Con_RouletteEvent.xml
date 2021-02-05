@@ -93,94 +93,8 @@
             <include refid="applyListCondition" />
     </select>
 
-    <select id="selectRouletteWeekCalendarList" parameterType="com.dalbit.content.vo.RouletteCalendarVo" resultType="com.dalbit.content.vo.RouletteCalendarVo">
-        /* Con_RouletteEvent.xml - selectRouletteWeekCalendarList */
-        select
-            (select count(distinct mem_no)
-                from rd_data.stat_member_login_day
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')
-                and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')) loginCnt
-            , itemCnt
-            , itemNo1
-            , itemNo2
-            , itemNo3
-            , itemNo4
-            , itemNo5
-            , itemNo6
-            , itemNo7
-            , itemNo8
-            , itemNo9
-            , (select count(distinct mem_no)
-                from rd_data.tb_event_coupon_member_apply apply
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(apply.apply_date, '%Y-%m-%d')
-                and date_format(apply.apply_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')) applyCnt
-            , (select count(mem_no)
-                from rd_data.tb_event_coupon_member_apply apply
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(apply.apply_date, '%Y-%m-%d')
-                and date_format(apply.apply_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')) joinCnt
-            , (select count(distinct apply.mem_no)
-                from rd_data.tb_event_coupon_member_apply apply
-                left join rd_data.tb_member_basic mem on apply.mem_no = mem.mem_no
-                left join rd_data.tb_member_withdrawal_bak withdrawal on apply.mem_no = withdrawal.mem_no
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(apply.apply_date, '%Y-%m-%d')
-                and date_format(apply.apply_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
-                and (mem.mem_sex = 'm' or withdrawal.mem_sex = 'm')) sex_man
-            , (select count(distinct apply.mem_no)
-                from rd_data.tb_event_coupon_member_apply apply
-                left join rd_data.tb_member_basic mem on apply.mem_no = mem.mem_no
-                left join rd_data.tb_member_withdrawal_bak withdrawal on apply.mem_no = withdrawal.mem_no
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(apply.apply_date, '%Y-%m-%d')
-                and date_format(apply.apply_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
-                and (mem.mem_sex = 'f' or withdrawal.mem_sex = 'f')) sex_female
-            , (select count(distinct apply.mem_no)
-                from rd_data.tb_event_coupon_member_apply apply
-                left join rd_data.tb_member_basic mem on apply.mem_no = mem.mem_no
-                left join rd_data.tb_member_withdrawal_bak withdrawal on apply.mem_no = withdrawal.mem_no
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(apply.apply_date, '%Y-%m-%d')
-                and date_format(apply.apply_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
-                and (mem.mem_sex = 'n' or withdrawal.mem_sex = 'n')) sex_unknown
-        from (
-            select
-                apply_date
-                , sum(item_cnt)  itemCnt
-                , sum(item_no_1) itemNo1
-                , sum(item_no_2) itemNo2
-                , sum(item_no_3) itemNo3
-                , sum(item_no_4) itemNo4
-                , sum(item_no_5) itemNo5
-                , sum(item_no_6) itemNo6
-                , sum(item_no_7) itemNo7
-                , sum(item_no_8) itemNo8
-                , sum(item_no_9) itemNo9
-            from (
-                select apply.apply_date
-                    , item_no
-                    , count(item_no) item_cnt
-                    , CASE WHEN apply.item_no = 1 THEN count(apply.item_no) ELSE 0 END item_no_1
-                    , CASE WHEN apply.item_no = 2 THEN count(apply.item_no) ELSE 0 END item_no_2
-                    , CASE WHEN apply.item_no = 3 THEN count(apply.item_no) ELSE 0 END item_no_3
-                    , CASE WHEN apply.item_no in(4, 14, 24, 34, 44, 54) THEN count(apply.item_no) ELSE 0 END item_no_4
-                    , CASE WHEN apply.item_no in(5, 15, 25, 35, 45, 55) THEN count(apply.item_no) ELSE 0 END item_no_5
-                    , CASE WHEN apply.item_no in(6, 16, 26, 36, 46, 56) THEN count(apply.item_no) ELSE 0 END item_no_6
-                    , CASE WHEN apply.item_no in(7, 17, 27, 37, 47, 57) THEN count(apply.item_no) ELSE 0 END item_no_7
-                    , CASE WHEN apply.item_no in(8, 18, 28, 38, 48, 58) THEN count(apply.item_no) ELSE 0 END item_no_8
-                    , CASE WHEN apply.item_no in(9, 19, 29, 39, 49, 59) THEN count(apply.item_no) ELSE 0 END item_no_9
-                from (
-                    select date_format(apply.apply_date, '%Y-%m-%d') apply_date
-                        , apply.item_no
-                    from rd_data.tb_event_coupon_member_apply apply
-                    where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(apply.apply_date, '%Y-%m-%d')
-                        and date_format(apply.apply_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
-                ) apply
-                group by apply.apply_date, item_no
-            ) dateSum
-        ) a
-    </select>
-
     <select id="selectRouletteWeekCalendarList_item" parameterType="com.dalbit.content.vo.RouletteCalendarVo" resultType="com.dalbit.content.vo.RouletteCalendarVo">
         SELECT DATE_FORMAT(apply.apply_date, '%Y-%m-%d') the_date
-             -- , (select count(*) from rd_data.stat_member_login_day where the_date = date_format(apply.apply_date, '%Y%m%d')) loginCnt
-             -- , (select count(distinct mem_no) from rd_data.tb_event_coupon_member_apply where  date_format(apply_date, '%Y%m%d') = date_format(apply.apply_date, '%Y%m%d')) applyCnt
              , COUNT(apply.apply_date)  itemCnt
              , SUM(item_no_1) itemNo1
              , SUM(item_no_2) itemNo2
@@ -213,7 +127,7 @@
     </select>
 
     <select id="selectRouletteWeekCalendarList_member" parameterType="com.dalbit.content.vo.RouletteCalendarVo" resultType="com.dalbit.content.vo.RouletteCalendarVo">
-        SELECT LEFT(apply_date,10), mem_sex, COUNT(*) mem_cnt, COUNT(DISTINCT mem_no) mem_unique_cnt
+        SELECT LEFT(apply_date,10) the_date, mem_sex, COUNT(*) mem_cnt, COUNT(DISTINCT mem_no) mem_unique_cnt
         FROM  rd_data.tb_event_coupon_member_apply
         WHERE apply_date BETWEEN #{search_startDate} AND #{search_endDate}
         GROUP BY
@@ -223,55 +137,4 @@
          2
     </select>
 
-    <select id="selectRouletteCalendarList" parameterType="com.dalbit.content.vo.RouletteCalendarVo" resultType="com.dalbit.content.vo.RouletteCalendarVo">
-        /* Con_Event.xml - selectRouletteCalendarList */
-        select date_format(apply.apply_date, '%Y-%m-%d') the_date
-            , (select count(*) from rd_data.stat_member_login_day where the_date = date_format(apply.apply_date, '%Y%m%d')) loginCnt
-            , (select count(distinct mem_no) from rd_data.tb_event_coupon_member_apply where  date_format(apply_date, '%Y%m%d') = date_format(apply.apply_date, '%Y%m%d')) applyCnt
-            , count(apply.apply_date)  itemCnt
-            , (select count(distinct apply.mem_no)
-                from rd_data.tb_event_coupon_member_apply apply
-                left join rd_data.tb_member_basic mem on apply.mem_no = mem.mem_no
-                left join rd_data.tb_member_withdrawal_bak withdrawal on apply.mem_no = withdrawal.mem_no
-                where the_date = date_format(apply.apply_date, '%Y-%m-%d')
-                and (mem.mem_sex = 'm' or withdrawal.mem_sex = 'm')) sex_man
-            , (select count(distinct apply.mem_no)
-                from rd_data.tb_event_coupon_member_apply apply
-                left join rd_data.tb_member_basic mem on apply.mem_no = mem.mem_no
-                left join rd_data.tb_member_withdrawal_bak withdrawal on apply.mem_no = withdrawal.mem_no
-                where the_date = date_format(apply.apply_date, '%Y-%m-%d')
-                and (mem.mem_sex = 'f' or withdrawal.mem_sex = 'f')) sex_female
-            , (select count(distinct apply.mem_no)
-                from rd_data.tb_event_coupon_member_apply apply
-                left join rd_data.tb_member_basic mem on apply.mem_no = mem.mem_no
-                left join rd_data.tb_member_withdrawal_bak withdrawal on apply.mem_no = withdrawal.mem_no
-                where the_date = date_format(apply.apply_date, '%Y-%m-%d')
-                and (mem.mem_sex = 'n' or withdrawal.mem_sex = 'n')) sex_unknown
-            , sum(item_no_1) itemNo1
-            , sum(item_no_2) itemNo2
-            , sum(item_no_3) itemNo3
-            , sum(item_no_4) itemNo4
-            , sum(item_no_5) itemNo5
-            , sum(item_no_6) itemNo6
-            , sum(item_no_7) itemNo7
-            , sum(item_no_8) itemNo8
-            , sum(item_no_9) itemNo9
-        from (
-            select
-                apply.apply_date
-                , if(apply.item_no = 1, 1, 0) item_no_1
-                , if(apply.item_no = 2, 1, 0) item_no_2
-                , if(apply.item_no = 3, 1, 0) item_no_3
-                , CASE WHEN apply.item_no in(4, 14, 24, 34, 44, 54) THEN 1 ELSE 0 END item_no_4
-                , CASE WHEN apply.item_no in(5, 15, 25, 35, 45, 55) THEN 1 ELSE 0 END item_no_5
-                , CASE WHEN apply.item_no in(6, 16, 26, 36, 46, 56) THEN 1 ELSE 0 END item_no_6
-                , CASE WHEN apply.item_no in(7, 17, 27, 37, 47, 57) THEN 1 ELSE 0 END item_no_7
-                , CASE WHEN apply.item_no in(8, 18, 28, 38, 48, 58) THEN 1 ELSE 0 END item_no_8
-                , CASE WHEN apply.item_no in(9, 19, 29, 39, 49, 59) THEN 1 ELSE 0 END item_no_9
-            from rd_data.tb_event_coupon_member_apply apply
-            left join rd_data.tb_member_basic basic on apply.mem_no = basic.mem_no
-            where apply.apply_date BETWEEN #{search_startDate} AND #{search_endDate}
-        ) apply
-        group by date_format(apply.apply_date, '%Y-%m-%d')
-    </select>
 </mapper>
