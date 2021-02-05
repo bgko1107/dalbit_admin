@@ -39,6 +39,7 @@
                                         <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                         <%--<input name="endDate" id="endDate" style="width: 100px">--%>
 
+                                        <span id="searchMemberArea" style="margin-top:2px; " onchange="btSearchClick();"></span>
                                         <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
 
                                         <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -174,6 +175,7 @@
         setDayButton();
 
         // getList();
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
     });
 
     function getParameter(viewName){
@@ -200,6 +202,7 @@
             , orderType : $("#exchange_sort").val()
             , innerType : $('input[name="search_testId"]').prop('checked') ? 1 : 0
             , djType : $('._tab.active a').data('specialdj')
+            , newSearchType : $("#searchMember").val()
         };
     }
 
@@ -878,6 +881,10 @@
         console.log(data);
 
         util.getAjaxData("imageUpload","/rest/money/exchange/image/upload", data, fn_opdateUpdate_complete);
+    }
+
+    function btSearchClick(){
+        $("#bt_search").click();
     }
 
 

@@ -72,6 +72,7 @@
     });
 
     function memberDataListTabClick(){
+        $("#searchMemberArea").show();
         tabType = 3;
         slctType = 99;
         dateType(slctType);
@@ -103,6 +104,7 @@
             , 'searchText' : $("#searchText").val()
             , 'slctType' : $('input[name="searchCheck"]').is(":checked") ? "1" : "0"
             , 'orderType' : $("select[name='memberDataList']").val()
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         util.getAjaxData("memberDataList", "/rest/money/resource/memberDataList", data, fn_success_memberDataList);

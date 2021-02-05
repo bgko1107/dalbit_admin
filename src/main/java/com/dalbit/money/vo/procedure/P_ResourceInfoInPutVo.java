@@ -13,6 +13,7 @@ public class P_ResourceInfoInPutVo extends PagingVo {
     private int slctType;
     private int slctResource;
     private int searchType;
+    private int newSearchType;
     private int slctSecret;
     private String startDate;
     private String endDate;

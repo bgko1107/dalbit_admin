@@ -80,8 +80,19 @@
     sDate = date.getFullYear()  +"-"+ common.lpad(date.getMonth() + 1,2,"0")  +"-"+ common.lpad(date.getDate(),2,"0");        //오늘
 
     $(document).ready(function() {
+
+        $("#searchTypeArea").html(util.getCommonCodeSelect(-1, search_boostHist_type));
+
         getSearch();
+
+        $('input[id="searchText"]').on('keydown', function(e) {    // textBox 처리
+            if(e.keyCode == 13) {
+                exchangePagingInfo.pageNo = 1;
+                getSearch();
+            };
+        });
     });
+
 
     $(document).on('click', '#bt_search', function(){
         boostHistPagingInfo.pageNo = 1;
@@ -105,8 +116,6 @@
         }else if(tabId == 'stat_year'){
             getYearSearch();
         }else if(tabId == 'list_hist'){
-
-            $("#searchTypeArea").html(util.getCommonCodeSelect(-1, search_boostHist_type));
 
             $('._show_histList').show();
             getHistoryList();
