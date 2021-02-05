@@ -390,7 +390,6 @@
 <script type="text/x-handlebars-template" id="tmp_policyHisroyDetail">
     <table class="table table-bordered">
         <colgroup>
-            <col width="3%" />
             <col width="5%" />
             <col width="15%" />
             <col width="25%" />
@@ -403,13 +402,12 @@
         </colgroup>
         <thead>
         <tr>
-            <th colspan="10" style="background-color: #dce6f2;">
+            <th colspan="9" style="background-color: #dce6f2;">
                 <label class="font-bold">[{{{getCommonCodeLabel summary.slctType 'event_slctType'}}}] </label>
                 변경이력
             </th>
         </tr>
         <tr>
-            <th>반영일자</th>
             <th>플랫폼</th>
             <th>제목</th>
             <th>내용</th>
@@ -424,7 +422,6 @@
         <tbody>
         {{#each this.data }}
         <tr>
-            <td>{{substr apply_date 0 19}}</td>
             <td>{{{getCommonCodeLabel platform 'content_platform6'}}}</td>
             <td><a href="javascript://" onclick="policyDetail($(this).data().idx, '1');" data-idx="{{idx}}" >{{title}}</a></td>
             <td>{{{replaceHtml desc}}}</td>

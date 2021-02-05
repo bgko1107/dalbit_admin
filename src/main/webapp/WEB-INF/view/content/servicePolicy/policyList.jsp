@@ -352,7 +352,7 @@
         </colgroup>
         <thead>
         <tr>
-            <th colspan="10" style="background-color: #dce6f2;">
+            <th colspan="6" style="background-color: #dce6f2;">
                 <label class="font-bold">[{{{getCommonCodeLabel summary.slctType 'policy_slctType'}}}] </label>
                 변경이력
             </th>
