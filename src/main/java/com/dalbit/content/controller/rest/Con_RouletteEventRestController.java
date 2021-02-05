@@ -7,6 +7,7 @@ import com.dalbit.content.vo.procedure.P_RouletteRateVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +47,17 @@ public class Con_RouletteEventRestController {
     @PostMapping("/selectApplyList")
     public String selectApplyList(RouletteApplyVo rouletteApplyVo){
         String result = con_rouletteEventService.selectRouletteApplyList(rouletteApplyVo);
+        return result;
+    }
+
+    /**
+     * 이벤트 현황 summary
+     */
+    @Deprecated
+    @Description("안정화 후 제거 예정")
+    @PostMapping("/calendar/week/old")
+    public String attendanceCalendarWeek_old(RouletteCalendarVo rouletteCalendarVo) {
+        String result = con_rouletteEventService.selectRouletteWeekCalendarList_old(rouletteCalendarVo);
         return result;
     }
 

@@ -11,6 +11,7 @@ public class RouletteCalendarVo extends PagingVo {
     /* input */
     private String search_startDate;
     private String search_endDate;
+    private int is_list = 0;
 
     /* output */
     private String start_date;
@@ -32,4 +33,8 @@ public class RouletteCalendarVo extends PagingVo {
     private int itemNo7;
     private int itemNo8;
     private int itemNo9;
+
+    private String mem_sex;
+    private int mem_cnt;
+    private int mem_unique_cnt;
 }
