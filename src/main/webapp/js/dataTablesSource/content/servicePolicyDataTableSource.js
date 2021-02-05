@@ -22,6 +22,17 @@ var servicePolicyDataTableSource = {
                     return common.substr(data, 0, 19);
                 }}
             ,{'title': '수정자', 'data': 'upd_op_name'}
+            ,{'title': '이벤트번호', 'data': 'event_no'}
+            ,{'title': '활성화', 'data': 'view_yn', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, content_viewOn);
+                }}
+            ,{'title': '이벤트 시작일', 'data': 'event_start_date', 'render': function (data, type, row, meta) {
+                    return common.substr(data, 0, 19);
+                }}
+            ,{'title': '이벤트 종료일', 'data': 'event_end_date', 'render': function (data, type, row, meta) {
+                    return common.substr(data, 0, 19);
+                }}
+
         ]
     },
 }

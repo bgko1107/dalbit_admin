@@ -66,6 +66,7 @@
     function policyDetail(idx, type){
         console.log(idx);
         if(common.isEmpty(idx)){
+            $("#editHistorylist").empty();
             var template = $("#tmp_policyDetail").html();
             var templateScript = Handlebars.compile(template);
             var context = '';
@@ -84,6 +85,19 @@
             // 시간 Select CSS 적용
             $("#apply-div-date").find("#timeHour").val(sendDate.hour().toString().length == 1?("0"+sendDate.hour()):sendDate.hour());
             $("#apply-div-date").find("#timeMinute").val(sendDate.minute().toString().length == 1?("0"+sendDate.minute()):sendDate.minute());
+
+
+            // 캘린더 초기값
+            $("#event-div-startDate").find("#event-input-startDate").val(sendDate.format('YYYY.MM.DD'));
+            // 시간 Select CSS 적용
+            $("#event-div-startDate").find("#timeHour").val(sendDate.hour().toString().length == 1?("0"+sendDate.hour()):sendDate.hour());
+            $("#event-div-startDate").find("#timeMinute").val(sendDate.minute().toString().length == 1?("0"+sendDate.minute()):sendDate.minute());
+
+            // 캘린더 초기값
+            $("#event-div-endDate").find("#event-input-endDate").val(sendDate.format('YYYY.MM.DD'));
+            // 시간 Select CSS 적용
+            $("#event-div-endDate").find("#timeHour").val(sendDate.hour().toString().length == 1?("0"+sendDate.hour()):sendDate.hour());
+            $("#event-div-endDate").find("#timeMinute").val(sendDate.minute().toString().length == 1?("0"+sendDate.minute()):sendDate.minute());
 
             $("#insertBtn").on('click', function(){
                 insertBtnClick();
@@ -109,11 +123,10 @@
 
         util.editorInit("content-notice");
 
-        var applyDate = response.summary.apply_date;
-        date = new Date(applyDate);
-        $("#apply-div-date").find("#apply-input-date").val(date.getFullYear() +'.'+ common.lpad(date.getMonth(),2,'0') +'.'+ common.lpad(date.getDate(),2,'0'));
-        $("#apply-div-date").find("#timeHour").val(common.lpad(date.getHours(),2,'0'));
-        $("#apply-div-date").find("#timeMinute").val(common.lpad(date.getMinutes(),2,'0'));
+        $("#eventTr").hide();
+        if(response.summary.slctType == "20" || response.summary.slctType == "21"){
+            $("#eventTr").show();
+        }
 
         applyDateCssSet();
 
@@ -136,6 +149,26 @@
             }
         }
 
+
+
+        var date = new Date(response.summary.apply_date);
+        console.log(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0') + " " + common.lpad(date.getHours(),2,'0') +":"+ common.lpad(date.getMinutes(),2,'0'));
+        $("#apply-div-date").find("#apply-input-date").val(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0'));
+        $("#apply-div-date").find("#timeHour").val(common.lpad(date.getHours(),2,'0'));
+        $("#apply-div-date").find("#timeMinute").val(common.lpad(date.getMinutes(),2,'0'));
+
+        var date = new Date(response.summary.event_start_date);
+        console.log(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0') + " " + common.lpad(date.getHours(),2,'0') +":"+ common.lpad(date.getMinutes(),2,'0'));
+        $("#event-div-startDate").find("#event-input-startDate").val(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0'));
+        $("#event-div-startDate").find("#timeHour").val(common.lpad(date.getHours(),2,'0'));
+        $("#event-div-startDate").find("#timeMinute").val(common.lpad(date.getMinutes(),2,'0'));
+
+        var date = new Date(response.summary.event_end_date);
+        console.log(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0') + " " + common.lpad(date.getHours(),2,'0') +":"+ common.lpad(date.getMinutes(),2,'0'));
+        $("#event-div-endDate").find("#event-input-endDate").val(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0'));
+        $("#event-div-endDate").find("#timeHour").val(common.lpad(date.getHours(),2,'0'));
+        $("#event-div-endDate").find("#timeMinute").val(common.lpad(date.getMinutes(),2,'0'));
+
         $("#insertBtn").on('click', function(){
             insertBtnClick();
         });
@@ -154,8 +187,9 @@
         });
 
         // 시간 Select CSS 적용
-        $("#timeHour").attr("class", "select-time");
-        $("#timeMinute").attr("class", "select-time");
+        $('.input-group.date').find("#timeHour").attr("class", "select-time");
+        $('.input-group.date').find("#timeMinute").attr("class", "select-time");
+
 
         $("input[name='platform']").change(function () {
             if ($(this).attr("id").indexOf("-1") > -1) {
@@ -181,6 +215,13 @@
             }
         });
 
+        $("#policy_slctType").on('change',function (){
+            var val = $(this).val();
+            $("#eventTr").hide();
+            if(val == "20" || val == "21"){
+                $("#eventTr").show();
+            }
+        });
 
         var scrollPosition = $("#policyDetailform").offset();
         util.scrollPostion(scrollPosition.top);
@@ -204,17 +245,32 @@
             alert("플랫폼을 선택하여 주시기 바랍니다.");
             return false;
         }
+        if($("#policy_slctType").val() == "20" || $("#policy_slctType").val() == "21"){
+            if($("#event_no").val() == "" || $("#event_no").val() == null){
+                alert("이벤트 번호를 입력하여 주시기 바랍니다.");
+                return false;
+            }
+        }
 
         var applyDateDiv = $("#apply-div-date");
         var applyDate = $("#apply-input-date").val() + " " + applyDateDiv.find("#timeHour").val() +":"+ applyDateDiv.find("#timeMinute").val() + ":00";
 
+        var eventSDateDiv = $("#event-div-startDate");
+        var eventStartDate = $("#event-input-startDate").val() + " " + eventSDateDiv.find("#timeHour").val() +":"+ eventSDateDiv.find("#timeMinute").val() + ":00";
+        var eventEDateDiv = $("#event-div-endDate");
+        var eventEndDate = $("#event-input-endDate").val() + " " + eventEDateDiv.find("#timeHour").val() +":"+ eventEDateDiv.find("#timeMinute").val() + ":00";
+
         var data = {
             idx : common.isEmpty($("#policyIdx").val()) ? 0 : $("#policyIdx").val()
-            ,osType : platform
-            ,slctType : $("#policy_slctType").val()
-            ,title : $("#title").val()
-            ,desc : $("#editor").summernote('code')
-            ,applyDate : applyDate
+            , osType : platform
+            , slctType : $("#policy_slctType").val()
+            , title : $("#title").val()
+            , desc : $("#editor").summernote('code')
+            , applyDate : applyDate
+            , viewYn : Number($("input[name='view_yn']:checked").val())
+            , eventNo : Number($("#event_no").val())
+            , eventStartDate : eventStartDate
+            , eventEndDate : eventEndDate
         };
 
         console.log(data);
@@ -293,6 +349,34 @@
                 </div>
             </td>
         </tr>
+        <tr id="eventTr" style="display: none">
+            <th>이벤트 번호</th>
+            <td><input type="text" class="form-control" id="event_no" value="{{event_no}}"></td>
+            <th>활성화</th>
+            <td>{{{getCommonCodeRadio view_yn 'content_viewOn' 'N' 'view_yn'}}}</td>
+            <th>이벤트 기간</th>
+            <td colspan="3">
+                <div class="col-md-5 no-padding">
+                    <div class="input-group date" id="event-div-startDate">
+                        <span class="input-group-addon" id="event-startDate"><i class="fa fa-calendar"></i></span>
+                        <input type="text" class="form-control" name="startDate" id="event-input-startDate" style="width:100px; background:white; height: 34px">
+                        {{{getCommonCodeSelect 00 'timeHour'}}}
+                        <span> : </span>
+                        {{{getCommonCodeSelect 00 'timeMinute'}}}
+                        <span>&nbsp;&nbsp;&nbsp;~</span>
+                    </div>
+                </div>
+                <div class="col-md-5 no-padding">
+                    <div class="input-group date" id="event-div-endDate">
+                        <span class="input-group-addon" id="event-endDate"><i class="fa fa-calendar"></i></span>
+                        <input type="text" class="form-control" name="startDate" id="event-input-endDate" style="width:100px; background:white; height: 34px">
+                        {{{getCommonCodeSelect 00 'timeHour'}}}
+                        <span> : </span>
+                        {{{getCommonCodeSelect 00 'timeMinute'}}}
+                    </div>
+                </div>
+            </td>
+        </tr>
         <tr>
             <th colspan="8">변경내용</th>
         </tr>
@@ -304,9 +388,21 @@
 
 <script type="text/x-handlebars-template" id="tmp_policyHisroyDetail">
     <table class="table table-bordered">
+        <colgroup>
+            <col width="3%" />
+            <col width="5%" />
+            <col width="15%" />
+            <col width="25%" />
+            <col width="4%" />
+            <col width="4%" />
+            <col width="3%" />
+            <col width="3%" />
+            <col width="4%" />
+            <col width="4%" />
+        </colgroup>
         <thead>
         <tr>
-            <th colspan="6" style="background-color: #dce6f2;">
+            <th colspan="10" style="background-color: #dce6f2;">
                 <label class="font-bold">[{{{getCommonCodeLabel summary.slctType 'policy_slctType'}}}] </label>
                 변경이력
             </th>
@@ -318,6 +414,10 @@
             <th>내용</th>
             <th>등록/수정일시</th>
             <th>등록/수정자</th>
+            <th>이벤트번호</th>
+            <th>활성화</th>
+            <th>이벤트 시작일</th>
+            <th>이벤트 종료일</th>
         </tr>
         </thead>
         <tbody>
@@ -341,6 +441,10 @@
                     {{reg_op_name}}
                 {{/dalbit_if}}
             </td>
+            <td>{{event_no}}</td>
+            <td>{{{getCommonCodeLabel view_yn 'content_viewOn'}}}</td>
+            <td>{{substr event_start_date 0 19}}</td>
+            <td>{{substr event_end_date 0 19}}</td>
         </tr>
         {{/each}}
         </tbody>
