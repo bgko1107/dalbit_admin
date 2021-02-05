@@ -295,11 +295,12 @@
                 type: 'post',
                 dataType: 'json',
                 data: {
-                    search_startDate : $('td.fc-day:first').data('date'),
-                    search_endDate: $('td.fc-day:last').data('date')
+                    search_startDate : $('td.fc-day:first').data('date') + ' 00:00:00',
+                    search_endDate: $('td.fc-day:last').data('date') + ' 23:59:59'
                 },
                 success: function(response) {
-
+                    console.log('[ajax 통신 결과]url : /rest/content/event/roulette/calendar/list');
+                    console.log(response);
                     response.data.forEach(function(info){
 
                         var dayTarget = $('.fc-day[data-date="'+info.the_date+'"]').find('.fc-day-content');
@@ -311,7 +312,7 @@
                         info.dal_100_Sum = info.itemNo9;
                         var context = info;
                         var html=templateScript(context);
-                        dayTarget.append(html);
+                        dayTarget.html(html);
 
                     });
 
