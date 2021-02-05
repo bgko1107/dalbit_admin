@@ -28,7 +28,8 @@
                                         <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                         <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                         <%--<input name="endDate" id="endDate" style="width: 100px">--%>
-                                        <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." style="display: none"></label>
+                                        <span id="searchMemberArea" onchange="btSearchClick();"></span>
+                                        <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
 
                                         <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                         <a href="javascript://" class="_prevSearch">[이전]</a>
@@ -116,6 +117,7 @@
         }else{
             getAutoList();
         }
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
     });
 
     function getParameter(){
@@ -129,6 +131,7 @@
             , pageNo : itemPagingInfo.pageNo
             , pageCnt : itemPagingInfo.pageCnt
             , autoType : $("#changeAutoSetting").val()
+            , newSearchType : $("#searchMember").val()
         };
 
         console.log(data);

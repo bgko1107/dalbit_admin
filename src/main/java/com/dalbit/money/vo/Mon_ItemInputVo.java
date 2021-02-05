@@ -12,6 +12,7 @@ public class Mon_ItemInputVo extends PagingVo {
     private String search_value;
     private String search_type;
     private String search_state;
+    private int newSearchType;
     private String sDate;
     private String eDate;
     private int search_testId;

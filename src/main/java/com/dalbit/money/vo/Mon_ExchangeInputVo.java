@@ -26,6 +26,7 @@ public class Mon_ExchangeInputVo extends PagingVo {
     private int last_reject;
     private String gender;
     private String baseDay;
+    private int newSearchType;
 
     //환전통계 summary : 범위 때문에 end 날짜 추가
     private String end_year;

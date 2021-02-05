@@ -11,7 +11,7 @@
         <div class="container-fluid col-lg-9 no-padding" style="margin-left: 15px">
             <form id="searchForm">
                 <div class="row widget widget-table searchBoxArea">
-                    <table>
+                    <table style="width: 100%;">
                         <tr>
                             <th rowspan="2" style="background-color:#4472c4;color:#e9ee17;width: 70px">
                                 <i class="fa fa-search"></i><br/>검색
@@ -29,7 +29,7 @@
                             <td style="text-align: left">
                                 <jsp:include page="../../searchArea/dateRangeSearchArea.jsp"/>
 
-                                <div class="col-md-3 no-padding" id="div_input">
+                                <div class="col-md-1 no-padding" id="div_input" style="margin-top:2px;">
                                     <input id="onedayDate" type="text" class="form-control" >
                                     <input id="monthDate" type="text" class="form-control" style="display: none"/>
                                     <input id="yearDate" type="text" class="form-control" style="display: none"/>
@@ -39,7 +39,10 @@
                                 <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                 <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                 <%--<input name="endDate" id="endDate" style="width: 100px">--%>
-                                <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." style="display: none"></label>
+                                <span class="col-md-1 no-padding" id="searchMemberArea" style="margin-top:2px; display: none;" onchange="btSearchClick();"></span>
+                                <label>
+                                    <input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." style="display: none">
+                                </label>
 
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                 <a href="javascript://" class="_prevSearch">[이전]</a>
@@ -110,6 +113,8 @@
     var _itemClick = 1;
 
     $(function(){
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+
         slctType = 0;
         setDayButton();
 
@@ -148,6 +153,7 @@
     });
 
     function infoTabClick(tmp){
+        $("#searchMemberArea").hide();
         tabType = tmp;
         slctType = tmp;
         dateType(slctType);
@@ -754,6 +760,10 @@
         }else{
             util.windowOpen(popupUrl,"900","550","별 정보 데이터");
         }
+    }
+
+    function btSearchClick(){
+        $("#bt_search").click();
     }
 
 

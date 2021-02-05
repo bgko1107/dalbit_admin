@@ -64,6 +64,7 @@
     });
 
     function buyDalDataListTabClick(){
+        $("#searchMemberArea").show();
         tabType = 4;
         slctType = 0;
 
@@ -72,7 +73,7 @@
         $("._prevSearch").show();
         $("._todaySearch").show();
         $("._nextSearch").show();
-        $("#div_input").hide();
+        $("#div_input").show();
         $("#searchText").show();
         $("#searchCheck").show();
         $("#liveResourceData").hide();
@@ -95,6 +96,7 @@
             , 'slctType' : $('input[name="searchCheck"]').is(":checked") ? "1" : "0"
             , 'orderType' : $("select[name='buyDalList']").val()
             , 'startDate' : $("#startDate").val()
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         util.getAjaxData("buyDalList", "/rest/money/resource/buyDalList", data, fn_success_buyDalList);

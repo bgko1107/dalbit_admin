@@ -68,6 +68,7 @@
     });
 
     function useDalDataListTabClick(){
+        $("#searchMemberArea").show();
         tabType = 5;
         slctType = 0;
         dateType(slctType);
@@ -75,7 +76,7 @@
         $("._prevSearch").show();
         $("._todaySearch").show();
         $("._nextSearch").show();
-        $("#div_input").hide();
+        $("#div_input").show();
         $("#searchText").show();
         $("#searchCheck").show();
         $("#liveResourceData").hide();
@@ -98,6 +99,7 @@
             , 'orderType' : $("select[name='searchCheck']").val()
             , 'startDate' : $("#startDate").val()
             , 'slctSecret' : 0
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         util.getAjaxData("useDalList", "/rest/money/resource/useDalList", data, fn_success_useDalList);

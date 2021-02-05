@@ -87,16 +87,32 @@
         </if>
         <!--concat(#{search_year}, #{search_month}) = DATE_FORMAT(exchange.reg_date, '%Y%m')-->
 
-        <if test='search_value != null and search_value != ""'>
-            and (
-            exchange.mem_no like CONCAT('%',#{search_value},'%')
-            or withdrawal.mem_no like CONCAT('%',#{search_value},'%')
-            or basic.mem_userid like CONCAT('%',#{search_value},'%')
-            or withdrawal.mem_userid like CONCAT('%',#{search_value},'%')
-            or basic.mem_nick like CONCAT('%',#{search_value},'%')
-            or withdrawal.mem_nick like CONCAT('%',#{search_value},'%')
-            or exchange.phone_no like CONCAT('%',#{search_value},'%')
-            )
+        <if test='searchText != null and searchText != ""'>
+            <choose>
+                <when test="newSearchType == 1">
+                    and (basic.mem_no = #{searchText} or withdrawal.mem_no = #{searchText})
+                </when>
+                <when test="newSearchType == 2">
+                    and (basic.mem_nick like concat('%', #{searchText}, '%') or withdrawal.mem_nick like concat('%', #{searchText}, '%'))
+                </when>
+                <when test="newSearchType == 3">
+                    and (basic.mem_name = #{searchText} or withdrawal.mem_name = #{searchText})
+                </when>
+                <when test="newSearchType == 4">
+                    and (basic.mem_phone = #{searchText} or withdrawal.mem_phone = #{searchText})
+                </when>
+                <when test="newSearchType == 5">
+                    and (basic.mem_id = #{searchText} or withdrawal.mem_id = #{searchText})
+                </when>
+                <when test="newSearchType == 6">
+                    and (basic.mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                    or withdrawal.mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText}))
+                </when>
+                <otherwise>
+                    and (basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                    or withdrawal.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText}))
+                </otherwise>
+            </choose>
         </if>
 
         <if test='gender != "0" and gender != "" and gender != null'>
@@ -796,27 +812,28 @@
             left outer join (select idx, mem_no, count(*) exchangeCnt from rd_data.tb_member_exchange where state = 1 group by mem_no) exchange on basic.mem_no = exchange.mem_no
 
             where 570 <![CDATA[<=]]> wallet.gold
-            <if test='search_value != null and search_value != ""'>
+            <if test='searchText != null and searchText != ""'>
                 <choose>
-                    <when test="search_type == 'mem_no'">
-                        and basic.mem_no like CONCAT('%',#{search_value},'%')
+                    <when test="newSearchType == 1">
+                        and basic.mem_no = #{searchText}
                     </when>
-                    <when test="search_type == 'user_id'">
-                        and basic.mem_userid like CONCAT('%',#{search_value},'%')
+                    <when test="newSearchType == 2">
+                        and basic.mem_nick like concat('%', #{searchText}, '%')
                     </when>
-                    <when test="search_type == 'mem_nick'">
-                        and basic.mem_nick like CONCAT('%',#{search_value},'%')
+                    <when test="newSearchType == 3">
+                        and basic.mem_name = #{searchText}
                     </when>
-                    <when test="search_type == 'mem_phone'">
-                        and basic.mem_phone like CONCAT('%',#{search_value},'%')
+                    <when test="newSearchType == 4">
+                        and basic.mem_phone = #{searchText}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and basic.mem_id = #{searchText}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and basic.mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
                     </when>
                     <otherwise>
-                        and (
-                        basic.mem_no like CONCAT('%',#{search_value},'%')
-                        or basic.mem_userid like CONCAT('%',#{search_value},'%')
-                        or basic.mem_nick like CONCAT('%',#{search_value},'%')
-                        or basic.mem_phone like CONCAT('%',#{search_value},'%')
-                        )
+                        and basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
                     </otherwise>
                 </choose>
             </if>
