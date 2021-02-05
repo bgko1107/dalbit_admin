@@ -13,6 +13,7 @@ public class P_ServicePolicyVo extends PagingVo {
     private int dateType;
     private int slctType;
     private String searchText;
+    private int searchType;
     private String idxList;
     private int eventNo;
     private String eventStartDate;

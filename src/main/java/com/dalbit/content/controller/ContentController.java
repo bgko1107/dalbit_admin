@@ -250,4 +250,7 @@ public class ContentController {
     @GetMapping("/fanrank/onOffList")
     public String fanrankOnOffList() {return "content/fanrank/onOffList";}
 
+    @GetMapping("/event/content/list")
+    public String eventContentManage() {return "content/event/content/list";}
+
 }

@@ -6,7 +6,6 @@
 <div class="widget-table mb10">
     <div class="col-md-1 no-padding">
         <select id="dateType" name="dateType" class="form-control" onchange="getPolicyList()">
-            <option value="0">반영일자</option>
             <option value="1">최근 등록일자</option>
             <option value="2">최근 수정일자</option>
         </select>
@@ -32,7 +31,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function (){
-        $("#slctTypeArea").html(util.getCommonCodeSelect(-1, policy_slctType));
+        $("#slctTypeArea").html(util.getCommonCodeSelect(-1, event_slctType));
 
         $("#deleteBtn").on('click', function(){
             policyDelete();
@@ -51,10 +50,10 @@
             data.searchText = $("#searchText").val();
             data.dateType = $("#dateType").val();
             data.slctType = $("#slctType").val();
-            data.searchType = 0;
+            data.searchType = 1;
         };
 
-        dtList_info = new DalbitDataTable($("#list"), dtList_info_data, servicePolicyDataTableSource.policyList);
+        dtList_info = new DalbitDataTable($("#list"), dtList_info_data, servicePolicyDataTableSource.eventManageList);
         dtList_info.useCheckBox(true);
         dtList_info.useIndex(true);
         dtList_info.setPageLength(50);
@@ -150,11 +149,25 @@
             }
         }
 
+
+
         var date = new Date(response.summary.apply_date);
         console.log(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0') + " " + common.lpad(date.getHours(),2,'0') +":"+ common.lpad(date.getMinutes(),2,'0'));
         $("#apply-div-date").find("#apply-input-date").val(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0'));
         $("#apply-div-date").find("#timeHour").val(common.lpad(date.getHours(),2,'0'));
         $("#apply-div-date").find("#timeMinute").val(common.lpad(date.getMinutes(),2,'0'));
+
+        var date = new Date(response.summary.event_start_date);
+        console.log(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0') + " " + common.lpad(date.getHours(),2,'0') +":"+ common.lpad(date.getMinutes(),2,'0'));
+        $("#event-div-startDate").find("#event-input-startDate").val(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0'));
+        $("#event-div-startDate").find("#timeHour").val(common.lpad(date.getHours(),2,'0'));
+        $("#event-div-startDate").find("#timeMinute").val(common.lpad(date.getMinutes(),2,'0'));
+
+        var date = new Date(response.summary.event_end_date);
+        console.log(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0') + " " + common.lpad(date.getHours(),2,'0') +":"+ common.lpad(date.getMinutes(),2,'0'));
+        $("#event-div-endDate").find("#event-input-endDate").val(date.getFullYear() +'.'+ common.lpad(date.getMonth() + 1,2,'0') +'.'+ common.lpad(date.getDate(),2,'0'));
+        $("#event-div-endDate").find("#timeHour").val(common.lpad(date.getHours(),2,'0'));
+        $("#event-div-endDate").find("#timeMinute").val(common.lpad(date.getMinutes(),2,'0'));
 
         $("#insertBtn").on('click', function(){
             insertBtnClick();
@@ -202,7 +215,7 @@
             }
         });
 
-        $("#policy_slctType").on('change',function (){
+        $("#event_slctType").on('change',function (){
             var val = $(this).val();
             $("#eventTr").hide();
             if(val == "20" || val == "21"){
@@ -232,7 +245,7 @@
             alert("플랫폼을 선택하여 주시기 바랍니다.");
             return false;
         }
-        if($("#policy_slctType").val() == "20" || $("#policy_slctType").val() == "21"){
+        if($("#event_slctType").val() == "20" || $("#event_slctType").val() == "21"){
             if($("#event_no").val() == "" || $("#event_no").val() == null){
                 alert("이벤트 번호를 입력하여 주시기 바랍니다.");
                 return false;
@@ -242,13 +255,22 @@
         var applyDateDiv = $("#apply-div-date");
         var applyDate = $("#apply-input-date").val() + " " + applyDateDiv.find("#timeHour").val() +":"+ applyDateDiv.find("#timeMinute").val() + ":00";
 
+        var eventSDateDiv = $("#event-div-startDate");
+        var eventStartDate = $("#event-input-startDate").val() + " " + eventSDateDiv.find("#timeHour").val() +":"+ eventSDateDiv.find("#timeMinute").val() + ":00";
+        var eventEDateDiv = $("#event-div-endDate");
+        var eventEndDate = $("#event-input-endDate").val() + " " + eventEDateDiv.find("#timeHour").val() +":"+ eventEDateDiv.find("#timeMinute").val() + ":00";
+
         var data = {
             idx : common.isEmpty($("#policyIdx").val()) ? 0 : $("#policyIdx").val()
             , osType : platform
-            , slctType : $("#policy_slctType").val()
+            , slctType : $("#event_slctType").val()
             , title : $("#title").val()
             , desc : $("#editor").summernote('code')
             , applyDate : applyDate
+            , viewYn : Number($("input[name='view_yn']:checked").val())
+            , eventNo : Number($("#event_no").val())
+            , eventStartDate : eventStartDate
+            , eventEndDate : eventEndDate
         };
 
         console.log(data);
@@ -313,17 +335,46 @@
         </tr>
         <tr>
             <th>서비스 구분</th>
-            <td>{{{getCommonCodeSelect slctType 'policy_slctType' 'Y' 'policy_slctType'}}}</td>
-            <th>주요사안<br/>(제목)</th>
+            <td>{{{getCommonCodeSelect slctType 'event_slctType' 'Y' 'event_slctType'}}}</td>
+            <th>제목</th>
             <td colspan="3"><input type="text" class="form-control" id="title" value="{{title}}"> </td>
             <th>반영일자</th>
             <td>
-                <div class="input-group date" id="apply-div-date">
+                <div class="input-group date" id="apply-div-date" style="display: none">
                     <span class="input-group-addon" id="apply-date"><i class="fa fa-calendar"></i></span>
                     <input type="text" class="form-control" name="startDate" id="apply-input-date" style="width:100px; background:white; height: 34px">
                     {{{getCommonCodeSelect 00 'timeHour'}}}
                     <span> : </span>
                     {{{getCommonCodeSelect 00 'timeMinute'}}}
+                </div>
+            </td>
+        </tr>
+        <%--<tr id="eventTr" style="display: none">--%>
+        <tr id="eventTr">
+            <th>이벤트 번호</th>
+            <td><input type="text" class="form-control" id="event_no" value="{{event_no}}"></td>
+            <th>활성화</th>
+            <td>{{{getCommonCodeRadio view_yn 'content_viewOn' 'N' 'view_yn'}}}</td>
+            <th>이벤트 기간</th>
+            <td colspan="3">
+                <div class="col-md-5 no-padding">
+                    <div class="input-group date" id="event-div-startDate">
+                        <span class="input-group-addon" id="event-startDate"><i class="fa fa-calendar"></i></span>
+                        <input type="text" class="form-control" name="startDate" id="event-input-startDate" style="width:100px; background:white; height: 34px">
+                        {{{getCommonCodeSelect 00 'timeHour'}}}
+                        <span> : </span>
+                        {{{getCommonCodeSelect 00 'timeMinute'}}}
+                        <span>&nbsp;&nbsp;&nbsp;~</span>
+                    </div>
+                </div>
+                <div class="col-md-5 no-padding">
+                    <div class="input-group date" id="event-div-endDate">
+                        <span class="input-group-addon" id="event-endDate"><i class="fa fa-calendar"></i></span>
+                        <input type="text" class="form-control" name="startDate" id="event-input-endDate" style="width:100px; background:white; height: 34px">
+                        {{{getCommonCodeSelect 00 'timeHour'}}}
+                        <span> : </span>
+                        {{{getCommonCodeSelect 00 'timeMinute'}}}
+                    </div>
                 </div>
             </td>
         </tr>
@@ -353,7 +404,7 @@
         <thead>
         <tr>
             <th colspan="10" style="background-color: #dce6f2;">
-                <label class="font-bold">[{{{getCommonCodeLabel summary.slctType 'policy_slctType'}}}] </label>
+                <label class="font-bold">[{{{getCommonCodeLabel summary.slctType 'event_slctType'}}}] </label>
                 변경이력
             </th>
         </tr>
@@ -364,6 +415,10 @@
             <th>내용</th>
             <th>등록/수정일시</th>
             <th>등록/수정자</th>
+            <th>이벤트번호</th>
+            <th>활성화</th>
+            <th>이벤트 시작일</th>
+            <th>이벤트 종료일</th>
         </tr>
         </thead>
         <tbody>
@@ -387,6 +442,10 @@
                     {{reg_op_name}}
                 {{/dalbit_if}}
             </td>
+            <td>{{event_no}}</td>
+            <td>{{{getCommonCodeLabel view_yn 'content_viewOn'}}}</td>
+            <td>{{substr event_start_date 0 19}}</td>
+            <td>{{substr event_end_date 0 19}}</td>
         </tr>
         {{/each}}
         </tbody>
