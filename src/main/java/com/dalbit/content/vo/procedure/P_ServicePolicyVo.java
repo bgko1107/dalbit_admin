@@ -14,6 +14,11 @@ public class P_ServicePolicyVo extends PagingVo {
     private int slctType;
     private String searchText;
     private String idxList;
+    private int eventNo;
+    private String eventStartDate;
+    private String eventEndDate;
+    private int viewYn;
+
 
     /* output */
     private int idx;
@@ -30,7 +35,10 @@ public class P_ServicePolicyVo extends PagingVo {
     private String osType;
     private String desc;
     private String applyDate;
-
+    private String event_no;
+    private String view_yn;
+    private String event_start_date;
+    private String event_end_date;
 
     /* summary */
 

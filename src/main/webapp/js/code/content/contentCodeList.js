@@ -44,6 +44,7 @@ var policy_slctType = [
     , new COMMON_CODE('12', '12', '검색')
     , new COMMON_CODE('13', '13', '기타')
     , new COMMON_CODE('20', '20', '이벤트')
+    , new COMMON_CODE('21', '21', '경품소개')
 ];
 
 
