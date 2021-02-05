@@ -637,12 +637,12 @@ public class Pay_CancelService {
                 FailVo failVo = new Gson().fromJson(data, FailVo.class);
                 log.info("=====================================");
                 log.info("[카카오페이(머니)] 취소코드: {}", failVo.getCode());
-                log.info("[카카오페이(머니)] Result Msg: {}", failVo.getExtras().getMethod_result_message());
+//                log.info("[카카오페이(머니)] Result Msg: {}", failVo.getExtras().getMethod_result_message());
                 log.info("=====================================");
 
                 cancelVo.setOrder_id(payCancelKakaoPayVo.getTradeid());
                 cancelVo.setCancel_dt("");
-                cancelVo.setFail_msg(failVo.getExtras().getMethod_result_message());
+                cancelVo.setFail_msg(Integer.toString(failVo.getCode()));
                 cancelVo.setOp_name(MemberVo.getMyMemNo());
                 cancelVo.setCancel_state("f");
 
