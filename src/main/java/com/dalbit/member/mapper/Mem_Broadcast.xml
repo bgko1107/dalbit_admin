@@ -44,7 +44,7 @@
     </insert>
 
     <insert id="setUpdateCodeDefine" parameterType="com.dalbit.member.vo.MemberVo">
-        update rd_data.tbl_code_define set `value` = if(#{type} = 1,'N','Y') where `type`='system_config'
+        update rd_data.tbl_code_define set `value` = if(#{type} = 1,'N','Y') where `type`='system_config' and `order` in ('0','1')
     </insert>
 
 </mapper>
