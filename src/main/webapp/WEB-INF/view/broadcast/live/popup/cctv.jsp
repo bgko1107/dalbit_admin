@@ -64,12 +64,11 @@
     });
 
     var autoRefreshId = '';
+    var minute = 1000 * 60;
     function configAutoRefresh(){
         var refreshTime = $("#_refreshTime").val();
         if(0 < refreshTime){
-            autoRefreshId = setInterval(
-                refreshVideoList
-            , refreshTime * 1000);
+            autoRefreshId = setInterval(refreshVideoList, refreshTime * minute);
         }
     }
 
@@ -209,6 +208,16 @@
 
         var icon = me.find('i._spin');
         icon.toggleClass('rotate');
+
+    });
+
+    $(document).on('change', '#_refreshTime', function(){
+        var me = $(this);
+        var val = me.val();
+        clearInterval(autoRefreshId);
+        if(0 < val){
+            autoRefreshId = setInterval(refreshVideoList, me.val() * minute);
+        }
 
     });
 </script>
