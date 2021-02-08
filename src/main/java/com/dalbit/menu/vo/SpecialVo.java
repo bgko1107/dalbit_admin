@@ -13,6 +13,7 @@ public class SpecialVo extends PagingVo {
     private String searchType;
     private String select_year;
     private String select_month;
+    private int newSearchType;
     
     /* output */
     private int req_idx;

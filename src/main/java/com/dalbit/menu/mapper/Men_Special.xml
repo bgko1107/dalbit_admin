@@ -29,28 +29,55 @@
     </select>
 
     <sql id="reqSpecial">
+
         <if test='txt_search != null and txt_search != ""'>
             <choose>
-                <when test='searchType == "1"'>
-                    and dj.mem_no like concat('%', #{txt_search}, '%')
+                <when test="newSearchType == 1">
+                    and dj.mem_no = #{txt_search}
                 </when>
-                <when test='searchType == "2"'>
-                    and basic.mem_id like concat('%', #{txt_search}, '%')
-                </when>
-                <when test='searchType == "3"'>
+                <when test="newSearchType == 2">
                     and basic.mem_nick like concat('%', #{txt_search}, '%')
                 </when>
-                <when test='searchType == "4"'>
-                    and dj.mem_phone like concat('%', #{txt_search}, '%')
+                <when test="newSearchType == 3">
+                    and basic.mem_name = #{txt_search}
+                </when>
+                <when test="newSearchType == 4">
+                    and basic.mem_phone = #{txt_search}
+                </when>
+                <when test="newSearchType == 5">
+                    and basic.mem_id = #{txt_search}
+                </when>
+                <when test="newSearchType == 6">
+                    and dj.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{txt_search})
                 </when>
                 <otherwise>
-                    and (dj.mem_no like concat('%', #{txt_search}, '%')
-                    or basic.mem_id like concat('%', #{txt_search}, '%')
-                    or basic.mem_nick like concat('%', #{txt_search}, '%')
-                    or dj.mem_phone like concat('%', #{txt_search}, '%'))
+                    and dj.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
                 </otherwise>
             </choose>
         </if>
+
+        <!--<if test='txt_search != null and txt_search != ""'>-->
+            <!--<choose>-->
+                <!--<when test='searchType == "1"'>-->
+                    <!--and dj.mem_no like concat('%', #{txt_search}, '%')-->
+                <!--</when>-->
+                <!--<when test='searchType == "2"'>-->
+                    <!--and basic.mem_id like concat('%', #{txt_search}, '%')-->
+                <!--</when>-->
+                <!--<when test='searchType == "3"'>-->
+                    <!--and basic.mem_nick like concat('%', #{txt_search}, '%')-->
+                <!--</when>-->
+                <!--<when test='searchType == "4"'>-->
+                    <!--and dj.mem_phone like concat('%', #{txt_search}, '%')-->
+                <!--</when>-->
+                <!--<otherwise>-->
+                    <!--and (dj.mem_no like concat('%', #{txt_search}, '%')-->
+                    <!--or basic.mem_id like concat('%', #{txt_search}, '%')-->
+                    <!--or basic.mem_nick like concat('%', #{txt_search}, '%')-->
+                    <!--or dj.mem_phone like concat('%', #{txt_search}, '%'))-->
+                <!--</otherwise>-->
+            <!--</choose>-->
+        <!--</if>-->
     </sql>
 
     <!--<select id="getReqSpecialList" parameterType="com.dalbit.menu.vo.SpecialReqVo" resultType="com.dalbit.menu.vo.SpecialReqVo">
@@ -299,28 +326,55 @@
                 and dj.select_month = #{select_month}
             </if>
         </where>
+
         <if test='txt_search != null and txt_search != ""'>
             <choose>
-                <when test='searchType == "1"'>
-                    and dj.mem_no like concat('%', #{txt_search}, '%')
+                <when test="newSearchType == 1">
+                    and dj.mem_no = #{txt_search}
                 </when>
-                <when test='searchType == "2"'>
-                    and basic.mem_id like concat('%', #{txt_search}, '%')
-                </when>
-                <when test='searchType == "3"'>
+                <when test="newSearchType == 2">
                     and basic.mem_nick like concat('%', #{txt_search}, '%')
                 </when>
-                <when test='searchType == "4"'>
-                    and redj.mem_phone like concat('%', #{txt_search}, '%')
+                <when test="newSearchType == 3">
+                    and basic.mem_name = #{txt_search}
+                </when>
+                <when test="newSearchType == 4">
+                    and basic.mem_phone = #{txt_search}
+                </when>
+                <when test="newSearchType == 5">
+                    and basic.mem_id = #{txt_search}
+                </when>
+                <when test="newSearchType == 6">
+                    and dj.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{txt_search})
                 </when>
                 <otherwise>
-                    and (dj.mem_no like concat('%', #{txt_search}, '%')
-                    or basic.mem_id like concat('%', #{txt_search}, '%')
-                    or basic.mem_nick like concat('%', #{txt_search}, '%')
-                    or redj.mem_phone like concat('%', #{txt_search}, '%'))
+                    and dj.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
                 </otherwise>
             </choose>
         </if>
+
+        <!--<if test='txt_search != null and txt_search != ""'>-->
+            <!--<choose>-->
+                <!--<when test='searchType == "1"'>-->
+                    <!--and dj.mem_no like concat('%', #{txt_search}, '%')-->
+                <!--</when>-->
+                <!--<when test='searchType == "2"'>-->
+                    <!--and basic.mem_id like concat('%', #{txt_search}, '%')-->
+                <!--</when>-->
+                <!--<when test='searchType == "3"'>-->
+                    <!--and basic.mem_nick like concat('%', #{txt_search}, '%')-->
+                <!--</when>-->
+                <!--<when test='searchType == "4"'>-->
+                    <!--and redj.mem_phone like concat('%', #{txt_search}, '%')-->
+                <!--</when>-->
+                <!--<otherwise>-->
+                    <!--and (dj.mem_no like concat('%', #{txt_search}, '%')-->
+                    <!--or basic.mem_id like concat('%', #{txt_search}, '%')-->
+                    <!--or basic.mem_nick like concat('%', #{txt_search}, '%')-->
+                    <!--or redj.mem_phone like concat('%', #{txt_search}, '%'))-->
+                <!--</otherwise>-->
+            <!--</choose>-->
+        <!--</if>-->
         order by `order` asc, dj.reg_date desc
     </sql>
 
@@ -657,8 +711,33 @@
             WHEN list.condition_code3 = 6 THEN list.condition_data3 <![CDATA[<=]]> list.allListenCnt
         END
 
-
         <if test='txt_search != null and txt_search != ""'>
+            <choose>
+                <when test="newSearchType == 1">
+                    and list.mem_no = #{txt_search}
+                </when>
+                <when test="newSearchType == 2">
+                    and list.mem_nick like concat('%', #{txt_search}, '%')
+                </when>
+                <when test="newSearchType == 3">
+                    and list.mem_name = #{txt_search}
+                </when>
+                <when test="newSearchType == 4">
+                    and list.mem_phone = #{txt_search}
+                </when>
+                <when test="newSearchType == 5">
+                    and list.mem_id = #{txt_search}
+                </when>
+                <when test="newSearchType == 6">
+                    and list.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{txt_search})
+                </when>
+                <otherwise>
+                    and list.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                </otherwise>
+            </choose>
+        </if>
+
+        <!--<if test='txt_search != null and txt_search != ""'>
             <choose>
                 <when test='searchType == "1"'>
                     and list.mem_no like concat('%', #{txt_search}, '%')
@@ -681,7 +760,7 @@
                     )
                 </otherwise>
             </choose>
-        </if>
+        </if>-->
     </sql>
 
     <select id="reqAbleSpecialDjList" parameterType="com.dalbit.menu.vo.SpecialReqVo" resultType="com.dalbit.menu.vo.SpecialReqVo">

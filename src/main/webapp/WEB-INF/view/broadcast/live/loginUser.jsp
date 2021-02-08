@@ -53,6 +53,7 @@
             data.searchText = $("#searchText").val();
             data.inner = -1;
             data.broad = 0;
+            data.newSearchType = slctType == 1 ? $("#searchMember").val() : $("#searchBroad").val();
         };
         dtList_info_loginUser = new DalbitDataTable($("#loginUser_tableList"), dtList_data, BroadcastDataTableSource.loginUser);
         dtList_info_loginUser.setPageLength(100);

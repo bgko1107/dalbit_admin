@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 public class SpecialDjManageVo extends PagingVo {
 
+    private int newSearchType;
     private String idx;
     private String title;
     private int notice_idx;

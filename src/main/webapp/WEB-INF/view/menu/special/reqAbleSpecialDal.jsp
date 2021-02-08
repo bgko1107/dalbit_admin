@@ -55,6 +55,7 @@
             data.select_month =  common.substr($("#startDate").val(),5,2);
             data.txt_search = $('#searchText').val();
             data.searchType = $('#searchType').val();
+            data.newSearchType = $("#searchMember").val();
         };
         dtList_info = new DalbitDataTable($("#reqAbleSpecialList"), dtList_info_data, specialDataTableSource.reqAbleSpecialList, $("#searchForm"));
         dtList_info.useCheckBox(false);

@@ -79,6 +79,7 @@
             , searchType: $('#searchType').val()
             , pageStart: specialDjPagingInfo.pageNo
             , pageCnt: specialDjPagingInfo.pageCnt
+            , newSearchType : $("#searchMember").val()
         };
     }
 

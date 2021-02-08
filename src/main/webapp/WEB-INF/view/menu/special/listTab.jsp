@@ -53,6 +53,8 @@
         var tab = me.parent();
 
         var tabIndex = $('#tablist_con li').index(tab);
+
+        $("#searchMemberArea").show();
         if(tabIndex == 0){
 
             specialDjPagingInfo.pageNo = 1;
@@ -60,6 +62,7 @@
         } else if (tabIndex == 1){
             initReq();
         } else if(tabIndex == 2) {
+            $("#searchMemberArea").hide();
             $("#reqManageDetail").empty();
             initManage();
         } else if(tabIndex == 3){

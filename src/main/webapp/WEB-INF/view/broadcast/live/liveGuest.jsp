@@ -53,6 +53,7 @@
             data.orderType = $("select[name='liveGuest']").val();
             data.startDate = $("#onedayDate").val();
             data.slctType = 0;
+            data.newSearchType = slctType == 1 ? $("#searchMember").val() : $("#searchBroad").val();
         };
         dtList_info_guest = new DalbitDataTable($("#guest_tableList"), dtList_data, BroadcastDataTableSource.liveGuestList);
         dtList_info_guest.setPageLength(100);

@@ -8,7 +8,7 @@
 
 <!-- serachBox -->
 <form id="searchForm">
-    <div class="row col-lg-12 form-inline">
+    <div class="col-lg-12 no-padding form-inline">
         <div class="col-md-6 no-padding">
             <div class="widget widget-table searchBoxArea">
                 <table>
@@ -22,7 +22,7 @@
                                 <label for="onedayDate" class="input-group-addon">
                                     <span><i class="fa fa-calendar" id="seldateDateBtn"></i></span>
                                 </label>
-                                <input type="text" class="form-control" id="onedayDate" name="onedayDate" style="width: 110px">
+                                <input type="text" class="form-control" id="onedayDate" name="onedayDate" style="width: 90px">
                             </div>
                             <span id="searchMemberArea" onchange="btSearchClick();"></span>
                             <span id="searchBroadArea" onchange="btSearchClick();" style="display: none"></span>
@@ -71,7 +71,7 @@
 
 <!-- //serachBox -->
 <!-- DATA TABLE -->
-<div class="row col-lg-12 form-inline">
+<div class="col-lg-12 no-padding form-inline">
 
     <!-- DATA TABLE -->
     <ul class="nav nav-tabs nav-tabs-custom-colored mt5">
@@ -215,15 +215,14 @@
             data.room_slctType = -1;
             data.room_searchText = "";
             data.ortStartDate =2;
-            data.newSearchType = slctType == 1 ? $("#searchMember").val() : $("#searchBroad").val();
         }else {                                                              // 방송정보
             data.dj_slctType = -1;
             data.dj_searchText = "";
             data.room_slctType = $("select[name='searchBroad_broad']").val();
             data.room_searchText = tmp_searchText;
             data.ortStartDate =2;
-            data.newSearchType = slctType == 1 ? $("#searchMember").val() : $("#searchBroad").val();
         }
+        data.newSearchType = slctType == 1 ? $("#searchMember").val() : $("#searchBroad").val();
         data.room_liveType = room_liveType;
 
         /*
