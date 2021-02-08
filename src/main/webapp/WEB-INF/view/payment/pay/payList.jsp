@@ -65,11 +65,14 @@
                 </div>
             </c:if>
         </div>
+        <div class="col-md-12 no-padding">
+            <button class="btn btn-default btn-sm print-btn pull-right excelDownBtn" type="button" ><i class="fa fa-print"></i>Excel Down</button>
+        </div>
         <table id="list_info" class="table table-sorting table-hover table-bordered">
             <thead></thead>
             <tbody></tbody>
         </table>
-        <button class="btn btn-default btn-sm print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
+        <button class="btn btn-default btn-sm print-btn pull-right excelDownBtn" type="button" ><i class="fa fa-print"></i>Excel Down</button>
         <!-- // DATA TABLE -->
     </div>
 </div> <!-- //wrapper -->
@@ -243,7 +246,7 @@
         dtList_info_pay.reload(pay_listSummary);
     }
     /*=============엑셀==================*/
-    $('#excelDownBtn').on('click', function(){
+    $('.excelDownBtn').on('click', function(){
         var formElement = document.querySelector("form");
         var formData = new FormData(formElement);
         formData.append("searchText", txt_search);
