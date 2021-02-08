@@ -24,6 +24,8 @@
                                 </label>
                                 <input type="text" class="form-control" id="onedayDate" name="onedayDate" style="width: 110px">
                             </div>
+                            <span id="searchMemberArea" onchange="btSearchClick();"></span>
+                            <span id="searchBroadArea" onchange="btSearchClick();" style="display: none"></span>
                             <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." ></label>
 
                             <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -136,6 +138,9 @@
     $("#liveSort").html(util.getCommonCodeSelect(0, liveSort));
     $("#endSort").html(util.getCommonCodeSelect(0, endSort));
 
+    $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+    $("#searchBroadArea").html(util.getCommonCodeSelect(1, searchBroad));
+
 
     var date = new Date();
     var sDate;
@@ -168,9 +173,13 @@
     });
 
     $('#searchRadio').change(function() {
+        $("#searchMemberArea").hide();
+        $("#searchBroadArea").hide();
         if($('input[name="searchRadio"]:checked').val() == "1"){
+            $("#searchMemberArea").show();
             $("#searchType_broad").html(util.getCommonCodeSelect(-1, searchType_broad));
         }else{
+            $("#searchBroadArea").show();
             $("#searchType_broad").html(util.getCommonCodeSelect(-1, searchBroad_broad));
         }
     });
@@ -206,12 +215,14 @@
             data.room_slctType = -1;
             data.room_searchText = "";
             data.ortStartDate =2;
+            data.newSearchType = slctType == 1 ? $("#searchMember").val() : $("#searchBroad").val();
         }else {                                                              // 방송정보
             data.dj_slctType = -1;
             data.dj_searchText = "";
             data.room_slctType = $("select[name='searchBroad_broad']").val();
             data.room_searchText = tmp_searchText;
             data.ortStartDate =2;
+            data.newSearchType = slctType == 1 ? $("#searchMember").val() : $("#searchBroad").val();
         }
         data.room_liveType = room_liveType;
 
@@ -310,11 +321,7 @@
             };
             var html = templateScript(data);
             $("#live_summaryArea").html(html);
-
-            var data = {};
-            util.getAjaxData("inspection", "/rest/member/broadcast/inspection/check",data, fn_inspection_check_success);
         }
-
     }
 
     function fn_inspection_check_success(dst_id, response){
@@ -381,6 +388,10 @@
         var data = {};
 
         util.getAjaxData("livePageTabCount", "/rest/broadcast/broadcast/tabCount",data, tabCount_success);
+
+        var data = {};
+
+        util.getAjaxData("inspection", "/rest/member/broadcast/inspection/check",data, fn_inspection_check_success);
     }
 
     function tabCount_success(dst_id, response){
@@ -592,6 +603,10 @@
         icon.toggleClass('rotate');
 
     });
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
 </script>
 
 <script id="live_tableSummary" type="text/x-handlebars-template">
