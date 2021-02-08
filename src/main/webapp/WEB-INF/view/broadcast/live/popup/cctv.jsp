@@ -26,6 +26,11 @@
                         <option value="30">30분</option>
                         <option value="0">안함</option>
                     </select>
+                    페이징 갯수
+                    <select class="form-control searchType" id="_pageCnt">
+                        <option value="24">24개</option>
+                        <option value="36">36개</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -38,7 +43,7 @@
 <script src="/js/webrtc_wowza_play.js"></script>
 <script type="text/javascript">
 
-    var videoPagingInfo= new PAGING_INFO(0, 1, 20);
+    var videoPagingInfo= new PAGING_INFO(0, 1, $("#_pageCnt").val());
 
     var date = new Date();
     var sDate;
@@ -212,13 +217,17 @@
     });
 
     $(document).on('change', '#_refreshTime', function(){
-        var me = $(this);
-        var val = me.val();
+        console.log('change');
+        var val = $("#_refreshTime").val();
         clearInterval(autoRefreshId);
         if(0 < val){
-            autoRefreshId = setInterval(refreshVideoList, me.val() * minute);
+            autoRefreshId = setInterval(refreshVideoList, val * minute);
         }
 
+    });
+
+    $(document).on('change', '#_pageCnt', function(){
+        refreshVideoList()
     });
 </script>
 
@@ -280,8 +289,8 @@
 <script id="tmp_videoSelectFrm" type="text/x-handlebars-template">
 {{#each this.data as |data|}}
     {{^equal data.image_path ''}}
-        <div class="item col-md-2 col-sm-2 mb15" style="padding-bottom: 15px;padding-right: 3px;padding-left: 3px">
-            <div>
+        <div class="item col-md-1 col-sm-1 mb15" style="padding-bottom: 15px;padding-right: 3px;padding-left: 3px">
+            <div style="height:100px;">
                 <ul class="list-unstyled">
                     <li>
                         <strong>제목:</strong> <a href="javascript://" class="_openVideoPlayerPop" data-roomno="{{data.room_no}}">{{{roomNoLink data.title data.room_no}}}</a>
