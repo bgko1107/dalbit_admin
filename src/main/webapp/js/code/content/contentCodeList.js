@@ -48,7 +48,7 @@ var policy_slctType = [
 var event_slctType = [
     new COMMON_CODE(null, 'slctType', '이벤트 내용 구분')
     , new COMMON_CODE('-1', '-1', '서비스구분(전체)')
-    , new COMMON_CODE('20', '20', '이벤트')
+    , new COMMON_CODE('20', '20', '유의사항')
     , new COMMON_CODE('21', '21', '경품소개')
 ];
 
