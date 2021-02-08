@@ -100,6 +100,13 @@
         $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
 
         setDayButton();
+
+        $('input[id="searchText"]').keydown(function(e) {
+            if (e.keyCode === 13) {
+                $("#bt_search").click();
+            };
+        });
+
     });
 
     function setRangeDate(displayDate, startDate, endDate){

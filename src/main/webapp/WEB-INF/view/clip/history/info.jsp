@@ -31,7 +31,7 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
-
+                                    <span id="searchClipArea" onchange="btSearchClick();"></span>
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                     <a href="javascript://" class="_prevSearch">[이전]</a>
@@ -74,6 +74,7 @@
     $(function(){
         slctType = 99;
         $("#isChoiceDateArea").append(util.getCommonCodeRadio(-1, clip_isChoiceDate));
+        $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchClip));
 
         dateType();
         $('input[id="searchText"]').keydown(function() {
@@ -107,5 +108,9 @@
     $(document).on('click', '#search_testId', function(){
         $("#bt_search").click();
     });
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
 
 </script>

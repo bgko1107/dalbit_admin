@@ -39,6 +39,7 @@
     function initDataTable_clipHistoryRemove() {
         //=---------- Main DataTable ----------
         var dtList_info_data = function (data) {
+            data.newSearchType = $("#searchClip").val();
         };
 
         dtList_info = new DalbitDataTable($("#clip_history_remove_list_info"), dtList_info_data, ClipHistoryDataTableSource.removeList, $("#searchForm"));

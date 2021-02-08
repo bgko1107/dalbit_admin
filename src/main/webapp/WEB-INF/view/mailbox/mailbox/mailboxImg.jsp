@@ -51,6 +51,7 @@
             , startDate : $("#startDate").val()
             , endDate : $("#endDate").val()
             , slctType : $("#slctType").val()
+            , 'newSearchType' : $("#searchMail").val()
         };
 
         console.log(data);

@@ -45,7 +45,8 @@
     function getRecommendList(){
         var data = {
             recDate : $("#startDate").val()
-            ,searchText : $("#searchText").val()
+            , searchText : $("#searchText").val()
+            , newSearchType : $("#searchClip").val()
         };
 
         console.log(data);

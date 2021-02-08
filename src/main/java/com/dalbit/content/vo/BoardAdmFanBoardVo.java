@@ -21,6 +21,7 @@ public class BoardAdmFanBoardVo extends PagingVo {
     private int isWithdarwal;           // 탈퇴회원모아보기 체크 여부
     private int fanBoardOwner;          // 팬보드주인(전체)
     private int isMemblock;          // 팬보드주인(전체)
+    private int newSearchType;
 
     /* output */
     private int idx;                    // 게시글 번호

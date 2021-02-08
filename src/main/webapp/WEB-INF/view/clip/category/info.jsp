@@ -44,6 +44,7 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
+                                    <span id="searchClipArea" onchange="btSearchClick();"></span>
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
 
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -87,6 +88,8 @@
     var tabId = 'tab_new';
 
     $(function(){
+        $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchClip));
+
         // tab_id 이동
         if(!common.isEmpty(tabMove)){
             if(tabMove == 2){
@@ -241,6 +244,10 @@
 
             $('#clipReplyModal').modal("show");
         }
+    }
+
+    function btSearchClick(){
+        $("#bt_search").click();
     }
 
 

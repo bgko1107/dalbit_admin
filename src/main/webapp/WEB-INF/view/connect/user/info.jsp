@@ -101,6 +101,13 @@
 
         //현재 접속자 통계 현황
         getLoginLiveInfo();
+
+
+        $('#searchText').on('keydown', function(e) {
+            if (e.keyCode === 13) {
+                $("#bt_search").click();
+            };
+        });
     });
 
     function getLoginLiveInfo(){

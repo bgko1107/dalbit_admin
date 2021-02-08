@@ -76,6 +76,7 @@
         $("input:radio[name='isChoiceDate']:radio[value='1']").prop('checked', true);  // 날짜 전체, 선택 여부
 
         $("#isChoiceDateArea").hide();
+        $("#searchClipArea").show();
         if(tabId == 'tab_all'){         //클립 관리 (전체)
             slctType = 99;
             $("input:radio[name='isChoiceDate']:radio[value='-1']").prop('checked', true);  // 날짜 전체, 선택 여부
@@ -122,6 +123,7 @@
             $("._todaySearch").show();
             $("._nextSearch").show();
             $('#searchText').hide();
+            $("#searchClipArea").hide();
             initClipHistory();
             $("#page-wrapper").css("height", "90px");
         }

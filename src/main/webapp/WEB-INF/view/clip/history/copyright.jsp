@@ -60,6 +60,7 @@
             , inner : $('input[name="search_testId"]').is(":checked") ? "0" : "1"
             , pageNo : copyrightPagingInfo.pageNo
             , pageCnt : copyrightPagingInfo.pageCnt
+            , newSearchType : $("#searchClip").val()
         }
         util.getAjaxData("getHistoryCopyright", "/rest/clip/history/copyright/list", data, function fn_getHistoryCopyright_success(dst_id, response) {
             var template = $('#tmp_clipCopyrightList').html();

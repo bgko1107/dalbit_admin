@@ -31,7 +31,7 @@
 
                                 <%--<input name="startDate" id="startDate">--%>
                                 <%--<input name="endDate" id="endDate" />--%>
-
+                                <span id="searchMailArea" onchange="btSearchClick();"></span>
                                 <label><input type="text" class="form-control" id="txt_search" placeholder="검색할 정보를 입력하세요"></label>
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                 <a href="javascript://" class="_prevSearch">[이전]</a>
@@ -60,6 +60,8 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
+        $("#searchMailArea").html(util.getCommonCodeSelect(1, searchMail));
+
         slctType = 0;
         dateType();
     });
@@ -75,6 +77,11 @@
             mailboxImgPagingInfo = pagingInfo;
             mailboxImgList(pagingInfo.pageNo);
         }
+    }
+
+
+    function btSearchClick(){
+        $("#bt_search").click();
     }
 
     // thumbnail 명칭 겹쳐서 thumbnailImg 로 세팅

@@ -21,6 +21,7 @@ public class ClipHistoryListenVo extends PagingVo {
     private String targetMemNo;
     private String targetClipNo;
     private int searchOsType = -1;
+    private int newSearchType;
 
     /* output */
     private String listenDate;

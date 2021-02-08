@@ -17,6 +17,7 @@ public class ClipHistoryMemberVo extends PagingVo {
     private int slctType;
     private int isChoiceDate;
     private int pageNo;
+    private int newSearchType;
 
     /* output */
     private int insertCnt;

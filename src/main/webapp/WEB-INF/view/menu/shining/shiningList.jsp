@@ -66,6 +66,7 @@
             , searchText: $('#searchText').val()
             , pageStart: shiningDjPagingInfo.pageNo
             , pageCnt: shiningDjPagingInfo.pageCnt
+            , newSearchType : $("#searchMember").val()
         };
     }
 

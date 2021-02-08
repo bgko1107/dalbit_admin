@@ -21,7 +21,6 @@ public class Mon_ItemInputVo extends PagingVo {
     private int orderType;
     private int pageNo;
 
-
     private String searchText;
 //    private int searchType;
     private int autoType;
