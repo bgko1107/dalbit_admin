@@ -26,5 +26,6 @@ public class P_ClipCopyrightOutputVo extends BaseVo {
     private int regCnt;         // 등록된 클립 총 수
     private int state;          // 상태
     private int hide;           // 숨기기 상태
+    private int newSearchType;
 
 }

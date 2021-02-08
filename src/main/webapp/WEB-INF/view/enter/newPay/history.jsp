@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <a id='historyExcel' type='button' class="btn btn-default print-btn pull-right" download="" href="#" onclick="return ExcellentExport.excel(this, 'divHisroty', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
+        <a id='historyExcel' type='button' class="btn btn-default print-btn pull-right" download="" href="#" onclick="return ExcellentExport.excel(this, 'divHisroty', 'Sheet1');"><i class="fa fa-print"></i>▲ 종합현황 Excel Down</a>
 
         <div class="top-left pull-left dataTable-div col-md-6 no-padding">
             <span class="_searchDate"></span><br/>
@@ -38,15 +38,15 @@
             <label id="payInnerArea" onchange="sel_change_pay();" style="border: 1px solid #632beb"></label>
         </div>
 
-        <div class="col-md-4 no-padding pull-right mb5">
+        <div class="col-md-12 no-padding pull-right mb5">
             <div class="no-padding pull-right" style="width: 227px">
                 <span id="pay_summaryArea2"></span>
             </div>
             <div class="no-padding mr10 pull-right" style="width: 227px">
                 <span id="pay_summaryArea"></span>
             </div>
+            <button class="btn btn-default print-btn pull-right historyExcelDown" type="button"><i class="fa fa-print"></i>▼ 내역 Excel Down</button>
         </div>
-
         <table class="table table-bordered" id="list_info">
             <thead>
             </thead>
@@ -56,7 +56,7 @@
     </div>
     <div class="widget-footer">
         <span>
-            <button class="btn btn-default print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
+            <button class="btn btn-default print-btn pull-right historyExcelDown" type="button"><i class="fa fa-print"></i>▲ 내역 Excel Down</button>
         </span>
     </div>
 </div>
@@ -251,15 +251,16 @@
     }
 
     /*=============엑셀==================*/
-    $('#excelDownBtn').on('click', function(){
+    $('.historyExcelDown').on('click', function(){
         var formElement = document.querySelector("form");
         var formData = new FormData(formElement);
+
         formData.append("searchText", "");
         formData.append("period", 0);
         formData.append("sDate", sDate);
         formData.append("eDate", eDate);
         formData.append("ostype", -1);
-        formData.append("searchPayStatus", -1);
+        formData.append("searchPayStatus", 1);
         formData.append("innerType", -1);
         formData.append("payWay", "all");
         formData.append("memberDataType", 99);

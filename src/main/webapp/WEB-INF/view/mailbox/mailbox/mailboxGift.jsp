@@ -55,6 +55,7 @@
             , 'searchText' : txt_search
             , 'startDate' : $("#startDate").val()
             , 'endDate' : $("#endDate").val()
+            , 'newSearchType' : $("#searchMail").val()
         };
 
         util.getAjaxData("mailboxGift", "/rest/content/boardAdm/mailbox/gift", data, fn_success_mailboxGift);

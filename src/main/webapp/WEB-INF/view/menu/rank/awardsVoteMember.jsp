@@ -25,6 +25,7 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
+                                    <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." ></label>
 
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -75,6 +76,8 @@
     listPagingInfo = new PAGING_INFO(0, 1, 50);
 
     $(function(){
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+
         slctType = 3;
         dateType();
     });
@@ -86,6 +89,7 @@
             , startDate : $("#startDate").val()
             , endDate : $("#endDate").val()
             , searchText : $("#searchText").val()
+            , newSearchType : $("#searchMember").val()
         };
         util.getAjaxData("addDjPoint", "/rest/menu/rank/awards/vote/member", data, fn_succ_list);
     }
@@ -122,6 +126,10 @@
     function handlebarsPaging(targetId, pagingInfo){
         listPagingInfo = pagingInfo;
         $('#bt_search').click();
+    }
+
+    function btSearchClick(){
+        $("#bt_search").click();
     }
 
     // $('#memSearch').on('click', function() {

@@ -10,6 +10,7 @@ public class ShiningVo extends PagingVo {
 
     /* input */
     private String checkDate;
+    private int newSearchType;
     private int pageNo;
 
     private String mem_no;

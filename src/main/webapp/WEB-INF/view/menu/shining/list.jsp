@@ -32,7 +32,7 @@
                                         <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                         <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                         <%--<input name="endDate" id="endDate" style="width: 100px">--%>
-
+                                        <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                         <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
 
                                         <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -64,6 +64,8 @@
 <script type="text/javascript">
 
     $(function() {
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+
         slctType = 1;
         setDayButton();
     });
@@ -82,5 +84,9 @@
             $("#bt_search").click();
         };
     });
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
 
 </script>

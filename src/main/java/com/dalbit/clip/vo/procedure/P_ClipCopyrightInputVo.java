@@ -14,5 +14,6 @@ public class P_ClipCopyrightInputVo extends PagingVo {
     private int orderType;      // 정렬구분 (1:청취순, 2:등록일자순, 3:등록개수순)
     private int inner;          // 테스트 아이디 포함 여부(0:미포함, 1: 포함)
     private int pageNo;
+    private int newSearchType;
 
 }

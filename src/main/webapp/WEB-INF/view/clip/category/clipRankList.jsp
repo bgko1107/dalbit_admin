@@ -65,6 +65,7 @@
             , slctType : $('input:radio[name="rankType"]:checked').val()
             , searchText : $("#searchText").val()
             , searchType : -1
+            , newSearchType : $("#searchClip").val();
         };
 
         console.log(data);
