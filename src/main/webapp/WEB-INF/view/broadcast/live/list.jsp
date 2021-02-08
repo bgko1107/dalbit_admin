@@ -97,6 +97,7 @@
                     <span id="liveSort" onchange="sortChange();"></span>
                     <span id="endSort" style="display: none" onchange="sortChange();"></span>
                     <button class="btn btn-green btn-sm print-btn" type="button" id="videoList" onclick="videoList_click();" style="background-color: #8556f6;color: white;">영상 모아보기</button>
+                    <button class="btn btn-green btn-sm print-btn" type="button" id="videoList" onclick="videoListPop_click();" style="background-color: #8556f6;color: white;">영상 모아보기 팝업</button>
                 <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이상훈|', principal.getUserInfo().getName())}">
                     <button class="btn btn-danger btn-sm print-btn pull-right" type="button" id="inspection" onclick="inspection_click();">임시점검</button>
                 </c:if>
@@ -454,6 +455,11 @@
         }
         $('#bt_search').click();
     }
+
+    function videoListPop_click(){
+        util.windowOpen("/broadcast/live/popup/cctv");
+    }
+
     function videoList(pagingNo) {
         if(!common.isEmpty(pagingNo)){
             videoPagingInfo.pageNo = pagingNo;
@@ -685,7 +691,7 @@
                         {{{roomNoLink data.title data.room_no}}}
                     </h4>
                     <ul class="list-unstyled">
-                        <li><strong>작성일시:</strong> {{substr data.start_date 0 19}}</li>
+                        <li><strong>방송시작일시:</strong> {{substr data.start_date 0 19}}</li>
                         <li><strong>Nick:</strong> {{replaceHtml data.dj_nickname}}</li>
                         <li><strong>No:</strong> <a href="javascript://" class="_openMemberPop" data-memno="{{data.dj_mem_no}}" >{{data.dj_mem_no}} </a> </li>
                         <li class="sexType"><strong>Sex:</strong> {{{sexIcon data.dj_memSex}}}</li>
