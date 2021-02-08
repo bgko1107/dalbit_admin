@@ -531,7 +531,7 @@
 
         var adapter;
         let info = {
-            wsUrl : 'wss://devwv.dalbitlive.com/webrtc-session.json',
+            wsUrl : WOWZA_VIDEO_SERVER_URL,
             applicationName : 'edge',
             streamName : WOWZA_PREFIX+me.data('roomno')+WOWZA_SUFFIX
         };
