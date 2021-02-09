@@ -86,7 +86,7 @@
             <div class="widget widget-table">
                 <div class="col-md-12">
                     <br/>
-                    <label id="liveTitle">${principal.getUserInfo()}
+                    <label id="liveTitle">
                         ㆍ실시간 생방송 시작된 방송이 최상위 누적되어 보여집니다.<br/>
                         ㆍDJ가 방송을 완료한 경우 해당 방송은 리스트에서 삭제됩니다.<br/>
                         ㆍ실시간 방송 랭킹 점수 산출 방법<br/>
