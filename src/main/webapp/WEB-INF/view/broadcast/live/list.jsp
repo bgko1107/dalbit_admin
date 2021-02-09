@@ -198,21 +198,22 @@
     $('#bt_search').on('click', function(){
         livePageTabCount();
 
+        console.log(liveState);
         if(liveState == 1 || liveState == 2){
             getSearch();
         }else if(liveState == 3){
-            getListenUserList_tabClick();
+            getListenUserList_tabClick(liveState);
         }else if(liveState == 4){
-            getLoginUserList_tabClick();
+            getLoginUserList_tabClick(liveState);
         }else if(liveState == 5){
-            getliveGuest_tabClick();
+            getliveGuest_tabClick(liveState);
         }
     });
 
     $("#seldate").hide();
 
+    var slctType = $('input[name="searchRadio"]:checked').val();
     var dtList_info_data = function (data) {
-        var slctType = $('input[name="searchRadio"]:checked').val();
         data.slctType = slctType;
         if(slctType == "1"){      // DJ정보
             data.dj_slctType = $("select[name='searchType_broad']").val();
@@ -281,6 +282,7 @@
 
 
     function liveList(tmp){
+        $("#searchRadio").show();
         liveState = tmp;
         if(tmp == 1){
             $("#liveTitle").html("ㆍ실시간 생방송 시작된 방송이 최상위 누적되어 보여집니다.<br/>ㆍDJ가 방송을 완료한 경우 해당 방송은 리스트에서 삭제됩니다.");
@@ -511,6 +513,7 @@
         data.endDate = $("#onedayDate").val() + ' 23:59:59';
         data.pageNo = videoPagingInfo.pageNo;
         data.pageCnt = videoPagingInfo.pageCnt;
+        data.newSearchType = slctType == 1 ? $("#searchMember").val() : $("#searchBroad").val();
 
         console.log(data);
         util.getAjaxData("video", "/rest/broadcast/broadcast/video/list", data, fn_video_success, fn_fail);
