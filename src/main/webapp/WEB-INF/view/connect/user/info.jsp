@@ -134,6 +134,7 @@
 
     $(document).on('click', '._ipSearch', function(){
        $("#searchText").val($(this).text());
+        $("#searchMember").val(6);
        $("#bt_search").click();
     });
 

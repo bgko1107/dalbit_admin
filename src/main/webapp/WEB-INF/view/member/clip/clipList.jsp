@@ -11,13 +11,43 @@
             <%--<div class="pull-left" style="width:30px; height:30px; background-color: #dae3f3; border:1px solid #cccccc;"></div>--%>
             <%--<div class="pull-left pl10 pt5" style="width:105px; height:30px; border:1px solid #cccccc; border-left-width: 0px;">테스트 아이디</div>--%>
         <%--</span>--%>
+
         <span id="clip_summaryArea"></span>
-        <table id="clip_history_list_info" class="table table-sorting table-hover table-bordered">
-            <thead>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <div id="clip_area">
+            <table id="clip_history_list_info" class="table table-sorting table-hover table-bordered">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div id="clip_listen_area">
+            <table id="clip_history_list_info2" class="table table-sorting table-hover table-bordered">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="clip_good_area">
+            <table id="clip_history_list_info3" class="table table-sorting table-hover table-bordered">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="clip_gift_area">
+            <table id="clip_history_list_info4" class="table table-sorting table-hover table-bordered">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
     </div>
     <div class="widget-footer">
         <span>
@@ -48,6 +78,7 @@
 <script type="text/javascript">
     var beforeOrderByType = 0;
     var beforeClipSubjectType = -1;
+    var clipTabType="";
 
     $(document).on('change', "#clipSubjectType, #clipOrderByType", function(){
         beforeOrderByType = $("#clipOrderByType").val();
@@ -73,13 +104,14 @@
     }
 
     function initDataTable_clipHistory(tmp) {
+        clipTabType = tmp;
+        $("#clip_area").hide();
+        $("#clip_listen_area").hide();
+        $("#clip_good_area").hide();
+        $("#clip_gift_area").hide();
         if(common.isEmpty(memNo)){
             return;
         }
-
-        if(tmp.indexOf("_") > 0){ tmp = tmp.split("_"); tmp = tmp[1]; }
-        var source = ClipHistoryDataTableSource.list;
-
         //=---------- Main DataTable ----------
         var dtList_info_detail_data = function (data) {
             data.orderByType = Number($("#clipOrderByType").val());
@@ -87,7 +119,23 @@
             data.targetMemNo = memNo;
         };
 
-        dtList_info_detail = new DalbitDataTable($("#clip_history_list_info"), dtList_info_detail_data, source);
+        if(tmp == "tab_clip" || tmp == "tab_clipList"){
+            $("#clip_area").show();
+             dtList_info_detail = new DalbitDataTable($("#clip_history_list_info"), dtList_info_detail_data, ClipHistoryDataTableSource.list);
+        }else if(tmp == "tab_clipList_listen") {
+            $("#clip_listen_area").show();
+            dtList_info_detail = new DalbitDataTable($("#clip_history_list_info2"), dtList_info_detail_data, ClipHistoryDataTableSource.list_listen);
+        }else if(tmp == "tab_clipList_good"){
+            $("#clip_good_area").show();
+            dtList_info_detail = new DalbitDataTable($("#clip_history_list_info3"), dtList_info_detail_data, ClipHistoryDataTableSource.list_good);
+        }else if(tmp == "tab_clipList_gift"){
+            $("#clip_gift_area").show();
+            dtList_info_detail = new DalbitDataTable($("#clip_history_list_info4"), dtList_info_detail_data, ClipHistoryDataTableSource.list_gift);
+        }
+
+
+        console.log(dtList_info_detail);
+
         dtList_info_detail.useCheckBox(false);
         dtList_info_detail.useIndex(true);
         dtList_info_detail.setPageLength(50);
@@ -316,7 +364,16 @@
 
 
     function clip_tableSummary_table(dst_id, response){
-        var template = $("#clip_tableSummary").html();
+        if(clipTabType == "tab_clip" || clipTabType == "tab_clipList"){
+            var template = $("#clip_tableSummary").html();
+        }else if(clipTabType == "tab_clipList_listen"){
+            var template = $("#clip_listen_tableSummary").html();
+        }else if(clipTabType == "tab_clipList_good"){
+            var template = $("#clip_good_tableSummary").html();
+        }else if(clipTabType == "tab_clipList_gift"){
+            var template = $("#clip_gift_tableSummary").html();
+
+        }
         var templateScript = Handlebars.compile(template);
         var data = {
             content : response.data
@@ -340,7 +397,7 @@
 
 
 <script id="clip_tableSummary" type="text/x-handlebars-template">
-    <table class="table table-bordered table-summary pull-right" id="declarationSummary" style="width: 500px;">
+    <table class="table table-bordered table-summary pull-right no-margin" style="width: 500px;">
         <thead>
         <tr>
             <th colspan="5" class="_bgColor" data-bgcolor="#8faadc">총 합</th>
@@ -359,6 +416,56 @@
             <td>{{addComma content.countGift}} 건</td>
             <td>{{addComma content.countByeol}} 별</td>
             <td>{{addComma content.countGood}} 개</td>
+        </tbody>
+    </table>
+</script>
+
+
+<script id="clip_listen_tableSummary" type="text/x-handlebars-template">
+    <table class="table table-bordered table-summary pull-right no-margin" style="width: 190px;">
+        <thead>
+        <tr>
+            <th colspan="2" class="_bgColor" data-bgcolor="#8faadc">총 합</th>
+        </tr>
+        <tr>
+            <th class="_bgColor" data-bgcolor="#dae3f3">청취자</th>
+            <th class="_bgColor" data-bgcolor="#dae3f3">청취수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td>{{addComma content.listenerCnt}} 명</td>
+        <td>{{addComma content.countPlay}} 건</td>
+        </tbody>
+    </table>
+</script>
+
+<script id="clip_good_tableSummary" type="text/x-handlebars-template">
+    <table class="table table-bordered table-summary pull-right no-margin" style="width: 100px;">
+        <thead>
+        <tr>
+            <th class="_bgColor" data-bgcolor="#dae3f3">좋아요</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td>{{addComma content.countGood}} 개</td>
+        </tbody>
+    </table>
+</script>
+
+<script id="clip_gift_tableSummary" type="text/x-handlebars-template">
+    <table class="table table-bordered table-summary pull-right no-margin" style="width: 190px;">
+        <thead>
+        <tr>
+            <th colspan="2" class="_bgColor" data-bgcolor="#8faadc">총 합</th>
+        </tr>
+        <tr>
+            <th class="_bgColor" data-bgcolor="#dae3f3">선물 건</th>
+            <th class="_bgColor" data-bgcolor="#dae3f3">받은 별</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td>{{addComma content.countGift}} 건</td>
+        <td>{{addComma content.countByeol}} 별</td>
         </tbody>
     </table>
 </script>

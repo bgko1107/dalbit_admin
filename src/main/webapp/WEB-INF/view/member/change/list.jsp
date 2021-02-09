@@ -101,6 +101,7 @@
             , autoType : $("#changeAutoSettingFilter").val()
             , startDate : "2020-01-01"
             , endDate : "2999-12-31"
+            , newSearchType : 1
         };
     }
 
