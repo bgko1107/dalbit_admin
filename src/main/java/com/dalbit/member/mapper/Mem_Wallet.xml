@@ -686,13 +686,13 @@
                      ,ABS( (a.money_new - a.money_old) + (a.ruby_new - a.ruby_old) ) AS ruby
                      ,( a.money_new + a.ruby_new ) AS ruby_new
                      , b.room_no
-                     , target_mem_no AS mem_no
-                     , (SELECT `level` FROM rd_data.tb_member_level WHERE mem_no = target_mem_no) AS `level`
-                     , (SELECT `grade` FROM rd_data.tb_member_level WHERE mem_no = target_mem_no) AS `grade`
-                     , (SELECT mem_userid FROM rd_data.tb_member_basic WHERE mem_no = target_mem_no) AS userId
-                     , (SELECT mem_nick FROM rd_data.tb_member_basic WHERE mem_no = target_mem_no) AS nickName
-                     , (SELECT mem_sex FROM rd_data.tb_member_basic WHERE mem_no = target_mem_no) AS mem_sex
-                     , (SELECT mem_birth_year FROM rd_data.tb_member_basic WHERE mem_no = target_mem_no) AS mem_birth_year
+                     , (case when if(a.mem_no = #{mem_no}, 'gift','') = 'gift' and if(a.target_mem_no=#{mem_no},'recv','') = '' THEN a.target_mem_no WHEN if(a.mem_no = #{mem_no}, 'gift','') = '' and if(a.target_mem_no=#{mem_no},'recv','') = 'recv' THEN a.mem_no else a.mem_no END) AS mem_no
+                     , (SELECT `level` FROM rd_data.tb_member_level WHERE mem_no = (case when if(a.mem_no = #{mem_no}, 'gift','') = 'gift' and if(a.target_mem_no=#{mem_no},'recv','') = '' THEN a.target_mem_no WHEN if(a.mem_no = #{mem_no}, 'gift','') = '' and if(a.target_mem_no=#{mem_no},'recv','') = 'recv' THEN a.mem_no else a.mem_no END)) AS `level`
+                     , (SELECT `grade` FROM rd_data.tb_member_level WHERE mem_no = (case when if(a.mem_no = #{mem_no}, 'gift','') = 'gift' and if(a.target_mem_no=#{mem_no},'recv','') = '' THEN a.target_mem_no WHEN if(a.mem_no = #{mem_no}, 'gift','') = '' and if(a.target_mem_no=#{mem_no},'recv','') = 'recv' THEN a.mem_no else a.mem_no END)) AS `grade`
+                     , (SELECT mem_userid FROM rd_data.tb_member_basic WHERE mem_no = (case when if(a.mem_no = #{mem_no}, 'gift','') = 'gift' and if(a.target_mem_no=#{mem_no},'recv','') = '' THEN a.target_mem_no WHEN if(a.mem_no = #{mem_no}, 'gift','') = '' and if(a.target_mem_no=#{mem_no},'recv','') = 'recv' THEN a.mem_no else a.mem_no END)) AS userId
+                     , (SELECT mem_nick FROM rd_data.tb_member_basic WHERE mem_no = (case when if(a.mem_no = #{mem_no}, 'gift','') = 'gift' and if(a.target_mem_no=#{mem_no},'recv','') = '' THEN a.target_mem_no WHEN if(a.mem_no = #{mem_no}, 'gift','') = '' and if(a.target_mem_no=#{mem_no},'recv','') = 'recv' THEN a.mem_no else a.mem_no END)) AS nickName
+                     , (SELECT mem_sex FROM rd_data.tb_member_basic WHERE mem_no = (case when if(a.mem_no = #{mem_no}, 'gift','') = 'gift' and if(a.target_mem_no=#{mem_no},'recv','') = '' THEN a.target_mem_no WHEN if(a.mem_no = #{mem_no}, 'gift','') = '' and if(a.target_mem_no=#{mem_no},'recv','') = 'recv' THEN a.mem_no else a.mem_no END)) AS mem_sex
+                     , (SELECT mem_birth_year FROM rd_data.tb_member_basic WHERE mem_no = (case when if(a.mem_no = #{mem_no}, 'gift','') = 'gift' and if(a.target_mem_no=#{mem_no},'recv','') = '' THEN a.target_mem_no WHEN if(a.mem_no = #{mem_no}, 'gift','') = '' and if(a.target_mem_no=#{mem_no},'recv','') = 'recv' THEN a.mem_no else a.mem_no END)) AS mem_birth_year
                      , a.last_upd_date
                      , b.item_code
                      , b.item_cnt
