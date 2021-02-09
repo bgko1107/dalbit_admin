@@ -6,8 +6,11 @@
 <!-- 로그인 현황 > 총계 -->
 <table class="table table-bordered _tableHeight no-margin" data-height="23px">
     <colgroup>
-        <col width="11%"/><col width="11%"/><col width="11%"/><col width="11%"/>
-        <col width="11%"/><col width="11%"/><col width="11%"/><col width="11%"/>
+        <col width="9%"/><col width="9%"/><col width="9%"/><col width="9%"/>
+        <col width="9%"/><col width="9%"/><col width="9%"/><col width="9%"/>
+        <col width="7%"/>
+        <col width="7%"/>
+        <col width="7%"/>
     </colgroup>
     <thead>
     <tr>
@@ -20,7 +23,10 @@
         <th>30~34세</th>
         <th>35~39세</th>
         <th>40대 이상</th>
-        <th>합계</th>
+        <th style="border-right:solid 1px black;">합계</th>
+        <th>AOS</th>
+        <th>IOS</th>
+        <th>PC</th>
     </tr>
     </thead>
     <tbody id="userTotalTableBody"></tbody>
@@ -70,7 +76,10 @@
         <td style="color: blue">{{addComma age3034_male_cnt}}</td>
         <td style="color: blue">{{addComma age3539_male_cnt}}</td>
         <td style="color: blue">{{addComma ageEtc_male_cnt}}</td>
-        <td style="color: blue">{{addComma total_male_cnt}}</td>
+        <td style="color: blue;border-right:solid 1px black;">{{addComma total_male_cnt}}</td>
+        <td style="color: blue;">{{addComma aos_m_cnt}}</td>
+        <td style="color: blue;">{{addComma ios_m_cnt}}</td>
+        <td style="color: blue;">{{addComma pc_m_cnt}}</td>
     </tr>
     <tr>
        <!-- <th class="_noBorder" style="width: 5px; border-left: hidden"></th>-->
@@ -82,7 +91,10 @@
         <td style="color: red">{{addComma age3034_female_cnt}}</td>
         <td style="color: red">{{addComma age3539_female_cnt}}</td>
         <td style="color: red">{{addComma ageEtc_female_cnt}}</td>
-        <td style="color: red">{{addComma total_female_cnt}}</td>
+        <td style="color: red;border-right:solid 1px black;">{{addComma total_female_cnt}}</td>
+        <td style="color: red">{{addComma aos_f_cnt}}</td>
+        <td style="color: red">{{addComma ios_f_cnt}}</td>
+        <td style="color: red">{{addComma pc_f_cnt}}</td>
     </tr>
     <tr>
         <!--<th class="_noBorder" style="width: 5px; border-left: hidden"></th>-->
@@ -94,7 +106,10 @@
         <td>{{addComma age3034_none_cnt}}</td>
         <td>{{addComma age3539_none_cnt}}</td>
         <td>{{addComma ageEtc_none_cnt}}</td>
-        <td>{{addComma total_none_cnt}}</td>
+        <td style="border-right:solid 1px black;">{{addComma total_none_cnt}}</td>
+        <td>{{addComma aos_n_cnt}}</td>
+        <td>{{addComma ios_n_cnt}}</td>
+        <td>{{addComma pc_n_cnt}}</td>
     </tr>
     <tr>
         <!--<th class="_noBorder" style="width: 5px; border-left: hidden"></th>-->
@@ -106,7 +121,10 @@
         <td>{{addComma age3034_total_cnt}}</td>
         <td>{{addComma age3539_total_cnt}}</td>
         <td>{{addComma ageEtc_total_cnt}}</td>
-        <td>{{addComma total_cnt}}</td>
+        <td style="border-right:solid 1px;">{{addComma total_cnt}}</td>
+        <td>{{addComma total_aos_cnt}}</td>
+        <td>{{addComma total_ios_cnt}}</td>
+        <td>{{addComma total_pc_cnt}}</td>
     </tr>
 
 </script>

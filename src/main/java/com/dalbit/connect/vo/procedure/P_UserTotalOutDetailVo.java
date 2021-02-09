@@ -68,4 +68,17 @@ public class P_UserTotalOutDetailVo {
     private int total_female_cnt;
     private int total_none_cnt;
 
+    private int aos_m_cnt;
+    private int ios_m_cnt;
+    private int pc_m_cnt;
+    private int aos_f_cnt;
+    private int ios_f_cnt;
+    private int pc_f_cnt;
+    private int aos_n_cnt;
+    private int ios_n_cnt;
+    private int pc_n_cnt;
+    private int total_aos_cnt;
+    private int total_ios_cnt;
+    private int total_pc_cnt;
+
 }
