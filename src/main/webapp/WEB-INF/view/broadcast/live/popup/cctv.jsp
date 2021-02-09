@@ -87,6 +87,9 @@
     }
 
     function videoList(pagingNo) {
+
+        videoStop();
+
         if(!common.isEmpty(pagingNo)){
             videoPagingInfo.pageNo = pagingNo;
         }else{
@@ -109,7 +112,7 @@
         data.pageNo = videoPagingInfo.pageNo;
         data.pageCnt = videoPagingInfo.pageCnt;
 
-        util.getAjaxData("video", "/rest/broadcast/broadcast/video/list", data, fn_video_success, fn_fail);
+        util.getAjaxData("video", "/rest/broadcast/broadcast/video/list", data, fn_video_success);
 
     };
 
@@ -131,12 +134,12 @@
             totalCnt = response.pagingVo.totalCnt;
         }
         videoPagingInfo.totalCnt = totalCnt;
-
-        console.log(videoPagingInfo);
         util.renderPagingNavigation("videoList_info_paginate", videoPagingInfo);
 
         ui.paintColor();
     };
+
+    var adapterList = new array();
 
     function videoPlay(me){
         var video_state = $(me).parent().find('._video_state');
@@ -149,10 +152,15 @@
         };
 
         adapter = WebRTCPlayAdapter();
+        adapterList.push(adapter);
+
         adapter.on('error', error => {
             if(error !== undefined){
                 video_state.text(" [플레이어 실행 오류] " + error);
                 //wowza_reconnect(me);
+                if(adapter.repeaterRetryCount < 10){
+                    wowza_reconnect(me);
+                }
                 return false;
             }
         });
@@ -173,13 +181,19 @@
             if (state == 'disconnected' || state == 'failed') {
                 stop();
                 video_state.text("연결이 종료되었습니다.");
-                wowza_reconnect(me);
+                //wowza_reconnect(me);
                 return false;
             }
         });
 
         adapter.start(info);
         video_state.text("방송방 연결시도중..");
+    }
+
+    function videoStop(){
+        adapterList.forEach(function(adapter, index){
+            adapter.stop();
+        })
     }
 
     function wowza_reconnect(me){
@@ -201,14 +215,16 @@
         }
     }
 
-    function fn_fail(data, textStatus, jqXHR){
-        alert(data.message);
-        console.log(data, textStatus, jqXHR);
-    }
-
     $(document).on('click', '._refresh', function(){
         var me = $(this);
+
+        //이전 동영상 play stop
+        //adapterList
         var target = $("#video_"+me.data('roomno'));
+
+        var videoIndex = $('._videoPlayer').index(target);
+        adapterList.remove(videoIndex)
+
         videoPlay(target);
 
         var icon = me.find('i._spin');
@@ -217,7 +233,6 @@
     });
 
     $(document).on('change', '#_refreshTime', function(){
-        console.log('change');
         var val = $("#_refreshTime").val();
         clearInterval(autoRefreshId);
         if(0 < val){
@@ -289,7 +304,7 @@
 <script id="tmp_videoSelectFrm" type="text/x-handlebars-template">
 {{#each this.data as |data|}}
     {{^equal data.image_path ''}}
-        <div class="item col-md-1 col-sm-1 mb15" style="padding-bottom: 15px;padding-right: 3px;padding-left: 3px">
+        <div class="item col-md-1 col-sm-1 mb15" style="padding-right: 3px;padding-left: 3px;display:inline;border:solid 1px;overflow:hidden;height:300px">
             <div style="height:100px;">
                 <ul class="list-unstyled">
                     <li>
@@ -301,7 +316,7 @@
             </div>
             <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;">
                 <span class="_video_state"></span>
-                <video id="video_{{data.room_no}}" class="_videoPlayer" data-roomno={{data.room_no}} style="width:100%;height:auto;" autoplay="autoplay" controls="controls" muted></video>
+                <video id="video_{{data.room_no}}" class="_videoPlayer" data-roomno={{data.room_no}} style="width:141px;height:188px" autoplay="autoplay" controls="controls" muted></video>
             </div>
         </div>
     {{/equal}}

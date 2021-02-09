@@ -261,6 +261,9 @@ public class DeclarationService {
                         mem_listenService.forcedExit(pMemberListenInputVo);
                     }
 
+                    //2021.02.03
+                    socketRestUtil.memberForceLogout(pMemberReportVo);
+
                 }
             }
 
