@@ -81,4 +81,9 @@ public class BroadcastController {
     @RequestMapping("/live/popup/noticeSendPopup")
     public String noticeSendPopup(Model model) { return "broadcast/live/popup/noticeSendPopup"; }
 
+    @GetMapping("/live/popup/cctv")
+    public String livePopupCctv(Model model) {
+        return "broadcast/live/popup/cctv";
+    }
+
 }
