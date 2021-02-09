@@ -139,7 +139,7 @@
         ui.paintColor();
     };
 
-    var adapterList = new array();
+    var adapterList = new Array();
 
     function videoPlay(me){
         var video_state = $(me).parent().find('._video_state');
@@ -219,11 +219,8 @@
         var me = $(this);
 
         //이전 동영상 play stop
-        //adapterList
         var target = $("#video_"+me.data('roomno'));
-
         var videoIndex = $('._videoPlayer').index(target);
-        adapterList.remove(videoIndex)
 
         videoPlay(target);
 
