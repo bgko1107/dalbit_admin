@@ -9,6 +9,11 @@
             <%--<div class="pull-left" style="width:30px; height:30px; background-color: #dae3f3; border:1px solid #cccccc;"></div>--%>
             <%--<div class="pull-left pl10 pt5" style="width:105px; height:30px; border:1px solid #cccccc; border-left-width: 0px;">테스트 아이디</div>--%>
         <%--</span>--%>
+        <select id="clipListenSort" name="clipListenSort" class="form-control searchType" onchange="initDataTable_clipHistoryListen_reload();">
+            <option value="0" selected="selected">최근</option>
+            <option value="2">좋아요</option>
+            <option value="4">선물달</option>
+        </select>
         <span id="clipListen_summaryArea"></span>
         <table id="clip_history_listen_list_info" class="table table-sorting table-hover table-bordered">
             <thead>
@@ -50,6 +55,7 @@
         //=---------- Main DataTable ----------
         var dtList_info_detail_data = function (data) {
             data.targetMemNo = memNo;
+            data.orderByType = $("#clipListenSort").val();
         };
 
         dtList_info_detail = new DalbitDataTable($("#clip_history_listen_list_info"), dtList_info_detail_data, source);
@@ -90,6 +96,10 @@
         $("#clipListen_summaryArea").html(html);
 
         ui.paintColor();
+    }
+
+    function initDataTable_clipHistoryListen_reload(){
+        dtList_info_detail.reload(selectCallback_clipHistotyListen);
     }
 
 </script>

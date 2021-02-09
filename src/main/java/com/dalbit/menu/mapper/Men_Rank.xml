@@ -14,28 +14,28 @@
         /* Men_Rank.xml - getDjLiveCheck */
         select count(*) as liveCnt, max(upd_date) as liveDate
         <if test='rankType == "1"'>
-            from rd_data.tb_ranking_dj_live_data_day where date_format(upd_date,'%Y.%m.%d') <![CDATA[ = ]]> #{sDate}
+            from rd_data.tb_ranking_dj_live_data_day where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{sDate}, ' 23:59:59')
         </if>
         <if test='rankType == "2"'>
-            from rd_data.tb_ranking_dj_live_data_week where date_format(upd_date,'%Y.%m.%d') >= #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+            from rd_data.tb_ranking_dj_live_data_week where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
         </if>
         <if test='rankType == "3"'>
-            from rd_data.tb_ranking_dj_live_data_month where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+            from rd_data.tb_ranking_dj_live_data_month where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
         </if>
         <if test='rankType == "4"'>
-            from rd_data.tb_ranking_dj_live_data_year where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+            from rd_data.tb_ranking_dj_live_data_year where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
         </if>
         <if test='rankType == "5"'>
             from rd_data.tb_ranking_time_dj_live_data
            <!--where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}-->
             <if test='timeRound == 1'>
-                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+                where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{sDate}, ' 10:00:00')
             </if>
             <if test='timeRound == 2'>
-                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
+                where upd_date between concat(#{sDate}, ' 10:00:00') and concat(#{sDate}, ' 19:00:00')
             </if>
             <if test='timeRound == 3'>
-                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
+                where upd_date between concat(#{sDate}, ' 19:00:00') and concat(#{sDate}, ' 23:59:59')
             </if>
         </if>
     </select>
@@ -44,28 +44,28 @@
         /* Men_Rank.xml - getFanLiveCheck */
         select count(*) as liveCnt, max(upd_date) as liveDate
         <if test='rankType == "1"'>
-            from rd_data.tb_ranking_fan_live_data_day where date_format(upd_date,'%Y.%m.%d') <![CDATA[ = ]]> #{sDate}
+            from rd_data.tb_ranking_fan_live_data_day where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{sDate}, ' 23:59:59')
         </if>
         <if test='rankType == "2"'>
-            from rd_data.tb_ranking_fan_live_data_week where date_format(upd_date,'%Y.%m.%d') >= #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+            from rd_data.tb_ranking_fan_live_data_week where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
         </if>
         <if test='rankType == "3"'>
-            from rd_data.tb_ranking_fan_live_data_month where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+            from rd_data.tb_ranking_fan_live_data_month where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
         </if>
         <if test='rankType == "4"'>
-            from rd_data.tb_ranking_fan_live_data_year where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+            from rd_data.tb_ranking_fan_live_data_year where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
         </if>
         <if test='rankType == "5"'>
             from rd_data.tb_ranking_time_fan_live_data
            <!--where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}-->
             <if test='timeRound == 1'>
-                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+                where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{sDate}, ' 10:00:00')
             </if>
             <if test='timeRound == 2'>
-                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
+                where upd_date between concat(#{sDate}, ' 10:00:00') and concat(#{sDate}, ' 19:00:00')
             </if>
             <if test='timeRound == 3'>
-                where upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
+                where upd_date between concat(#{sDate}, ' 19:00:00') and concat(#{sDate}, ' 23:59:59')
             </if>
         </if>
         <!--select count(*) as liveCnt, max(ranking_date) as liveDate from rd_data.tb_ranking_fan_live where date_format(ranking_date,'%Y.%m.%d') = #{sDate}-->
@@ -120,36 +120,35 @@
 
           <if test='rankType == "1"'>
            <if test='liveCnt != 0'>
-               where date_format(dj.upd_date,'%Y.%m.%d') = #{sDate}
+               where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{sDate}, ' 23:59:59')
            </if>
             <if test='liveCnt == 0'>
-               where date_format(dj.ranking_date,'%Y.%m.%d') <![CDATA[ = ]]> #{sDate}
+               where dj.ranking_date <![CDATA[ = ]]> #{sDate}
             </if>
           </if>
           <if test='rankType == "5"'>
               <if test='liveCnt != 0'>
                   <if test='timeRound == 1'>
-                      where dj.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00')  and dj.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+                      where dj.upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{sDate}, ' 10:00:00')
                   </if>
                   <if test='timeRound == 2'>
-                      where dj.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and dj.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
+                      where dj.upd_date between concat(#{sDate}, ' 10:00:00') and concat(#{sDate}, ' 19:00:00')
                   </if>
                   <if test='timeRound == 3'>
-                      where dj.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and dj.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
+                      where dj.upd_date between concat(#{sDate}, ' 19:00:00') and concat(#{sDate}, ' 23:59:59')
                   </if>
-                 <!--where date_format(dj.upd_date,'%Y.%m.%d') = #{sDate}-->
               </if>
               <if test='liveCnt == 0'>
-               where date_format(dj.ranking_date,'%Y.%m.%d') <![CDATA[ = ]]> #{sDate}
+               where dj.ranking_date <![CDATA[ = ]]> #{sDate}
                  and dj.time_round = ${timeRound}
               </if>
           </if>
           <if test='rankType == "2" or rankType == "3" or rankType == "4"'>
             <if test='liveCnt != 0'>
-                where date_format(dj.upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(dj.upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+                where dj.upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
             </if>
             <if test='liveCnt == 0'>
-               where date_format(dj.ranking_date,'%Y.%m.%d') = #{sDate}
+               where dj.ranking_date = #{sDate}
             </if>
           </if>
 
@@ -170,10 +169,10 @@
                       and mem.mem_phone like concat('%', #{txt_search}, '%')
                   </when>
                   <otherwise>
-                      and (mem.mem_no like concat('%', #{txt_search}, '%')
-                      or mem_id like concat('%', #{txt_search}, '%')
+                      and (mem.mem_no = #{txt_search}
+                      or mem_id = #{txt_search}
                       or mem_nick like concat('%', #{txt_search}, '%')
-                      or mem.mem_phone like concat('%', #{txt_search}, '%'))
+                      or mem.mem_phone = #{txt_search})
                   </otherwise>
               </choose>
           </if>
@@ -227,46 +226,47 @@
         left join rd_data.tb_member_level lev on fan.mem_no = lev.mem_no
         <if test='rankType == "1"'>
             <if test='liveCnt != 0'>
-                where date_format(fan.upd_date,'%Y.%m.%d') = #{sDate}
+                where fan.upd_date between concat(#{sDate},' 00:00:00') and concat(#{sDate},' 23:59:59')
             </if>
             <if test='liveCnt == 0'>
-                where date_format(fan.ranking_date,'%Y.%m.%d') = #{sDate}
+                where fan.ranking_date = #{sDate}
             </if>
         </if>
         <if test='rankType == "5"'>
             <if test='liveCnt != 0'>
-                <if test='timeRound == 1'>
-                    where fan.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 00:00:00')  and fan.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 10:00:00')
+                <if test='liveCnt != 0'>
+                    <if test='timeRound == 1'>
+                        where fan.upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{sDate}, ' 10:00:00')
+                    </if>
+                    <if test='timeRound == 2'>
+                        where fan.upd_date between concat(#{sDate}, ' 10:00:00') and concat(#{sDate}, ' 19:00:00')
+                    </if>
+                    <if test='timeRound == 3'>
+                        where fan.upd_date between concat(#{sDate}, ' 19:00:00') and concat(#{sDate}, ' 23:59:59')
+                    </if>
                 </if>
-                <if test='timeRound == 2'>
-                    where fan.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 10:00:00') and fan.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 19:00:00')
-                </if>
-                <if test='timeRound == 3'>
-                    where fan.upd_date <![CDATA[ >= ]]> concat(#{sDate}, ' 19:00:00') and fan.upd_date <![CDATA[ < ]]> concat(#{sDate}, ' 23:59:59')
-                </if>
-                <!--where date_format(dj.upd_date,'%Y.%m.%d') = #{sDate}-->
             </if>
             <if test='liveCnt == 0'>
-                where date_format(fan.ranking_date,'%Y.%m.%d') <![CDATA[ = ]]> #{sDate}
+                where fan.ranking_date <![CDATA[ = ]]> #{sDate}
                 and fan.time_round = ${timeRound}
             </if>
         </if>
         <if test='rankType == "2" or rankType == "3" or rankType == "4"'>
             <if test='liveCnt != 0'>
-                where date_format(fan.upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(fan.upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+                where fan.upd_date between concat(#{sDate},' 00:00:00') and concat(#{eDate},' 23:59:59')
             </if>
             <if test='liveCnt == 0'>
-                where date_format(fan.ranking_date,'%Y.%m.%d') = #{sDate}
+                where fan.ranking_date = #{sDate}
             </if>
         </if>
 
         AND (test.is_admin IS NULL OR test.is_admin = 0)
 
         <if test='txt_search != null and txt_search != ""'>
-            and (mem.mem_no like concat('%', #{txt_search}, '%')
-            or mem_id like concat('%', #{txt_search}, '%')
+            and (mem.mem_no = #{txt_search}
+            or mem_id = #{txt_search}
             or mem_nick like concat('%', #{txt_search}, '%')
-            or mem.mem_phone like concat('%', #{txt_search}, '%'))
+            or mem.mem_phone = #{txt_search})
         </if>
 
     </sql>
@@ -549,8 +549,7 @@
         /* Men_Rank.xml - AddDjPointVo */
         select count(*) as liveCnt, max(upd_date) as liveDate
           from rd_data.tb_ranking_dj_live_data_month
-         where date_format(upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
-           and date_format(upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+         where upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{sDate}, ' 23:59:59')
     </select>
 
     <sql id="addDjPointCondition">
@@ -566,31 +565,31 @@
         left join rd_data.tb_member_basic mem on prof.mem_no = mem.mem_no
         left join rd_admin.tb_admin_test_account test on prof.mem_no = test.mem_no
         <if test='liveCnt != 0'>
-            where date_format(dj.upd_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate} and date_format(dj.upd_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}
+            where dj.upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
         </if>
         <if test='liveCnt == 0'>
-            where date_format(dj.ranking_date,'%Y.%m.%d') = #{sDate}
+            where dj.ranking_date = #{sDate}
         </if>
         AND (test.is_admin IS NULL OR test.is_admin = 0)
         <if test='txt_search != null and txt_search != ""'>
             <choose>
                 <when test='selectGubun =="1"'>
-                    and mem.mem_no like concat('%', #{txt_search}, '%')
+                    and mem.mem_no = #{txt_search}
                 </when>
                 <when test='selectGubun =="2"'>
-                    and mem_id like concat('%', #{txt_search}, '%')
+                    and mem_id = #{txt_search}
                 </when>
                 <when test='selectGubun =="3"'>
                     and mem_nick like concat('%', #{txt_search}, '%')
                 </when>
                 <when test='selectGubun =="4"'>
-                    and mem.mem_phone like concat('%', #{txt_search}, '%')
+                    and mem.mem_phone = #{txt_search}
                 </when>
                 <otherwise>
-                    and (mem.mem_no like concat('%', #{txt_search}, '%')
-                    or mem_id like concat('%', #{txt_search}, '%')
+                    and (mem.mem_no = #{txt_search}
+                    or mem_id = #{txt_search}
                     or mem_nick like concat('%', #{txt_search}, '%')
-                    or mem.mem_phone like concat('%', #{txt_search}, '%'))
+                    or mem.mem_phone = #{txt_search})
                 </otherwise>
             </choose>
         </if>
@@ -621,20 +620,20 @@
                              from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=1
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank1
+                              and ranking_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
+                          ) as addPointRank1
                         , (select count(*)
                              from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=2
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank2
+                              and ranking_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
+                          ) as addPointRank2
                         , (select count(*)
                              from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=3
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank3
+                              and ranking_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
+                          ) as addPointRank3
                         <include refid="addDjPointCondition"/>
 
                   ) a , (select @RNUM := #{pageStart}) r
@@ -668,20 +667,20 @@
                              from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=1
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank1
+                              and ranking_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
+                          ) as addPointRank1
                         , (select count(*)
                              from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=2
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank2
+                              and ranking_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
+                          ) as addPointRank2
                         , (select count(*)
                              from rd_data.tb_ranking_time_dj
                             where mem_no = dj.mem_no
                               and `rank`=3
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ >= ]]> #{sDate}
-                              and date_format(ranking_date,'%Y.%m.%d') <![CDATA[ <= ]]> #{eDate}) as addPointRank3
+                              and ranking_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
+                          ) as addPointRank3
                         <include refid="addDjPointCondition"/>
 
                   ) a , (select @RNUM := #{pageStart}) r

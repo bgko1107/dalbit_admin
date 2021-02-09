@@ -40,7 +40,11 @@
             </div>
             <div class="tab-pane fade" id="clip"><!-- 클립관리 -->
                 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist">
+                    <%--<li class="active"><a href="#clipList" role="tab" data-toggle="tab" id="tab_clipList" onclick="tab_click(this.id);">등록 내역</a></li>--%>
                     <li class="active"><a href="#clipList" role="tab" data-toggle="tab" id="tab_clipList" onclick="tab_click(this.id);">등록 내역</a></li>
+                    <li><a href="#clipList" role="tab" data-toggle="tab" id="tab_clipList_listen" onclick="tab_click(this.id);">청취 회원</a></li>
+                    <li><a href="#clipList" role="tab" data-toggle="tab" id="tab_clipList_good" onclick="tab_click(this.id);">좋아요 회원</a></li>
+                    <li><a href="#clipList" role="tab" data-toggle="tab" id="tab_clipList_gift" onclick="tab_click(this.id);">선물한 회원</a></li>
                     <li><a href="#clipListenList" role="tab" data-toggle="tab" id="tab_clipListenList" onclick="tab_click(this.id);">청취 내역</a></li>
                 </ul>
                 <div class="tab-content">
@@ -149,6 +153,12 @@
                 $("#tab_clip").click();
             }
 
+            getHistory_clipList(tmp);
+        }else if(tmp == "tab_clipList_listen"){
+            getHistory_clipList(tmp);
+        }else if(tmp == "tab_clipList_good"){
+            getHistory_clipList(tmp);
+        }else if(tmp == "tab_clipList_gift"){
             getHistory_clipList(tmp);
         }else if(tmp == "tab_clipListenList"){
             if(!$("#tab_clip").parent("li").hasClass("active")){

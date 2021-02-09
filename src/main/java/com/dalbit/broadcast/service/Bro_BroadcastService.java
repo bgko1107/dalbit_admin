@@ -120,7 +120,7 @@ public class Bro_BroadcastService {
         }
 
         String result;
-        if(Integer.parseInt(procedureVo.getRet()) > 0) {
+        if(broadList.size() > 0) {
             result = gsonUtil.toJson(new JsonOutputVo(Status.방송기록보기성공, broadList, new PagingVo(procedureVo.getRet()),summary));
         }else{
             result = gsonUtil.toJson(new JsonOutputVo(Status.방송기록보기실패));
