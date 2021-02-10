@@ -15,12 +15,13 @@
             a.mem_slct,
             a.mem_sex,
             a.mem_join_date as joinDate,
-            IFNULL(b.image_profile, '') AS image_profile,
+            ifnull(c.image_profile,b.image_profile) image_profile,
             a.last_upd_date,
             a.inner
         FROM
             rd_data.tb_member_basic AS a
 		LEFT JOIN rd_data.tb_member_profile AS b ON a.mem_no = b.mem_no
+		left join rd_data.tb_member_profile_album AS c on a.mem_no = c.mem_no
     </sql>
 
     <!-- 프로필 -->

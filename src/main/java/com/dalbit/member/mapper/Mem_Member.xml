@@ -950,4 +950,18 @@
     <select id="callMemberCouponHistory" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_MemberCouponVo">
         call rd_admin.sp_admin_coupon_member_history(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
+
+    <select id="callAlbumList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_MemberInfoOutputVo">
+        call rd_data.sp_member_profile_album_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <update id="callMemberAlbumDelete" parameterType="com.dalbit.member.vo.procedure.P_MemberInfoInputVo">
+        /* M_Member.xml - callMemberAlbumDelete */
+        update rd_data.tb_member_profile_album set image_profile='' where mem_no=#{mem_no} and idx=#{idx}
+    </update>
+
+    <update id="callMemberProfileDelete" parameterType="com.dalbit.member.vo.procedure.P_MemberInfoInputVo">
+        /* M_Member.xml - callMemberProfileDelete */
+        update rd_data.tb_member_profile set image_profile='' , last_upd_date=now() where mem_no=#{mem_no}
+    </update>
 </mapper>

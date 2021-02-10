@@ -987,6 +987,13 @@
         getMemNo_info_reload(memNo);
     }
 
+    $(document).on('click','#bt_profileAlbum', function (){
+        report = "/member/member/popup/albumPopup?memNo=" + memNo
+                + "&memNick=" + encodeURIComponent(memberInfo_responseDate.nickName)
+                + "&memSex=" + encodeURIComponent(memberInfo_responseDate.memSex)
+        ;
+        util.windowOpen(report,"1000","800","프로필목록");
+    })
 
 
 </script>
@@ -1014,13 +1021,18 @@
                 프로필<br>이미지
                 {{#equal memWithdrawal '0'}}
                 <br><button type="button" id="bt_img" class="btn btn-default btn-sm no-margin" style="margin-left: 10px" data-memno="{{mem_no}}" data-nickname="{{nickName}}">초기화</button>
-                <br><button type="button" id="bt_profileImg_editHistory" class="btn btn-default btn-sm mt5">상세</button>
+                <br><button type="button" id="bt_profileImg_editHistory" class="btn btn-default btn-sm">상세</button>
                 {{/equal}}
             </th>
             <td rowspan="5">
-                <form id="profileImg" method="post" enctype="multipart/form-data">
-                    <img id="image_section" class="thumbnail fullSize_background no-padding" src="{{renderProfileImage profileImage memSex}}" alt="your image" style="width: 150px;height: 150px" />
-                </form>
+                <div class="col-md-8 no-padding">
+                    <form id="profileImg" method="post" enctype="multipart/form-data">
+                        <img id="image_section" class="thumbnail fullSize_background no-padding" src="{{renderProfileImage profileImage memSex}}" alt="your image" style="width: 150px;height: 150px" />
+                    </form>
+                </div>
+                <div class="col-md-2 no-padding">
+                    <button type="button" id="bt_profileAlbum" class="btn btn-default btn-sm mt5">상세</button>
+                </div>
             </td>
             <th rowspan="5">
                 방송방<br>배경이미지

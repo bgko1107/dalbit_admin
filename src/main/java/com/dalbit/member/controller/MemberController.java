@@ -37,6 +37,8 @@ public class MemberController {
     @RequestMapping("/mailbox/popup/mailboxMsg")
     public String mailboxMsg(Model model) { return "member/mailbox/popup/mailboxMsg"; }
 
+    @RequestMapping("/member/popup/albumPopup")
+    public String albumPopup(Model model) { return "member/member/popup/albumPopup"; }
 
     /**
      * 회원리스트
