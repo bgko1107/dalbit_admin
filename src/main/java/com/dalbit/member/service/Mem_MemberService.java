@@ -1149,13 +1149,15 @@ public class Mem_MemberService {
             pMemberInfoInputVo.setIdx(Integer.parseInt(idxList[i]));
 
             // 수정이력
-            P_MemberEditorVo pMemberEditorVo = new P_MemberEditorVo();
+            if(!DalbitUtil.isEmpty(pMemberInfoInputVo.getProfile() )){
+                P_MemberEditorVo pMemberEditorVo = new P_MemberEditorVo();
 
-            pMemberEditorVo.setEditContents("관리자 프로필이미지 초기화 : " + pMemberInfoInputVo.getProfile() + " >> " + "");
-            pMemberEditorVo.setType(0);
-            pMemberEditorVo.setMem_no(pMemberInfoInputVo.getMem_no());
-            pMemberEditorVo.setOpName(MemberVo.getMyMemNo());
-            mem_MemberDao.callMemberEditHistoryAdd(pMemberEditorVo);
+                pMemberEditorVo.setEditContents("관리자 프로필이미지 초기화 : " + pMemberInfoInputVo.getProfile() + " >> " + "");
+                pMemberEditorVo.setType(0);
+                pMemberEditorVo.setMem_no(pMemberInfoInputVo.getMem_no());
+                pMemberEditorVo.setOpName(MemberVo.getMyMemNo());
+                mem_MemberDao.callMemberEditHistoryAdd(pMemberEditorVo);
+            }
 
             // 프로필 이미지 제거
             deleteResult = mem_MemberDao.callMemberAlbumDelete(pMemberInfoInputVo);
@@ -1176,7 +1178,6 @@ public class Mem_MemberService {
                     param.put("recvPosition", "chat");
                     param.put("recvLevel", 0);
                     param.put("recvTime", 0);
-
 
                     // message set
                     Gson gson = new Gson();
