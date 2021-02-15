@@ -222,7 +222,7 @@ common.timeStampDay = function(time){
         }
         return timeData ;
     }else{
-        return "";
+        return "-";
     }
 }
 

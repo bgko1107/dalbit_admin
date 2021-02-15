@@ -55,75 +55,7 @@
                 </otherwise>
             </choose>
         </if>
-
-        <!--<if test='txt_search != null and txt_search != ""'>-->
-            <!--<choose>-->
-                <!--<when test='searchType == "1"'>-->
-                    <!--and dj.mem_no like concat('%', #{txt_search}, '%')-->
-                <!--</when>-->
-                <!--<when test='searchType == "2"'>-->
-                    <!--and basic.mem_id like concat('%', #{txt_search}, '%')-->
-                <!--</when>-->
-                <!--<when test='searchType == "3"'>-->
-                    <!--and basic.mem_nick like concat('%', #{txt_search}, '%')-->
-                <!--</when>-->
-                <!--<when test='searchType == "4"'>-->
-                    <!--and dj.mem_phone like concat('%', #{txt_search}, '%')-->
-                <!--</when>-->
-                <!--<otherwise>-->
-                    <!--and (dj.mem_no like concat('%', #{txt_search}, '%')-->
-                    <!--or basic.mem_id like concat('%', #{txt_search}, '%')-->
-                    <!--or basic.mem_nick like concat('%', #{txt_search}, '%')-->
-                    <!--or dj.mem_phone like concat('%', #{txt_search}, '%'))-->
-                <!--</otherwise>-->
-            <!--</choose>-->
-        <!--</if>-->
     </sql>
-
-    <!--<select id="getReqSpecialList" parameterType="com.dalbit.menu.vo.SpecialReqVo" resultType="com.dalbit.menu.vo.SpecialReqVo">
-        /* Men_Special.xml - getReqSpecialList */
-        select
-            *
-        from (
-            select
-                dj.idx as idx
-                , dj.mem_no as mem_no
-                , dj.mem_name as mem_name
-                , dj.mem_phone as mem_phone
-                , dj.title as title
-                , dj.reg_date as reg_date
-                , dj.contents as contents
-                , dj.broadcast_time1 as broadcast_time1
-                , dj.broadcast_time2 as broadcast_time2
-                , dj.state as state
-                , dj.op_name as op_name
-                , dj.last_upd_date as last_upd_date
-                , profile.specialdj_badge as specialdj_badge
-                , basic.mem_id as mem_id
-                , basic.mem_nick as mem_nick
-                , basic.mem_birth_year
-                , basic.mem_birth_month
-                , basic.mem_birth_day
-                &#45;&#45; , profile.image_profile  as image_profile
-                , @RNUM := @RNUM + 1 as rowNum
-            from rd_admin.tb_req_special_dj dj
-                , rd_data.tb_member_profile profile
-                , rd_data.tb_member_basic basic
-                , rd_admin.tb_req_special_dj_manage manage
-                , (select @RNUM := 0) r
-            where basic.mem_no = dj.mem_no
-                and profile.mem_no = dj.mem_no
-                and basic.mem_no = profile.mem_no
-                and dj.state <![CDATA[<>]]> 2
-                and concat(#{select_year}, #{select_month}) = DATE_FORMAT(dj.reg_date, '%Y%m')
-                and manage.select_year = #{select_year}
-                and manage.select_month = #{select_month}
-                <include refid="reqSpecial" />
-            order by idx desc
-        ) a
-        limit #{pageStart}, #{pageCnt}
-    </select>-->
-
 
     <select id="getReqSpecialList" parameterType="com.dalbit.menu.vo.SpecialReqVo" resultType="com.dalbit.menu.vo.SpecialReqVo">
         /* Men_Special.xml - getReqSpecialList */
@@ -285,12 +217,27 @@
 
     <insert id="reqOk" parameterType="com.dalbit.menu.vo.SpecialReqVo">
         /* Men_Special.xml - reqOk */
-        insert into
-          rd_admin.tb_special_dj (req_idx, mem_no, reg_date, op_name, is_force, `order`, select_year, select_month
-          , round_no)
-        values
-        (#{idx}, #{mem_no}, current_timestamp(), #{op_name}, #{is_force}, (select ifnull(max(`order`), 0 ) + 1 from rd_admin.tb_special_dj dj), #{select_year}, #{select_month}
-        , (select round_no + 1 from rd_admin.tb_req_special_dj_manage where date_format(concat(select_year, select_month, '01'), '%Y-%m') = (select date_format(DATE_SUB(date_format(concat(#{select_year}, #{select_month}, '01'), '%Y-%m-%d'), interval 1 month),  '%Y-%m'))))
+        insert into rd_admin.tb_special_dj(
+            req_idx
+            , mem_no
+            , reg_date
+            , op_name
+            , is_force
+            , select_year
+            , select_month
+            , round_no
+            , slct_type
+        )values(
+            #{idx}
+            , #{mem_no}
+            , current_timestamp()
+            , #{op_name}
+            , #{is_force}
+            , #{select_year}
+            , #{select_month}
+            , (select round_no + 1 from rd_admin.tb_req_special_dj_manage where date_format(concat(select_year, select_month, '01'), '%Y-%m') = (select date_format(DATE_SUB(date_format(concat(#{select_year}, #{select_month}, '01'), '%Y-%m-%d'), interval 1 month),  '%Y-%m')))
+            , #{slct_type}
+        )
     </insert>
 
     <insert id="opLastUpdDate" parameterType="com.dalbit.menu.vo.SpecialReqVo">
@@ -313,6 +260,7 @@
         /* Men_Special.xml - profileUpdate */
         update rd_data.tb_member_profile
         set specialdj_badge = #{specialdj_badge}
+            , specialdj_cnt = specialdj_cnt + #{plusMinusCnt}
         where mem_no = #{mem_no}
     </update>
 
@@ -333,7 +281,10 @@
                     and dj.mem_no = #{txt_search}
                 </when>
                 <when test="newSearchType == 2">
-                    and basic.mem_nick like concat('%', #{txt_search}, '%')
+                    and (
+                        basic.mem_nick like concat('%', #{txt_search})
+                        or basic.mem_nick like concat(#{txt_search}, '%')
+                    )
                 </when>
                 <when test="newSearchType == 3">
                     and basic.mem_name = #{txt_search}
@@ -352,77 +303,42 @@
                 </otherwise>
             </choose>
         </if>
-
-        <!--<if test='txt_search != null and txt_search != ""'>-->
-            <!--<choose>-->
-                <!--<when test='searchType == "1"'>-->
-                    <!--and dj.mem_no like concat('%', #{txt_search}, '%')-->
-                <!--</when>-->
-                <!--<when test='searchType == "2"'>-->
-                    <!--and basic.mem_id like concat('%', #{txt_search}, '%')-->
-                <!--</when>-->
-                <!--<when test='searchType == "3"'>-->
-                    <!--and basic.mem_nick like concat('%', #{txt_search}, '%')-->
-                <!--</when>-->
-                <!--<when test='searchType == "4"'>-->
-                    <!--and redj.mem_phone like concat('%', #{txt_search}, '%')-->
-                <!--</when>-->
-                <!--<otherwise>-->
-                    <!--and (dj.mem_no like concat('%', #{txt_search}, '%')-->
-                    <!--or basic.mem_id like concat('%', #{txt_search}, '%')-->
-                    <!--or basic.mem_nick like concat('%', #{txt_search}, '%')-->
-                    <!--or redj.mem_phone like concat('%', #{txt_search}, '%'))-->
-                <!--</otherwise>-->
-            <!--</choose>-->
-        <!--</if>-->
-        order by `order` asc, dj.reg_date desc
     </sql>
 
     <select id="getSpecialList" parameterType="com.dalbit.menu.vo.SpecialVo" resultType="com.dalbit.menu.vo.SpecialVo">
         /* Men_Special.xml - getSpecialList */
-        select *
+        select *, (a.likeCnt + boostCnt * 10) as totLikeCnt
         from (
-        select
-        @RNUM := @RNUM + 1 as rowNum,
-        dj.req_idx         as req_idx,
-        dj.mem_no          as mem_no,
-        dj.reg_date        as reg_date,
-        dj.is_force        as is_force,
-        dj.`order`         as `order`,
-        dj.op_name         as op_name,
-        basic.mem_id       as mem_id,
-        basic.mem_userid   as mem_userid,
-        basic.mem_nick     as mem_nick,
-        redj.mem_phone     as mem_phone,
-        lev.level          as `level`,
-        lev.grade          as grade,
-        pro.image_profile  as image_profile,
-        dj.select_year        as select_year,
-        dj.select_month       as select_month,
-        (select COUNT(*) from rd_data.tb_broadcast_room_live_list WHERE mem_no = dj.mem_no AND state <![CDATA[<]]> 4)  as onAir,
-        (select COUNT(*) from rd_data.tb_member_fanstar fan, rd_data.tb_member_basic basic WHERE fan.mem_no_fan = basic.mem_no and fan.mem_no_star= dj.mem_no and basic.mem_state != 5) as fanCnt,
-        (select ifnull(sum(airtime), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS airTime,
-        (select ifnull(sum(gold), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS giftedRuby,
-        (select ifnull(sum(good), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS likeCnt,
-        (select sum(booster) as boostCnt from rd_data.tb_member_broadcast_broadcasting a where mem_no= dj.mem_no) as boostCnt,
-        (SELECT
-        count(distinct(DATE( last_upd_date )))
-        FROM rd_data.tb_member_broadcast_broadcasting
-        WHERE mem_no = dj.mem_no AND last_upd_date between SUBDATE(NOW(), INTERVAL 3 MONTH) AND NOW()) as broadcastCnt,
-        (select count(*) from rd_data.tb_member_report WHERE mem_no = dj.mem_no and op_code in (3,4,5,6) ) as reportCnt
-        ,basic.mem_birth_year
-        ,basic.mem_birth_month
-        ,basic.mem_birth_day
-        ,basic.inner
-        from rd_admin.tb_special_dj dj
-        inner join rd_data.tb_member_basic basic on dj.mem_no = basic.mem_no
-        inner join rd_data.tb_member_profile pro on dj.mem_no = pro.mem_no
-        inner join rd_data.tb_member_level lev on dj.mem_no = lev.mem_no
-        left join rd_admin.tb_req_special_dj redj on dj.mem_no = redj.mem_no and dj.req_idx = redj.idx
-        , (select @RNUM := 0) r
-        <include refid="special"/>
+            select
+                dj.req_idx,
+                dj.mem_no,
+                dj.reg_date,
+                dj.op_name,
+                dj.select_year,
+                dj.select_month,
+                basic.mem_id,
+                basic.mem_userid,
+                basic.mem_nick,
+                basic.mem_birth_year,
+                basic.mem_birth_month,
+                basic.mem_birth_day,
+                basic.inner,
+                pro.image_profile,
+                pro.specialdj_cnt,
+                pro.specialdj_badge,
+                if(0 <![CDATA[<]]> (pro.specialdj_cnt-5), pro.specialdj_cnt-5, 0) best_cnt,
+                (select ifnull(sum(airtime), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS airTime,
+                (select ifnull(sum(gold), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS giftedRuby,
+                (select ifnull(sum(good), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS likeCnt,
+                (select sum(booster) as boostCnt from rd_data.tb_member_broadcast_broadcasting a where mem_no= dj.mem_no) as boostCnt,
+                (select count(*) from rd_data.tb_member_report WHERE mem_no = dj.mem_no and op_code in (3,4,5,6) ) as reportCnt
+            from rd_admin.tb_special_dj dj
+            inner join rd_data.tb_member_basic basic on dj.mem_no = basic.mem_no
+            inner join rd_data.tb_member_profile pro on dj.mem_no = pro.mem_no
+            <include refid="special"/>
+            order by `order` asc, dj.reg_date desc
         ) a
-        where rowNum between #{searchStartNo, jdbcType=INTEGER} and #{searchEndNo, jdbcType=INTEGER}
+        limit 0, 100
     </select>
 
     <select id="getSpecialListCnt" parameterType="com.dalbit.menu.vo.SpecialVo" resultType="integer">
@@ -435,20 +351,14 @@
         <include refid="special"/>
     </select>
 
-    <select id="checkSpecialDjCnt" parameterType="com.dalbit.menu.vo.SpecialVo" resultType="integer">
+    <select id="checkSpecialDjCnt" parameterType="com.dalbit.menu.vo.SpecialVo" resultType="java.util.HashMap">
         /* Men_Special.xml - checkSpecialDjCnt */
-        select
-        count(*)
-        from (
-            select dj.mem_no, dj.select_year, dj.select_month
-            from rd_admin.tb_special_dj dj
-            inner join rd_data.tb_member_basic basic on dj.mem_no = basic.mem_no
-            left join rd_admin.tb_req_special_dj redj on dj.mem_no = redj.mem_no and dj.req_idx = redj.idx
-            <include refid="special"/>
-        ) a
-        where a.mem_no = #{mem_no}
-        and a.select_year = #{select_year}
-        and a.select_month = #{select_month}
+        select profile.specialdj_cnt
+             , count(dj.mem_no) is_exist
+        from rd_data.tb_member_basic basic
+                 inner join rd_data.tb_member_profile profile on basic.mem_no = profile.mem_no
+                 left join rd_admin.tb_special_dj dj on dj.mem_no = basic.mem_no and dj.select_year = #{select_year} and select_month = #{select_month}
+        where basic.mem_no = #{mem_no}
     </select>
 
     <select id="getSpecialDetail" parameterType="com.dalbit.menu.vo.SpecialVo" resultType="com.dalbit.menu.vo.SpecialVo">
@@ -506,6 +416,10 @@
             , condition_data2
             , condition_code3
             , condition_data3
+            , condition_code4
+            , condition_data4
+            , best_code
+            , best_data
             , is_view
             , platform
             , pc_image_url
@@ -555,6 +469,10 @@
             , condition_data2
             , condition_code3
             , condition_data3
+            , condition_code4
+            , condition_data4
+            , best_code
+            , best_data
             , is_view
             , platform
             , reg_date
@@ -566,15 +484,19 @@
             , #{select_month}
             , #{notice_idx}
             , #{req_start_date}
-            , #{req_end_date}
+            , DATE_FORMAT(#{req_end_date}, '%Y.%m.%d 23:59:59')
             , #{condition_start_date}
-            , #{condition_end_date}
+            , DATE_FORMAT(#{condition_end_date}, '%Y.%m.%d 23:59:59')
             , #{condition_code1}
             , #{condition_data1}
             , #{condition_code2}
             , #{condition_data2}
             , #{condition_code3}
             , #{condition_data3}
+            , #{condition_code4}
+            , #{condition_data4}
+            , best_code
+            , best_data
             , #{is_view}
             , #{platform}
             , now()
@@ -589,15 +511,19 @@
         set title = #{title}
             , notice_idx = #{notice_idx}
             , req_start_date = #{req_start_date}
-            , req_end_date = #{req_end_date}
+            , req_end_date = DATE_FORMAT(#{req_end_date}, '%Y.%m.%d 23:59:59')
             , condition_start_date = #{condition_start_date}
-            , condition_end_date = #{condition_end_date}
+            , condition_end_date = DATE_FORMAT(#{condition_end_date}, '%Y.%m.%d 23:59:59')
             , condition_code1 = #{condition_code1}
             , condition_data1 = #{condition_data1}
             , condition_code2 = #{condition_code2}
             , condition_data2 = #{condition_data2}
             , condition_code3 = #{condition_code3}
             , condition_data3 = #{condition_data3}
+            , condition_code4 = #{condition_code4}
+            , condition_data4 = #{condition_data4}
+            , best_code = #{best_code}
+            , best_data = #{best_data}
             , is_view = #{is_view}
             , platform = #{platform}
             , last_upd_date = now()
@@ -665,6 +591,12 @@
             , condition_code3
             , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = condition_code3) condition_codeName3
             , condition_data3
+            , condition_code4
+            , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = condition_code3) condition_codeName4
+            , condition_data4
+            , best_code
+            , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = best_code) best_codeName
+            , best_data
             , pc_image_url
             , mobile_image_url
             , is_view
@@ -944,5 +876,9 @@
             where
                 <include refid="reqAbleCondition" />
         ) a
+    </select>
+
+    <select id="callBestAbleList" statementType="CALLABLE"  parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.menu.vo.SpecialDjBestVo">
+        call rd_admin.sp_admin_specialdj_best_able_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 </mapper>

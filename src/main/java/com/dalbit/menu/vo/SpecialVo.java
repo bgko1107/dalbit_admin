@@ -37,11 +37,15 @@ public class SpecialVo extends PagingVo {
     private String fanCnt;
     private int airTime;
     private int giftedRuby;
+    private int totLikeCnt;
     private int likeCnt;
     private int boostCnt;
     private int broadcastCnt;
     private int reportCnt;
     private int inner;
+    private int specialdj_cnt;
+    private int specialdj_badge;
+    private int best_cnt;
 
     private String title;
     private String contents;

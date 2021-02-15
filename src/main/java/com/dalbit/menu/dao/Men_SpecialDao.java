@@ -1,9 +1,11 @@
 package com.dalbit.menu.dao;
 
+import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.menu.vo.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -21,7 +23,7 @@ public interface Men_SpecialDao {
     int getReqSpecialListCnt(SpecialReqVo specialReqVo);
 
     @Transactional(readOnly = true)
-    int checkSpecialDjCnt(SpecialReqVo specialReqVo);
+    HashMap checkSpecialDjCnt(SpecialReqVo specialReqVo);
 
     @Transactional(readOnly = true)
     SpecialReqVo getReqSpecialDetail(SpecialReqVo specialReqVo);
@@ -66,5 +68,8 @@ public interface Men_SpecialDao {
 
     @Transactional(readOnly = true)
     int reqAbleSpecialDjCnt(SpecialReqVo specialReqVo);
+
+    @Transactional(readOnly = true)
+    List<SpecialDjBestVo> callBestAbleList(ProcedureVo procedureVo);
 
 }
