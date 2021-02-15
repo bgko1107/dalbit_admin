@@ -443,7 +443,7 @@
 
     function fn_broadcastgiftYear_success(dst_id, response) {
         var isDataEmpty = response.data.detailList == null;
-        $("#giftYearListBody").empty();
+        $(".yearBroad").find("#giftYearListBody").empty();
         if(!isDataEmpty){
 
             // response.data.totalInfo.sum_totalGiftCnt = response.data.totalInfo.sum_normalGiftCnt + response.data.totalInfo.sum_guest_normalGiftCnt;
@@ -457,7 +457,7 @@
             var templateScript = Handlebars.compile(template);
             var totalContext = response.data.totalInfo;
             var totalHtml = templateScript(totalContext);
-            $("#giftYearListBody").append(totalHtml);
+            $(".yearBroad").find("#giftYearListBody").append(totalHtml);
 
             response.data.detailList.slctType = $('input:radio[name="slctType"]:checked').val();
         }
@@ -482,12 +482,12 @@
         var templateScript = Handlebars.compile(template);
         var detailContext = response.data.detailList;
         var html=templateScript(detailContext);
-        $("#giftYearListBody").append(html);
+        $(".yearBroad").find("#giftYearListBody").append(html);
 
         if(isDataEmpty){
-            $("#giftYearListBody td:last").remove();
+            $(".yearBroad").find("#giftYearListBody td:last").remove();
         }else{
-            $("#giftYearListBody").append(totalHtml);
+            $(".yearBroad").find("#giftYearListBody").append(totalHtml);
         }
         ui.tableHeightSet();
         ui.paintColor();
@@ -495,7 +495,7 @@
 
     function fn_platformYearList_success(dst_id, response) {
         var isDataEmpty = response.data.detailList == null;
-        $("#platformYearListBody").empty();
+        $(".yearBroad").find("#platformYearListBody").empty();
         if(!isDataEmpty){
             response.data.totalInfo.totalCnt = response.data.totalInfo.totalCreateCnt + response.data.totalInfo.v_totalCreateCnt;
             response.data.totalInfo.totalTime = response.data.totalInfo.totalBroadcastingTime + response.data.totalInfo.v_totalBroadcastingTime;
@@ -504,7 +504,7 @@
             var templateScript = Handlebars.compile(template);
             var totalContext = response.data.totalInfo;
             var totalHtml = templateScript(totalContext);
-            $("#platformYearListBody").append(totalHtml);
+            $(".yearBroad").find("#platformYearListBody").append(totalHtml);
 
             response.data.detailList.slctType = slctType;
         }
@@ -525,12 +525,12 @@
         var templateScript = Handlebars.compile(template);
         var detailContext = response.data.detailList;
         var html=templateScript(detailContext);
-        $("#platformYearListBody").append(html);
+        $(".yearBroad").find("#platformYearListBody").append(html);
 
         if(isDataEmpty){
-            $("#platformYearListBody td:last").remove();
+            $(".yearBroad").find("#platformYearListBody td:last").remove();
         }else{
-            $("#platformYearListBody").append(totalHtml);
+            $(".yearBroad").find("#platformYearListBody").append(totalHtml);
         }
 
         ui.tableHeightSet();
@@ -539,7 +539,7 @@
 
     function fn_typeYear_success(data, response){
         var isDataEmpty = response.data.detailList == null;
-        var tableBody = $("#typeYearTableBody");
+        var tableBody = $(".yearBroad").find("#typeYearTableBody");
 
         tableBody.empty();
         if(!isDataEmpty){
@@ -567,7 +567,7 @@
         tableBody.append(html);
 
         if(isDataEmpty){
-            $("#typeYearTableBody td:last").remove();
+            $(".yearBroad").find("#typeYearTableBody td:last").remove();
         }else{
             tableBody.append(totalHtml);
         }
