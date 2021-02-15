@@ -14,6 +14,9 @@ public interface Sta_NewBroadcastDao {
     ArrayList<P_NewBroadcastTimeOutVo> callNewBroadcastTime(ProcedureVo procedureVo);
 
     @Transactional(readOnly = true)
+    ArrayList<P_NewBroadcastTimeNewOutVo> callNewBroadcastTimeNew(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
     ArrayList<P_NewBroadcastTypeOutVo> callNewBroadcastType(ProcedureVo procedureVo);
 
     @Transactional(readOnly = true)

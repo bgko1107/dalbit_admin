@@ -11,8 +11,54 @@
 </div>
 <div class="widget widget-table mb10">
     <div class="widget-content mt10">
-        <div class="col-md-12 no-padding">
+        <div class="col-md-12 no-padding" id="div_dayBroad">
             <span class="font-bold">◈DJ/청취자 성별</span>
+            <table class="table table-bordered _tableHeight" data-height="23px">
+                <colgroup>
+                    <col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
+                    <col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
+                    <col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
+                    <col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th rowspan="3" class="_bgColor" data-bgColor="#8faadc">구분</th>
+                    <th colspan="4" class="_bgColor" data-bgColor="#8faadc">라디오</th>
+                    <th colspan="4" class="_bgColor" data-bgColor="#b4c7e7">영상</th>
+                    <th colspan="4" class="_bgColor" data-bgcolor="#bfbfbf">총합</th>
+                    <th colspan="5" class="_bgColor" data-bgColor="#f8cbad">청취자</th>
+                    <th rowspan="3" class="_bgColor" data-bgColor="#8faadc">선물 수</th>
+                    <th rowspan="3" class="_bgColor" data-bgColor="#8faadc">선물 달</th>
+                </tr>
+                <tr>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#dae3f3">최대개설</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#dae3f3">방송시간</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#dae3f3">최대개설</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#dae3f3">방송시간</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#bfbfbf">최대개설</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#bfbfbf">방송시간</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                    <th class="_bgColor" data-bgColor="#fbe5d6">게스트</th>
+                    <th rowspan="2" class="_bgColor" data-bgColor="#f8cbad">최대청취자</th>
+                </tr>
+                <tr>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                </tr>
+                </thead>
+                <tbody id="dayTableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12 no-padding" style="display: none" id="div_dayDetailRadio">
+            <span class="font-bold">◈라디오 방송 > 성별</span>
             <table class="table table-bordered _tableHeight" data-height="23px">
                 <colgroup>
                     <col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/>
@@ -26,8 +72,7 @@
                 <thead>
                 <tr>
                     <th rowspan="3" class="_bgColor" data-bgColor="#b4c7e7">구분</th>
-                    <th colspan="6" class="_bgColor" data-bgColor="#b4c7e7">라디오 방송</th>
-                    <th colspan="8" class="_bgColor" data-bgColor="#b4c7e7">영상 방송</th>
+                    <th colspan="8" class="_bgColor" data-bgColor="#b4c7e7">라디오 방송</th>
                     <th rowspan="3" class="_bgColor" data-bgcolor="#dae3f3">최대 개설</th>
                     <th rowspan="3" class="_bgColor" data-bgColor="#b4c7e7">방송시간</th>
                     <th colspan="10" class="_bgColor" data-bgColor="#f8cbad">청취자</th>
@@ -36,9 +81,6 @@
                     <th rowspan="3" class="_bgColor" data-bgColor="#b4c7e7">선물 달</th>
                 </tr>
                 <tr>
-                    <th colspan="2" class="_bgColor _sex_male" data-bgColor="#dae3f3"></th>
-                    <th colspan="2" class="_bgColor _sex_female" data-bgColor="#dae3f3"></th>
-                    <th colspan="2" class="_bgColor _sex_none" data-bgColor="#dae3f3"></th>
                     <th colspan="2" class="_bgColor _sex_male" data-bgColor="#dae3f3"></th>
                     <th colspan="2" class="_bgColor _sex_female" data-bgColor="#dae3f3"></th>
                     <th colspan="2" class="_bgColor _sex_none" data-bgColor="#dae3f3"></th>
@@ -68,6 +110,59 @@
                     <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
                     <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
                     <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                </tr>
+                </thead>
+                <tbody id="dayDetailRadioTableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12 no-padding" style="display: none" id="div_dayDetailVideo">
+            <span class="font-bold">◈영상 방송 > 성별</span>
+            <table class="table table-bordered _tableHeight" data-height="23px">
+                <colgroup>
+                    <col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/>
+                    <col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/>
+                    <col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/>
+                    <col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/>
+                    <col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/>
+                    <col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/>
+                    <col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/><col width="3.3%"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th rowspan="3" class="_bgColor" data-bgColor="#b4c7e7">구분</th>
+                    <th colspan="8" class="_bgColor" data-bgColor="#b4c7e7">영상 방송</th>
+                    <th rowspan="3" class="_bgColor" data-bgcolor="#dae3f3">최대 개설</th>
+                    <th rowspan="3" class="_bgColor" data-bgColor="#b4c7e7">방송시간</th>
+                    <th colspan="10" class="_bgColor" data-bgColor="#f8cbad">청취자</th>
+                    <th rowspan="3" class="_bgColor" data-bgcolor="#fbe5d6">최대 청취자</th>
+                    <th rowspan="3" class="_bgColor" data-bgColor="#b4c7e7">선물 수</th>
+                    <th rowspan="3" class="_bgColor" data-bgColor="#b4c7e7">선물 달</th>
+                </tr>
+                <tr>
+                    <th colspan="2" class="_bgColor _sex_male" data-bgColor="#dae3f3"></th>
+                    <th colspan="2" class="_bgColor _sex_female" data-bgColor="#dae3f3"></th>
+                    <th colspan="2" class="_bgColor _sex_none" data-bgColor="#dae3f3"></th>
+                    <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">소계</th>
+                    <th colspan="2" class="_bgColor _sex_male" data-bgColor="#fbe5d6"></th>
+                    <th colspan="2" class="_bgColor _sex_female" data-bgColor="#fbe5d6"></th>
+                    <th colspan="2" class="_bgColor _sex_none" data-bgColor="#fbe5d6"></th>
+                    <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">소계</th>
+                    <th colspan="2" class="_bgColor" data-bgColor="#fbe5d6">게스트</th>
+                </tr>
+                <tr>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
+                    <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
                     <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
                     <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
                     <th class="_bgColor" data-bgColor="#f2f2f2">중복</th>
@@ -76,7 +171,7 @@
                     <th class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
                 </tr>
                 </thead>
-                <tbody id="dayTableBody"></tbody>
+                <tbody id="dayDetailVideoTableBody"></tbody>
             </table>
         </div>
 
@@ -207,7 +302,25 @@
 
         var data = dataSet();
         data.slctType = 1;
-        util.getAjaxData("time", "/rest/status/newBroadcast/info/time", data, fn_day_success);
+        data.detailType = 0;
+
+        $(".dayBroad").find("#div_dayBroad").hide();
+        $(".dayBroad").find("#div_dayDetailRadio").hide();
+        $(".dayBroad").find("#div_dayDetailVideo").hide();
+        if(tabId == "tab_day"){
+            $(".dayBroad").find("#div_dayBroad").show();
+            util.getAjaxData("time", "/rest/status/newBroadcast/info/time/new", data, fn_day_success);
+        }else{
+            data.detailType = 1;
+            data.roomType = 0;
+            $(".dayBroad").find("#div_dayDetailRadio").show();
+            $(".dayBroad").find("#div_dayDetailVideo").show();
+            util.getAjaxData("time", "/rest/status/newBroadcast/info/time/new", data, fn_dayDetailRadio_success);
+            data.roomType = 1;
+            util.getAjaxData("time", "/rest/status/newBroadcast/info/time/new", data, fn_dayDetailVideo_success);
+        }
+
+
 
         util.getAjaxData("broadcastGift", "/rest/status/broadcast/broadcastGift/list", data, fn_broadcastGiftDay_success);
 
@@ -253,6 +366,98 @@
 
         if(isDataEmpty){
             $("#dayTableBody td:last").remove();
+        }else{
+            tableBody.append(totalHtml);
+        }
+
+        ui.tableHeightSet();
+        ui.paintColor();
+    }
+
+    // 라디오 방송 > 성별
+    function fn_dayDetailRadio_success(data, response){
+        var isDataEmpty = response.data.detailList == null;
+        var tableBody = $(".dayBroad").find("#dayDetailRadioTableBody");
+
+        tableBody.empty();
+        if(!isDataEmpty){
+            var template = $('#tmp_dayDetailRadioTotal').html();
+            var templateScript = Handlebars.compile(template);
+            var totalContext = response.data.totalInfo;
+            var totalHtml = templateScript(totalContext);
+            tableBody.append(totalHtml);
+        }
+
+        for(var i=0;i<response.data.detailList.length;i++){
+            response.data.detailList[i].nowMonth = Number(moment().format("MM"));
+            response.data.detailList[i].nowDay = common.lpad(Number(moment().format("DD")),2,"0");
+            response.data.detailList[i].nowHour = Number(moment().format("HH"));
+            response.data.detailList[i].day = response.data.detailList[i].the_date.substr(8,2);
+            toDay = week[moment(response.data.detailList[i].the_date.replace(/-/gi,".")).add('days', 0).day()];
+            if(toDay == "토"){
+                toDay = '<span class="_fontColor" data-fontColor="blue">' + response.data.detailList[i].the_date.replace(/-/gi,".") + "(" + toDay + ")" + '</span>';
+            }else if(toDay == "일"){
+                toDay = '<span class="_fontColor" data-fontColor="red">' + response.data.detailList[i].the_date.replace(/-/gi,".") + "(" + toDay + ")" + '</span>';
+            }else{
+                toDay = response.data.detailList[i].the_date.replace(/-/gi,".") + "(" + toDay + ")";
+            }
+            response.data.detailList[i].date = toDay;
+        }
+
+        var template = $('#tmp_dayDetailRadioList').html();
+        var templateScript = Handlebars.compile(template);
+        var detailContext = response.data.detailList;
+        var html=templateScript(detailContext);
+        tableBody.append(html);
+
+        if(isDataEmpty){
+            $(".dayBroad").find("#dayDetailRadioTableBody td:last").remove();
+        }else{
+            tableBody.append(totalHtml);
+        }
+
+        ui.tableHeightSet();
+        ui.paintColor();
+    }
+
+    // 영상 방송 > 성별
+    function fn_dayDetailVideo_success(data, response){
+        var isDataEmpty = response.data.detailList == null;
+        var tableBody = $(".dayBroad").find("#dayDetailVideoTableBody");
+
+        tableBody.empty();
+        if(!isDataEmpty){
+            var template = $('#tmp_dayDetailVideoTotal').html();
+            var templateScript = Handlebars.compile(template);
+            var totalContext = response.data.totalInfo;
+            var totalHtml = templateScript(totalContext);
+            tableBody.append(totalHtml);
+        }
+
+        for(var i=0;i<response.data.detailList.length;i++){
+            response.data.detailList[i].nowMonth = Number(moment().format("MM"));
+            response.data.detailList[i].nowDay = common.lpad(Number(moment().format("DD")),2,"0");
+            response.data.detailList[i].nowHour = Number(moment().format("HH"));
+            response.data.detailList[i].day = response.data.detailList[i].the_date.substr(8,2);
+            toDay = week[moment(response.data.detailList[i].the_date.replace(/-/gi,".")).add('days', 0).day()];
+            if(toDay == "토"){
+                toDay = '<span class="_fontColor" data-fontColor="blue">' + response.data.detailList[i].the_date.replace(/-/gi,".") + "(" + toDay + ")" + '</span>';
+            }else if(toDay == "일"){
+                toDay = '<span class="_fontColor" data-fontColor="red">' + response.data.detailList[i].the_date.replace(/-/gi,".") + "(" + toDay + ")" + '</span>';
+            }else{
+                toDay = response.data.detailList[i].the_date.replace(/-/gi,".") + "(" + toDay + ")";
+            }
+            response.data.detailList[i].date = toDay;
+        }
+
+        var template = $('#tmp_dayDetailVideoList').html();
+        var templateScript = Handlebars.compile(template);
+        var detailContext = response.data.detailList;
+        var html=templateScript(detailContext);
+        tableBody.append(html);
+
+        if(isDataEmpty){
+            $(".dayBroad").find("#dayDetailVideoTableBody td:last").remove();
         }else{
             tableBody.append(totalHtml);
         }
@@ -431,35 +636,25 @@
 <script type="text/x-handlebars-template" id="tmp_dayTotal">
     <tr class="font-bold _bgColor" data-bgColor="#d0cece">
         <td>총합</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma total_create_mCnt}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma total_unique_dj_mCnt}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma total_create_fCnt}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma total_unique_dj_fCnt}}</td>
-        <td>{{addComma total_create_nCnt}}</td>
-        <td>{{addComma total_unique_dj_nCnt}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma v_total_create_mCnt}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma v_total_unique_dj_mCnt}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma v_total_create_fCnt}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma v_total_unique_dj_fCnt}}</td>
-        <td>{{addComma v_total_create_nCnt}}</td>
-        <td>{{addComma v_total_unique_dj_nCnt}}</td>
-        <td>{{addComma total_create_totalCnt}}</td>
-        <td>{{addComma total_unique_dj_Cnt}}</td>
-        <td>{{addComma total_create_max_Cnt}}</td>
-        <td>{{timeStampDay total_airtime}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma total_listener_mCnt}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma total_unique_listener_mCnt}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma total_listener_fCnt}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma total_unique_listener_fCnt}}</td>
-        <td>{{addComma total_listener_nCnt}}</td>
-        <td>{{addComma total_unique_listener_nCnt}}</td>
-        <td>{{addComma total_listener_totalCnt}}</td>
-        <td>{{addComma total_unique_listener_Cnt}}</td>
-        <td>{{addComma total_guest_totalCnt}}</td>
-        <td>{{addComma total_guest_UniqueCnt}}</td>
-        <td>{{addComma total_listener_max_Cnt}}</td>
-        <td>{{addComma total_gift_Cnt}}</td>
-        <td>{{addComma total_gift_Amt}}</td>
+        <td>{{addComma sum_a_create_Cnt}}</td>
+        <td>{{addComma sum_a_unique_dj_Cnt}}</td>
+        <td>{{addComma sum_a_create_max_Cnt}}</td>
+        <td>{{timeStampDay sum_a_airtime}}</td>
+        <td>{{addComma sum_v_create_Cnt}}</td>
+        <td>{{addComma sum_v_unique_dj_Cnt}}</td>
+        <td>{{addComma sum_v_create_max_Cnt}}</td>
+        <td>{{timeStampDay sum_v_airtime}}</td>
+        <td>{{addComma sum_create_Cnt}}</td>
+        <td>{{addComma sum_unique_dj_Cnt}}</td>
+        <td>{{addComma sum_create_max_Cnt}}</td>
+        <td>{{timeStampDay sum_airtime}}</td>
+        <td>{{addComma sum_listener_Cnt}}</td>
+        <td>{{addComma sum_unique_listener_Cnt}}</td>
+        <td>{{addComma sum_guest_Cnt}}</td>
+        <td>{{addComma sum_guest_unique_Cnt}}</td>
+        <td>{{addComma sum_listener_max_Cnt}}</td>
+        <td>{{addComma sum_gift_Cnt}}</td>
+        <td>{{addComma sum_gift_Amt}}</td>
     </tr>
 </script>
 
@@ -469,35 +664,158 @@
         <td {{#dalbit_if nowDay '==' day}} class="font-bold _bgColor" data-bgColor="#fff2cc"  {{/dalbit_if}}
         {{#dalbit_if nowDay '!=' day}} class="font-bold _bgColor" data-bgColor="#d8e2f3"  {{/dalbit_if}}>
         {{{data.date}}}
-        <td class="_fontColor" data-fontColor="blue">{{addComma create_mCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma unique_dj_mCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma create_fCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma unique_dj_fCnt 'Y'}}</td>
-        <td>{{addComma create_nCnt 'Y'}}</td>
-        <td>{{addComma unique_dj_nCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma v_create_mCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma v_unique_dj_mCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma v_create_fCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma v_unique_dj_fCnt 'Y'}}</td>
-        <td>{{addComma v_create_nCnt 'Y'}}</td>
-        <td>{{addComma v_unique_dj_nCnt 'Y'}}</td>
-        <td>{{addComma create_Cnt 'Y'}}</td>
-        <td>{{addComma unique_dj_Cnt 'Y'}}</td>
-        <td>{{addComma create_max_Cnt 'Y'}}</td>
-        <td>{{timeStampDay airtime}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma listener_mCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="blue">{{addComma unique_listener_mCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma listener_fCnt 'Y'}}</td>
-        <td class="_fontColor" data-fontColor="red">{{addComma unique_listener_fCnt 'Y'}}</td>
-        <td>{{addComma listener_nCnt 'Y'}}</td>
-        <td>{{addComma unique_listener_nCnt 'Y'}}</td>
-        <td>{{addComma guest_Cnt 'Y'}}</td>
-        <td>{{addComma guest_unique_Cnt 'Y'}}</td>
-        <td>{{addComma listener_Cnt 'Y'}}</td>
-        <td>{{addComma unique_listener_Cnt 'Y'}}</td>
-        <td>{{addComma listener_max_Cnt 'Y'}}</td>
-        <td>{{addComma gift_Cnt 'Y'}}</td>
-        <td>{{addComma gift_Amt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma a_create_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma a_unique_dj_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma a_create_max_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{timeStampDay a_airtime 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma v_create_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma v_unique_dj_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma v_create_max_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{timeStampDay v_airtime 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma create_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma unique_dj_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma create_max_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{timeStampDay airtime 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma listener_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma unique_listener_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma listener_max_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma gift_Cnt 'Y'}}</td>
+        <td class="_fontColor" data-fontColor="">{{addComma gift_Amt 'Y'}}</td>
+    </tr>
+    {{else}}
+    <tr>
+        <td colspan="20" class="noData">{{isEmptyData}}<td>
+    </tr>
+    {{/each}}
+</script>
+
+
+<%--라디오방송 성별--%>
+<script type="text/x-handlebars-template" id="tmp_dayDetailRadioTotal">
+    <tr class="font-bold _bgColor" data-bgColor="#d0cece">
+        <td>총합</td>
+        <td>{{addComma sum_create_mCnt}}</td>
+        <td>{{addComma sum_unique_dj_mCnt}}</td>
+        <td>{{addComma sum_create_fCnt}}</td>
+        <td>{{addComma sum_unique_dj_fCnt}}</td>
+        <td>{{addComma sum_create_nCnt}}</td>
+        <td>{{addComma sum_unique_dj_nCnt}}</td>
+        <td>{{addComma sum_create_Cnt}}</td>
+        <td>{{addComma sum_unique_dj_Cnt}}</td>
+        <td>{{addComma sum_create_max_Cnt}}</td>
+        <td>{{timeStampDay sum_airtime}}</td>
+        <td>{{addComma sum_listener_mCnt}}</td>
+        <td>{{addComma sum_unique_listener_mCnt}}</td>
+        <td>{{addComma sum_listener_fCnt}}</td>
+        <td>{{addComma sum_unique_listener_fCnt}}</td>
+        <td>{{addComma sum_listener_nCnt}}</td>
+        <td>{{addComma sum_unique_listener_nCnt}}</td>
+        <td>{{addComma sum_guest_Cnt}}</td>
+        <td>{{addComma sum_guest_unique_Cnt}}</td>
+        <td>{{addComma sum_listener_Cnt}}</td>
+        <td>{{addComma sum_unique_listener_Cnt}}</td>
+        <td>{{addComma sum_listener_max_Cnt}}</td>
+        <td>{{addComma sum_gift_Cnt}}</td>
+        <td>{{addComma sum_gift_Amt}}</td>
+    </tr>
+</script>
+<script type="text/x-handlebars-template" id="tmp_dayDetailRadioList">
+    {{#each this as |data|}}
+    <tr {{#dalbit_if nowDay '==' day}} class="font-bold _bgColor" data-bgColor="#fff2cc"  {{/dalbit_if}}>
+    <td {{#dalbit_if nowDay '==' day}} class="font-bold _bgColor" data-bgColor="#fff2cc"  {{/dalbit_if}}
+    {{#dalbit_if nowDay '!=' day}} class="font-bold _bgColor" data-bgColor="#d8e2f3"  {{/dalbit_if}}>
+    {{{data.date}}}
+    <td class="_fontColor" data-fontColor="">{{addComma create_mCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_dj_mCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma create_fCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_dj_fCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma create_nCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_dj_nCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma create_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_dj_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma create_max_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{timeStampDay airtime 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_mCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_listener_mCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_fCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_listener_fCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_nCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_listener_nCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_listener_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_max_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma gift_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma gift_Amt 'Y'}}</td>
+    </tr>
+    {{else}}
+    <tr>
+        <td colspan="20" class="noData">{{isEmptyData}}<td>
+    </tr>
+    {{/each}}
+</script>
+
+<%--영상방송 성별--%>
+<script type="text/x-handlebars-template" id="tmp_dayDetailVideoTotal">
+    <tr class="font-bold _bgColor" data-bgColor="#d0cece">
+        <td>총합</td>
+        <td>{{addComma sum_create_mCnt}}</td>
+        <td>{{addComma sum_unique_dj_mCnt}}</td>
+        <td>{{addComma sum_create_fCnt}}</td>
+        <td>{{addComma sum_unique_dj_fCnt}}</td>
+        <td>{{addComma sum_create_nCnt}}</td>
+        <td>{{addComma sum_unique_dj_nCnt}}</td>
+        <td>{{addComma sum_create_Cnt}}</td>
+        <td>{{addComma sum_unique_dj_Cnt}}</td>
+        <td>{{addComma sum_create_max_Cnt}}</td>
+        <td>{{timeStampDay sum_airtime}}</td>
+        <td>{{addComma sum_listener_mCnt}}</td>
+        <td>{{addComma sum_unique_listener_mCnt}}</td>
+        <td>{{addComma sum_listener_fCnt}}</td>
+        <td>{{addComma sum_unique_listener_fCnt}}</td>
+        <td>{{addComma sum_listener_nCnt}}</td>
+        <td>{{addComma sum_unique_listener_nCnt}}</td>
+        <td>{{addComma sum_guest_Cnt}}</td>
+        <td>{{addComma sum_guest_unique_Cnt}}</td>
+        <td>{{addComma sum_listener_Cnt}}</td>
+        <td>{{addComma sum_unique_listener_Cnt}}</td>
+        <td>{{addComma sum_listener_max_Cnt}}</td>
+        <td>{{addComma sum_gift_Cnt}}</td>
+        <td>{{addComma sum_gift_Amt}}</td>
+    </tr>
+</script>
+<script type="text/x-handlebars-template" id="tmp_dayDetailVideoList">
+    {{#each this as |data|}}
+    <tr {{#dalbit_if nowDay '==' day}} class="font-bold _bgColor" data-bgColor="#fff2cc"  {{/dalbit_if}}>
+    <td {{#dalbit_if nowDay '==' day}} class="font-bold _bgColor" data-bgColor="#fff2cc"  {{/dalbit_if}}
+    {{#dalbit_if nowDay '!=' day}} class="font-bold _bgColor" data-bgColor="#d8e2f3"  {{/dalbit_if}}>
+    {{{data.date}}}
+    <td class="_fontColor" data-fontColor="">{{addComma create_mCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_dj_mCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma create_fCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_dj_fCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma create_nCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_dj_nCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma create_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_dj_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma create_max_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma airtime 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_mCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_listener_mCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_fCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_listener_fCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_nCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_listener_nCnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma unique_listener_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma listener_max_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma gift_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma gift_Amt 'Y'}}</td>
     </tr>
     {{else}}
     <tr>

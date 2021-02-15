@@ -16,6 +16,8 @@ public class P_StatVo {
     private int pageCnt;
     private int recvType;
     private String type_media;
+    private int detailType;
+    private int roomType;
 
     private String beforStartDate;
     private String beforEndDate;
