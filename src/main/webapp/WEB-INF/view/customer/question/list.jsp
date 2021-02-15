@@ -25,7 +25,7 @@
                                         <span name="question_selbox_type" id="question_selbox_type" style="display: none"></span>
                                         <span name="slctDateType" id="slctDateType" onchange="seldateType_change();"></span>
 
-                                        <div class="input-group date" id="rangeDatepicker" style="display: none">
+                                        <div class="input-group date" id="rangeDatepicker">
                                             <label for="displayDate" class="input-group-addon">
                                                 <span><i class="fa fa-calendar"></i></span>
                                             </label>
@@ -38,11 +38,11 @@
                                         <%--<input name="endDate" id="endDate" />--%>
                                         <span id="searchMemberArea" onchange="btSearchClick();" style="display: none"></span>
                                         <span id="searchQnaArea" onchange="btSearchClick();" style="display: none"></span>
-                                        <label><input type="text" class="form-control" id="txt_search" style="width: 130px"></label>
+                                        <label><input type="text" class="form-control" id="txt_search" style="width: 130px;display: none"></label>
                                         <button type="button" class="btn btn-success" id="bt_search">검색</button>
-                                        <a href="javascript://" class="_prevSearch" style="display: none">[이전]</a>
-                                        <a href="javascript://" class="_todaySearch" style="display: none">[오늘]</a>
-                                        <a href="javascript://" class="_nextSearch" style="display: none">[다음]</a>
+                                        <a href="javascript://" class="_prevSearch" >[이전]</a>
+                                        <a href="javascript://" class="_todaySearch" >[오늘]</a>
+                                        <a href="javascript://" class="_nextSearch" >[다음]</a>
                                     </td>
                                 </tr>
                             </table>
@@ -212,7 +212,7 @@
             $("#question_summaryArea0").show();
         }
 
-        $("#question_status").html(util.getCommonCodeSelect(-1, question_status));
+        $("#question_status").html(util.getCommonCodeSelect(0, question_status));
         $("#question_platform").html(util.getCommonCodeSelect(-1, question_platform));
         tab_questionClick(0);
     });
@@ -270,19 +270,21 @@
     function seldateType_change(){
         $("#searchMemberArea").hide();
         $("#searchQnaArea").hide();
-        if($("#slctDateType").find("select").val() == 0){
-            $("#rangeDatepicker").hide();
-            $("._prevSearch").hide();
-            $("._todaySearch").hide();
-            $("._nextSearch").hide();
-        }else if($("#slctDateType").find("select").val() == 1 || $("#slctDateType").find("select").val() == 2){
+        $("#rangeDatepicker").hide();
+        $("#txt_search").hide();
+        $("._prevSearch").hide();
+        $("._todaySearch").hide();
+        $("._nextSearch").hide();
+        if($("#slctDateType").find("select").val() == 1 || $("#slctDateType").find("select").val() == 2){
             $("#rangeDatepicker").show();
             $("._prevSearch").show();
             $("._todaySearch").show();
             $("._nextSearch").show();
         }else if($("#slctDateType").find("select").val() == 3){
+            $("#txt_search").show();
             $("#searchMemberArea").show();
         }else if($("#slctDateType").find("select").val() == 4){
+            $("#txt_search").show();
             $("#searchQnaArea").show();
         }
     }

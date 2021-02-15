@@ -26,7 +26,6 @@ var question_selbox_type = [
 
 var slctDateType = [
     new COMMON_CODE(null, 'slctDateType', '조회구분')
-    , new COMMON_CODE('0', '0', '날짜(전체)')
     , new COMMON_CODE('1', '1', '접수일시')
     , new COMMON_CODE('2', '2', '처리일시')
     , new COMMON_CODE('3', '3', '회원구분')
