@@ -39,7 +39,7 @@
     function initDataTable_clipHistoryMember() {
         //=---------- Main DataTable ----------
         var dtList_info_data = function (data) {
-            data.newSearchType = $("#searchClip").val();
+            data.newSearchType = $("#searchMember").val();
         };
 
         dtList_info = new DalbitDataTable($("#clip_history_member_list_info"), dtList_info_data, ClipHistoryDataTableSource.memberList, $("#searchForm"));
