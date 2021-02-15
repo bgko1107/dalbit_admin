@@ -60,6 +60,8 @@
             data.searchType = 1;
             data.slctPlatform = tmp_slctPlatform;
             data.slctState = tmp_slctState;
+            data.newSearchType = 1;
+            data.slctDateType = 3;
         };
         dtList_info_detail = new DalbitDataTable($("#"+tmp).find("#list_info_detail"), dtList_info_detail_data, questionDataTableSource.questList);
         dtList_info_detail.useCheckBox(false);

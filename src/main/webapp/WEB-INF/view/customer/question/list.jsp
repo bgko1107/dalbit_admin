@@ -25,7 +25,7 @@
                                         <span name="question_selbox_type" id="question_selbox_type" style="display: none"></span>
                                         <span name="slctDateType" id="slctDateType" onchange="seldateType_change();"></span>
 
-                                        <div class="input-group date" id="rangeDatepicker">
+                                        <div class="input-group date" id="rangeDatepicker" style="display: none">
                                             <label for="displayDate" class="input-group-addon">
                                                 <span><i class="fa fa-calendar"></i></span>
                                             </label>
@@ -36,13 +36,13 @@
                                         <input type="hidden" name="endDate" id="endDate" />
                                         <%--<input name="startDate" id="startDate" />--%>
                                         <%--<input name="endDate" id="endDate" />--%>
-                                        <span id="searchMemberArea" onchange="btSearchClick();" style="display: none"></span>
+                                        <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                         <span id="searchQnaArea" onchange="btSearchClick();" style="display: none"></span>
-                                        <label><input type="text" class="form-control" id="txt_search" style="width: 130px;display: none"></label>
+                                        <label><input type="text" class="form-control" id="txt_search"></label>
                                         <button type="button" class="btn btn-success" id="bt_search">검색</button>
-                                        <a href="javascript://" class="_prevSearch" >[이전]</a>
-                                        <a href="javascript://" class="_todaySearch" >[오늘]</a>
-                                        <a href="javascript://" class="_nextSearch" >[다음]</a>
+                                        <a href="javascript://" class="_prevSearch" style="display: none">[이전]</a>
+                                        <a href="javascript://" class="_todaySearch" style="display: none">[오늘]</a>
+                                        <a href="javascript://" class="_nextSearch" style="display: none">[다음]</a>
                                     </td>
                                 </tr>
                             </table>
@@ -212,7 +212,7 @@
             $("#question_summaryArea0").show();
         }
 
-        $("#question_status").html(util.getCommonCodeSelect(0, question_status));
+        $("#question_status").html(util.getCommonCodeSelect(3, question_status));
         $("#question_platform").html(util.getCommonCodeSelect(-1, question_platform));
         tab_questionClick(0);
     });
