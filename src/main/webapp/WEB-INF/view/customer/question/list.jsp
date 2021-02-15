@@ -212,13 +212,13 @@
             $("#question_summaryArea0").show();
         }
 
-        $("#question_status").html(util.getCommonCodeSelect(3, question_status));
+        $("#question_status").html(util.getCommonCodeSelect(-1, question_status));
         $("#question_platform").html(util.getCommonCodeSelect(-1, question_platform));
         tab_questionClick(0);
     });
     $("#question_searchType").html(util.getCommonCodeSelect(-1, question_searchType));
     $("#question_selbox_type").html(util.getCommonCodeSelect(-1, question_selbox_type));
-    $("#slctDateType").html(util.getCommonCodeSelect(-1, slctDateType));
+    $("#slctDateType").html(util.getCommonCodeSelect(3, slctDateType));
 
     $('#one_title').html("ㆍ회원의 1:1문의 내용을 확인하고, 답변 및 처리할 수 있습니다. 신중히 확인 한 후 답변바랍니다.");
 
