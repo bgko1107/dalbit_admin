@@ -802,7 +802,7 @@
     <td class="_fontColor" data-fontColor="">{{addComma create_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_dj_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma create_max_Cnt 'Y'}}</td>
-    <td class="_fontColor" data-fontColor="">{{addComma airtime 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{timeStampDay airtime 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_mCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_mCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_fCnt 'Y'}}</td>
