@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <!-- /#page-wrapper -->
+    <!-- /#page-wr apper -->
 </div>
 <!-- /#wrapper -->
 
