@@ -371,7 +371,7 @@
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p16Succ}}</span><br/>({{addComma p16Fail}})<br/>({{average p16Fail p16Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p17Succ}}</span><br/>({{addComma p17Fail}})<br/>({{average p17Fail p17Succ}}%)</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p34Succ}}</span><br/>({{addComma p34Fail}})<br/>({{average p34Succ p34Fail}}%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p34Succ}}</span><br/>({{addComma p34Fail}})<br/>({{average p34Fail p34Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p31Succ}}</span><br/>({{addComma p31Fail}})<br/>({{average p31Fail p31Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p20Succ}}</span><br/>({{addComma p20Fail}})<br/>({{average p20Fail p20Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p19Succ}}</span><br/>({{addComma p19Fail}})<br/>({{average p19Fail p19Succ}}%)</td>
