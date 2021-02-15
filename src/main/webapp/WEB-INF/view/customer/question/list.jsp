@@ -36,7 +36,8 @@
                                         <input type="hidden" name="endDate" id="endDate" />
                                         <%--<input name="startDate" id="startDate" />--%>
                                         <%--<input name="endDate" id="endDate" />--%>
-
+                                        <span id="searchMemberArea" onchange="btSearchClick();" style="display: none"></span>
+                                        <span id="searchQnaArea" onchange="btSearchClick();" style="display: none"></span>
                                         <label><input type="text" class="form-control" id="txt_search" style="width: 130px"></label>
                                         <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                         <a href="javascript://" class="_prevSearch" style="display: none">[이전]</a>
@@ -168,6 +169,9 @@
 
     $(document).ready(function() {
 
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+        $("#searchQnaArea").html(util.getCommonCodeSelect(1, searchQna));
+
         $("#displayDate").statsDaterangepicker(
             function(start, end, t1) {
                 $("#startDate").val(start.format('YYYY.MM.DD'));
@@ -264,16 +268,22 @@
     }
 
     function seldateType_change(){
+        $("#searchMemberArea").hide();
+        $("#searchQnaArea").hide();
         if($("#slctDateType").find("select").val() == 0){
             $("#rangeDatepicker").hide();
             $("._prevSearch").hide();
             $("._todaySearch").hide();
             $("._nextSearch").hide();
-        }else{
+        }else if($("#slctDateType").find("select").val() == 1 || $("#slctDateType").find("select").val() == 2){
             $("#rangeDatepicker").show();
             $("._prevSearch").show();
             $("._todaySearch").show();
             $("._nextSearch").show();
+        }else if($("#slctDateType").find("select").val() == 3){
+            $("#searchMemberArea").show();
+        }else if($("#slctDateType").find("select").val() == 4){
+            $("#searchQnaArea").show();
         }
     }
 
@@ -492,7 +502,6 @@
         $("#tab_qna").addClass("hide");
     }
     function allMembers(){
-        console.log("--------------------");
         var dtList_info_detail_data0 = function ( data ) {
             data.searchText = $('#txt_search').val();
             data.searchType = tmp_searchType;
@@ -502,6 +511,7 @@
             data.startDate = $("#startDate").val();
             data.endDate = $("#endDate").val();
             data.slctDateType = $("#slctDateType").find("select").val();
+            data.newSearchType = $("#slctDateType").find("select").val() == 3 ? $("#searchMember").val() : $("#slctDateType").find("select").val() == 4 ? $("#searchQna").val() : 1;
         };
 
         dtList_info_detail0 = new DalbitDataTable($("#list_info0"), dtList_info_detail_data0, questionDataTableSource.questList);
@@ -520,6 +530,7 @@
             data.startDate = $("#startDate").val();
             data.endDate = $("#endDate").val();
             data.slctDateType = $("#slctDateType").find("select").val();
+            data.newSearchType = $("#slctDateType").find("select").val() == 3 ? $("#searchMember").val() : $("#slctDateType").find("select").val() == 4 ? $("#searchQna").val() : 1;
         };
 
         dtList_info_detail = new DalbitDataTable($("#list_info"), dtList_info_detail_data, questionDataTableSource.questList);
@@ -538,6 +549,7 @@
             data.startDate = $("#startDate").val();
             data.endDate = $("#endDate").val();
             data.slctDateType = $("#slctDateType").find("select").val();
+            data.newSearchType = $("#slctDateType").find("select").val() == 3 ? $("#searchMember").val() : $("#slctDateType").find("select").val() == 4 ? $("#searchQna").val() : 1;
         };
 
         dtList_info_detail2 = new DalbitDataTable($("#list_info2"), dtList_info_detail_data2, questionDataTableSource.questListNonMember);
@@ -568,6 +580,11 @@
     }
 
     /*==================================*/
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
+
 </script>
 
 <script id="question_tableSummary0" type="text/x-handlebars-template">
