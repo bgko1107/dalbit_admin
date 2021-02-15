@@ -468,7 +468,7 @@
 
     function fn_broadcastGiftDay_success(dst_id, response) {
         var isDataEmpty = response.data.detailList == null;
-        $("#giftDayListBody").empty();
+        $(".dayBroad").find("#giftDayListBody").empty();
         if(!isDataEmpty){
 
             // response.data.totalInfo.sum_totalGiftCnt = response.data.totalInfo.sum_normalGiftCnt + response.data.totalInfo.sum_guest_normalGiftCnt;
@@ -482,7 +482,7 @@
             var templateScript = Handlebars.compile(template);
             var totalContext = response.data.totalInfo;
             var totalHtml = templateScript(totalContext);
-            $("#giftDayListBody").append(totalHtml);
+            $(".dayBroad").find("#giftDayListBody").append(totalHtml);
 
             response.data.detailList.slctType = $('input:radio[name="slctType"]:checked').val();
         }
@@ -516,12 +516,12 @@
         var templateScript = Handlebars.compile(template);
         var detailContext = response.data.detailList;
         var html=templateScript(detailContext);
-        $("#giftDayListBody").append(html);
+        $(".dayBroad").find("#giftDayListBody").append(html);
 
         if(isDataEmpty){
-            $("#giftDayListBody td:last").remove();
+            $(".dayBroad").find("#giftDayListBody td:last").remove();
         }else{
-            $("#giftDayListBody").append(totalHtml);
+            $(".dayBroad").find("#giftDayListBody").append(totalHtml);
         }
 
         ui.tableHeightSet();
@@ -530,7 +530,7 @@
 
     function fn_platformDayList_success(dst_id, response) {
         var isDataEmpty = response.data.detailList == null;
-        $("#platformDayListBody").empty();
+        $(".dayBroad").find("#platformDayListBody").empty();
         if(!isDataEmpty){
             response.data.totalInfo.totalCnt = response.data.totalInfo.totalCreateCnt + response.data.totalInfo.v_totalCreateCnt;
             response.data.totalInfo.totalTime = response.data.totalInfo.totalBroadcastingTime + response.data.totalInfo.v_totalBroadcastingTime;
@@ -539,7 +539,7 @@
             var templateScript = Handlebars.compile(template);
             var totalContext = response.data.totalInfo;
             var totalHtml = templateScript(totalContext);
-            $("#platformDayListBody").append(totalHtml);
+            $(".dayBroad").find("#platformDayListBody").append(totalHtml);
 
             response.data.detailList.slctType = slctType;
         }
@@ -570,12 +570,12 @@
         var templateScript = Handlebars.compile(template);
         var detailContext = response.data.detailList;
         var html=templateScript(detailContext);
-        $("#platformDayListBody").append(html);
+        $(".dayBroad").find("#platformDayListBody").append(html);
 
         if(isDataEmpty){
-            $("#platformDayListBody td:last").remove();
+            $(".dayBroad").find("#platformDayListBody td:last").remove();
         }else{
-            $("#platformDayListBody").append(totalHtml);
+            $(".dayBroad").find("#platformDayListBody").append(totalHtml);
         }
 
         ui.tableHeightSet();
@@ -584,7 +584,7 @@
 
     function fn_typeDay_success(data, response){
         var isDataEmpty = response.data.detailList == null;
-        var tableBody = $("#typeDayTableBody");
+        var tableBody = $(".dayBroad").find("#typeDayTableBody");
 
         tableBody.empty();
         if(!isDataEmpty){
@@ -622,7 +622,7 @@
         tableBody.append(html);
 
         if(isDataEmpty){
-            $("#typeDayTableBody td:last").remove();
+            $(".dayBroad").find("#typeDayTableBody td:last").remove();
         }else{
             tableBody.append(totalHtml);
         }
@@ -712,10 +712,10 @@
         <td>{{addComma sum_unique_listener_fCnt}}</td>
         <td>{{addComma sum_listener_nCnt}}</td>
         <td>{{addComma sum_unique_listener_nCnt}}</td>
-        <td>{{addComma sum_guest_Cnt}}</td>
-        <td>{{addComma sum_guest_unique_Cnt}}</td>
         <td>{{addComma sum_listener_Cnt}}</td>
         <td>{{addComma sum_unique_listener_Cnt}}</td>
+        <td>{{addComma sum_guest_Cnt}}</td>
+        <td>{{addComma sum_guest_unique_Cnt}}</td>
         <td>{{addComma sum_listener_max_Cnt}}</td>
         <td>{{addComma sum_gift_Cnt}}</td>
         <td>{{addComma sum_gift_Amt}}</td>
@@ -743,10 +743,10 @@
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_fCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_nCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_nCnt 'Y'}}</td>
-    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
-    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_max_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma gift_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma gift_Amt 'Y'}}</td>
@@ -778,10 +778,10 @@
         <td>{{addComma sum_unique_listener_fCnt}}</td>
         <td>{{addComma sum_listener_nCnt}}</td>
         <td>{{addComma sum_unique_listener_nCnt}}</td>
-        <td>{{addComma sum_guest_Cnt}}</td>
-        <td>{{addComma sum_guest_unique_Cnt}}</td>
         <td>{{addComma sum_listener_Cnt}}</td>
         <td>{{addComma sum_unique_listener_Cnt}}</td>
+        <td>{{addComma sum_guest_Cnt}}</td>
+        <td>{{addComma sum_guest_unique_Cnt}}</td>
         <td>{{addComma sum_listener_max_Cnt}}</td>
         <td>{{addComma sum_gift_Cnt}}</td>
         <td>{{addComma sum_gift_Amt}}</td>
@@ -809,10 +809,10 @@
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_fCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_nCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_nCnt 'Y'}}</td>
-    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
-    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_max_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma gift_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma gift_Amt 'Y'}}</td>

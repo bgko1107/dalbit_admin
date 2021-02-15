@@ -677,10 +677,10 @@
         <td>{{addComma sum_unique_listener_fCnt}}</td>
         <td>{{addComma sum_listener_nCnt}}</td>
         <td>{{addComma sum_unique_listener_nCnt}}</td>
-        <td>{{addComma sum_guest_Cnt}}</td>
-        <td>{{addComma sum_guest_unique_Cnt}}</td>
         <td>{{addComma sum_listener_Cnt}}</td>
         <td>{{addComma sum_unique_listener_Cnt}}</td>
+        <td>{{addComma sum_guest_Cnt}}</td>
+        <td>{{addComma sum_guest_unique_Cnt}}</td>
         <td>{{addComma sum_listener_max_Cnt}}</td>
         <td>{{addComma sum_gift_Cnt}}</td>
         <td>{{addComma sum_gift_Amt}}</td>
@@ -709,10 +709,10 @@
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_fCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_nCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_nCnt 'Y'}}</td>
-    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
-    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_max_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma gift_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma gift_Amt 'Y'}}</td>
@@ -744,10 +744,10 @@
         <td>{{addComma sum_unique_listener_fCnt}}</td>
         <td>{{addComma sum_listener_nCnt}}</td>
         <td>{{addComma sum_unique_listener_nCnt}}</td>
-        <td>{{addComma sum_guest_Cnt}}</td>
-        <td>{{addComma sum_guest_unique_Cnt}}</td>
         <td>{{addComma sum_listener_Cnt}}</td>
         <td>{{addComma sum_unique_listener_Cnt}}</td>
+        <td>{{addComma sum_guest_Cnt}}</td>
+        <td>{{addComma sum_guest_unique_Cnt}}</td>
         <td>{{addComma sum_listener_max_Cnt}}</td>
         <td>{{addComma sum_gift_Cnt}}</td>
         <td>{{addComma sum_gift_Amt}}</td>
@@ -776,10 +776,10 @@
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_fCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_nCnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_nCnt 'Y'}}</td>
-    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
-    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma unique_listener_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_Cnt 'Y'}}</td>
+    <td class="_fontColor" data-fontColor="">{{addComma guest_unique_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma listener_max_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma gift_Cnt 'Y'}}</td>
     <td class="_fontColor" data-fontColor="">{{addComma gift_Amt 'Y'}}</td>
