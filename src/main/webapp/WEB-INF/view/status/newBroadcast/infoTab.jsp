@@ -17,11 +17,11 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade in active timeBroad" style="width: 2600px" id="time"><jsp:include page="time.jsp"/></div>
-                <div class="tab-pane fade timeBroad" style="width: 2600px" id="timeDetail"><jsp:include page="time.jsp"/></div>
-                <div class="tab-pane fade dayBroad" style="width: 2600px" id="day"><jsp:include page="day.jsp"/></div>
-                <div class="tab-pane fade dayBroad" style="width: 2600px" id="dayDetail"><jsp:include page="day.jsp"/></div>
-                <div class="tab-pane fade yearBroad" style="width: 2600px" id="year" ><jsp:include page="year.jsp"/></div>
-                <div class="tab-pane fade yearBroad" style="width: 2600px" id="yearDetail" ><jsp:include page="year.jsp"/></div>
+                <div class="tab-pane fade timeBroad" id="timeDetail"><jsp:include page="time.jsp"/></div>
+                <div class="tab-pane fade dayBroad" id="day"><jsp:include page="day.jsp"/></div>
+                <div class="tab-pane fade dayBroad" id="dayDetail"><jsp:include page="day.jsp"/></div>
+                <div class="tab-pane fade yearBroad" id="year" ><jsp:include page="year.jsp"/></div>
+                <div class="tab-pane fade yearBroad" id="yearDetail" ><jsp:include page="year.jsp"/></div>
                 <div class="tab-pane fade" id="gift"><jsp:include page="gift.jsp"/></div>
             </div>
         </div>
