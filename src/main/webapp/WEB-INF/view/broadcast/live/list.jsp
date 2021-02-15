@@ -627,7 +627,7 @@
             var td = $(this).children();
             var td_3 = td.eq(3);
             if(td_3.find('#mediaType').data().mediatype == "v"){
-                td_3.css("background-color", "#dae3f3");
+                td_3.css("background-color", "#fbe5d6");
             }
         });
     }
@@ -664,7 +664,7 @@
         </tr>
         <tr>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalAudioCnt}}</td>
-            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalVideoCnt}}</td>
+            <td><span style="color: red;font-weight: bold">{{#equal length '0'}}0{{/equal}}{{addComma content.totalVideoCnt}}</span></td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.normalDjCnt}} ({{addComma content.specialDjCnt}})</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.newDjCnt}}명</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalAosCnt}}</td>

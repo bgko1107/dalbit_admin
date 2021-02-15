@@ -512,7 +512,7 @@
             <th>방송상태</th>
 
 
-            <td style="text-align: left; {{#dalbit_if type_media '==' 'v'}} background-color: #dae3f3 {{/dalbit_if}}">
+            <td style="text-align: left; {{#dalbit_if type_media '==' 'v'}} background-color: #fbe5d6 {{/dalbit_if}}">
                 {{{icon_broadcastState}}}
                 <button type="button" id="bt_forcedEnd" class="btn btn-danger btn-sm pull-right">방송강제종료</button>
                 {{#equal roomHide '0'}}
