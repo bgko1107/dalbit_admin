@@ -162,6 +162,12 @@ var specialDataTableSource = {
             {'title': '지원요건 3', 'data': '', 'render': function (data, type, row, meta) {
                     return row.condition_codeName3 + '<br />' + specialDjUtil.getConditionData(row.condition_code3, row.condition_data3)
                 },'width':'200px'},
+            {'title': '지원요건 4', 'data': '', 'render': function (data, type, row, meta) {
+                    return row.condition_codeName4 + '<br />' + specialDjUtil.getConditionData(row.condition_code4, row.condition_data4)
+                },'width':'200px'},
+            {'title': '스페셜요건', 'data': '', 'render': function (data, type, row, meta) {
+                    return row.best_codeName + '<br />' + specialDjUtil.getConditionData(row.best_code, row.best_data)
+                },'width':'200px'},
             {'title': '등록일', 'data': 'reg_date', 'render': function (data, type, row, meta) {
                     return moment(row.reg_date).format('YYYY.MM.DD HH:mm:ss')
                 },'width':'100px'},
@@ -179,5 +185,41 @@ var specialDataTableSource = {
                     return data
                 },'width':'100px'},
         ]
-    }
+    },
+
+    'bestAbleSpecialList' : {
+        'url': '/rest/menu/special/bestAbleList'
+        , 'columns': [
+            {'title': '유저구분', 'data': 'specialdj_badge','width':'70px', 'render' : function(data, type, row, meta){
+                    return (data == 0 ? '일반' : data == 1 ? '스페셜' : '베스트');
+                }},
+            {'title': '스디 횟수', 'data': 'specialdj_cnt','width':'70px'},
+            {'title': '베스트<br >횟수', 'data': 'bestdj_cnt','width':'70px'},
+            {'title': '회원번호', 'data': 'mem_no','width':'200px', 'render' : function(data, type, row, meta){
+                    return '<a href="javascript://" class="_detail" data-year="'+row.select_year+'" data-month="'+row.select_month+'">' + data + '</a>'
+                }},
+            {'title': '닉네임', 'data': 'mem_nick','width':'300px'},
+            {'title': '성별', 'data': 'mem_sex', 'render': function (data, type, row, meta) {
+                    return common.sexIcon(data, row.mem_birth_year, true);
+                },'width':'100px'},
+            {'title': '누적 방송시간<br />(팬방송 제외)', 'data': 'air_time', 'render': function (data, type, row, meta) {
+                    return common.timeStampDay(data-row.fan_air_time);
+                },'width':'200px'},
+            {'title': '누적<br />팬 방송시간', 'data': 'fan_air_time', 'render': function (data, type, row, meta) {
+                    return common.timeStampDay(data);
+                },'width':'200px'},
+            {'title': '일반 조건<br />신청 유무', 'data': 'is_req','width':'200px'},
+            {'title': '베스트<br />가능여부', 'data': '', 'render': function (data, type, row, meta) {
+
+                    if(row.specialdj_badge == 2 && row.best_data <= Math.floor(data-row.fan_air_time / 3600)){
+                        return common.setFontColor('가능', 'blue');
+                    }
+                    if(row.specialdj_badge < 2 && row.is_req == 'Y'){
+                        return common.setFontColor('가능', 'blue');
+                    }
+
+                    return common.setFontColor('불가능', 'red');
+                },'width':'200px'},
+        ]
+    },
 };

@@ -205,4 +205,13 @@ public class Men_SpecialRestController {
         String result = menSpecialService.selectManageList(specialDjManageVo);
         return result;
     }
+
+    /**
+     * 스페셜 달D 신청 관리 목록
+     */
+    @PostMapping("bestAbleList")
+    public String selectBestAbleList(SpecialDjBestVo specialDjBestVo) {
+        String result = menSpecialService.selectBestAbleList(specialDjBestVo);
+        return result;
+    }
 }

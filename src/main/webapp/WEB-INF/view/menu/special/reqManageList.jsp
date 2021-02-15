@@ -314,53 +314,6 @@
         }
     });
 
-    /*$(document).on('click', '#insertBtn', function(){
-
-        if(confirm('저장하시겠습니까?')){
-
-            $('input[type="hidden"][name="select_year"]').val($('select[name="select_year"]').val());
-            $('input[type="hidden"][name="select_month"]').val($('select[name="select_month"]').val());
-
-            var contentList = new Array();
-            $('._manageContent').each(function(index){
-                var content_type = $(this).find('.content_type:checked').val();
-
-                if(content_type == 'image'){
-                    var data = {
-                        content_type : $(this).find('.content_type:checked').val()
-                        , content_order : index
-                        , image_pc_url : $(this).find('.image_pc_url').val()
-                        , image_mobile_url : $(this).find('.image_mobile_url').val()
-                    }
-
-                }else if(content_type == 'button'){
-                    var data = {
-                        content_type : $(this).find('.content_type:checked').val()
-                        , content_order : index
-                        , button_type : $(this).find('.button_type:checked').val()
-                        , button_color : $(this).find('.button_color').val()
-                        , button_name : $(this).find('.button_name').val()
-                        , button_name_color : $(this).find('.button_name_color').val()
-                        , button_pc_link : $(this).find('.button_pc_link').val()
-                        , button_mobile_link : $(this).find('.button_mobile_link').val()
-                    }
-                }
-
-                contentList.push(data);
-            });
-
-            var formData = util.serializeToJson($("#reqManageDetail"))
-            formData.contentList = contentList;
-
-            if(validationCheck()){
-                var json = {
-                    jsonData : JSON.stringify(formData)
-                }
-                util.getAjaxData("updateManageInfo", "/rest/menu/special/insertManageInfo", json, fn_success_insertManageInfo);
-            }
-        }
-    });*/
-
     $(document).on('change', '.content_type', function(){
         var me = $(this);
         var table = me.closest('table')
@@ -515,7 +468,7 @@
                     </tr>
                     <tr>
                         <th>자격요건1</th>
-                        <td colspan="3">
+                        <td>
 
                             <select class="form-control" name="condition_code1">
                                 {{#each this.specialDjCondition}}
@@ -524,10 +477,9 @@
                             </select>
                             <input type="text" class="form-control" id="condition_data1" name="condition_data1" value="{{this.specialDjManageInfo.condition_data1}}" />
                         </td>
-                    </tr>
-                    <tr>
+
                         <th>자격요건2</th>
-                        <td colspan="3">
+                        <td>
                             <select class="form-control" name="condition_code2">
                                 {{#each this.specialDjCondition}}
                                     <option value="{{cd}}" {{#equal ../specialDjManageInfo.condition_code2 cd}}selected{{/equal}}>{{cdNm}}</option>
@@ -538,13 +490,34 @@
                     </tr>
                     <tr>
                         <th>자격요건3</th>
-                        <td colspan="3">
+                        <td>
                             <select class="form-control" name="condition_code3">
                                 {{#each this.specialDjCondition}}
                                     <option value="{{cd}}" {{#equal ../specialDjManageInfo.condition_code3 cd}}selected{{/equal}}>{{cdNm}}</option>
                                 {{/each}}
                             </select>
                             <input type="text" class="form-control" id="condition_data3" name="condition_data3" value="{{this.specialDjManageInfo.condition_data3}}" />
+                        </td>
+
+                        <th>자격요건4</th>
+                        <td>
+                            <select class="form-control" name="condition_code4">
+                                {{#each this.specialDjCondition}}
+                                    <option value="{{cd}}" {{#equal ../specialDjManageInfo.condition_code4 cd}}selected{{/equal}}>{{cdNm}}</option>
+                                {{/each}}
+                            </select>
+                            <input type="text" class="form-control" id="condition_data4" name="condition_data4" value="{{this.specialDjManageInfo.condition_data4}}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>베스트 요건</th>
+                        <td colspan="3">
+                            <select class="form-control" name="best_code">
+                                {{#each this.specialDjCondition}}
+                                    <option value="{{cd}}" {{#equal ../specialDjManageInfo.best_code cd}}selected{{/equal}}>{{cdNm}}</option>
+                                {{/each}}
+                            </select>
+                            <input type="text" class="form-control" id="best_data" name="best_data" value="{{this.specialDjManageInfo.best_data}}" />
                         </td>
                     </tr>
 
@@ -685,7 +658,9 @@
                         <i class="fa fa-floppy-o"></i>저장
                     </button>
                 {{/equal}}
-                <button type="button" class="btn btn-warning btn-sm pull-right mb15 mr10" id="addContentBtn"><i class="fa fa-plus"></i>컨텐츠 추가</button>
+                <button type="button" class="btn btn-warning btn-sm pull-right mb15 mr10" id="addContentBtn" style="display:none;">
+                    <i class="fa fa-plus"></i>컨텐츠 추가
+                </button>
             </div>
         </div>
     </div>
