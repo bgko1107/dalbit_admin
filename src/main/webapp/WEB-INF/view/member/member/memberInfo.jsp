@@ -1119,7 +1119,7 @@
                 <button type="button" id="bt_profileMsg_del" class="btn btn-default btn-sm pull-right " style="background-color: #46B0CF; border-color: #46B0CF">삭제</button>
             </td>
             <th>방송상태</th>
-            <td colspan="3" style="text-align: left">
+            <td colspan="3" style="text-align: left;{{#dalbit_if type_media '==' 'v'}} background-color: #dae3f3 {{/dalbit_if}} ">
                 {{{icon_broadcastState}}}
                 {{#equal broadcastState 'ON'}}
                 - 방송제목 : {{{roomNoLink ../title ../room_no}}}
@@ -1128,7 +1128,7 @@
                     <img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />
                 {{/dalbit_if}}
                 {{#dalbit_if type_media '==' 'v'}}
-                    <img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />
+                    <img src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />
                 {{/dalbit_if}}
             </td>
             <th>마이크</th>

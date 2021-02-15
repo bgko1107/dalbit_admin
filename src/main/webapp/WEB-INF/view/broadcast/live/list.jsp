@@ -173,7 +173,7 @@
     sDate = date.getFullYear()  +"-"+ common.lpad(date.getMonth() + 1,2,"0")  +"-"+ common.lpad(date.getDate(),2,"0");        //오늘
 
     $(document).ready(function() {
-        getSearch();
+        // getSearch();
         livePageTabCount();
     });
 
@@ -329,6 +329,8 @@
             var html = templateScript(data);
             $("#live_summaryArea").html(html);
         }
+
+       tableCss();
     }
 
     function fn_inspection_check_success(dst_id, response){
@@ -618,6 +620,16 @@
 
     function btSearchClick(){
         $("#bt_search").click();
+    }
+
+    function tableCss(){
+        $('#list_info > tbody > tr').each(function(){
+            var td = $(this).children();
+            var td_3 = td.eq(3);
+            if(td_3.find('#mediaType').data().mediatype == "v"){
+                td_3.css("background-color", "#dae3f3");
+            }
+        });
     }
 </script>
 

@@ -510,7 +510,9 @@
                 {{#equal broadcastState 'ON'}}<button type="button" id="bt_msgWelcom" class="btn btn-default btn-sm pull-right">초기화</button>{{/equal}}
             </td>
             <th>방송상태</th>
-            <td style="text-align: left">
+
+
+            <td style="text-align: left; {{#dalbit_if type_media '==' 'v'}} background-color: #dae3f3 {{/dalbit_if}}">
                 {{{icon_broadcastState}}}
                 <button type="button" id="bt_forcedEnd" class="btn btn-danger btn-sm pull-right">방송강제종료</button>
                 {{#equal roomHide '0'}}
@@ -531,7 +533,7 @@
                     <img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />
                 {{/dalbit_if}}
                 {{#dalbit_if type_media '==' 'v'}}
-                    <img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />
+                    <img src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />
                 {{/dalbit_if}}
             </td>
         </tr>
