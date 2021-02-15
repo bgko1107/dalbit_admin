@@ -45,7 +45,7 @@
                     <th rowspan="2" class="_bgColor" data-bgColor="#bfbfbf">방송시간</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">중복</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#f2f2f2">비중복</th>
-                    <th class="_bgColor" data-bgColor="#fbe5d6">게스트</th>
+                    <th colspan="2" class="_bgColor" data-bgColor="#fbe5d6">게스트</th>
                     <th rowspan="2" class="_bgColor" data-bgColor="#f8cbad">최대청취자</th>
                 </tr>
                 <tr>

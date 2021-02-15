@@ -400,3 +400,7 @@ Handlebars.registerHelper("popupLink", function(display, url, width, height){
 Handlebars.registerHelper("viewMailBoxItemJson", function(memNick, jsonString){
     return util.viewMailBoxItemJson(memNick, jsonString);
 });
+
+Handlebars.registerHelper("split", function (value, pattern ,location) {
+    return value.split(pattern)[location];
+});
