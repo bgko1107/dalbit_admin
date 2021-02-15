@@ -29,7 +29,7 @@
         targetMemNo = memNo;
         var dtList_info2;
         var dtList_info_data2 = function ( data ) {
-            var searchType = -1;
+            // var searchType = -1;
             var searchText = $('#searchText').val();
             var startDate = common.isEmpty($("#onedayDate").val()) ? "-1" : $("#startDate").val();
             var endDate = common.isEmpty($("#onedayDate").val()) ? "-1" : $("#endDate").val();
@@ -38,17 +38,18 @@
             }
 
             if(!common.isEmpty(targetMemNo)){
-                searchType = 1;
+                // searchType = 1;
                 searchText = targetMemNo;
                 startDate = "1900.01.01";
                 endDate = "9000.01.01";
             }
 
-            data.searchType = searchType;       // 검색구분
+            // data.searchType = searchType;       // 검색구분
             data.searchText = searchText;                        // 검색명
             data.searchTarget = $('#searchTarget option:selected').val();       //대상
             data.startDate = startDate;
             data.endDate = endDate;
+            data.newSearchType = $("#searchMember").val();
             // data.pageCnt = 10;
         };
         dtList_info2 = new DalbitDataTable($("#tb_res_forcedList"), dtList_info_data2, RestrictionsDataTableSource.forcedList);

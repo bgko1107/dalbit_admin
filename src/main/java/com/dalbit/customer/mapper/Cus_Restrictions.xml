@@ -2,40 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dalbit.customer.dao.Cus_RestrictionsDao">
 
-    <!-- 경고/정지회원 Count-->
-    <select id="getWithdrawalListCnt" parameterType="com.dalbit.customer.vo.procedure.P_WithdrawalListInputVo" resultType="java.lang.Integer">
-        /* Cus_Restrictions.xml - getWithdrawalListCnt */
-        SELECT
-        COUNT(*)
-        FROM
-        (
-        SELECT
-        report.reported_mem_no     AS mem_no
-        , IFNULL(basic.mem_nick, (SELECT mem_nick FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = report.reported_mem_no)) AS mem_nick
-        , IFNULL(basic.mem_name, (SELECT mem_name FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = report.reported_mem_no)) AS mem_name
-        , IFNULL(basic.mem_userid, (SELECT mem_userid FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = report.reported_mem_no)) AS mem_userid
-        , (SELECT ip FROM rd_data.tb_member_connect_state WHERE mem_no = report.reported_mem_no) AS ip
-        , (SELECT device_uuid FROM rd_data.tb_member_session WHERE mem_no = basic.mem_no ORDER BY last_upd_date DESC LIMIT 1)	AS device_uuid
-        , basic.mem_phone		AS mem_phone
-        FROM
-        (SELECT * FROM rd_data.tb_member_basic WHERE mem_state != 1) AS basic
-        LEFT JOIN
-        rd_data.tb_member_report AS report
-        ON
-        report.idx = (SELECT MAX(idx) FROM rd_data.tb_member_report WHERE reported_mem_no = basic.mem_no AND status != '0' AND op_code != '1')
+    <sql id="withdrawalWhere">
         <where>
-            report.reported_mem_no IS NOT NULL
-            <if test='opCode != null and opCode != "" and opCode != "-1" '>
-                AND report.op_code = #{opCode}
-            </if>
-            <if test="startDate != '-1'">
-              AND report.op_date BETWEEN DATE_FORMAT(#{startDate}, '%Y-%m-%d 00:00:00') AND DATE_FORMAT(#{endDate}, '%Y-%m-%d 23:59:59')
-            </if>
-        </where>
-        ORDER BY report.op_date desc
-        ) AS a
-        <where>
+
             <if test='searchText != null and searchText != ""'>
+                <choose>
+                    <when test="newSearchType == 1">
+                        and a.mem_no = #{searchText}
+                    </when>
+                    <when test="newSearchType == 2">
+                        and a.mem_nick like concat('%', #{searchText}, '%')
+                    </when>
+                    <when test="newSearchType == 3">
+                        and a.mem_name = #{searchText}
+                    </when>
+                    <when test="newSearchType == 4">
+                        and a.mem_phone = #{searchText}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and a.mem_id = #{searchText}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and a.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                    </when>
+                    <otherwise>
+                        and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                    </otherwise>
+                </choose>
+            </if>
+
+            <!-- <if test='searchText != null and searchText != ""'>
                 <choose>
                     <when test='searchType == 1'>
                         AND a.mem_no like concat ('%', #{searchText}, '%')
@@ -70,8 +66,42 @@
                         )
                     </otherwise>
                 </choose>
+            </if> -->
+        </where>
+    </sql>
+    <!-- 경고/정지회원 Count-->
+    <select id="getWithdrawalListCnt" parameterType="com.dalbit.customer.vo.procedure.P_WithdrawalListInputVo" resultType="java.lang.Integer">
+        /* Cus_Restrictions.xml - getWithdrawalListCnt */
+        SELECT
+        COUNT(*)
+        FROM
+        (
+        SELECT
+        report.reported_mem_no     AS mem_no
+        , IFNULL(basic.mem_nick, (SELECT mem_nick FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = report.reported_mem_no)) AS mem_nick
+        , IFNULL(basic.mem_name, (SELECT mem_name FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = report.reported_mem_no)) AS mem_name
+        , IFNULL(basic.mem_userid, (SELECT mem_userid FROM rd_data.tb_member_withdrawal_bak WHERE mem_no = report.reported_mem_no)) AS mem_userid
+        , (SELECT ip FROM rd_data.tb_member_connect_state WHERE mem_no = report.reported_mem_no) AS ip
+        , (SELECT device_uuid FROM rd_data.tb_member_session WHERE mem_no = basic.mem_no ORDER BY last_upd_date DESC LIMIT 1)	AS device_uuid
+        , basic.mem_phone		AS mem_phone
+        FROM
+        (SELECT * FROM rd_data.tb_member_basic WHERE mem_state != 1) AS basic
+        LEFT JOIN
+        rd_data.tb_member_report AS report
+        ON
+        report.idx = (SELECT MAX(idx) FROM rd_data.tb_member_report WHERE reported_mem_no = basic.mem_no AND status != '0' AND op_code != '1')
+        <where>
+            report.reported_mem_no IS NOT NULL
+            <if test='opCode != null and opCode != "" and opCode != "-1" '>
+                AND report.op_code = #{opCode}
+            </if>
+            <if test="startDate != '-1'">
+              AND report.op_date BETWEEN DATE_FORMAT(#{startDate}, '%Y-%m-%d 00:00:00') AND DATE_FORMAT(#{endDate}, '%Y-%m-%d 23:59:59')
             </if>
         </where>
+        ORDER BY report.op_date desc
+        ) AS a
+        <include refid="withdrawalWhere"/>
     </select>
 
     <!-- 경고/정지회원 LIST-->
@@ -126,44 +156,7 @@
             </if>
         </where>
         ) AS a
-        <where>
-            <if test='searchText != null and searchText != ""'>
-                <choose>
-                    <when test='searchType == 1'>
-                        AND a.mem_no like concat ('%', #{searchText}, '%')
-                    </when>
-                    <when test='searchType == 2'>
-                        AND a.mem_name like concat ('%', #{searchText}, '%')
-                    </when>
-                    <when test='searchType == 3'>
-                        AND a.mem_userid like concat ('%', #{searchText}, '%')
-                    </when>
-                    <when test='searchType == 4'>
-                        AND a.mem_nick like concat ('%', #{searchText}, '%')
-                    </when>
-                    <when test='searchType == 5'>
-                        AND a.mem_phone like concat ('%', #{searchText}, '%')
-                    </when>
-                    <when test='searchType == 6'>
-                        AND a.device_uuid = #{searchText}
-                    </when>
-                    <when test='searchType == 9'>
-                        AND a.ip = #{searchText}
-                    </when>
-                    <otherwise>
-                        AND (
-                        a.mem_no like concat ('%', #{searchText}, '%')
-                        OR a.mem_name like concat ('%', #{searchText}, '%')
-                        OR a.mem_userid like concat ('%', #{searchText}, '%')
-                        OR a.mem_nick like concat ('%', #{searchText}, '%')
-                        OR a.mem_phone like concat ('%', #{searchText}, '%')
-                        OR a.device_uuid = #{searchText}
-                        OR a.ip = #{searchText}
-                        )
-                    </otherwise>
-                </choose>
-            </if>
-        </where>
+        <include refid="withdrawalWhere"/>
         ORDER BY a.start_date DESC
         LIMIT  #{pageStart}, #{pageCnt}
         ) AS a,
@@ -171,57 +164,65 @@
     </select>
 
 
-
-
-    <!-- 방송 강제퇴장 회원 COUNT-->
-    <select id="getForcedListCnt" parameterType="com.dalbit.customer.vo.procedure.P_ForcedListInputVo" resultType="java.lang.Integer">
-        /* Cus_Restrictions.xml - getForcedListCnt */
-        SELECT
-        COUNT(*)
-        FROM
-        (
-        SELECT
-        listen.mem_no	 AS mem_no
-        ,IFNULL(basic.mem_userid, basicx.mem_userid) AS mem_userid
-        ,IFNULL(basic.mem_nick, basicx.mem_nick) AS mem_nick
-        ,IFNULL(basic.mem_sex, basicx.mem_sex) AS mem_sex
-        ,IFNULL(basic.mem_name, basicx.mem_name) AS mem_name
-        ,IFNULL(basic.mem_birth_year, basicx.mem_birth_year) AS mem_birth_year
-        ,IFNULL(basic.mem_birth_month, basicx.mem_birth_month) AS mem_birth_month
-        ,IFNULL(basic.mem_birth_day, basicx.mem_birth_day) AS mem_birth_day
-        ,IFNULL(basic.inner, basic.inner) AS `inner`
-        ,((DATE_FORMAT(NOW(),'%Y') - (IFNULL(basic.mem_birth_year, basicx.mem_birth_year))) + 1) AS mem_age
-        ,cstd.last_device_uuid AS device_uuid
-        ,IFNULL(basic.mem_phone, basicx.mem_phone) AS mem_phone
-        ,cst.ip AS mem_ip
-        , dj_mem_no	 AS dj_mem_no
-        ,IFNULL(dj.mem_userid, djx.mem_userid) AS dj_mem_userid
-        ,IFNULL(dj.mem_nick, djx.mem_nick) AS dj_mem_nick
-        ,IFNULL(dj.mem_sex, djx.mem_sex) AS dj_mem_sex
-        ,IFNULL(dj.mem_name, djx.mem_name) AS dj_mem_name
-        ,IFNULL(dj.mem_phone, djx.mem_phone) AS dj_mem_phone
-        ,IFNULL(dj.inner, djx.inner) AS dj_inner
-        ,cstd.ip AS dj_mem_ip
-        ,cstd.last_device_uuid AS dj_device_uuid
-        FROM
-        rd_data.tb_member_broadcast_listening AS listen
-        LEFT JOIN rd_data.tb_member_basic AS basic ON  listen.mem_no = basic.mem_no
-        LEFT JOIN rd_data.tb_member_basic AS dj ON  listen.dj_mem_no = dj.mem_no
-        LEFT JOIN rd_data.tb_member_basic AS basicx ON  listen.mem_no = basicx.mem_no
-        LEFT JOIN rd_data.tb_member_basic AS djx ON  listen.dj_mem_no = djx.mem_no
-        LEFT JOIN rd_data.tb_broadcast_room AS room ON  listen.room_no = room.room_no
-        LEFT JOIN rd_data.tb_member_connect_state AS cst ON listen.mem_no = cst.mem_no
-        LEFT JOIN rd_data.tb_member_connect_state AS cstd ON listen.dj_mem_no = cstd.mem_no
+    <sql id="forcedWhere">
         <where>
-            listen.forced = 'Y'
-            <if test="startDate != '-1'">
-                AND listen.last_upd_date BETWEEN DATE_FORMAT(#{startDate}, '%Y-%m-%d 00:00:00') AND DATE_FORMAT(#{endDate}, '%Y-%m-%d 23:59:59')
+
+            <if test='searchText != null and searchText != ""'>
+                <if test='searchTarget != null and searchTarget != "" and searchTarget != "2"'>
+                    <choose>
+                        <when test="newSearchType == 1">
+                            and a.mem_no = #{searchText}
+                        </when>
+                        <when test="newSearchType == 2">
+                            and a.mem_nick like concat('%', #{searchText}, '%')
+                        </when>
+                        <when test="newSearchType == 3">
+                            and a.mem_name = #{searchText}
+                        </when>
+                        <when test="newSearchType == 4">
+                            and a.mem_phone = #{searchText}
+                        </when>
+                        <when test="newSearchType == 5">
+                            and a.mem_id = #{searchText}
+                        </when>
+                        <when test="newSearchType == 6">
+                            and a.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        </when>
+                        <otherwise>
+                            and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                        </otherwise>
+                    </choose>
+                </if>
+                <if test='searchTarget != null and searchTarget != "" and searchTarget != "1"'>
+                    OR (
+                    <choose>
+                        <when test="newSearchType == 1">
+                            a.dj_mem_no = #{searchText}
+                        </when>
+                        <when test="newSearchType == 2">
+                            a.dj_mem_nick like concat('%', #{searchText}, '%')
+                        </when>
+                        <when test="newSearchType == 3">
+                            a.dj_mem_name = #{searchText}
+                        </when>
+                        <when test="newSearchType == 4">
+                            a.dj_mem_phone = #{searchText}
+                        </when>
+                        <when test="newSearchType == 5">
+                            a.dj_mem_id = #{searchText}
+                        </when>
+                        <when test="newSearchType == 6">
+                            a.dj_mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        </when>
+                        <otherwise>
+                            a.dj_mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                        </otherwise>
+                    </choose>
+                    )
+                </if>
             </if>
-        </where>
-        GROUP BY listen.room_no, listen.mem_no
-        ORDER BY listen.last_upd_date DESC
-        ) AS a
-        <where>
+
+            <!-- <where>
             <if test='searchText != null and searchText != ""'>
                 <if test='searchTarget != null and searchTarget != "" and searchTarget != "2"'>
                     <choose>
@@ -300,8 +301,62 @@
                     )
                 </if>
             </if>
+        </where> -->
         </where>
+    </sql>
+
+    <!-- 방송 강제퇴장 회원 COUNT-->
+    <select id="getForcedListCnt" parameterType="com.dalbit.customer.vo.procedure.P_ForcedListInputVo" resultType="java.lang.Integer">
+        /* Cus_Restrictions.xml - getForcedListCnt */
+        SELECT
+        COUNT(*)
+        FROM
+        (
+        SELECT
+        listen.mem_no	 AS mem_no
+        ,IFNULL(basic.mem_userid, basicx.mem_userid) AS mem_userid
+        ,IFNULL(basic.mem_nick, basicx.mem_nick) AS mem_nick
+        ,IFNULL(basic.mem_sex, basicx.mem_sex) AS mem_sex
+        ,IFNULL(basic.mem_name, basicx.mem_name) AS mem_name
+        ,IFNULL(basic.mem_birth_year, basicx.mem_birth_year) AS mem_birth_year
+        ,IFNULL(basic.mem_birth_month, basicx.mem_birth_month) AS mem_birth_month
+        ,IFNULL(basic.mem_birth_day, basicx.mem_birth_day) AS mem_birth_day
+        ,IFNULL(basic.inner, basic.inner) AS `inner`
+        ,((DATE_FORMAT(NOW(),'%Y') - (IFNULL(basic.mem_birth_year, basicx.mem_birth_year))) + 1) AS mem_age
+        ,cstd.last_device_uuid AS device_uuid
+        ,IFNULL(basic.mem_phone, basicx.mem_phone) AS mem_phone
+        ,cst.ip AS mem_ip
+        , dj_mem_no	 AS dj_mem_no
+        ,IFNULL(dj.mem_userid, djx.mem_userid) AS dj_mem_userid
+        ,IFNULL(dj.mem_nick, djx.mem_nick) AS dj_mem_nick
+        ,IFNULL(dj.mem_sex, djx.mem_sex) AS dj_mem_sex
+        ,IFNULL(dj.mem_name, djx.mem_name) AS dj_mem_name
+        ,IFNULL(dj.mem_phone, djx.mem_phone) AS dj_mem_phone
+        ,IFNULL(dj.inner, djx.inner) AS dj_inner
+        ,cstd.ip AS dj_mem_ip
+        ,cstd.last_device_uuid AS dj_device_uuid
+        FROM
+        rd_data.tb_member_broadcast_listening AS listen
+        LEFT JOIN rd_data.tb_member_basic AS basic ON  listen.mem_no = basic.mem_no
+        LEFT JOIN rd_data.tb_member_basic AS dj ON  listen.dj_mem_no = dj.mem_no
+        LEFT JOIN rd_data.tb_member_basic AS basicx ON  listen.mem_no = basicx.mem_no
+        LEFT JOIN rd_data.tb_member_basic AS djx ON  listen.dj_mem_no = djx.mem_no
+        LEFT JOIN rd_data.tb_broadcast_room AS room ON  listen.room_no = room.room_no
+        LEFT JOIN rd_data.tb_member_connect_state AS cst ON listen.mem_no = cst.mem_no
+        LEFT JOIN rd_data.tb_member_connect_state AS cstd ON listen.dj_mem_no = cstd.mem_no
+        <where>
+            listen.forced = 'Y'
+            <if test="startDate != '-1'">
+                AND listen.last_upd_date BETWEEN DATE_FORMAT(#{startDate}, '%Y-%m-%d 00:00:00') AND DATE_FORMAT(#{endDate}, '%Y-%m-%d 23:59:59')
+            </if>
+        </where>
+        GROUP BY listen.room_no, listen.mem_no
+        ORDER BY listen.last_upd_date DESC
+        ) AS a
+        <include refid="forcedWhere"/>
     </select>
+
+
 
     <select id="getForcedList" parameterType="com.dalbit.customer.vo.procedure.P_ForcedListInputVo" resultType="com.dalbit.customer.vo.procedure.P_ForcedListOutputVo">
         /* Cus_Restrictions.xml - getForcedList */
@@ -354,86 +409,7 @@
         <!--ORDER BY listen.last_upd_date DESC-->
         ) AS a,
         (SELECT @RNUM := #{pageStart}) r
-        <where>
-            <if test='searchText != null and searchText != ""'>
-                <if test='searchTarget != null and searchTarget != "" and searchTarget != "2" '>
-                    <choose>
-                        <when test='searchType == 1'>
-                            AND a.mem_no = #{searchText}
-                        </when>
-                        <when test='searchType == 2'>
-                            AND a.mem_name like concat ('%', #{searchText}, '%')
-                        </when>
-                        <when test='searchType == 3'>
-                            AND a.mem_userid = #{searchText}
-                        </when>
-                        <when test='searchType == 4'>
-                            AND a.mem_nick like concat ('%', #{searchText}, '%')
-                        </when>
-                        <when test='searchType == 5'>
-                            AND a.mem_phone like concat ('%', #{searchText}, '%')
-                        </when>
-                        <when test='searchType == 6'>
-                            AND a.device_uuid = #{searchText}
-                        </when>
-                        <when test='searchType == 9'>
-                            AND a.mem_ip = #{searchText}
-                        </when>
-                        <otherwise>
-                            AND
-                            (
-                            a.mem_no = #{searchText}
-                            OR a.mem_name like concat ('%', #{searchText}, '%')
-                            OR a.mem_userid = #{searchText}
-                            OR a.mem_nick like concat ('%', #{searchText}, '%')
-                            OR a.mem_phone like concat ('%', #{searchText}, '%')
-                            OR a.device_uuid = #{searchText}
-                            OR a.mem_ip = #{searchText}
-                            )
-                        </otherwise>
-                    </choose>
-                </if>
-
-                <if test='searchTarget != null and searchTarget != "" and searchTarget != "1"'>
-                    OR (
-                    <choose>
-                        <when test='searchType == 1'>
-                            a.dj_mem_no = #{searchText}
-                        </when>
-                        <when test='searchType == 2'>
-                            a.dj_mem_name like concat ('%', #{searchText}, '%')
-                        </when>
-                        <when test='searchType == 3'>
-                            a.dj_mem_userid = #{searchText}
-                        </when>
-                        <when test='searchType == 4'>
-                            a.dj_mem_nick like concat ('%', #{searchText}, '%')
-                        </when>
-                        <when test='searchType == 5'>
-                            a.dj_mem_phone like concat ('%', #{searchText}, '%')
-                        </when>
-                        <when test='searchType == 6'>
-                            a.dj_device_uuid = #{searchText}
-                        </when>
-                        <when test='searchType == 9'>
-                            a.dj_mem_ip = #{searchText}
-                        </when>
-                        <otherwise>
-                            (
-                            a.dj_mem_no = #{searchText}
-                            OR a.dj_mem_name like concat ('%', #{searchText}, '%')
-                            OR a.dj_mem_userid = #{searchText}
-                            OR a.dj_mem_nick like concat ('%', #{searchText}, '%')
-                            OR a.dj_mem_phone like concat ('%', #{searchText}, '%')
-                            OR a.dj_device_uuid = #{searchText}
-                            OR a.dj_mem_ip = #{searchText}
-                            )
-                        </otherwise>
-                    </choose>
-                    )
-                </if>
-            </if>
-        </where>
+        <include refid="forcedWhere"/>
         LIMIT  #{pageStart}, #{pageCnt}
     </select>
     <!-- 방송 강제퇴장 회원 LIST-->

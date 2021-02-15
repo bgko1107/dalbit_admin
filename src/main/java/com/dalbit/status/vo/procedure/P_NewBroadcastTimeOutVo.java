@@ -85,6 +85,52 @@ public class P_NewBroadcastTimeOutVo {
     private int total_gift_Cnt;
     private int total_gift_Amt;
 
+
+    // new --------------------------------
+    private int sum_a_create_Cnt;
+    private int sum_a_unique_dj_Cnt;
+    private int sum_a_create_max_Cnt;
+    private int sum_a_airtime;
+    private int sum_v_create_Cnt;
+    private int sum_v_unique_dj_Cnt;
+    private int sum_v_create_max_Cnt;
+    private int sum_v_airtime;
+    private int sum_create_Cnt;
+    private int sum_unique_dj_Cnt;
+    private int sum_create_max_cnt;
+    private int sum_airtime;
+    private int sum_listener_Cnt;
+    private int sum_unique_listener_Cnt;
+    private int sum_guest_Cnt;
+    private int sum_guest_unique_Cnt;
+    private int sum_listener_max_Cnt;
+    private int sum_gift_Cnt;
+    private int sum_gift_Amt;
+
+    private int sum_create_mCnt;
+    private int sum_unique_dj_mCnt;
+    private int sum_create_fCnt;
+    private int sum_unique_dj_fCnt;
+    private int sum_create_nCnt;
+    private int sum_unique_dj_nCnt;
+    private int sum_create_max_Cnt;
+    private int sum_listener_mCnt;
+    private int sum_unique_listener_mCnt;
+    private int sum_listener_fCnt;
+    private int sum_unique_listener_fCnt;
+    private int sum_listener_nCnt;
+    private int sum_unique_listener_nCnt;
+
+    private int a_create_Cnt;
+    private int a_unique_dj_Cnt;
+    private int a_create_max_Cnt;
+    private int a_airtime;
+    private int v_create_Cnt;
+    private int v_unique_dj_Cnt;
+    private int v_create_max_Cnt;
+    private int v_airtime;
+    private int create_max_cnt;
+
 }
 
 

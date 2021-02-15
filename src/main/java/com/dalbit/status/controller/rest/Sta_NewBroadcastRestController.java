@@ -43,6 +43,25 @@ public class Sta_NewBroadcastRestController {
     }
 
     /**
+     * 방송 시간/월간/연간
+     * @param pStatVo
+     * @return
+     */
+    @PostMapping("info/time/new")
+    public String timeNew(P_StatVo pStatVo){
+        if(DalbitUtil.isEmpty(pStatVo.getStartDate())){
+            pStatVo.setStartDate(null);
+        }
+
+        if(DalbitUtil.isEmpty(pStatVo.getEndDate())){
+            pStatVo.setEndDate(null);
+        }
+
+        String result = sta_NewBroadcastService.callNewBroadcastTimeNew(pStatVo);
+        return result;
+    }
+
+    /**
      * 방송 주제별
      * @param pStatVo
      * @return

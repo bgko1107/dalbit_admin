@@ -1115,4 +1115,102 @@ public class Mem_MemberService {
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, couponHistoryList, new PagingVo(summary.getTotalCnt())));
     }
+
+
+    public String albumList(P_MemberInfoInputVo pMemberInfoInputVo){
+
+        ProcedureVo procedureVo = new ProcedureVo(pMemberInfoInputVo);
+        ArrayList<P_MemberInfoOutputVo> list = mem_MemberDao.callAlbumList(procedureVo);
+
+        P_MemberInfoOutputVo outVo = new Gson().fromJson(procedureVo.getExt(), P_MemberInfoOutputVo.class);
+
+        HashMap map = new HashMap();
+        map.put("list", list);
+        map.put("outVo", outVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, map));
+    }
+
+    /**
+     * 회원 정보 수정
+     */
+    public String getAlbumDelete(P_MemberInfoInputVo pMemberInfoInputVo) throws GlobalException {
+        String result = "";
+        int deleteResult = 0;
+
+        String[] LeaderList = pMemberInfoInputVo.getLeaderList().split("@@");
+        String[] profileList = pMemberInfoInputVo.getProfileList().split("@@");
+        String[] idxList = pMemberInfoInputVo.getIdxList().split("@@");
+
+        boolean profileSw = true;
+        for(int i=0 ; i<idxList.length; i++){
+            pMemberInfoInputVo.setLeader(Integer.parseInt(LeaderList[i]));
+            pMemberInfoInputVo.setProfile(DalbitUtil.isEmpty(profileList[i]) ? "" : profileList[i]);
+            pMemberInfoInputVo.setIdx(Integer.parseInt(idxList[i]));
+
+            // 수정이력
+            if(!DalbitUtil.isEmpty(pMemberInfoInputVo.getProfile() )){
+                P_MemberEditorVo pMemberEditorVo = new P_MemberEditorVo();
+
+                pMemberEditorVo.setEditContents("관리자 프로필이미지 초기화 : " + pMemberInfoInputVo.getProfile() + " >> " + "");
+                pMemberEditorVo.setType(0);
+                pMemberEditorVo.setMem_no(pMemberInfoInputVo.getMem_no());
+                pMemberEditorVo.setOpName(MemberVo.getMyMemNo());
+                mem_MemberDao.callMemberEditHistoryAdd(pMemberEditorVo);
+            }
+
+            // 프로필 이미지 제거
+            deleteResult = mem_MemberDao.callMemberAlbumDelete(pMemberInfoInputVo);
+
+            // 리더 프로필 이미지 일 경우
+            if(pMemberInfoInputVo.getLeader() == 1){
+                deleteResult = mem_MemberDao.callMemberProfileDelete(pMemberInfoInputVo);
+            }
+            if(deleteResult > 0){
+                // 리더 프로필 이미지일 경우 socket 송신
+                if(pMemberInfoInputVo.getLeader() == 1){
+                    // option
+                    HashMap<String, Object> param = new HashMap<>();
+                    param.put("memNo", pMemberInfoInputVo.getMem_no());
+                    param.put("memNk", "");
+                    param.put("ctrlRole", "ctrlRole");
+                    param.put("recvType", "chat");
+                    param.put("recvPosition", "chat");
+                    param.put("recvLevel", 0);
+                    param.put("recvTime", 0);
+
+                    // message set
+                    Gson gson = new Gson();
+                    HashMap<String,Object> tmp = new HashMap();
+                    tmp.put("image", new ImageVo("",pMemberInfoInputVo.getMemSex(), DalbitUtil.getProperty("server.photo.url")).getUrl().replace(DalbitUtil.getProperty("server.photo.url"),""));
+                    tmp.put("sex", pMemberInfoInputVo.getMemSex());
+                    tmp.put("nk", pMemberInfoInputVo.getMemNick());
+                    String message =  gson.toJson(tmp);
+
+                    socketUtil.setSocket(param, "reqMyInfo", message, jwtUtil.generateToken(pMemberInfoInputVo.getMem_no(), true, true));
+                }
+            }
+        }
+
+        if(deleteResult > 0){
+            //이미지 초기화시 무조건 push 발송
+            try{    // PUSH 발송
+                P_pushInsertVo pPushInsertVo = new P_pushInsertVo();
+                pPushInsertVo.setMem_nos(pMemberInfoInputVo.getMem_no());
+                pPushInsertVo.setSlct_push("35");
+                pPushInsertVo.setPush_slct("57");       //운영자 메시지(프로필 이미지 초기화, 닉네임 초기화)
+                pPushInsertVo.setSend_title("달빛 라이브 운영자 메시지");
+                pPushInsertVo.setSend_cont("운영정책 위반으로 프로필 이미지가 초기화 되었습니다.");
+                pPushInsertVo.setImage_type("101");
+                pushService.sendPushReqOK(pPushInsertVo);
+            }catch (Exception e){
+                log.error("[PUSH 발송 실패 - 회원 정보 수정]");
+            }
+            result = gsonUtil.toJson(new JsonOutputVo(Status.회원정보수정성공));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.회원정보수정실패));
+        }
+
+        return result;
+    }
 }

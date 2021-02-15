@@ -49,6 +49,22 @@ public class Sta_NewBroadcastService {
     }
 
     /**
+     * 방송 new 시간/월간
+     */
+    public String callNewBroadcastTimeNew(P_StatVo pStatVo){
+        ProcedureVo procedureVo = new ProcedureVo(pStatVo);
+        ArrayList<P_NewBroadcastTimeNewOutVo> detailList = sta_NewBroadcastDao.callNewBroadcastTimeNew(procedureVo);
+        P_NewBroadcastTimeNewOutVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_NewBroadcastTimeNewOutVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
+
+    /**
      * 방송 플랫폼
      */
     public String callNewBroadcastType(P_StatVo pStatVo){

@@ -34,26 +34,27 @@
         targetMemNo = memNo;
         var dtList_info;
         var dtList_info_data = function ( data ) {
-            var searchType = $('#searchType option:selected').val();
+            // var searchType = $('#searchType option:selected').val();
             var searchText = $('#searchText').val();
             var startDate = common.isEmpty($("#onedayDate").val()) ? "-1" : $("#startDate").val();
             var endDate = common.isEmpty($("#onedayDate").val()) ? "-1" : $("#endDate").val();
-            if($('input[name="searchRadio"]:checked').val() != "1"){
-                searchType = $('input[name="searchRadio"]:checked').val();       // IP 검색 : 9 , 모바일ID 검색 : 6
-            }
+            // if($('input[name="searchRadio"]:checked').val() != "1"){
+            //     searchType = $('input[name="searchRadio"]:checked').val();       // IP 검색 : 9 , 모바일ID 검색 : 6
+            // }
 
             if(memNo){
-                searchType = "1";
+                // searchType = "1";
                 searchText = memNo;
                 startDate = "1900.01.01";
                 endDate = "9000.01.01";
             }
 
-            data.searchType = searchType;       // 검색구분
+            // data.searchType = searchType;       // 검색구분
             data.searchText = searchText;            // 검색명
             data.opCode = $("#opCode").val();
             data.startDate = startDate;
             data.endDate = endDate;
+            data.newSearchType = $("#searchMember").val();
             // data.pageCnt = 10;
         };
         dtList_info = new DalbitDataTable($("#tb_res_withdrawalList"), dtList_info_data, RestrictionsDataTableSource.withdrawalList);

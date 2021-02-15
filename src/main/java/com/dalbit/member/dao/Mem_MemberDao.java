@@ -178,4 +178,10 @@ public interface Mem_MemberDao {
 
     @Transactional(readOnly = true)
     ArrayList<P_MemberCouponVo> callMemberCouponHistory(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<P_MemberInfoOutputVo> callAlbumList(ProcedureVo procedureVo);
+
+    int callMemberAlbumDelete(P_MemberInfoInputVo pMemberInfoInputVo);
+    int callMemberProfileDelete(P_MemberInfoInputVo pMemberInfoInputVo);
 }

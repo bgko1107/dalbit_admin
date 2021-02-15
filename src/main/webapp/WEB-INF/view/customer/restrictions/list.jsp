@@ -26,13 +26,14 @@
                     </tr>
                     <tr>
                         <td style="text-align: left">
-                            <span id="searchRadio"></span>
+                            <%--<span id="searchRadio"></span>--%>
                             <input type="text" class="form-control" id="onedayDate" name="onedayDate" >
 
                             <input class="hide" name="startDate" id="startDate" style="width: 100px">
                             <input class="hide" name="endDate" id="endDate" style="width: 100px">
                             <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                             <%--<input name="endDate" id="endDate" style="width: 100px">--%>
+                            <span id="searchMemberArea" onchange="btSearchClick();"></span>
                             <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
 
                             <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -107,7 +108,7 @@
 
     $(document).ready(function() {
         slctType = 0;
-        setDayButton();
+        dateType();
 
         $('input[id="searchText"]').keydown(function() {
             if (event.keyCode === 13) {
@@ -128,9 +129,10 @@
         //     getRestrictionsInfo();
         // });
 
-        $("#searchRadio").html(util.getCommonCodeRadio(1, searchRadioMember));
+        // $("#searchRadio").html(util.getCommonCodeRadio(1, searchRadioMember));
         // $("#searchType").html(util.getCommonCodeSelect(-1, restrictions_searchType));
         $("#searchOpCode").html(util.getCommonCodeSelect(-1, restrictions_searchOpCode));
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
 
         getRestrictionsInfo();
     });
@@ -198,37 +200,5 @@
         $("#bt_search").click();
     });
 
-    function setTimeDate(dateTime){
-        $("#onedayDate").val(dateTime);
-        $("#startDate").val(dateTime);
-        $("#endDate").val(dateTime);
-        $("._searchDate").html(dateTime + " (" + toDay + ")");
-    }
-
-    function searchDate(dateType){
-        //시간별
-        if(common.isEmpty(dateType)){
-            $("#startDate").val(moment(new Date()).format('YYYY.MM.DD'));
-            $("#endDate").val(moment(new Date()).format('YYYY.MM.DD'));
-
-            $("._searchDate").html(moment(new Date()).format('YYYY.MM.DD'));
-
-        }else if(dateType == 'prev'){
-            setDay(-1);
-
-        }else{
-            setDay(1);
-        }
-        $("#bt_search").click();
-    }
-
-    function setDay(days){
-        toDay = week[moment($("#startDate").val()).add('days', days).day()];
-        $("#startDate").val(moment($("#startDate").val()).add('days', days).format('YYYY.MM.DD'));
-        $("#endDate").val($("#startDate").val());
-
-        $("._searchDate").html($("#startDate").val() + " (" + toDay + ")");
-        $("#onedayDate").val($("#startDate").val());
-    }
 
 </script>

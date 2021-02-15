@@ -107,6 +107,10 @@ public class P_MemberInfoOutputVo extends SearchVo {
     private String deviceUuid;
     private String deviceModel;
 
+    private int idx;
+    private int leader_yn;
+
+
     public void setBlock_end_date(Date block_end_date){
         this.block_end_date = block_end_date;
         this.blockEndDateFormat = DalbitUtil.convertDateFormat(block_end_date, "yyyy.MM.dd HH:mm:ss");

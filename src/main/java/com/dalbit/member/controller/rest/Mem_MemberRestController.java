@@ -340,4 +340,19 @@ public class Mem_MemberRestController {
         String result = mem_MemberService.memberCouponHistory(pMemberCouponVo);
         return result;
     }
+
+    @PostMapping("album/list")
+    public String albumList(P_MemberInfoInputVo pMemberInfoInputVo){
+        String result = mem_MemberService.albumList(pMemberInfoInputVo);
+        return result;
+    }
+
+    /**
+     * 회원 정보 수정
+     */
+    @PostMapping("album/delete")
+    public String albumDelete(P_MemberInfoInputVo pMemberInfoInputVo)throws GlobalException{
+        String result = mem_MemberService.getAlbumDelete(pMemberInfoInputVo);
+        return result;
+    }
 }
