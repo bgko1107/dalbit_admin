@@ -11,8 +11,8 @@
             <thead>
                 <th style="background-color: #d9d9d9">구분</th>
                 <th style="background-color: #d9d9d9">성별</th>
-                <th style="background-color: #c6d9f1">설정 ON(비율)</th>
-                <th style="background-color: #c6d9f1">해제 OFF(비율)</th>
+                <th style="background-color: #c6d9f1">설정 ON (비율)</th>
+                <th style="background-color: #c6d9f1">해제 OFF (비율)</th>
                 <th style="background-color: #d9d9d9">설정<br/>총계</th>
             </thead>
             <tbody id="monthSetTableBody">
@@ -45,11 +45,11 @@
 
             toDay = week[moment(response.data.detailList[i].the_date.replace(/-/gi,".")).add('days', 0).day()];
             if(toDay == "토"){
-                toDay = '<span class="_fontColor" data-fontColor="blue">' + response.data.detailList[i].the_date.replace(/-/gi,".") + "(" + toDay + ")" + '</span>';
+                toDay = '<span class="_fontColor" data-fontColor="blue">' + response.data.detailList[i].the_date.replace(/-/gi,".") + " (" + toDay + ")" + '</span>';
             }else if(toDay == "일"){
-                toDay = '<span class="_fontColor" data-fontColor="red">' + response.data.detailList[i].the_date.replace(/-/gi,".") + "(" + toDay + ")" + '</span>';
+                toDay = '<span class="_fontColor" data-fontColor="red">' + response.data.detailList[i].the_date.replace(/-/gi,".") + " (" + toDay + ")" + '</span>';
             }else{
-                toDay = response.data.detailList[i].the_date.replace(/-/gi,".") + "(" + toDay + ")";
+                toDay = response.data.detailList[i].the_date.replace(/-/gi,".") + " (" + toDay + ")";
             }
             response.data.detailList[i].date = toDay;
 
