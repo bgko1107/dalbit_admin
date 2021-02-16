@@ -1,7 +1,6 @@
 package com.dalbit.menu.service;
 
 import com.dalbit.common.code.Status;
-import com.dalbit.common.dao.CommonMemberDao;
 import com.dalbit.common.service.CommonMemberService;
 import com.dalbit.common.service.CommonService;
 import com.dalbit.common.vo.*;
@@ -224,35 +223,17 @@ public class Men_SpecialService {
 
         boolean isBestDj = 5 < DalbitUtil.getIntMap(checkDjCnt, "specialdj_cnt") ? true : false;
 
-        specialReqVo.setOp_name(MemberVo.getMyMemNo());
-        specialReqVo.setSlct_type(isBestDj ? 1 : 0);
-        int result = menSpecialDao.reqOk(specialReqVo);
+        //스페셜 DJ 뱃지 추가
+        MemberBadgeVo memberBadgeVo = new MemberBadgeVo();
+        memberBadgeVo.setMemNo(specialReqVo.getMem_no());
+        memberBadgeVo.setBadgeType(isBestDj ? 16 : 17);
+        memberBadgeVo.setBadgeRank(1);
+        memberBadgeVo.setStartDate(specialReqVo.getStart_date());
+        memberBadgeVo.setEndDate(specialReqVo.getEnd_date());
+        memberBadgeVo.setOpName(MemberVo.getMyMemNo());
+        ProcedureVo procedureVo = commonMemberService.memberBadgeAdd(memberBadgeVo);
 
-        specialReqVo.setState(2);
-        menSpecialDao.reqOkUpdate(specialReqVo);
-
-        String curYearMonth = DalbitUtil.getDate("yyyyMM");
-        String paramYearMonth = specialReqVo.getSelect_year()+specialReqVo.getSelect_month();
-        if(curYearMonth.equals(paramYearMonth)){
-            specialReqVo.setSpecialdj_badge(isBestDj ? 2 : 1);
-            specialReqVo.setPlusMinusCnt(1);
-            menSpecialDao.profileUpdate(specialReqVo);
-        }
-
-        //베스트DJ일 경우 뱃지 추가
-        if(isBestDj){
-            MemberBadgeVo memberBadgeVo = new MemberBadgeVo();
-            memberBadgeVo.setMemNo(specialReqVo.getMem_no());
-            memberBadgeVo.setBadgeType(16);
-            memberBadgeVo.setBadgeRank(1);
-            memberBadgeVo.setStartDate(specialReqVo.getStart_date());
-            memberBadgeVo.setEndDate(specialReqVo.getEnd_date());
-            memberBadgeVo.setOpName(specialReqVo.getOp_name());
-            commonMemberService.memberBadgeAdd(memberBadgeVo);
-        }
-
-
-        if(result > 0) {
+        if(procedureVo.getRet().equals("0")) {
             return gsonUtil.toJson(new JsonOutputVo(Status.스페셜DJ승인완료_성공));
         } else {
             return gsonUtil.toJson(new JsonOutputVo(Status.스페셜DJ승인완료_실패));
@@ -313,57 +294,17 @@ public class Men_SpecialService {
      */
     @Transactional(readOnly = false)
     public String reqCancel(SpecialVo specialVo, SpecialReqVo specialReqVo) {
-        specialVo.setOp_name(MemberVo.getMyMemNo());
-        int result = menSpecialDao.reqCancel(specialVo);
 
-        specialReqVo.setState(3);
-        specialReqVo.setIdx(specialVo.getReq_idx());
-        specialReqVo.setOp_name(MemberVo.getMyMemNo());
-        menSpecialDao.reqOkUpdate(specialReqVo);
-
-        String curYearMonth = DalbitUtil.getDate("yyyyMM");
-        String paramYearMonth = specialReqVo.getSelect_year()+specialReqVo.getSelect_month();
-        if(curYearMonth.equals(paramYearMonth)){
-            specialReqVo.setSpecialdj_badge(0);
-            specialReqVo.setPlusMinusCnt(-1);
-            menSpecialDao.profileUpdate(specialReqVo);
-        }
+        HashMap checkDjCnt = menSpecialDao.checkSpecialDjCnt(specialReqVo);
+        boolean isBestDj = 5 < DalbitUtil.getIntMap(checkDjCnt, "specialdj_cnt") ? true : false;
 
         MemberBadgeVo memberBadgeVo = new MemberBadgeVo();
-        memberBadgeVo.setBadgeType(16);
+        memberBadgeVo.setBadgeType(isBestDj ? 16 : 17);
         memberBadgeVo.setMemNo(specialReqVo.getMem_no());
         memberBadgeVo.setStartDate(specialReqVo.getSelect_year()+"-"+specialReqVo.getSelect_month()+"-01");
-        commonMemberService.memberBadgeDelete(memberBadgeVo);
+        ProcedureVo procedureVo = commonMemberService.memberBadgeDelete(memberBadgeVo);
 
-        if(result > 0) {
-            // 스페셜 DJ 선정 PUSH 발송
-            /*
-            try{    // PUSH 발송
-                P_pushInsertVo pPushInsertVo = new P_pushInsertVo();
-                pPushInsertVo.setMem_nos(specialReqVo.getMem_no());
-                pPushInsertVo.setSlct_push("5");
-                pPushInsertVo.setSend_title("스페셜 DJ가 해제되었어요.");
-                pPushInsertVo.setSend_cont("안타깝지만 스페셜 DJ가 해제되었습니다. 다음에 다시 도전해보세요.");
-                pPushInsertVo.setImage_type("102");
-                pPushInsertVo.setBoard_idx("22");
-
-                pushService.sendPushReqOK(pPushInsertVo);
-            }catch (Exception e){
-                log.error("[PUSH 발송 실패 - 스페셜 DJ 신청 거부]");
-            }
-
-            try{
-                P_MemberReportVo pMemberReportVo = new P_MemberReportVo();
-
-                pMemberReportVo.setReported_mem_no(specialReqVo.getMem_no());
-                pMemberReportVo.setType_noti(34);
-                pMemberReportVo.setNotiContents("안타깝지만 스페셜 DJ가 해제되었습니다. 다음에 다시 도전해보세요.");
-                pMemberReportVo.setNotimemo("안타깝지만 스페셜 DJ가 해제되었습니다. 다음에 다시 도전해보세요.");
-                memMemberDao.callMemberNotification_Add(pMemberReportVo);
-            }catch (Exception e){
-                log.error("[NOTI 발송 실패 - 스페셜 DJ 신청 거부]");
-            }
-            */
+        if(procedureVo.getRet().equals("0")) {
             return gsonUtil.toJson(new JsonOutputVo(Status.스페셜DJ승인취소_성공));
         } else {
             return gsonUtil.toJson(new JsonOutputVo(Status.스페셜DJ승인취소_실패));
