@@ -22,6 +22,7 @@ public class ClipHistoryReplyVo extends PagingVo {
     private String startDate;
     private String endDate;
 
+
     /* output */
     private String replyIdx;
     private String castNo;

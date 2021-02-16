@@ -92,7 +92,8 @@
             data.searchState = Number($("#searchState").val());
             data.orderByType = Number($("#clipOrderByType").val());
             data.subjectType = Number(common.isEmpty($("#clipSubjectType").val()) ? "-1" : $("#clipSubjectType").val());
-            data.newSearchType = $("#searchClip").val();
+            data.newSearchType = newSlctType == 1 ? $("#searchClip").val() : $("#searchMember").val();
+            data.newSlctType = newSlctType;
         };
 
         dtList_info = new DalbitDataTable($("#clip_hot_list_info"), dtList_info_data, ClipHistoryDataTableSource.list, $("#searchForm"));

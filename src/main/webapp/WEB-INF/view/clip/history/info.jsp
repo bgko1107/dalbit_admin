@@ -31,6 +31,20 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
+                                    <span id="searchRadio" onchange="searchRadioChange();">
+                                        <label class="control-inline fancy-radio custom-color-green">
+                                            <input type="radio" value="1" id="searchRadio1" name="searchRadio" class="form-control" checked="checked">
+                                            <span>
+                                                <i></i>클립
+                                            </span>
+                                        </label>
+                                        <label class="control-inline fancy-radio custom-color-green">
+                                            <input type="radio" value="2" id="searchRadio2" name="searchRadio" class="form-control">
+                                            <span>
+                                                <i></i>회원
+                                            </span>
+                                        </label>
+                                    </span>
                                     <span id="searchClipArea" onchange="btSearchClick();"></span>
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -71,6 +85,7 @@
 
 <script type="text/javascript">
 
+    var newSlctType=1;
     $(function(){
         slctType = 99;
         $("#isChoiceDateArea").append(util.getCommonCodeRadio(-1, clip_isChoiceDate));
@@ -108,6 +123,17 @@
     $(document).on('click', '#search_testId', function(){
         $("#bt_search").click();
     });
+
+
+    function searchRadioChange(){
+        newSlctType = $('input[name="searchRadio"]:checked').val();
+        $("#searchClipArea").empty();
+        if(newSlctType == 1){
+            $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchClip));
+        }else{
+            $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchMember));
+        }
+    }
 
     function btSearchClick(){
         $("#bt_search").click();

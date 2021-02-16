@@ -39,7 +39,8 @@
     function initDataTable_clipHistoryGift() {
         //=---------- Main DataTable ----------
         var dtList_info_data = function (data) {
-            data.newSearchType = $("#searchClip").val();
+            data.newSearchType = newSlctType == 1 ? $("#searchClip").val() : $("#searchMember").val();
+            data.newSlctType = newSlctType;
         };
 
         dtList_info = new DalbitDataTable($("#clip_history_gift_list_info"), dtList_info_data, ClipHistoryDataTableSource.giftList, $("#searchForm"));

@@ -29,4 +29,5 @@ public class SearchVo extends PagingVo {
     private Integer menuIdx;
 
     private Integer newSearchType;
+    private Integer newSlctType;
 }
