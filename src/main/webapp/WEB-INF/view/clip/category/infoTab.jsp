@@ -60,10 +60,12 @@
 
         $("#searchClipArea").show();
         $("#searchText").show();
+        $("#searchRadio").show();
 
         if(tabId == 'tab_category'){    // 카테고리
             $("#page-wrapper").hide();
         }else if(tabId == 'tab_clipRank'){
+            $("#searchRadio").hide();
             $("#searchClipArea").hide();
             $("#searchText").hide();
             $("#sp_radioGroup").show();

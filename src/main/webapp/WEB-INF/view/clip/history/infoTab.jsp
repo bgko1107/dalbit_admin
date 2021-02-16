@@ -81,6 +81,7 @@
 
         $("#searchClipArea").empty();
         $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchClip));
+        $("#searchRadio").show();
 
         $("#searchText").attr('style', 'width: 188px;');
         if(tabId == 'tab_all'){         //클립 관리 (전체)
@@ -132,6 +133,7 @@
             $("._nextSearch").show();
             $('#searchText').hide();
             $("#searchClipArea").hide();
+            $("#searchRadio").hide();
             initClipHistory();
             $("#page-wrapper").css("height", "90px");
         }
