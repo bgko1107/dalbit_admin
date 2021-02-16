@@ -1,11 +1,10 @@
 package com.dalbit.menu.service;
 
 import com.dalbit.common.code.Status;
+import com.dalbit.common.dao.CommonMemberDao;
+import com.dalbit.common.service.CommonMemberService;
 import com.dalbit.common.service.CommonService;
-import com.dalbit.common.vo.CodeVo;
-import com.dalbit.common.vo.JsonOutputVo;
-import com.dalbit.common.vo.PagingVo;
-import com.dalbit.common.vo.ProcedureVo;
+import com.dalbit.common.vo.*;
 import com.dalbit.content.service.PushService;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.excel.vo.ExcelVo;
@@ -38,6 +37,9 @@ public class Men_SpecialService {
 
     @Autowired
     Mem_MemberDao memMemberDao;
+
+    @Autowired
+    CommonMemberService commonMemberService;
 
     @Autowired
     GsonUtil gsonUtil;
@@ -215,15 +217,15 @@ public class Men_SpecialService {
     @Transactional(readOnly = false)
     public String reqOk(SpecialReqVo specialReqVo) {
 
-        /*specialdj_cnt;
-        is_exist;*/
         HashMap checkDjCnt = menSpecialDao.checkSpecialDjCnt(specialReqVo);
         if(0 < DalbitUtil.getIntMap(checkDjCnt, "is_exist")){
             return gsonUtil.toJson(new JsonOutputVo(Status.스페셜DJ_중복));
         }
 
+        boolean isBestDj = 5 < DalbitUtil.getIntMap(checkDjCnt, "specialdj_cnt") ? true : false;
+
         specialReqVo.setOp_name(MemberVo.getMyMemNo());
-        specialReqVo.setSlct_type(5 < DalbitUtil.getIntMap(checkDjCnt, "is_exist") ? 1 : 0);
+        specialReqVo.setSlct_type(isBestDj ? 1 : 0);
         int result = menSpecialDao.reqOk(specialReqVo);
 
         specialReqVo.setState(2);
@@ -232,10 +234,23 @@ public class Men_SpecialService {
         String curYearMonth = DalbitUtil.getDate("yyyyMM");
         String paramYearMonth = specialReqVo.getSelect_year()+specialReqVo.getSelect_month();
         if(curYearMonth.equals(paramYearMonth)){
-            specialReqVo.setSpecialdj_badge(1);
+            specialReqVo.setSpecialdj_badge(isBestDj ? 2 : 1);
             specialReqVo.setPlusMinusCnt(1);
             menSpecialDao.profileUpdate(specialReqVo);
         }
+
+        //베스트DJ일 경우 뱃지 추가
+        if(isBestDj){
+            MemberBadgeVo memberBadgeVo = new MemberBadgeVo();
+            memberBadgeVo.setMemNo(specialReqVo.getMem_no());
+            memberBadgeVo.setBadgeType(16);
+            memberBadgeVo.setBadgeRank(1);
+            memberBadgeVo.setStartDate(specialReqVo.getStart_date());
+            memberBadgeVo.setEndDate(specialReqVo.getEnd_date());
+            memberBadgeVo.setOpName(specialReqVo.getOp_name());
+            commonMemberService.memberBadgeAdd(memberBadgeVo);
+        }
+
 
         if(result > 0) {
             return gsonUtil.toJson(new JsonOutputVo(Status.스페셜DJ승인완료_성공));
@@ -313,6 +328,12 @@ public class Men_SpecialService {
             specialReqVo.setPlusMinusCnt(-1);
             menSpecialDao.profileUpdate(specialReqVo);
         }
+
+        MemberBadgeVo memberBadgeVo = new MemberBadgeVo();
+        memberBadgeVo.setBadgeType(16);
+        memberBadgeVo.setMemNo(specialReqVo.getMem_no());
+        memberBadgeVo.setStartDate(specialReqVo.getSelect_year()+"-"+specialReqVo.getSelect_month()+"-01");
+        commonMemberService.memberBadgeDelete(memberBadgeVo);
 
         if(result > 0) {
             // 스페셜 DJ 선정 PUSH 발송

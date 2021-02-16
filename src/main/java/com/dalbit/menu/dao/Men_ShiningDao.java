@@ -16,8 +16,4 @@ public interface Men_ShiningDao {
 
     @Transactional(readOnly = true)
     List<ShiningVo> callExpectedList(ProcedureVo procedureVo);
-
-    ProcedureVo callAddShining(ProcedureVo procedureVo);
-
-    ProcedureVo callShiningDelete(ProcedureVo procedureVo);
 }

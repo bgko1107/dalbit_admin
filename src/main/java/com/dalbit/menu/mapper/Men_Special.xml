@@ -150,19 +150,19 @@
                         and 1800 <![CDATA[<=]]> listen.listentime), 0) listenCnt30
             , (select count(*) from rd_admin.tb_special_dj where mem_no = dj.mem_no and concat(select_year, select_month) <![CDATA[<=]]> concat(#{select_year}, #{select_month})) specialCnt
         from rd_admin.tb_req_special_dj dj
-        , rd_data.tb_member_profile profile
-        , rd_data.tb_member_basic basic
-        , rd_admin.tb_req_special_dj_manage manage
-        , (select @RNUM := 0) r
+            , rd_data.tb_member_profile profile
+            , rd_data.tb_member_basic basic
+            , rd_admin.tb_req_special_dj_manage manage
+            , (select @RNUM := 0) r
         where basic.mem_no = dj.mem_no
-        and profile.mem_no = dj.mem_no
-        and basic.mem_no = profile.mem_no
-        and dj.state <![CDATA[<>]]> 2
-        <!--and concat(#{select_year}, #{select_month}) = DATE_FORMAT(dj.reg_date, '%Y%m')-->
-        and dj.reg_date between concat(#{select_year},'.', #{select_month},'.01', ' 00:00:00') and DATE_SUB( DATE_ADD(concat(#{select_year},'.', #{select_month},'.01'), INTERVAL 1 MONTH), INTERVAL 1 SECOND )
-        and manage.select_year = #{select_year}
-        and manage.select_month = #{select_month}
-        <include refid="reqSpecial" />
+            and profile.mem_no = dj.mem_no
+            and basic.mem_no = profile.mem_no
+            and dj.state <![CDATA[<>]]> 2
+            <!--and concat(#{select_year}, #{select_month}) = DATE_FORMAT(dj.reg_date, '%Y%m')-->
+            and dj.reg_date between concat(#{select_year},'.', #{select_month},'.01', ' 00:00:00') and DATE_SUB( DATE_ADD(concat(#{select_year},'.', #{select_month},'.01'), INTERVAL 1 MONTH), INTERVAL 1 SECOND )
+            and manage.select_year = #{select_year}
+            and manage.select_month = #{select_month}
+            <include refid="reqSpecial" />
         order by idx desc
         ) a
         limit #{pageStart}, #{pageCnt}
@@ -273,36 +273,40 @@
             <if test='select_month != null and select_month != ""' >
                 and dj.select_month = #{select_month}
             </if>
-        </where>
 
-        <if test='txt_search != null and txt_search != ""'>
-            <choose>
-                <when test="newSearchType == 1">
-                    and dj.mem_no = #{txt_search}
-                </when>
-                <when test="newSearchType == 2">
-                    and (
-                        basic.mem_nick like concat('%', #{txt_search})
-                        or basic.mem_nick like concat(#{txt_search}, '%')
-                    )
-                </when>
-                <when test="newSearchType == 3">
-                    and basic.mem_name = #{txt_search}
-                </when>
-                <when test="newSearchType == 4">
-                    and basic.mem_phone = #{txt_search}
-                </when>
-                <when test="newSearchType == 5">
-                    and basic.mem_id = #{txt_search}
-                </when>
-                <when test="newSearchType == 6">
-                    and dj.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{txt_search})
-                </when>
-                <otherwise>
-                    and dj.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
-                </otherwise>
-            </choose>
-        </if>
+            <if test="isBest == 1">
+                and pro.specialdj_badge = 2
+            </if>
+
+            <if test='txt_search != null and txt_search != ""'>
+                <choose>
+                    <when test="newSearchType == 1">
+                        and dj.mem_no = #{txt_search}
+                    </when>
+                    <when test="newSearchType == 2">
+                        and (
+                            basic.mem_nick like concat('%', #{txt_search})
+                            or basic.mem_nick like concat(#{txt_search}, '%')
+                        )
+                    </when>
+                    <when test="newSearchType == 3">
+                        and basic.mem_name = #{txt_search}
+                    </when>
+                    <when test="newSearchType == 4">
+                        and basic.mem_phone = #{txt_search}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and basic.mem_id = #{txt_search}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and dj.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{txt_search})
+                    </when>
+                    <otherwise>
+                        and dj.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
     </sql>
 
     <select id="getSpecialList" parameterType="com.dalbit.menu.vo.SpecialVo" resultType="com.dalbit.menu.vo.SpecialVo">
@@ -326,6 +330,8 @@
                 pro.image_profile,
                 pro.specialdj_cnt,
                 pro.specialdj_badge,
+                ifnull(req.mem_name, basic.mem_name) mem_name,
+                ifnull(req.mem_phone, basic.mem_phone) mem_phone,
                 if(0 <![CDATA[<]]> (pro.specialdj_cnt-5), pro.specialdj_cnt-5, 0) best_cnt,
                 (select ifnull(sum(airtime), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS airTime,
                 (select ifnull(sum(gold), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS giftedRuby,
@@ -335,6 +341,7 @@
             from rd_admin.tb_special_dj dj
             inner join rd_data.tb_member_basic basic on dj.mem_no = basic.mem_no
             inner join rd_data.tb_member_profile pro on dj.mem_no = pro.mem_no
+            left outer join rd_admin.tb_req_special_dj req on dj.mem_no = req.mem_no and concat(dj.select_year,dj.select_month) = date_format(req.reg_date, '%Y%m')
             <include refid="special"/>
             order by `order` asc, dj.reg_date desc
         ) a
@@ -347,6 +354,7 @@
         count(*)
         from rd_admin.tb_special_dj dj
         inner join rd_data.tb_member_basic basic on dj.mem_no = basic.mem_no
+        inner join rd_data.tb_member_profile pro on dj.mem_no = pro.mem_no
         left join rd_admin.tb_req_special_dj redj on dj.mem_no = redj.mem_no and dj.req_idx = redj.idx
         <include refid="special"/>
     </select>

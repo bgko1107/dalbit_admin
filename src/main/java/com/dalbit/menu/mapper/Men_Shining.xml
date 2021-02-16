@@ -9,12 +9,4 @@
     <select id="callExpectedList" statementType="CALLABLE" parameterType="ProcedureVo" resultType="com.dalbit.menu.vo.ShiningVo">
         call rd_admin.sp_admin_nominee_shiningdj_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
-
-    <select id="callAddShining" statementType="CALLABLE" parameterType="ProcedureVo" resultType="ProcedureVo">
-        call rd_admin.sp_admin_member_badge_add(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
-    </select>
-
-    <select id="callShiningDelete" statementType="CALLABLE" parameterType="ProcedureVo" resultType="ProcedureVo">
-        call rd_admin.sp_admin_member_badge_del(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
-    </select>
 </mapper>
