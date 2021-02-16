@@ -18,6 +18,7 @@ public class ClipHistoryRemoveVo extends PagingVo {
     private int isChoiceDate;
     private int pageNo;
     private int newSearchType;
+    private int newSlctType;
 
     /* output */
     private String clipIdx;

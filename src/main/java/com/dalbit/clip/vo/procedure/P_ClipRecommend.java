@@ -18,6 +18,7 @@ public class P_ClipRecommend extends PagingVo {
     private String ytubeUrl;
     private String bannerUrl;
     private int newSearchType;
+    private int newSlctType;
 
     private String titleMsg;
     private String descMsg;

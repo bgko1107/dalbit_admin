@@ -58,6 +58,9 @@
         $("#sp_radioGroup").hide();
         $("#sp_prevGroup").hide();
 
+        $("#searchClipArea").show();
+        $("#searchText").show();
+
         if(tabId == 'tab_category'){    // 카테고리
             $("#page-wrapper").hide();
         }else if(tabId == 'tab_clipRank'){

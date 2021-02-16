@@ -19,6 +19,7 @@ public class ClipHistoryVo extends PagingVo {
     private int pageNo;
     private String targetMemNo;
     private int newSearchType;
+    private int newSlctType;
 
     private int searchTypeOpen = -1;
     private int searchConfirm = -1;

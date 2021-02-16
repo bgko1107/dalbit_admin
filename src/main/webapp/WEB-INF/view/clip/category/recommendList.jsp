@@ -46,7 +46,8 @@
         var data = {
             recDate : $("#startDate").val()
             , searchText : $("#searchText").val()
-            , newSearchType : $("#searchClip").val()
+            , newSearchType : newSlctType == 1 ? $("#searchClip").val() : $("#searchMember").val()
+            , newSlctType : newSlctType
         };
 
         console.log(data);

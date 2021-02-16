@@ -44,6 +44,22 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
+
+                                    <span id="searchRadio" onchange="searchRadioChange();">
+                                        <label class="control-inline fancy-radio custom-color-green">
+                                            <input type="radio" value="1" id="searchRadio1" name="searchRadio" class="form-control" checked="checked">
+                                            <span>
+                                                <i></i>클립
+                                            </span>
+                                        </label>
+                                        <label class="control-inline fancy-radio custom-color-green">
+                                            <input type="radio" value="2" id="searchRadio2" name="searchRadio" class="form-control">
+                                            <span>
+                                                <i></i>회원
+                                            </span>
+                                        </label>
+                                    </span>
+
                                     <span id="searchClipArea" onchange="btSearchClick();"></span>
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요."></label>
 
@@ -86,6 +102,7 @@
 <script type="text/javascript">
     var tabMove = <%=in_tabMove%>;
     var tabId = 'tab_new';
+    var newSlctType = 1;
 
     $(function(){
         $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchClip));
@@ -243,6 +260,16 @@
             $('#image_section' + i).prop("src" ,common.profileImage(PHOTO_SERVER_URL,response.data[i].profileImage,memSex));
 
             $('#clipReplyModal').modal("show");
+        }
+    }
+
+    function searchRadioChange(){
+        newSlctType = $('input[name="searchRadio"]:checked').val();
+        $("#searchClipArea").empty();
+        if(newSlctType == 1){
+            $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchClip));
+        }else{
+            $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchMember));
         }
     }
 

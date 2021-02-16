@@ -19,6 +19,7 @@ public class ClipHistoryGiftVo extends PagingVo {
     private int pageNo;
     private String targetClipNo;
     private int newSearchType;
+    private int newSlctType;
 
     private String searchSex;
     private int searchState = -1;

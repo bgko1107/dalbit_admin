@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="input-group date" id="rangeDatepicker" style="display: none">
+<div class="input-group date" id="rangeDatepicker" style="display: none;">
     <label for="displayDate" class="input-group-addon">
         <span><i class="fa fa-calendar"></i></span>
     </label>
-    <input type="text" name="displayDate" id="displayDate" class="form-control" />
+    <input type="text" name="displayDate" id="displayDate" class="form-control" style="width: 160px" />
 </div>
 
 <script type="text/javascript">
