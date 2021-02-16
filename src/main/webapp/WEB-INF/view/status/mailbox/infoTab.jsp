@@ -16,8 +16,8 @@
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="time"><jsp:include page="time.jsp"/></div>
                 <div class="tab-pane fade" id="month"><jsp:include page="month.jsp"/></div>
-                <div class="tab-pane fade" id="monthSet" style="width: 1300px;"><jsp:include page="monthSet.jsp"/></div>
-                <div class="tab-pane fade" id="yearSet" style="width: 1300px;"><jsp:include page="yearSet.jsp"/></div>
+                <div class="tab-pane fade col-lg-8 no-padding" id="monthSet"><jsp:include page="monthSet.jsp"/></div>
+                <div class="tab-pane fade col-lg-8 no-padding" id="yearSet"><jsp:include page="yearSet.jsp"/></div>
             </div>
         </div>
     </div>
