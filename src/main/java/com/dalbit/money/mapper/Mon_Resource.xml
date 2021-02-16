@@ -228,7 +228,7 @@
             and a.item_type = '3'
         </if>
         <if test='type == "11"'>
-            and a.item_type not in ('3','4','5','9')
+            and a.item_type not in ('3','4','5','9','11')
         </if>
         <if test='gender == "m" or gender == "f" or gender == "n"'>
             <if test='type == "2-1"'>
@@ -476,7 +476,7 @@
    left join rd_data.tb_member_withdrawal_bak e on a.gifted_mem_no = e.mem_no
    left join rd_data.tbl_gift_item f on a.item_code = f.item_code ,(select @rownum := #{pageStart}) r
        where date_format(a.last_upd_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate} and date_format(a.last_upd_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate}
-        and a.item_type not in ('3','4','5')
+        and a.item_type not in ('3','4','5','11')
         <if test='gender == "m" or gender == "f" or gender == "n"'>
               and ifnull(b.mem_sex,c.mem_sex) = #{gender}
               and ifnull(b.inner,c.inner) = 0

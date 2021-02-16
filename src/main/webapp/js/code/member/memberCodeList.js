@@ -271,6 +271,7 @@ var mem_wallet_dal_code = [
     , new COMMON_CODE('25', '25', '이벤트 경품 달로 받기')
     , new COMMON_CODE('31', '31', '자동교환')
     , new COMMON_CODE('32', '32', '우체동 선물')
+    , new COMMON_CODE('33', '33', '미니 게임(룰렛)')
 ];
 
 var mem_wallet_byeol_code = [
@@ -293,6 +294,7 @@ var mem_wallet_byeol_code = [
     , new COMMON_CODE('23', '23', '이벤트 지급(어드민)')
     , new COMMON_CODE('31', '31', '자동교환')
     , new COMMON_CODE('32', '32', '우체통 선물')
+    , new COMMON_CODE('33', '33', '미니 게임(룰렛)')
 ];
 
 var slctWalletDateType = [

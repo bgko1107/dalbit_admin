@@ -650,7 +650,7 @@
                     and ((a.mem_no = #{mem_no} and a.target_mem_no = '10000000000000') or a.target_mem_no = #{mem_no})
                 </when>
                 <when test='walletType == "2"'>
-                    and (a.mem_no = #{mem_no} and a.target_mem_no != '10000000000000') and `type` in (2, 3, 4, 14, 17, 19, 20, 32)
+                    and (a.mem_no = #{mem_no} and a.target_mem_no != '10000000000000') and `type` in (2, 3, 4, 14, 17, 19, 20, 32, 33)
                 </when>
                 <when test='walletType == "0"'>
                     AND (a.mem_no = #{mem_no} or a.target_mem_no=#{mem_no})
@@ -671,7 +671,7 @@
              From rd_data.tb_member_wallet_ruby a
         left join rd_data.tb_member_broadcast_item b on a.link_idx = b.idx
         LEFT JOIN rd_data.tbl_gift_item c ON b.item_code = c.item_code
-            where (link_idx > 0 or type not in (2, 3, 4, 5, 6, 14, 17, 32))
+            where (link_idx > 0 or type not in (2, 3, 4, 5, 6, 14, 17, 32, 33))
             <include refid="condition_newDal"/>
     </select>
 
@@ -713,7 +713,7 @@
               FROM rd_data.tb_member_wallet_ruby a
          LEFT JOIN rd_data.tb_member_broadcast_item b ON a.link_idx = b.idx
          LEFT JOIN rd_data.tbl_gift_item c ON b.item_code = c.item_code
-             WHERE (link_idx > 0 or type not in (2, 3, 4, 5, 6, 14, 17, 32))
+             WHERE (link_idx > 0 or type not in (2, 3, 4, 5, 6, 14, 17, 32, 33))
                 <include refid="condition_newDal"/>
                 order by a.last_upd_date desc
                 limit #{pageStart}, #{pageCnt}
@@ -725,7 +725,7 @@
         SELECT (SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby  where `type` = 1 and mem_no = #{mem_no}) AS sum_charge_cnt
                ,(SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby where `type` = 5 and mem_no = #{mem_no}) AS sum_input_cnt
                ,(SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby where `type` in (7, 8, 9, 10, 11, 12, 13, 16, 18, 22, 23, 25) and mem_no = #{mem_no}) AS sum_event_cnt
-               ,(SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby where `type` in (2, 3, 4, 14, 17, 19, 20, 32)  and mem_no = #{mem_no}) AS sum_output_cnt
+               ,(SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby where `type` in (2, 3, 4, 14, 17, 19, 20, 32, 33)  and mem_no = #{mem_no}) AS sum_output_cnt
                ,(SELECT IFNULL(SUM((money_new - money_old)+(ruby_new - ruby_old)), 0) FROM rd_data.tb_member_wallet_ruby where `type` in ( 6, 31 )  and mem_no = #{mem_no}) AS sum_change_cnt
                ,IFNULL((SELECT IFNULL(ruby_new, 0) FROM rd_data.tb_member_wallet_ruby where mem_no = #{mem_no} and `type`=15),0) AS start_cnt
                ,IFNULL(ruby, 0) AS sum_own_cnt
@@ -740,10 +740,10 @@
         <if test='walletType != null and walletType != ""'>
             <choose>
                 <when test='walletType == "1"'>
-                    and a.mem_no = #{mem_no} and `type` not in ( 1, 3, 31 )
+                    and a.mem_no = #{mem_no} and `type` not in ( 1, 3, 31)
                 </when>
                 <when test='walletType == "2"'>
-                    and a.mem_no = #{mem_no} and `type` in ( 1, 3, 31 )
+                    and a.mem_no = #{mem_no} and `type` in ( 1, 3, 31)
                 </when>
                 <when test='walletType == "0"'>
                     AND a.mem_no=#{mem_no}
@@ -764,7 +764,7 @@
              From rd_data.tb_member_wallet_gold a
         left join rd_data.tb_member_broadcast_item b on a.link_idx = b.idx and a.type != 3
         LEFT JOIN rd_data.tbl_gift_item c ON b.item_code = c.item_code
-            where (link_idx > 0 or type in (3, 4, 5, 6, 7, 8, 21, 22, 23))
+            where (link_idx > 0 or type in (3, 4, 5, 6, 7, 8, 21, 22, 23, 33))
             <include refid="condition_newByeol"/>
     </select>
 
@@ -807,7 +807,7 @@
                  From rd_data.tb_member_wallet_gold a
             left join rd_data.tb_member_broadcast_item b on a.link_idx = b.idx and a.type != 3
             LEFT JOIN rd_data.tbl_gift_item c ON b.item_code = c.item_code
-                where (link_idx > 0 or type in (3, 4, 5, 6, 7, 8, 21, 22, 23))
+                where (link_idx > 0 or type in (3, 4, 5, 6, 7, 8, 21, 22, 23, 33))
                 <include refid="condition_newByeol"/>
                 order by a.last_upd_date desc
                 limit #{pageStart}, #{pageCnt}
@@ -817,7 +817,7 @@
 
     <select id="getResultNewByeolSummary" parameterType="com.dalbit.member.vo.procedure.P_WalletByeolVo" resultType="java.util.HashMap">
         SELECT
-            (SELECT IFNULL(SUM(gold_new - gold_old), 0) FROM rd_data.tb_member_wallet_gold where `type` in (2, 14, 17, 19, 20) AND mem_no = #{mem_no}) AS sum_input_cnt
+            (SELECT IFNULL(SUM(gold_new - gold_old), 0) FROM rd_data.tb_member_wallet_gold where `type` in (2, 14, 17, 19, 20, 33) AND mem_no = #{mem_no}) AS sum_input_cnt
             ,(SELECT IFNULL(SUM(gold_new - gold_old), 0) FROM rd_data.tb_member_wallet_gold where `type` in (4,5,6,7,8,21,22,23) AND mem_no = #{mem_no}) AS sum_event_cnt
             ,(SELECT IFNULL(SUM(gold_new - gold_old), 0) FROM rd_data.tb_member_wallet_gold where `type` = 3 AND mem_no = #{mem_no}) AS sum_exchange_cnt
             ,(SELECT IFNULL(SUM(gold_new - gold_old), 0) FROM rd_data.tb_member_wallet_gold where `type` in ( 1, 3, 31 ) AND mem_no = #{mem_no}) AS sum_change_cnt
