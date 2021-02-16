@@ -17,9 +17,9 @@ var BroadcastDataTableSource = {
             {'title': '주제<br/>제목', 'data': 'title','width' : '150px', 'render': function (data, type, row, meta) {
                     var tmp_mediaType = "";
                     if(row.mediaType == "a"){
-                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }else{
-                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }
                     return tmp_mediaType + ' ' + row.subject_name + '<br/>' + util.roomNoLink(data, row.room_no);
                 }},
@@ -178,7 +178,7 @@ var BroadcastDataTableSource = {
                     if(row.mediaType == "a"){
                         tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }else{
-                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }
                     return tmp_mediaType + ' ' + util.roomNoLink(data, row.room_no);
                 }},

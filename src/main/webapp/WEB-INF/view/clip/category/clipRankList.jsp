@@ -65,7 +65,6 @@
             , slctType : $('input:radio[name="rankType"]:checked').val()
             , searchText : $("#searchText").val()
             , searchType : -1
-            , newSearchType : $("#searchClip").val();
         };
 
         console.log(data);
@@ -90,7 +89,6 @@
 
     }
     function winnerMsgClick(data){
-        console.log("------------------------------------");
         console.log(data.data('winnermsg'));
         $('#winnerMsgModal').modal("show");
         $("#clipName_nick").html(data.data('title') + " - " + data.data('nickname'));
@@ -102,7 +100,7 @@
 <script type="text/x-handlebars-template" id="tmp_ClipRankListTable">
     {{#each this as |data|}}
     <tr>
-        <td>{{rowNum}}</td>
+        <td>{{split rank '.' 0}}</td>
         <td>
             {{subjectName}}<br/>
             <a href="javascript://" class="_openClipInfoPop" data-clipNo="{{cast_no}}">{{title}}</a>

@@ -473,7 +473,7 @@ common.sexIcon = function(sex, birthYear, isBr){
         }else if(sex_lowercase == 'f'){
             return '<label class="font-bold" style="color: red;margin-bottom: 0px"><i class="fa fa-female"></i> 여성</label>' + (!common.isEmpty(isBr) && isBr ? '<br>' : '') + '(' + koreanAge + '세)';
         }else{
-            return '<label class="font-bold" style="margin-bottom: 0px;"><i class="fa fa-question"></i> 알수없음</label>' + (!common.isEmpty(isBr) && isBr ? '<br>' : '') + '(' + koreanAge + '세)'
+            return '<label class="font-bold" style="margin-bottom: 0px;"><i class="fa fa-question"></i> 미선택</label>' + (!common.isEmpty(isBr) && isBr ? '<br>' : '') + '(' + koreanAge + '세)'
         }
     }else{
         if(sex_lowercase == 'm'){
@@ -481,7 +481,7 @@ common.sexIcon = function(sex, birthYear, isBr){
         }else if(sex_lowercase == 'f'){
             return '<label class="font-bold" style="color: red;margin-bottom: 0px"><i class="fa fa-female"></i> 여성</label>';
         }else{
-            return '<label class="font-bold" style="margin-bottom: 0px;"><i class="fa fa-question"></i> 알수없음</label>';
+            return '<label class="font-bold" style="margin-bottom: 0px;"><i class="fa fa-question"></i> 미선택</label>';
         }
     }
 };

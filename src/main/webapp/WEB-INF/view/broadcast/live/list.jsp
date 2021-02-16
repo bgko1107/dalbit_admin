@@ -173,14 +173,15 @@
     sDate = date.getFullYear()  +"-"+ common.lpad(date.getMonth() + 1,2,"0")  +"-"+ common.lpad(date.getDate(),2,"0");        //오늘
 
     $(document).ready(function() {
-        getSearch();
+        // getSearch();
         livePageTabCount();
     });
 
     $('#searchRadio').change(function() {
         $("#searchMemberArea").hide();
         $("#searchBroadArea").hide();
-        if($('input[name="searchRadio"]:checked').val() == "1"){
+        slctType = $('input[name="searchRadio"]:checked').val();
+        if(slctType == "1"){
             $("#searchMemberArea").show();
             $("#searchType_broad").html(util.getCommonCodeSelect(-1, searchType_broad));
         }else{
@@ -212,7 +213,7 @@
 
     $("#seldate").hide();
 
-    var slctType = $('input[name="searchRadio"]:checked').val();
+    var slctType = 1;
     var dtList_info_data = function (data) {
         data.slctType = slctType;
         if(slctType == "1"){      // DJ정보
@@ -224,7 +225,7 @@
         }else {                                                              // 방송정보
             data.dj_slctType = -1;
             data.dj_searchText = "";
-            data.room_slctType = $("select[name='searchBroad_broad']").val();
+            // data.room_slctType = $("select[name='searchBroad_broad']").val();
             data.room_searchText = tmp_searchText;
             data.ortStartDate =2;
         }
@@ -328,6 +329,8 @@
             var html = templateScript(data);
             $("#live_summaryArea").html(html);
         }
+
+       tableCss();
     }
 
     function fn_inspection_check_success(dst_id, response){
@@ -337,7 +340,6 @@
     function getSearch(){
         /* 엑셀저장을 위해 조회조건 임시저장 */
         tmp_searchText = $('#searchText').val();
-        var slctType = $('input[name="searchRadio"]:checked').val();
         tmp_slctType = slctType;
         tmp_dj_searchText = $('#searchText').val();
         tmp_room_searchText = $('#searchText').val();
@@ -474,7 +476,7 @@
         }
 
         var data={};
-        var slctType = $('input[name="searchRadio"]:checked').val();
+        var slctType = 1;
         data.slctType = slctType;
         if(slctType == "1"){      // DJ정보
             data.dj_slctType = $("select[name='searchType_broad']").val();
@@ -619,6 +621,16 @@
     function btSearchClick(){
         $("#bt_search").click();
     }
+
+    function tableCss(){
+        $('#list_info > tbody > tr').each(function(){
+            var td = $(this).children();
+            var td_3 = td.eq(3);
+            if(td_3.find('#mediaType').data().mediatype == "v"){
+                td_3.css("background-color", "#fbe5d6");
+            }
+        });
+    }
 </script>
 
 <script id="live_tableSummary" type="text/x-handlebars-template">
@@ -652,7 +664,7 @@
         </tr>
         <tr>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalAudioCnt}}</td>
-            <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalVideoCnt}}</td>
+            <td><span style="color: red;font-weight: bold">{{#equal length '0'}}0{{/equal}}{{addComma content.totalVideoCnt}}</span></td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.normalDjCnt}} ({{addComma content.specialDjCnt}})</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.newDjCnt}}명</td>
             <td>{{#equal length '0'}}0{{/equal}}{{addComma content.totalAosCnt}}</td>

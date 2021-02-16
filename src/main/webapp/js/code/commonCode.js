@@ -326,6 +326,7 @@ var searchQna = [
     new COMMON_CODE('', 'searchQna', '1:1 문의 검색')
     , new COMMON_CODE('1', '1', '문의 제목')
     , new COMMON_CODE('2', '2', '문의 내용')
+    , new COMMON_CODE('3', '3', '답변')
 ];
 
 var searchMarketing = [

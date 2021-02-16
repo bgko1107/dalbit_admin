@@ -11,7 +11,7 @@
                     <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
                         <li class="active"><a href="#clipList" role="tab" data-toggle="tab" id="tab_new">최신 클립</a></li>
                         <li><a href="#clipList" role="tab" data-toggle="tab" id="tab_hot">인기 클립</a></li>
-                        <%--<li><a href="#clipRank" role="tab" data-toggle="tab" id="tab_clipRank">클립 랭킹</a></li>--%>
+                        <li><a href="#clipRank" role="tab" data-toggle="tab" id="tab_clipRank">클립 랭킹</a></li>
                         <li><a href="#recommendList" role="tab" data-toggle="tab" id="tab_recommendList">주간 클립 테이블</a></li>
                         <%--<li><a href="#recommendClip" role="tab" data-toggle="tab" id="tab_recommendClip">추천 클립 등록관리</a></li>--%>
                         <li><a href="#category" role="tab" data-toggle="tab" id="tab_category">주제 관리</a></li>
@@ -19,7 +19,7 @@
                 </div>
                 <div class="tab-content col-lg-12">
                     <div class="tab-pane fade in active" id="clipList"><jsp:include page="clipList.jsp"/></div>      <!-- 인기 클립 -->
-                    <%--<div class="tab-pane fade" id="clipRank"><jsp:include page="clipRankList.jsp"/></div>      <!-- 주제 관리 -->--%>
+                    <div class="tab-pane fade" id="clipRank"><jsp:include page="clipRankList.jsp"/></div>      <!-- 주제 관리 -->
                     <div class="tab-pane fade" id="recommendList"><jsp:include page="recommendList.jsp"/></div>      <!-- 주제 관리 -->
                     <%--<div class="tab-pane fade" id="recommendClip"><jsp:include page="recommendClip.jsp"/></div>      <!-- 주제 관리 -->--%>
                     <div class="tab-pane fade" id="category"><jsp:include page="clipCategoryList.jsp"/></div>      <!-- 주제 관리 -->
@@ -61,6 +61,8 @@
         if(tabId == 'tab_category'){    // 카테고리
             $("#page-wrapper").hide();
         }else if(tabId == 'tab_clipRank'){
+            $("#searchClipArea").hide();
+            $("#searchText").hide();
             $("#sp_radioGroup").show();
             $("#sp_prevGroup").show();
             slctType = 0;

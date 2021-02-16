@@ -196,7 +196,7 @@ var MemberDataTableSource = {
                     if(data == "a"){
                         return '<img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }else if(data == "v"){
-                        return '<img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        return '<img src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }
                 }},
             {'title': '시작시간', 'data': 'startDateFormat', 'width':'120px'},
@@ -264,7 +264,7 @@ var MemberDataTableSource = {
                     if(data == "a"){
                         return '<img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }else if(data == "v"){
-                        return '<img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        return '<img src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }
                 }},
             {'title': '청취시작시간', 'data': 'startDateFormat', 'width':'120px'},

@@ -26,7 +26,7 @@ public class Sta_MailboxRestController {
     Sta_MailboxService sta_MailboxService;
 
     /**
-     * 1:1문의 총계
+     * 우체통현황
      * @param pStatVo
      * @return
      */
@@ -39,6 +39,23 @@ public class Sta_MailboxRestController {
             pStatVo.setEndDate(null);
         }
         String result = sta_MailboxService.callMailboxTime(pStatVo);
+        return result;
+    }
+
+    /**
+     * 우체통 설정 현황
+     * @param pStatVo
+     * @return
+     */
+    @PostMapping("month/set")
+    public String monthSet(P_StatVo pStatVo){
+        if(DalbitUtil.isEmpty(pStatVo.getStartDate())){
+            pStatVo.setStartDate(null);
+        }
+        if(DalbitUtil.isEmpty(pStatVo.getEndDate())){
+            pStatVo.setEndDate(null);
+        }
+        String result = sta_MailboxService.callMailboxMonthSet(pStatVo);
         return result;
     }
 }

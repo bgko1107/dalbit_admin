@@ -7,5 +7,10 @@
         call rd_admin.sp_admin_stat_mailbox_time(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
+    <select id="callMailboxMonthSet" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.status.vo.procedure.P_MailboxMonthSetVo">
+        /* Sta_MailboxDao.xml - callMailboxMonthSet */
+        call rd_admin.sp_admin_mailbox_onoff_setting(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
 
 </mapper>

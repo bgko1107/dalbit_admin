@@ -77,6 +77,9 @@
 
         $("#isChoiceDateArea").hide();
         $("#searchClipArea").show();
+        $("#searchClipArea").empty();
+
+        $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchClip));
         if(tabId == 'tab_all'){         //클립 관리 (전체)
             slctType = 99;
             $("input:radio[name='isChoiceDate']:radio[value='-1']").prop('checked', true);  // 날짜 전체, 선택 여부
@@ -90,9 +93,11 @@
             $('#searchText, #bt_search').show();
             initClipHistory();
         }else if(tabId == 'tab_member'){    // 클립 관리 (회원)
+            $("#searchClipArea").empty();
+            $("#searchClipArea").append(util.getCommonCodeSelect(-1, searchMember));
             slctType = 99;
             $("input:radio[name='isChoiceDate']:radio[value='-1']").prop('checked', true);  // 날짜 전체, 선택 여부
-            $("#search_aria").html(util.getCommonCodeSelect(-1, clip_member_searchType))
+            $("#search_aria").html(util.getCommonCodeSelect(-1, clip_member_searchType));
             $('#searchText, #bt_search').show();
         }else if(tabId == 'tab_listen'){    // 클립 청취
             slctType = 3;
