@@ -13,4 +13,7 @@ public interface Sta_MailboxDao {
     @Transactional(readOnly = true)
     ArrayList<P_MailboxVo> callMailboxTime(ProcedureVo procedureVo);
 
+    @Transactional(readOnly = true)
+    ArrayList<P_MailboxMonthSetVo> callMailboxMonthSet(ProcedureVo procedureVo);
+
 }

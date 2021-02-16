@@ -5,6 +5,7 @@ import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.status.dao.Sta_MailboxDao;
+import com.dalbit.status.vo.procedure.P_MailboxMonthSetVo;
 import com.dalbit.status.vo.procedure.P_MailboxVo;
 import com.dalbit.status.vo.procedure.P_StatVo;
 import com.dalbit.util.GsonUtil;
@@ -112,6 +113,19 @@ public class Sta_MailboxService {
         }
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, resultList));
+    }
+
+    public String callMailboxMonthSet(P_StatVo pStatVo){
+
+        ProcedureVo procedureVo = new ProcedureVo(pStatVo);
+        ArrayList<P_MailboxMonthSetVo> detailList =  sta_MailboxDao.callMailboxMonthSet(procedureVo);
+        P_MailboxMonthSetVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_MailboxMonthSetVo.class);
+
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
     }
 
 

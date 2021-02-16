@@ -10,10 +10,14 @@
             <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
                 <li class="active"><a href="#time" role="tab" data-toggle="tab" id="tab_time">시간대별</a></li>
                 <li><a href="#month" role="tab" data-toggle="tab" id="tab_month">월간별</a></li>
+                <li><a href="#monthSet" role="tab" data-toggle="tab" id="tab_monthSet">월간별 설정 현황</a></li>
+                <li><a href="#yearSet" role="tab" data-toggle="tab" id="tab_yearSet">연간별 설정 현황</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="time"><jsp:include page="time.jsp"/></div>
                 <div class="tab-pane fade" id="month"><jsp:include page="month.jsp"/></div>
+                <div class="tab-pane fade" id="monthSet" style="width: 1300px;"><jsp:include page="monthSet.jsp"/></div>
+                <div class="tab-pane fade" id="yearSet" style="width: 1300px;"><jsp:include page="yearSet.jsp"/></div>
             </div>
         </div>
     </div>
@@ -29,8 +33,10 @@
         if(tabId == 'tab_time'){
             slctType = 0;
             $(".searchDate").html($("#onedayDate").val() + " (" + toDay + ")");
-        }else if(tabId == 'tab_month') {
+        }else if(tabId == 'tab_month' || tabId == 'tab_monthSet') {
             slctType = 1;
+        }else if(tabId == 'tab_yearSet') {
+            slctType = 2;
         }
         dateType();
     });
@@ -40,6 +46,10 @@
             getTime();
         }else if(tabId == 'tab_month') {
             getMonth();
+        }else if(tabId == 'tab_monthSet') {
+            getMonthSet();
+        }else if(tabId == 'tab_yearSet') {
+            getYearSet();
         }
     });
 </script>
