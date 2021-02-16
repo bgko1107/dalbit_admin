@@ -242,7 +242,7 @@
                 </tr>
                 <tr>
                     <th rowspan="2" colspan="2">플랫폼</th>
-                    <td rowspan="2" colspan="2">{{{getCommonCodeCheck platform 'content_platform2'}}}</td>
+                    <td rowspan="2" colspan="2">{{{getCommonCodeCheck '' 'content_platform2'}}}</td>
 
                     <th rowspan="2">성별</th>
                     <td rowspan="2">{{{getCommonCodeSelect gender 'gender'}}}</td>
