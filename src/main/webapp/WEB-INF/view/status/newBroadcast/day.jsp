@@ -638,21 +638,21 @@
         <td>총합</td>
         <td>{{addComma sum_a_create_Cnt}}</td>
         <td>{{addComma sum_a_unique_dj_Cnt}}</td>
-        <td>{{addComma sum_a_create_max_Cnt}}</td>
+        <td>-</td>
         <td>{{timeStampDay sum_a_airtime}}</td>
         <td>{{addComma sum_v_create_Cnt}}</td>
         <td>{{addComma sum_v_unique_dj_Cnt}}</td>
-        <td>{{addComma sum_v_create_max_Cnt}}</td>
+        <td>-</td>
         <td>{{timeStampDay sum_v_airtime}}</td>
         <td>{{addComma sum_create_Cnt}}</td>
         <td>{{addComma sum_unique_dj_Cnt}}</td>
-        <td>{{addComma sum_create_max_Cnt}}</td>
+        <td>-</td>
         <td>{{timeStampDay sum_airtime}}</td>
         <td>{{addComma sum_listener_Cnt}}</td>
         <td>{{addComma sum_unique_listener_Cnt}}</td>
         <td>{{addComma sum_guest_Cnt}}</td>
         <td>{{addComma sum_guest_unique_Cnt}}</td>
-        <td>{{addComma sum_listener_max_Cnt}}</td>
+        <td>-</td>
         <td>{{addComma sum_gift_Cnt}}</td>
         <td>{{addComma sum_gift_Amt}}</td>
     </tr>
@@ -704,7 +704,7 @@
         <td>{{addComma sum_unique_dj_nCnt}}</td>
         <td>{{addComma sum_create_Cnt}}</td>
         <td>{{addComma sum_unique_dj_Cnt}}</td>
-        <td>{{addComma sum_create_max_Cnt}}</td>
+        <td>-</td>
         <td>{{timeStampDay sum_airtime}}</td>
         <td>{{addComma sum_listener_mCnt}}</td>
         <td>{{addComma sum_unique_listener_mCnt}}</td>
@@ -716,7 +716,7 @@
         <td>{{addComma sum_unique_listener_Cnt}}</td>
         <td>{{addComma sum_guest_Cnt}}</td>
         <td>{{addComma sum_guest_unique_Cnt}}</td>
-        <td>{{addComma sum_listener_max_Cnt}}</td>
+        <td>-</td>
         <td>{{addComma sum_gift_Cnt}}</td>
         <td>{{addComma sum_gift_Amt}}</td>
     </tr>
@@ -770,7 +770,7 @@
         <td>{{addComma sum_unique_dj_nCnt}}</td>
         <td>{{addComma sum_create_Cnt}}</td>
         <td>{{addComma sum_unique_dj_Cnt}}</td>
-        <td>{{addComma sum_create_max_Cnt}}</td>
+        <td>-</td>
         <td>{{timeStampDay sum_airtime}}</td>
         <td>{{addComma sum_listener_mCnt}}</td>
         <td>{{addComma sum_unique_listener_mCnt}}</td>
@@ -782,7 +782,7 @@
         <td>{{addComma sum_unique_listener_Cnt}}</td>
         <td>{{addComma sum_guest_Cnt}}</td>
         <td>{{addComma sum_guest_unique_Cnt}}</td>
-        <td>{{addComma sum_listener_max_Cnt}}</td>
+        <td>-</td>
         <td>{{addComma sum_gift_Cnt}}</td>
         <td>{{addComma sum_gift_Amt}}</td>
     </tr>
