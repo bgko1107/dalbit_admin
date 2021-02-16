@@ -227,7 +227,7 @@
 
             util.getAjaxData('multiOperate', '/rest/customer/declaration/multi/operate', data, function(dist_id, response){
                 alert(response.message);
-                getReportList();
+                dtList_info.reload(null, false);
             });
         }
 
