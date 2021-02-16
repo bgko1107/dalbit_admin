@@ -74,7 +74,7 @@
         });
         <!-- 버튼 끝 -->
 
-        $("#"+targetId).find("#searchType").html(util.getCommonCodeSelect(-1, special_searchType));
+        $("#"+targetId).find("#searchType").html(util.getCommonCodeSelect(-1, searchMember, 'Y', 'searchType'));
     });
 
     var callbackFn;
@@ -86,9 +86,10 @@
     var dtList_modal_info_detail;
     var source = specialDataTableSource.modalSpecialList;       //callback : setModalMemeberData()
     var dtList_info_detail_data = function (data) {
-        data.searchType = $("#"+targetId).find("select[name='searchType']").val();          // 검색구분
+        data.newSearchType = $("#"+targetId).find("select[name='searchType']").val();          // 검색구분
         data.searchText = $("#"+targetId).find('#txt_search').val();                        // 검색명
     }
+
     dtList_modal_info_detail = new DalbitDataTable($("#"+targetId).find("#modal_list_info"), dtList_info_detail_data, source);
     dtList_modal_info_detail.useCheckBox(false);
     dtList_modal_info_detail.useIndex(false);

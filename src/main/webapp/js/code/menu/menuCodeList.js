@@ -86,10 +86,10 @@ var special_roundNos = [
     , new COMMON_CODE('3', '3', '3기'),
     , new COMMON_CODE('4', '4', '4기'),
     , new COMMON_CODE('5', '5', '5기'),
+    , new COMMON_CODE('6', '6', '6기')
     , new COMMON_CODE('7', '7', '7기'),
     , new COMMON_CODE('8', '8', '8기'),
     , new COMMON_CODE('9', '9', '9기'),
-    , new COMMON_CODE('6', '6', '6기')
     , new COMMON_CODE('10', '10', '10기')
     , new COMMON_CODE('11', '11', '11기')
     , new COMMON_CODE('12', '12', '12기')

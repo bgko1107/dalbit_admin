@@ -87,15 +87,6 @@ public class Mem_MemberService {
         ProcedureVo procedureVo = new ProcedureVo(pMemberListInputVo);
         ArrayList<P_MemberListOutputVo> memberList = mem_MemberDao.callMemberList(procedureVo);
 
-//        for(int i=0;i<memberList.size();i ++ ){
-//            MemberVo memInfoOutVo = DalbitUtil.getMemInfo(memberList.get(i).getMem_no());
-//            if(!DalbitUtil.isEmpty(memInfoOutVo)) {
-//                memberList.get(i).setMem_birth_year(memInfoOutVo.getMem_birth_year());
-//                memberList.get(i).setMem_birth_month(memInfoOutVo.getMem_birth_month());
-//                memberList.get(i).setMem_birth_day(memInfoOutVo.getMem_birth_day());
-//            }
-//        }
-
         String result;
         if(Integer.parseInt(procedureVo.getRet()) > 0) {
             result = gsonUtil.toJson(new JsonOutputVo(Status.회원정보보기_성공, memberList, new PagingVo(procedureVo.getRet())));

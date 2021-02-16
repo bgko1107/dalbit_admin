@@ -8,10 +8,14 @@
         <%--<h3><i class="fa fa-desktop"></i> 검색결과</h3>--%>
     <%--</div>--%>
         <div class="row col-md-12 mt15">
+
             <div class="pull-left ml5 mb15">
                 ㆍ 해당 월의 스페셜 DJ입니다. <br/>
                 ㆍ 운영자 직접 등록 시 해당 월 1일부터 바로 스페셜 DJ가 적용됩니다. <br/>
                 ㆍ 스페셜 DJ 자격은 1개월(당월 1일~당월 말일) 동안 유지됩니다.
+                <div>
+                    ㆍ  <input type="checkbox" name="isBest" id="isBest" /> <label for="isBest" class="font-bold">베스트 스페셜 DJ만 보기</label>
+                </div>
             </div>
 
             <!-- summary & 운영자 등록 버튼 -->
@@ -36,6 +40,8 @@
                     <th>회원번호</th>
                     <th>User닉네임</th>
                     <th>성별</th>
+                    <th>이름</th>
+                    <th>연락처</th>
                     <th>누적 방송시간</th>
                     <th>누적 받은 별</th>
                     <th>좋아요 합계</th>
@@ -78,6 +84,7 @@
             , pageStart: specialDjPagingInfo.pageNo
             , pageCnt: specialDjPagingInfo.pageCnt
             , newSearchType : $("#searchMember").val()
+            , isBest : $("#isBest").prop('checked') ? 1 : 0
         };
     }
 
@@ -169,43 +176,13 @@
                , select_month: common.substr($("#startDate").val(),5,2)
            };
             dalbitLog(data);
-            util.getAjaxData("cancel", "/rest/menu/special/reqCancel", data, fn_success_cancel);
+            util.getAjaxData("cancel", "/rest/menu/special/reqCancel", data, function(dst_id, response) {
+                alert(response.message);
+                getList();
+            });
         }
         return false;
     });
-
-    function fn_success_cancel(dst_id, response) {
-        alert(response.message);
-        getList();
-    }
-
-    $('#bt_edit').on('click', function() {
-        if(approveDal > totalCnt) {
-            alert('순위 변경은 스페셜 DJ 전체목록에서 가능합니다.');
-            return false;
-        }
-        var orderDataArr = new Array();
-        $('._noTr').each(function(i) {
-            var mem_no = $(this).find('._openMemberPop').data('memno');
-            var order = i + 1;
-            var data = {
-                mem_no : mem_no
-                , order : order
-            };
-            orderDataArr.push(data);
-        });
-
-        var param = {
-            orderJsonData : JSON.stringify(orderDataArr)
-        };
-
-        util.getAjaxData("updateOrder", "/rest/menu/special/updateOrder", param, fn_updateOrder_success);
-    });
-
-    function fn_updateOrder_success(dst_id, response) {
-        alert(response.message);
-        init();
-    }
 
     function fullSize_background(url) {
         if(common.isEmpty(url)){
@@ -223,6 +200,10 @@
 
     $('#memSearch').on('click', function() {
         showPopMemberList(choiceMember);
+    });
+
+    $("#isBest").on('change', function(){
+        specialList();
     });
 </script>
 
@@ -251,6 +232,8 @@
         </td>
         <td>{{mem_nick}}</td>
         <td>{{{sexIcon mem_sex mem_birth_year}}}</td>
+        <td>{{mem_name}}</td>
+        <td>{{phoneNumHyphen mem_phone}}</td>
         <td>{{timeStampDay airTime}}</td>
         <td>{{addComma giftedRuby}} 개</td>
         <td>{{addComma totLikeCnt}} 개</td>

@@ -165,7 +165,7 @@ var specialDataTableSource = {
             {'title': '지원요건 4', 'data': '', 'render': function (data, type, row, meta) {
                     return row.condition_codeName4 + '<br />' + specialDjUtil.getConditionData(row.condition_code4, row.condition_data4)
                 },'width':'200px'},
-            {'title': '스페셜요건', 'data': '', 'render': function (data, type, row, meta) {
+            {'title': '베스트요건', 'data': '', 'render': function (data, type, row, meta) {
                     return row.best_codeName + '<br />' + specialDjUtil.getConditionData(row.best_code, row.best_data)
                 },'width':'200px'},
             {'title': '등록일', 'data': 'reg_date', 'render': function (data, type, row, meta) {
@@ -215,7 +215,7 @@ var specialDataTableSource = {
                         return common.setFontColor('가능', 'blue');
                     }
                     if(row.specialdj_badge < 2 && row.is_req == 'Y'){
-                        return common.setFontColor('가능', 'blue');
+                        return common.setFontColor('심사필요', 'green');
                     }
 
                     return common.setFontColor('불가능', 'red');

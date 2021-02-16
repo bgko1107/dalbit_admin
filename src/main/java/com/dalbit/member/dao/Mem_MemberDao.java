@@ -20,7 +20,7 @@ public interface Mem_MemberDao {
     @Transactional(readOnly = true)
     ProcedureVo callMemberLogin(ProcedureVo procedureVo);
 
-    @Transactional(readOnly = true)
+    //@Transactional(readOnly = true)
     ArrayList<P_MemberListOutputVo> callMemberList(ProcedureVo procedureVo);
 
     @Transactional(readOnly = true)

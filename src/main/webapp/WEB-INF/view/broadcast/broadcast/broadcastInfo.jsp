@@ -530,10 +530,10 @@
                 {{/equal}}
 
                 {{#dalbit_if type_media '==' 'a'}}
-                    <img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />
+                    <img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="라디오 방송" style="width: 33px;height: 33px" />
                 {{/dalbit_if}}
                 {{#dalbit_if type_media '==' 'v'}}
-                    <img src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />
+                    <img src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="보이는 라디오 방송" style="width: 33px;height: 33px" />
                 {{/dalbit_if}}
             </td>
         </tr>

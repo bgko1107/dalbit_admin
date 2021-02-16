@@ -14,6 +14,7 @@ public class SpecialVo extends PagingVo {
     private String select_year;
     private String select_month;
     private int newSearchType;
+    private int isBest;
 
     /* output */
     private int req_idx;
@@ -23,6 +24,7 @@ public class SpecialVo extends PagingVo {
     private int order;
     private String op_name;
     private String mem_phone;
+    private String mem_name;
     private String mem_id;
     private String mem_userid;
     private String mem_nick;

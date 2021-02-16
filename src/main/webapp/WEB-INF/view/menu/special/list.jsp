@@ -110,6 +110,8 @@
                 , is_force : 1
                 , select_year : common.substr($("#startDate").val(),0,4)
                 , select_month :  common.substr($("#startDate").val(),5,2)
+                , start_date : $("#startDate").val()
+                , end_date : $("#endDate").val()
             };
             util.getAjaxData("ok", "/rest/menu/special/reqOk", obj, fn_success_ok);
         }

@@ -43,7 +43,7 @@
 
     function emptySearch() {
         $('#txt_search').val('');
-        $('#searchArea').html(util.getCommonCodeSelect(-1, special_searchType));
+        $('#searchArea').html(util.getCommonCodeSelect(-1, searchMember, 'Y', 'searchType'));
     }
 
     $('._tab').on('click', function(){

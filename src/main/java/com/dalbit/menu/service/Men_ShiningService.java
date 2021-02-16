@@ -1,6 +1,7 @@
 package com.dalbit.menu.service;
 
 import com.dalbit.common.code.Status;
+import com.dalbit.common.dao.CommonMemberDao;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.ProcedureVo;
@@ -27,6 +28,9 @@ public class Men_ShiningService {
 
     @Autowired
     Men_ShiningDao menShiningDao;
+
+    @Autowired
+    CommonMemberDao commonMemberDao;
 
     @Autowired
     GsonUtil gsonUtil;
@@ -119,7 +123,7 @@ public class Men_ShiningService {
         for(int i=0; i<memNo.length;i++){
             shiningVo.setMemNo(memNo[i]);
             ProcedureVo procedureVo = new ProcedureVo(shiningVo);
-            menShiningDao.callAddShining(procedureVo);
+            commonMemberDao.callMemberBadgeAdd(procedureVo);
 
             if(procedureVo.getRet().equals(Status.샤이닝DJ등록_실패_스페셜DJ.getMessageCode())){
                 return gsonUtil.toJson(new JsonOutputVo(Status.샤이닝DJ등록_실패_스페셜DJ));
@@ -149,7 +153,7 @@ public class Men_ShiningService {
             deleteMember.setEndDate(shiningVo.getEndDate());
             deleteMember.setBadgeType(10);
             ProcedureVo procedureVo = new ProcedureVo(deleteMember);
-            menShiningDao.callShiningDelete(procedureVo);
+            commonMemberDao.callMemberBadgeDelete(procedureVo);
 
             if(!procedureVo.getRet().equals(Status.샤이닝DJ삭제_성공.getMessageCode())){
                 return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
