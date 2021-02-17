@@ -330,7 +330,7 @@
             $("#live_summaryArea").html(html);
         }
 
-       tableCss();
+       //tableCss();
     }
 
     function fn_inspection_check_success(dst_id, response){
@@ -623,13 +623,20 @@
     }
 
     function tableCss(){
-        $('#list_info > tbody > tr').each(function(){
+        /*$('#list_info > tbody > tr').each(function(){
             var td = $(this).children();
             var td_3 = td.eq(3);
-            if(td_3.find('#mediaType').data().mediatype == "v"){
+            console.log(td_3.find('img #mediaType').data());
+            /!*if(td_3.find('#mediaType').data().mediatype == "v"){
                 td_3.css("background-color", "#fbe5d6");
+            }*!/
+        });*/
+        /*$('.mediaType').each(function(){
+            var me = $(this);
+            if(!common.isEmpty(me.data('mediatype'))){
+                me.css("background-color", "#fbe5d6");
             }
-        });
+        });*/
     }
 </script>
 
