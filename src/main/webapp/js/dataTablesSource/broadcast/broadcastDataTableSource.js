@@ -17,11 +17,11 @@ var BroadcastDataTableSource = {
             {'title': '주제<br/>제목', 'data': 'title','width' : '150px', 'render': function (data, type, row, meta) {
                     var tmp_mediaType = "";
                     if(row.mediaType == "a"){
-                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" /> ';
+                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }else{
-                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" /> ';
+                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }
-                    return tmp_mediaType + row.subject_name + '<br/>' + util.roomNoLink(data, row.room_no);
+                    return tmp_mediaType + ' ' + row.subject_name + '<br/>' + util.roomNoLink(data, row.room_no);
                 }},
             {'title': '방송방', 'data': 'backgroundImage', 'width' : '50px', 'render' : function(data, type, row){
                     return '<img class="thumbnail fullSize_background" src="'+ PHOTO_SERVER_URL + data +'" width="65px" height="65px" />';
@@ -176,9 +176,9 @@ var BroadcastDataTableSource = {
             {'title': '제목', 'data': 'title','width' : '150px', 'render': function (data, type, row, meta) {
                     var tmp_mediaType = "";
                     if(row.mediaType == "a"){
-                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }else{
-                        tmp_mediaType = '<img src="https://image.dalbitlive.com/svg/ico_live_video.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }
                     return tmp_mediaType + ' ' + util.roomNoLink(data, row.room_no);
                 }},
@@ -906,6 +906,40 @@ var BroadcastDataTableSource = {
                     }
                     return tmp;
                 }},
+        ]
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
+    },
+
+    'minigameMemberList': {
+        'url': '/rest/broadcast/minigame/member/list'
+        , 'columns': [
+            {'title': '회원번호', 'data': 'mem_no', 'width':'100px', 'render': function (data, type, row, meta) {
+                    return util.memNoLink(data, row.mem_no);
+                }},
+            {'title': '닉네임', 'data': 'memNick', 'width':'100px'},
+            {'title': '참여 게임', 'data': 'gameName', 'width':'100px'},
+            {'title': '참여일시', 'data': '', 'width':'100px'},
+            {'title': '게임 차감 달', 'data': '', 'width':'100px'},
+            {'title': '당첨/선택 옵션', 'data': '', 'width':'100px'},
+        ]
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
+    },
+
+    'minigameEditHistory': {
+        'url': '/rest/broadcast/minigame/edit/history'
+        , 'columns': [
+            {'title': '수정일시', 'data': '', 'width':'100px'},
+            {'title': '개설 게임', 'data': '', 'width':'100px'},
+            {'title': '수정내역', 'data': '', 'width':'100px'},
+            {'title': '처리자명', 'data': '', 'width':'100px'},
         ]
         ,'createdRow' : function( row, data, dataIndex ) {
             if (data.inner == 1) {    // 테스트계정 row 색상 표시
