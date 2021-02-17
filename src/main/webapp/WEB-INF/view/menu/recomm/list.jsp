@@ -65,6 +65,9 @@
     }
 
     function fn_recommMember_success(dst_id, response, param){
+
+        response.data.desc = response.data.desc.replace(/\\n/gi, "\r\n");
+
         var template = $('#tmp_recommMemberInfo').html();
         var templateScript = Handlebars.compile(template);
         var data = response.data;
@@ -184,7 +187,7 @@
         </tr>
         <tr>
             <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">소개문구</th>
-            <td colspan="8"><textarea type="textarea" class="form-control" id="desc" name="desc" style="width: 100%; height: 100%">{{desc}}</textarea></td>
+            <td colspan="8"><textarea type="textarea" class="form-control" id="desc" name="desc" style="width: 100%; height: 200px">{{desc}}</textarea></td>
         </tr>
     </table>
 </script>
