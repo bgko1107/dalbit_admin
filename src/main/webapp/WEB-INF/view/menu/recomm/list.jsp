@@ -187,7 +187,7 @@
         </tr>
         <tr>
             <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">소개문구</th>
-            <td colspan="8"><textarea type="textarea" class="form-control" id="desc" name="desc" style="width: 100%; height: 100%">{{desc}}</textarea></td>
+            <td colspan="8"><textarea type="textarea" class="form-control" id="desc" name="desc" style="width: 100%; height: 200px">{{desc}}</textarea></td>
         </tr>
     </table>
 </script>
