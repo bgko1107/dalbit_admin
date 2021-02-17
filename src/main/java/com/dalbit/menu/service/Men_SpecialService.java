@@ -221,7 +221,8 @@ public class Men_SpecialService {
             return gsonUtil.toJson(new JsonOutputVo(Status.스페셜DJ_중복));
         }
 
-        boolean isBestDj = 5 < DalbitUtil.getIntMap(checkDjCnt, "specialdj_cnt") ? true : false;
+        //승인 전 카운트임..
+        boolean isBestDj = 5 <= DalbitUtil.getIntMap(checkDjCnt, "specialdj_cnt") ? true : false;
 
         //스페셜 DJ 뱃지 추가
         MemberBadgeVo memberBadgeVo = new MemberBadgeVo();
