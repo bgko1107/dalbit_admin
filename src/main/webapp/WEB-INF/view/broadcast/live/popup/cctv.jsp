@@ -31,6 +31,12 @@
                         <option value="24">24개</option>
                         <option value="36">36개</option>
                     </select>
+                    페이지 번호
+                    <select class="form-control searchType" id="_pageNo">
+                        <option value="1">1 페이지</option>
+                        <option value="2">2 페이지</option>
+                        <option value="2">3 페이지</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -43,7 +49,7 @@
 <script src="/js/webrtc_wowza_play.js"></script>
 <script type="text/javascript">
 
-    var videoPagingInfo= new PAGING_INFO(0, 1, $("#_pageCnt").val());
+    var videoPagingInfo= new PAGING_INFO(0, $("#_pageNo").val(), $("#_pageCnt").val());
 
     var date = new Date();
     var sDate;
@@ -62,18 +68,22 @@
     var tmp_searchText = "";
     var mediaType = 0;
 
+    var adapterList = new Array();
+
     $(document).ready(function() {
         videoList();
-
         configAutoRefresh();
     });
 
+    var reconnectId = '';
     var autoRefreshId = '';
     var minute = 1000 * 60;
     function configAutoRefresh(){
         var refreshTime = $("#_refreshTime").val();
         if(0 < refreshTime){
             autoRefreshId = setInterval(refreshVideoList, refreshTime * minute);
+
+            reconnectId = setInterval(tryReconnectVideoList, 1 * minute);
         }
     }
 
@@ -139,7 +149,10 @@
         ui.paintColor();
     };
 
-    var adapterList = new Array();
+    function changeState(target, message, state){
+        target.text(message);
+        target.data('state', state);
+    }
 
     function videoPlay(me){
         var video_state = $(me).parent().find('._video_state');
@@ -156,21 +169,17 @@
 
         adapter.on('error', error => {
             if(error !== undefined){
-                video_state.text(" [플레이어 실행 오류] " + error);
-                //wowza_reconnect(me);
-                if(adapter.repeaterRetryCount < 10){
-                    wowza_reconnect(me);
-                }
+                changeState(video_state, '[플레이어 실행 오류] ' + error, 99)
                 return false;
             }
         });
 
         adapter.on('pcStateChange', state => {
             if(state == 'connecting'){
-                video_state.text("방송방 연결중....");
+                changeState(video_state, '방송방 연결중....', 1);
             }
             if (state == 'connected') {
-                video_state.text("");
+                changeState(video_state, '', 2);
                 remoteVideo = document.getElementById('video_'+me.data('roomno'));
                 try{
                     remoteVideo.srcObject = adapter.getStream();
@@ -180,20 +189,21 @@
             }
             if (state == 'disconnected' || state == 'failed') {
                 stop();
-                video_state.text("연결이 종료되었습니다.");
                 //wowza_reconnect(me);
+                changeState(video_state, '연결이 종료되었습니다.', 3);
                 return false;
             }
         });
 
         adapter.start(info);
-        video_state.text("방송방 연결시도중..");
+        changeState(video_state, '방송방 연결시도중..', 0);
     }
 
     function videoStop(){
         adapterList.forEach(function(adapter, index){
             adapter.stop();
-        })
+        });
+        adapterList = new Array();
     }
 
     function wowza_reconnect(me){
@@ -205,7 +215,25 @@
             video_refresh_btn.click();
             video_state.text("재연결 시도중입니다.");
         }
+    }
 
+    function tryReconnectVideoList(){
+
+        var videoCnt = $('._video_state').length;
+        var disconnectVideoCnt = 0;
+
+        $('._video_state').each(function(){
+           var me = $(this);
+           var state = me.data('state');
+           if(!common.isEmpty(state) && 2 < state){
+               disconnectVideoCnt ++;
+               if(20 <= Math.floor(disconnectVideoCnt / videoCnt * 100)){
+                   refreshVideoList();
+               }else{
+                   me.parent().parent().find('._refresh').click();
+               }
+           }
+        });
     }
 
     function handlebarsPaging(targetId, pagingInfo) {
@@ -220,7 +248,6 @@
 
         //이전 동영상 play stop
         var target = $("#video_"+me.data('roomno'));
-        var videoIndex = $('._videoPlayer').index(target);
 
         videoPlay(target);
 
@@ -239,7 +266,12 @@
     });
 
     $(document).on('change', '#_pageCnt', function(){
-        refreshVideoList()
+        refreshVideoList();
+    });
+
+    $(document).on('change', '#_pageNo', function(){
+        videoPagingInfo.pageNo = $(this).val();
+        refreshVideoList();
     });
 </script>
 
