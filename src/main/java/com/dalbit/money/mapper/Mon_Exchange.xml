@@ -102,11 +102,11 @@
                     and (basic.mem_phone = #{searchText} or withdrawal.mem_phone = #{searchText})
                 </when>
                 <when test="newSearchType == 5">
-                    and (basic.mem_id = #{searchText} or withdrawal.mem_id = #{searchText})
+                    and (basic.mem_userid = #{searchText} or withdrawal.mem_userid = #{searchText})
                 </when>
                 <when test="newSearchType == 6">
-                    and (basic.mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
-                    or withdrawal.mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText}))
+                    and (basic.mem_ip in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                    or withdrawal.mem_ip in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText}))
                 </when>
                 <otherwise>
                     and (basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -827,10 +827,10 @@
                         and basic.mem_phone = #{searchText}
                     </when>
                     <when test="newSearchType == 5">
-                        and basic.mem_id = #{searchText}
+                        and basic.mem_userid = #{searchText}
                     </when>
                     <when test="newSearchType == 6">
-                        and basic.mem_ip in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        and basic.mem_ip in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                     </when>
                     <otherwise>
                         and basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})

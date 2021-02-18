@@ -56,12 +56,17 @@ var fnc_profileList = {};
 
 
     fnc_profileList.initDataTable= function() {
-        console.log(fnc_profileList.pagingInfo)
 
         $("#pageStart").val(fnc_profileList.pagingInfo.pageNo);
         $("#pageCnt").val(fnc_profileList.pagingInfo.pageCnt);
 
-        util.getAjaxData(fnc_profileList.targetId, "/rest/customer/image/profile/list", $("#searchForm").serialize(), fnc_profileList.fn_select_success, fnc_profileList.fn_fail);
+        var data = {};
+        data.searchText = $("input[name=searchText]").val();
+        data.newSearchType = $("#searchMember").val();
+        data.pageStart = fnc_profileList.pagingInfo.pageNo;
+        data.pageCnt = fnc_profileList.pagingInfo.pageCnt;
+
+        util.getAjaxData(fnc_profileList.targetId, "/rest/customer/image/profile/list", data, fnc_profileList.fn_select_success, fnc_profileList.fn_fail);
     };
 
 

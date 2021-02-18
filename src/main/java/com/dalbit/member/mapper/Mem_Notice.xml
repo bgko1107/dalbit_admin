@@ -34,11 +34,40 @@
           From rd_data.tb_member_broadcast_notice a
           left join rd_data.tb_member_basic b on a.mem_no = b.mem_no
           LEFT JOIN rd_data.tb_member_withdrawal_bak c ON a.mem_no = c.mem_no
-         where ((b.mem_no = #{mem_no} OR b.mem_userid = #{mem_no} OR b.mem_nick like CONCAT('%',#{mem_no},'%'))
-             or (c.mem_no = #{mem_no} OR c.mem_userid = #{mem_no} OR c.mem_nick like CONCAT('%',#{mem_no},'%')))
+         where CHAR_LENGTH(a.title) > 0
+            <if test='mem_no != null and mem_no != ""'>
+                <choose>
+                    <when test="newSearchType == 1">
+                        and (b.mem_no = #{mem_no} or c.mem_no = #{mem_no})
+                    </when>
+                    <when test="newSearchType == 2">
+                        and (b.mem_nick like concat('%', #{mem_no}, '%') or c.mem_nick like concat('%', #{mem_no}, '%'))
+                    </when>
+                    <when test="newSearchType == 3">
+                        and (b.mem_name = #{mem_no} or c.mem_name = #{mem_no})
+                    </when>
+                    <when test="newSearchType == 4">
+                        and (b.mem_phone = #{mem_no} or c.mem_phone = #{mem_no})
+                    </when>
+                    <when test="newSearchType == 5">
+                        and (b.mem_userid = #{mem_no} or c.mem_userid = #{mem_no})
+                    </when>
+                    <when test="newSearchType == 6">
+                        and (b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{mem_no})
+                           or c.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{mem_no}))
+                    </when>
+                    <when test="newSearchType == 7">
+                        and (b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{mem_no})
+                           or c.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{mem_no}))
+                    </when>
+                    <otherwise>
+                        and ((b.mem_no = #{mem_no} OR b.mem_nick like CONCAT('%',#{mem_no},'%'))
+                            or (c.mem_no = #{mem_no} OR c.mem_nick like CONCAT('%',#{mem_no},'%')))
+                    </otherwise>
+                </choose>
+            </if>
             <if test='sDate != null and sDate !=""'>
-                and a.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{sDate}, '%Y.%m.%d 00:00:00')
-                and a.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{eDate}, '%Y.%m.%d 23:59:59')
+                and a.last_upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
             </if>
             <if test='status == 1'>
                 and a.status = 0
@@ -65,11 +94,39 @@
          left join rd_data.tb_member_basic b on a.mem_no = b.mem_no
          LEFT JOIN rd_data.tb_member_withdrawal_bak c ON a.mem_no = c.mem_no
              where CHAR_LENGTH(a.notice) > 0
-               and ((b.mem_no like CONCAT('%',#{mem_no},'%') OR b.mem_userid like CONCAT('%',#{mem_no},'%') OR b.mem_nick like CONCAT('%',#{mem_no},'%')) or
-                    (c.mem_no like CONCAT('%',#{mem_no},'%') OR c.mem_userid like CONCAT('%',#{mem_no},'%') OR c.mem_nick like CONCAT('%',#{mem_no},'%')))
+                <if test='mem_no != null and mem_no != ""'>
+                    <choose>
+                        <when test="newSearchType == 1">
+                            and (b.mem_no = #{mem_no} or c.mem_no = #{mem_no})
+                        </when>
+                        <when test="newSearchType == 2">
+                            and (b.mem_nick like concat('%', #{mem_no}, '%') or c.mem_nick like concat('%', #{mem_no}, '%'))
+                        </when>
+                        <when test="newSearchType == 3">
+                            and (b.mem_name = #{mem_no} or c.mem_name = #{mem_no})
+                        </when>
+                        <when test="newSearchType == 4">
+                            and (b.mem_phone = #{mem_no} or c.mem_phone = #{mem_no})
+                        </when>
+                        <when test="newSearchType == 5">
+                            and (b.mem_userid = #{mem_no} or c.mem_userid = #{mem_no})
+                        </when>
+                        <when test="newSearchType == 6">
+                            and (b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{mem_no})
+                            or c.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{mem_no}))
+                        </when>
+                        <when test="newSearchType == 7">
+                            and (b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{mem_no})
+                            or c.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{mem_no}))
+                        </when>
+                        <otherwise>
+                            and ((b.mem_no = #{mem_no} OR b.mem_nick like CONCAT('%',#{mem_no},'%'))
+                            or (c.mem_no = #{mem_no} OR c.mem_nick like CONCAT('%',#{mem_no},'%')))
+                        </otherwise>
+                    </choose>
+                </if>
                 <if test='sDate != null and sDate !=""'>
-                    and a.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{sDate}, '%Y.%m.%d 00:00:00')
-                    and a.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{eDate}, '%Y.%m.%d 23:59:59')
+                    and a.last_upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
                 </if>
         </if>
     </sql>
@@ -135,20 +192,39 @@
     <sql id="noticeReplyCondition">
         <where>
             <if test='start_sel != null and start_sel != ""'>
-                nore.last_upd_date  <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
+                nore.last_upd_date between concat(#{start_sel}, ' 00:00:00') and concat(#{end_sel}, ' 23:59:59')
             </if>
-            <if test='end_sel != null and end_sel != ""'>
-                and nore.last_upd_date  <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
-            </if>
+
             <if test='txt_search != null and txt_search != ""'>
-                and (
-                noti.writer_mem_no like CONCAT('%',#{txt_search},'%') or
-                bas.mem_nick like CONCAT('%',#{txt_search},'%') or bak.mem_nick like CONCAT('%',#{txt_search},'%') or
-                bas.mem_userid like CONCAT('%',#{txt_search},'%') or bak.mem_userid like CONCAT('%',#{txt_search},'%') or
-                nore.writer_no like CONCAT('%',#{txt_search},'%') or
-                reba.mem_nick like CONCAT('%',#{txt_search},'%') or rebak.mem_nick like CONCAT('%',#{txt_search},'%') or
-                reba.mem_userid like CONCAT('%',#{txt_search},'%') or rebak.mem_userid like CONCAT('%',#{txt_search},'%')
-                )
+                <choose>
+                    <when test="newSearchType == 1">
+                        and (bas.mem_no = #{txt_search} or reba.mem_no = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 2">
+                        and (bas.mem_nick like concat('%', #{txt_search}, '%') or reba.mem_nick like concat('%', #{txt_search}, '%'))
+                    </when>
+                    <when test="newSearchType == 3">
+                        and (bas.mem_name = #{txt_search} or reba.mem_name = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 4">
+                        and (bas.mem_phone = #{txt_search} or reba.mem_phone = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 5">
+                        and (bas.mem_userid = #{txt_search} or reba.mem_userid = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 6">
+                        and (bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search})
+                         or reba.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search}))
+                    </when>
+                    <when test="newSearchType == 7">
+                        and (bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                         or reba.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search}))
+                    </when>
+                    <otherwise>
+                        and (bas.mem_no = #{txt_search} or bas.mem_nick like concat('%', #{txt_search}, '%'))
+                          or (reba.mem_no = #{txt_search} or reba.mem_nick like concat('%', #{txt_search}, '%'))
+                    </otherwise>
+                </choose>
             </if>
             <if test='replyStatus == 1'>
                 and nore.`status` = 0

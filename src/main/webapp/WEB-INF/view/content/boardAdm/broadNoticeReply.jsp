@@ -80,6 +80,7 @@
             , 'end_sel' : $("#endDate").val()
             , 'searchType' : 0
             , 'replyStatus' : Number($("#noticeReplayStatus option:selected").val())
+            , 'newSearchType' : $("#searchMember").val()
         };
         util.getAjaxData("noticeReplyList", "/rest/content/boardAdm/noticeReplyList", data, fn_success_noticeReplyList);
     }

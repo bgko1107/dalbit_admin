@@ -996,3 +996,12 @@ var full_moon_text_guide_area = [
     , new COMMON_CODE('7', '7', '2')
     , new COMMON_CODE('8', '8', '3')
 ]
+
+var game_history_sort = [
+    new COMMON_CODE(null, 'game_history_sort', '게임진행내역 정렬')
+    , new COMMON_CODE('0', '0', '최근 방송 시작 순으로')
+    , new COMMON_CODE('1', '1', '게임진행횟수 순으로')
+    , new COMMON_CODE('2', '2', '누적 청취자 많은 순으로')
+    , new COMMON_CODE('3', '3', '누적 청취자 적은 순으로')
+    , new COMMON_CODE('4', '4', '받은 별 많은 순으로')
+]

@@ -16,6 +16,7 @@ public class BoardAdmStoryVo extends PagingVo {
     private String txt_search;
     private String start_sel;
     private String end_sel;
+    private int newSearchType;
 
     /* output */
     private int storyIdx;           // 사연 idx

@@ -95,6 +95,7 @@
             , 'sDate' : $("#startDate").val()
             , 'eDate' : $("#endDate").val()
             , 'searchType' : 0
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         util.getAjaxData("profileMsgList", "/rest/content/boardAdm/profileMsgList", data, fn_success_profileMsgList);

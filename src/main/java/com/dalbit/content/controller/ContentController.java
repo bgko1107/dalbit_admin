@@ -171,6 +171,11 @@ public class ContentController {
         return "content/servicePolicy/list";
     }
 
+    @GetMapping("/minigame/info")
+    public String minigameInfo() {
+        return "content/minigame/info";
+    }
+
     @GetMapping("/ios/version")
     @ResponseBody
     public String iosVersion(){

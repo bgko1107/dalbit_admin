@@ -55,11 +55,11 @@ var fnc_noticeList = {};
     };
 
     fnc_noticeList.initDataTable= function() {
-        var data = {
-            'pageNo' : fnc_noticeList.pagingInfo.pageNo
-            , 'pageCnt' : fnc_noticeList.pagingInfo.pageCnt
-            , 'searchText' : $('#txt_search').val()
-        };
+        var data = {};
+        data.searchText = $("input[name=searchText]").val();
+        data.newSearchType = $("#searchMember").val();
+        data.pageNo = fnc_noticeList.pagingInfo.pageNo;
+        data.pageCnt = fnc_noticeList.pagingInfo.pageCnt;
 
         util.getAjaxData(fnc_noticeList.targetId, "/rest/customer/image/notice/list", data, fnc_noticeList.fn_select_success, fnc_noticeList.fn_fail);
     };

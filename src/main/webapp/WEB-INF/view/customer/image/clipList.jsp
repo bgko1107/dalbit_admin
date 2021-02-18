@@ -56,12 +56,12 @@ var fnc_clipList = {};
 
 
     fnc_clipList.initDataTable= function() {
-        var data = {
-            'pageNo' : fnc_clipList.pagingInfo.pageNo
-            , 'pageCnt' : fnc_clipList.pagingInfo.pageCnt
-            , 'orderByType' : 6
-            , 'searchText' : $('#txt_search').val()
-        };
+        var data = {};
+        data.searchText = $("input[name=searchText]").val();
+        data.newSearchType = $("#searchMember").val();
+        data.pageNo = fnc_clipList.pagingInfo.pageNo;
+        data.pageCnt = fnc_clipList.pagingInfo.pageCnt;
+        data.orderByType = 6;
 
         util.getAjaxData(fnc_clipList.targetId, "/rest/customer/image/clip/list", data, fnc_clipList.fn_select_success, fnc_clipList.fn_fail);
     };

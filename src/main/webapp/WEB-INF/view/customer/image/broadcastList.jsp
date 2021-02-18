@@ -57,10 +57,13 @@ var fnc_broadcastList = {};
     fnc_broadcastList.initDataTable= function() {
         console.log(fnc_broadcastList.pagingInfo)
 
-        $("#pageStart").val(fnc_broadcastList.pagingInfo.pageNo);
-        $("#pageCnt").val(fnc_broadcastList.pagingInfo.pageCnt);
+        var data = {};
+        data.searchText = $("input[name=searchText]").val();
+        data.newSearchType = $("#searchMember").val();
+        data.pageStart = fnc_broadcastList.pagingInfo.pageNo;
+        data.pageCnt = fnc_broadcastList.pagingInfo.pageCnt;
 
-        util.getAjaxData(fnc_broadcastList.targetId, "/rest/customer/image/broadcast/list", $("#searchForm").serialize(), fnc_broadcastList.fn_select_success, fnc_broadcastList.fn_fail);
+        util.getAjaxData(fnc_broadcastList.targetId, "/rest/customer/image/broadcast/list", data, fnc_broadcastList.fn_select_success, fnc_broadcastList.fn_fail);
     };
 
 

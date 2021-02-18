@@ -17,9 +17,7 @@
                         </tr>
                         <tr>
                             <td style="text-align: left">
-                                <span id="search_slct_type_aria"></span>
-                                <span id="search_reason_aria"></span>
-                                <span name="question_platform" id="question_platform"></span>
+                                <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                 <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색할 정보를 입력하세요"></label>
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
                             </td>
@@ -61,6 +59,15 @@
             </table>
         </div>
 
+
+        <div class="col-lg-6 form-inline no-padding">
+            <br/>
+            <br/>
+            <span id="search_slct_type_aria" onchange="getDeclareInfo()"></span>
+            <span id="search_reason_aria" onchange="getDeclareInfo()"></span>
+            <span name="question_platform" id="question_platform" onchange="getDeclareInfo()"></span>
+        </div>
+
         <!-- DATA TABLE -->
         <div class="col-lg-12 no-padding mt10">
             <div class="widget widget-table">
@@ -99,6 +106,18 @@
     </div> <%-- #page-wrapper --%>
 </div> <%-- #wapper --%>
 
+<div class="modal fade" id="reportImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
+    <div class="modal-dialog" style="width: 600px; height: auto">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <span id="reportImageList"></span>
+            </div>
+            <div class="modal-body no-padding">
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="/js/lib/jquery.table2excel.js"></script>
 <script type="text/javascript" src="/js/code/customer/customerCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/customer/questionCodeList.js?${dummyData}"></script>
@@ -106,6 +125,7 @@
     var dtList_info;
 
     $(document).ready(function() {
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
 
         getReportList();
         ui.checkBoxUnbind('list_info', function(){
@@ -148,6 +168,7 @@
             data.slctType = tmp_slctType;
             data.slctReason = tmp_slctReason;
             data.strPlatform = tmp_slctPlatform;
+            data.newSearchType = $("#searchMember").val();
         };
         dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, customerDataTableSource.DeclareList);
         dtList_info.useCheckBox(true);
@@ -206,6 +227,38 @@
         util.getAjaxData("detail", "/rest/customer/declaration/detail", obj, fn_detail_success);
     }
 
+    function getImageCnt(index){
+        var data = dtList_info.getDataRow(index);
+
+        var obj = {};
+        obj.reportIdx = data.reportIdx;
+
+        // util.getAjaxData("detail", "/rest/customer/declaration/image/list", obj, fn_imageList_success);
+
+        var tmpImageList = "";
+
+        tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + "/mailBox_0/20938320000/20210115125231778945.png" + '" alt="" /></a></div>';
+        tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + "/mailBox_0/20938320000/20210115101556090936.png" + '" alt="" /></a></div>';
+        tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + "/mailBox_0/20942812800/20210119161425525429.png" + '" alt="" /></a></div>';
+
+        $("#reportImageList").html(tmpImageList);
+
+        $("#reportImage").modal("show");
+    }
+
+    function fn_imageList_success(dst_id, response){
+        var tmpImageList = "";
+
+        response.data.forEach(function (data, index){
+            tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-margin no-padding" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + data.imageUrl + '" alt="" /></a></div>';
+        });
+
+        $("#reportImageList").html(tmpImageList);
+
+        $("#reportImage").modal("show");
+
+    }
+
     $(document).on('click', '#checkProcBtn', function(){
         var checkSelector = $("#list_info tbody input[type='checkbox']:checked");
         var checkedCnt = checkSelector.length;
@@ -257,6 +310,12 @@
     });
 
     /*----------- 엑셀 ---------=*/
+
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
+
 
 </script>
 

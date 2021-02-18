@@ -6,7 +6,7 @@
     <div id="page-wrapper">
         <div class="container-fluid">
             <!-- serachBox -->
-            <form id="searchForm">
+            <form id="searchForm" style="display: none;">
                 <div class="row col-lg-12 form-inline">
                     <div class="widget widget-table searchBoxArea">
                         <table>
@@ -17,7 +17,6 @@
                             </tr>
                             <tr>
                                 <td style="text-align: left">
-                                    <span id="search_slctType_aria"></span>
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색할 정보를 입력하세요"></label>
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                 </td>
@@ -32,6 +31,10 @@
                 <button type="button" class="btn btn-default pull-right" id="bt_insert">등록</button>
             </div>
             <!-- DATA TABLE -->
+            <div class="row col-lg-12 form-inline">
+                <span id="search_slctType_aria" onchange="getFaqInfo();"></span>
+            </div>
+
             <div class="row col-lg-12 form-inline">
                 <div class="widget widget-table">
                     <div class="widget-header">
@@ -83,12 +86,13 @@
     var dtList_info;
     var dtList_info_data = function ( data ) {
         data.search = $('#searchText').val();                       // 검색명
-        data.gubun = $("select[name='selectGubun']").val()
+        data.slctType = $("select[name='slctType']").val();
     };
 
     dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, FaqDataTableSource.faqInfo, $("#searchForm"));
     dtList_info.useCheckBox(true);
     dtList_info.useIndex(true);
+    dtList_info.setPageLength(50);
     dtList_info.createDataTable();
 
     //검색조건 불러오기

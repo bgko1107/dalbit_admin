@@ -6,6 +6,32 @@
         <where>
             <if test='searchText != null and searchText != ""'>
                 <choose>
+                    <when test="newSearchType == 1">
+                        and bas.mem_no = #{searchText}
+                    </when>
+                    <when test="newSearchType == 2">
+                        and bas.mem_nick like concat('%', #{searchText}, '%')
+                    </when>
+                    <when test="newSearchType == 3">
+                        and bas.mem_name = #{searchText}
+                    </when>
+                    <when test="newSearchType == 4">
+                        and bas.mem_phone = #{searchText}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and bas.mem_userid = #{searchText}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                    </when>
+                    <otherwise>
+                        and bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                    </otherwise>
+                </choose>
+            </if>
+
+            <!-- <if test='searchText != null and searchText != ""'>
+                <choose>
                     <when test='searchType == "1"'>
                         rep.reported_mem_no like concat ('%', #{searchText}, '%')
                     </when>
@@ -35,7 +61,7 @@
                         )
                     </otherwise>
                 </choose>
-            </if>
+            </if> -->
             <if test='blockType != -1'>
                 and blo.block_type = #{blockType}
             </if>

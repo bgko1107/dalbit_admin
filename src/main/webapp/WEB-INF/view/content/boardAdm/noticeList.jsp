@@ -90,6 +90,7 @@
             , 'sDate' : $("#startDate").val()
             , 'eDate' : $("#endDate").val()
             , 'searchType' : tabId == "tab_noticeMemberDetail" ? 1 : 2
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         util.getAjaxData("noticeList", "/rest/content/boardAdm/noticeList", data, fn_success_noticeList);

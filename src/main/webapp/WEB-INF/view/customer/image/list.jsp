@@ -19,6 +19,7 @@
                             <td style="text-align: left">
                                 <input type="hidden" name="pageStart" id="pageStart">
                                 <input type="hidden" name="pageCnt" id="pageCnt">
+                                <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                 <label><input type="text" class="form-control" id="txt_search" name="searchText" placeholder="검색할 정보를 입력하세요"></label>
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
                             </td>
@@ -56,16 +57,12 @@
 
 <script>
     $(document).ready(function() {
-        init();
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+
         initEvent();
     });
 
 //=------------------------------ Init / Event--------------------------------------------
-    function init() {
-        //검색조건 불러오기
-        $("#search_searchType_aria").html(util.getCommonCodeSelect(-1, declaration_image_searchType));
-    }
-
     function initEvent(){
         $('input[id="txt_search"]').keydown(function() {
             if (event.keyCode === 13) {
@@ -257,5 +254,9 @@
     $(document).on("mouseout",".thumbnailImg",function(){ //마우스 아웃
         $("#preview").remove();
     });
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
 
 </script>

@@ -108,6 +108,7 @@
             , 'eDate' : $("#endDate").val()
             , 'searchType' : 0
             , 'status' : Number($("#clipReplayStatus option:selected").val())
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         util.getAjaxData("clipReplyList", "/rest/content/boardAdm/clipReplyList", data, fn_success_clipReplyList);

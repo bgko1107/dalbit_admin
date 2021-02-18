@@ -16,6 +16,7 @@
                     <li><a href="#likeDetail" role="tab" data-toggle="tab" id="tab_likeDetail" onclick="getBroadHistory_like(this.id);">좋아요 내역</a></li>
                     <li><a href="#giftDetail" role="tab" data-toggle="tab" id="tab_giftDetail" onclick="getBroadHistory_gift(this.id);">선물내역</a></li>
                     <li><a href="#storyDetail" role="tab" data-toggle="tab" id="tab_storyDetail" onclick="getBroadHistory_story(this.id);">사연내역</a></li>
+                    <li><a href="#minigame" role="tab" data-toggle="tab" id="tab_minigame" onclick="getBroadHistory_minigame(this.id);">미니게임</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="infoDetail"><jsp:include page="broadcastInfo.jsp"/></div>      <!-- 상세 -->
@@ -25,6 +26,7 @@
                     <div class="tab-pane fade" id="likeDetail"><jsp:include page="../like/list.jsp"/></div>                 <!-- 좋아요 -->
                     <div class="tab-pane fade" id="giftDetail"><jsp:include page="../gift/list.jsp"/></div>                 <!-- 선물 -->
                     <div class="tab-pane fade" id="storyDetail"><jsp:include page="../story/list.jsp"/></div>               <!-- 사연 -->
+                    <div class="tab-pane fade" id="minigame"><jsp:include page="../minigame/list.jsp"/></div>               <!-- 미니게임 -->
                 </div>
             </div>
         </div>
@@ -38,5 +40,6 @@
     });
 
     var dtList_info_detail;
+    var dtList_info_detail2;
     var dtList_top_info="";
 </script>

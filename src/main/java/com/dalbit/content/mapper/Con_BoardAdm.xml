@@ -6,6 +6,95 @@
         <where>
             <if test='txt_search != null and txt_search != ""'>
                 <if test='fanBoardOwner == 0'>
+                    <choose>
+                        <when test="newSearchType == 1">
+                            and (member.mem_no = #{txt_search} or writer_member.mem_no = #{txt_search} )
+                        </when>
+                        <when test="newSearchType == 2">
+                            and (member.mem_nick like concat('%', #{txt_search}, '%') or writer_member.mem_nick like concat('%', #{txt_search}, '%'))
+                        </when>
+                        <when test="newSearchType == 3">
+                            and (member.mem_name = #{txt_search} or writer_member.mem_name = #{txt_search})
+                        </when>
+                        <when test="newSearchType == 4">
+                            and (member.mem_phone = #{txt_search} or writer_member.mem_phone = #{txt_search})
+                        </when>
+                        <when test="newSearchType == 5">
+                            and (member.mem_userid = #{txt_search} or writer_member.mem_userid = #{txt_search})
+                        </when>
+                        <when test="newSearchType == 6">
+                            and (member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search})
+                            or writer_member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search}))
+                        </when>
+                        <when test="newSearchType == 7">
+                            and (member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                            or writer_member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                        </when>
+                        <otherwise>
+                            and (member.mem_no = #{txt_search} or writer_member.mem_no = #{txt_search} )
+                        </otherwise>
+                    </choose>
+                </if>
+
+                <if test='fanBoardOwner == 1'>
+                    <choose>
+                        <when test="newSearchType == 1">
+                            and member.mem_no = #{txt_search}
+                        </when>
+                        <when test="newSearchType == 2">
+                            and member.mem_nick like concat('%', #{txt_search}, '%')
+                        </when>
+                        <when test="newSearchType == 3">
+                            and member.mem_name = #{txt_search}
+                        </when>
+                        <when test="newSearchType == 4">
+                            and member.mem_phone = #{txt_search}
+                        </when>
+                        <when test="newSearchType == 5">
+                            and member.mem_userid = #{txt_search}
+                        </when>
+                        <when test="newSearchType == 6">
+                            and member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search})
+                        </when>
+                        <when test="newSearchType == 7">
+                            and member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                        </when>
+                        <otherwise>
+                            and member.mem_no = #{txt_search}
+                        </otherwise>
+                    </choose>
+                </if>
+
+                <if test='fanBoardOwner == 2'>
+                    <choose>
+                        <when test="newSearchType == 1">
+                            and writer_member.mem_no = #{txt_search}
+                        </when>
+                        <when test="newSearchType == 2">
+                            and writer_member.mem_nick like concat('%', #{txt_search}, '%')
+                        </when>
+                        <when test="newSearchType == 3">
+                            and writer_member.mem_name = #{txt_search}
+                        </when>
+                        <when test="newSearchType == 4">
+                            and writer_member.mem_phone = #{txt_search}
+                        </when>
+                        <when test="newSearchType == 5">
+                            and writer_member.mem_userid = #{txt_search}
+                        </when>
+                        <when test="newSearchType == 6">
+                            and writer_member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search})
+                        </when>
+                        <when test="newSearchType == 7">
+                            and writer_member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search}
+                        </when>
+                        <otherwise>
+                            and writer_member.mem_no = #{txt_search}
+                        </otherwise>
+                    </choose>
+                </if>
+            </if>
+                <!-- <if test='fanBoardOwner == 0'>
                     ((select mem_no from rd_data.tb_member_basic where mem_no = fan.mem_no) = #{txt_search}
                     or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.mem_no) like concat ('%',#{txt_search},'%')
                     or (select mem_no from rd_data.tb_member_basic where mem_no = fan.writer_no) = #{txt_search}
@@ -18,13 +107,9 @@
                 <if test='fanBoardOwner == 2'>
                     ((select mem_no from rd_data.tb_member_basic where mem_no = fan.writer_no) = #{txt_search}
                     or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%'))
-                </if>
-            </if>
+                </if> -->
             <if test='start_sel != null and start_sel != ""'>
-                and fan.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
-            </if>
-            <if test='end_sel != null and end_sel != ""'>
-                and fan.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
+                and fan.last_upd_date between concat(#{start_sel}, '%Y.%m.%d 00:00:00') and concat(#{end_sel}, '%Y.%m.%d 23:59:59')
             </if>
             <if test='searchType == "2" '>    <!-- 비밀글만 보기 -->
                 and fan.view_yn = 0
@@ -164,6 +249,10 @@
       select
         count(*)
       from rd_data.tb_member_fanboard fan
+    left outer join rd_data.tb_member_basic member on fan.mem_no = member.mem_no
+    left outer join rd_data.tb_member_withdrawal_bak withdrawal_member on fan.mem_no = withdrawal_member.mem_no
+    left outer join rd_data.tb_member_basic writer_member on fan.writer_no = writer_member.mem_no
+    left outer join rd_data.tb_member_withdrawal_bak writer_withdrawal_member on fan.writer_no = writer_withdrawal_member.mem_no
         <include refid="fanBoardCondition"/>
     </select>
 
@@ -177,6 +266,10 @@
             ,sum(if(view_yn = 0,if((select mem_sex FROM rd_data.tb_member_basic WHERE mem_no = fan.writer_no) = 'f', 1, 0),0)) as secretFemaleCnt
             ,sum(if(view_yn = 0,if((select mem_sex FROM rd_data.tb_member_basic WHERE mem_no = fan.writer_no) = 'n', 1, 0),0)) as secretNoneCnt
             from rd_data.tb_member_fanboard as fan
+        left outer join rd_data.tb_member_basic member on fan.mem_no = member.mem_no
+        left outer join rd_data.tb_member_withdrawal_bak withdrawal_member on fan.mem_no = withdrawal_member.mem_no
+        left outer join rd_data.tb_member_basic writer_member on fan.writer_no = writer_member.mem_no
+        left outer join rd_data.tb_member_withdrawal_bak writer_withdrawal_member on fan.writer_no = writer_withdrawal_member.mem_no
         <include refid="fanBoardCondition"/>
     </select>
 
@@ -237,13 +330,34 @@
     <sql id="storyCondition">
         <where>
             <if test='txt_search != null and txt_search != ""'>
-                (bas.mem_no = #{txt_search}
-                or sto.writer_no  = #{txt_search}
-                OR bas.mem_userid  = #{txt_search}
-                or sto.mem_userid  = #{txt_search}
-                OR bas.mem_nick like CONCAT('%',#{txt_search},'%')
-                or sto.mem_nick like CONCAT('%', #{txt_search}, '%')
-                )
+                <choose>
+                    <when test="newSearchType == 1">
+                        and (bas.mem_no = #{txt_search} or stobas.mem_no = #{txt_search} )
+                    </when>
+                    <when test="newSearchType == 2">
+                        and (bas.mem_nick like concat('%', #{txt_search}, '%') or stobas.mem_nick like concat('%', #{txt_search}, '%'))
+                    </when>
+                    <when test="newSearchType == 3">
+                        and (bas.mem_name = #{txt_search} or stobas.mem_name = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 4">
+                        and (bas.mem_phone = #{txt_search} or stobas.mem_phone = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 5">
+                        and (bas.mem_userid = #{txt_search} or stobas.mem_userid = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 6">
+                        and (bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search})
+                            or stobas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search}))
+                    </when>
+                    <when test="newSearchType == 7">
+                        and (bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                            or stobas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                    </when>
+                    <otherwise>
+                        and (bas.mem_no = #{txt_search} or stobas.mem_no = #{txt_search} )
+                    </otherwise>
+                </choose>
             </if>
             <if test='start_sel != null and start_sel !=""'>
                  and sto.write_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
@@ -294,6 +408,7 @@
         FROM rd_data.tb_broadcast_room_story sto
         JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
         JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
+        JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
         , (select @RNUM := 0) r
         <include refid="storyCondition"/>
         <if test="searchType == 0">
@@ -319,6 +434,7 @@
         FROM rd_data.tb_broadcast_room_story sto
         JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
         JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
+        JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
         <include refid="storyCondition"/>
     </select>
 
@@ -331,6 +447,7 @@
         FROM rd_data.tb_broadcast_room_story sto
         JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
         JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
+        JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
         <include refid="storyCondition"/>
     </select>
 
@@ -363,18 +480,38 @@
         where session.mem_no is not null
           and profile.msg_profile is not null
           and profile.msg_profile != ''
+
         <if test='searchText != null and searchText != ""'>
-            and (basic.mem_no = #{searchText}
-            OR basic.mem_userid = #{searchText}
-            OR basic.mem_nick like CONCAT('%',#{searchText},'%')
-            OR basic.mem_id = #{searchText}
-            OR basic.mem_phone like CONCAT('%',#{searchText},'%'))
+            <choose>
+                <when test="newSearchType == 1">
+                    and basic.mem_no = #{searchText}
+                </when>
+                <when test="newSearchType == 2">
+                    and basic.mem_nick like concat('%', #{searchText}, '%')
+                </when>
+                <when test="newSearchType == 3">
+                    and basic.mem_name = #{searchText}
+                </when>
+                <when test="newSearchType == 4">
+                    and basic.mem_phone = #{searchText}
+                </when>
+                <when test="newSearchType == 5">
+                    and basic.mem_userid = #{searchText}
+                </when>
+                <when test="newSearchType == 6">
+                    and basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                </when>
+                <when test="newSearchType == 7">
+                    and basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                </when>
+                <otherwise>
+                    and (basic.mem_no = #{searchText} or basic.mem_nick like concat('%', #{searchText}, '%'))
+                </otherwise>
+            </choose>
         </if>
+
         <if test='sDate != null and sDate !=""'>
-            and date_format(profile.last_upd_date,'%Y.%m.%d') <![CDATA[>=]]> #{sDate}
-        </if>
-        <if test='eDate != null and eDate != ""'>
-            and date_format(profile.last_upd_date,'%Y.%m.%d') <![CDATA[<=]]> #{eDate}
+            and profile.last_upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
         </if>
         order by session.last_upd_date desc
     </sql>
@@ -439,18 +576,38 @@
           left join rd_data.tb_member_basic castMem on b.cast_mem_no = castMem.mem_no
           left join rd_data.tb_member_basic writerMem on b.writer_mem_no = writerMem.mem_no
           inner join (select @RNUM := #{pageStart}) r
-        where ((castMem.mem_no = #{searchText}
-                OR castMem.mem_userid = #{searchText}
-                OR castMem.mem_nick like CONCAT('%',#{searchText},'%')
-                OR castMem.mem_id = #{searchText}
-                OR castMem.mem_phone like CONCAT('%',#{searchText},'%'))
-                or (writerMem.mem_no = #{searchText}
-                OR writerMem.mem_userid = #{searchText}
-                OR writerMem.mem_nick like CONCAT('%',#{searchText},'%')
-                OR writerMem.mem_id = #{searchText}
-                OR writerMem.mem_phone like CONCAT('%',#{searchText},'%'))
-            )
-        and b.write_date BETWEEN concat(#{sDate},' 00:00:00') AND concat(#{eDate},' 23:59:59')
+        where b.write_date BETWEEN concat(#{sDate},' 00:00:00') AND concat(#{eDate},' 23:59:59')
+        <if test='searchText != null and searchText != ""'>
+            <choose>
+                <when test="newSearchType == 1">
+                    and (castMem.mem_no = #{searchText} or writerMem.mem_no = #{searchText})
+                </when>
+                <when test="newSearchType == 2">
+                    and (castMem.mem_nick like concat('%', #{searchText}, '%') or writerMem.mem_nick like concat('%', #{searchText}, '%'))
+                </when>
+                <when test="newSearchType == 3">
+                    and (castMem.mem_name = #{searchText} or writerMem.mem_name = #{searchText})
+                </when>
+                <when test="newSearchType == 4">
+                    and (castMem.mem_phone = #{searchText} or writerMem.mem_phone = #{searchText})
+                </when>
+                <when test="newSearchType == 5">
+                    and (castMem.mem_userid = #{searchText} or writerMem.mem_userid = #{searchText})
+                </when>
+                <when test="newSearchType == 6">
+                    and (castMem.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                      or writerMem.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText}))
+                </when>
+                <when test="newSearchType == 7">
+                    and (castMem.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                       or writerMem.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText}))
+                </when>
+                <otherwise>
+                    and ((castMem.mem_no = #{searchText} or castMem.mem_nick like concat('%', #{searchText}, '%'))
+                       or writerMem.(mem_no = #{searchText} or writerMem.mem_nick like concat('%', #{searchText}, '%')))
+                </otherwise>
+            </choose>
+        </if>
         <if test='status != 0'>
             and `status` = #{status}
         </if>

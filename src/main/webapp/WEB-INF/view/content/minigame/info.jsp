@@ -5,7 +5,7 @@
 <div id="wrapper">
     <div id="page-wrapper">
         <!-- serachBox -->
-        <div class="row col-lg-12 form-inline">
+        <div class="col-lg-12 form-inline no-padding">
             <div class="col-md-8 no-padding">
                 <div class="widget widget-table searchBoxArea">
                     <table>
@@ -17,21 +17,20 @@
                                 <jsp:include page="../../searchArea/daySearchFunction.jsp"/>
                                 <div>
                                     <div id="div_dayButton"><jsp:include page="../../searchArea/daySearchArea.jsp"/></div>
+                                    <div id="div_monthButton"><jsp:include page="../../searchArea/monthSearchArea.jsp"/></div>
                                 </div>
                             </th>
                         </tr>
                         <tr>
                             <td style="text-align: left">
-                                <jsp:include page="../../searchArea/dateRangeSearchArea.jsp"/>
-
                                 <input id="onedayDate" type="text" class="form-control" >
+                                <input id="monthDate" type="text" class="form-control" >
 
                                 <input type="hidden" name="startDate" id="startDate">
                                 <input type="hidden" name="endDate" id="endDate" />
 
                                 <%--<input name="startDate" id="startDate">--%>
                                 <%--<input name="endDate" id="endDate" />--%>
-                                <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                 <label><input type="text" class="form-control" id="txt_search" placeholder="검색할 정보를 입력하세요"></label>
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                 <a href="javascript://" class="_prevSearch">[이전]</a>
@@ -42,15 +41,11 @@
                     </table>
                 </div>
             </div>
-
-            <div class="col-md-4 no-padding">
-                <span id="summaryArea"></span>
-            </div>
         </div>
         <!-- //serachBox -->
         <!-- tab -->
-        <div class="row col-lg-12 form-inline">
-            <jsp:include page="boardAdmTab.jsp"/>
+        <div class="col-lg-12 form-inline no-padding">
+            <jsp:include page="tabList.jsp"/>
         </div>
         <!-- //tab -->
     </div> <!-- //page-wrapper -->
@@ -60,51 +55,12 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
-
-        slctType = 0;
+        slctType = 1;
         dateType();
     });
 
     function handlebarsPaging(targetId, pagingInfo) {
-
-        if(targetId == "notice_paginate_top" || targetId == "notice_paginate") {
-            noticePagingInfo = pagingInfo;
-            noticeList(pagingInfo.pageNo);
-
-        }else if(targetId == "story_paginate_top" || targetId == "story_paginate"){
-            StoryPagingInfo = pagingInfo;
-            storyList(pagingInfo.pageNo);
-
-        } else if(targetId == "fanBoard_paginate_top" || targetId == "fanBoard_paginate") {
-            fanBoardPagingInfo = pagingInfo;
-            fanBoardList(pagingInfo.pageNo);
-
-        }else if(targetId == "fanBoardReply_paginate_top" || targetId == "fanBoardReply_paginate") {
-            fanBoardReplyPagingInfo = pagingInfo;
-            fanBoardReply(pagingInfo.pageNo);
-
-        } else if(targetId == "list_info_paginate_top" || targetId == "list_info_paginate") {
-            shotListPagingInfo = pagingInfo;
-            profileMsgList(pagingInfo.pageNo);
-
-        } else if(targetId == "broadNotice_paginate_top" || targetId == "broadNotice_paginate") {
-            sbroadNoticePagingInfo = pagingInfo;
-            broadNoticeList(pagingInfo.pageNo);
-
-        } else if(targetId == "clipReply_paginate_top" || targetId == "clipReply_paginate"){
-            clipPagingInfo = pagingInfo;
-            clipReplyList(pagingInfo.pageNo);
-
-        }else if(targetId == "profile_paginate_top" || targetId == "profile_paginate"){
-            profilePagingInfo = pagingInfo;
-            profileMsgList(pagingInfo.pageNo);
-
-        }else if(targetId == "noticeReply_paginate_top" || targetId == "noticeReply_paginate"){
-            noticeReplyPagingInfo = pagingInfo;
-            broadNoticeReply(pagingInfo.pageNo);
-
-        }else if(targetId == "mailbox_paginate_top" || targetId == "mailbox_paginate"){
+        if(targetId == "mailbox_paginate_top" || targetId == "mailbox_paginate"){
             mailboxPagingInfo = pagingInfo;
             mailboxList(pagingInfo.pageNo);
         }
@@ -118,7 +74,6 @@
         if(common.isEmpty($(this).attr("src"))){
             return;
         }
-
         $("body").append("<p id='preview'><img id='previewImage' src='"+ $(this).attr("src") +"' width='300px' /></p>"); //이미지
 
         $("#previewImage").load(function () {
@@ -138,8 +93,4 @@
     $(document).on("mouseout",".thumbnailImg",function(){ //마우스 아웃
         $("#preview").remove();
     });
-
-    function btSearchClick(){
-        $("#bt_search").click();
-    }
 </script>

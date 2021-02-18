@@ -119,6 +119,7 @@
             , 'eDate' : $("#endDate").val()
             , 'searchType' : 1
             , 'status' : $("#boardRoomStatus option:selected").val()
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         util.getAjaxData("noticeList", "/rest/content/boardAdm/noticeList", data, fn_success_broadNoticeList);

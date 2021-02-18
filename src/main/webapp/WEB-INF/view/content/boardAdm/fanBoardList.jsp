@@ -153,6 +153,7 @@
             , 'isWithdarwal' : Number($("#isWithdarwal option:selected").val())
             , 'fanBoardOwner' : Number($("#fanBoardOwner option:selected").val())
             , 'isMemblock' : Number($("#isMemblock option:selected").val())
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         console.log(data);

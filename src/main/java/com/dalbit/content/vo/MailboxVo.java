@@ -15,6 +15,7 @@ public class MailboxVo extends PagingVo {
     private String endDate;
     private String searchText;
     private int pageNo;
+    private int newSearchType;
 
     /* output */
     private String lastChatDate;

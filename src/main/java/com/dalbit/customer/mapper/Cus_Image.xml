@@ -29,27 +29,30 @@
         SELECT
           COUNT(*)
         FROM
-          rd_data.tb_member_basic
+          rd_data.tb_member_basic a
         <where>
             <if test='searchText != null and searchText != ""'>
                 <choose>
-                    <when test='searchType == 1'>
-                        AND mem_no like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 1">
+                        and a.mem_no = #{searchText}
                     </when>
-                    <when test='searchType == 2'>
-                        AND mem_name like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 2">
+                        and a.mem_nick like concat('%', #{searchText}, '%')
                     </when>
-                    <when test='searchType == 3'>
-                        AND mem_userid like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 3">
+                        and a.mem_name = #{searchText}
                     </when>
-                    <when test='searchType == 4'>
-                        AND mem_nick like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 4">
+                        and a.mem_phone = #{searchText}
                     </when>
-                    <when test='searchType == 5'>
-                        AND mem_phone like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 5">
+                        and a.mem_userid = #{searchText}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                     </when>
                     <otherwise>
-                        AND (mem_no like CONCAT('%',#{searchText},'%') OR mem_name like CONCAT('%',#{searchText},'%') OR mem_userid like CONCAT('%',#{searchText},'%') OR mem_nick like CONCAT('%',#{searchText},'%') OR mem_phone like CONCAT('%',#{searchText},'%'))
+                        and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
                     </otherwise>
                 </choose>
             </if>
@@ -68,23 +71,26 @@
             <where>
                 <if test='searchText != null and searchText != ""'>
                     <choose>
-                        <when test='searchType == 1'>
-                            AND a.mem_no like CONCAT('%',#{searchText},'%')
+                        <when test="newSearchType == 1">
+                            and a.mem_no = #{searchText}
                         </when>
-                        <when test='searchType == 2'>
-                            AND a.mem_name like CONCAT('%',#{searchText},'%')
+                        <when test="newSearchType == 2">
+                            and a.mem_nick like concat('%', #{searchText}, '%')
                         </when>
-                        <when test='searchType == 3'>
-                            AND a.mem_userid like CONCAT('%',#{searchText},'%')
+                        <when test="newSearchType == 3">
+                            and a.mem_name = #{searchText}
                         </when>
-                        <when test='searchType == 4'>
-                            AND a.mem_nick like CONCAT('%',#{searchText},'%')
+                        <when test="newSearchType == 4">
+                            and a.mem_phone = #{searchText}
                         </when>
-                        <when test='searchType == 5'>
-                            AND a.mem_phone like CONCAT('%',#{searchText},'%')
+                        <when test="newSearchType == 5">
+                            and a.mem_userid = #{searchText}
+                        </when>
+                        <when test="newSearchType == 6">
+                            and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                         </when>
                         <otherwise>
-                            AND (a.mem_no like CONCAT('%',#{searchText},'%') OR a.mem_name like CONCAT('%',#{searchText},'%') OR a.mem_userid like CONCAT('%',#{searchText},'%') OR a.mem_nick like CONCAT('%',#{searchText},'%') OR a.mem_phone like CONCAT('%',#{searchText},'%'))
+                            and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
                         </otherwise>
                     </choose>
                 </if>
@@ -139,26 +145,26 @@
             a.state != 4
             <if test='searchText != null and searchText != ""'>
                 <choose>
-                    <when test='searchType == 1'>
-                        AND b.mem_no like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 1">
+                        and b.mem_no = #{searchText}
                     </when>
-                    <when test='searchType == 2'>
-                        AND b.mem_name like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 2">
+                        and b.mem_nick like concat('%', #{searchText}, '%')
                     </when>
-                    <when test='searchType == 3'>
-                        AND b.mem_userid like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 3">
+                        and b.mem_name = #{searchText}
                     </when>
-                    <when test='searchType == 4'>
-                        AND b.mem_nick like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 4">
+                        and b.mem_phone = #{searchText}
                     </when>
-                    <when test='searchType == 5'>
-                        AND b.mem_phone like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 5">
+                        and b.mem_userid = #{searchText}
                     </when>
-                    <when test='searchType == 6'>
-                        AND a.title like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 6">
+                        and b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                     </when>
                     <otherwise>
-                        AND (b.mem_no like CONCAT('%',#{searchText},'%') OR b.mem_name like CONCAT('%',#{searchText},'%') OR b.mem_userid like CONCAT('%',#{searchText},'%') OR b.mem_nick like CONCAT('%',#{searchText},'%') OR b.mem_phone like CONCAT('%',#{searchText},'%') OR a.title like CONCAT('%',#{searchText},'%'))
+                        and b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
                     </otherwise>
                 </choose>
             </if>
@@ -178,26 +184,26 @@
             a.state != 4
             <if test='searchText != null and searchText != ""'>
                 <choose>
-                    <when test='searchType == 1'>
-                        AND b.mem_no like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 1">
+                        and b.mem_no = #{searchText}
                     </when>
-                    <when test='searchType == 2'>
-                        AND b.mem_name like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 2">
+                        and b.mem_nick like concat('%', #{searchText}, '%')
                     </when>
-                    <when test='searchType == 3'>
-                        AND b.mem_userid like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 3">
+                        and b.mem_name = #{searchText}
                     </when>
-                    <when test='searchType == 4'>
-                        AND b.mem_nick like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 4">
+                        and b.mem_phone = #{searchText}
                     </when>
-                    <when test='searchType == 5'>
-                        AND b.mem_phone like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 5">
+                        and b.mem_userid = #{searchText}
                     </when>
-                    <when test='searchType == 6'>
-                        AND a.title like CONCAT('%',#{searchText},'%')
+                    <when test="newSearchType == 6">
+                        and b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                     </when>
                     <otherwise>
-                        AND (b.mem_no like CONCAT('%',#{searchText},'%') OR b.mem_name like CONCAT('%',#{searchText},'%') OR b.mem_userid like CONCAT('%',#{searchText},'%') OR b.mem_nick like CONCAT('%',#{searchText},'%') OR b.mem_phone like CONCAT('%',#{searchText},'%') OR a.title like CONCAT('%',#{searchText},'%'))
+                        and b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
                     </otherwise>
                 </choose>
             </if>
@@ -219,9 +225,29 @@
     <sql id="noticeCondition">
         <where>
             <if test='searchText != null and searchText != ""'>
-                (b.mem_no like concat('%', #{searchText}, '%')
-                or b.mem_nick like concat('%', #{searchText}, '%')
-                or a.title like concat ('%', #{searchText}, '%'))
+                <choose>
+                    <when test="newSearchType == 1">
+                        and b.mem_no = #{searchText}
+                    </when>
+                    <when test="newSearchType == 2">
+                        and b.mem_nick like concat('%', #{searchText}, '%')
+                    </when>
+                    <when test="newSearchType == 3">
+                        and b.mem_name = #{searchText}
+                    </when>
+                    <when test="newSearchType == 4">
+                        and b.mem_phone = #{searchText}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and b.mem_userid = #{searchText}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                    </when>
+                    <otherwise>
+                        and b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                    </otherwise>
+                </choose>
             </if>
             and a.image_path != '' and a.image_path is not null
         </where>

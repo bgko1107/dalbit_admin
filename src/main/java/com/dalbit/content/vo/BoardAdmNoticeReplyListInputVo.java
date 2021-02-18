@@ -16,5 +16,6 @@ public class BoardAdmNoticeReplyListInputVo extends PagingVo {
     private String end_sel;
     private int pageNo;
     private int replyStatus;
+    private int newSearchType;
 
 }

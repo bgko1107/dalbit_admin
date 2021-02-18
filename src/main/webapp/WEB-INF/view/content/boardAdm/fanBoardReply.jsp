@@ -142,6 +142,7 @@
             , 'isWithdarwal' : Number($("#isReplyWithdarwal option:selected").val())
             , 'fanBoardOwner' : Number($("#fanReplyBoardOwner option:selected").val())
             , 'isMemblock' : Number($("#isReplyMemblock option:selected").val())
+            , 'newSearchType' : $("#searchMember").val()
         };
         util.getAjaxData("fanBoardList", "/rest/content/boardAdm/fanBoardList", data, fn_success_fanBoardReply);
     }

@@ -62,6 +62,7 @@
             , 'searchText' : txt_search
             , 'startDate' : $("#startDate").val()
             , 'endDate' : $("#endDate").val()
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         util.getAjaxData("mailbox", "/rest/content/boardAdm/mailbox", data, fn_success_mailbox);

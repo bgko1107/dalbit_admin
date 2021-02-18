@@ -20,10 +20,10 @@
                         and a.mem_phone = #{searchText}
                     </when>
                     <when test="newSearchType == 5">
-                        and a.mem_id = #{searchText}
+                        and a.mem_userid = #{searchText}
                     </when>
                     <when test="newSearchType == 6">
-                        and a.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                     </when>
                     <otherwise>
                         and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -183,10 +183,10 @@
                             and a.mem_phone = #{searchText}
                         </when>
                         <when test="newSearchType == 5">
-                            and a.mem_id = #{searchText}
+                            and a.mem_userid = #{searchText}
                         </when>
                         <when test="newSearchType == 6">
-                            and a.mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                            and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                         </when>
                         <otherwise>
                             and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -209,10 +209,10 @@
                             a.dj_mem_phone = #{searchText}
                         </when>
                         <when test="newSearchType == 5">
-                            a.dj_mem_id = #{searchText}
+                            a.mem_userid = #{searchText}
                         </when>
                         <when test="newSearchType == 6">
-                            a.dj_mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                            a.dj_mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                         </when>
                         <otherwise>
                             a.dj_mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})

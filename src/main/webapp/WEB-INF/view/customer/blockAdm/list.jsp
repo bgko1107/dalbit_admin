@@ -17,7 +17,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align: left">
-                                    <span id="blockTypeArea"></span>
+                                    <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                     <sapn id="blockHistArea"></sapn>
                                     <label><input type="text" class="form-control" id="searchText" name="searchText"></label>
                                     <label><input type="text" class="form-control" id="searchHistText" name="searchHistText"></label>
@@ -31,7 +31,8 @@
             </form>
             <!-- //serachBox -->
 
-            <div class="row col-lg-12">
+            <div class="row col-lg-12 form-inline">
+                <span id="blockTypeArea"></span>
                 <button type="button" class="btn btn-primary pull-right mb15 mr15" id="bt_block"><i class="fa fa-search"></i>차단 등록</button>
             </div>
 
@@ -86,6 +87,7 @@
 <script type="text/javascript">
 
     $(function() {
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
         $('#blockTypeArea').html(util.getCommonCodeSelect(-1, block_blockType));
         $('#searchArea').html(util.getCommonCodeSelect(-1, block_searchType));
         $('#blockHistArea').html(util.getCommonCodeSelect(-1, blockHist_histType));
@@ -125,6 +127,7 @@
         $('#searchArea').show();
         $('#searchText').show();
         $('#bt_search').show();
+        $('#searchMemberArea').show();
 
         $('#blockHistArea').hide();
         $('#searchHistText').hide();
@@ -136,6 +139,7 @@
 
         getBlockHistoryList();
 
+        $('#searchMemberArea').hide();
         $('#blockHistArea').show();
         $('#searchHistText').show();
         $('#bt_histSearch').show();
@@ -153,6 +157,7 @@
             data.blockType = $('#blockType').val();     // 차단 유형 구분
             data.searchType = $('#searchType').val();   // 검색 유형 구분
             data.searchText = $('#searchText').val();   // 검색어 구분
+            data.newSearchType = $("#searchMember").val();
         };
 
         dtList_info = new DalbitDataTable($('#tb_blockAdmList'), dtList_info_data, blockAdmDataTableSource.blockAdmList, $('#searchForm'));
@@ -290,6 +295,12 @@
         dtList_info.reload();
 
     }
+
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
+
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_blockDetail">

@@ -11,7 +11,7 @@
                         , (select count(distinct DATE_FORMAT(start_date, '%Y%m%d')) from rd_data.tb_member_broadcast_listening where mem_no = a.mem_no) listenCnt2
                         , (select count(*) from rd_data.tb_payment_succ where mem_no = a.mem_no and pay_yn = 'Y') payCnt
                    From rd_data.tb_member_basic a
-                  where DATE_FORMAT(mem_join_date, '%Y.%m.%d') >= STR_TO_DATE(#{sDate}, '%Y.%m.%d') and DATE_FORMAT(mem_join_date, '%Y.%m.%d')  <![CDATA[<=]]>  STR_TO_DATE(#{eDate}, '%Y.%m.%d')
+                  where mem_join_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
                     <if test="testid != -1">
                         and a.inner = 0
                     </if>
@@ -34,10 +34,10 @@
                                 and mem_phone = #{searchText}
                             </when>
                             <when test="newSearchType == 5">
-                                and mem_id = #{searchText}
+                                and mem_userid = #{searchText}
                             </when>
                             <when test="newSearchType == 6">
-                                and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                                and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                             </when>
                             <otherwise>
                                 and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -73,7 +73,7 @@
 
     <select id="callJoinList_totalCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberJoinInputVo" resultType="integer">
         select count(*) totalCnt From rd_data.tb_member_basic a
-          where DATE_FORMAT(mem_join_date, '%Y.%m.%d') >= STR_TO_DATE(#{sDate}, '%Y.%m.%d') and DATE_FORMAT(mem_join_date, '%Y.%m.%d')  <![CDATA[<=]]>  STR_TO_DATE(#{eDate}, '%Y.%m.%d')
+          where mem_join_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
             <if test="testid != -1">
                 and a.inner = 0
             </if>
@@ -96,10 +96,10 @@
                         and mem_phone = #{searchText}
                     </when>
                     <when test="newSearchType == 5">
-                        and mem_id = #{searchText}
+                        and mem_userid = #{searchText}
                     </when>
                     <when test="newSearchType == 6">
-                        and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                     </when>
                     <otherwise>
                         and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -120,7 +120,7 @@
                 ,count(case when os_type = 2 then 1 end) as iosCnt
                 ,count(case when os_type = 3 then 1 end) as pcCnt
          From rd_data.tb_member_basic a
-        where DATE_FORMAT(mem_join_date, '%Y.%m.%d') >= STR_TO_DATE(#{sDate}, '%Y.%m.%d') and DATE_FORMAT(mem_join_date, '%Y.%m.%d')  <![CDATA[<=]]>  STR_TO_DATE(#{eDate}, '%Y.%m.%d')
+        where mem_join_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
             <if test="testid != -1">
                 and a.inner = 0
             </if>
@@ -136,7 +136,7 @@
                         , (select count(distinct DATE_FORMAT(start_date, '%Y%m%d')) from rd_data.tb_member_broadcast_listening where mem_no = a.mem_no) listenCnt2
                         , (select count(*) from rd_data.tb_payment_succ where mem_no = a.mem_no and pay_yn = 'Y') payCnt
                    From rd_data.tb_member_withdrawal_bak a
-                  where DATE_FORMAT(last_upd_date, '%Y.%m.%d') >= STR_TO_DATE(#{sDate}, '%Y.%m.%d') and DATE_FORMAT(last_upd_date, '%Y.%m.%d')  <![CDATA[<=]]>  STR_TO_DATE(#{eDate}, '%Y.%m.%d')
+                  where last_upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
                    <if test="testid != -1">
                        and a.inner = 0
                    </if>
@@ -159,10 +159,10 @@
                                 and mem_phone = #{searchText}
                             </when>
                             <when test="newSearchType == 5">
-                                and mem_id = #{searchText}
+                                and mem_userid = #{searchText}
                             </when>
                             <when test="newSearchType == 6">
-                                and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                                and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                             </when>
                             <otherwise>
                                 and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -197,7 +197,7 @@
     <select id="callWithdrawalList_totalCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberJoinInputVo" resultType="integer">
          select count(*) AS totalCnt
            From rd_data.tb_member_withdrawal_bak a
-          where DATE_FORMAT(last_upd_date, '%Y.%m.%d') >= STR_TO_DATE(#{sDate}, '%Y.%m.%d') and DATE_FORMAT(last_upd_date, '%Y.%m.%d')  <![CDATA[<=]]>  STR_TO_DATE(#{eDate}, '%Y.%m.%d')
+          where last_upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
            <if test="testid != -1">
                and a.inner = 0
            </if>
@@ -220,10 +220,10 @@
                         and mem_phone = #{searchText}
                     </when>
                     <when test="newSearchType == 5">
-                        and mem_id = #{searchText}
+                        and mem_userid = #{searchText}
                     </when>
                     <when test="newSearchType == 6">
-                        and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                     </when>
                     <otherwise>
                         and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
@@ -247,7 +247,7 @@
                 ,count(case when mem_sex = 'f' then 1 end) as femaleCnt
                 ,count(case when mem_sex = 'n' then 1 end) as noneCnt
          From rd_data.tb_member_withdrawal_bak a
-         where DATE_FORMAT(last_upd_date, '%Y.%m.%d') >= STR_TO_DATE(#{sDate}, '%Y.%m.%d') and DATE_FORMAT(last_upd_date, '%Y.%m.%d')  <![CDATA[<=]]>  STR_TO_DATE(#{eDate}, '%Y.%m.%d')
+        where last_upd_date between concat(#{sDate}, ' 00:00:00') and concat(#{eDate}, ' 23:59:59')
          <if test="testid != -1">
            and a.inner = 0
          </if>
@@ -270,10 +270,10 @@
                         and mem_phone = #{searchText}
                     </when>
                     <when test="newSearchType == 5">
-                        and mem_id = #{searchText}
+                        and mem_userid = #{searchText}
                     </when>
                     <when test="newSearchType == 6">
-                        and mem_no in (select distinct mem_no from rd_data.tb_member_connect_state where last_login_ip = #{searchText})
+                        and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
                     </when>
                     <otherwise>
                         and mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})

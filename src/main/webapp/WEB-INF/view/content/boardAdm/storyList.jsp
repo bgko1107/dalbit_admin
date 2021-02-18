@@ -79,6 +79,7 @@
             , 'end_sel' : $("#endDate").val()
             , 'searchType' : 0
             , 'broState' : Number($("#broState option:selected").val())
+            , 'newSearchType' : $("#searchMember").val()
         };
 
         util.getAjaxData("storyList", "/rest/content/boardAdm/storyList", data, function (dst_id, response, param) {
