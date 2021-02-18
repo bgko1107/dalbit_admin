@@ -176,13 +176,16 @@
                   FROM rd_data.tbl_gift_item
                  where view_yn =1
                   <if test="itemType == 1">
-                   and use_area not in ('1','2','30')
-                  </if>
-                  <if test="itemType == 2">
-                   and use_area = '1'
+                   and category='normal'
                   </if>
                   <if test="itemType == 3">
-                   and use_area = '2'
+                   and category='combo'
+                  </if>
+                  <if test="itemType == 2">
+                   and category='emotion'
+                  </if>
+                  <if test="itemType == 4">
+                   and category='text'
                   </if>
                    and item_slct = 1
                    and (item_price != 0 or item_price_ios != 0)

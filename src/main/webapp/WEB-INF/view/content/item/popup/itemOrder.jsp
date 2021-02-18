@@ -11,6 +11,7 @@
                 <li class="active"><a href="#gift" role="tab" data-toggle="tab" id="tab_gift" onclick="giftList(1);">일반</a></li>
                 <li><a href="#emotion" role="tab" data-toggle="tab" id="tab_emotion" onclick="giftList(3);">콤보</a></li>
                 <li><a href="#combo" role="tab" data-toggle="tab" id="tab_combo" onclick="giftList(2);">감정</a></li>
+                <li><a href="#text" role="tab" data-toggle="tab" id="tab_text" onclick="giftList(4);">문자</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="gift">
