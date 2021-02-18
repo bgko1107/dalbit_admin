@@ -192,7 +192,7 @@ public class SocketRestUtil {
 
         OkHttpClientUtil okHttpClientUtil = new OkHttpClientUtil();
         RequestBody formBody = new FormBody.Builder()
-                .add("mem_no", pMemberReportVo.getMem_no())
+                .add("memNo", pMemberReportVo.getMem_no())
                 .add("message", pMemberReportVo.getNotimemo())
                 .build();
 

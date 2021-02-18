@@ -211,7 +211,7 @@ var specialDataTableSource = {
             {'title': '일반 조건<br />신청 유무', 'data': 'is_req','width':'200px'},
             {'title': '베스트<br />가능여부', 'data': '', 'render': function (data, type, row, meta) {
 
-                    if(row.specialdj_badge == 2 && row.best_data <= Math.floor(data-row.fan_air_time / 3600)){
+                    if(row.specialdj_badge == 2 && row.best_data <= Math.floor(row.air_time / 3600)){
                         return common.setFontColor('가능', 'blue');
                     }
                     if(row.specialdj_badge < 2 && row.is_req == 'Y'){

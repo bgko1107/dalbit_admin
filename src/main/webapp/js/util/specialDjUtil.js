@@ -28,6 +28,10 @@ specialDjUtil.getConditionData = function(code, value){
     }else if(code == 6){
         result = '{{value}}명';
 
+    }else if(code == 7){
+        result = '{{value}}별';
+    }else{
+        result = value;
     }
 
     return common.replace(result, '{{value}}', value);

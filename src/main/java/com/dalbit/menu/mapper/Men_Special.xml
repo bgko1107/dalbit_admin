@@ -600,7 +600,7 @@
             , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = condition_code3) condition_codeName3
             , condition_data3
             , condition_code4
-            , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = condition_code3) condition_codeName4
+            , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = condition_code4) condition_codeName4
             , condition_data4
             , best_code
             , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = best_code) best_codeName
@@ -627,6 +627,7 @@
             WHEN list.condition_code1 = 4 THEN list.condition_data1 <![CDATA[<=]]> list.level
             WHEN list.condition_code1 = 5 THEN list.condition_data1 <![CDATA[<=]]> list.fanCnt
             WHEN list.condition_code1 = 6 THEN list.condition_data1 <![CDATA[<=]]> list.allListenCnt
+            WHEN list.condition_code1 = 7 THEN list.condition_data1 <![CDATA[<=]]> list.receiveStar
         END
 
         AND
@@ -638,6 +639,7 @@
             WHEN list.condition_code2 = 4 THEN list.condition_data2 <![CDATA[<=]]> list.level
             WHEN list.condition_code2 = 5 THEN list.condition_data2 <![CDATA[<=]]> list.fanCnt
             WHEN list.condition_code2 = 6 THEN list.condition_data2 <![CDATA[<=]]> list.allListenCnt
+            WHEN list.condition_code2 = 7 THEN list.condition_data2 <![CDATA[<=]]> list.receiveStar
         END
 
         AND
@@ -649,6 +651,19 @@
             WHEN list.condition_code3 = 4 THEN list.condition_data3 <![CDATA[<=]]> list.level
             WHEN list.condition_code3 = 5 THEN list.condition_data3 <![CDATA[<=]]> list.fanCnt
             WHEN list.condition_code3 = 6 THEN list.condition_data3 <![CDATA[<=]]> list.allListenCnt
+            WHEN list.condition_code3 = 7 THEN list.condition_data3 <![CDATA[<=]]> list.receiveStar
+        END
+
+        AND
+
+        CASE
+            WHEN list.condition_code4 = 1 THEN list.condition_data4 * 60 <![CDATA[<=]]> list.airTime
+            WHEN list.condition_code4 = 2 THEN list.condition_data4 <![CDATA[<=]]> list.broadcastCnt
+            WHEN list.condition_code4 = 3 THEN list.condition_data4 <![CDATA[<=]]> list.goodCnt + list.boostGoodCnt
+            WHEN list.condition_code4 = 4 THEN list.condition_data4 <![CDATA[<=]]> list.level
+            WHEN list.condition_code4 = 5 THEN list.condition_data4 <![CDATA[<=]]> list.fanCnt
+            WHEN list.condition_code4 = 6 THEN list.condition_data4 <![CDATA[<=]]> list.allListenCnt
+            WHEN list.condition_code4 = 7 THEN list.condition_data4 <![CDATA[<=]]> list.receiveStar
         END
 
         <if test='txt_search != null and txt_search != ""'>
@@ -727,6 +742,8 @@
                     , manage.condition_data2
                     , manage.condition_code3
                     , manage.condition_data3
+                    , manage.condition_code4
+                    , manage.condition_data4
                     , ifnull((select TRUNCATE(ifnull(sum(airtime), 0) / 60, 0)
                                 from rd_data.tb_broadcast_room room
                                 where mem_no = basic.mem_no
@@ -817,6 +834,8 @@
                     , manage.condition_data2
                     , manage.condition_code3
                     , manage.condition_data3
+                    , manage.condition_code4
+                    , manage.condition_data4
                     , ifnull((select TRUNCATE(ifnull(sum(airtime), 0) / 60, 0)
                                 from rd_data.tb_broadcast_room room
                                 where mem_no = basic.mem_no
