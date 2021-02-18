@@ -78,7 +78,49 @@
                     and b.mem_birth_year  <![CDATA[<=]]> date_format(date_add(now(), interval -60 year), '%Y') and b.mem_birth_year  <![CDATA[>]]> date_format(date_add(now(), interval -70 year), '%Y')
                 </if>
             </if>
+
+
             <if test='searchText != null and searchText != ""'>
+                <if test="slctType == 0">
+                    <choose>
+                        <when test="newSearchType == 1">
+                            and (b.mem_no = #{searchText} or c.mem_no = #{searchText} or pay.order_id like concat(#{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 2">
+                            and (b.mem_nick like concat('%', #{searchText}, '%') or c.mem_nick like concat('%', #{searchText}, '%') or pay.order_id like concat(#{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 3">
+                            and (b.mem_name = #{searchText} or c.mem_name = #{searchText} or pay.order_id like concat(#{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 4">
+                            and (b.mem_phone = #{searchText} or c.mem_phone = #{searchText} or pay.order_id like concat(#{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 5">
+                            and (b.mem_userid = #{searchText} or c.mem_userid = #{searchText} or pay.order_id like concat(#{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 6">
+                            and (b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                             or c.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                             or pay.order_id like concat(#{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 7">
+                            and (b.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                             or c.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                             or pay.order_id like concat(#{searchText}, '%'))
+                        </when>
+                        <otherwise>
+                            and ((b.mem_no = #{searchText} or b.mem_nick like concat('%', #{searchText}, '%'))
+                             or (c.mem_no = #{searchText} or c.mem_nick like concat('%', #{searchText}, '%'))
+                             or pay.order_id like concat(#{searchText}, '%'))
+                        </otherwise>
+                    </choose>
+                </if>
+                <if test="slctType == 1">
+                    and b.mem_no = #{searchText}
+                </if>
+            </if>
+
+            <!-- <if test='searchText != null and searchText != ""'>
                 <if test="slctType == 0">
                     and (((b.mem_nick like concat('%', #{searchText}, '%')
                     or b.mem_no = #{searchText}
@@ -93,7 +135,7 @@
                 <if test="slctType == 1">
                     and b.mem_no = #{searchText}
                 </if>
-            </if>
+            </if>-->
         </where>
     </sql>
 

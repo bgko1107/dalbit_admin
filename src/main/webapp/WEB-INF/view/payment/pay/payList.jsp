@@ -133,6 +133,7 @@
             data.payWay = tmp_payWay;
             data.memberDataType = memberDataType;
             data.slctType = slctType;
+            data.newSearchType = $("#searchMember").val();
 
         };
         if(tmp == "payment"){
