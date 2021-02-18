@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %></c:set>
+<c:set var="dummyData" value="<%= java.lang.Math.round(java.lang.Math.random() * 1000000) %>" />
 <!-- DATA TABLE -->
 <div class="widget widget-table">
     <%--<div class="widget-header">--%>
@@ -54,6 +54,7 @@
         dtList_info = new DalbitDataTable($("#reqManageList"), {}, specialDataTableSource.reqManageList, $("#searchForm"));
         dtList_info.useCheckBox(false);
         dtList_info.useIndex(false);
+        dtList_info.setPageLength(20);
         dtList_info.createDataTable();
 
         ui.checkBoxInit('reqManageList');
