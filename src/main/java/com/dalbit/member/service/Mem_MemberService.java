@@ -352,6 +352,11 @@ public class Mem_MemberService {
                 Gson gson = new Gson();
                 HashMap<String,Object> tmp = new HashMap();
                 if("".equals(pMemberEditorVo.getProfileImage())){
+                    // 프로필 이미지 제거
+                    P_MemberInfoInputVo pMemberInfoInputVo = new P_MemberInfoInputVo();
+                    pMemberInfoInputVo.setMem_no(pMemberEditorVo.getMem_no());
+                    mem_MemberDao.callMemberLeaderAlbumDelete(pMemberInfoInputVo);
+
                     tmp.put("image", new ImageVo("",pMemberEditorVo.getMemSex(), DalbitUtil.getProperty("server.photo.url")).getUrl().replace(DalbitUtil.getProperty("server.photo.url"),""));
                 }else{
                     tmp.put("image", pMemberEditorVo.getBeforProfileImage());

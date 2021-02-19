@@ -964,4 +964,9 @@
         /* M_Member.xml - callMemberProfileDelete */
         update rd_data.tb_member_profile set image_profile='' , last_upd_date=now() where mem_no=#{mem_no}
     </update>
+
+    <update id="callMemberLeaderAlbumDelete" parameterType="com.dalbit.member.vo.procedure.P_MemberInfoInputVo">
+        /* M_Member.xml - callMemberLeaderAlbumDelete */
+        update rd_data.tb_member_profile_album set image_profile='' where mem_no=#{mem_no} and leader_yn=1
+    </update>
 </mapper>
