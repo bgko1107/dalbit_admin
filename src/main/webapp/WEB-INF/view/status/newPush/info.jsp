@@ -49,6 +49,7 @@
                                     <input class="hide" name="endDate" id="endDate" style="width: 100px">
                                     <%--<input name="startDate" id="startDate" style="width: 100px">--%>
                                     <%--<input name="endDate" id="endDate" style="width: 100px">--%>
+                                    <span id="searchMemberArea" onchange="btSearchClick();" style="display: none"></span>
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색어를 입력해주세요." style="display: none"></label>
 
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -95,6 +96,8 @@
     }
 
     $(function(){
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+
         if(!common.isEmpty(tabType)){
             $("#tablist_con li.active a").click();
         }else{
@@ -136,6 +139,9 @@
                 rows.not(":eq(0)").remove();
             }
         });
+    }
+    function btSearchClick(){
+        $("#bt_search").click();
     }
 
 </script>

@@ -85,6 +85,8 @@
                     <h3><i class="fa fa-desktop"></i> 검색결과</h3>
                 </div>
                 <div class="widget-content">
+                    <span id="search_bannerType_aria" onchange="btSearchClick();"></span>
+                    <span id="search_platformGroup_aria" onchange="btSearchClick();"></span>
                     <table id="list_info" class="table table-sorting table-hover table-bordered">
                         <thead>
                         </thead>

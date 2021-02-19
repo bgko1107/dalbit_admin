@@ -18,8 +18,6 @@
                         <tr>
                             <td style="text-align: left">
                                 <input type="hidden" name="is_view" id="is_view" value="1" />
-                                <span id="search_bannerType_aria"></span>
-                                <span id="search_platformGroup_aria"></span>
 
                                 <label><input type="text" class="form-control" id="txt_search" name="searchText" placeholder="검색할 정보를 입력하세요"></label>
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -224,5 +222,8 @@
         if(imgURL.length > 0){
             alert("이미지 URL이 정상적이지 않습니다.\n입력 URL :" + imgURL);
         }
+    }
+    function btSearchClick(){
+        $("#bt_search").click();
     }
 </script>

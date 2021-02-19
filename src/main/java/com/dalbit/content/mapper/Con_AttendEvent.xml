@@ -25,7 +25,37 @@
                    </otherwise>
                </choose>
            </if>
-           <if test='txt_search != null and txt_search != ""'>
+
+            <if test='txt_search != null and txt_search != ""'>
+                <choose>
+                    <when test="newSearchType == 1">
+                        and bas.mem_no = #{txt_search}
+                    </when>
+                    <when test="newSearchType == 2">
+                        and bas.mem_nick like concat('%', #{txt_search}, '%')
+                    </when>
+                    <when test="newSearchType == 3">
+                        and bas.mem_name = #{txt_search}
+                    </when>
+                    <when test="newSearchType == 4">
+                        and bas.mem_phone = #{txt_search}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and bas.mem_userid = #{txt_search}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 7">
+                        and bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                    </when>
+                    <otherwise>
+                        and (bas.mem_no = #{searchText} or bas.mem_nick like concat('%', #{txt_search}, '%'))
+                    </otherwise>
+                </choose>
+            </if>
+
+           <!-- <if test='txt_search != null and txt_search != ""'>
               <choose>
                   <when test='searchType == "1"'>
                      and att.mem_no like concat ('%', #{txt_search}, '%')
@@ -43,7 +73,7 @@
                            )
                   </otherwise>
               </choose>
-           </if>
+           </if> -->
     </sql>
 
     <select id="selectAttendanceList" parameterType="com.dalbit.content.vo.AttendanceVo" resultType="com.dalbit.content.vo.AttendanceVo">
@@ -232,6 +262,38 @@
 
             <if test='txt_search != null and txt_search != ""'>
                 <choose>
+                    <when test="newSearchType == 1">
+                        and (basic.mem_no = #{txt_search} or withdraw.mem_no = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 2">
+                        and (basic.mem_nick like concat('%', #{txt_search}, '%') or withdraw.mem_nick like concat('%', #{txt_search}, '%'))
+                    </when>
+                    <when test="newSearchType == 3">
+                        and (basic.mem_name = #{txt_search} or withdraw.mem_name = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 4">
+                        and (basic.mem_phone = #{txt_search} or withdraw.mem_phone = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 5">
+                        and (basic.mem_userid = #{txt_search} or withdraw.mem_userid = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 6">
+                        and (basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search})
+                         or withdraw.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search}))
+                    </when>
+                    <when test="newSearchType == 7">
+                        and (basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                         or withdraw.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search}))
+                    </when>
+                    <otherwise>
+                        and ((basic.mem_no = #{txt_search} or basic.mem_nick like concat('%', #{txt_search}, '%'))
+                         or (withdraw.mem_no = #{txt_search} or basic.mem_nick like concat('%', #{txt_search}, '%')))
+                    </otherwise>
+                </choose>
+            </if>
+
+            <!-- <if test='txt_search != null and txt_search != ""'>
+                <choose>
                     <when test='searchType == "1"'>
                         and (
                             basic.mem_no like concat ('%', #{txt_search}, '%')
@@ -258,7 +320,7 @@
                         )
                     </otherwise>
                 </choose>
-            </if>
+            </if> -->
         </where>
     </sql>
 

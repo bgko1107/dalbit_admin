@@ -17,7 +17,6 @@
                             </tr>
                             <tr>
                                 <td style="text-align: left">
-                                    <span id="search_slctType_aria"></span>
 
                                     <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색할 정보를 입력하세요"></label>
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -38,6 +37,8 @@
                         <h3><i class="fa fa-desktop"></i> 검색결과</h3>
                     </div>
                     <div class="widget-content">
+                        <span> • 달빛라이브 사이트 내 공지를 등록/수정/삭제할 수 있습니다.</span><br/>
+                        <span id="search_slctType_aria" onchange="btSearchClick();"></span>
                         <table id="list_info" class="table table-sorting table-hover table-bordered">
                             <thead>
                             </thead>
@@ -66,6 +67,7 @@
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script>
     $(document).ready(function() {
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
 
         $('input[id="searchText"]').keydown(function(e) {
             if (e.keyCode === 13) {
@@ -87,7 +89,7 @@
     function init(){
         var dtList_info_data = function ( data ) {
             data.search = $('#searchText').val();                       // 검색명
-            data.gubun = $("select[name='selectGubun']").val()
+            data.slctType = $("select[name='slctType']").val();
         };
 
         dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, NoticeDataTableSource.noticeInfo, $("#searchForm"));
@@ -185,6 +187,10 @@
     $(document).on('click', '._notice', function() {
        alert("준비중입니다.");
     });
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
 
 
 </script>

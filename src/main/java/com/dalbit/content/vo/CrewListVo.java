@@ -20,4 +20,5 @@ public class CrewListVo extends PagingVo {
     private int payAmtSum;
     private String regDate;
     private int slct_type;
+    private int newSearchType;
 }

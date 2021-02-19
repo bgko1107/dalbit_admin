@@ -16,6 +16,7 @@
                         </tr>
                         <tr>
                             <td style="text-align: left">
+                                <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                 <label><input type="text" class="form-control" id="txt_search" name="txt_search"></label>
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
 
@@ -71,6 +72,7 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
     });
 
     $(document).on('change', 'input[name="searchFormRadio"]', function(){
@@ -192,6 +194,7 @@
             data.testId = tmp_inner;
             data.lastConnectCheck = tmp_include;
             data.slctType = tmp_filter;
+            data.newSearchType = $("#searchMember").val();
         };
         dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, levelDataTableSource.memLevelList);
         dtList_info.useCheckBox(false);
@@ -278,6 +281,9 @@
     //
     // });
 
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
 
 </script>
 

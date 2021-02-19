@@ -29,10 +29,8 @@
                 ,history.last_upd_date
             FROM
                 rd_stmp.smtp_push_history AS history
-            LEFT JOIN
-                rd_admin.tb_admin_push AS admin
-            ON
-                history.admin_idx = admin.idx
+            LEFT JOIN rd_admin.tb_admin_push AS admin ON history.admin_idx = admin.idx
+            LEFT JOIN rd_data.tb_member_basic AS basic ON history.mem_no = basic.mem_no
             <where>
                 history.send_date
                 BETWEEN
@@ -57,11 +55,35 @@
                 </if>
 
                 <if test='searchText != null and searchText != ""'>
-                    AND (history.send_title like concat ('%', #{searchText}, '%')
-                    OR history.send_cont like concat ('%', #{searchText}, '%')
-                    OR (history.mem_no like concat ('%', #{searchText}, '%')
-                    OR history.mem_nick like concat ('%', #{searchText}, '%'))
-                    OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                    <choose>
+                        <when test="newSearchType == 1">
+                            and (basic.mem_no = #{searchText} OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 2">
+                            and (basic.mem_nick like concat('%', #{searchText}, '%') OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 3">
+                            and (basic.mem_name = #{searchText} OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 4">
+                            and (basic.mem_phone = #{searchText} OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 5">
+                            and (basic.mem_userid = #{searchText} OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 6">
+                            and (basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                            OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 7">
+                            and (basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                            OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <otherwise>
+                            and ((basic.mem_no = #{searchText} or basic.mem_nick like concat('%', #{searchText}, '%'))
+                            OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </otherwise>
+                    </choose>
                 </if>
 
             </where>
@@ -103,10 +125,8 @@
                 ,(SELECT COUNT(*) FROM rd_data.tb_member_recv_alert WHERE mem_no_star = history.mem_no AND alert_yn = 1) AS memberNotice
             FROM
                 rd_stmp.smtp_push_history AS history
-            LEFT JOIN
-                rd_admin.tb_admin_push AS admin
-            ON
-                history.admin_idx = admin.idx
+            LEFT JOIN rd_admin.tb_admin_push AS admin ON history.admin_idx = admin.idx
+            LEFT JOIN rd_data.tb_member_basic AS basic ON history.mem_no = basic.mem_no
             <where>
                 history.send_date
                 BETWEEN
@@ -137,12 +157,44 @@
                 </if>
 
                 <if test='searchText != null and searchText != ""'>
+                    <choose>
+                        <when test="newSearchType == 1">
+                            and (basic.mem_no = #{searchText} OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 2">
+                            and (basic.mem_nick like concat('%', #{searchText}, '%') OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 3">
+                            and (basic.mem_name = #{searchText} OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 4">
+                            and (basic.mem_phone = #{searchText} OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 5">
+                            and (basic.mem_userid = #{searchText} OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 6">
+                            and (basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                             OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <when test="newSearchType == 7">
+                            and (basic.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                             OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </when>
+                        <otherwise>
+                            and ((basic.mem_no = #{searchText} or basic.mem_nick like concat('%', #{searchText}, '%'))
+                             OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
+                        </otherwise>
+                    </choose>
+                </if>
+
+                <!-- <if test='searchText != null and searchText != ""'>
                     AND (history.send_title like concat ('%', #{searchText}, '%')
                     OR history.send_cont like concat ('%', #{searchText}, '%')
                     OR (history.mem_no like concat ('%', #{searchText}, '%')
                     OR history.mem_nick like concat ('%', #{searchText}, '%'))
                     OR ifnull(admin.op_name,'자동') like concat ('%', #{searchText}, '%'))
-                </if>
+                </if> -->
             </where>
         ) AS a,
         (select @rownum := #{pageStart}) AS b
@@ -217,7 +269,7 @@
               </if>
           </where>
         ) AS a
-        <where>
+       <!-- <where>
             <if test='searchText != null and searchText != ""'>
                 <choose>
                     <when test='searchType == 1'>
@@ -234,7 +286,7 @@
                     </otherwise>
                 </choose>
             </if>
-        </where>
+        </where>-->
     </select>
 
 

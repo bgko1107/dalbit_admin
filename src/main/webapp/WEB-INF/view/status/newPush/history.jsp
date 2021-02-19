@@ -73,6 +73,7 @@
             data.send_type = $("#send_type").val();
             data.push_slct = $("#push_slct").val();
             data.searchText = $("#searchText").val();
+            data.newSearchType = $("#searchMember").val();
         };
         dtList_info = new DalbitDataTable($("#push_history_list_info"), dtList_info_data, PushDataTableSource.historyList, $("#searchForm"));
         dtList_info.useCheckBox(false);

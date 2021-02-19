@@ -17,9 +17,9 @@
                         </tr>
                         <tr>
                             <td style="text-align: left">
-                                <span id="search_viewOn_aria"></span>
-                                <span id="search_osType_aria"></span>
-                                <span id="search_searchType_aria"></span>
+                                <span id="search_viewOn_aria" onchange="btSearchClick();"></span>
+                                <span id="search_osType_aria" onchange="btSearchClick();"></span>
+                                <span id="search_searchType_aria" style="display: none"></span>
 
                                 <label><input type="text" class="form-control" id="txt_search" name="searchText" placeholder="검색할 정보를 입력하세요"></label>
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
@@ -108,6 +108,7 @@
 
     //Tab 선택시 호출 함수
     function onClickHeaderTab(id){
+        $("#searchForm").show();
         var targetName = id.split("_")[1];
         var targetFnc = eval("fnc_"+targetName);
 
@@ -274,8 +275,14 @@
 
     function onClickTab(id){
         if(id == "tab_quick"){
+            $("#searchForm").hide();
             fnc_quick();
         }
     }
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
+
 
 </script>

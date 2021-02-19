@@ -19,8 +19,8 @@
                     </tr>
                     <tr>
                         <td style="text-align: left">
-                            <span class="select_category" id="select_category"></span>
-                            <span id="searchIsUse"></span>
+                            <span class="select_category" id="select_category" onchange="btSearchClick();"></span>
+                            <span id="searchIsUse"  onchange="btSearchClick();"></span>
                             <%--<span id="searchType"></span>--%>
                             <label><input type="text" class="form-control" id="txt_search"></label>
                             <button type="submit" class="btn btn-success" id="bt_search">검색</button>
@@ -368,6 +368,11 @@
         resetNo();
         btnSet();
     }
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
+
 </script>
 
 

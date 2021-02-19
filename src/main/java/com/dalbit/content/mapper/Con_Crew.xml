@@ -115,6 +115,46 @@
     <sql id="crewMemberCondition">
         <if test='searchText != null and searchText != ""'>
             <choose>
+                <when test="newSearchType == 1">
+                    and (member.mem_no = #{searchText} or outMember.mem_no = #{searchText}
+                     or crewbas.crew_name = #{searchText} or crewbas.crew_memo = #{searchText})
+                </when>
+                <when test="newSearchType == 2">
+                    and (member.mem_nick like concat('%', #{searchText}, '%') or outMember.mem_nick like concat('%', #{searchText}, '%')
+                     or crewbas.crew_name = #{searchText} or crewbas.crew_memo = #{searchText})
+                </when>
+                <when test="newSearchType == 3">
+                    and (member.mem_name = #{searchText} or outMember.mem_name = #{searchText}
+                     or crewbas.crew_name = #{searchText} or crewbas.crew_memo = #{searchText})
+                </when>
+                <when test="newSearchType == 4">
+                    and (member.mem_phone = #{searchText} or outMember.mem_phone = #{searchText}
+                     or crewbas.crew_name = #{searchText} or crewbas.crew_memo = #{searchText})
+                </when>
+                <when test="newSearchType == 5">
+                    and (member.mem_userid = #{searchText} or outMember.mem_userid = #{searchText}
+                     or crewbas.crew_name = #{searchText} or crewbas.crew_memo = #{searchText})
+                </when>
+                <when test="newSearchType == 6">
+                    and (member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                       or outMember.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                       or crewbas.crew_name = #{searchText} or crewbas.crew_memo = #{searchText})
+                </when>
+                <when test="newSearchType == 7">
+                    and (member.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                       or outMember.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                       or crewbas.crew_name = #{searchText} or crewbas.crew_memo = #{searchText})
+                </when>
+                <otherwise>
+                    and ((member.mem_no = #{searchText} or member.mem_nick like concat('%', #{searchText}, '%'))
+                     or (outMember.mem_no = #{searchText} or outMember.mem_nick like concat('%', #{searchText}, '%'))
+                     or crewbas.crew_name = #{searchText} or crewbas.crew_memo = #{searchText})
+                </otherwise>
+            </choose>
+        </if>
+        <!--
+        <if test='searchText != null and searchText != ""'>
+            <choose>
                 <when test='searchType == 1'>
                     and (
                         crewMember.mem_no like concat ('%', #{searchText})
@@ -156,6 +196,7 @@
                 </otherwise>
             </choose>
         </if>
+        -->
     </sql>
 
     <select id="selectCrewMemberInfo" parameterType="com.dalbit.content.vo.CrewMemberListVo" resultType="com.dalbit.content.vo.CrewMemberListVo">

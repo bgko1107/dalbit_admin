@@ -16,8 +16,6 @@
                         </tr>
                         <tr>
                             <td style="text-align: left">
-                                <span id="search_eventState"></span>
-                                <span id="search_eventWinner"></span>
                                 <label><input type="text" class="form-control" id="searchText" placeholder="검색할 정보를 입력하세요."></label>
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
                             </td>
@@ -35,6 +33,8 @@
         <div class="row col-lg-12 form-inline mb10">
             <div class="widget widget-table">
                 <div class="widget-content">
+                    <span id="search_eventState" onchange="btSearchClick();"></span>
+                    <span id="search_eventWinner" onchange="btSearchClick();"></span>
                     <table id="list_eventInfo" class="table table-sorting table-hover table-bordered">
                         <thead>
                         </thead>
@@ -130,7 +130,9 @@
             });
         }
     });
-
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
 
 
 </script>

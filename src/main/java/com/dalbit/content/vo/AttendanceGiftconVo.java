@@ -14,6 +14,7 @@ public class AttendanceGiftconVo extends PagingVo {
     private String search_startDate;
     private String search_endDate;
     private String gifticon_type;
+    private int newSearchType;
 
     /* output */
     private String the_date;

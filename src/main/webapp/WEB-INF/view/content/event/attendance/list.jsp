@@ -21,6 +21,7 @@
                             <tr>
                                 <td style="text-align: left">
                                     <span id="attendanceTypeArea"></span>
+                                    <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                     <jsp:include page="../../../searchArea/dateRangeSearchArea.jsp"/>
                                     <input type="hidden" name="startDate" id="startDate">
                                     <input type="hidden" name="endDate" id="endDate" />
@@ -66,6 +67,7 @@
 
     $(document).ready(function() {
         $('#attendanceTypeArea').html(util.getCommonCodeSelect('-1', attendance_dayType));
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
         slctType = 3;
         dateType();
     });
@@ -89,6 +91,7 @@
             data.txt_search = $('#txt_search').val();                   // 검색 창
             data.txt_startSel =  $("#startDate").val().replace(/\./gi,'');
             data.txt_endSel =  $("#endDate").val().replace(/\./gi,'');
+            data.newSearchType = $("#searchMember").val();
         };
 
         dtList_info = new DalbitDataTable($('#attendanceList'), dtList_info_data, EventDataTableSource.attendance, $('#searchForm'));
@@ -98,6 +101,10 @@
         dtList_info.useInitReload(true);
         dtList_info.createDataTable();
 
+    }
+
+    function btSearchClick(){
+        $("#bt_search").click();
     }
 
 </script>

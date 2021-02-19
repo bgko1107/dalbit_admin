@@ -38,10 +38,12 @@
     $("#tablist_con li a").on('click', function(){
         tabId = $(this).prop('id');
         $("#searchText").hide();
+        $("#searchMemberArea").hide();
         if(tabId == 'tab_time' || tabId == 'tab_history'){
             slctType = 0;
             if(tabId == 'tab_history'){
                 $("#searchText").show();
+                $("#searchMemberArea").show();
             }
         }else if(tabId == 'tab_day' || tabId == 'tab_month' || tabId == 'tab_notice'){
             slctType = 1;

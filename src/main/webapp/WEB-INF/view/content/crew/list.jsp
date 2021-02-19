@@ -19,6 +19,7 @@
                             <tr>
                                 <td style="text-align: left">
                                     <%--<span id="searchTypeAria"></span>--%>
+                                    <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                     <label><input type="text" class="form-control _trim" name="searchText" id="searchText" placeholder="크루원을 검색하세요"></label>
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                 </td>
@@ -201,6 +202,7 @@
     });
 
     function init(){
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
         $('#searchTypeAria').html(util.getCommonCodeSelect(null, attendance_searchType));
         $('#crewMemberInfoArea').html(util.getCommonCodeSelect(null, crew_searchType));
         $('#crew').attr('readonly', true);
@@ -328,6 +330,7 @@
             'pageStart' : crewPagingInfo.pageNo
             , 'pageCnt' : crewPagingInfo.pageCnt
             , 'slct_type' : $('#monthPayChk').prop('checked') ? 1 : 0
+            , 'newSearchType' : $("#searchMember").val()
         };
         util.getAjaxData("selectCrewInfo", "/rest/content/crew/selectCrewInfo", data, fn_selectCrewInfo_success);
     }
@@ -350,6 +353,7 @@
             , 'searchText' : $('#searchText').val().replace(/ /gi, '')
             , 'pageStart' : crewMemberPagingInfo.pageNo
             , 'pageCnt' : crewMemberPagingInfo.pageCnt
+            , 'newSearchType' : $("#searchMember").val()
         };
         util.getAjaxData("selectCrewMemberInfo", "/rest/content/crew/selectCrewMemberInfo", data, fn_selectCrewMemberInfo_success);
     }
@@ -502,6 +506,10 @@
         });
         util.pushSendLink(memNoList, $(this).attr('id'));
     });
+
+    function btSearchClick(){
+        $("#bt_search").click();
+    }
 
 </script>
 

@@ -28,6 +28,7 @@
                                     <%--<input name="startDate" id="startDate">--%>
                                     <%--<input name="endDate" id="endDate" />--%>
 
+                                    <span id="searchMemberArea" onchange="btSearchClick();"></span>
                                     <label><input type="text" class="form-control" id="txt_search" placeholder="검색할 정보를 입력하세요"></label>
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                     <a href="javascript://" class="_prevSearch">[이전]</a>
@@ -66,6 +67,7 @@
 
     $(document).ready(function() {
         $('#giftTypeArea').html(util.getCommonCodeSelect('-1', event_giftcon_type));
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
         slctType = 3;
         dateType();
     });
@@ -88,6 +90,7 @@
             data.txt_search = $('#txt_search').val();                   // 검색 창
             data.search_startDate =  $("#startDate").val().replace(/\./gi,'');
             data.search_endDate =  $("#endDate").val().replace(/\./gi,'');
+            data.newSearchType = $("#searchMember").val();
         };
 
         dtList_info = new DalbitDataTable($('#attendanceList'), dtList_info_data, EventDataTableSource.giftconList, $('#searchForm'));
@@ -97,6 +100,9 @@
         dtList_info.useInitReload(true);
         dtList_info.createDataTable();
 
+    }
+    function btSearchClick(){
+        $("#bt_search").click();
     }
 
 </script>

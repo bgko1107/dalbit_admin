@@ -17,8 +17,8 @@
                             </tr>
                             <tr>
                                 <td style="text-align: left">
-                                    <span id="terms_platform"></span>
-                                    <span id="terms_type"></span>
+                                    <span id="terms_platform" onchange="getList();"></span>
+                                    <span id="terms_type" onchange="getList();"></span>
                                     <label><input type="text" class="form-control" id="txt_search" name="searchText" placeholder="검색할 정보를 입력하세요"></label>
                                     <button type="button" class="btn btn-success" id="bt_search">검색</button>
                                 </td>

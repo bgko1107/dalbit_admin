@@ -13,6 +13,7 @@ public class CrewMemberListVo extends PagingVo {
     /* input */
     private int searchType;
     private String searchText;
+    private int newSearchType;
 
     /* output */
     private int idx;

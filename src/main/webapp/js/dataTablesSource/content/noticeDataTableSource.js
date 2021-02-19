@@ -32,7 +32,7 @@ var NoticeDataTableSource = {
                     return util.renderOnOff(data);
                 }}
         ]
-        , 'comments': ' • 달빛라이브 사이트 내 공지를 등록/수정/삭제할 수 있습니다.'
+        , 'comments': ''
     },
 
     'editHistory': {

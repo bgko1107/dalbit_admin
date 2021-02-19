@@ -13,6 +13,7 @@ public class AttendanceVo extends PagingVo {
     private String txt_endSel;
     private String txt_search;
     private String searchType;
+    private int newSearchType;
 
     /* output */
     private int mem_state;

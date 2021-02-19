@@ -15,8 +15,8 @@
                     </tr>
                     <tr>
                         <td style="text-align: left">
-                            <span id="objType"></span>
-                            <span id="viewType"></span>
+                            <span id="objType" onchange="init();"></span>
+                            <span id="viewType" onchange="init();"></span>
                             <label><input type="text" class="form-control" id="txt_search" placeholder="검색할 정보를 입력하세요"></label>
                             <button type="button" class="btn btn-success" id="bt_search">검색</button>
                         </td>
