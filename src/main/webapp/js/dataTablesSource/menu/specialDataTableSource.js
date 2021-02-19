@@ -2,6 +2,10 @@ var specialDataTableSource = {
     'reqSpecialList': {
         'url': '/rest/menu/special/reqDalList'
         , 'columns': [
+            {'title': '스디횟수', 'data': 'specialCnt', 'width' : '5%', 'render': function(data, type, row) {
+                    return common.addComma(data) + ' 회';
+                }}
+            ,
             {'title': '회원번호', 'data': 'mem_no', 'width' : '10%', 'render': function(data, type, row) {
                     return '<a href="javascript://" class="_openMemberPop" data-memno="' + row.mem_no + '">' + data + '</a>'
                 }}
@@ -196,7 +200,7 @@ var specialDataTableSource = {
             {'title': '스디 횟수', 'data': 'specialdj_cnt','width':'70px'},
             {'title': '베스트<br >횟수', 'data': 'bestdj_cnt','width':'70px'},
             {'title': '회원번호', 'data': 'mem_no','width':'200px', 'render' : function(data, type, row, meta){
-                    return '<a href="javascript://" class="_detail" data-year="'+row.select_year+'" data-month="'+row.select_month+'">' + data + '</a>'
+                    return util.memNoLink(data, data);
                 }},
             {'title': '닉네임', 'data': 'mem_nick','width':'300px'},
             {'title': '성별', 'data': 'mem_sex', 'render': function (data, type, row, meta) {

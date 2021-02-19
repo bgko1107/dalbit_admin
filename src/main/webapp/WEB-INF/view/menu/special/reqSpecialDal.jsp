@@ -61,7 +61,6 @@
 
 
     function initReq() {
-        reqGetSummary();
         reqSpecialList();
     }
 
@@ -81,23 +80,6 @@
 
         ui.checkBoxInit('reqSpecialList');
         //dtList_info.reload();
-    }
-
-    function reqGetSummary(){
-        var data = {
-            select_year:  common.substr($("#startDate").val(),0,4)
-            , select_month: common.substr($("#startDate").val(),5,2)
-        };
-        util.getAjaxData("summary", "/rest/menu/special/summary", data, fn_reqSummary_success);
-    }
-
-    function fn_reqSummary_success(dst_id, response){
-        var template = $('#tmp_summary').html();
-        var templateScript = Handlebars.compile(template);
-        var context = response;
-        var html = templateScript(context);
-
-        $("#reqSummaryTableBody").empty().append(html);
     }
 
     $(document).on('click', '._reqDalDetail', function() {
