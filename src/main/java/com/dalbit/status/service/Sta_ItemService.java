@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -33,8 +34,8 @@ public class Sta_ItemService {
     /**
      * 아이템 고정
      */
-    public String callItemLive(){
-        ProcedureVo procedureVo = new ProcedureVo();
+    public String callItemLive(StatVo statVo){
+        ProcedureVo procedureVo = new ProcedureVo(statVo);
         sta_ItemDao.callItemLive(procedureVo);
         P_ItemLiveOutputVo itemLive = new Gson().fromJson(procedureVo.getExt(), P_ItemLiveOutputVo.class);
 
@@ -47,19 +48,85 @@ public class Sta_ItemService {
      * 아이템 총계
      */
     public String callItemTotal(StatVo StatVo){
-        ProcedureVo procedureVo = new ProcedureVo(StatVo);
-        ArrayList<P_ItemTotalOutDetailVo> detailList = sta_ItemDao.callItemTotal(procedureVo);
-        P_ItemTotalOutVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_ItemTotalOutVo.class);
 
-        if(Integer.parseInt(procedureVo.getRet()) <= 0){
-            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        ArrayList resultList = new ArrayList();
+        String[] dateList = StatVo.getDateList().split("@");
+
+        int slctType_date = 0;
+        if(StatVo.getSlctType() == 0) {
+            slctType_date = 25;
+        }else if(StatVo.getSlctType() == 1) {
+            slctType_date = 32;
+        }
+        for(int i=0;i<dateList.length;i++){
+            if(dateList[i].indexOf("-") > -1){
+                StatVo.setStartDate(dateList[i].split("-")[0]);
+                StatVo.setEndDate(dateList[i].split("-")[1]);
+            }else{
+                StatVo.setStartDate(dateList[i]);
+                StatVo.setEndDate(dateList[i]);
+            }
+
+            ProcedureVo procedureVo = new ProcedureVo(StatVo);
+            List<P_ItemTotalOutDetailVo> detailList =  sta_ItemDao.callItemTotal(procedureVo);
+            P_ItemTotalOutDetailVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_ItemTotalOutDetailVo.class);
+
+            boolean zeroSw = false;
+            if(detailList.size() < slctType_date){
+                int detailList_size = detailList.size();
+                for (int j = 0; j < slctType_date; j++) {
+                    P_ItemTotalOutDetailVo outVo = new P_ItemTotalOutDetailVo();
+                    for (int k = 0; k < detailList_size; k++){
+                        if(StatVo.getSlctType() == 0) {
+                            if (detailList.get(k).getThe_hr() == j) {
+                                zeroSw = true;
+                                break;
+                            }
+                        }else if(StatVo.getSlctType() == 1) {
+                            if (Integer.parseInt(detailList.get(k).getThe_date().substring(5,2)) == j) {
+                                detailList.get(k).setThe_day(j);
+                                zeroSw = true;
+                                break;
+                            }
+
+                        }
+                    }
+                    if(!zeroSw){
+                        outVo.setThe_date(dateList[i]);
+                        outVo.setThe_day(j);
+                        outVo.setThe_hr(j);
+//                        outVo.setPhone_join_mCnt(0);
+//                        outVo.setPhone_out_mCnt(0);
+
+                        detailList.add(outVo);
+                    }
+                }
+            }
+
+            var result = new HashMap<String, Object>();
+            result.put("totalInfo", totalInfo);
+            result.put("detailList", detailList);
+
+            resultList.add(result);
+
         }
 
-        var result = new HashMap<String, Object>();
-        result.put("totalInfo", totalInfo);
-        result.put("detailList", detailList);
 
-        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+
+//        return gsonUtil.toJson(new JsonOutputVo(Status.조회, resultList));
+//        ProcedureVo procedureVo = new ProcedureVo(StatVo);
+//        ArrayList<P_ItemTotalOutDetailVo> detailList = sta_ItemDao.callItemTotal(procedureVo);
+//        P_ItemTotalOutVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_ItemTotalOutVo.class);
+//
+//        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+//            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+//        }
+//
+//        var result = new HashMap<String, Object>();
+//        result.put("totalInfo", totalInfo);
+//        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, resultList));
     }
 
     /**

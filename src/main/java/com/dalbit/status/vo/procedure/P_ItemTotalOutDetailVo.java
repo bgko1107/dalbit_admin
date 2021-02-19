@@ -13,6 +13,9 @@ public class P_ItemTotalOutDetailVo {
     private String daily;
     private String date;
     private String hour;
+    private int the_hr;
+    private String the_date;
+    private int the_day;
     private int changeCnt;
     private int changeAmt;
     private int dalgiftCnt;
@@ -26,6 +29,11 @@ public class P_ItemTotalOutDetailVo {
 
     private int mailboxCnt;
     private int mailboxAmt;
+    private int totalCnt;
+    private int totalCntAccum;
+    private int totalAmt;
+    private int totalAmtAccum;
+
 }
 
 

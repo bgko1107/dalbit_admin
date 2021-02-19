@@ -32,8 +32,8 @@ public class Sta_ItemRestController {
      * 아이템 고정
      */
     @PostMapping("/live/list")
-    public String itemLive(){
-        String result = sta_ItemService.callItemLive();
+    public String itemLive(StatVo statVo){
+        String result = sta_ItemService.callItemLive(statVo);
         return result;
     }
 

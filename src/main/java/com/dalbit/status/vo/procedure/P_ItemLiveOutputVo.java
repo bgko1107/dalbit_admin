@@ -26,5 +26,10 @@ public class P_ItemLiveOutputVo extends BaseVo {
     private int month_item_amt;     
     private int bmonth_item_amt;        
     private int month_inc_amt;
+
+    private String week_startDate;
+    private String week_endDate;
+    private String bweek_startDate;
+    private String bweek_endDate;
     
 }

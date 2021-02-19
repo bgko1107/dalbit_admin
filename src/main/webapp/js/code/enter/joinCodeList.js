@@ -25,6 +25,14 @@ var join_slctType2 = [
     , new COMMON_CODE('month', '2', '월간별')
 ];
 
+var join_slctType3 = [
+    new COMMON_CODE(null, 'slctType', '검색 조건')
+    , new COMMON_CODE('time', '0', '시간대별')
+    , new COMMON_CODE('week', '4', '주간별')
+    , new COMMON_CODE('day', '1', '일자별')
+    , new COMMON_CODE('month', '2', '월간별')
+];
+
 var revenueProcess_slctType = [
     new COMMON_CODE(null, 'slctType', '검색 조건')
     , new COMMON_CODE('time', '0', '시간간별')

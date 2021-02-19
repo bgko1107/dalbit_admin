@@ -48,7 +48,7 @@
                 </div>
             </form>
 
-            <div class="row col-lg-12 form-inline">
+            <div class="row col-lg-12 form-inline" id="div_live">
                 <!-- 가입자수 -->
                 <div class="widget widget-table mb10">
                     <div class="widget-header">
@@ -57,20 +57,20 @@
                     <div class="widget-content mt10">
                         <table class="table table-bordered">
                             <colgroup>
-                                <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
-                                <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
+                                <col width="10%"/><col width="10%"/><col width="10%"/><col width="7%"/><col width="10%"/>
+                                <col width="10%"/><col width="7%"/><col width="10%"/><col width="10%"/><col width="7%"/>
                             </colgroup>
                             <thead>
                             <tr>
                                 <th></th>
-                                <th>실시간</th>
-                                <th>전일</th>
+                                <th id="th_live"></th>
+                                <th id="th_beforLive"></th>
                                 <th>증감</th>
-                                <th>주간</th>
-                                <th>전주</th>
+                                <th id="th_liveWeek"></th>
+                                <th id="th_liveBeforWeek"></th>
                                 <th>증감</th>
-                                <th>월간</th>
-                                <th>전월</th>
+                                <th id="th_liveMonth"></th>
+                                <th id="th_liveBeforMonth"></th>
                                 <th>증감</th>
                             </tr>
                             </thead>
@@ -93,10 +93,9 @@
 <script type="text/javascript">
 
     $(function(){
-        $("#slctTypeArea").append(util.getCommonCodeRadio(0, join_slctType));
+        $("#slctTypeArea").append(util.getCommonCodeRadio(0, join_slctType3));
         $("#slctTypeArea2").append(util.getCommonCodeRadio(0, join_slctType2));
         slctType = 0;
-        getList();
         setDayButton();
     });
 
@@ -109,7 +108,11 @@
     });
 
     function getList(){
-        util.getAjaxData("itemLive", "/rest/status/item/live/list", null, fn_live_success);
+        var data = {
+            startDate : $("#startDate").val()
+            , endDate : $("#endDate").val()
+        };
+        util.getAjaxData("itemLive", "/rest/status/item/live/list", data, fn_live_success);
     }
 
     function fn_live_success(data, response){
@@ -119,12 +122,28 @@
         var context = response.data.liveInfo;
         var html=templateScript(context);
         $("#liveTableBody").append(html);
+
+
+
+        var tmp_date = new Date();
+        tmp_date = moment(tmp_date).format("YYYY.MM.DD HH:mm:SS");
+        var tmp_total = tmp_date.split(" ")[1];
+
+        $("#th_live").html('전일<br/>('+moment($("#startDate").val()).add('days', -1).format('MM/DD') + ' 0시~' + tmp_total.split(":")[0] + "시)");
+        $("#th_beforLive").html('실시간<br/>('+moment($("#startDate").val()).add('days', 0).format('MM/DD') + ' 0시~' + tmp_total.split(":")[0] + "시)");
+        $("#th_liveWeek").html('전주<br/>('+common.substr(response.data.liveInfo.week_startDate,5,5) + "~" + common.substr(response.data.liveInfo.week_endDate,5,5) + ')');
+        $("#th_liveBeforWeek").html('주간<br/>('+common.substr(response.data.liveInfo.bweek_startDate,5,5) + "~" + common.substr(response.data.liveInfo.bweek_endDate,5,5) + ')');
+        $("#th_liveMonth").html('전월<br/>('+moment($("#startDate").val()).add('months', 0).format('MM/01') + '~' + moment($("#startDate").val()).add('months', 1).add('days', -1).format('DD') + ')');
+        $("#th_liveBeforMonth").html('월간<br/>('+moment($("#startDate").val()).add('months', -1).format('MM/01') + "~" + moment($("#startDate").val()).add('months', 0).add('days', -1).format('DD') + ')');
     }
 
     function radioChange(){
         if(tabId != 'tab_broadcastDetail' && tabId != 'tab_clipDetail' && tabId != 'tab_mailbox') {
+
+            console.log(tabId);
             slctType = $('input[name="slctType"]:checked').val();
-            if ($('input[name="slctType"]:checked').val() == 0) {
+            console.log(slctType);
+            if (slctType == 0 || slctType == 4) {
                 $("#oneDayDatePicker").show();
             } else {
                 $("#oneDayDatePicker").hide();
@@ -165,38 +184,26 @@
 <script type="text/x-handlebars-template" id="tmp_live">
     <tr>
         <th>건수</th>
-        <td>{{addComma now_item_cnt}}</td>
         <td>{{addComma yes_item_cnt}}</td>
+        <td style="background-color: ">{{addComma now_item_cnt}}</td>
         <td class="{{upAndDownClass now_inc_cnt}}"><i class="fa {{upAndDownIcon now_inc_cnt}}"></i> {{addComma now_inc_cnt}}</td>
-        <td>{{addComma week_item_cnt}}</td>
         <td>{{addComma bweek_item_cnt}}</td>
+        <td>{{addComma week_item_cnt}}</td>
         <td class="{{upAndDownClass week_inc_cnt}}"><i class="fa {{upAndDownIcon week_inc_cnt}}"></i> {{addComma week_inc_cnt}}</td>
-        <td>{{addComma month_item_cnt}}</td>
         <td>{{addComma bmonth_item_cnt}}</td>
+        <td>{{addComma month_item_cnt}}</td>
         <td class="{{upAndDownClass month_inc_cnt}}"><i class="fa {{upAndDownIcon month_inc_cnt}}"></i> {{addComma month_inc_cnt}}</td>
     </tr>
     <tr>
         <th>달수</th>
-        <td>{{addComma now_item_amt}}</td>
         <td>{{addComma yes_item_amt}}</td>
+        <td>{{addComma now_item_amt}}</td>
         <td class="{{upAndDownClass now_inc_amt}}"><i class="fa {{upAndDownIcon now_inc_amt}}"></i> {{addComma now_inc_amt}}</td>
-        <td>{{addComma week_item_amt}}</td>
         <td>{{addComma bweek_item_amt}}</td>
+        <td>{{addComma week_item_amt}}</td>
         <td class="{{upAndDownClass week_inc_amt}}"><i class="fa {{upAndDownIcon week_inc_amt}}"></i> {{addComma week_inc_amt}}</td>
-        <td>{{addComma month_item_amt}}</td>
         <td>{{addComma bmonth_item_amt}}</td>
+        <td>{{addComma month_item_amt}}</td>
         <td class="{{upAndDownClass month_inc_amt}}"><i class="fa {{upAndDownIcon month_inc_amt}}"></i> {{addComma month_inc_amt}}</td>
     </tr>
-    <%--<tr>
-        <th>합계</th>
-        <td>{{addComma }}</td>
-        <td>{{addComma }}</td>
-        <td class="{{upAndDownClass }}"><i class="fa {{upAndDownIcon }}"></i> {{addComma }}</td>
-        <td>{{addComma }}</td>
-        <td>{{addComma }}</td>
-        <td class="{{upAndDownClass }}"><i class="fa {{upAndDownIcon }}"></i> {{addComma }}</td>
-        <td>{{addComma }}</td>
-        <td>{{addComma }}</td>
-        <td class="{{upAndDownClass }}"><i class="fa {{upAndDownIcon }}"></i> {{addComma }}</td>
-    </tr>--%>
 </script>
