@@ -218,6 +218,11 @@ var specialDataTableSource = {
                     if(row.specialdj_badge == 2 && row.best_data <= Math.floor(row.air_time / 3600)){
                         return common.setFontColor('가능', 'blue');
                     }
+
+                    if(row.specialdj_badge == 1 && 5 < row.specialdj_cnt && row.best_data <= Math.floor(row.air_time / 3600)){
+                        return common.setFontColor('가능', 'blue');
+                    }
+
                     if(row.specialdj_badge < 2 && row.is_req == 'Y'){
                         return common.setFontColor('심사필요', 'green');
                     }
