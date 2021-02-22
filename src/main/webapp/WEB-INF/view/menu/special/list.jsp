@@ -81,6 +81,8 @@
             initReqAble();
         } else if (tabIndex == 4) {
             initbestAble();
+        } else if (tabIndex == 5) {
+            initSpecialLeague();
         }
     });
 
@@ -99,6 +101,8 @@
                 initReqAble();
             } else if (tabIndex == 4) {
                 initbestAble();
+            } else if (tabIndex == 5) {
+                initSpecialLeague();
             }
         }
     });

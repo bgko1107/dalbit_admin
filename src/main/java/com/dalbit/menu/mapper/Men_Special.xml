@@ -914,4 +914,8 @@
     <select id="callBestAbleList" statementType="CALLABLE"  parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.menu.vo.SpecialDjBestVo">
         call rd_admin.sp_admin_specialdj_best_able_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
+
+    <select id="callSpecialLeagueList" statementType="CALLABLE"  parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.menu.vo.SpecialLeagueVo">
+        call rd_admin.sp_admin_ranking_special_league(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
 </mapper>

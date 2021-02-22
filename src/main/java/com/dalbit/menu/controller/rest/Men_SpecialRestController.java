@@ -214,4 +214,13 @@ public class Men_SpecialRestController {
         String result = menSpecialService.selectBestAbleList(specialDjBestVo);
         return result;
     }
+
+    /**
+     * 스페셜 리그 목록
+     */
+    @PostMapping("specialLeague")
+    public String specialLeagueList(SpecialVo specialVo) {
+        String result = menSpecialService.callSpecialLeagueList(specialVo);
+        return result;
+    }
 }

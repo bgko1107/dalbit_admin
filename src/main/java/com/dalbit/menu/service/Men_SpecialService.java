@@ -453,5 +453,19 @@ public class Men_SpecialService {
         return result;
     }
 
+    /**
+     * 스페셜 리그
+     */
+    public String callSpecialLeagueList(SpecialVo specialVo) {
+
+        ProcedureVo procedureVo = new ProcedureVo(specialVo);
+        List<SpecialLeagueVo> list = menSpecialDao.callSpecialLeagueList(procedureVo);
+
+        PagingVo pagingVo = new Gson().fromJson(procedureVo.getExt(), PagingVo.class);
+
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(pagingVo.getTotalCnt(), pagingVo.getPageStart(), pagingVo.getPageCnt())));
+        return result;
+    }
+
 
 }

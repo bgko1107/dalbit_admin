@@ -10,11 +10,13 @@ public class SpecialVo extends PagingVo {
 
     /* input */
     private String txt_search;
+    private String searchText;
     private String searchType;
     private String select_year;
     private String select_month;
     private int newSearchType;
     private int isBest;
+    private int roundNo;
 
     /* output */
     private int req_idx;

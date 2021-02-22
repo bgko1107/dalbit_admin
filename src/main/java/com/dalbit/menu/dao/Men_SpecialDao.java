@@ -72,4 +72,7 @@ public interface Men_SpecialDao {
     @Transactional(readOnly = true)
     List<SpecialDjBestVo> callBestAbleList(ProcedureVo procedureVo);
 
+    @Transactional(readOnly = true)
+    List<SpecialLeagueVo> callSpecialLeagueList(ProcedureVo procedureVo);
+
 }

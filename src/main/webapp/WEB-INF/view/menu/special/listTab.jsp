@@ -12,6 +12,7 @@
                <li><a href="#reqManage" role="tab" data-toggle="tab" class="_tab">스페셜 DJ 신청관리</a></li>
                <li><a href="#reqAble" role="tab" data-toggle="tab" class="_tab">스페셜 DJ 신청 가능 회원</a></li>
                <li><a href="#bestAble" role="tab" data-toggle="tab" class="_tab">베스트 스페셜 DJ 가능 회원</a></li>
+               <li><a href="#specialLeague" role="tab" data-toggle="tab" class="_tab">스페셜 리그</a></li>
            </ul>
            <div class="tab-content no-padding">
                <div class="tab-pane fade in active" id="dal"><jsp:include page="specialDal.jsp"/></div>
@@ -19,6 +20,7 @@
                <div class="tab-pane fade" id="reqManage"><jsp:include page="reqManageList.jsp"/></div>
                <div class="tab-pane fade" id="reqAble"><jsp:include page="reqAbleSpecialDal.jsp"/></div>
                <div class="tab-pane fade" id="bestAble"><jsp:include page="bestSpecialDal.jsp"/></div>
+               <div class="tab-pane fade" id="specialLeague"><jsp:include page="specialLeague.jsp"/></div>
            </div>
        </div>
     </div>
@@ -71,6 +73,8 @@
             initReqAble();
         } else if (tabIndex == 4) {
             initbestAble();
+        } else if (tabIndex == 5) {
+            initSpecialLeague();
         }
     });
 </script>
