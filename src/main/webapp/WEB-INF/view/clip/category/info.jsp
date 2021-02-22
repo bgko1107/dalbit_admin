@@ -109,7 +109,7 @@
 
         // tab_id 이동
         if(!common.isEmpty(tabMove)){
-            if(tabMove == 2){
+            if(tabMove == 3){
                 tabId = 'tab_recommendList';
                 $('.nav-tabs li:eq(' + tabMove +') a').tab('show');
                 $("#sp_prevGroup").show();
