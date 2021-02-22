@@ -8,20 +8,20 @@ import lombok.ToString;
 @Setter
 @ToString
 public class P_ItemTotalOutVo {
-    private int sum_changeCnt;
-    private int sum_changeAmt;
-    private int sum_dalgiftCnt;
-    private int sum_dalgiftAmt;
-    private int sum_subsCnt;
-    private int sum_subsAmt;
-    private int sum_broadgiftCnt;
-    private int sum_broadgiftAmt;
-    private int sum_castgiftCnt;
-    private int sum_castgiftAmt;
-    private int sum_mailboxCnt;
-    private int sum_mailboxAmt;
-    private int sum_totalCnt;
-    private int sum_totalCntAccum;
-    private int sum_totalAmt;
-    private int sum_totalAmtAccum;
+    private long sum_changeCnt;
+    private long sum_changeAmt;
+    private long sum_dalgiftCnt;
+    private long sum_dalgiftAmt;
+    private long sum_subsCnt;
+    private long sum_subsAmt;
+    private long sum_broadgiftCnt;
+    private long sum_broadgiftAmt;
+    private long sum_castgiftCnt;
+    private long sum_castgiftAmt;
+    private long sum_mailboxCnt;
+    private long sum_mailboxAmt;
+    private long sum_totalCnt;
+    private long sum_totalCntAccum;
+    private long sum_totalAmt;
+    private long sum_totalAmtAccum;
 }
