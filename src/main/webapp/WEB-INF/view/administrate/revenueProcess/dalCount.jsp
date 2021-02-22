@@ -22,12 +22,12 @@
             <thead>
             <tr>
                 <th rowspan="4" class="_bgColor _fontColor" data-bgcolor="#00b050" data-fontcolor="white">조회일자</th>
-                <th colspan="33" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">달빛라이브 [달_수량]</th>
+                <th colspan="35" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">달빛라이브 [달_수량]</th>
             </tr>
             <tr>
                 <th rowspan="2" colspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기초</th>
                 <th colspan="10" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">증가</th>
-                <th colspan="19" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">감소</th>
+                <th colspan="21" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">감소</th>
                 <th rowspan="2" colspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기말</th>
             </tr>
             <tr>
@@ -35,8 +35,8 @@
                 <th colspan="5" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">유료</th>
                 <th colspan="4" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">무료</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">전체합계</th>
-                <th colspan="9" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">유료</th>
-                <th colspan="9" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">무료</th>
+                <th colspan="10" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">유료</th>
+                <th colspan="10" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">무료</th>
             </tr>
             <tr>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">유료</th>
@@ -52,6 +52,7 @@
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">관리자지급</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">합계</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">방송</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">부스터</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">클립</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">우체통</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">선물하기</th>
@@ -61,6 +62,7 @@
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">관리자회수</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">합계</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">방송</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">부스터</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">클립</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">우체통</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">선물하기</th>
@@ -135,6 +137,7 @@
         <td>{{addComma subTotalDal 'Y'}}</td>
         <td>{{addComma subPayTotal 'Y'}}</td>
         <td>{{addComma subPayBroad 'Y'}}</td>
+        <td>{{addComma subPayBooster 'Y'}}</td>
         <td>{{addComma subPayClip 'Y'}}</td>
         <td>{{addComma subPayMailbox 'Y'}}</td>
         <td>{{addComma subPayGift 'Y'}}</td>
@@ -144,6 +147,7 @@
         <td>{{addComma subPayOp 'Y'}}</td>
         <td>{{addComma subFreeTotal 'Y'}}</td>
         <td>{{addComma subFreeBroad 'Y'}}</td>
+        <td>{{addComma subFreeBooster 'Y'}}</td>
         <td>{{addComma subFreeClip 'Y'}}</td>
         <td>{{addComma subFreeMailbox 'Y'}}</td>
         <td>{{addComma subFreeGift 'Y'}}</td>

@@ -11,8 +11,9 @@
         <div class="dataTables_paginate paging_full_numbers" id="dalSales_paginate_top"></div>
         <table class="table table-bordered">
             <colgroup>
-                <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
-                <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
+                <col width="9%"/><col width="9%"/><col width="9%"/><col width="9%"/><col width="9%"/>
+                <col width="9%"/><col width="9%"/><col width="9%"/><col width="9%"/><col width="9%"/>
+                <col width="9%"/>
             </colgroup>
             <thead>
             <tr>
@@ -24,6 +25,7 @@
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">선수금</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">미지급</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">매출액</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">충당부채</th>
             </tr>
             <tr>
                 <th class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">유료</th>
@@ -113,6 +115,7 @@
         <td>{{addComma totalInfo.firstAmt}}</td>
         <td>{{addComma totalInfo.unpaidAmt}}</td>
         <td>{{addComma totalInfo.salesAmt}}</td>
+        <td>{{addComma totalInfo.freeSalesAmt}}</td>
     </tr>
     {{#each this.detailList as |data|}}
     <tr>
@@ -127,7 +130,11 @@
                 {{#dalbit_if slctType '==' 2}}
                     클립
                 {{else}}
-                    우체통
+                    {{#dalbit_if slctType '==' 3}}
+                        부스터
+                    {{else}}
+                        우체통
+                    {{/dalbit_if}}
                 {{/dalbit_if}}
             {{/dalbit_if}}
 
@@ -146,6 +153,7 @@
         <td>{{addComma firstAmt 'Y'}}</td>
         <td>{{addComma unpaidAmt 'Y'}}</td>
         <td>{{addComma salesAmt 'Y'}}</td>
+        <td>{{addComma freeSalesAmt 'Y'}}</td>
     </tr>
     {{/each}}
 </script>

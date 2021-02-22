@@ -8,9 +8,9 @@
         <span class="_searchDate"></span>
         <table class="table table-bordered">
             <colgroup>
-                <col width="7.6%"/><col width="7.6%"/><col width="7.6%"/><col width="7.6%"/><col width="7.6%"/>
-                <col width="7.6%"/><col width="7.6%"/><col width="7.6%"/><col width="7.6%"/><col width="7.6%"/>
-                <col width="7.6%"/><col width="7.6%"/><col width="7.6%"/>
+                <col width="7%"/><col width="7%"/><col width="7%"/><col width="7%"/><col width="7%"/>
+                <col width="7%"/><col width="7%"/><col width="7%"/><col width="7%"/><col width="7%"/>
+                <col width="7%"/><col width="7%"/><col width="7%"/><col width="7%"/>
             </colgroup>
             <thead>
             <tr>
@@ -19,6 +19,7 @@
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">별수</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">미지급비용</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">매출액</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">충당부채</th>
                 <th colspan="3" class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">탈퇴</th>
             </tr>
             <tr>
@@ -81,6 +82,7 @@
         <td>{{addComma totalByeol 'Y'}}</td>
         <td>{{addComma unpaidAmt 'Y'}}</td>
         <td>{{addComma salesAmt 'Y'}}</td>
+        <td>{{addComma freeSalesAmt 'Y'}}</td>
         <td>{{addComma withdrawalPayDal 'Y'}}</td>
         <td>{{addComma withdrawalFreeDal 'Y'}}</td>
         <td>{{addComma withdrawalByeol 'Y'}}</td>

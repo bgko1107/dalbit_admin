@@ -97,4 +97,8 @@ public class P_RevenueProcessVo {
     private long withdrawalFreeDal;
     private long withdrawalByeol;
 
+    private long freeSalesAmt;
+    private long subPayBooster;
+    private long subFreeBooster;
+
 }
