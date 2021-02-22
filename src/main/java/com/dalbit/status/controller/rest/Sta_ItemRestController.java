@@ -55,6 +55,23 @@ public class Sta_ItemRestController {
     }
 
     /**
+     * 아이템 총계(주간)
+     * @param StatVo
+     * @return
+     */
+    @PostMapping("/total/week/list")
+    public String callItemTotalWeek(StatVo StatVo){
+        if(DalbitUtil.isEmpty(StatVo.getStartDate())){
+            StatVo.setStartDate(null);
+        }
+        if(DalbitUtil.isEmpty(StatVo.getEndDate())){
+            StatVo.setEndDate(null);
+        }
+        String result = sta_ItemService.callItemTotalWeek(StatVo);
+        return result;
+    }
+
+    /**
      * 아이템 성별
      * @param StatVo
      * @return

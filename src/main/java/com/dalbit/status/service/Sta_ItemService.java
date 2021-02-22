@@ -57,6 +57,8 @@ public class Sta_ItemService {
             slctType_date = 25;
         }else if(StatVo.getSlctType() == 1) {
             slctType_date = 32;
+        }else if(StatVo.getSlctType() == 2) {
+            slctType_date = 13;
         }
         for(int i=0;i<dateList.length;i++){
             if(dateList[i].indexOf("-") > -1){
@@ -69,7 +71,7 @@ public class Sta_ItemService {
 
             ProcedureVo procedureVo = new ProcedureVo(StatVo);
             List<P_ItemTotalOutDetailVo> detailList =  sta_ItemDao.callItemTotal(procedureVo);
-            P_ItemTotalOutDetailVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_ItemTotalOutDetailVo.class);
+            P_ItemTotalOutVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_ItemTotalOutVo.class);
 
             boolean zeroSw = false;
             if(detailList.size() < slctType_date){
@@ -83,20 +85,24 @@ public class Sta_ItemService {
                                 break;
                             }
                         }else if(StatVo.getSlctType() == 1) {
-                            if (Integer.parseInt(detailList.get(k).getThe_date().substring(5,2)) == j) {
+                            if (Integer.parseInt(detailList.get(k).getDaily().substring(8)) == j) {
                                 detailList.get(k).setThe_day(j);
                                 zeroSw = true;
                                 break;
                             }
-
+                        }else if(StatVo.getSlctType() == 2) {
+                            if (detailList.get(k).getMonthly() == j) {
+//                                detailList.get(k).setMonthly(j);
+                                zeroSw = true;
+                                break;
+                            }
                         }
                     }
                     if(!zeroSw){
                         outVo.setThe_date(dateList[i]);
                         outVo.setThe_day(j);
                         outVo.setThe_hr(j);
-//                        outVo.setPhone_join_mCnt(0);
-//                        outVo.setPhone_out_mCnt(0);
+                        outVo.setMonthly(j);
 
                         detailList.add(outVo);
                     }
@@ -127,6 +133,25 @@ public class Sta_ItemService {
 //        result.put("detailList", detailList);
 
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, resultList));
+    }
+
+    /**
+     * 총계 (주간)
+     */
+    public String callItemTotalWeek(StatVo StatVo){
+        ProcedureVo procedureVo = new ProcedureVo(StatVo);
+        List<P_ItemTotalOutDetailVo> detailList =  sta_ItemDao.callItemTotal(procedureVo);
+        P_ItemTotalOutVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_ItemTotalOutVo.class);
+
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
     }
 
     /**

@@ -63,14 +63,14 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th id="th_live"></th>
                                 <th id="th_beforLive"></th>
+                                <th id="th_live"></th>
                                 <th>증감</th>
-                                <th id="th_liveWeek"></th>
                                 <th id="th_liveBeforWeek"></th>
+                                <th id="th_liveWeek"></th>
                                 <th>증감</th>
-                                <th id="th_liveMonth"></th>
                                 <th id="th_liveBeforMonth"></th>
+                                <th id="th_liveMonth"></th>
                                 <th>증감</th>
                             </tr>
                             </thead>
@@ -91,7 +91,6 @@
 <script type="text/javascript" src="/js/code/enter/joinCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/util/statUtil.js?${dummyData}"></script>
 <script type="text/javascript">
-
     $(function(){
         $("#slctTypeArea").append(util.getCommonCodeRadio(0, join_slctType3));
         $("#slctTypeArea2").append(util.getCommonCodeRadio(0, join_slctType2));
@@ -127,14 +126,16 @@
 
         var tmp_date = new Date();
         tmp_date = moment(tmp_date).format("YYYY.MM.DD HH:mm:SS");
+        var tmp_day = tmp_date.split(" ")[0];
         var tmp_total = tmp_date.split(" ")[1];
 
-        $("#th_live").html('전일<br/>('+moment($("#startDate").val()).add('days', -1).format('MM/DD') + ' 0시~' + tmp_total.split(":")[0] + "시)");
-        $("#th_beforLive").html('실시간<br/>('+moment($("#startDate").val()).add('days', 0).format('MM/DD') + ' 0시~' + tmp_total.split(":")[0] + "시)");
-        $("#th_liveWeek").html('전주<br/>('+common.substr(response.data.liveInfo.week_startDate,5,5) + "~" + common.substr(response.data.liveInfo.week_endDate,5,5) + ')');
-        $("#th_liveBeforWeek").html('주간<br/>('+common.substr(response.data.liveInfo.bweek_startDate,5,5) + "~" + common.substr(response.data.liveInfo.bweek_endDate,5,5) + ')');
-        $("#th_liveMonth").html('전월<br/>('+moment($("#startDate").val()).add('months', 0).format('MM/01') + '~' + moment($("#startDate").val()).add('months', 1).add('days', -1).format('DD') + ')');
-        $("#th_liveBeforMonth").html('월간<br/>('+moment($("#startDate").val()).add('months', -1).format('MM/01') + "~" + moment($("#startDate").val()).add('months', 0).add('days', -1).format('DD') + ')');
+        $("#th_beforLive").html('전일<br/>('+moment($("#startDate").val()).add('days', -1).format('MM/DD') + ' 0시~' + tmp_total.split(":")[0] + "시)");
+        $("#th_live").html('실시간<br/>('+moment($("#startDate").val()).add('days', 0).format('MM/DD') + ' 0시~' + tmp_total.split(":")[0] + "시)");
+        $("#th_liveBeforWeek").html('전주<br/>('+common.substr(response.data.liveInfo.bweek_startDate,5,5) + "~" + common.substr(response.data.liveInfo.bweek_endDate,5,5) + ')');
+        $("#th_liveWeek").html('주간<br/>('+common.substr(response.data.liveInfo.week_startDate,5,5) + "~" + common.substr(response.data.liveInfo.week_endDate,5,5) + ')');
+        $("#th_liveBeforMonth").html('전월<br/>('+moment($("#startDate").val()).add('months', -1).format('MM/01') + "~" + tmp_day.split(".")[2] + ')');
+        $("#th_liveMonth").html('월간<br/>('+moment($("#startDate").val()).add('months', 0).format('MM/01') + '~' + tmp_day.split(".")[2] + ')');
+
     }
 
     function radioChange(){
@@ -144,6 +145,9 @@
             slctType = $('input[name="slctType"]:checked').val();
             console.log(slctType);
             if (slctType == 0 || slctType == 4) {
+                if($('input[name="slctType"]:checked').val() == 4){
+                    slctType = 1;
+                }
                 $("#oneDayDatePicker").show();
             } else {
                 $("#oneDayDatePicker").hide();
