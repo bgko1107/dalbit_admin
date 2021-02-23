@@ -86,4 +86,7 @@ public interface Con_BoardAdmDao {
 
     @Transactional(readOnly = true)
     ArrayList<BoardAdmTabCountVo> mailboxTabCount(BoardAdmTabCountVo boardAdmTabCountVo);
+
+    @Transactional(readOnly = true)
+    ArrayList<MiniGameListVo> callMiniGameList(ProcedureVo procedureVo);
 }

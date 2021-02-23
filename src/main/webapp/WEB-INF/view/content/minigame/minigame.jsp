@@ -84,35 +84,30 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function() {
-        // miniGameList();
-    });
-
     function miniGameList() {
-        // var data = {
-        // };
+        var data = {};
 
-        // util.getAjaxData("miniGameList", "/rest/content/boardAdm/mini/game/list", data, fn_success_miniGameList);
+        util.getAjaxData("miniGameList", "/rest/content/boardAdm/mini/game/list", data, fn_success_miniGameList);
 
-        var template = $('#tmp_miniGameInfoTable').html();
-        var templateScript = Handlebars.compile(template);
-        var html = templateScript();
-        $('#tb_miniGameInfo').html(html);
+        // var template = $('#tmp_miniGameInfoTable').html();
+        // var templateScript = Handlebars.compile(template);
+        // var html = templateScript();
+        // $('#tb_miniGameInfo').html(html);
+        //
+        // var template = $('#tmp_miniGameListTable').html();
+        // var templateScript = Handlebars.compile(template);
+        // var html = templateScript();
+        // $('#tb_miniGameList').html(html);
+    }
+
+    function fn_success_miniGameList(dst_id, response, param) {
 
         var template = $('#tmp_miniGameListTable').html();
         var templateScript = Handlebars.compile(template);
-        var html = templateScript();
+        var context = response.data;
+        var html = templateScript(context);
         $('#tb_miniGameList').html(html);
     }
-
-    // function fn_success_miniGameList(dst_id, response, param) {
-    //
-    //     var template = $('#tmp_miniGameListTable').html();
-    //     var templateScript = Handlebars.compile(template);
-    //     var context = response;
-    //     var html = templateScript(context);
-    //     $('#tb_miniGameList').html(html);
-    // }
 
     $("#bt_updateMiniGameInfo").on('click', function(){
        if(confirm('미니게임 노출 상태를 변경하시겠습니까?')){
@@ -182,9 +177,15 @@
 </script>
 
 <script id="tmp_miniGameListTable" type="text/x-handlebars-template">
-    {{#each this.data as |data|}}
+    {{#each this}}
         <tr>
             <td>{{indexDesc ../pagingVo/totalCnt rowNum}}</td>
+            <td>{{game_name}}</td>
+            <td><img src="{{renderImage image_url}}"/></td>
+            <td>{{game_desc}}</td>
+            <td>{{substr reg_date 0 19}}</td>
+            <td>{{op_name}}</td>
+            <td>{{{getCommonCodeLabel view_yn 'content_viewOn'}}}</td>
         </tr>
     {{else}}
         <tr>

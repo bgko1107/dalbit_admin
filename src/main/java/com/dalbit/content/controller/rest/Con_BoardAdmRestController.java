@@ -254,4 +254,12 @@ public class Con_BoardAdmRestController {
     public String mailboxTabCount(BoardAdmTabCountVo boardAdmTabCountVo) {
         return conBoardAdmService.mailboxTabCount(boardAdmTabCountVo);
     }
+
+    /**
+     * 미니 게임 목록
+     */
+    @PostMapping("/mini/game/list")
+    public String miniGameList(MiniGameListVo miniGameListVo) {
+        return conBoardAdmService.miniGameList(miniGameListVo);
+    }
 }
