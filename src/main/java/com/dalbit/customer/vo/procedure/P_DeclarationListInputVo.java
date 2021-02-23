@@ -9,4 +9,7 @@ import lombok.Setter;
 public class P_DeclarationListInputVo extends SearchVo {
     private int pageNo;
     private String strPlatform;
+    private int slctDateType;
+    private String startDate;
+    private String endDate;
 }

@@ -17,9 +17,24 @@
                         </tr>
                         <tr>
                             <td style="text-align: left">
+                                <jsp:include page="../../searchArea/daySearchFunction.jsp"/>
+
+                                <span name="report_slctDateType" id="report_slctDateType" onchange="report_slctDateType_onchange();"></span>
                                 <span id="searchMemberArea" onchange="btSearchClick();"></span>
+
+                                <jsp:include page="../../searchArea/dateRangeSearchArea.jsp"/>
+                                <input type="hidden" name="startDate" id="startDate">
+                                <input type="hidden" name="endDate" id="endDate" />
+
+                                <%--<input name="startDate" id="startDate">--%>
+                                <%--<input name="endDate" id="endDate" />--%>
+
                                 <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색할 정보를 입력하세요"></label>
                                 <button type="button" class="btn btn-success" id="bt_search">검색</button>
+
+                                <a href="javascript://" class="_prevSearch">[이전]</a>
+                                <a href="javascript://" class="_todaySearch">[오늘]</a>
+                                <a href="javascript://" class="_nextSearch">[다음]</a>
                             </td>
                         </tr>
                     </table>
@@ -122,12 +137,17 @@
 <script type="text/javascript" src="/js/code/customer/customerCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/customer/questionCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
-    var dtList_info;
-
     $(document).ready(function() {
+        getDeclareInfo();
+        getDeclareInfo();
+        $("#report_slctDateType").html(util.getCommonCodeSelect(-1, report_slctDateType));
         $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
 
-        getReportList();
+        $("#search_search_type_aria").html(util.getCommonCodeSelect(-1, declaration_searchType));
+        $("#search_slct_type_aria").html(util.getCommonCodeSelect(-1, declaration_slctType));
+        $("#search_reason_aria").html(util.getCommonCodeSelect(-1, declaration_reason));
+        $("#question_platform").html(util.getCommonCodeSelect(-1, question_platform));
+
         ui.checkBoxUnbind('list_info', function(){
             var me = $(this);
             var check = $('#list_info tbody input[type="checkbox"]:not(".disabled")');
@@ -143,50 +163,14 @@
                 check.prop('checked', false)
             }
         });
+
+        $("#displayDate").statsDaterangepicker(
+            function(start, end, t1) {
+                $("#startDate").val(start.format('YYYY.MM.DD'));
+                $("#endDate").val(end.format('YYYY.MM.DD'));
+            }
+        );
     });
-
-    /** Data Table **/
-    var tmp_searchText = null;
-    var tmp_searchType = null;
-    var tmp_slctType = null;
-    var tmp_slctReason = null;
-    var tmp_slctPlatform = null;
-    function getReportList() {
-
-        util.getAjaxData("summary", "/rest/customer/declaration/opCount", "", function (dst_id, response) {
-            var template = $('#tmp_declarationSummary').html();
-            var templateScript = Handlebars.compile(template);
-            var context = response;
-            var html = templateScript(context);
-
-            $("#summaryDataTable").html(html);
-        });
-
-        var dtList_info_data = function ( data ) {
-            data.searchText = tmp_searchText;
-            data.searchType = tmp_searchType;
-            data.slctType = tmp_slctType;
-            data.slctReason = tmp_slctReason;
-            data.strPlatform = tmp_slctPlatform;
-            data.newSearchType = $("#searchMember").val();
-        };
-        dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, customerDataTableSource.DeclareList);
-        dtList_info.useCheckBox(true);
-        dtList_info.useIndex(true);
-        dtList_info.useInitReload(true);
-        dtList_info.setPageLength(10);
-        dtList_info.usePageLenght(10);
-        dtList_info.createDataTable();
-
-        // 검색조건 불러오기
-        $("#search_search_type_aria").html(util.getCommonCodeSelect(-1, declaration_searchType));
-        $("#search_slct_type_aria").html(util.getCommonCodeSelect(-1, declaration_slctType));
-        $("#search_reason_aria").html(util.getCommonCodeSelect(-1, declaration_reason));
-        $("#question_platform").html(util.getCommonCodeSelect(-1, question_platform));
-
-        getDeclareInfo();
-
-    }
 
     $(".av nav-tabs nav-tabs-custom-colored active").on('click', function() {
         $("#" + $(this).data('id')).addClass('on');
@@ -203,13 +187,36 @@
     });
 
     function getDeclareInfo() {
-        tmp_searchText = $('#searchText').val();
-        tmp_searchType = $("select[name='searchType']").val();
-        tmp_slctType  = $("select[name='slctType']").val();
-        tmp_slctReason  = $("select[name='slctReason']").val();
-        tmp_slctPlatform  = $("select[name='platform']").val();
 
-        dtList_info.reload();
+        util.getAjaxData("summary", "/rest/customer/declaration/opCount", "", function (dst_id, response) {
+            var template = $('#tmp_declarationSummary').html();
+            var templateScript = Handlebars.compile(template);
+            var context = response;
+            var html = templateScript(context);
+
+            $("#summaryDataTable").html(html);
+        });
+
+        var dtList_info;
+        var dtList_info_data = function ( data ) {
+            data.searchText = $('#searchText').val();
+            data.searchType = $("select[name='searchType']").val();
+            data.slctType = $("select[name='slctType']").val();;
+            data.slctReason = $("select[name='slctReason']").val();
+            data.strPlatform = $("select[name='platform']").val();
+            data.newSearchType = $("#searchMember").val();
+            data.slctDateType = $("#slctDateType").val();
+            data.startDate = $("#startDate").val();
+            data.endDate = $("#endDate").val();
+        };
+        dtList_info = new DalbitDataTable($("#list_info"), dtList_info_data, customerDataTableSource.DeclareList);
+        dtList_info.useCheckBox(true);
+        dtList_info.useIndex(true);
+        dtList_info.useInitReload(true);
+        dtList_info.setPageLength(10);
+        dtList_info.usePageLenght(10);
+        dtList_info.createDataTable();
+
 
         /*검색결과 영역이 접혀 있을 시 열기*/
         ui.toggleSearchList();
@@ -316,7 +323,21 @@
         $("#bt_search").click();
     }
 
-
+    function report_slctDateType_onchange(){
+        $("#slctDateType").val();
+        $("#searchMemberArea").hide();
+        var val = $("#slctDateType").val();
+        if(val == 3){
+            $("#searchMemberArea").show();
+            $("#rangeDatepicker").hide();
+        }else if(val == 1){
+            slctType = 3;
+            dateType();
+        }else if(val == 2){
+            slctType = 3;
+            dateType();
+        }
+    }
 </script>
 
 <script id="tmp_declarationSummary" type="text/x-handlebars-template">

@@ -98,6 +98,13 @@ var declaration_send = [
     , new COMMON_CODE('no', '0', '알림 OFF')
 ];
 
+var report_slctDateType = [
+    new COMMON_CODE(null, 'slctDateType', '조회구분')
+    , new COMMON_CODE('3', '3', '회원구분')
+    , new COMMON_CODE('1', '1', '접수일시')
+    , new COMMON_CODE('2', '2', '처리일시')
+];
+
 /** =------ Sms ---------- */
 
 var sms_code = [
