@@ -34,12 +34,14 @@
         </table>
     </div>
 </div>
-<button class="btn btn-default btn-sm print-btn pull-left excelDownBtn_dalSalesRange" type="button"><i class="fa fa-print"></i>Excel Down</button>
-<button class="btn btn-default btn-sm print-btn pull-right excelDownBtn_dalSalesRange" type="button"><i class="fa fa-print"></i>Excel Down</button>
+
+<a type='button' class="btn btn-default print-btn pull-left dalbitSalesRangeExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalbitSalesRange', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
+<a type='button' class="btn btn-default print-btn pull-right dalbitSalesRangeExcel" download="" href="#" onclick="return ExcellentExport.excel(this, 'divDalbitSalesRange', 'Sheet1');"><i class="fa fa-print"></i>Excel Down</a>
 
 <script type="text/javascript">
 
     function getDalbitSalesRangeList(){
+        $(".dalbitSalesRangeExcel").attr('download' , "달빛Live_수익인식Process(달 매출-기간)_" + moment($("#startDate").val()).add('days', 0).format('YYYY.MM.DD') + ".xls");
 
         var data = {
             slctType : slctType
@@ -63,18 +65,6 @@
         ui.tableHeightSet();
         ui.paintColor();
     }
-
-    $('.excelDownBtn_dalSalesRange').on('click', function(){
-        var formData = new FormData();
-        formData.append("startDate", $("#startDate").val());
-
-        util.excelDownload($(this), "/rest/enter/pay/dal/sales/listExcel", formData,
-            function () {
-                console.log("fn_success_excel");
-            }, function () {
-                console.log("fn_fail_excel");
-            });
-    });
 
     function rowspan(className){
         $("." + className).each(function() {
