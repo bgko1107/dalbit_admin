@@ -398,13 +398,13 @@
         <tbody>
         {{^equal report_idx ""}}
         <tr>
-            <th>기타 신고 메시지</th>
+            <th>신고 메시지</th>
             <td>{{{replaceHtml ../op_msg}}}</td>
         </tr>
         {{/equal}}
         {{#equal report_idx ""}}
         <tr>
-            <th>운영자 메모</th>
+            <th>신고 메시지</th>
             <td>{{../adminMemo}}</td>
         </tr>
         {{/equal}}
