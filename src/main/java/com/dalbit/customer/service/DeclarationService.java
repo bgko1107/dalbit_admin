@@ -228,6 +228,9 @@ public class DeclarationService {
                         }else if(block_type == 3){
                             blockScopeTexts = pDeclarationOperateVo.getReported_mem_no();
                             edit_contents = "회원번호 차단 등록 : " +  blockScopeTexts;
+                        }else if(block_type == 4){
+                            blockScopeTexts = pDeclarationOperateVo.getReported_mem_no();
+                            edit_contents = "휴대폰번호 차단 등록 : " +  blockScopeTexts;
                         }
 
                         if(!DalbitUtil.isEmpty(blockScopeTexts)){

@@ -80,7 +80,7 @@
         // <!-- 버튼 끝 -->
 
         $("#"+targetId).find("#modalBlockType").html(util.getCommonCodeRadio('1', block_blockRadio));
-        $("#"+targetId).find("#modalBlockDay").html(util.getCommonCodeRadio('1', block_blockDay));
+        $("#"+targetId).find("#modalBlockDay").html(util.getCommonCodeRadio('1', block_blockDay, 'Y'));
     });
 
     var callbackFn;

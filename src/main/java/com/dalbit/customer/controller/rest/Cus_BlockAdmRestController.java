@@ -59,4 +59,28 @@ public class Cus_BlockAdmRestController {
     public String historyList(BlockAdmVo blockAdmVo) {
         return cusBlockAdmService.selectBlockHistList(blockAdmVo);
     }
+
+    /**
+     * 차단 메모 조회
+     */
+    @PostMapping("/admin/memo")
+    public String adminMemo(BlockAdmVo blockAdmVo) {
+        return cusBlockAdmService.selectAdminMemo(blockAdmVo);
+    }
+
+    /**
+     * 차단 메모 등록/삭제
+     */
+    @PostMapping("/admin/memo/ins")
+    public String adminMemoIns(BlockAdmVo blockAdmVo) {
+        return cusBlockAdmService.adminMemoIns(blockAdmVo);
+    }
+
+    /**
+     * 차단 메모 삭제
+     */
+    @PostMapping("/admin/memo/del")
+    public String adminMemoDel(BlockAdmVo blockAdmVo) {
+        return cusBlockAdmService.adminMemoDel(blockAdmVo);
+    }
 }

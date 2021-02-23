@@ -65,6 +65,9 @@
             <if test='blockType != -1'>
                 and blo.block_type = #{blockType}
             </if>
+            <if test='blockBlockDay != -1'>
+                and blo.block_day = #{blockBlockDay}
+            </if>
         </where>
     </sql>
 
@@ -86,9 +89,11 @@
                 , blo.op_name as op_name
                 , blo.report_idx as report_idx
                 , @RNUM := @RNUM + 1 as rowNum
+                , ifnull(opMemo.idx,0) AS blockIdx
             from rd_admin.tb_login_block blo
                 left join rd_data.tb_member_report rep on blo.report_idx = rep.idx
                 left join rd_data.tb_member_basic bas on rep.reported_mem_no = bas.mem_no
+                left Join rd_admin.tb_admin_op_memo_block opMemo on blo.idx = opMemo.blockIdx
                 , (select @RNUM := 0) r
             <include refid="blockCondition"/>
             order by last_upd_date desc
@@ -192,6 +197,8 @@
           , op_name
           , report_idx
           , memo
+          , mem_no
+          , block_idx
           ) values (
             #{edit_contents}
             , #{edit_type}
@@ -199,14 +206,18 @@
             , #{op_name}
             , #{report_idx}
             , null
+            , #{mem_no}
+            , #{blockIdx}
           )
     </insert>
 
     <select id="selectBlockInfo" parameterType="String" resultType="com.dalbit.customer.vo.BlockAdmVo">
         /* Cus_BlockAdm.xml - selectBlockInfo*/
-        select *
-            from rd_admin.tb_login_block
-            where idx = #{idx}
+        SELECT blo.*, bas.mem_no, bas.mem_nick
+          from rd_admin.tb_login_block blo
+     left join rd_data.tb_member_report rep on blo.report_idx = rep.idx
+     left join rd_data.tb_member_basic bas on rep.reported_mem_no = bas.mem_no
+         where blo.idx = #{idx}
     </select>
 
     <sql id="blockHistCondition">
@@ -232,21 +243,25 @@
 
     <select id="selectBlockHistList" parameterType="com.dalbit.customer.vo.BlockAdmVo" resultType="com.dalbit.customer.vo.BlockAdmVo">
         /* Cus_BlockAdm.xml - selectBlockHistList*/
-        select *
+        select * , @RNUM := @RNUM + 1 as rowNum
           from (
             select
-                edit_contents
-                , edit_type
-                , last_upd_date
-                , op_name
-                , report_idx
-                , memo
-                , @RNUM := @RNUM + 1 as rowNum
-            from rd_admin.tb_login_block_history
-                , (select @RNUM := 0) r
+                blo.edit_contents
+                , blo.edit_type
+                , blo.last_upd_date
+                , blo.op_name
+                , blo.report_idx
+                , blo.memo
+                , blo.mem_no
+                , basic.mem_nick
+                , ifnull(opMemo.blockIdx,0) AS blockIdx
+            from rd_admin.tb_login_block_history blo
+          left join rd_data.tb_member_basic basic on blo.mem_no = basic.mem_no
+          left Join rd_admin.tb_admin_op_memo_block opMemo on blo.block_idx = opMemo.blockIdx
             <include refid="blockHistCondition"/>
             order by last_upd_date desc
           ) a
+          , (select @RNUM := 0) r
         limit #{pageStart}, #{pageCnt}
     </select>
 
@@ -256,4 +271,32 @@
             from rd_admin.tb_login_block_history
             <include refid="blockHistCondition"/>
     </select>
+
+
+    <select id="selectAdminMemo" parameterType="com.dalbit.customer.vo.BlockAdmVo" resultType="com.dalbit.customer.vo.BlockAdmVo">
+        /* Cus_BlockAdm.xml - selectAdminMemo*/
+        SELECT idx, blockIdx, mem_no, memo, op_name, reg_date, last_upd_date
+          FROM rd_admin.tb_admin_op_memo_block
+         where blockIdx = #{blockIdx}
+    </select>
+
+    <insert id="adminMemoIns" parameterType="com.dalbit.customer.vo.BlockAdmVo">
+        /* Cus_BlockAdm.xml - adminMemoIns */
+        insert into rd_admin.tb_admin_op_memo_block ( blockIdx , mem_no , memo , op_name , reg_date , last_upd_date )
+           values ( #{blockIdx} , #{mem_no} , #{memo} , #{opName} , now() , now() )
+    </insert>
+
+    <update id="adminMemoUpd" parameterType="com.dalbit.customer.vo.BlockAdmVo">
+        /* Cus_BlockAdm.xml - adminMemoUpd */
+        update rd_admin.tb_admin_op_memo_block
+           set memo = #{memo} , op_name = #{opName} , last_upd_date = now()
+         where idx = #{idx}
+    </update>
+
+    <delete id="adminMemoDel" parameterType="com.dalbit.customer.vo.BlockAdmVo">
+        /* Cus_BlockAdm.xml - adminMemoDel */
+        delete from rd_admin.tb_admin_op_memo_block
+         where idx = #{idx}
+    </delete>
+
 </mapper>

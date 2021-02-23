@@ -572,6 +572,8 @@ public class Mem_MemberService {
                         edit_contents = "ip 차단 등록 : " +  blockScopeTexts[i];
                     }else if(block_type == 3){
                         edit_contents = "회원번호 차단 등록 : " +  blockScopeTexts[i];
+                    }else if(block_type == 4){
+                        edit_contents = "휴대폰번호 차단 등록 : " +  blockScopeTexts[i];
                     }
 
                     mem_MemberDao.insertLoginBlockHistory(new LoginBlockHistVo(edit_contents, 0, pMemberReportVo.getOpName(), pMemberReportVo.getIdx()));

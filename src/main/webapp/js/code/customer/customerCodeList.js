@@ -62,6 +62,7 @@ var block_scope = [
     , new COMMON_CODE('mem_no', '3', '아이디(변경x)')
     , new COMMON_CODE('deviceUuid', '1', '디바이스 아이디')
     , new COMMON_CODE('ip', '2', 'ip')
+    , new COMMON_CODE('mem_phone', '4', '휴대폰번호')
 ]
 
 var declaration_status = [

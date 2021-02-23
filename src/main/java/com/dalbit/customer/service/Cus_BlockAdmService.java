@@ -103,6 +103,9 @@ public class Cus_BlockAdmService {
                 if(!DalbitUtil.isEmpty(history.getReport_idx())) {
                     blockAdmVo.setReport_idx(history.getReport_idx());
                 }
+                blockAdmVo.setBlockIdx(Integer.parseInt(idxs[i]));
+                blockAdmVo.setMem_no(history.getMem_no());
+
                 cusBlockAdmDao.insertDelBlockHistory(blockAdmVo);
 
                 // rd_admin.tb_login_block에서 delete하기 위함
@@ -146,4 +149,41 @@ public class Cus_BlockAdmService {
         return gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(blockAdmVo.getTotalCnt(), blockAdmVo.getPageStart(), blockAdmVo.getPageCnt())));
     }
 
+    /**
+     * 차단 운영자 메모
+     */
+    public String selectAdminMemo(BlockAdmVo blockAdmVo) {
+        BlockAdmVo blockDetail = cusBlockAdmDao.selectAdminMemo(blockAdmVo);
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, blockDetail));
+    }
+
+    /**
+     * 차단 운영자 메모 등록/수정
+     */
+    public String adminMemoIns(BlockAdmVo blockAdmVo) {
+        blockAdmVo.setOpName(MemberVo.getMyMemNo());
+        try {
+            if ("".equals(blockAdmVo.getIdx())) {
+                cusBlockAdmDao.adminMemoIns(blockAdmVo);
+            } else {
+                cusBlockAdmDao.adminMemoUpd(blockAdmVo);
+            }
+            return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+        }catch (Exception e){
+            return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+
+    }
+
+    /**
+     * 차단 운영자 메모 삭제
+     */
+    public String adminMemoDel(BlockAdmVo blockAdmVo) {
+        try {
+            cusBlockAdmDao.adminMemoDel(blockAdmVo);
+            return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+        }catch (Exception e){
+            return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+    }
 }

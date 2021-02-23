@@ -88,6 +88,7 @@
     var deviceUuid =  '';
     var ip =  '';
     var fnCallBack =  '${param.fnCallBack}';
+    var memPhone;
 
     $(document).ready(function() {
 
@@ -117,6 +118,7 @@
             memSex = resData.memSex;
             deviceUuid = resData.deviceUuid;
             ip = resData.ip;
+            memPhone = resData.phoneNum;
 
             $('#td_memId').html(memId);
             $('#td_memNick').html(memNick);
@@ -125,7 +127,7 @@
             else if(memSex == "f")
                 $('#td_memSex').html("<label style=\"color: red\">여</lable>");
             else
-                $('#td_memSex').html("알수없음");
+                $('#td_memSex').html("미선택");
         });
     }
 
@@ -218,9 +220,9 @@
             obj.notiContents = msgValue;
             obj.notimemo = msgTitle;
             //obj.blockScope = $("blockScope_deviceUuid").
-            obj.blockScope = $("#blockScope_1").prop('checked')+','+$("#blockScope_2").prop('checked')+','+$("#blockScope_3").prop('checked');
+            obj.blockScope = $("#blockScope_1").prop('checked')+','+$("#blockScope_2").prop('checked')+','+$("#blockScope_3").prop('checked')+','+$("#blockScope_4").prop('checked');
 
-            obj.blockScopeText = deviceUuid +','+ ip + ',' + memNo;
+            obj.blockScopeText = deviceUuid +','+ ip + ',' + memNo + ',' + memPhone;
 
             util.getAjaxData("report", "/rest/member/member/report", obj, update_success);
         }return false;

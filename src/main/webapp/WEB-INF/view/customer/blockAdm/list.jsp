@@ -32,7 +32,6 @@
             <!-- //serachBox -->
 
             <div class="row col-lg-12 form-inline">
-                <span id="blockTypeArea"></span>
                 <button type="button" class="btn btn-primary pull-right mb15 mr15" id="bt_block"><i class="fa fa-search"></i>차단 등록</button>
             </div>
 
@@ -52,6 +51,8 @@
                     <div class="tab-content no-padding">
                         <div class="tab-pane fade in active" id="blockAdmList">
                             <div class="widget-content">
+                                <span id="blockTypeArea" onchange="getBlockList();"></span>
+                                <sapn id="blockBlockDayArea" onchange="getBlockList();"></sapn>
                                 <table id="tb_blockAdmList" class="table table-sorting table-hover table-bordered">
                                     <thead></thead>
                                     <tbody></tbody>
@@ -73,12 +74,23 @@
                 </div>
             </div>
             <!-- //DATA TABLE -->
-
-            <div class="row col-lg-12" id="blockDetail"></div>
-
         </div> <!-- //container-fluid -->
     </div> <!-- //page-wrapper -->
 </div> <!-- //wrapper-->
+
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-footer no-padding no-margin">
+                <div class="row col-lg-12 mb5" id="blockDetail" style="margin-left: 0px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="/js/dataTablesSource/customer/blockAdmDataTableSource.js?${dummyData}"></script>
 <script src="/js/code/customer/blockAdmCodeList.js?${dummyData}"></script>
@@ -86,11 +98,15 @@
 
 <script type="text/javascript">
 
+    var blockIdx;
+    var memNo;
+
     $(function() {
         $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
         $('#blockTypeArea').html(util.getCommonCodeSelect(-1, block_blockType));
         $('#searchArea').html(util.getCommonCodeSelect(-1, block_searchType));
         $('#blockHistArea').html(util.getCommonCodeSelect(-1, blockHist_histType));
+        $('#blockBlockDayArea').html(util.getCommonCodeSelect(-1, block_blockDay));
         getBlockList();
 
         $('#blockHistArea').hide();
@@ -158,6 +174,7 @@
             data.searchType = $('#searchType').val();   // 검색 유형 구분
             data.searchText = $('#searchText').val();   // 검색어 구분
             data.newSearchType = $("#searchMember").val();
+            data.blockBlockDay = $("#block_day").val(); // 제제종류
         };
 
         dtList_info = new DalbitDataTable($('#tb_blockAdmList'), dtList_info_data, blockAdmDataTableSource.blockAdmList, $('#searchForm'));
@@ -171,13 +188,13 @@
 
     }
 
-    $(document).on('click', '#tb_blockAdmList .dt-body-center input[type="checkbox"]', function() {
-        if($(this).prop('checked')){
-            $(this).parent().parent().find('._blockDetail').click();
-        } else {
-            $("#blockDetail").empty();
-        }
-    });
+    // $(document).on('click', '#tb_blockAdmList .dt-body-center input[type="checkbox"]', function() {
+    //     if($(this).prop('checked')){
+    //         $(this).parent().parent().find('._blockDetail').click();
+    //     } else {
+    //         $("#blockDetail").empty();
+    //     }
+    // });
 
     $(document).on('click', '._blockDetail', function() {
        var data = {
@@ -192,11 +209,11 @@
         var templateScript = Handlebars.compile(template);
         var context = response.data;
         var html = templateScript(context);
-
         $('#blockDetail').html(html);
 
-        var scrollPosition = $("#blockDetail").offset();
-        util.scrollPostion(scrollPosition.top);
+        $("#modal").modal('show');
+        // var scrollPosition = $("#blockDetail").offset();
+        // util.scrollPostion(scrollPosition.top);
     }
 
     function fullSize_background(url) {
@@ -301,6 +318,75 @@
         $("#bt_search").click();
     }
 
+    function adminMemo(idx){
+        data = dtList_info.getDataRow(idx);
+        memNo = data.mem_no;
+        blockIdx = data.idx;
+
+        var data={};
+        data.blockIdx = blockIdx;
+
+        util.getAjaxData("blockMemo", "/rest/customer/blockAdm/admin/memo", data, fn_blockMemo_success);
+
+    }
+    function adminMemoHistory(idx){
+        data = dtList_info.getDataRow(idx);
+        memNo = data.mem_no;
+        blockIdx = data.blockIdx;
+
+        var data={};
+        data.blockIdx = blockIdx;
+
+        util.getAjaxData("blockMemo", "/rest/customer/blockAdm/admin/memo", data, fn_blockMemo_success);
+
+    }
+
+    function fn_blockMemo_success(dst_id, response){
+        $("#blockDetail").empty();
+        var template = $('#tmp_blockMemoDetail').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response.data;
+        var html = templateScript(context);
+        console.log(html);
+        $('#blockDetail').html(html);
+        $("#blockDetail").show();
+        $("#modal").modal('show');
+    }
+
+    function memoIns(){
+        var data={};
+        data.blockIdx = blockIdx;
+        data.mem_no = memNo;
+        data.idx = "";
+        data.memo = $("#memo").val();
+
+        console.log(data);
+        util.getAjaxData("blockMemo", "/rest/customer/blockAdm/admin/memo/ins", data, fn_blockMemoUpd_success);
+
+    }
+    function memoUpd(data){
+        var obj={};
+        obj.idx = data.idx;
+        obj.blockIdx = blockIdx;
+        obj.memo = $("#memo").val();
+        console.log(data);
+        util.getAjaxData("blockMemo", "/rest/customer/blockAdm/admin/memo/ins", obj, fn_blockMemoUpd_success);
+
+    }
+    function memoDel(data){
+        var obj={};
+        obj.idx = data.idx;
+        console.log(data);
+        util.getAjaxData("blockMemo", "/rest/customer/blockAdm/admin/memo/del", obj, fn_blockMemoUpd_success);
+
+    }
+    function fn_blockMemoUpd_success(dsc_id, response){
+        $("#modal").modal('hide');
+        $("#blockDetail").empty();
+        $("#bt_search").click();
+    }
+
+
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_blockDetail">
@@ -324,4 +410,34 @@
         {{/equal}}
         </tbody>
     </table>
+</script>
+
+
+
+<script type="text/x-handlebars-template" id="tmp_blockMemoDetail">
+    <table class="table table-bordered table-dalbit mt15">
+        <colgroup>
+            <col width="5%" />
+            <col width="15%" />
+        </colgroup>
+        <tbody>
+        <tr>
+            <th>운영자 메모</th>
+        </tr>
+        <tr>
+            <td><textarea name="memo" id="memo" style='width:100%;height:100%;' rows="10" >{{memo}}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+    {{^idx}}<button type="button" id="bt_bloclMemoins" class="btn btn-danger btn-sm" onclick="memoIns();">등록하기</button>{{/idx}}
+    {{#idx}}
+        <div class="col-md-6 no-padding">
+            <span class="pull-left">등록 일시 : {{../reg_date}}</span><br/>
+            <span class="pull-left">수정 일시 : {{../last_upd_date}}</span>
+        </div>
+        <div class="col-md-6 pull-right no-padding">
+            <button type="button" id="bt_blockMemoUpd" data-idx="{{../idx}}" onclick="memoUpd($(this).data());" class="btn btn-danger btn-sm">수정하기</button>
+            <button type="button" id="bt_bloclMemoDel" data-idx="{{../idx}}" onclick="memoDel($(this).data());" class="btn btn-danger btn-sm">삭제하기</button>
+        </div>
+    {{/idx}}
 </script>

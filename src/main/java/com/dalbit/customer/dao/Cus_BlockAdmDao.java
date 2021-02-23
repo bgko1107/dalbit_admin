@@ -32,4 +32,10 @@ public interface Cus_BlockAdmDao {
     @Transactional(readOnly = true)
     int selectBlockHistListCnt(BlockAdmVo blockAdmVo);
 
+    @Transactional(readOnly = true)
+    BlockAdmVo selectAdminMemo(BlockAdmVo blockAdmVo);
+
+    int adminMemoIns(BlockAdmVo blockAdmVo);
+    int adminMemoUpd(BlockAdmVo blockAdmVo);
+    int adminMemoDel(BlockAdmVo blockAdmVo);
 }
