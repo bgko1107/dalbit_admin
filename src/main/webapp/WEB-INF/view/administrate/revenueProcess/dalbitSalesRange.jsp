@@ -16,7 +16,7 @@
             <thead>
             <tr>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">조회일자</th>
-                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">DJ</th>
+                <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">구분</th>
                 <th colspan="3" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">달</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">별</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">선수금</th>
@@ -103,9 +103,9 @@
                     클립
                 {{else}}
                     {{#dalbit_if slctType '==' 3}}
-                        부스터
-                    {{else}}
                         우체통
+                    {{else}}
+                        부스터
                     {{/dalbit_if}}
                 {{/dalbit_if}}
             {{/dalbit_if}}

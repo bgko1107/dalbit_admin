@@ -134,9 +134,9 @@
                     클립
                 {{else}}
                     {{#dalbit_if slctType '==' 3}}
-                        부스터
-                    {{else}}
                         우체통
+                    {{else}}
+                        부스터
                     {{/dalbit_if}}
                 {{/dalbit_if}}
             {{/dalbit_if}}
