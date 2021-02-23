@@ -77,7 +77,7 @@
           from (
             select
                 blo.idx as idx
-                , rep.reported_mem_no as mem_no
+                ,  if(blo.block_type=3,block_text,rep.reported_mem_no) as mem_no
                 , bas.mem_id as mem_id
                 , bas.mem_nick as mem_nick
                 , bas.mem_phone as mem_phone
@@ -92,7 +92,7 @@
                 , ifnull(opMemo.idx,0) AS blockIdx
             from rd_admin.tb_login_block blo
                 left join rd_data.tb_member_report rep on blo.report_idx = rep.idx
-                left join rd_data.tb_member_basic bas on rep.reported_mem_no = bas.mem_no
+                left join rd_data.tb_member_basic bas on  if(blo.block_type=3,block_text,rep.reported_mem_no) = bas.mem_no
                 left Join rd_admin.tb_admin_op_memo_block opMemo on blo.idx = opMemo.blockIdx
                 , (select @RNUM := 0) r
             <include refid="blockCondition"/>
@@ -216,7 +216,7 @@
         SELECT blo.*, bas.mem_no, bas.mem_nick
           from rd_admin.tb_login_block blo
      left join rd_data.tb_member_report rep on blo.report_idx = rep.idx
-     left join rd_data.tb_member_basic bas on rep.reported_mem_no = bas.mem_no
+     left join rd_data.tb_member_basic bas on if(blo.block_type=3,block_text,rep.reported_mem_no) = bas.mem_no
          where blo.idx = #{idx}
     </select>
 
@@ -260,9 +260,8 @@
           left Join rd_admin.tb_admin_op_memo_block opMemo on blo.block_idx = opMemo.blockIdx
             <include refid="blockHistCondition"/>
             order by last_upd_date desc
-          ) a
-          , (select @RNUM := 0) r
         limit #{pageStart}, #{pageCnt}
+        ) a , (select @RNUM := 0) r
     </select>
 
     <select id="selectBlockHistListCnt" parameterType="com.dalbit.customer.vo.BlockAdmVo" resultType="integer">

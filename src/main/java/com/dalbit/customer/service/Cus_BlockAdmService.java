@@ -59,6 +59,8 @@ public class Cus_BlockAdmService {
 
         } else if(blockAdmVo.getRadioBlock() == 3){
             blockAdmVo.setEdit_contents("회원번호 차단 등록 : " + blockAdmVo.getBlock_text());
+        } else if(blockAdmVo.getRadioBlock() == 4){
+            blockAdmVo.setEdit_contents("휴대폰번호 차단 등록 : " + blockAdmVo.getBlock_text());
         }
 
         int result = 0;

@@ -23,6 +23,7 @@ var block_blockRadio = [
     , new COMMON_CODE('deviceUuid', 1, 'deviceUuid')
     , new COMMON_CODE('ip', 2, 'IP')
     , new COMMON_CODE('memNo', 3, '회원번호')
+    , new COMMON_CODE('memPhone', 4, '휴대폰번호')
 ];
 
 var block_blockDay = [
