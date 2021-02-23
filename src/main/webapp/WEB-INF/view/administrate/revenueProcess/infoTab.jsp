@@ -13,6 +13,7 @@
                 <li><a href="#byeolCount" role="tab" data-toggle="tab" id="tab_byeolCount">별 수</a></li>
                 <li><a href="#byeolAmt" role="tab" data-toggle="tab" id="tab_byeolAmt">별 수 - 회원내역</a></li>
                 <li><a href="#dalbitSales" role="tab" data-toggle="tab" id="tab_dalbitSales">달 매출</a></li>
+                <li><a href="#dalbitSalesRange" role="tab" data-toggle="tab" id="tab_dalbitSalesRange">달 매출 - 기간</a></li>
                 <li><a href="#withdrawalDal" role="tab" data-toggle="tab" id="tab_withdrawalDal">탈퇴 달</a></li>
                 <li><a href="#withdrawalByeol" role="tab" data-toggle="tab" id="tab_withdrawalByeol">탈퇴 별</a></li>
             </ul>
@@ -23,6 +24,7 @@
                 <div class="tab-pane fade" id="byeolCount"><jsp:include page="byeolCount.jsp"/></div>
                 <div class="tab-pane fade" id="byeolAmt"><jsp:include page="byeolAmt.jsp"/></div>
                 <div class="tab-pane fade" id="dalbitSales"><jsp:include page="dalbitSales.jsp"/></div>
+                <div class="tab-pane fade" id="dalbitSalesRange"><jsp:include page="dalbitSalesRange.jsp"/></div>
                 <div class="tab-pane fade" id="withdrawalDal" style="width: 800px;"><jsp:include page="withdrawalDal.jsp"/></div>
                 <div class="tab-pane fade" id="withdrawalByeol" style="width: 600px;"><jsp:include page="withdrawalByeol.jsp"/></div>
             </div>
@@ -75,6 +77,8 @@
             getWithdrawalDalList();
         }else if(tabId =='tab_withdrawalByeol'){
             getWithdrawalByeolList();
+        }else if(tabId =='tab_dalbitSalesRange'){
+            getDalbitSalesRangeList();
         }
     });
 </script>

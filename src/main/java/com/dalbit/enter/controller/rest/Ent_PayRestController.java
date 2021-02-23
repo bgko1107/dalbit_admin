@@ -188,6 +188,13 @@ public class Ent_PayRestController {
         return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
     }
 
+    // 달 매출
+    @PostMapping("/dal/sales/range")
+    public String dalSalesRange(P_RevenueProcessVo pRevenueProcessVo){
+        String result = ent_PayService.callDalSalesRange(pRevenueProcessVo);
+        return result;
+    }
+
     // 탈퇴 달 금액
     @PostMapping("/withdrawal/dal")
     public String withdrawalDal(P_RevenueProcessVo pRevenueProcessVo){

@@ -999,6 +999,20 @@ public class Ent_PayService {
 
         return model;
     }
+    // 달 매출
+    public String callDalSalesRange(P_RevenueProcessVo pRevenueProcessVo){
+        ProcedureVo procedureVo = new ProcedureVo(pRevenueProcessVo);
+        List<P_RevenueProcessVo> detailList =  ent_PayDao.callDalSalesRange(procedureVo);
+        P_RevenueProcessVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_RevenueProcessVo.class);
+        if(Integer.parseInt(procedureVo.getRet()) <= 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
+        }
+        var result = new HashMap<String, Object>();
+        result.put("totalInfo", totalInfo);
+        result.put("detailList", detailList);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+    }
 
     // 탈퇴 달
     public String callWithdrawalDal(P_RevenueProcessVo pRevenueProcessVo){
