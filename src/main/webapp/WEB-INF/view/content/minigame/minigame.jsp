@@ -180,7 +180,7 @@
     {{#each this}}
         <tr>
             <td>{{indexDesc ../pagingVo/totalCnt rowNum}}</td>
-            <td>{{game_name}}</td>
+            <td><a href="javascript://" onclick="" data-gameNo="{{this.game_no}}">{{game_name}}</a></td>
             <td><img src="{{renderImage image_url}}"/></td>
             <td>{{game_desc}}</td>
             <td>{{substr reg_date 0 19}}</td>
