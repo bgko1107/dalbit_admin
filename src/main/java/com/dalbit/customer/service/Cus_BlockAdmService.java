@@ -1,16 +1,19 @@
 package com.dalbit.customer.service;
 
+import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
+import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.customer.dao.Cus_BlockAdmDao;
 import com.dalbit.customer.vo.BlockAdmVo;
+import com.dalbit.member.dao.Mem_MemberDao;
 import com.dalbit.member.vo.MemberVo;
+import com.dalbit.member.vo.procedure.P_MemberReportVo;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.dalbit.common.code.Status;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +27,9 @@ public class Cus_BlockAdmService {
 
     @Autowired
     Cus_BlockAdmDao cusBlockAdmDao;
+
+    @Autowired
+    Mem_MemberDao mem_MemberDao;
 
     /**
      * 차단 회원 내역 조회
@@ -59,6 +65,13 @@ public class Cus_BlockAdmService {
 
         } else if(blockAdmVo.getRadioBlock() == 3){
             blockAdmVo.setEdit_contents("회원번호 차단 등록 : " + blockAdmVo.getBlock_text());
+
+            P_MemberReportVo memo = new P_MemberReportVo();
+            memo.setMemo(blockAdmVo.getAdminMemo());
+            memo.setOpName(MemberVo.getMyMemNo());
+            memo.setMem_no(blockAdmVo.getBlock_text());
+            ProcedureVo procedureVo = new ProcedureVo(memo);
+            mem_MemberDao.callMemAdminMemoAdd(procedureVo);
         } else if(blockAdmVo.getRadioBlock() == 4){
             blockAdmVo.setEdit_contents("휴대폰번호 차단 등록 : " + blockAdmVo.getBlock_text());
         }
