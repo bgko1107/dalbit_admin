@@ -869,5 +869,9 @@
           and last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{endDate}, '%Y.%m.%d 23:59:59')
     </select>
 
+    <select id="callMiniGameList" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.content.vo.MiniGameListVo">
+        call rd_admin.sp_admin_contents_minigame_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
 
 </mapper>
