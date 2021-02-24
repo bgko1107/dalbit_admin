@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %>
-</c:set>
+<c:set var="dummyData" value="<%= java.lang.Math.round(java.lang.Math.random() * 1000000) %>" />
 
 <div id="wrapper">
     <div id="page-wrapper">
@@ -17,14 +16,16 @@
                     <div class="widget-content">
                         <div id="tabContainer">
                             <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
-                                <li class="active"><a href="#condition" role="tab" data-toggle="tab" id="tab_condition">조건 관리</a></li>
-                                <li><a href="#word" role="tab" data-toggle="tab" id="tab_word">문구 관리</a></li>
+                                <li class="active"><a href="#condition" role="tab" data-toggle="tab" id="tab_condition" class="_fullmoonTab" data-clickcnt="1">조건 관리</a></li>
+                                <li><a href="#word" role="tab" data-toggle="tab" id="tab_word" class="_fullmoonTab" data-clickcnt="0">문구 관리</a></li>
+                                <li><a href="#event" role="tab" data-toggle="tab" id="tab_event" class="_fullmoonTab" data-clickcnt="0">이벤트 관리</a></li>
                             </ul>
                         </div>
 
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="condition"><jsp:include page="condition.jsp"/></div>      <!-- 조건 관리 -->
                             <div class="tab-pane fade" id="word"><jsp:include page="word.jsp"/></div>              <!-- 문구 관리 -->
+                            <div class="tab-pane fade" id="event"><jsp:include page="event.jsp"/></div>              <!-- 문구 관리 -->
                         </div>
                     </div>
                 </div>
@@ -41,4 +42,18 @@
        console.log('tab click');
 
     });*/
+
+    $('._fullmoonTab').on('click', function(){
+       var me = $(this);
+       var clickCnt = me.data('clickcnt');
+       if(0 == clickCnt){
+           me.data('clickcnt', clickCnt+1);
+           if(me.prop('id') == 'tab_word'){
+               getFullmoonWord();
+           }
+       }
+        if(me.prop('id') == 'tab_event'){
+            getFullmoonEventList();
+        }
+    });
 </script>

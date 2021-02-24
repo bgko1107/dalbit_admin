@@ -2,6 +2,7 @@ package com.dalbit.content.controller.rest;
 
 import com.dalbit.content.service.Con_FullmoonService;
 import com.dalbit.content.vo.procedure.P_FullmoonConditionVo;
+import com.dalbit.content.vo.procedure.P_FullmoonEventVo;
 import com.dalbit.content.vo.procedure.P_FullmoonTextVo;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.GsonUtil;
@@ -44,6 +45,24 @@ public class Con_FullmoonRestController {
     @PostMapping("/info/textEdit")
     public String fullmoonTextEdit(P_FullmoonTextVo pFullmoonConditionVo) {
         String result = con_fullmoonService.callFullmoonTextEdit(pFullmoonConditionVo);
+        return result;
+    }
+
+    @PostMapping("/event/list")
+    public String fullmoonEventList(P_FullmoonEventVo pFullmoonEventVo) {
+        String result = con_fullmoonService.callFullmoonEventList(pFullmoonEventVo);
+        return result;
+    }
+
+    @PostMapping("/event/detail")
+    public String fullmoonEventDetail(P_FullmoonEventVo pFullmoonEventVo) {
+        String result = con_fullmoonService.callFullmoonEventDetail(pFullmoonEventVo);
+        return result;
+    }
+
+    @PostMapping("/event/update")
+    public String fullmoonEventUpdate(P_FullmoonEventVo pFullmoonEventVo) {
+        String result = con_fullmoonService.callFullmoonEventUpdate(pFullmoonEventVo);
         return result;
     }
 

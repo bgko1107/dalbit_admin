@@ -12,22 +12,6 @@
                 ㆍ 매달 최소 10일, 20시간 이상 방송한 달D입니다. <br/>
                 ㆍ 기간 정지 3회 이상 혹은 영구 정지 시 박탈처리 합니다. <br/>
             </div>
-
-            <!-- summary -->
-            <div class="pull-right">
-                <table class="table table-bordered table-summary pull-right">
-                    <thead>
-                    <th>승인 달D</th>
-                    <th style="color: #ff0000;">총 신청 달D</th>
-                    </thead>
-                    <tbody id="reqSummaryTableBody">
-                    </tbody>
-                </table>
-
-                <%--<button type="button" class="btn btn-primary pull-right mt10 mr15" id="bt_manage"><i class="fa fa-floppy-o"></i>신청관리</button>--%>
-            </div>
-            <!-- //summary -->
-
         </div>
 
         <div class="widget-content">
