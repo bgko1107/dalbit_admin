@@ -29,6 +29,7 @@ public class P_FullmoonEventVo extends BaseVo {
     private Date upd_date;
     private String last_op_name;
     private Date last_upd_date;
+    private int value_cnt;
 
     private String platform;
     private String banner_start_date;
