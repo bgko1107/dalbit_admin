@@ -411,13 +411,13 @@ Handlebars.registerHelper("split", function (value, pattern ,location) {
 });
 
 Handlebars.registerHelper("rowNumDesc", function (total, value, pageNo, pageCnt) {
-    pageNo = common.isEmpty(pageNo) ? 1 : pageNo;
-    pageCnt = common.isEmpty(pageCnt) ? 0 : pageCnt;
+    pageNo = isNaN(Number(pageNo)) ? 1 : pageNo;
+    pageCnt = isNaN(Number(pageCnt)) ? 0 : pageCnt;
     return total - value - ((pageNo - 1) * pageCnt);
 });
 
 Handlebars.registerHelper("rowNumAsc", function (total, value, pageNo, pageCnt) {
-    pageNo = common.isEmpty(pageNo) ? 1 : pageNo;
-    pageCnt = common.isEmpty(pageCnt) ? 0 : pageCnt;
+    pageNo = isNaN(Number(pageNo)) ? 1 : pageNo;
+    pageCnt = isNaN(Number(pageCnt)) ? 0 : pageCnt;
     return value + ((pageNo - 1) * pageCnt) + 1;
 });
