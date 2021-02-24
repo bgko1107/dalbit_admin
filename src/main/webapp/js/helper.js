@@ -409,3 +409,11 @@ Handlebars.registerHelper("viewMailBoxItemJson", function(memNick, jsonString){
 Handlebars.registerHelper("split", function (value, pattern ,location) {
     return value.split(pattern)[location];
 });
+
+Handlebars.registerHelper("rowNumDesc", function (total, value) {
+    return total - value;
+});
+
+Handlebars.registerHelper("rowNumAsc", function (total, value) {
+    return ++value;
+});

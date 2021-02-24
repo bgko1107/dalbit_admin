@@ -164,7 +164,6 @@
         }
     });
 
-
     function getImg(){
         $("#imageViewer").attr('src',$("#imageUrl").val());
     }
@@ -188,7 +187,7 @@
 <script id="tmp_miniGameListTable" type="text/x-handlebars-template">
     {{#each this}}
         <tr>
-            <td>{{game_no}}</td>
+            <td>{{rowNumDesc ../length @index}}</td>
             <td><a href="javascript://" onclick="miniGameDetail({{game_no}})">{{game_name}}</a></td>
             <td><img src="{{renderImage image_url}}"/></td>
             <td>{{game_desc}}</td>
