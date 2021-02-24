@@ -513,8 +513,9 @@ public class Con_BoardAdmService {
         return result;
     }
 
-    public String miniGameAdd(MiniGameDetailVo miniGameListVo) {
-        ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
+    public String miniGameAdd(MiniGameDetailVo miniGameDetailVo) {
+        ProcedureVo procedureVo = new ProcedureVo(miniGameDetailVo);
+        miniGameDetailVo.setOp_name(MemberVo.getMyMemNo());
         conBoardAdmDao.callMiniGameAdd(procedureVo);
         String result;
         if(Status.미니게임_등록_성공.getMessageCode().equals(procedureVo.getRet())) {

@@ -140,7 +140,7 @@
                 , view_yn: $("#miniGameDetail #detail_view_yn").prop('checked') ? 1 : 0
             };
             util.getAjaxData("miniGameInfoUpd", "/rest/content/boardAdm/mini/game/info/update", data, function (dst_id, response, param){
-                alert("수정되었습니다.");
+                alert(response.message);
                 $('#miniGameDetail').empty();
                 miniGameList();
 
@@ -151,14 +151,13 @@
     $(document).on('click', '#bt_insertMiniGame', function(){
         if(confirm('미니 게임을 등록 하시겠습니까?')){
             var data = {
-                game_no: $("#miniGameDetail #gameNo").val()
-                , game_name: $("#miniGameDetail #gameName").val()
+                game_name: $("#miniGameDetail #gameName").val()
                 , image_url: $("#miniGameDetail #imageUrl").val()
                 , game_desc: $("#miniGameDetail #contents").val()
                 , view_yn: $("#miniGameDetail #detail_view_yn").prop('checked') ? 1 : 0
             };
-            util.getAjaxData("miniGameInfoUpd", "/rest/content/boardAdm/mini/game/info/add", data, function (dst_id, response, param){
-                alert("등록되었습니다.");
+            util.getAjaxData("miniGameInfoAdd", "/rest/content/boardAdm/mini/game/info/add", data, function (dst_id, response, param){
+                alert(response.message);
                 $('#miniGameDetail').empty();
                 miniGameList();
             });
