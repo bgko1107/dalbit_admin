@@ -12,6 +12,7 @@ public class RecommVo extends PagingVo {
     private int slctType;
     private String title;
     private String memNoList;
+    private int pageNo;
 
     /* ourput */
     /* list */

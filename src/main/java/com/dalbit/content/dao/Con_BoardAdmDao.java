@@ -89,4 +89,7 @@ public interface Con_BoardAdmDao {
 
     @Transactional(readOnly = true)
     ArrayList<MiniGameListVo> callMiniGameList(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
+    ProcedureVo callServiceCenterNoticeListDetail(ProcedureVo procedureVo);
 }

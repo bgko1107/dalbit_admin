@@ -8,6 +8,7 @@ import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.dao.Con_BoardAdmDao;
 import com.dalbit.content.vo.*;
+import com.dalbit.content.vo.procedure.P_noticeDetailOutputVo;
 import com.dalbit.member.dao.Mem_MemberDao;
 import com.dalbit.member.dao.Mem_NoticeDao;
 import com.dalbit.member.vo.MemberVo;
@@ -478,5 +479,23 @@ public class Con_BoardAdmService {
         }else{
             return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, list, new PagingVo(miniGameList.getTotalCnt()),miniGameList));
         }
+    }
+
+    public String miniGameDetail(MiniGameDetailVo miniGameListVo) {
+        ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
+        conBoardAdmDao.callServiceCenterNoticeListDetail(procedureVo);
+        MiniGameDetailVo minigameDetail = new Gson().fromJson(procedureVo.getExt(), MiniGameDetailVo.class);
+
+        String result;
+
+        if(Status.미니게임_상세조회_성공.getMessageCode().equals(procedureVo.getRet())) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_상세조회_성공, minigameDetail));
+        } else if(Status.미니게임_상세조회_게임번호없음.getMessageCode().equals(procedureVo.getRet())) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_상세조회_게임번호없음));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_상세조회_에러));
+        }
+
+        return result;
     }
 }

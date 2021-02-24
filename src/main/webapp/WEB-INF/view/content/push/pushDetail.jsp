@@ -575,21 +575,31 @@
         resultJson['msg_type'] = 0;
 
         // 푸시디자인
-        if(type == "5" || type == "6"){
+/*        if(type == "5" || type == "6"){
             resultJson['image_type'] = "102";
         }else{
             resultJson['image_type'] = "101";
+        }*/
+
+        // 이미지 첨부 안함 상태
+        if($("#send_url").val() == "" || $("#send_url").val() == null
+            || $("#send_url").val().indexOf("profile_3") > 0){
+            resultJson['image_type'] = "104";
+        // 이미지 첨부 상태 또는 이미 이미지를 첨부한 상태
+        }else{
+            resultJson['image_type'] = "105";
+            resultJson['send_url'] = $("#send_url").val();
         }
 
         if(common.isEmpty(resultJson['slct_push'])){
             resultJson['slct_push'] = "9";
         }
 
-        if(!common.isEmpty($("#send_url").val())){
+        /*if(!common.isEmpty($("#send_url").val())){
             resultJson['image_type'] = "301";       // 이미지 타입
             resultJson['send_url'] = $("#send_url").val();
             // resultJson['imagePath'] = imagePath;
-        }
+        }*/
 
         dalbitLog(resultJson);
         return resultJson;
@@ -797,6 +807,14 @@
 
     function fn_pathChange_success(dst_id, response) {
         $("#previewImage").attr('src', response.data.url);
+        $("#div_image").show();
+    }
+
+    function delImage(){
+        $("#previewImage").attr('src', '');
+        $("#div_image").hide();
+        $("._hidden_filename").val('');
+        $("#files1").val('');
     }
 
 </script>
@@ -935,8 +953,17 @@
                 <th>이미지첨부</th>
                 <td colspan="5">
                     <div class="col-md-4 no-padding"><input id="files1" type="file" onchange="photoSubmit($(this))"></div>
-                    <input class="_hidden_filename form-control hide" name="send_url" id="send_url" value="{{send_url}}" />
-                    {{#dalbit_if send_url "!=" null}}<img class="thumbnail fullSize_background no-padding no-margin" id="previewImage" src="{{renderImage send_url}}" alt="your image" style="width: 50px;height: 50px" />{{/dalbit_if}}
+                    <input type="hidden" class="_hidden_filename form-control" name="send_url" id="send_url" value="{{send_url}}" />
+                    <div class="col-md-8 no-padding" id="div_image" {{#dalbit_if send_url '==' ""}} style="display: none" {{/dalbit_if}}>
+                        <div class="col-md-1 no-padding" style="width: 56px">
+                            <img class="thumbnail fullSize_background no-padding no-margin" id="previewImage" src="{{renderImage send_url}}" alt="your image" style="width: 50px;height: 50px;" />
+                        </div>
+                        <div class="col-md-1 no-padding">
+                            <span id="imageDeleteButton">
+                                <a style="cursor: pointer;" onclick="delImage()">[X]</a>
+                            </span>
+                        </div>
+                    </div>
                 </td>
             </tr>
 
