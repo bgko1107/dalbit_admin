@@ -270,4 +270,14 @@ public class Con_BoardAdmRestController {
     public String miniGameDetail(MiniGameDetailVo miniGameListVo) {
         return conBoardAdmService.miniGameDetail(miniGameListVo);
     }
+
+    /**
+     * 미니 게임 수정
+     */
+    @PostMapping("/mini/game/info/update")
+    public String miniGameUpdate(MiniGameDetailVo miniGameListVo) {
+        return conBoardAdmService.miniGameUpdate(miniGameListVo);
+    }
+
+
 }
