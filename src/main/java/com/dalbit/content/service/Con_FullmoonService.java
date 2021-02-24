@@ -7,6 +7,7 @@ import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.dao.Con_FullmoonDao;
 import com.dalbit.content.vo.procedure.P_FullmoonConditionVo;
 import com.dalbit.content.vo.procedure.P_FullmoonEventVo;
+import com.dalbit.content.vo.procedure.P_FullmoonRankingVo;
 import com.dalbit.content.vo.procedure.P_FullmoonTextVo;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.GsonUtil;
@@ -82,6 +83,13 @@ public class Con_FullmoonService {
                 result = gsonUtil.toJson(new JsonOutputVo(pFullmoonEventVo.getIdx() == 0 ? Status.생성 : Status.수정, detail));
         }
         return result;
+    }
+
+    public String callFullmoonEventRanking(P_FullmoonRankingVo pFullmoonRankingVo){
+        pFullmoonRankingVo.setOpName(MemberVo.getMyMemNo());
+        ProcedureVo procedureVo = new ProcedureVo(pFullmoonRankingVo);
+        P_FullmoonEventVo detail = con_fullmoonDao.callFullmoonEventDetail(procedureVo);
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, detail));
     }
 
 }

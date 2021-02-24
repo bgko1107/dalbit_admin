@@ -797,7 +797,6 @@ util.renderDynamicPageCntSelect = function(selectId, defaultValue){
 }
 
 util.commonCheckMarkingPlatform = function(area, checkName, values){
-    console.log(values);
     if(values == "111"){
         area.find("input[name='"+checkName+"']").each(function () {
             this.checked = true;

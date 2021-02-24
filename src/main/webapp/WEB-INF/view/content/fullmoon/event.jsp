@@ -66,9 +66,30 @@
         });
     }
 
+    function render_detailTab(data){
+
+        /*if(data.idx == 0){
+            $("#fullmoonEventDetailArea").empty();
+        }*/
+
+        //if(0 == $("#fullmoonEventDetailArea #tabContainer").length){
+            var template = $("#tmp_fullmoonEventDetail").html();
+            var templateScript = Handlebars.compile(template);
+            var context = data;
+            var html = templateScript(context);
+            $("#fullmoonEventDetailArea").html(html);
+        //}
+    }
+
     $(document).on('click', '._fullmoonEventDetail', function(){
         var me = $(this);
         var idx = me.data('idx');
+
+        var data = {
+            idx : me.data('idx')
+        }
+
+        render_detailTab(data);
 
         if(idx == 0){
             detailView(null);
@@ -77,32 +98,34 @@
             $('#banner_start_date').datepicker();
             $('#banner_end_date').datepicker();
         }else{
-            var data = {
-                idx : idx
-            }
-            util.getAjaxData("getFullmoonEventList", "/rest/content/fullmoon/event/detail", data, function(dst_id, response) {
-                var data = response.data;
-
-                detailView(data);
-
-                $('#start_date').datepicker('setDates', data.start_date);
-                $('#end_date').datepicker('setDates', data.end_date);
-                $('#banner_start_date').datepicker('setDates', data.banner_start_date);
-                $('#banner_end_date').datepicker('setDates', data.banner_end_date);
-
-                $('._previewBtn').click();
-
-                util.commonCheckMarkingPlatform($("#fullmoonEventDetailArea"), "platform", data.platform);
-            });
+            getFullmoonDetail(data);
         }
     });
 
+    function getFullmoonDetail(data){
+        util.getAjaxData("getFullmoonEventList", "/rest/content/fullmoon/event/detail", data, function(dst_id, response) {
+            var data = response.data;
+
+            detailView(data);
+
+            $('#start_date').datepicker('setDates', data.start_date);
+            $('#end_date').datepicker('setDates', data.end_date);
+            $('#banner_start_date').datepicker('setDates', data.banner_start_date);
+            $('#banner_end_date').datepicker('setDates', data.banner_end_date);
+
+            $('._previewBtn').click();
+
+            util.commonCheckMarkingPlatform($("#fullmoonEventDetailArea"), "platform", data.platform);
+        });
+    }
+
     function detailView(data){
-        var template = $("#tmp_fullmoonEventDetail").html();
+
+        var template = $("#tmp_fullmoonEventDetail_tabDetail").html();
         var templateScript = Handlebars.compile(template);
         var context = data;
         var html = templateScript(context);
-        $("#fullmoonEventDetailArea").html(html);
+        $("#fullmoonTabContent").html(html);
 
         $("#start_date_hour").prop('style', 'width:45px;');
         $("#start_date_minute").prop('style', 'width:45px;');
@@ -256,7 +279,41 @@
         return data;
     }
 
+    $(document).on('click', '#tab_dj_rank', function(){
+        var data = {
+            fullmoon_idx : $(this).data('idx')
+            , slct_type : 1
+        }
+        getFullmoonRank(data);
+    });
 
+    $(document).on('click', '#tab_listen_rank', function(){
+        var data = {
+            fullmoon_idx : $(this).data('idx')
+            , slct_type : 2
+        }
+        getFullmoonRank(data);
+
+    });
+
+    function getFullmoonRank(data){
+        util.getAjaxData("getFullmoonEventRanking", "/rest/content/fullmoon/event/ranking", data, function(dst_id, response, param) {
+            var template = $("#tmp_fullmoonEventDetail_tabRank").html();
+            var templateScript = Handlebars.compile(template);
+            response.param = param;
+            var context = response;
+            var html = templateScript(context);
+            $("#fullmoonTabContent").html(html);
+        });
+    }
+
+    $(document).on('click', '#tab_event_detail', function(){
+        console.log('event_detail');
+        var data = {
+            idx : $(this).data('idx')
+        }
+        getFullmoonDetail(data);
+    });
 
 </script>
 
@@ -290,153 +347,217 @@
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_fullmoonEventDetail">
+
+    <div id="tabContainer">
+        <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="fullmoonDetail_tablist">
+            <li class="active"><a href="#detail_event" role="tab" data-toggle="tab" id="tab_event_detail" data-idx="{{idx}}" aria-expanded="false">이벤트 상세정보</a></li>
+            {{^equal idx 0}}
+                <li><a href="#dj_rank" role="tab" data-toggle="tab" id="tab_dj_rank" data-idx="{{../idx}}" aria-expanded="false">문법사 랭킹</a></li>
+                <li><a href="#listen_rank" role="tab" data-toggle="tab" id="tab_listen_rank" data-idx="{{../idx}}" aria-expanded="true">문집사 랭킹</a></li>
+            {{/equal}}
+        </ul>
+    </div>
     <div class="widget widget-table">
         <div class="widget-header">
             <h3><i class="fa fa-desktop"></i> 보름달 노출 설정</h3>
         </div>
-        <div class="widget-content mt15 mb15">
-            <form id="fullmoonDetailFrm">
-                <input type="hidden" id="idx" name="idx" value="{{idx}}" />
-                <input type="hidden" id="banner_idx" name="banner_idx" value="{{banner_idx}}" />
-                <div class="row col-lg-12 form-inline mb15">
-                    <table class="table table-sorting table-hover table-bordered">
-                        <colgroup>
-                            <col width="10%"/>
-                            <col width="15%"/>
-                            <col width="15%"/>
-                            <col width="10%"/>
-                            <col width="10%"/>
-                            <col width="10%"/>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th colspan="3">노출기간</th>
-                            <th>게시여부</th>
-                            <th>등록정보</th>
-                            <th>수정정보</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>이벤트 기간</th>
-                                <td>
-                                    <div class="input-group date" id="start_date_area">
-                                        <input type="text" class="form-control " id="start_date" name="start_date" value="{{start_date}}" style="width:85px;">
-                                        {{{getCommonCodeSelect start_date_hour 'timeHour' 'Y' 'start_date_hour'}}} {{{getCommonCodeSelect start_date_minute 'timeMinute' 'Y' 'start_date_minute'}}}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group date" id="end_date_area">
-                                        <input type="text" class="form-control " id="end_date" name="end_date" value="{{end_date}}" style="width:85px;">
-                                        {{{getCommonCodeSelect end_date_hour 'timeHour' 'Y' 'end_date_hour'}}} {{{getCommonCodeSelect end_date_minute 'timeMinute' 'Y' 'end_date_minute'}}}
-                                    </div>
-                                </td>
-                                <td>
-                                    {{{getOnOffSwitch view_yn 'view_yn'}}}
-                                </td>
-                                <th>보름달이 뜨는 날</th>
-                                <td colspan="2">
-                                    <div class="input-group date" id="date_startSel">
-                                        <input type="text" class="form-control" name="fullmoon_text" id="fullmoon_text" value="{{fullmoon_text}}" />
-                                    </div>
-                                </td>
-                            </tr>
+        <div class="widget-content mt15 mb15" id="fullmoonTabContent"></div>
+    </div>
+</script>
 
-                            <tr>
-                                <th>배너 기간</th>
-                                <td>
-                                    <div class="input-group date" id="date_startSel">
-                                        <input type="text" class="form-control " id="banner_start_date" name="banner_start_date" value="{{banner_start_date}}" style="width:85px;">
-                                        {{{getCommonCodeSelect banner_start_date_hour 'timeHour' 'Y' 'banner_start_date_hour'}}} {{{getCommonCodeSelect banner_start_date_minute 'timeMinute' 'Y' 'banner_start_date_minute'}}}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group date" id="date_startSel">
-                                        <input type="text" class="form-control " id="banner_end_date" name="banner_end_date" value="{{banner_end_date}}" style="width:85px;">
-                                        {{{getCommonCodeSelect banner_end_date_hour 'timeHour' 'Y' 'banner_end_date_hour'}}} {{{getCommonCodeSelect banner_end_date_minute 'timeMinute' 'Y' 'banner_end_date_minute'}}}
-                                    </div>
-                                </td>
-                                <td>
-                                    {{{getOnOffSwitch is_view 'is_view'}}}
-                                </td>
-                                <th>보름달 띄우기<br />이벤트 기간</th>
-                                <td colspan="2">
-                                    <input type="text" class="form-control" name="fullmoon_duration" id="fullmoon_duration" value="{{fullmoon_duration}}" />
-                                </td>
-                            </tr>
+<script type="text/x-handlebars-template" id="tmp_fullmoonEventDetail_tabDetail">
+    <form id="fullmoonDetailFrm">
+        <input type="hidden" id="idx" name="idx" value="{{idx}}" />
+        <input type="hidden" id="banner_idx" name="banner_idx" value="{{banner_idx}}" />
+        <div class="row col-lg-12 form-inline mb15">
+            <table class="table table-sorting table-hover table-bordered">
+                <colgroup>
+                    <col width="10%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
+                    <col width="10%"/>
+                    <col width="10%"/>
+                    <col width="10%"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th colspan="3">노출기간</th>
+                    <th>게시여부</th>
+                    <th>등록정보</th>
+                    <th>수정정보</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>이벤트 기간</th>
+                        <td>
+                            <div class="input-group date" id="start_date_area">
+                                <input type="text" class="form-control " id="start_date" name="start_date" value="{{start_date}}" style="width:85px;">
+                                {{{getCommonCodeSelect start_date_hour 'timeHour' 'Y' 'start_date_hour'}}} {{{getCommonCodeSelect start_date_minute 'timeMinute' 'Y' 'start_date_minute'}}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group date" id="end_date_area">
+                                <input type="text" class="form-control " id="end_date" name="end_date" value="{{end_date}}" style="width:85px;">
+                                {{{getCommonCodeSelect end_date_hour 'timeHour' 'Y' 'end_date_hour'}}} {{{getCommonCodeSelect end_date_minute 'timeMinute' 'Y' 'end_date_minute'}}}
+                            </div>
+                        </td>
+                        <td>
+                            {{{getOnOffSwitch view_yn 'view_yn'}}}
+                        </td>
+                        <th>보름달이 뜨는 날</th>
+                        <td colspan="2">
+                            <div class="input-group date" id="date_startSel">
+                                <input type="text" class="form-control" name="fullmoon_text" id="fullmoon_text" value="{{fullmoon_text}}" />
+                            </div>
+                        </td>
+                    </tr>
 
-                            <tr>
-                                <th>등록자</th>
-                                <td>{{op_name}}</td>
-                                <td>{{upd_date}}</td>
+                    <tr>
+                        <th>배너 기간</th>
+                        <td>
+                            <div class="input-group date" id="date_startSel">
+                                <input type="text" class="form-control " id="banner_start_date" name="banner_start_date" value="{{banner_start_date}}" style="width:85px;">
+                                {{{getCommonCodeSelect banner_start_date_hour 'timeHour' 'Y' 'banner_start_date_hour'}}} {{{getCommonCodeSelect banner_start_date_minute 'timeMinute' 'Y' 'banner_start_date_minute'}}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-group date" id="date_startSel">
+                                <input type="text" class="form-control " id="banner_end_date" name="banner_end_date" value="{{banner_end_date}}" style="width:85px;">
+                                {{{getCommonCodeSelect banner_end_date_hour 'timeHour' 'Y' 'banner_end_date_hour'}}} {{{getCommonCodeSelect banner_end_date_minute 'timeMinute' 'Y' 'banner_end_date_minute'}}}
+                            </div>
+                        </td>
+                        <td>
+                            {{{getOnOffSwitch is_view 'is_view'}}}
+                        </td>
+                        <th>보름달 띄우기<br />이벤트 기간</th>
+                        <td colspan="2">
+                            <input type="text" class="form-control" name="fullmoon_duration" id="fullmoon_duration" value="{{fullmoon_duration}}" />
+                        </td>
+                    </tr>
 
-                                <th>수정자</th>
-                                <td>{{last_op_name}}</td>
-                                <td>{{last_upd_date}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <tr>
+                        <th>등록자</th>
+                        <td>{{op_name}}</td>
+                        <td>{{upd_date}}</td>
 
-                <div class="row col-lg-12 form-inline">
-                    <table id="fullmoonDetailTable" class="table table-sorting table-hover table-bordered">
-                        <colgroup>
-                            <col width="10%"/>
-                            <col width="10%"/>
-                            <col width="30%"/>
-                            <col width="20%"/>
-                            <col width="30%"/>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th colspan="5">배너 정보</th>
-                        </tr>
-                        </thead>
-                        <tr>
-                            <th colspan="2">플랫폼</th>
-                            <td>{{{getCommonCodeHorizontalCheck platform 'content_platform2'}}}</td>
-                            <th>IOS 심사중 노출</th>
-                            <td>{{{getOnOffSwitch ios_judge_view_on 'ios_judge_view_on'}}}</td>
-                        </tr>
-                        <tr>
-                            <th rowspan="2">Main Center<br />팝업</th>
-                            <th>PC 이미지</th>
-                            <td colspan="2">
-                                <input type="text" class="form-control" id="pc_img_url" style="width:70%" value="{{pc_img_url}}" maxlength="150" />
-                                <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
-                            </td>
-                            <td>
-                                <div class="_prevArea"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>모바일 이미지</th>
-                            <td colspan="2">
-                                <input type="text" class="form-control" id="mobile_img_url" style="width:70%" value="{{mobile_img_url}}" maxlength="150" />
-                                <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
-                            </td>
-                            <td>
-                                <div class="_prevArea"></div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th colspan="2">PC 링크</th>
-                            <td colspan="3">
-                                <input type="text" class="form-control" id="pc_link_url" style="width:100%" value="{{pc_link_url}}" maxlength="150" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th colspan="2">모바일 링크</th>
-                            <td colspan="3">
-                                <input type="text" class="form-control" id="mobile_link_url" style="width:100%" value="{{mobile_link_url}}" maxlength="150" />
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <button type="button" class="btn btn-success btn-sm pull-right _saveBtn" style="margin-top:2px;">저장</button>
-                </div>
-            </form>
+                        <th>수정자</th>
+                        <td>{{last_op_name}}</td>
+                        <td>{{last_upd_date}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
+        <div class="row col-lg-12 form-inline">
+            <table id="fullmoonDetailTable" class="table table-sorting table-hover table-bordered">
+                <colgroup>
+                    <col width="10%"/>
+                    <col width="10%"/>
+                    <col width="30%"/>
+                    <col width="20%"/>
+                    <col width="30%"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th colspan="5">배너 정보</th>
+                </tr>
+                </thead>
+                <tr>
+                    <th colspan="2">플랫폼</th>
+                    <td>{{{getCommonCodeHorizontalCheck platform 'content_platform2'}}}</td>
+                    <th>IOS 심사중 노출</th>
+                    <td>{{{getOnOffSwitch ios_judge_view_on 'ios_judge_view_on'}}}</td>
+                </tr>
+                <tr>
+                    <th rowspan="2">Main Center<br />팝업</th>
+                    <th>PC 이미지</th>
+                    <td colspan="2">
+                        <input type="text" class="form-control" id="pc_img_url" style="width:70%" value="{{pc_img_url}}" maxlength="150" />
+                        <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
+                    </td>
+                    <td>
+                        <div class="_prevArea"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>모바일 이미지</th>
+                    <td colspan="2">
+                        <input type="text" class="form-control" id="mobile_img_url" style="width:70%" value="{{mobile_img_url}}" maxlength="150" />
+                        <button class="btn btn-sm btn-default _previewBtn" type="button">미리보기</button>
+                    </td>
+                    <td>
+                        <div class="_prevArea"></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th colspan="2">PC 링크</th>
+                    <td colspan="3">
+                        <input type="text" class="form-control" id="pc_link_url" style="width:100%" value="{{pc_link_url}}" maxlength="150" />
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">모바일 링크</th>
+                    <td colspan="3">
+                        <input type="text" class="form-control" id="mobile_link_url" style="width:100%" value="{{mobile_link_url}}" maxlength="150" />
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-success btn-sm pull-right _saveBtn" style="margin-top:2px;">저장</button>
+        </div>
+    </form>
+</script>
+
+<script type="text/x-handlebars-template" id="tmp_fullmoonEventDetail_tabRank">
+    <div class="row col-lg-12 form-inline">
+        <table id="fullmoonDetailTable" class="table table-sorting table-hover table-bordered">
+            <colgroup>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="20%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                <col width="10%"/>
+                {{#equal this.param.slct_type '2'}}
+                    <col width="10%"/>
+                {{/equal}}
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>순위</th>
+                    <th>프로필<br />이미지</th>
+                    <th>회원번호</th>
+                    <th>닉네임</th>
+                    <th>성별</th>
+                    <th>이벤트 기간 내<br />보름달 띄운 횟수</th>
+                    <th>이벤트 기간 내<br />보름달 띄운 최근 일시</th>
+                    {{#equal this.param.slct_type '2'}}
+                        <th>이벤트 기간 내<br />청취 시간</th>
+                    {{/equal}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each this.data as |data|}}
+                    <tr>
+                        <td>{{data.rank}}</td>
+                        <td>{{data.profileImage}}</td>
+                        <td>{{data.mem_no}}</td>
+                        <td>{{data.nickName}}</td>
+                        <td>{{data.mem_sex}}</td>
+                        <td>{{addComma data.completeCnt}}</td>
+                        <td>{{data.lastDate}}</td>
+                        <td>{{data.listenTime}}</td>
+                    </tr>
+                {{else}}
+                    <tr>
+                        <td colspan="{{#equal this.param.slct_type '2'}}8{{else}}7{{/equal}}">{{isEmptyData}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </script>
