@@ -62,6 +62,7 @@
             var context = response.data;
             var html = templateScript(context);
             $("#fullmoonEventList").html(html);
+            $("#fullmoonEventDetailArea").empty();
         });
     }
 
