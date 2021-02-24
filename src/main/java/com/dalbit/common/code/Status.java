@@ -885,6 +885,11 @@ public enum Status {
     미니게임_수정_성공("0", "minigame.detail.update.success", "미니게임 수정 성공 시"),
     미니게임_수정_게임번호없음("-1", "minigame.detail.update.no.game.number", "게임번호 없을 시"),
     미니게임_수정_에러("C006", "minigame.detail.update.error", "미니게임 수정 에러 발생 시"),
+
+    //미니게임 등록
+    미니게임_등록_성공("0", "minigame.detail.add.success", "미니게임 등록 성공 시"),
+    미니게임_등록_데이터없음("-1", "minigame.detail.add.data.err", "등록 데이터가 없을 시"),
+    미니게임_등록_에러("C006", "minigame.detail.add.error", "미니게임 등록 에러 발생 시"),
     ;
 
     final private String RESULT_SUCCESS = "success";

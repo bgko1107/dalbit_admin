@@ -512,4 +512,18 @@ public class Con_BoardAdmService {
         }
         return result;
     }
+
+    public String miniGameAdd(MiniGameDetailVo miniGameListVo) {
+        ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
+        conBoardAdmDao.callMiniGameAdd(procedureVo);
+        String result;
+        if(Status.미니게임_등록_성공.getMessageCode().equals(procedureVo.getRet())) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_등록_성공));
+        } else if(Status.미니게임_등록_데이터없음.getMessageCode().equals(procedureVo.getRet())) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_등록_데이터없음));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_등록_에러));
+        }
+        return result;
+    }
 }
