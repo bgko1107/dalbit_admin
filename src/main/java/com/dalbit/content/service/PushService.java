@@ -125,14 +125,20 @@ public class PushService {
         String result = null;
 
         try{
-            if(DalbitUtil.isEmpty(pPushInsertVo.getSend_url())){
+              if(DalbitUtil.isEmpty(pPushInsertVo.getSend_url())){
                 if(!DalbitUtil.isEmpty(pPushInsertVo.getImage_type())){
-                    if(pPushInsertVo.getImage_type().equals("102")){
+                  /*  if(pPushInsertVo.getImage_type().equals("102")){
                         pPushInsertVo.setSend_url(SERVER_PHOTO_URL + PUSH_LOGO_IMG_102);
                     }else if(pPushInsertVo.getImage_type().equals("103")){
                         pPushInsertVo.setSend_url(SERVER_PHOTO_URL + PUSH_LOGO_IMG_103);
                     }else{
                         pPushInsertVo.setSend_url(SERVER_PHOTO_URL + PUSH_LOGO_IMG_101);
+                    }*/
+
+                    if(pPushInsertVo.getImage_type().equals("104")){
+                        pPushInsertVo.setSend_url("");
+                    }else{
+                        pPushInsertVo.setSend_url(pPushInsertVo.getSend_url());
                     }
                 }
             }
@@ -276,7 +282,7 @@ public class PushService {
                         pushDao.callStmpPushAdd(procedureVo);
 
                         if(Status.푸시발송_성공.getMessageCode().equals(procedureVo.getRet())){
-                            log.debug("[PUSH_SEND] 푸시 발송 성공 (" + target + ")");
+                            log.debug("[PUSH_SEND] 푸시 발송 성공 ("  + target + ")");
                             sucCnt++;
                         }else if(Status.푸시발송_디바이스토큰미존재.getMessageCode().equals(procedureVo.getRet())){
                             log.error("[PUSH_SEND] ERROR 디바이스토큰 미존재 (" + target + ")");
