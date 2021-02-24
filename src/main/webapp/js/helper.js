@@ -410,10 +410,14 @@ Handlebars.registerHelper("split", function (value, pattern ,location) {
     return value.split(pattern)[location];
 });
 
-Handlebars.registerHelper("rowNumDesc", function (total, value) {
-    return total - value;
+Handlebars.registerHelper("rowNumDesc", function (total, value, pageNo, pageCnt) {
+    pageNo = common.isEmpty(pageNo) ? 1 : pageNo;
+    pageCnt = common.isEmpty(pageCnt) ? 0 : pageCnt;
+    return total - value - ((pageNo - 1) * pageCnt);
 });
 
-Handlebars.registerHelper("rowNumAsc", function (total, value) {
-    return ++value;
+Handlebars.registerHelper("rowNumAsc", function (total, value, pageNo, pageCnt) {
+    pageNo = common.isEmpty(pageNo) ? 1 : pageNo;
+    pageCnt = common.isEmpty(pageCnt) ? 0 : pageCnt;
+    return value + ((pageNo - 1) * pageCnt) + 1;
 });
