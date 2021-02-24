@@ -27,7 +27,8 @@
                                     <div class="widget-header searchBoxRow">
                                         <h3 class="title"><i class="fa fa-search"></i> 회원 검색</h3>
                                         <div>
-                                            <span id="searchType"></span>
+                                            <span id="searchType" style="display: none"></span>
+                                            <span id="searchMemberArea"></span>
                                             <label><input type="text" class="form-control" id="txt_search"></label>
                                             <button type="submit" class="btn btn-success" id="bt_search">검색</button>
                                         </div>
@@ -62,6 +63,7 @@
     var memberModalId = "select_memberList";
 
     $(document).ready(function () {
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
         $("#"+memberModalId).find('input[id="txt_search"]').keydown(function() {
             if (event.keyCode === 13) {
                 getModalUserInfo();
@@ -88,7 +90,8 @@
     var dtList_info_detail_data = function (data) {
         data.searchType = $("#"+memberModalId).find("select[name='searchType']").val();          // 검색구분
         data.searchText = $("#"+memberModalId).find('#txt_search').val();                        // 검색명
-    }
+        data.newSearchType = $("#searchMember").val();
+    };
     dtList_modal_info_detail = new DalbitDataTable($("#"+memberModalId).find("#modal_member_list_info"), dtList_info_detail_data, UtilDataTableSource.modalMemberList);
     dtList_modal_info_detail.useCheckBox(false);
     dtList_modal_info_detail.useIndex(true);

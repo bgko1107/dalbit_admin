@@ -27,7 +27,8 @@
                                     <div class="widget-header searchBoxRow">
                                         <h3 class="title"><i class="fa fa-search"></i> 회원 검색</h3>
                                         <div>
-                                            <span id="searchType"></span>
+                                            <span id="searchType" style="display: none"></span>
+                                            <span id="searchMemberArea"></span>
                                             <label><input type="text" class="form-control" id="txt_search"></label>
                                             <button type="submit" class="btn btn-success" id="bt_modal_search">검색</button>
                                         </div>
@@ -62,6 +63,8 @@
     var memberModalId = "select_memberBoostList";
 
     $(document).ready(function () {
+        $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+
         $("#"+memberModalId).find('input[id="txt_search"]').keydown(function() {
             if (event.keyCode === 13) {
                 getModalUserInfo();
@@ -123,6 +126,10 @@
             alert("검색어는 최소 1자 이상 입력하여 주셔야 합니다.");
             return false;
         }
+
+        var dtList_info_detail_data = function ( data ) {
+            data.newSearchType = $("#searchMember").val();
+        };
 
         dtList_modal_info_detail = new DalbitDataTable($("#"+memberModalId).find("#modal_member_list_info"), dtList_info_detail_data, UtilDataTableSource.modalMemberBoosterList);
         dtList_modal_info_detail.useCheckBox(false);
