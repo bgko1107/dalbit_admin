@@ -64,13 +64,13 @@
                             <tr>
                                 <th></th>
                                 <th id="th_beforLive"></th>
-                                <th id="th_live"></th>
+                                <th id="th_live" style="background-color: #fff2cc"></th>
                                 <th>증감</th>
                                 <th id="th_liveBeforWeek"></th>
-                                <th id="th_liveWeek"></th>
+                                <th id="th_liveWeek" style="background-color: #fff2cc"></th>
                                 <th>증감</th>
                                 <th id="th_liveBeforMonth"></th>
-                                <th id="th_liveMonth"></th>
+                                <th id="th_liveMonth" style="background-color: #fff2cc"></th>
                                 <th>증감</th>
                             </tr>
                             </thead>
@@ -189,7 +189,7 @@
     <tr>
         <th>건수</th>
         <td>{{addComma yes_item_cnt}}</td>
-        <td style="background-color: ">{{addComma now_item_cnt}}</td>
+        <td>{{addComma now_item_cnt}}</td>
         <td class="{{upAndDownClass now_inc_cnt}}"><i class="fa {{upAndDownIcon now_inc_cnt}}"></i> {{addComma now_inc_cnt}}</td>
         <td>{{addComma bweek_item_cnt}}</td>
         <td>{{addComma week_item_cnt}}</td>

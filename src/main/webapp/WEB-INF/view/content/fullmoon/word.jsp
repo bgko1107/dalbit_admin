@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %>
-</c:set>
+<c:set var="dummyData" value="<%= java.lang.Math.round(java.lang.Math.random() * 1000000) %>" />
 
 <!-- 보름달 상태창 -->
 <div class="col-lg-12 form-inline mt15">
@@ -107,11 +106,7 @@
 
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        word();
-    });
-
-    function word() {
+    function getFullmoonWord() {
 
         var data = {
             slctType : 0
