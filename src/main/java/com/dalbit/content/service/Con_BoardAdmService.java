@@ -483,7 +483,7 @@ public class Con_BoardAdmService {
 
     public String miniGameDetail(MiniGameDetailVo miniGameListVo) {
         ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
-        conBoardAdmDao.callServiceCenterNoticeListDetail(procedureVo);
+        conBoardAdmDao.callMiniGameDetail(procedureVo);
         MiniGameDetailVo minigameDetail = new Gson().fromJson(procedureVo.getExt(), MiniGameDetailVo.class);
 
         String result;
@@ -496,6 +496,20 @@ public class Con_BoardAdmService {
             result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_상세조회_에러));
         }
 
+        return result;
+    }
+
+    public String miniGameUpdate(MiniGameDetailVo miniGameListVo) {
+        ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
+        conBoardAdmDao.callMiniGameUpdate(procedureVo);
+        String result;
+        if(Status.미니게임_수정_성공.getMessageCode().equals(procedureVo.getRet())) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_수정_성공));
+        } else if(Status.미니게임_수정_게임번호없음.getMessageCode().equals(procedureVo.getRet())) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_수정_게임번호없음));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_수정_에러));
+        }
         return result;
     }
 }
