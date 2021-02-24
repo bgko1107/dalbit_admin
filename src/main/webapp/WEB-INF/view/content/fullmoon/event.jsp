@@ -516,7 +516,7 @@
         <table id="fullmoonDetailTable" class="table table-sorting table-hover table-bordered">
             <colgroup>
                 <col width="10%"/>
-                <col width="10%"/>
+                <!--<col width="10%"/>-->
                 <col width="20%"/>
                 <col width="10%"/>
                 <col width="10%"/>
@@ -529,7 +529,7 @@
             <thead>
                 <tr>
                     <th>순위</th>
-                    <th>프로필<br />이미지</th>
+                    <!--<th>프로필<br />이미지</th>-->
                     <th>회원번호</th>
                     <th>닉네임</th>
                     <th>성별</th>
@@ -544,17 +544,19 @@
                 {{#each this.data as |data|}}
                     <tr>
                         <td>{{data.rank}}</td>
-                        <td>{{data.profileImage}}</td>
-                        <td>{{data.mem_no}}</td>
+                        <!--<td>{{data.profileImage}}</td>-->
+                        <td>{{{memNoLink data.mem_no data.mem_no}}}</td>
                         <td>{{data.nickName}}</td>
-                        <td>{{data.mem_sex}}</td>
+                        <td>{{data.memSex}}</td>
                         <td>{{addComma data.completeCnt}}</td>
                         <td>{{data.lastDate}}</td>
-                        <td>{{data.listenTime}}</td>
+                        {{#equal ../this.param.slct_type '2'}}
+                            <td>{{timeStampAll data.listenTime}}</td>
+                        {{/equal}}
                     </tr>
                 {{else}}
                     <tr>
-                        <td colspan="{{#equal this.param.slct_type '2'}}8{{else}}7{{/equal}}">{{isEmptyData}}</td>
+                        <td colspan="{{#equal this.param.slct_type '2'}}7{{else}}6{{/equal}}">{{isEmptyData}}</td>
                     </tr>
                 {{/each}}
             </tbody>

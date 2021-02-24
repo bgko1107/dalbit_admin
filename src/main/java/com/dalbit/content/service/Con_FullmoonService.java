@@ -88,8 +88,8 @@ public class Con_FullmoonService {
     public String callFullmoonEventRanking(P_FullmoonRankingVo pFullmoonRankingVo){
         pFullmoonRankingVo.setOpName(MemberVo.getMyMemNo());
         ProcedureVo procedureVo = new ProcedureVo(pFullmoonRankingVo);
-        P_FullmoonEventVo detail = con_fullmoonDao.callFullmoonEventDetail(procedureVo);
-        return gsonUtil.toJson(new JsonOutputVo(Status.조회, detail));
+        ArrayList<P_FullmoonRankingVo> list = con_fullmoonDao.callFullmoonEventRanking(procedureVo);
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, list));
     }
 
 }

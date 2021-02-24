@@ -22,6 +22,6 @@ public class P_FullmoonRankingVo extends BaseVo {
     private String memSex;
     private String profileImage;
     private int completeCnt;
-    private Date lastDate;
+    private String lastDate;
     private int listenTime;
 }

@@ -3,6 +3,7 @@ package com.dalbit.content.dao;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.vo.procedure.P_FullmoonConditionVo;
 import com.dalbit.content.vo.procedure.P_FullmoonEventVo;
+import com.dalbit.content.vo.procedure.P_FullmoonRankingVo;
 import com.dalbit.content.vo.procedure.P_FullmoonTextVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,4 +31,6 @@ public interface Con_FullmoonDao {
     P_FullmoonEventVo callFullmoonEventDetail(ProcedureVo procedureVo);
 
     P_FullmoonEventVo callFullmoonEventUpdate(ProcedureVo procedureVo);
+
+    ArrayList<P_FullmoonRankingVo> callFullmoonEventRanking(ProcedureVo procedureVo);
 }
