@@ -94,4 +94,6 @@ public interface Con_BoardAdmDao {
     ProcedureVo callMiniGameDetail(ProcedureVo procedureVo);
 
     ProcedureVo callMiniGameUpdate(ProcedureVo procedureVo);
+
+    ProcedureVo callMiniGameAdd(ProcedureVo procedureVo);
 }

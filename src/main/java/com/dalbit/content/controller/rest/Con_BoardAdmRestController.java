@@ -279,5 +279,13 @@ public class Con_BoardAdmRestController {
         return conBoardAdmService.miniGameUpdate(miniGameListVo);
     }
 
+    /**
+     * 미니 게임 등록
+     */
+    @PostMapping("/mini/game/info/add")
+    public String miniGameAdd(MiniGameDetailVo miniGameListVo) {
+        return conBoardAdmService.miniGameAdd(miniGameListVo);
+    }
+
 
 }

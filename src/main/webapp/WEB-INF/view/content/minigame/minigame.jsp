@@ -121,7 +121,7 @@
         $('#miniGameDetail').html(html);
     }
 
-    //게임 등록
+    //게임 등록 폼 호출
     $("#bt_miniGameDetail").on('click', function(){
         var template = $('#tmp_miniGameDetailTable').html();
         var templateScript = Handlebars.compile(template);
@@ -139,18 +139,31 @@
                 , game_desc: $("#miniGameDetail #contents").val()
                 , view_yn: $("#miniGameDetail #detail_view_yn").prop('checked') ? 1 : 0
             };
-            util.getAjaxData("miniGameInfoUpd", "/rest/content/boardAdm/mini/game/info/update", data, fn_success_miniGameInfoUpd);
+            util.getAjaxData("miniGameInfoUpd", "/rest/content/boardAdm/mini/game/info/update", data, function (dst_id, response, param){
+                alert(response.message);
+                $('#miniGameDetail').empty();
+                miniGameList();
+
+            });
         }
     });
 
-    function fn_success_miniGameInfoUpd(dst_id, response){
+    $(document).on('click', '#bt_insertMiniGame', function(){
+        if(confirm('미니 게임을 등록 하시겠습니까?')){
+            var data = {
+                game_name: $("#miniGameDetail #gameName").val()
+                , image_url: $("#miniGameDetail #imageUrl").val()
+                , game_desc: $("#miniGameDetail #contents").val()
+                , view_yn: $("#miniGameDetail #detail_view_yn").prop('checked') ? 1 : 0
+            };
+            util.getAjaxData("miniGameInfoAdd", "/rest/content/boardAdm/mini/game/info/add", data, function (dst_id, response, param){
+                alert(response.message);
+                $('#miniGameDetail').empty();
+                miniGameList();
+            });
+        }
+    });
 
-        var template = $('#tmp_miniGameInfoTable').html();
-        var templateScript = Handlebars.compile(template);
-        var context = response.data;
-        var html = templateScript(context);
-        $('#tb_miniGameInfo').html(html);
-    }
 
     function getImg(){
         $("#imageViewer").attr('src',$("#imageUrl").val());
@@ -175,7 +188,7 @@
 <script id="tmp_miniGameListTable" type="text/x-handlebars-template">
     {{#each this}}
         <tr>
-            <td>{{indexDesc ../pagingVo/totalCnt rowNum}}</td>
+            <td>{{game_no}}</td>
             <td><a href="javascript://" onclick="miniGameDetail({{game_no}})">{{game_name}}</a></td>
             <td><img src="{{renderImage image_url}}"/></td>
             <td>{{game_desc}}</td>
@@ -199,7 +212,7 @@
         </colgroup>
         <tr>
             <th>No</th>
-            <td></td>
+            <td>{{game_no}}</td>
             <th>게임명칭</th>
             <td><input type="text" class="_trim" id="gameName" name="gameName" value="{{game_name}}"></td>
             <th>등록/수정자</th>
