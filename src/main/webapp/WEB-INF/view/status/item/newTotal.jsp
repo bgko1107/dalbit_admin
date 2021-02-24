@@ -25,15 +25,15 @@
                     <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">방송선물</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">클립선물</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">우체통선물</th>
-                    <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">총합</th>
-                    <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">누적</th>
+                    <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">총합</th>
+                    <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">누적</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">교환</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#fbe5d6">직접선물</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">방송선물</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">클립선물</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">우체통선물</th>
-                    <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">총합</th>
-                    <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">누적</th>
+                    <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">총합</th>
+                    <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">누적</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">교환</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">직접선물</th>
                 </tr>
@@ -87,8 +87,8 @@
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">방송선물</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">클립선물</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">우체통선물</th>
-                    <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">총합</th>
-                    <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">누적</th>
+                    <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">총합</th>
+                    <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">누적</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">교환</th>
                     <th colspan="2" class="_bgColor" data-bgcolor="#dae3f3">직접선물</th>
                 </tr>
