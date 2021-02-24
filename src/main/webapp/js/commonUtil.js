@@ -567,6 +567,26 @@ util.editorInit = function(type) {
         }
     });
 },
+/*에디터 간단한 텍스트만 제어 하는 버전*/
+util.editorLightInit = function(obj) {
+    var targetEditor = $('._editor');
+
+    targetEditor.summernote({
+        lang: 'ko-KR',
+        height: common.isEmpty(obj.height) ? '500px' : obj.height,
+        focus: false,
+        callbacks: { // 콜백을 사용
+
+        },
+        toolbar: [
+            ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']]
+            , ['fontname', ['fontname']]
+            , ['fontsize', ['fontsize']]
+            , ['color', ['color']]
+            , ['view', ['codeview']]
+        ],
+    });
+},
 util.imageFullSize = function(modalId ,url){
     var html = '<div class="modal fade" id="'+ modalId +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
         html+=      '<div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">';
@@ -774,4 +794,25 @@ util.renderDynamicPageCntSelect = function(selectId, defaultValue){
     html +=     '<option value="100"' + (defaultValue==100 ? 'selected' : '') + '">100 개씩</option>';
     html += '</select>';
     return html;
+}
+
+util.commonCheckMarkingPlatform = function(area, checkName, values){
+    console.log(values);
+    if(values == "111"){
+        area.find("input[name='"+checkName+"']").each(function () {
+            this.checked = true;
+        });
+    }else {
+        area.find("input[name='"+checkName+"']").each(function () {
+            this.checked = false;
+        });
+
+        var arrayPlatform = values.split('');
+        for (var idx in arrayPlatform) {
+            if (arrayPlatform[idx] == 1) {
+                var value = parseInt(idx) + 1;
+                area.find("input[name='"+checkName+"'][id='"+checkName+ '' + value + "']").prop("checked", true);
+            }
+        }
+    }
 }
