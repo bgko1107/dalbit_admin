@@ -50,6 +50,7 @@ var event_slctType = [
     , new COMMON_CODE('-1', '-1', '서비스구분(전체)')
     , new COMMON_CODE('20', '20', '유의사항')
     , new COMMON_CODE('21', '21', '경품소개')
+    , new COMMON_CODE('99', '99', '기타')
 ];
 
 
