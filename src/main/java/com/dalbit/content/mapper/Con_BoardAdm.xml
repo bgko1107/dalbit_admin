@@ -109,7 +109,7 @@
                     or (select mem_nick from rd_data.tb_member_basic where mem_no = fan.writer_no) like concat ('%',#{txt_search},'%'))
                 </if> -->
             <if test='start_sel != null and start_sel != ""'>
-                and fan.last_upd_date between concat(#{start_sel}, '%Y.%m.%d 00:00:00') and concat(#{end_sel}, '%Y.%m.%d 23:59:59')
+                and fan.last_upd_date between concat(#{start_sel}, ' 00:00:00') and concat(#{end_sel}, ' 23:59:59')
             </if>
             <if test='searchType == "2" '>    <!-- 비밀글만 보기 -->
                 and fan.view_yn = 0

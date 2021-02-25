@@ -18,18 +18,19 @@
             <thead>
             <tr>
                 <th rowspan="3" class="_bgColor _fontColor" data-bgcolor="#00b050" data-fontcolor="white">회원정보</th>
-                <th colspan="14" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">달빛라이브 [별_금액]</th>
+                <th colspan="15" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">달빛라이브 [별_금액]</th>
             </tr>
             <tr>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기초</th>
-                <th colspan="6" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">증가</th>
+                <th colspan="7" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">증가</th>
                 <th colspan="6" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">감소</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기말</th>
             </tr>
             <tr>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">합계</th>
-                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">방송</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">이벤트</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">방송-음성</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">방송-영상</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">클립</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">우체통</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">관리자지급</th>
@@ -113,6 +114,7 @@
         <td>{{addComma totalInfo.addTotal}}</td>
         <td>{{addComma totalInfo.addEvent}}</td>
         <td>{{addComma totalInfo.addBroad}}</td>
+        <td>{{addComma totalInfo.addBroadV}}</td>
         <td>{{addComma totalInfo.addClip}}</td>
         <td>{{addComma totalInfo.addMailbox}}</td>
         <td>{{addComma totalInfo.addOp}}</td>
@@ -134,6 +136,7 @@
         <td>{{addComma addTotal 'Y'}}</td>
         <td>{{addComma addEvent 'Y'}}</td>
         <td>{{addComma addBroad 'Y'}}</td>
+        <td>{{addComma addBroadV 'Y'}}</td>
         <td>{{addComma addClip 'Y'}}</td>
         <td>{{addComma addMailbox 'Y'}}</td>
         <td>{{addComma addOp 'Y'}}</td>

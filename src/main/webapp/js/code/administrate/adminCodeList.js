@@ -100,3 +100,14 @@ var testDalByeollistSort = [
     , new COMMON_CODE('4', '4', '별 회수 수가 많은 순으로')
     , new COMMON_CODE('5', '5', '최근 사용 일시 순으로')
 ];
+
+
+var revenueProcess = [
+    new COMMON_CODE(null, 'revenueProcessSlctType', '유형')
+    , new COMMON_CODE('1', '1', '방송-음성')
+    , new COMMON_CODE('2', '2', '방송-영상')
+    , new COMMON_CODE('3', '3', '부스터-음성')
+    , new COMMON_CODE('4', '4', '부스터-영상')
+    , new COMMON_CODE('5', '5', '클립')
+    , new COMMON_CODE('6', '6', '우체통')
+];

@@ -31,5 +31,5 @@ public class P_ItemLiveOutputVo extends BaseVo {
     private String week_endDate;
     private String bweek_startDate;
     private String bweek_endDate;
-    
+
 }
