@@ -73,13 +73,13 @@ var recommDataTableSource = {
         'url': '/rest/content/newcomer/list'
         , 'columns': [
 
-            {'title': '프로필', 'width': '10%', 'data': 'profileImage', 'render': function(data, type, row) {
+            {'title': '프로필', 'width': '70px', 'data': 'profileImage', 'render': function(data, type, row) {
                     return '<img class="thumbnarest/menu/recommil fullSize_background" src="'+ common.profileImage(PHOTO_SERVER_URL, data, row.mem_sex) +'" width="65px" height="65px" />';
                 }}
-            , {'title': '회원번호', 'data': 'mem_no', 'width' : '10%', 'render': function(data, type, row) {
+            , {'title': '회원번호', 'data': 'mem_no', 'width' : '100px', 'render': function(data, type, row) {
                     return '<a href="javascript://" class="_openMemberPop" data-memno="' + data + '">' + data + '</a><br/>' + row.mem_nick
                 }}
-            , {'title': '성별', 'data': 'mem_sex', 'width':'5%', 'render': function (data, type, row, meta) {
+            , {'title': '성별', 'data': 'mem_sex', 'width':'100px', 'render': function (data, type, row, meta) {
                     var tmp="";
                     if(row.specialdjYn == "1"){
                         tmp = '<span class ="label" style="background-color:red">' + "스페셜DJ" + '</span>';
@@ -89,20 +89,20 @@ var recommDataTableSource = {
                     }
                     return common.sexIcon(data, row.mem_birth_year) + '<br/>' + tmp;
                 }}
-            , {'title': '사용여부', 'data': 'viewYn', 'width':'5%', 'render': function (data, type, row, meta) {
+            , {'title': '사용여부', 'data': 'viewYn', 'width':'40px', 'render': function (data, type, row, meta) {
                     return util.getCommonCodeLabel(data,'content_viewOn','N','view_yn');
                 }}
-            , {'title': 'PUSH문구', 'data': 'send_title', 'width':'5%', 'render': function (data, type, row, meta) {
+            , {'title': 'PUSH문구', 'data': 'send_title', 'width':'180px', 'render': function (data, type, row, meta) {
                     return '<a href="javascript://" onclick="pushDetail(' + meta.row + ');">' + data + '</a>';
                 }}
-            , {'title': 'PUSH 발송건수', 'data': 'send_cnt'}
-            , {'title': '최근 방송일시', 'data': 'last_broadcast', 'render': function(data, type, row) {
+            , {'title': 'PUSH 발송건수', 'data': 'send_cnt', 'width':'60px'}
+            , {'title': '최근 방송일시', 'data': 'last_broadcast', 'width':'100px', 'render': function(data, type, row) {
                     return data;
                 }}
-            , {'title': '최근 7일 방송시간', 'data': 'broadcastTime', 'render': function(data, type, row) {
+            , {'title': '최근 7일 방송시간', 'data': 'broadcastTime', 'width':'70px', 'render': function(data, type, row) {
                     return common.timeStampDay(data);
                 }}
-            , {'title': '등록정보', 'data': 'reg_opName', 'render': function(data, type, row) {
+            , {'title': '등록정보', 'data': 'reg_opName', 'width':'100px', 'render': function(data, type, row) {
                     return data + '<br/>' + row.reg_date;
                 }}
         ]
