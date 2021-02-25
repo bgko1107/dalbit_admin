@@ -90,7 +90,7 @@
 
     }
     function newcomerEdit() {
-        if(confirm('추천 DJ를 저장 하시겠습니까?')) {
+        if(confirm('신입회원 PUSH를 저장 하시겠습니까?')) {
             var data = {
                 mem_no: $("#newcomer_mem_no").text()
                 , send_title: $("#send_title").val()
@@ -118,10 +118,10 @@
         var checkDatas = dtList.getCheckedData();
 
         if(checkDatas.length == 0){
-            alert('삭제할 추천 DJ를 Check 하세요.');
+            alert('삭제할 신입회원을 Check 하세요.');
             return;
         }
-        if(confirm('선택한 추천 DJ를 삭제 하시겠습니까?')){
+        if(confirm('선택한 신입회원을 삭제 하시겠습니까?')){
             var memNoList = "";
             for(var i=0;i<checkDatas.length;i++){
                 memNoList += checkDatas[i].mem_no + "@@";
