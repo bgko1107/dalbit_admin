@@ -126,22 +126,7 @@
             <a href="javascript://" class="_openMemberPop" data-memNo="{{mem_no}}">{{mem_no}}</a><br/>
             {{nickName}} {{{sexIcon memSex}}}({{memAge}})
         </td>
-        <td>
-            {{#dalbit_if slctType '==' 1}}
-                방송
-            {{else}}
-                {{#dalbit_if slctType '==' 2}}
-                    클립
-                {{else}}
-                    {{#dalbit_if slctType '==' 3}}
-                        우체통
-                    {{else}}
-                        부스터
-                    {{/dalbit_if}}
-                {{/dalbit_if}}
-            {{/dalbit_if}}
-
-        </td>
+        <td>{{{getCommonCodeLabel slctType 'revenueProcess'}}}</td>
         <td>
             {{#dalbit_if memType '==' 0}}
                 일반

@@ -55,6 +55,7 @@ public class P_RevenueProcessVo {
     private long subTotalDal;
     private long subPayTotal;
     private long subPayBroad;
+    private long subPayBroadV;
     private long subPayClip;
     private long subPayMailbox;
     private long subPayGift;
@@ -64,6 +65,7 @@ public class P_RevenueProcessVo {
     private long subPayOp;
     private long subFreeTotal;
     private long subFreeBroad;
+    private long subFreeBroadV;
     private long subFreeClip;
     private long subFreeMailbox;
     private long subFreeGift;
@@ -80,6 +82,7 @@ public class P_RevenueProcessVo {
     private long addTotal;
     private long addEvent;
     private long addBroad;
+    private long addBroadV;
     private long addClip;
     private long addMailbox;
     private long addOp;
@@ -99,6 +102,10 @@ public class P_RevenueProcessVo {
 
     private long freeSalesAmt;
     private long subPayBooster;
+    private long subPayBoosterV;
     private long subFreeBooster;
+    private long subFreeBoosterV;
+
+
 
 }

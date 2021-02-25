@@ -47,8 +47,8 @@
                         , mem_no as memNo
                         , (select ruby From rd_data.tb_member_wallet a where a.mem_no = ruby.mem_no) as dal
                         , (select gold From rd_data.tb_member_wallet a where a.mem_no = ruby.mem_no) as byeol
-                        , last_upd_date
                         , (select last_upd_date From rd_data.tb_member_wallet a where a.mem_no = ruby.mem_no) as lastUpdDate
+                        , last_upd_date
                   from rd_data.tb_member_wallet_ruby ruby
                  where op_name is not null
                   <if test='emp_name != null and emp_name != ""'>
