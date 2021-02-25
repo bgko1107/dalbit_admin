@@ -89,8 +89,8 @@
         var dtList_info_data = function (data) {
             data.attendanceType = $('#attendanceTypeArea').val();   // 참여 구분
             data.txt_search = $('#txt_search').val();                   // 검색 창
-            data.txt_startSel =  $("#startDate").val().replace(/\./gi,'');
-            data.txt_endSel =  $("#endDate").val().replace(/\./gi,'');
+            data.txt_startSel =  $("#startDate").val();
+            data.txt_endSel =  $("#endDate").val();
             data.newSearchType = $("#searchMember").val();
         };
 

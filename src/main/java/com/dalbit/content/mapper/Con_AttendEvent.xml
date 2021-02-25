@@ -7,10 +7,10 @@
        and att.mem_no = pro.mem_no
        and check_ok = '1'
            <if test='txt_startSel != null and txt_startSel != ""'>
-               and att.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{txt_startSel}, '%Y-%m-%d 00:00:00')
-           </if>
-           <if test='txt_endSel != null and txt_endSel != ""'>
-               and att.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{txt_endSel}, '%Y-%m-%d 23:59:59')
+               and att.last_upd_date between concat(#{txt_startSel} , ' 00:00:00') and concat(#{txt_endSel},' 23:59:59')
+
+               <!--and att.last_upd_date <![CDATA[>=]]> DATE_FORMAT(#{txt_startSel}, '%Y-%m-%d 00:00:00')-->
+               <!--and att.last_upd_date <![CDATA[<=]]> DATE_FORMAT(#{txt_endSel}, '%Y-%m-%d 23:59:59')-->
            </if>
            <if test='the_day != null and the_day != ""'>
                <choose>
@@ -136,8 +136,9 @@
                 left join rd_data.tb_member_basic basic on attendance.mem_no = basic.mem_no
             where attendance.check_ok = 1
                 and attendance.the_day != 9
-                and date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')
-                    and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+                and the_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
+                <!--and date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')-->
+                    <!--and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')-->
         ) attendance
         group by attendance.the_date
     </select>
@@ -156,16 +157,18 @@
             , sum(expSum) expSum
             , (select count(distinct mem_no)
                 from rd_data.tb_member_attendance_check chk
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(chk.the_date, '%Y-%m-%d')
-                    and date_format(chk.the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+                where chk.the_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
+                <!--where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(chk.the_date, '%Y-%m-%d')-->
+                    <!--and date_format(chk.the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')-->
                     and check_ok = 1
                     and the_day != 9) joinCnt
             , (select count(*)
                 from rd_data.tb_member_attendance_check chk
                     left join rd_data.tb_member_basic mem on chk.mem_no = mem.mem_no
                     left join rd_data.tb_member_withdrawal_bak withdrawal on chk.mem_no = withdrawal.mem_no
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(chk.the_date, '%Y-%m-%d')
-                    and date_format(chk.the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+                where chk.the_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
+                <!--where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(chk.the_date, '%Y-%m-%d')-->
+                    <!--and date_format(chk.the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')-->
                     and check_ok = 1
                     and the_day != 9
                     and (mem.mem_sex = 'm' or withdrawal.mem_sex = 'm')) sex_man
@@ -173,8 +176,9 @@
                 from rd_data.tb_member_attendance_check chk
                     left join rd_data.tb_member_basic mem on chk.mem_no = mem.mem_no
                     left join rd_data.tb_member_withdrawal_bak withdrawal on chk.mem_no = withdrawal.mem_no
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(chk.the_date, '%Y-%m-%d')
-                    and date_format(chk.the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+                where chk.the_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
+                <!--where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(chk.the_date, '%Y-%m-%d')-->
+                    <!--and date_format(chk.the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')-->
                     and check_ok = 1
                     and the_day != 9
                     and (mem.mem_sex = 'f' or withdrawal.mem_sex = 'f')) sex_female
@@ -182,8 +186,9 @@
                 from rd_data.tb_member_attendance_check chk
                     left join rd_data.tb_member_basic mem on chk.mem_no = mem.mem_no
                     left join rd_data.tb_member_withdrawal_bak withdrawal on chk.mem_no = withdrawal.mem_no
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(chk.the_date, '%Y-%m-%d')
-                    and date_format(chk.the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+                where chk.the_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
+                <!--where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(chk.the_date, '%Y-%m-%d')-->
+                    <!--and date_format(chk.the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')-->
                     and check_ok = 1
                     and the_day != 9
                     and (mem.mem_sex = 'n' or withdrawal.mem_sex = 'n')) sex_unknown
@@ -200,8 +205,9 @@
                 from rd_data.tb_member_attendance_check attendance
                 where attendance.check_ok = 1
                     and attendance.the_day != 9
-                    and date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')
-                    and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+                    and the_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
+                    <!--and date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')-->
+                    <!--and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')-->
             ) attendance
             group by attendance.the_date
         ) a
@@ -212,8 +218,9 @@
         select
             (select count(*)
                 from rd_data.tb_member_attendance_check
-                where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')
-                    and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+                where the_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
+                <!--where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')-->
+                    <!--and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')-->
                     and the_day = 9) target_cnt
             , count(*) join_cnt
             , count(case when basic.mem_sex = 'm' or withdrawal.mem_sex = 'm' then 1 end) sex_man
@@ -240,8 +247,9 @@
         from rd_data.tb_member_attendance_check chk
             left join rd_data.tb_member_basic basic on chk.mem_no = basic.mem_no
             left join rd_data.tb_member_withdrawal_bak withdrawal on chk.mem_no = withdrawal.mem_no
-        where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')
-            and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')
+        where the_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
+        <!--where date_format(#{search_startDate}, '%Y-%m-%d') <![CDATA[<=]]> date_format(the_date, '%Y-%m-%d')-->
+            <!--and date_format(the_date, '%Y-%m-%d') <![CDATA[<=]]> date_format(#{search_endDate}, '%Y-%m-%d')-->
             and check_ok = 1
             and the_day = 9
     </select>
@@ -253,11 +261,10 @@
             </if>
 
             <if test='search_startDate != null and search_startDate != ""'>
-                and #{search_startDate} <![CDATA[<=]]> date_format(win.win_date,'%Y%m%d')
-            </if>
+                and win.win_date between concat(#{search_startDate} , ' 00:00:00') and concat(#{search_endDate},' 23:59:59')
 
-            <if test='search_endDate != null and search_endDate != ""'>
-                and date_format(win.win_date,'%Y%m%d') <![CDATA[<=]]> #{search_endDate}
+                <!--and #{search_startDate} <![CDATA[<=]]> date_format(win.win_date,'%Y%m%d')-->
+                <!--and date_format(win.win_date,'%Y%m%d') <![CDATA[<=]]> #{search_endDate}-->
             </if>
 
             <if test='txt_search != null and txt_search != ""'>
