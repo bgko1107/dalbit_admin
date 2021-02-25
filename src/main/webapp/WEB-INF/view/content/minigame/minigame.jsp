@@ -24,23 +24,17 @@
                     <tr>
                         <th>구분</th>
                         <th>상태</th>
-                        <th>수정일시</th>
-                        <th>수정자</th>
                     </tr>
                     </thead>
                     <tbody id="tb_miniGameInfo"></tbody>
                 </table>
-            </div>
-            <div class="widget-footer">
-                 <span>
-                     <button class="btn btn-primary pull-right mb5" type="button" id="bt_updateMiniGameInfo">수정하기</button>
-                 </span>
+                <button class="btn btn-primary pull-right mb5" type="button" id="bt_updateMiniGameInfo">수정하기</button>
+                <button class="btn btn-success pull-right mb5 mr10" type="button" id="bt_nativeSend">네이티브 전송</button>
             </div>
         </div>
     </div>
     <!-- //테스트 계정 현황 -->
     <div class="col-lg-12 no-padding mt5">
-        <button class="btn btn-success pull-right mb5 mr10" type="button" id="bt_nativeSend">네이티브 전송</button>
         <button class="btn btn-default pull-right mb5 mr5" type="button" id="bt_miniGameDetail">게임 등록</button>
         <div class="widget-content ">
             <table id="mailboxTable" class="table table-sorting table-hover table-bordered mt10">
@@ -71,21 +65,38 @@
 
 <script type="text/javascript">
 
+    //미니게임 노출상태 변경
     $("#bt_updateMiniGameInfo").on('click', function(){
-        if(confirm('미니게임 노출 상태를 변경하시겠습니까?')){
-            // var data = {
-            // };
-
-            // util.getAjaxData("miniGameInfoUpd", "/rest/content/boardAdm/mini/game/info/update", data, fn_success_miniGameInfoUpd);
+        var me = $("#tb_miniGameInfo #detail_view_yn").prop('checked');
+        if(confirm(me ? "미니게임 상태를 ON 하시겠습니까?" : "미니게임 상태를 OFF 하시겠습니까?")){
+            var data = {
+                type : 'mini_game'
+                , code : '미니게임 활성여부'
+                , value : me ? 1 : 0
+            }
+            util.getAjaxData("minigameState", "/common/updateCodeDefine", data, function(dst_id, response){
+                var resultMsg = '미니게임 상태 변경에 실패했습니다.';
+                if(response.result == 'success'){
+                    if(response.data.updateResult == 1){
+                        resultMsg = '미니게임 상태가 변경되었습니다.';
+                    }
+                }
+                alert(resultMsg);
+                miniGameList();
+            });
+        }else{
+            e.preventDefault();
+            return false;
         }
     });
 
+    //네이티브 전송
     $("#bt_nativeSend").on('click', function(){
         if(confirm('네이티브 전송하시겠습니까?')){  // socaket 송신하자
-            // var data = {
-            // };
-
-            // util.getAjaxData("miniGameInfoUpd", "/rest/content/boardAdm/mini/game/info/update", data, fn_success_miniGameInfoUpd);
+            // 리플레시
+            util.getAjaxData("sendChangeItem", "/rest/content/item/sendChangeItem", null, function(dst_id, data, dst_params){
+                alert(data.message);
+            });
         }
     });
 
@@ -99,21 +110,28 @@
 
         var template = $('#tmp_miniGameListTable').html();
         var templateScript = Handlebars.compile(template);
-        var context = response.data;
+        var context = response.data.list;
         var html = templateScript(context);
         $('#tb_miniGameList').html(html);
+
+        var template = $('#tmp_miniGameInfoTable').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response.data.miniInfo;
+        var html = templateScript(context);
+        $('#tb_miniGameInfo').html(html);
     }
 
     //상세 조회
-    function miniGameDetail(gameNo) {
+    function miniGameDetail(param) {
         var data = {
-            game_no : gameNo
+            game_no : param.gameno
+            , rowNum : param.rownum
         }
         util.getAjaxData("miniGameDetail", "/rest/content/boardAdm/mini/game/detail", data, fn_success_miniGameDetail);
     }
 
     function fn_success_miniGameDetail(dst_id, response, param) {
-
+        response.data.rowNum = param.rowNum;
         var template = $('#tmp_miniGameDetailTable').html();
         var templateScript = Handlebars.compile(template);
         var context = response.data;
@@ -170,25 +188,17 @@
 </script>
 
 <script id="tmp_miniGameInfoTable" type="text/x-handlebars-template">
-    <%--{{#each this.data as |data|}}--%>
-        <tr>
-            <td>미니게임 버튼 노출여부</td>
-            <td>{{{getOnOffSwitch view_on}}}</td>
-            <td>2021-02-16 14:33:00</td>
-            <td>김자운</td>
-        </tr>
-    <%--{{else}}
-        <tr>
-            <td colspan="4">{{isEmptyData}}</td>
-        </tr>
-    {{/each}}--%>
+    <tr>
+        <td>미니게임 버튼 노출여부</td>
+        <td>{{{getOnOffSwitch value 'view_yn'}}}</td>
+    </tr>
 </script>
 
 <script id="tmp_miniGameListTable" type="text/x-handlebars-template">
     {{#each this}}
         <tr>
             <td>{{rowNumDesc ../length @index}}</td>
-            <td><a href="javascript://" onclick="miniGameDetail({{game_no}})">{{game_name}}</a></td>
+            <td><a href="javascript://" onclick="miniGameDetail($(this).data())" data-gameno="{{game_no}}" data-rownum="{{rowNumDesc ../length @index}}">{{game_name}}</a></td>
             <td><img src="{{renderImage image_url}}"/></td>
             <td>{{game_desc}}</td>
             <td>{{substr reg_date 0 19}}</td>
@@ -211,7 +221,7 @@
         </colgroup>
         <tr>
             <th>No</th>
-            <td>{{game_no}}</td>
+            <td>{{rowNum}}</td>
             <th>게임명칭</th>
             <td><input type="text" class="_trim" id="gameName" name="gameName" value="{{game_name}}"></td>
             <th>등록/수정자</th>
@@ -227,7 +237,7 @@
                 <input hidden type="text" class="_trim" id="gameNo" name="gameNo" value="{{game_no}}" >
                 <input type="text" class="_trim" id="imageUrl" name="imageUrl" style="width:88%" value="{{image_url}}" >
                 <input type="button" value="미리보기" onclick="getImg();">
-                <img id="imageViewer" class="thumbnail fullSize_background no-margin no-padding" style="border:0px; border-radius:0px; width:150px;height: 150px" src="" alt="" /></a>
+                <img id="imageViewer" class="thumbnail fullSize_background no-margin no-padding" style="border:0px; border-radius:0px; width:150px;height: 150px" src="{{renderImage image_url}}" alt="" /></a>
             </td>
             <th>노출문구</th>
             <td colspan="4"><textarea name="contents" id="contents" style='width:100%;height:100%;' rows="10"  placeholder="게임에 대한 설명을 입력해주세요.">{{game_desc}}</textarea></td>
