@@ -42,6 +42,7 @@
             data.slctReason = tmp_slctReason;
             data.searchText = memNo;
             data.strPlatform = tmp_slctPlatform;
+            data.slctDateType = 3;
         };
         dtList_info_detail = new DalbitDataTable($("#"+tmp).find("#list_info_detail"), dtList_info_detail_data, source);
         dtList_info_detail.useCheckBox(true);

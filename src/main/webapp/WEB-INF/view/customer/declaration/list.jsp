@@ -186,6 +186,9 @@
         getDeclareInfo();
     });
 
+
+    var dtList_info;
+
     function getDeclareInfo() {
 
         util.getAjaxData("summary", "/rest/customer/declaration/opCount", "", function (dst_id, response) {
@@ -197,7 +200,6 @@
             $("#summaryDataTable").html(html);
         });
 
-        var dtList_info;
         var dtList_info_data = function ( data ) {
             data.searchText = $('#searchText').val();
             data.searchType = $("select[name='searchType']").val();
