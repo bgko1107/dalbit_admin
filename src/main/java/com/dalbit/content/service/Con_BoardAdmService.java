@@ -3,6 +3,8 @@ package com.dalbit.content.service;
 import com.dalbit.broadcast.dao.Bro_BroadcastDao;
 import com.dalbit.broadcast.vo.procedure.P_StoryDeleteVo;
 import com.dalbit.common.code.Status;
+import com.dalbit.common.service.CommonService;
+import com.dalbit.common.vo.CodeListVo;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.ProcedureVo;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -42,6 +45,9 @@ public class Con_BoardAdmService {
 
     @Autowired
     Mem_MemberDao mem_MemberDao;
+
+    @Autowired
+    CommonService commonService;
 
     /**
      * 팬보드 조회
@@ -474,10 +480,23 @@ public class Con_BoardAdmService {
         ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
         ArrayList<MiniGameListVo> list = conBoardAdmDao.callMiniGameList(procedureVo);
         MiniGameListVo miniGameList = new Gson().fromJson(procedureVo.getExt(), MiniGameListVo.class);
+
+        CodeListVo codeListVo = new CodeListVo();
+        codeListVo.setType("mini_game");
+        codeListVo.setCode("미니게임 활성여부");
+        CodeListVo code = commonService.getCodeDefine(codeListVo);
+
+        var resultMap = new HashMap();
+        resultMap.put("code", code.getCode());
+        resultMap.put("value", code.getValue());
+
+        HashMap map = new HashMap();
+        map.put("list", list);
+        map.put("miniInfo", resultMap);
         if(list.size() > 0){
-            return gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(miniGameList.getTotalCnt()),miniGameList));
+            return gsonUtil.toJson(new JsonOutputVo(Status.조회, map, new PagingVo(miniGameList.getTotalCnt()),miniGameList));
         }else{
-            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, list, new PagingVo(miniGameList.getTotalCnt()),miniGameList));
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, map, new PagingVo(miniGameList.getTotalCnt()),miniGameList));
         }
     }
 
