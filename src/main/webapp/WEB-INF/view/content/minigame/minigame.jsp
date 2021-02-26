@@ -222,8 +222,6 @@
         <tr>
             <th>No</th>
             <td>{{rowNum}}</td>
-            <th>게임명칭</th>
-            <td><input type="text" class="_trim" id="gameName" name="gameName" value="{{game_name}}"></td>
             <th>등록/수정자</th>
             <td>{{op_name}}</td>
             <th>등록/수정일시</th>
@@ -232,15 +230,20 @@
             <td>{{{getOnOffSwitch view_yn 'view_yn'}}}</td>
         </tr>
         <tr>
-            <th>이미지URL</th>
-            <td colspan="4">
+            <th rowspan="2">이미지URL</th>
+            <td rowspan="2" colspan="3">
                 <input hidden type="text" class="_trim" id="gameNo" name="gameNo" value="{{game_no}}" >
-                <input type="text" class="_trim" id="imageUrl" name="imageUrl" style="width:88%" value="{{image_url}}" >
-                <input type="button" value="미리보기" onclick="getImg();">
+                <input type="text" class="_trim form-control pull-left" id="imageUrl" name="imageUrl" style="width:87%" value="{{image_url}}" >
+                <input type="button" class="pull-right btn-default" value="미리보기" onclick="getImg();">
                 <img id="imageViewer" class="thumbnail fullSize_background no-margin no-padding" style="border:0px; border-radius:0px; width:150px;height: 150px" src="{{renderImage image_url}}" alt="" /></a>
             </td>
+            <th>게임 명칭</th>
+            <td colspan="3"><input type="text" class="_trim form-control" id="gameName" name="gameName" value="{{game_name}}" style="width: 100%"></td>
+        </tr>
+        <tr>
+
             <th>노출문구</th>
-            <td colspan="4"><textarea name="contents" id="contents" style='width:100%;height:100%;' rows="10"  placeholder="게임에 대한 설명을 입력해주세요.">{{game_desc}}</textarea></td>
+            <td colspan="3"><textarea name="contents" id="contents" style='width:100%;height:100%;' rows="10"  placeholder="게임에 대한 설명을 입력해주세요.">{{game_desc}}</textarea></td>
         </tr>
     </table>
     {{#if game_no}}
