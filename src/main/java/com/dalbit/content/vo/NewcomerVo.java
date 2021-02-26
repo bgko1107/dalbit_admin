@@ -30,6 +30,8 @@ public class NewcomerVo extends PagingVo {
     private int send_cnt;
     private String last_send_date;
     private String last_broadcast;
+    private int specialdj_badge;
+    private int shiningdj_badge;
 
 
 
