@@ -263,4 +263,7 @@ public class ContentController {
     @GetMapping("/event/content/list")
     public String eventContentManage() {return "content/event/content/list";}
 
+    @GetMapping("/event/champion/rank")
+    public String championRank() {return "content/event/champion/rank";}
+
 }
