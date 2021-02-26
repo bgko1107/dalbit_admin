@@ -29,7 +29,7 @@
                     <tbody id="tb_miniGameInfo"></tbody>
                 </table>
                 <button class="btn btn-primary pull-right mb5" type="button" id="bt_updateMiniGameInfo">수정하기</button>
-                <button class="btn btn-success pull-right mb5 mr10" type="button" id="bt_nativeSend">네이티브 전송</button>
+<%--                <button class="btn btn-success pull-right mb5 mr10" type="button" id="bt_nativeSend">네이티브 전송</button>--%>
             </div>
         </div>
     </div>
@@ -91,14 +91,14 @@
     });
 
     //네이티브 전송
-    $("#bt_nativeSend").on('click', function(){
-        if(confirm('네이티브 전송하시겠습니까?')){  // socaket 송신하자
-            // 리플레시
-            util.getAjaxData("sendChangeItem", "/rest/content/item/sendChangeItem", null, function(dst_id, data, dst_params){
-                alert(data.message);
-            });
-        }
-    });
+    // $("#bt_nativeSend").on('click', function(){
+    //     if(confirm('네이티브 전송하시겠습니까?')){  // socaket 송신하자
+    //         // 리플레시
+    //         util.getAjaxData("sendChangeItem", "/rest/content/item/sendChangeItem", null, function(dst_id, data, dst_params){
+    //             alert(data.message);
+    //         });
+    //     }
+    // });
 
     //리스트 조회
     function miniGameList() {
