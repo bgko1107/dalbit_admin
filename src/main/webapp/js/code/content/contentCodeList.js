@@ -310,6 +310,7 @@ var banner_bannerType = [
     , new COMMON_CODE('storePopup', '12', '스토어팝업')
     , new COMMON_CODE('rankPopup', '14', '랭킹팝업')
     , new COMMON_CODE('questionTop', '15', '1:1문의 TOP')
+    , new COMMON_CODE('clipPlay', '16', '클립Play')
 ];
 
 var banner_bannerType_popup = [
@@ -334,6 +335,7 @@ var banner_bannerType_banner = [
     , new COMMON_CODE('mainRankBottom', '9', 'Main Center')
     , new COMMON_CODE('clip', '10', '클립 Center')
     , new COMMON_CODE('questionTop', '15', '1:1문의 TOP')
+    , new COMMON_CODE('clipPlay', '16', '클립Play')
 ];
 
 var banner_loginType = [
