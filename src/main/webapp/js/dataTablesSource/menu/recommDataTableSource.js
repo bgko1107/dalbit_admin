@@ -81,11 +81,11 @@ var recommDataTableSource = {
                 }}
             , {'title': '성별', 'data': 'mem_sex', 'width':'100px', 'render': function (data, type, row, meta) {
                     var tmp="";
-                    if(row.specialdjYn == "1"){
-                        tmp = '<span class ="label" style="background-color:red">' + "스페셜DJ" + '</span>';
+                    if(row.specialdj_badge == "1"){
+                        tmp += util.getMemberBadge("red", "red", null, "스페셜DJ", "100%", "20px", 10, "15px", "15px");
                     }
-                    if(row.shiningdjYn == "1"){
-                        tmp = '<span class ="label" style="background-color:#aa00ff">' + "샤이닝DJ" + '</span>';
+                    if(row.shiningdj_badge == "1"){
+                        tmp += util.getMemberBadge("pink", "pink", null, "샤이닝DJ", "100%", "20px", 10, "15px", "15px");
                     }
                     return common.sexIcon(data, row.mem_birth_year) + '<br/>' + tmp;
                 }}
