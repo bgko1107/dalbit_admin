@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Slf4j
 @Service
 public class CommonMemberService {
@@ -23,6 +25,16 @@ public class CommonMemberService {
     public ProcedureVo memberBadgeDelete(MemberBadgeVo memberBadgeVo){
         ProcedureVo procedureVo = new ProcedureVo(memberBadgeVo);
         commonMemberDao.callMemberBadgeDelete(procedureVo);
+        return procedureVo;
+    }
+
+    public ProcedureVo memberSettingSelect(String memNo){
+        HashMap map = new HashMap();
+        map.put("mem_no", memNo);
+        ProcedureVo procedureVo = new ProcedureVo(map);
+
+        commonMemberDao.callMemberSettingSelect(procedureVo);
+
         return procedureVo;
     }
 

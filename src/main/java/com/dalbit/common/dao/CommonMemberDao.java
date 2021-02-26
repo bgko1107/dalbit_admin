@@ -13,4 +13,6 @@ public interface CommonMemberDao {
 
     ProcedureVo callMemberBadgeDelete(ProcedureVo procedureVo);
 
+    ProcedureVo callMemberSettingSelect(ProcedureVo procedureVo);
+
 }

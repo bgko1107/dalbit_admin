@@ -21,8 +21,8 @@ import java.util.HashMap;
 
 @Slf4j
 @RestController
-@RequestMapping("common/member")
-public class CommonController {
+@RequestMapping("common")
+public class CommonMemberController {
 
     @Autowired
     GsonUtil gsonUtil;
