@@ -118,20 +118,20 @@
             {{#each this as |data|}}
                 <tr>
                     <td>{{data.rank}}</td>
-                    <td><img class="thumbnail fullSize_background" src="{{renderImage data.profileImage}}" style='height:auto; width:100%;margin-bottom: 0px' /></td>
+                    <td><img class="thumbnail fullSize_background" src="{{renderImage data.profileImage}}" style='width:65px; height:65px; margin-bottom: 0px' /></td>
                     <td>{{{memNoLink data.mem_no data.mem_no}}}</td>
                     <td>{{phoneNumHyphen memPhone}}</td>
                     <td>{{memNick}}</td>
                     <td>{{addComma totalPoint}} 별</td>
                     <td>{{addComma winPoint}} 점</td>
-                    <td><img class="thumbnail fullSize_background" src="{{renderImage data.qupid_profileImage}}" style='height:auto; width:100%;margin-bottom: 0px' /></td>
+                    <td><img class="thumbnail fullSize_background" src="{{renderImage data.qupid_profileImage}}" style='width:65px; height:65px; margin-bottom: 0px' /></td>
                     <td>{{{memNoLink data.qupid_mem_no data.qupid_mem_no}}}</td>
                     <td>{{qupid_memNick}}</td>
                 </tr>
 
             {{else}}
                 <tr>
-                    <td colspan="9">{{isEmptyData}}</td>
+                    <td colspan="10">{{isEmptyData}}</td>
                 </tr>
             {{/each}}
         </tbody>
@@ -162,7 +162,7 @@
         {{#each this as |data|}}
             <tr>
                 <td>{{data.rank}}</td>
-                <td><img class="thumbnail fullSize_background" src="{{renderImage data.profileImage}}" style='height:auto; width:100%;margin-bottom: 0px' /></td>
+                <td><img class="thumbnail fullSize_background" src="{{renderImage data.profileImage}}" style='width:65px; height:65px; margin-bottom: 0px' /></td>
                 <td>{{{memNoLink data.mem_no data.mem_no}}}</td>
                 <td>{{phoneNumHyphen memPhone}}</td>
                 <td>{{memNick}}</td>
@@ -171,7 +171,7 @@
 
         {{else}}
             <tr>
-                <td colspan="8">{{isEmptyData}}</td>
+                <td colspan="6">{{isEmptyData}}</td>
             </tr>
         {{/each}}
         </tbody>
