@@ -124,11 +124,6 @@
 
         util.editorInit("content-notice");
 
-        $("#eventTr").hide();
-        if(response.summary.slctType == "20" || response.summary.slctType == "21"){
-            $("#eventTr").show();
-        }
-
         applyDateCssSet();
 
         //OS 구분
@@ -202,14 +197,6 @@
             }
         });
 
-        $("#policy_slctType").on('change',function (){
-            var val = $(this).val();
-            $("#eventTr").hide();
-            if(val == "20" || val == "21"){
-                $("#eventTr").show();
-            }
-        });
-
         var scrollPosition = $("#policyDetailform").offset();
         util.scrollPostion(scrollPosition.top);
     }
@@ -232,7 +219,7 @@
             alert("플랫폼을 선택하여 주시기 바랍니다.");
             return false;
         }
-        if($("#policy_slctType").val() == "20" || $("#policy_slctType").val() == "21"){
+        if($("#policy_slctType").val() == "20" || $("#policy_slctType").val() == "21" || $("#policy_slctType").val() == "99"){
             if($("#event_no").val() == "" || $("#event_no").val() == null){
                 alert("이벤트 번호를 입력하여 주시기 바랍니다.");
                 return false;

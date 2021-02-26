@@ -123,10 +123,10 @@
 
         util.editorInit("content-notice");
 
-        $("#eventTr").hide();
-        if(response.summary.slctType == "20" || response.summary.slctType == "21"){
+        // $("#eventTr").hide();
+        // if(response.summary.slctType == "20" || response.summary.slctType == "21" || response.summary.slctType == "99"){
             $("#eventTr").show();
-        }
+        // }
 
         applyDateCssSet();
 
@@ -218,9 +218,9 @@
         $("#event_slctType").on('change',function (){
             var val = $(this).val();
             $("#eventTr").hide();
-            if(val == "20" || val == "21"){
+            // if(val == "20" || val == "21" || val == "99"){
                 $("#eventTr").show();
-            }
+            // }
         });
 
         var scrollPosition = $("#policyDetailform").offset();
