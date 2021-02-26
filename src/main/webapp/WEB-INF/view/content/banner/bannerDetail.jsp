@@ -240,7 +240,7 @@
 
     fnc_bannerDetail.popupBannerDisplayChange = function(){
         //배너위치에 따른 display 변경
-        if(-1 < '|6|11|12|13|14|'.indexOf('|'+$('input[name="position"]:checked').val()+'|')){
+        if(-1 < '|6|11|12|13|14|16|'.indexOf('|'+$('input[name="position"]:checked').val()+'|')){
             $('._show_popup').show();
             $("input[name='popup_type']:radio").change();
 
