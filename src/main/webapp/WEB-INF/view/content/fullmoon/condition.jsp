@@ -488,15 +488,17 @@
 </script>
 
 <script id="tmp_fullmoonYnCondition" type="text/x-handlebars-template">
-    {{#each this}}
+    {{#each this as |data|}}
+        {{#equal data.slctType '1'}}
         <tr>
-            <td>{{{getCommonCodeLabel slctType 'full_moon_condition5_slctType'}}}</td>
+            <td>{{{getCommonCodeLabel data.slctType 'full_moon_condition5_slctType'}}}</td>
             <td>
-                {{{getOnOffSwitch minValue 'fullmoonYn'}}}
+                {{{getOnOffSwitch data.minValue 'fullmoonYn'}}}
             </td>
-            <td>{{moment editDate 'YYYY-MM-DD HH:mm:ss'}}</td>
-            <td>{{opName}}</td>
+            <td>{{moment data.editDate 'YYYY-MM-DD HH:mm:ss'}}</td>
+            <td>{{data.opName}}</td>
         </tr>
+        {{/equal}}
     {{/each}}
 </script>
 

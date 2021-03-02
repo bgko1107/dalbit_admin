@@ -959,7 +959,7 @@ var full_moon_condition4_slctType_unit = [
 
 var full_moon_condition5_slctType = [
     new COMMON_CODE(null, 'slctType', '구분')
-    , new COMMON_CODE('1', '1', '보름날 노출여부')
+    , new COMMON_CODE('1', '1', '보름달 노출여부')
 ]
 
 //보름달 문구관리

@@ -321,11 +321,13 @@
 <script type="text/x-handlebars-template" id="tmp_fullmoonEventList">
     {{#each this}}
         <tr>
+            <td>{{idx}}</td>
             <td>
-                <!--{{indexDesc ../pagingVo.totalCnt item.rowNum}}-->
-                {{idx}}
-            </td>
-            <td>
+                {{#equal view_yn '1'}}
+                    {{{isCurrentDisplay start_date end_date}}}
+                {{else}}
+                    <span style="color:gray">OFF</span>
+                {{/equal}}
             </td>
             <td>
                 <a href="javascript://" class="_fullmoonEventDetail" data-idx={{idx}}>
