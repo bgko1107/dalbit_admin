@@ -527,8 +527,12 @@ public class Mon_ExchangeService {
 
             // 미완료, 완료 동일하게 신청 당시 예금주, 예금주 주민번호
             // 만약 없으면 최종 완료 예금주 정보로
-            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getAccount_name()) ? exchangeVo.getPrevAccountName() : exchangeVo.getAccount_name());
-            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getSocial_no()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))));
+//            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getAccount_name()) ? exchangeVo.getPrevAccountName() : exchangeVo.getAccount_name());
+//            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getSocial_no()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))));
+
+            // 세금 신고자, 세금신고자의 주민번호
+            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getPrevAccountName()) ? exchangeVo.getAccount_name() : exchangeVo.getPrevAccountName());
+            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getPrevSocialNo()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))));
 
             hm.put("accountName", DalbitUtil.isEmpty(exchangeVo.getAccount_name()) ? "" : exchangeVo.getAccount_name());
 
@@ -622,8 +626,12 @@ public class Mon_ExchangeService {
 
             // 미완료, 완료 동일하게 신청 당시 예금주, 예금주 주민번호
             // 만약 없으면 최종 완료 예금주 정보로
-            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getAccount_name()) ? exchangeVo.getPrevAccountName() : exchangeVo.getAccount_name());
-            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getSocial_no()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))));
+//            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getAccount_name()) ? exchangeVo.getPrevAccountName() : exchangeVo.getAccount_name());
+//            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getSocial_no()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))));
+
+            // 세금 신고자, 세금신고자의 주민번호
+            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getPrevAccountName()) ? exchangeVo.getAccount_name() : exchangeVo.getPrevAccountName());
+            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getPrevSocialNo()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))));
 
             hm.put("accountName", DalbitUtil.isEmpty(exchangeVo.getAccount_name()) ? "" : exchangeVo.getAccount_name());
 
