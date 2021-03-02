@@ -257,19 +257,6 @@
         $("#reportImage").modal("show");
     }
 
-    function fn_imageList_success(dst_id, response){
-        var tmpImageList = "";
-
-        response.data.forEach(function (data, index){
-            tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-margin no-padding" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + data.imageUrl + '" alt="" /></a></div>';
-        });
-
-        $("#reportImageList").html(tmpImageList);
-
-        $("#reportImage").modal("show");
-
-    }
-
     $(document).on('click', '#checkProcBtn', function(){
         var checkSelector = $("#list_info tbody input[type='checkbox']:checked");
         var checkedCnt = checkSelector.length;

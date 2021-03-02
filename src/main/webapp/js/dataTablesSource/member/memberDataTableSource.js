@@ -596,6 +596,12 @@ var MemberDataTableSource = {
             ,{'title': '성별', 'data': 'reported_mem_sex', 'width':'70px', 'render': function (data, type, row, meta) {
                     return common.sexIcon(data, row.reported_mem_birth_year);
                 }}
+            ,{'title': '이미지', 'data': 'image_cnt','width':'60px','render':function (data,type,row,meta){
+                    if(data < 1){
+                        return "N";
+                    }
+                    return '<a href="javascript://" onclick="getImageCnt('+meta.row+');"> ' + data + ' </a>';
+                }}
             ,{'title': '접수 일시', 'data': 'regDateFormat'}
             ,{'title': '처리 일시', 'data': 'opDateFormat', 'defaultContent':'-'}
             ,{'title': '처리 상태', 'data': 'op_code', 'name': 'slctType', 'render' : function(data) {
