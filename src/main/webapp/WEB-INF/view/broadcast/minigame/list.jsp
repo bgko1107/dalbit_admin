@@ -53,7 +53,11 @@
 
     function getBroadHistory_minigame(tmp) {     // 상세보기
         var dtList_info_detail_data = function (data) {
-            data.room_no = room_no;
+            data.searchText = room_no;
+            data.slctType = 2;
+            data.startDate = '1900.01.01';
+            data.endDate = '2999.12.31';
+
         };
         dtList_info_detail = new DalbitDataTable($("#tb_minigameMemberlist"), dtList_info_detail_data, BroadcastDataTableSource.minigameMemberList);
         dtList_info_detail.useCheckBox(false);
@@ -63,7 +67,11 @@
         // dtList_info_detail.createDataTable();
 
         var dtList_info_detail_data = function (data) {
-            data.room_no = room_no;
+            data.searchText = room_no;
+            data.slctType = 2;
+            data.startDate = '1900.01.01';
+            data.endDate = '2999.12.31';
+            data.newSearchType = 8;
         };
         dtList_info_detail2 = new DalbitDataTable($("#tb_minigameEditHistory"), dtList_info_detail_data, BroadcastDataTableSource.minigameEditHistory);
         dtList_info_detail2.useCheckBox(false);
@@ -75,8 +83,7 @@
     function minigame_summary_table(json){
         var template = $("#minigame_tableSummary").html();
         var templateScript = Handlebars.compile(template);
-        var data = {
-        }
+        var data = json.summary;
         var html = templateScript(data);
         $("#minigame_summaryArea").html(html);
     }
@@ -92,8 +99,8 @@
         </tr>
         </thead>
         <tbody>
-            <td>0 회</td>
-            <td>0 달</td>
+            <td>{{totalGoCnt}} / {{totalCnt}} 회</td>
+            <td>{{totalPayAmt}} 달</td>
         </tbody>
     </table>
 </script>

@@ -7,10 +7,11 @@
     <span id="gameHistorySortArea"></span>
     <div class="col-lg-12 no-padding mt5">
         <div class="widget-content ">
+            <div class="dataTables_paginate paging_full_numbers" id="gameHistory_paginate_top"></div>
             <table class="table table-sorting table-hover table-bordered mt10">
                 <colgroup>
-                    <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
-                    <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
+                    <col width="5%"/><col width="5%"/><col width="20%"/><col width="10%"/><col width="6%"/>
+                    <col width="6%"/><col width="10%"/><col width="10%"/><col width="5%"/><col width="5%"/>
                 </colgroup>
                 <thead>
                 <tr>
@@ -29,6 +30,7 @@
                 <tbody id="tb_miniGameHistory">
                 </tbody>
             </table>
+            <div class="dataTables_paginate paging_full_numbers" id="gameHistory_paginate"></div>
         </div>
     </div>
 </div>
@@ -38,26 +40,86 @@
     $(document).ready(function() {
     });
 
-    function gameHistory() {
-        $("#gameHistorySortArea").html(util.getCommonCodeSelect(0, game_history_sort));
+    var gameHistoryPagingInfo = new PAGING_INFO(0,1,40);
+    function gameHistory(pagingNo) {
 
+        if(!common.isEmpty(pagingNo)){
+            gameHistoryPagingInfo.pageNo = pagingNo;
+        }else{
+            gameHistoryPagingInfo.pageNo = 1;
+        }
 
-        // var data = {
-        // };
+        var data = {
+            sortState : $("#game_history_sort").val()
+            , newSearchType : $("#searchMember").val()
+            , searchText : common.isEmpty($('#searchText').val()) ? '' : $('#searchText').val()
+            , startDate : $("#startDate").val()
+            , endDate : $("#endDate").val()
+            , slctType : 1
+            , pageNo : gameHistoryPagingInfo.pageNo
+            , pageCnt : gameHistoryPagingInfo.pageCnt
 
-        // util.getAjaxData("miniGameList", "/rest/content/boardAdm/mini/game/list", data, fn_success_miniGameList);
+        };
+
+        util.getAjaxData("miniGameList", "/rest/content/boardAdm/mini/game/member/list", data, fn_success_miniGameMemberList);
 
         var template = $('#tmp_miniGameHistoryTable').html();
         var templateScript = Handlebars.compile(template);
         var html = templateScript();
         $('#tb_miniGameHistory').html(html);
     }
+
+    function fn_success_miniGameMemberList(dst_id, response){
+
+
+        response.pagingVo.pageNo = gameHistoryPagingInfo.pageNo;
+        response.pagingVo.pageCnt = gameHistoryPagingInfo.pageCnt;
+
+        var template = $('#tmp_miniGameHistoryTable').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response;
+        var html = templateScript(context);
+        $('#tb_miniGameHistory').html(html);
+
+        gameHistoryPagingInfo.totalCnt = response.pagingVo.totalCnt;
+        util.renderPagingNavigation('gameHistory_paginate_top', gameHistoryPagingInfo);
+        util.renderPagingNavigation('gameHistory_paginate', gameHistoryPagingInfo);
+
+        if(response.data.length == 0) {
+            $("#gameHistory_paginate_top").hide();
+            $('#gameHistory_paginate').hide();
+        } else {
+            $("#gameHistory_paginate_top").show();
+            $('#gameHistory_paginate').show();
+        }
+
+    }
+
+    function handlebarsPaging(targetId, pagingInfo) {
+
+        if(targetId == "gameHistory_paginate_top" || targetId == "gameHistory_paginate") {
+            gameHistoryPagingInfo = pagingInfo;
+            gameHistory(pagingInfo.pageNo);
+        }
+    }
+
+
+
 </script>
 
 <script id="tmp_miniGameHistoryTable" type="text/x-handlebars-template">
     {{#each this.data as |data|}}
         <tr>
-            <td>{{indexDesc ../pagingVo/totalCnt rowNum}}</td>
+            <td>{{rowNumDesc ../pagingVo/totalCnt @index ../pagingVo/pageNo ../pagingVo/pageCnt}}</td>
+            <td>{{{getCommonCodeLabel os_type 'loginHistoryOsType'}}}</td>
+            <td>{{{roomNoLink room_no room_no}}} <br/>{{title}}</td>
+            <td>{{{memNoLink mem_no mem_no}}} <br/> {{mem_nick}} </td>
+            <td>{{{sexIcon mem_sex mem_birth_year}}}</td>
+            <td>{{{getCommonCodeLabel state 'room_state'}}}</td>
+            <td>{{start_date}}</td>
+            <td>{{end_date}}</td>
+            <td>{{#dalbit_if pay_yn '==' Y}} ON {{else}} OFF {{/dalbit_if}}</td>
+            <td>{{addComma go_cnt}}</td>
         </tr>
     {{else}}
         <tr>

@@ -10,7 +10,6 @@ import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.content.dao.Con_BoardAdmDao;
 import com.dalbit.content.vo.*;
-import com.dalbit.content.vo.procedure.P_noticeDetailOutputVo;
 import com.dalbit.member.dao.Mem_MemberDao;
 import com.dalbit.member.dao.Mem_NoticeDao;
 import com.dalbit.member.vo.MemberVo;
@@ -500,6 +499,7 @@ public class Con_BoardAdmService {
         }
     }
 
+
     public String miniGameDetail(MiniGameDetailVo miniGameListVo) {
         ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
         conBoardAdmDao.callMiniGameDetail(procedureVo);
@@ -545,5 +545,29 @@ public class Con_BoardAdmService {
             result = gsonUtil.toJson(new JsonOutputVo(Status.미니게임_등록_에러));
         }
         return result;
+    }
+
+    public String miniGameMemberList(MiniGameListVo miniGameListVo) {
+        ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
+        ArrayList<MiniGameListVo> list = conBoardAdmDao.miniGameMemberList(procedureVo);
+        MiniGameListVo miniGameList = new Gson().fromJson(procedureVo.getExt(), MiniGameListVo.class);
+
+        if(list.size() > 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(miniGameList.getTotalCnt()), miniGameList));
+        }else{
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, list, new PagingVo(miniGameList.getTotalCnt()),miniGameList));
+        }
+    }
+
+    public String miniGameEditHistory(MiniGameListVo miniGameListVo) {
+        ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
+        ArrayList<MiniGameListVo> list = conBoardAdmDao.miniGameEditHistory(procedureVo);
+        MiniGameListVo miniGameList = new Gson().fromJson(procedureVo.getExt(), MiniGameListVo.class);
+
+        if(list.size() > 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(miniGameList.getTotalCnt()), miniGameList));
+        }else{
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, list, new PagingVo(miniGameList.getTotalCnt()),miniGameList));
+        }
     }
 }
