@@ -18,6 +18,15 @@
     <jsp:include page="declarationTab.jsp"></jsp:include>
 </div>
 
+<div class="modal fade" id="reportImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <span id="reportImageList"></span>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -103,6 +112,22 @@
             $(this).parent().parent().find('._getDeclarationDetail').click();
         }
     });
+
+    function getImageCnt(index){
+        var data = dtList_info_detail.getDataRow(index);
+
+        var tmpImageList = "";
+
+        tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + data.image_url1 + '" alt="" /></a></div>';
+        tmpImageList += data.image_url2 != '' ? '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + data.image_url2 + '" alt="" /></a></div>' : '';
+        tmpImageList += data.image_url3 != '' ? '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + data.image_url3 + '" alt="" /></a></div>' : '';
+
+        console.log(tmpImageList);
+
+        $("#reportImageList").html(tmpImageList);
+
+        $("#reportImage").modal("show");
+    }
 
 </script>
 

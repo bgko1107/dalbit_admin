@@ -122,7 +122,7 @@
 </div> <%-- #wapper --%>
 
 <div class="modal fade" id="reportImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
-    <div class="modal-dialog" style="width: 600px; height: auto">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header no-padding">
                 <span id="reportImageList"></span>
@@ -239,33 +239,22 @@
     function getImageCnt(index){
         var data = dtList_info.getDataRow(index);
 
-        var obj = {};
-        obj.reportIdx = data.reportIdx;
-
-        // util.getAjaxData("detail", "/rest/customer/declaration/image/list", obj, fn_imageList_success);
-
         var tmpImageList = "";
 
-        tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + "/mailBox_0/20938320000/20210115125231778945.png" + '" alt="" /></a></div>';
-        tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + "/mailBox_0/20938320000/20210115101556090936.png" + '" alt="" /></a></div>';
-        tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + "/mailBox_0/20942812800/20210119161425525429.png" + '" alt="" /></a></div>';
+        console.log(data.image_url1);
+        console.log(data.image_url2);
+        console.log(data.image_url3);
+
+        tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + data.image_url1 + '" alt="" /></a></div>';
+        tmpImageList += data.image_url2 != '' ? '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + data.image_url2 + '" alt="" /></a></div>' : '';
+        tmpImageList += data.image_url3 != '' ? '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-padding no-margin" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + data.image_url3 + '" alt="" /></a></div>' : '';
+
+        console.log(tmpImageList);
+
 
         $("#reportImageList").html(tmpImageList);
 
         $("#reportImage").modal("show");
-    }
-
-    function fn_imageList_success(dst_id, response){
-        var tmpImageList = "";
-
-        response.data.forEach(function (data, index){
-            tmpImageList += '<div class="col-md-4 no-padding"><img id="imageViewer_' + index + '" class="thumbnail fullSize_background no-margin no-padding" style="width:192px;height: 192px" src="' + PHOTO_SERVER_URL + data.imageUrl + '" alt="" /></a></div>';
-        });
-
-        $("#reportImageList").html(tmpImageList);
-
-        $("#reportImage").modal("show");
-
     }
 
     $(document).on('click', '#checkProcBtn', function(){

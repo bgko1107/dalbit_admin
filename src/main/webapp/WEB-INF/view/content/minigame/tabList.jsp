@@ -19,9 +19,12 @@
     $("#tablist_con li a").on('click', function(){
         tabId = $(this).prop('id');
 
+        $("#searchMemberArea").empty();
         if(tabId == "tab_miniGame"){
             slctType = 1;
         }else if(tabId == "tab_gameHistory"){
+
+            $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
             slctType = 0;
         }
         dateType();

@@ -915,16 +915,18 @@ var BroadcastDataTableSource = {
     },
 
     'minigameMemberList': {
-        'url': '/rest/broadcast/minigame/member/list'
+        'url': '/rest/content/boardAdm/mini/game/member/list'
         , 'columns': [
             {'title': '회원번호', 'data': 'mem_no', 'width':'100px', 'render': function (data, type, row, meta) {
                     return util.memNoLink(data, row.mem_no);
                 }},
-            {'title': '닉네임', 'data': 'memNick', 'width':'100px'},
-            {'title': '참여 게임', 'data': 'gameName', 'width':'100px'},
-            {'title': '참여일시', 'data': '', 'width':'100px'},
-            {'title': '게임 차감 달', 'data': '', 'width':'100px'},
-            {'title': '당첨/선택 옵션', 'data': '', 'width':'100px'},
+            {'title': '닉네임', 'data': 'mem_nick', 'width':'100px'},
+            {'title': '참여 게임', 'data': 'gameName', 'width':'100px', 'render': function (data, type, row, meta) {
+                    return '룰렛';
+                }},
+            {'title': '참여일시', 'data': 'last_upd_date', 'width':'100px'},
+            {'title': '게임 차감 달', 'data': 'pay_amt', 'width':'100px'},
+            {'title': '당첨/선택 옵션', 'data': 'opt', 'width':'100px'},
         ]
         ,'createdRow' : function( row, data, dataIndex ) {
             if (data.inner == 1) {    // 테스트계정 row 색상 표시
@@ -934,12 +936,14 @@ var BroadcastDataTableSource = {
     },
 
     'minigameEditHistory': {
-        'url': '/rest/broadcast/minigame/edit/history'
+        'url': '/rest/content/boardAdm/mini/game/edit/history'
         , 'columns': [
-            {'title': '수정일시', 'data': '', 'width':'100px'},
-            {'title': '개설 게임', 'data': '', 'width':'100px'},
-            {'title': '수정내역', 'data': '', 'width':'100px'},
-            {'title': '처리자명', 'data': '', 'width':'100px'},
+            {'title': '수정일시', 'data': 'edit_date', 'width':'100px'},
+            {'title': '개설 게임', 'data': '', 'width':'100px', 'render': function (data, type, row, meta) {
+                    return '룰렛';
+                }},
+            {'title': '수정내역', 'data': 'edit_contents', 'width':'100px'},
+            {'title': '처리자명', 'data': 'op_name', 'width':'100px'},
         ]
         ,'createdRow' : function( row, data, dataIndex ) {
             if (data.inner == 1) {    // 테스트계정 row 색상 표시

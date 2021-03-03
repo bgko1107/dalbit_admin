@@ -70,6 +70,12 @@ public class P_DeclarationListOutputVo extends BaseVo {
     private String report_grade;
     private String data2;
 
+    // 첨부 이미지
+    private String image_url1;
+    private String image_url2;
+    private String image_url3;
+    private int image_cnt;
+
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
         this.regDateFormat = DalbitUtil.convertDateFormat(regDate, "yyyy.MM.dd HH:mm:ss");

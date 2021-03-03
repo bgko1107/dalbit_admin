@@ -35,12 +35,12 @@ var customerDataTableSource = {
             ,{'title': '신고', 'data': 'totalReportedCnt','width':'60px','render':function (data,type,row,meta){
                     return common.addComma(data) + " 건";
                 }}
-          /*  ,{'title': '이미지', 'data': 'imageCnt','width':'60px','render':function (data,type,row,meta){
+            ,{'title': '이미지', 'data': 'image_cnt','width':'60px','render':function (data,type,row,meta){
                     if(data < 1){
                         return "N";
                     }
                     return '<a href="javascript://" onclick="getImageCnt('+meta.row+');"> ' + data + ' </a>';
-                }}*/
+                }}
             ,{'title': '처리', 'data': 'totalOpCnt','width':'60px','render':function (data,type,row,meta){
                     return common.addComma(data) + " 건";
                 }}
