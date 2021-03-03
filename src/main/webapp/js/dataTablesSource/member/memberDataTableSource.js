@@ -271,9 +271,13 @@ var MemberDataTableSource = {
             {'title': '청취종료시간', 'data': 'endDateFormat', 'width':'120px'},
             {'title': '청취진행시간', 'data': 'listentime', 'width':'80px', 'render': function (data, type, row) {
                     if(row.shadow == 1){
-                        var startDate = moment(row.startDateFormat);
-                        var endDate = moment(row.endDateFormat);
-                        return common.timeStamp(endDate.diff(startDate, 'seconds'));
+                        if(common.isEmpty(row.endDateFormat)){
+                            return '';
+                        }else{
+                            var startDate = moment(row.startDateFormat);
+                            var endDate = moment(row.endDateFormat);
+                            return common.timeStamp(endDate.diff(startDate, 'seconds'));
+                        }
                     }
                     return common.timeStamp(data);
 
