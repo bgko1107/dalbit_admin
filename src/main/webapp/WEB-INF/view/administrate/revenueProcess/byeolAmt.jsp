@@ -11,18 +11,18 @@
         <div class="dataTables_paginate paging_full_numbers" id="byeolAmt_paginate_top"></div>
         <table class="table table-bordered">
             <colgroup>
-                <col width="9%"/><col width="6%"/><col width="6%"/><col width="6%"/><col width="6%"/>
+                <col width="9%"/><col width="6%"/><col width="6%"/><col width="6%"/><col width="6%"/><col width="6%"/>
                 <col width="6%"/><col width="6%"/><col width="6%"/><col width="6%"/><col width="6%"/>
                 <col width="6%"/><col width="6%"/><col width="6%"/><col width="6%"/><col width="6%"/>
             </colgroup>
             <thead>
             <tr>
                 <th rowspan="3" class="_bgColor _fontColor" data-bgcolor="#00b050" data-fontcolor="white">회원정보</th>
-                <th colspan="15" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">달빛라이브 [별_금액]</th>
+                <th colspan="16" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">달빛라이브 [별_금액]</th>
             </tr>
             <tr>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기초</th>
-                <th colspan="7" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">증가</th>
+                <th colspan="8" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">증가</th>
                 <th colspan="6" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">감소</th>
                 <th rowspan="2" class="_bgColor _fontColor" data-bgcolor="#548235" data-fontcolor="white">기말</th>
             </tr>
@@ -33,6 +33,7 @@
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">방송-영상</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">클립</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">우체통</th>
+                <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">환전취소</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">관리자지급</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">합계</th>
                 <th class="_bgColor _fontColor" data-bgcolor="#7b7b7b" data-fontcolor="white">환전</th>
@@ -117,6 +118,7 @@
         <td>{{addComma totalInfo.addBroadV}}</td>
         <td>{{addComma totalInfo.addClip}}</td>
         <td>{{addComma totalInfo.addMailbox}}</td>
+        <td>{{addComma totalInfo.addChangeCancel}}</td>
         <td>{{addComma totalInfo.addOp}}</td>
         <td>{{addComma totalInfo.subTotal}}</td>
         <td>{{addComma totalInfo.subExchange}}</td>
@@ -139,6 +141,7 @@
         <td>{{addComma addBroadV 'Y'}}</td>
         <td>{{addComma addClip 'Y'}}</td>
         <td>{{addComma addMailbox 'Y'}}</td>
+        <td>{{addComma addChangeCancel 'Y'}}</td>
         <td>{{addComma addOp 'Y'}}</td>
         <td>{{addComma subTotal 'Y'}}</td>
         <td>{{addComma subExchange 'Y'}}</td>
