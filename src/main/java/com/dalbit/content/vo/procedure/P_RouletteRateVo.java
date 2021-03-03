@@ -13,6 +13,7 @@ public class P_RouletteRateVo extends BaseVo {
     private int dalCnt;
     private int winRate;
     private int limitCnt;
+    private int expPoint;
 
     private String editList;
 }
