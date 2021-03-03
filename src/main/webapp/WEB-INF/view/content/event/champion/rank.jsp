@@ -166,7 +166,7 @@
                 <td>{{{memNoLink data.mem_no data.mem_no}}}</td>
                 <td>{{phoneNumHyphen memPhone}}</td>
                 <td>{{memNick}}</td>
-                <td>{{totalPoint}} 달</td>
+                <td>{{addComma totalPoint}} 달</td>
             </tr>
 
         {{else}}
