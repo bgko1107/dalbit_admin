@@ -74,6 +74,9 @@
         var html = templateScript(data);
         $("#recommMemberInfo").html(html);
         ui.paintColor();
+        if(!common.isEmpty($("#image_url").val())){
+            $('._previewImage').click();
+        }
 
 
         var scrollPosition = $("#recommMemberInfo").offset();
@@ -100,6 +103,7 @@
                 , title: $("#title").val()
                 , desc: $("#desc").val()
                 , viewYn: $("input[name='view_yn']:checked").val()
+                , imageUrl : $("#image_url").val()
             };
 
             console.log(data);
@@ -137,6 +141,14 @@
             util.getAjaxData("recomm", "/rest/menu/recomm/delete", data, fn_recommEdit_success);
         }
     }
+
+    $(document).on('click', '._previewImage', function(){
+       console.log('click');
+       console.log($('._previewArea img').length);
+       var image_url = $("#image_url").val();
+       var img = "<img class='thumbnail fullSize_background no-padding' src='"+image_url+"' style='height:auto; width:100%;margin-bottom: 0px' />";
+       $('._previewArea').html(img);
+    });
 </script>
 
 <script id="tmp_recommMemberInfo" type="text/x-handlebars-template">
@@ -184,6 +196,23 @@
             <td>{{timeStampDay broadcastTime}}</td>
             <th class="_bgColor" data-bgcolor="#c6d9f1">최근 3개월 방송횟수</th>
             <td>{{addComma broadcastCnt}} 회</td>
+        </tr>
+        <tr>
+            <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">이미지 등록</th>
+            <td colspan="3">
+                <input type="text" class="form-control" name="image_url" id="image_url" value="{{imageUrl}}">
+            </td>
+            <td><button type="button" class="btn btn-default btn-sm _previewImage">미리보기</button></td>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">미리보기</th>
+            <td class="_previewArea">
+                {{^equal imageUrl ''}}
+                    <img class="thumbnail fullSize_background no-padding" src="{{imageUrl}}" style='height:auto; width:100%;margin-bottom: 0px' />
+                {{/equal}}
+            </td>
+            <th class="_bgColor" data-bgcolor="#c6d9f1">프로필 이미지</th>
+            <td>
+                <img class="thumbnail fullSize_background no-padding" src="{{renderProfileImage profileImage}}" style='height:auto; width:100%;margin-bottom: 0px' />
+            </td>
         </tr>
         <tr>
             <th colspan="2" class="_bgColor" data-bgcolor="#c6d9f1">소개문구</th>
