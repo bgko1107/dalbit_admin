@@ -361,6 +361,11 @@ var BroadcastDataTableSource = {
         , 'columns': [
             {'title': '구분', 'data': 'state', 'width':'80px', 'render': function (data, type, row, meta) {
                     var tmp = "";
+
+                    if(row.shadow == 1){
+                        tmp += '<br/><lable>관리자모드</lable><br/>';
+                    }
+
                     if(row.recomm_badge == "1"){
                         tmp = '<span class ="label" style="background-color:#d943c1">' + "추천" + '</span><br/>';
                     }
@@ -405,7 +410,12 @@ var BroadcastDataTableSource = {
             {'title': '청취 종료시간', 'data': 'endDateFormat', 'width':'100px'},
             {'title': '권한 시작 일시', 'data': 'authStartDateFormat', 'width':'100px'},
             {'title': '권한 종료 일시', 'data': 'authEndDateFormat', 'width':'100px'},
-            {'title': '누적 청취시간', 'data': 'listenTime', 'width':'100px','render' : function (data){
+            {'title': '누적 청취시간', 'data': 'listenTime', 'width':'100px','render' : function (data, type, row){
+                    if(row.shadow == 1){
+                        var startDate = moment(row.startDateFormat);
+                        var endDate = moment(row.endDateFormat);
+                        return common.timeStamp(endDate.diff(startDate, 'seconds'));
+                    }
                     return common.timeStamp(data);
                 }},
             {'title': '입장수', 'data': 'joinCnt', 'width':'60px'},
@@ -439,6 +449,9 @@ var BroadcastDataTableSource = {
         ,'createdRow' : function( row, data, dataIndex ) {
             if (data.inner == 1) {    // 테스트계정 row 색상 표시
                 $(row).addClass("bg-testMember");
+            }
+            if (data.shadow == 1) {
+                $(row).addClass("font-shadow");
             }
         }
     },

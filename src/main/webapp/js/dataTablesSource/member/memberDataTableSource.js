@@ -268,15 +268,15 @@ var MemberDataTableSource = {
                     }
                 }},
             {'title': '청취시작시간', 'data': 'startDateFormat', 'width':'120px'},
-            {'title': '청취종료시간', 'data': 'endDateFormat', 'width':'120px', 'render' : function(data, type, row){
+            {'title': '청취종료시간', 'data': 'endDateFormat', 'width':'120px'},
+            {'title': '청취진행시간', 'data': 'listentime', 'width':'80px', 'render': function (data, type, row) {
                     if(row.shadow == 1){
-                        return '관리자 모드';
-                    }else{
-                        return data;
+                        var startDate = moment(row.startDateFormat);
+                        var endDate = moment(row.endDateFormat);
+                        return common.timeStamp(endDate.diff(startDate, 'seconds'));
                     }
-                }},
-            {'title': '청취진행시간', 'data': 'listentime', 'width':'80px', 'render': function (data) {
                     return common.timeStamp(data);
+
                 }},
             {'title': '강제퇴장', 'data': 'forcedLeave', 'width':'60px', 'render': function (data) {
                     return common.addComma(data);
