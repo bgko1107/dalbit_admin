@@ -362,10 +362,6 @@ var BroadcastDataTableSource = {
             {'title': '구분', 'data': 'state', 'width':'80px', 'render': function (data, type, row, meta) {
                     var tmp = "";
 
-                    if(row.shadow == 1){
-                        tmp += '<br/><lable>관리자모드</lable><br/>';
-                    }
-
                     if(row.recomm_badge == "1"){
                         tmp = '<span class ="label" style="background-color:#d943c1">' + "추천" + '</span><br/>';
                     }
