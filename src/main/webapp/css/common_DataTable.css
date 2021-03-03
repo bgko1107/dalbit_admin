@@ -159,3 +159,7 @@ table.borderBlack tr td:last-child {
 .bg-testMember{
     background-color: #dae3f3;
 }
+
+.font-shadow{
+    color : #c70357;
+}

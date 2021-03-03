@@ -249,7 +249,7 @@ var MemberDataTableSource = {
                 }},
             {'title': 'DJ닉네임', 'data': 'dj_nickName', 'width':'100px'},
             {'title': '성별', 'data': 'dj_mem_sex', 'width':'100px', 'render': function (data, type, row, meta) {
-                    return common.sexIcon(data,row.dj_birth_year);
+                    return common.sexIcon(data,row.dj_birth_year) + '[' + row.shadow + ']';
                 }},
             {'title': '입장제한', 'data': 'type_entry','width' : '65px', 'render': function (data) {
                     return util.getCommonCodeLabel(data, entryType);
@@ -268,7 +268,13 @@ var MemberDataTableSource = {
                     }
                 }},
             {'title': '청취시작시간', 'data': 'startDateFormat', 'width':'120px'},
-            {'title': '청취종료시간', 'data': 'endDateFormat', 'width':'120px'},
+            {'title': '청취종료시간', 'data': 'endDateFormat', 'width':'120px', 'render' : function(data, type, row){
+                    if(row.shadow == 1){
+                        return '관리자 모드';
+                    }else{
+                        return data;
+                    }
+                }},
             {'title': '청취진행시간', 'data': 'listentime', 'width':'80px', 'render': function (data) {
                     return common.timeStamp(data);
                 }},
@@ -303,6 +309,9 @@ var MemberDataTableSource = {
         ,'createdRow' : function( row, data, dataIndex ) {
             if (data.inner == 1) {    // 테스트계정 row 색상 표시
                 $(row).addClass("bg-testMember");
+            }
+            if (data.shadow == 1) {
+                $(row).addClass("font-shadow");
             }
         }
     },
