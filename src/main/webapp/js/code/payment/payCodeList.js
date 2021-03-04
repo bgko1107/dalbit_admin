@@ -105,4 +105,5 @@ var payWay_new = [
     , new COMMON_CODE('payletter', 'payco', '페이코')
     , new COMMON_CODE('payletter', 'kakaopay', '카카오페이(카드)')
     , new COMMON_CODE('kakaoMoney', 'kakaoMoney', '카카오페이(머니)')
+    , new COMMON_CODE('simple', 'simple', '간편결제(계좌)')
 ];
