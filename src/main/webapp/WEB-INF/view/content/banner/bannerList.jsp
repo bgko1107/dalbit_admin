@@ -141,6 +141,8 @@ var fnc_bannerList = {};
     fnc_bannerList.initDataTable= function() {
         //=---------- Main DataTable ----------
         var dtList_info_data = function (data) {
+            data.position = $('#position').val();
+            data.platform = $("#platform").val();
         };
 
         fnc_bannerList.dtList_info = new DalbitDataTable(fnc_bannerList.targetDataTable, dtList_info_data, BannerDataTableSource.list, $("#searchForm"));

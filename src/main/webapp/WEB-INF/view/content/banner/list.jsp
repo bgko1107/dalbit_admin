@@ -135,7 +135,6 @@
     function getItemInfo(){
         // var selectTabId = $("#headerTab").find(".active").find("a").prop("id").split("_")[1];
         var selectTabId = "bannerList";
-        console.log(selectTabId)
         var targetFnc = eval("fnc_"+selectTabId);
 
         /* 엑셀저장을 위해 조회조건 임시저장 */

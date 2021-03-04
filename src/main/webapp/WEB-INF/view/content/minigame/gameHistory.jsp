@@ -118,7 +118,7 @@
             <td>{{{getCommonCodeLabel state 'room_state'}}}</td>
             <td>{{start_date}}</td>
             <td>{{end_date}}</td>
-            <td>{{#dalbit_if pay_yn '==' Y}} ON {{else}} OFF {{/dalbit_if}}</td>
+            <td>{{#dalbit_if pay_yn '==' 1}} ON {{else}} OFF {{/dalbit_if}}</td>
             <td>{{addComma go_cnt}}</td>
         </tr>
     {{else}}

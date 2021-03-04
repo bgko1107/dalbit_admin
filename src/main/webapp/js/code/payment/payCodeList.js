@@ -38,6 +38,7 @@ var payWay = [
     , new COMMON_CODE('payletter', 'payco', '페이코')
     , new COMMON_CODE('payletter', 'kakaopay', '카카오페이(카드)')
     , new COMMON_CODE('kakaoMoney', 'kakaoMoney', '카카오페이(머니)')
+    , new COMMON_CODE('simple', 'simple', '간편결제(계좌)')
 ];
 
 var bankList = [
@@ -55,6 +56,16 @@ var bankList = [
     , new COMMON_CODE('034','034','광주은행')
     , new COMMON_CODE('039','039','경남은행')
     , new COMMON_CODE('031','031','대구은행')
+    , new COMMON_CODE('037','037','전북은행')
+    , new COMMON_CODE('088','088','신한은행')
+    , new COMMON_CODE('002','002','산업은행')
+    , new COMMON_CODE('007','007','수협')
+    , new COMMON_CODE('035','035','제주은행')
+    , new COMMON_CODE('048','048','신협은행')
+    , new COMMON_CODE('005','005','KEB 하나은행')
+    , new COMMON_CODE('045','045','새마을금고')
+    , new COMMON_CODE('089','089','K 뱅크')
+    , new COMMON_CODE('090','090','카카오뱅크')
 ];
 
 var attempSearchType = [
@@ -94,4 +105,5 @@ var payWay_new = [
     , new COMMON_CODE('payletter', 'payco', '페이코')
     , new COMMON_CODE('payletter', 'kakaopay', '카카오페이(카드)')
     , new COMMON_CODE('kakaoMoney', 'kakaoMoney', '카카오페이(머니)')
+    , new COMMON_CODE('simple', 'simple', '간편결제(계좌)')
 ];

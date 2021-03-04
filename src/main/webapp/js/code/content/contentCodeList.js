@@ -798,6 +798,7 @@ var roulette_winType = [
     , new COMMON_CODE('all', '-1', '전체')
     , new COMMON_CODE('dal', '1', '달')
     , new COMMON_CODE('gifticon', '2', '기프티콘')
+    , new COMMON_CODE('exp', '3', '경험치')
 ];
 
 var content_scheduleWeek = [

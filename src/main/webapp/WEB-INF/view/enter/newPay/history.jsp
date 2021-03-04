@@ -305,7 +305,7 @@
         <colgroup>
             <col width="7.4%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
             <col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
-            <col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
+            <col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/><col width="7.1%"/>
         </colgroup>
         <thead>
         <tr>
@@ -323,8 +323,9 @@
             <th>티머니</th>
             <th>캐시비</th>
             <th>페이코</th>
-            <th>카카오페이(카드)</th>
-            <th>카카오페이(머니)</th>
+            <th>카카오페이<br/>(카드)</th>
+            <th>카카오페이<br/>(머니)</th>
+            <th>간편결제<br/>(계좌)</th>
             <th style="color: green;font-weight: bold">총합</th>
         </tr>
         </thead>
@@ -344,6 +345,7 @@
             <td>{{addComma payco_cnt}}</td>
             <td>{{addComma kakaopay_cnt}}</td>
             <td>{{addComma kakaomoney_cnt}}</td>
+            <td>{{addComma simple_cnt}}</td>
             <td><b>{{addComma total_cnt}}</b></td>
         </tr>
         <tr>
@@ -361,6 +363,7 @@
             <td>{{addComma payco_cmt}}</td>
             <td>{{addComma kakaopay_cmt}}</td>
             <td>{{addComma kakaomoney_cmt}}</td>
+            <td>{{addComma simple_cmt}}</td>
             <td><b>{{addComma total_cmt}}</b></td>
         </tr>
         <tr  style="color: #66a449">
@@ -378,6 +381,7 @@
             <td>{{addComma payco_amt}}</td>
             <td>{{addComma kakaopay_amt}}</td>
             <td>{{addComma kakaomoney_amt}}</td>
+            <td>{{addComma simple_amt}}</td>
             <td><b>{{addComma total_amt}}</b></td>
         </tr>
 
@@ -396,6 +400,7 @@
             <td>{{vatMinus payco_amt}}</td>
             <td>{{vatMinus kakaopay_amt}}</td>
             <td>{{vatMinus kakaomoney_amt}}</td>
+            <td>{{vatMinus simple_amt}}</td>
             <td><b>{{vatMinus total_amt}}</b></td>
         </tr>
         <tr>
@@ -413,6 +418,7 @@
             <td>({{payRate payco_cnt total_cnt}}%)<br/><b>{{payRate payco_amt total_amt}}%</b></td>
             <td>({{payRate kakaopay_cnt total_cnt}}%)<br/><b>{{payRate kakaopay_amt total_amt}}%</b></td>
             <td>({{payRate kakaomoney_cnt total_cnt}}%)<br/><b>{{payRate kakaomoney_amt total_amt}}%</b></td>
+            <td>({{payRate simple_cnt total_cnt}}%)<br/><b>{{payRate simple_amt total_amt}}%</b></td>
             <td>({{payRate total_cnt total_cnt}}%)<br/><b>{{payRate total_amt total_amt}}%</b></td>
         </tr>
         </tbody>

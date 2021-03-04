@@ -174,6 +174,11 @@ var MemberDataTableSource = {
              {'title': '방송상태', 'data': 'liveBroad', 'width':'80px'},
         ]
         , 'comments': 'ㆍ회원 아이디를 클릭하시면 상세정보를 확인할 수 있습니다.'
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
     },
 
     'broadDetail': {
@@ -269,8 +274,18 @@ var MemberDataTableSource = {
                 }},
             {'title': '청취시작시간', 'data': 'startDateFormat', 'width':'120px'},
             {'title': '청취종료시간', 'data': 'endDateFormat', 'width':'120px'},
-            {'title': '청취진행시간', 'data': 'listentime', 'width':'80px', 'render': function (data) {
+            {'title': '청취진행시간', 'data': 'listentime', 'width':'80px', 'render': function (data, type, row) {
+                    if(row.shadow == 1){
+                        if(common.isEmpty(row.endDateFormat)){
+                            return '';
+                        }else{
+                            var startDate = moment(row.startDateFormat);
+                            var endDate = moment(row.endDateFormat);
+                            return common.timeStamp(endDate.diff(startDate, 'seconds'));
+                        }
+                    }
                     return common.timeStamp(data);
+
                 }},
             {'title': '강제퇴장', 'data': 'forcedLeave', 'width':'60px', 'render': function (data) {
                     return common.addComma(data);
@@ -303,6 +318,9 @@ var MemberDataTableSource = {
         ,'createdRow' : function( row, data, dataIndex ) {
             if (data.inner == 1) {    // 테스트계정 row 색상 표시
                 $(row).addClass("bg-testMember");
+            }
+            if (data.shadow == 1) {
+                $(row).addClass("font-shadow");
             }
         }
     },

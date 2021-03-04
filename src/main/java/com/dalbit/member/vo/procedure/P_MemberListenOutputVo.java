@@ -38,6 +38,7 @@ public class P_MemberListenOutputVo extends SearchVo {
     private int state;
     private String type_entry;
     private String type_media;
+    private int shadow;
 
     private int giftCnt;
     private int giftDal;

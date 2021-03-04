@@ -14,27 +14,37 @@
         <if test='txt_search != null and txt_search != ""'>
             <choose>
                 <when test='searchType == "1"'>
-                    AND evtApply.mem_no like  concat ('%', #{txt_search}, '%')
+                    AND (evtApply.mem_no like  concat ('%', #{txt_search})
+                        or evtApply.mem_no like  concat (#{txt_search}, '%'))
                 </when>
                 <when test='searchType == "2"'>
                     AND (
-                        member.mem_userid like concat ('%', #{txt_search}, '%')
-                        or outMember.mem_userid like concat ('%', #{txt_search}, '%')
+                        member.mem_userid like concat ('%', #{txt_search})
+                        or member.mem_userid like concat (#{txt_search}, '%')
+                        or outMember.mem_userid like concat ('%', #{txt_search})
+                        or outMember.mem_userid like concat (#{txt_search}, '%')
                     )
                 </when>
                 <when test='searchType == "3"'>
                     AND (
-                        member.mem_nick like concat ('%', #{txt_search}, '%')
-                        or outMember.mem_nick like concat ('%', #{txt_search}, '%')
+                        member.mem_nick like concat ('%', #{txt_search})
+                        or member.mem_nick like concat (#{txt_search}, '%')
+                        or outMember.mem_nick like concat ('%', #{txt_search})
+                        or outMember.mem_nick like concat (#{txt_search}, '%')
                     )
                 </when>
                 <otherwise>
                     and (
-                        evtApply.mem_no like  concat ('%', #{txt_search}, '%')
-                        or member.mem_userid like concat ('%', #{txt_search}, '%')
-                        or outMember.mem_userid like concat ('%', #{txt_search}, '%')
-                        or member.mem_nick like concat ('%', #{txt_search}, '%')
-                        or outMember.mem_nick like concat ('%', #{txt_search}, '%')
+                        evtApply.mem_no like  concat ('%', #{txt_search})
+                        or evtApply.mem_no like  concat (#{txt_search}, '%')
+                        or member.mem_userid like concat ('%', #{txt_search})
+                        or member.mem_userid like concat (#{txt_search}, '%')
+                        or outMember.mem_userid like concat ('%', #{txt_search})
+                        or outMember.mem_userid like concat (#{txt_search}, '%')
+                        or member.mem_nick like concat ('%', #{txt_search})
+                        or member.mem_nick like concat (#{txt_search}, '%')
+                        or outMember.mem_nick like concat ('%', #{txt_search})
+                        or outMember.mem_nick like concat (#{txt_search}, '%')
                     )
                 </otherwise>
             </choose>
@@ -46,7 +56,10 @@
             and evtApply.item_no in ('2', '3') /*1은 0달 꽝이라 제외*/
         </if>
         <if test='winType == 2'>
-            and evtApply.item_no not in ('1', '2', '3')
+            and evtApply.item_no not in ('1', '2', '3', '10001', '10002', '10003', '10004')
+        </if>
+        <if test='winType == 3'>
+            and evtApply.item_no in ('10001', '10002', '10003', '10004')
         </if>
     </sql>
 

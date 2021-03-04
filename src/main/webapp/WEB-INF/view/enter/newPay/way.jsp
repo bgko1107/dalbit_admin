@@ -9,14 +9,15 @@
         <%--<a href="javascript://" class="_nextSearch">[다음]</a>--%>
         <table class="table table-bordered">
             <colgroup>
-                <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                <col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/><col width="2.7%"/>
-                <col width="2.7%"/><col width="2.7%"/>
+                <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                <col width="2%"/>
             </colgroup>
             <thead>
             <tr>
@@ -35,6 +36,7 @@
                 <th colspan="3" class="_stateTopTh">페이코<i class="fa fa-paypal"></i></th>
                 <th colspan="3" class="_stateTopTh">카카오페이(카드)<i class="fa fa-comment"></i></th>
                 <th colspan="3" class="_stateTopTh">카카오페이(머니)<i class="fa fa-comment"></i></th>
+                <th colspan="3" class="_stateTopTh">간편결제(계좌)<i class="fa fa-money"></i></th>
             </tr>
             <tr>
                 <th class="_stateSubTh">건(비율)</th>
@@ -64,6 +66,9 @@
                 <%--<th class="_stateSubTh">건</th>--%>
                 <%--<th class="_stateSubTh">수량</th>--%>
                 <%--<th class="_stateSubTh">금액</th>--%>
+                <th class="_stateSubTh">건</th>
+                <th class="_stateSubTh">수량</th>
+                <th class="_stateSubTh">금액</th>
                 <th class="_stateSubTh">건</th>
                 <th class="_stateSubTh">수량</th>
                 <th class="_stateSubTh">금액</th>
@@ -191,6 +196,9 @@
         <td>{{vatMinus sum_kakaomoneyCnt}}</td>
         <td>{{vatMinus sum_kakaomoneyCmt}}</td>
         <td>{{vatMinus sum_kakaomoneyAmt}}</td>
+        <td>{{vatMinus sum_simpleCnt}}</td>
+        <td>{{vatMinus sum_simpleCmt}}</td>
+        <td>{{vatMinus sum_simpleAmt}}</td>
     </tr>
 </script>
 
@@ -245,7 +253,9 @@
         <td>{{vatMinus kakaomoneyCnt}}</td>
         <td>{{vatMinus kakaomoneyCmt}}</td>
         <td>{{vatMinus kakaomoneyAmt}}</td>
-
+        <td>{{vatMinus simpleCnt}}</td>
+        <td>{{vatMinus simpleCmt}}</td>
+        <td>{{vatMinus simpleAmt}}</td>
     </tr>
     {{else}}
     <td colspan="11" class="noData">{{isEmptyData}}<td>

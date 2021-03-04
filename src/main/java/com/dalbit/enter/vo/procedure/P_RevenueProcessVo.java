@@ -85,6 +85,7 @@ public class P_RevenueProcessVo {
     private long addBroadV;
     private long addClip;
     private long addMailbox;
+    private long addChangeCancel;
     private long addOp;
     private long subTotal;
     private long subExchange;

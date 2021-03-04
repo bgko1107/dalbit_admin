@@ -32,11 +32,19 @@
                                 <col width="5%">
                                 <col width="5%">
                                 <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
                             </colgroup>
                             <thead>
                                 <tr>
                                     <th></th>
                                     <th>꽝</th>
+                                    <th>1 exp</th>
+                                    <th>3 exp</th>
+                                    <th>5 exp</th>
+                                    <th>10 exp</th>
                                     <th>1달</th>
                                     <th>3달</th>
                                     <th>상품 A</th>
@@ -52,20 +60,28 @@
                             <tbody>
                                 <tr id="giftCntArea">
                                     <th>최대 당첨<br />제한 명수</th>
-                                    <td>무제한<input type="hidden" class="form-control _data" /></td>
-                                    <td>무제한<input type="hidden" class="form-control _data" /></td>
-                                    <td>무제한<input type="hidden" class="form-control _data" /></td>
-                                    <td><input type="text" class="form-control _data" /></td>
-                                    <td><input type="text" class="form-control _data" /></td>
-                                    <td><input type="text" class="form-control _data" /></td>
-                                    <td><input type="text" class="form-control _data" /></td>
-                                    <td><input type="text" class="form-control _data" /></td>
-                                    <td><input type="text" class="form-control _data" /></td>
+                                    <td>무제한<input type="hidden" class="form-control _data" data-itemNo="1" /></td>
+                                    <td>무제한<input type="hidden" class="form-control _data" data-itemNo="10001" /></td>
+                                    <td>무제한<input type="hidden" class="form-control _data" data-itemNo="10002" /></td>
+                                    <td>무제한<input type="hidden" class="form-control _data" data-itemNo="10003" /></td>
+                                    <td>무제한<input type="hidden" class="form-control _data" data-itemNo="10004" /></td>
+                                    <td>무제한<input type="hidden" class="form-control _data" data-itemNo="2" /></td>
+                                    <td>무제한<input type="hidden" class="form-control _data" data-itemNo="3" /></td>
+                                    <td><input type="text" class="form-control _data" data-itemNo="4" /></td>
+                                    <td><input type="text" class="form-control _data" data-itemNo="5" /></td>
+                                    <td><input type="text" class="form-control _data" data-itemNo="6" /></td>
+                                    <td><input type="text" class="form-control _data" data-itemNo="7" /></td>
+                                    <td><input type="text" class="form-control _data" data-itemNo="8" /></td>
+                                    <td><input type="text" class="form-control _data" data-itemNo="9" /></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr id="giftRate">
                                     <th>확률(100%)</th>
+                                    <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                    <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                    <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                    <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
                                     <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
                                     <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
                                     <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
@@ -112,11 +128,19 @@
                                 <col width="5%">
                                 <col width="5%">
                                 <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="5%">
                             </colgroup>
                             <thead>
                             <tr>
                                 <th></th>
                                 <th>꽝</th>
+                                <th>1 exp</th>
+                                <th>3 exp</th>
+                                <th>5 exp</th>
+                                <th>10 exp</th>
                                 <th>1달</th>
                                 <th>3달</th>
                                 <th>상품 A</th>
@@ -135,6 +159,10 @@
                                 <td>무제한<input type="hidden" class="form-control _data" /></td>
                                 <td>무제한<input type="hidden" class="form-control _data" /></td>
                                 <td>무제한<input type="hidden" class="form-control _data" /></td>
+                                <td>무제한<input type="hidden" class="form-control _data" /></td>
+                                <td>무제한<input type="hidden" class="form-control _data" /></td>
+                                <td>무제한<input type="hidden" class="form-control _data" /></td>
+                                <td>무제한<input type="hidden" class="form-control _data" /></td>
                                 <td><input type="text" class="form-control _data" /></td>
                                 <td><input type="text" class="form-control _data" /></td>
                                 <td><input type="text" class="form-control _data" /></td>
@@ -146,6 +174,10 @@
                             </tr>
                             <tr id="eventRate">
                                 <th>확률(100%)</th>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
+                                <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
                                 <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
                                 <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
                                 <td><input type="text" class="form-control _data" style="width:60px; display:inherit" maxlength="5" /> %</td>
@@ -228,6 +260,8 @@
         var splitTxt = '|'
         $('#'+cntArea+' td input._data').each(function(index){
             var dalCnt = 0;
+            var exp = 0;
+            var itemNo = $(this).data('itemno');
             var giftRate = $('#'+rate+' td:eq('+index+') input').val();
             var giftCnt = $('#'+cntArea+' td:eq('+index+') input').val();
             if(common.isEmpty(giftCnt)){
@@ -244,15 +278,24 @@
                 return false;
             }
 
-            if(index == 1){
+            if(itemNo == 2){
                 dalCnt = 1;
-            }else if(index == 2){
+            }else if(itemNo == 3){
                 dalCnt = 3;
-            }else if(index == 8){
+            }else if(itemNo == 9){
                 dalCnt = 100;
+            }else if(itemNo == 10001){
+                exp = 1;
+            }else if(itemNo == 10002){
+                exp = 3;
+            }else if(itemNo == 10003){
+                exp = 5;
+            }else if(itemNo == 10004){
+                exp = 10;
             }
-            editList += index + 1 + ',' + dalCnt + ',' + (giftRate * 100) + ',' + giftCnt;
-            if(index != 8){
+
+            editList += itemNo + ',' + dalCnt + ',' + (giftRate * 100) + ',' + giftCnt + ',' + exp;
+            if(itemNo != 9){
                 editList += splitTxt;
             }
         });
