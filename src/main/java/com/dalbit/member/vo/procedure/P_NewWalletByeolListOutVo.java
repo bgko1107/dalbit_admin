@@ -27,5 +27,7 @@ public class P_NewWalletByeolListOutVo extends SearchVo {
     private String secret;
     private String itemName;
     private String item_thumbnail;
+    private int pageNo;
+    private String gubun;
 }
 

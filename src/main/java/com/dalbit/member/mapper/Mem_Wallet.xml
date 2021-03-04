@@ -826,4 +826,18 @@
         FROM rd_data.tb_member_wallet
         WHERE mem_no = #{mem_no}
     </select>
+
+
+
+
+    <select id="callNewWalletProDal" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_NewWalletDalListOutVo">
+    /* Mem_Wallet.xml - callNewWalletProDal */
+    call rd_admin.sp_admin_member_wallet_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <select id="callNewWalletProByeol" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_NewWalletByeolListOutVo">
+    /* Mem_Wallet.xml - callNewWalletProByeol */
+    call rd_admin.sp_admin_member_wallet_list(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
 </mapper>
