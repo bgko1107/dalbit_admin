@@ -174,6 +174,11 @@ var MemberDataTableSource = {
              {'title': '방송상태', 'data': 'liveBroad', 'width':'80px'},
         ]
         , 'comments': 'ㆍ회원 아이디를 클릭하시면 상세정보를 확인할 수 있습니다.'
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
     },
 
     'broadDetail': {

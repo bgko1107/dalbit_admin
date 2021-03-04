@@ -35,6 +35,7 @@ public class P_MemberListOutputVo extends SearchVo {
     private String last_connect_DateFormat;
 
     private int item_cnt;
+    private int inner;
 
     public void setJoinDate(Date joinDate){
         this.joinDate = joinDate;
