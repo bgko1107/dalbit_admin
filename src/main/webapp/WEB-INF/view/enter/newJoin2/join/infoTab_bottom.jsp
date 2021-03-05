@@ -7,6 +7,7 @@
             <div class="widget-content">
                 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
                     <li class="active"><a href="#calendar" role="tab" data-toggle="tab" id="tab_calendar">일자별</a></li>
+                    <li><a href="#naturalJoin" role="tab" data-toggle="tab" id="tab_naturalJoin">일자별 (자연가입)</a></li>
                     <li><a href="#time" role="tab" data-toggle="tab" id="tab_time">시간대별</a></li>
                     <li><a href="#month" role="tab" data-toggle="tab" id="tab_month">월간별</a></li>
                     <li><a href="#list" role="tab" data-toggle="tab" id="tab_list">가입 회원내역</a></li>
@@ -14,6 +15,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="calendar"><jsp:include page="calendar.jsp"/></div>     <!-- 일자별 -->
+                    <div class="tab-pane fade" id="naturalJoin"><jsp:include page="naturalJoin.jsp"/></div>         <!-- 자연가입 -->
                     <div class="tab-pane fade" id="time"><jsp:include page="time.jsp"/></div>                       <!-- 실시간 -->
                     <div class="tab-pane fade" id="month"><jsp:include page="month.jsp"/></div>                     <!-- 월간별 -->
                     <div class="tab-pane fade" id="list"><jsp:include page="list.jsp"/></div>                       <!-- 가입 회원내역 -->
@@ -43,7 +45,7 @@
         $("#searchMemberArea").hide();
         if(tabId == 'tab_time'){
             slctType = 0;
-        }else if(tabId == 'tab_calendar' || tabId == 'tab_month') {
+        }else if(tabId == 'tab_calendar' || tabId == 'tab_month' || tabId == "tab_naturalJoin") {
             slctType = 1;
         }else if(tabId == 'tab_list') {
             $("#searchText").show();
@@ -70,6 +72,8 @@
                 getCalendar();
             }else if(tabId == 'tab_month') {
                 getMonth();
+            }else if(tabId == "tab_naturalJoin"){
+                getNaturalJoin();
             }
         }else if (tabId == 'tab_list'){
             getUserInfo();

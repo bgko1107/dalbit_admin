@@ -10,7 +10,7 @@
             <div id='lineArea'></div>
         </div>
         <div id="container-fluid">
-            <div class="widget-content col-md-10">
+            <div class="widget-content col-md-10 no-padding">
                 <div class="calendar col-md-10 no-padding"></div>
                 <div class="col-md-2 no-padding" id="totalTable"></div>
 
@@ -46,6 +46,7 @@
 
     function renderCalendar(){
         var tmp_sDate = $("#startDate").val();
+        var tmp_eDate = $("#endDate").val();
 
         beforeSDate = moment($("#startDate").val()).add("months", -1).format('YYYY.MM.01');
         var monthLastDate = new Date(beforeSDate.substr(0,4),beforeSDate.substr(5,7),-1);
@@ -72,8 +73,8 @@
                     type: 'post',
                     dataType: 'json',
                     data: {
-                        startDate : $('.fc-day').not('.fc-other-month').first().data('date').replace(/-/gi,".")
-                        , endDate : $('.fc-day').not('.fc-other-month').last().data('date').replace(/-/gi,".")
+                        startDate : tmp_sDate
+                        , endDate : tmp_eDate
                         , beforeStartDate : beforeSDate
                         , beforeEndDate : beforeEDate
                         , slctType : 1
@@ -166,7 +167,6 @@
         var total_join_cnt = [];
 
         if (response.result == "fail") {
-            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
             $("#lineArea").empty();
             $("#barArea").empty();
             return false;
@@ -408,7 +408,6 @@
 
             Plotly.newPlot('lineArea', data, layout);
             /* 라인차트 [end] */
-
 
             setSummary(response.data);
         }else{
