@@ -232,7 +232,7 @@
         left join rd_data.tb_member_withdrawal_bak withdrawal on exchange.mem_no = withdrawal.mem_no
         WHERE DATE_FORMAT(#{startDate},'%Y-%m-%d 00:00:00') <![CDATA[<=]]> op_date
             AND op_date <![CDATA[<=]]> DATE_FORMAT(#{endDate},'%Y-%m-%d 23:59:59')
-            and (state in (0, 1, 4) or (state = 2 and last_reject = 1))
+            and state = 1
         <if test='search_testId == 1'>
             and (basic.inner = 0 or withdrawal.inner = 0)
         </if>
@@ -409,7 +409,7 @@
         </choose>
         left join rd_data.tb_member_basic basic
         on exchange.mem_no = basic.mem_no
-        where (exchange.state in (0,1,4) or ( exchange.state = 2 and exchange.last_reject = 1))
+        where exchange.state = 1
         <choose>
             <when test="end_year == null">
                 and DATE_FORMAT(exchange.op_date , '%Y%m') = concat(#{search_year}, #{search_month})
@@ -454,7 +454,7 @@
         left join rd_data.tb_member_basic basic
         on exchange.mem_no = basic.mem_no
         LEFT JOIN rd_data.tb_member_withdrawal_bak f ON exchange.mem_no = f.mem_no
-        where (exchange.state in (0,1,4) or ( exchange.state = 2 and exchange.last_reject = 1))
+        where exchange.state = 1
         <choose>
             <when test="end_year == null">
                 and DATE_FORMAT(exchange.op_date , '%Y%m') = concat(#{search_year}, #{search_month})
@@ -499,7 +499,7 @@
         on exchange.mem_no = basic.mem_no
 
         LEFT JOIN rd_data.tb_member_withdrawal_bak f ON exchange.mem_no = f.mem_no
-        where (exchange.state in (0,1,4) or ( exchange.state = 2 and exchange.last_reject = 1))
+        where exchange.state = 1
         <choose>
             <when test="end_year == null">
                 and DATE_FORMAT(exchange.op_date , '%Y%m') = concat(#{search_year}, #{search_month})
