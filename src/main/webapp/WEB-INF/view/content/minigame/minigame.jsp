@@ -155,7 +155,7 @@
                 , game_name: $("#miniGameDetail #gameName").val()
                 , image_url: $("#miniGameDetail #imageUrl").val()
                 , game_desc: $("#miniGameDetail #contents").val()
-                , view_yn: $("#miniGameDetail #detail_view_yn").prop('checked') ? 1 : 0
+                , view_yn: $("#miniGameDetail #detail_show_yn").prop('checked') ? 1 : 0
             };
             util.getAjaxData("miniGameInfoUpd", "/rest/content/boardAdm/mini/game/info/update", data, function (dst_id, response, param){
                 alert(response.message);
@@ -227,7 +227,7 @@
             <th>등록/수정일시</th>
             <td>{{last_upd_date}}</td>
             <th>노출여부</th>
-            <td>{{{getOnOffSwitch view_yn 'view_yn'}}}</td>
+            <td>{{{getOnOffSwitch view_yn 'show_yn'}}}</td>
         </tr>
         <tr>
             <th rowspan="2">이미지URL</th>
