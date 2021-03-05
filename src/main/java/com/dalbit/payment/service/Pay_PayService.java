@@ -61,8 +61,8 @@ public class Pay_PayService {
 
         List<Pay_PayOutputVo> list = payPayDao.getPayList(payPayInputVo);
 
-        String[] headers = {"No", "회원번호", "닉네임", "수단", "정보", "시도일시", "완료일시", "결제아이템", "달 수", "결제수량", "금액", "취소 시 차감 달", "보유 달", "직원여부", "플랫폼", "취소일시", "취소실패사유", "처리자", "결제상태", "취소상태"};
-        int[] headerWidths = {3000, 3000, 3000, 3000, 5000, 5000, 5000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000};
+        String[] headers = {"No", "회원번호", "닉네임","거래번호", "수단", "정보", "시도일시", "완료일시", "결제아이템", "달 수", "결제수량", "금액", "취소 시 차감 달", "보유 달", "직원여부", "플랫폼", "취소일시", "취소실패사유", "처리자", "결제상태", "취소상태"};
+        int[] headerWidths = {3000, 3000, 3000,3000, 3000, 5000, 5000, 5000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000};
 
         List<Object[]> bodies = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
@@ -74,23 +74,26 @@ public class Pay_PayService {
             hm.put("no", list.size() - i);
             hm.put("col1", DalbitUtil.isEmpty(list.get(i).getMem_no()) ? "" : list.get(i).getMem_no());
             hm.put("col2", DalbitUtil.isEmpty(list.get(i).getMem_nick()) ? "" : list.get(i).getMem_nick());
-            hm.put("col3", DalbitUtil.isEmpty(payWay) ? "" : payWay);
-            hm.put("col4", DalbitUtil.isEmpty(list.get(i).getPay_info_no()) ? "" : list.get(i).getPay_info_no() + " " + (DalbitUtil.isEmpty(list.get(i).getPay_info_nm()) ? "" : list.get(i).getPay_info_nm()));
-            hm.put("col5", DalbitUtil.isEmpty(list.get(i).getPay_dt_comein()) ? "" : list.get(i).getPay_dt_comein());
-            hm.put("col6", DalbitUtil.isEmpty(list.get(i).getPay_ok_date()) ? "" : list.get(i).getPay_ok_date() + " " + list.get(i).getPay_ok_time());
-            hm.put("col7", DalbitUtil.isEmpty(list.get(i).getPay_code()) ? "" : list.get(i).getPay_code());
-            hm.put("col8", DalbitUtil.isEmpty(list.get(i).getDal_cnt()) ? "" : DalbitUtil.comma(list.get(i).getDal_cnt()));
-            hm.put("col9", DalbitUtil.isEmpty(list.get(i).getItem_amt()) ? "" : list.get(i).getItem_amt());
-            hm.put("col10", DalbitUtil.isEmpty(list.get(i).getPay_amt()) ? "" : list.get(i).getPay_amt());
-            hm.put("col11", DalbitUtil.isEmpty(list.get(i).getDal_cnt()) ? "" : list.get(i).getDal_cnt());
-            hm.put("col12", DalbitUtil.isEmpty(list.get(i).getTot_dal_cnt()) ? "" : list.get(i).getTot_dal_cnt());
-            hm.put("col13", DalbitUtil.isEmpty(list.get(i).getChrgr_yn()) ? "" : list.get(i).getChrgr_yn().equals("1") ? "Y" : "N");
-            hm.put("col14", DalbitUtil.isEmpty(platform) ? "" : platform);
-            hm.put("col15", DalbitUtil.isEmpty(list.get(i).getCancel_dt()) ? "" : list.get(i).getCancel_dt());
-            hm.put("col16", DalbitUtil.isEmpty(list.get(i).getFail_msg()) ? "" : list.get(i).getFail_msg());
-            hm.put("col17", DalbitUtil.isEmpty(list.get(i).getOp_name()) ? "" : list.get(i).getOp_name());
-            hm.put("col18", DalbitUtil.isEmpty(list.get(i).getPay_yn()) ? "" : list.get(i).getPay_yn().toUpperCase());
-            hm.put("col19", DalbitUtil.isEmpty(list.get(i).getCancel_state()) ? "" : list.get(i).getCancel_state().toUpperCase());
+
+            hm.put("col3", DalbitUtil.isEmpty(list.get(i).getOrder_id()) ? "" : list.get(i).getOrder_id());
+
+            hm.put("col4", DalbitUtil.isEmpty(payWay) ? "" : payWay);
+            hm.put("col5", DalbitUtil.isEmpty(list.get(i).getPay_info_no()) ? "" : list.get(i).getPay_info_no() + " " + (DalbitUtil.isEmpty(list.get(i).getPay_info_nm()) ? "" : list.get(i).getPay_info_nm()));
+            hm.put("col6", DalbitUtil.isEmpty(list.get(i).getPay_dt_comein()) ? "" : list.get(i).getPay_dt_comein());
+            hm.put("col7", DalbitUtil.isEmpty(list.get(i).getPay_ok_date()) ? "" : list.get(i).getPay_ok_date() + " " + list.get(i).getPay_ok_time());
+            hm.put("col8", DalbitUtil.isEmpty(list.get(i).getPay_code()) ? "" : list.get(i).getPay_code());
+            hm.put("col9", DalbitUtil.isEmpty(list.get(i).getDal_cnt()) ? "" : DalbitUtil.comma(list.get(i).getDal_cnt()));
+            hm.put("col10", DalbitUtil.isEmpty(list.get(i).getItem_amt()) ? "" : list.get(i).getItem_amt());
+            hm.put("col11", DalbitUtil.isEmpty(list.get(i).getPay_amt()) ? "" : list.get(i).getPay_amt());
+            hm.put("col12", DalbitUtil.isEmpty(list.get(i).getDal_cnt()) ? "" : list.get(i).getDal_cnt());
+            hm.put("col13", DalbitUtil.isEmpty(list.get(i).getTot_dal_cnt()) ? "" : list.get(i).getTot_dal_cnt());
+            hm.put("col14", DalbitUtil.isEmpty(list.get(i).getChrgr_yn()) ? "" : list.get(i).getChrgr_yn().equals("1") ? "Y" : "N");
+            hm.put("col15", DalbitUtil.isEmpty(platform) ? "" : platform);
+            hm.put("col16", DalbitUtil.isEmpty(list.get(i).getCancel_dt()) ? "" : list.get(i).getCancel_dt());
+            hm.put("col17", DalbitUtil.isEmpty(list.get(i).getFail_msg()) ? "" : list.get(i).getFail_msg());
+            hm.put("col18", DalbitUtil.isEmpty(list.get(i).getOp_name()) ? "" : list.get(i).getOp_name());
+            hm.put("col19", DalbitUtil.isEmpty(list.get(i).getPay_yn()) ? "" : list.get(i).getPay_yn().toUpperCase());
+            hm.put("col20", DalbitUtil.isEmpty(list.get(i).getCancel_state()) ? "" : list.get(i).getCancel_state().toUpperCase());
 
             bodies.add(hm.values().toArray());
         }
