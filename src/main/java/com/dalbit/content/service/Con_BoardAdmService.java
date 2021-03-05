@@ -547,6 +547,18 @@ public class Con_BoardAdmService {
         return result;
     }
 
+    public String miniGameHistoryList(MiniGameListVo miniGameListVo) {
+        ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
+        ArrayList<MiniGameListVo> list = conBoardAdmDao.miniGameHistoryList(procedureVo);
+        MiniGameListVo miniGameList = new Gson().fromJson(procedureVo.getExt(), MiniGameListVo.class);
+
+        if(list.size() > 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(miniGameList.getTotalCnt()), miniGameList));
+        }else{
+            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음, list, new PagingVo(miniGameList.getTotalCnt()),miniGameList));
+        }
+    }
+
     public String miniGameMemberList(MiniGameListVo miniGameListVo) {
         ProcedureVo procedureVo = new ProcedureVo(miniGameListVo);
         ArrayList<MiniGameListVo> list = conBoardAdmDao.miniGameMemberList(procedureVo);

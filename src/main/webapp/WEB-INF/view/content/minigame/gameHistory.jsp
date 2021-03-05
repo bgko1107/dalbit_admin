@@ -61,7 +61,7 @@
 
         };
 
-        util.getAjaxData("miniGameList", "/rest/content/boardAdm/mini/game/member/list", data, fn_success_miniGameMemberList);
+        util.getAjaxData("miniGameList", "/rest/content/boardAdm/mini/game/history/list", data, fn_success_miniGameMemberList);
 
         var template = $('#tmp_miniGameHistoryTable').html();
         var templateScript = Handlebars.compile(template);
