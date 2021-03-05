@@ -3,12 +3,14 @@ package com.dalbit.member.service;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
+import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.excel.service.ExcelService;
 import com.dalbit.excel.vo.ExcelVo;
 import com.dalbit.member.dao.Mem_WalletDao;
 import com.dalbit.member.vo.procedure.*;
 import com.dalbit.util.DalbitUtil;
 import com.dalbit.util.GsonUtil;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -294,22 +296,29 @@ public class Mem_WalletService {
         return model;
     }
 
+
+
     /**
      * new 내지갑 달 내역 조회
      */
     public String getNewDalList(P_WalletDalVo pDalVo) {
-        int totalCnt = mem_walletDao.callNewWalletDal_totalCnt(pDalVo);
-        pDalVo.setTotalCnt(totalCnt);
-        List<P_NewWalletDalListOutVo> outVoList = mem_walletDao.callNewWalletDal(pDalVo);
+//        int totalCnt = mem_walletDao.callNewWalletDal_totalCnt(pDalVo);
+//        pDalVo.setTotalCnt(totalCnt);
+//        List<P_NewWalletDalListOutVo> outVoList = mem_walletDao.callNewWalletDal(pDalVo);
+
         HashMap summary = mem_walletDao.getResultNewDalSummary(pDalVo);
 
+        ProcedureVo procedureVo = new ProcedureVo(pDalVo);
+        List<P_NewWalletDalListOutVo> outVoList = mem_walletDao.callNewWalletProDal(procedureVo);
+        P_NewWalletDalListOutVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_NewWalletDalListOutVo.class);
+
         if(DalbitUtil.isEmpty(outVoList) || outVoList.size() <= 0){
-            return gsonUtil.toJson(new JsonOutputVo(Status.내지갑_달사용내역조회_없음, new ArrayList<P_NewWalletDalListOutVo>(), new PagingVo(pDalVo.getTotalCnt(), pDalVo.getPageNo(), pDalVo.getPageCnt())));
+            return gsonUtil.toJson(new JsonOutputVo(Status.내지갑_달사용내역조회_없음));
         }
 
         String result;
         if(outVoList.size() > 0) {
-            result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_달사용내역조회_성공, outVoList, new PagingVo(pDalVo.getTotalCnt(), pDalVo.getPageNo(), pDalVo.getPageCnt()),summary));
+            result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_달사용내역조회_성공, outVoList, new PagingVo(totalInfo.getTotalCnt(), totalInfo.getPageNo(), totalInfo.getPageCnt()),summary));
         }else{
             result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_달사용내역조회_실패));
         }
@@ -320,19 +329,23 @@ public class Mem_WalletService {
      * new 내지갑 별 내역 조회
      */
     public String getNewByeolList(P_WalletByeolVo pByeolVo) {
-        int totalCnt = mem_walletDao.callNewWalletByeol_totalCnt(pByeolVo);
-        pByeolVo.setTotalCnt(totalCnt);
-        List<P_NewWalletByeolListOutVo> outVoList = mem_walletDao.callNewWalletByeol(pByeolVo);
+//        int totalCnt = mem_walletDao.callNewWalletByeol_totalCnt(pByeolVo);
+//        pByeolVo.setTotalCnt(totalCnt);
+//        List<P_NewWalletByeolListOutVo> outVoList = mem_walletDao.callNewWalletByeol(pByeolVo);
+
+        ProcedureVo procedureVo = new ProcedureVo(pByeolVo);
+        List<P_NewWalletByeolListOutVo> outVoList = mem_walletDao.callNewWalletProByeol(procedureVo);
+        P_NewWalletByeolListOutVo totalInfo = new Gson().fromJson(procedureVo.getExt(), P_NewWalletByeolListOutVo.class);
 
         HashMap summary = mem_walletDao.getResultNewByeolSummary(pByeolVo);
 
         if(DalbitUtil.isEmpty(outVoList) || outVoList.size() <= 0){
-            return gsonUtil.toJson(new JsonOutputVo(Status.내지갑_별사용내역조회_없음, new ArrayList<P_NewWalletByeolListOutVo>(), new PagingVo(pByeolVo.getTotalCnt(), pByeolVo.getPageNo(), pByeolVo.getPageCnt()), summary));
+            return gsonUtil.toJson(new JsonOutputVo(Status.내지갑_별사용내역조회_없음));
         }
 
         String result;
         if(outVoList.size() > 0) {
-            result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_별사용내역조회_성공, outVoList, new PagingVo(pByeolVo.getTotalCnt(), pByeolVo.getPageNo(), pByeolVo.getPageCnt()), summary));
+            result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_별사용내역조회_성공, outVoList, new PagingVo(totalInfo.getTotalCnt(), totalInfo.getPageNo(), totalInfo.getPageCnt()), summary));
         }else{
             result = gsonUtil.toJson(new JsonOutputVo(Status.내지갑_별사용내역조회_실패));
         }

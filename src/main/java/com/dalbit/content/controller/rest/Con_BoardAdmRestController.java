@@ -287,9 +287,16 @@ public class Con_BoardAdmRestController {
         return conBoardAdmService.miniGameAdd(miniGameListVo);
     }
 
+    /**
+     * 미니 게임 진행 목록
+     */
+    @PostMapping("/mini/game/history/list")
+    public String miniGameHistoryList(MiniGameListVo miniGameListVo) {
+        return conBoardAdmService.miniGameHistoryList(miniGameListVo);
+    }
 
     /**
-     * 미니 참여자게임 목록
+     * 미니 게임 참여자 목록
      */
     @PostMapping("/mini/game/member/list")
     public String miniGameMemberList(MiniGameListVo miniGameListVo) {

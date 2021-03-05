@@ -12,6 +12,7 @@ public class P_WalletByeolVo extends PagingVo {
     private String walletType;            //(0: 전체, 1:구매, 2:선물, 3:교환)
     private int slct_type;                  //사용 구분(1: 루비교환, 2: 선물, 3: 환전, 4: 이벤트 받기, 7: 운영자지급)
     private int pageNo;
+    private int slctType;
 
     private String sDate;
     private String eDate;

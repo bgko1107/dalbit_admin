@@ -61,7 +61,7 @@
 
         };
 
-        util.getAjaxData("miniGameList", "/rest/content/boardAdm/mini/game/member/list", data, fn_success_miniGameMemberList);
+        util.getAjaxData("miniGameList", "/rest/content/boardAdm/mini/game/history/list", data, fn_success_miniGameMemberList);
 
         var template = $('#tmp_miniGameHistoryTable').html();
         var templateScript = Handlebars.compile(template);
@@ -112,7 +112,7 @@
         <tr>
             <td>{{rowNumDesc ../pagingVo/totalCnt @index ../pagingVo/pageNo ../pagingVo/pageCnt}}</td>
             <td>{{{getCommonCodeLabel os_type 'loginHistoryOsType'}}}</td>
-            <td>{{{roomNoLink room_no room_no}}} <br/>{{title}}</td>
+            <td>{{{getCommonCodeLabel subjectType 'subject_type'}}} <br/> {{{roomNoLink title room_no}}}</td>
             <td>{{{memNoLink mem_no mem_no}}} <br/> {{mem_nick}} </td>
             <td>{{{sexIcon mem_sex mem_birth_year}}}</td>
             <td>{{{getCommonCodeLabel state 'room_state'}}}</td>

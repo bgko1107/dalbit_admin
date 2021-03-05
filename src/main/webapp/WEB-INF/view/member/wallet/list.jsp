@@ -235,7 +235,11 @@
             data.startDate = sDate;
             data.endDate = eDate;
             data.walletDataType = $("#slctWalletDateType").find("select").val();
-
+            if(tmp == "dal" ) {
+                data.slctType = 0;
+            }else if(tmp == "byeol"){
+                data.slctType = 1;
+            }
         };
         var tmp_summary;
         // dtList_info_detail.destroy();  // 없어도 될듯?
@@ -249,7 +253,8 @@
         dtList_info_detail.useCheckBox(false);
         dtList_info_detail.useIndex(true);
         dtList_info_detail.setPageLength(50);
-        dtList_info_detail.createDataTable(tmp_summary);
+        // dtList_info_detail.createDataTable(tmp_summary);
+        dtList_info_detail.createDataTable();
 
         initDataTableTop_select_wallet()
     }

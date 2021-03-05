@@ -98,6 +98,9 @@ public interface Con_BoardAdmDao {
     ProcedureVo callMiniGameAdd(ProcedureVo procedureVo);
 
     @Transactional(readOnly = true)
+    ArrayList<MiniGameListVo> miniGameHistoryList(ProcedureVo procedureVo);
+
+    @Transactional(readOnly = true)
     ArrayList<MiniGameListVo> miniGameMemberList(ProcedureVo procedureVo);
 
     @Transactional(readOnly = true)
