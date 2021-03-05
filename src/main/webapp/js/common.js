@@ -132,6 +132,7 @@ common.replaceHtml_json = function(text){
 
 common.replaceTag = function(text){
     if(!common.isEmpty(text)){
+        text = text.replace(/\\r\\n/g, '<br/>');
         text = text.replace(/\\n/g, '<br/>');
         text = text.replace(/\\t/g, ' ');
         return text;

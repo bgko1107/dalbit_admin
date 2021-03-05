@@ -225,7 +225,7 @@ var ItemDataTableSource = {
                     return data;
                 }},
             {'title': '설명', 'data': 'desc', 'defaultContent': '-', 'render': function (data, type, row, meta) {
-                    return data;
+                    return common.replaceTag(data);
                 }},
             {'title': '사운드여부', 'data': 'sound_yn', 'defaultContent': '-', 'render': function (data, type, row, meta) {
                     return data == 0 ? '-' : 'Y';
