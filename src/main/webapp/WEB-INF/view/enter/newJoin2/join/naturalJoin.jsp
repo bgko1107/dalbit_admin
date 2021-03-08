@@ -164,8 +164,7 @@
         }else{
             alert('애드브릭스 등록 실패');
         }
-        $("#txt_jsonData").val('');
-        $("#div_gridData").empty();
+       renderNaturalJoin();
    }
 
 
@@ -241,6 +240,10 @@
                 });
             }
         });
+
+
+        $("#txt_jsonData").val('');
+        $("#div_gridData").empty();
     }
 
 
