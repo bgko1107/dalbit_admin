@@ -596,10 +596,10 @@
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_adbrix_calendarData">
-    <div>전체가입자 : {{addComma total_joinCnt}}</div>
-    <div class="font-bold" style="color: #ff5600">자연가입자 : {{addComma natural_joinCnt}}</div>
-    <div>UAC : {{addComma uac}}</div>
-    <div>오퍼월(IOS+AOS) : {{addComma ios_aos}}</div>
+    <div class="font-bold" style="color: black;">전체가입자 : {{addComma total_joinCnt}}</div>
+    <div class="font-bold" style="color: #ff5600;">자연가입자 : {{addComma natural_joinCnt}}</div>
+    <div style="color: black;">UAC : {{addComma uac}}</div>
+    <div style="color: black;">오퍼월(IOS+AOS) : {{addComma ios_aos}}</div>
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_adbrix_totalTable">
