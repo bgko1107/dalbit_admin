@@ -11,7 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 
 @Slf4j
 @RestController
@@ -109,6 +117,15 @@ public class Pay_CancelRestController {
     @PostMapping("kakaoMoney")
     public String payCancelKakaoMoney(Pay_CancelKakaoPayVo payCancelKakaoPayVo) throws GlobalException {
         String result = payCancelService.payCancelKakaoMoney(payCancelKakaoPayVo);
+        return result;
+    }
+
+    /**
+     * 간편결제(계좌) 결제 취소
+     */
+    @PostMapping("simple")
+    public String payCancelSimple(Pay_CancelSimplePayVo payCancelSimplePayVo) throws GlobalException, NoSuchPaddingException, InvalidKeyException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, ParseException {
+        String result = payCancelService.payCancelSimple(payCancelSimplePayVo);
         return result;
     }
 
