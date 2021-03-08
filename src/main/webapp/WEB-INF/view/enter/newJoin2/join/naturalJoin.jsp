@@ -68,7 +68,7 @@
                 <textarea type="textarea" class="form-control" id="memo" name="memo" style="width: 100%; height: 150px;"></textarea>
             </div>
             <div class="modal-footer">
-                <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이건준|', principal.getUserInfo().getName())}">
+                <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이건준|양대기|박진|박희천|', principal.getUserInfo().getName())}">
                     <button type="button" class="btn btn-default" id="bt_adbrixMemoDel" onclick="adbrixMemoAdd('delete');"><i class="fa fa-times-circle"></i> 삭제</button>
                     <button type="button" class="btn btn-default" id="bt_adbrixMemoAdd" onclick="adbrixMemoAdd('insert');"><i class="fa fa-times-circle"></i> 등록하기</button>
                     <button type="button" class="btn btn-default" id="bt_adbrixMemoUpd" onclick="adbrixMemoAdd('update');"><i class="fa fa-times-circle"></i> 수정하기</button>
@@ -87,85 +87,89 @@
 
     var memoIdx;
     var memoDate;
-   function adbrixAddClick(){
-       $("#adbrixExcelModal").modal('show');
-   }
+    function adbrixAddClick(){
+        $("#txt_jsonData").val('');
+        $("#div_gridData").empty();
+        $("#file").val("");
+
+        $("#adbrixExcelModal").modal('show');
+    }
 
 
-   function jsonDataExcel() {
-       let input = event.target;
-       let reader = new FileReader();
-       reader.onload = function () {
-           let data = reader.result;
-           let workBook = XLSX.read(data, { type: 'binary' });
-           workBook.SheetNames.forEach(function (sheetName) {
-               console.log('SheetName: ' + sheetName);
-               let rows = XLSX.utils.sheet_to_json(workBook.Sheets[sheetName]);
+    function jsonDataExcel() {
+        let input = event.target;
+        let reader = new FileReader();
+        reader.onload = function () {
+            let data = reader.result;
+            let workBook = XLSX.read(data, { type: 'binary' });
+            workBook.SheetNames.forEach(function (sheetName) {
+                console.log('SheetName: ' + sheetName);
+                let rows = XLSX.utils.sheet_to_json(workBook.Sheets[sheetName]);
 
-               console.log(rows);
+                console.log(rows);
 
-               $("#txt_jsonData").val(JSON.stringify(rows));
-           })
-       };
-       reader.readAsBinaryString(input.files[0]);
-   }
+                $("#txt_jsonData").val(JSON.stringify(rows));
+            })
+        };
+        reader.readAsBinaryString(input.files[0]);
+    }
 
-   function adbrixListAdd(){
-       if(confirm('Excel 파일을 등록 하시겠습니까?')){
-           $("#adbrixExcelModal").modal('hide');
+    function adbrixListAdd(){
+        if(confirm('Excel 파일을 등록 하시겠습니까?')){
+            $("#adbrixExcelModal").modal('hide');
 
-           var data = {
-               adbrixExcelList: $("#txt_jsonData").val()
-           };
-           util.getAjaxData("month", "/rest/enter/newjoin2/adbrix/add", data, fn_adbrixAdd_success);
-       }
-   }
+            var data = {
+                adbrixExcelList: $("#txt_jsonData").val()
+            };
+            util.getAjaxData("month", "/rest/enter/newjoin2/adbrix/add", data, fn_adbrixAdd_success);
+        }
+    }
 
-   var test1 = null, test2 = null;
-   function gridExcelToWeb(file, target){
-       var reader = new FileReader();
+    var test1 = null, test2 = null;
+    function gridExcelToWeb(file, target){
+        var reader = new FileReader();
 
-       reader.onload = function (evt) {
-           if (evt.target.readyState == FileReader.DONE) {
-               var data = evt.target.result;  //해당 데이터, 웹 서버에서 ajax같은거로 가져온 blob 형태의 데이터를 넣어주어도 동작 한다.
-               data = new Uint8Array(data);
-               var workbook = XLSX.read(data, { type: 'array' });
-               var sheetName = '';
-               workbook.SheetNames.forEach( function(data, idx){   //시트 여러개라면 이 안에서 반복문을 통해 돌리면 된다.
-                   if(idx == 0){
-                       sheetName = data;
-                   }
-               });
-               test1 = workbook;
+        reader.onload = function (evt) {
+            if (evt.target.readyState == FileReader.DONE) {
+                var data = evt.target.result;  //해당 데이터, 웹 서버에서 ajax같은거로 가져온 blob 형태의 데이터를 넣어주어도 동작 한다.
+                data = new Uint8Array(data);
+                var workbook = XLSX.read(data, { type: 'array' });
+                var sheetName = '';
+                workbook.SheetNames.forEach( function(data, idx){   //시트 여러개라면 이 안에서 반복문을 통해 돌리면 된다.
+                    if(idx == 0){
+                        sheetName = data;
+                    }
+                });
+                test1 = workbook;
 
-               var toHtml = XLSX.utils.sheet_to_html(workbook.Sheets[sheetName], { header: '' });
+                var toHtml = XLSX.utils.sheet_to_html(workbook.Sheets[sheetName], { header: '' });
 
-               target.html(toHtml);
-               target.find('table').attr({class:'table table-bordered',id:'excelResult'});  //id나 class같은거를 줄 수 있다.
-               test2 = toHtml;
-               $('#excelResult').find('tr').each(function(idx){
-                   if(idx == 0 ){
-                       $(this).css({'background-color':'#969da5a3'});
-                   }
-               });
-           }
-       };
-       reader.readAsArrayBuffer(file);
-   }
+                target.html(toHtml);
+                target.find('table').attr({class:'table table-bordered',id:'excelResult'});  //id나 class같은거를 줄 수 있다.
+                test2 = toHtml;
+                $('#excelResult').find('tr').each(function(idx){
+                    if(idx == 0 ){
+                        $(this).css({'background-color':'#969da5a3'});
+                    }
+                });
+            }
+        };
+        reader.readAsArrayBuffer(file);
+    }
 
-   $('#file').change( function(){
-       const selectedFile = $(this)[0].files[0];
-       gridExcelToWeb(selectedFile,  $('#div_gridData'))
-   });
+    $('#file').change( function(){
+        const selectedFile = $(this)[0].files[0];
+        gridExcelToWeb(selectedFile,  $('#div_gridData'))
+    });
 
-   function fn_adbrixAdd_success(dst_id, response){
+    function fn_adbrixAdd_success(dst_id, response){
         if(response.result=="success"){
             alert('애드브릭스 등록 성공');
         }else{
             alert('애드브릭스 등록 실패');
         }
-       renderNaturalJoin();
-   }
+        renderNaturalJoin();
+    }
 
 
     function getNaturalJoin(){
@@ -240,10 +244,6 @@
                 });
             }
         });
-
-
-        $("#txt_jsonData").val('');
-        $("#div_gridData").empty();
     }
 
 
@@ -531,7 +531,7 @@
     }
 
     function adbrixMemo(param){
-       memoDate = param;
+        memoDate = param;
         console.log(param);
         var data = {
             startDate: param
@@ -555,29 +555,29 @@
 
     function adbrixMemoAdd(gubun){
 
-       var message = "";
-       if(gubun=="delete") {
-           message = "등록된 메모를 삭제하시겠습니까?";
-       }else if(gubun=="insert") {
-           message = "메모를 등록하시겠습니까?";
-       }else if(gubun=="update"){
-           message = "등록된 메모를 수정하시겠습니까?";
-       }
+        var message = "";
+        if(gubun=="delete") {
+            message = "등록된 메모를 삭제하시겠습니까?";
+        }else if(gubun=="insert") {
+            message = "메모를 등록하시겠습니까?";
+        }else if(gubun=="update"){
+            message = "등록된 메모를 수정하시겠습니까?";
+        }
 
-       if(confirm(message)){
-           var data = {
-               memoIdx: memoIdx
-               , gubun: gubun
-               , memo : $("#memo").val()
-               , startDate : memoDate
-           };
-           util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/adbrix/memo/edit", data, fn_adbrixMemoEdit_success);
-       }
+        if(confirm(message)){
+            var data = {
+                memoIdx: memoIdx
+                , gubun: gubun
+                , memo : $("#memo").val()
+                , startDate : memoDate
+            };
+            util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/adbrix/memo/edit", data, fn_adbrixMemoEdit_success);
+        }
     }
 
     function fn_adbrixMemoEdit_success(dst_id, response){
         $("#adbrixMemoModal").modal('hide');
-       renderNaturalJoin();
+        renderNaturalJoin();
     }
 
     $(document).on('click', '#excelDownBtn', function (){
@@ -608,26 +608,26 @@
             <col width="67%"/><col width="33%"/>
         </colgroup>
         <tbody>
-            <tr>
-                <th>구분</th>
-                <th>총합</th>
-            </tr>
-            <tr class="font-bold">
-                <td>총 가입자</td>
-                <td>{{addComma total_joinCnt}}</td>
-            </tr>
-            <tr class="font-bold" style="color: #ff5600">
-                <td>총 자연가입자</td>
-                <td>{{addComma natural_joinCnt}}</td>
-            </tr>
-            <tr class="font-bold">
-                <td>총 UAC</td>
-                <td>{{addComma uac}}</td>
-            </tr>
-            <tr class="font-bold">
-                <td>총 오퍼월 IOS+AOS</td>
-                <td>{{addComma ios_aos}}</td>
-            </tr>
+        <tr>
+            <th>구분</th>
+            <th>총합</th>
+        </tr>
+        <tr class="font-bold">
+            <td>총 가입자</td>
+            <td>{{addComma total_joinCnt}}</td>
+        </tr>
+        <tr class="font-bold" style="color: #ff5600">
+            <td>총 자연가입자</td>
+            <td>{{addComma natural_joinCnt}}</td>
+        </tr>
+        <tr class="font-bold">
+            <td>총 UAC</td>
+            <td>{{addComma uac}}</td>
+        </tr>
+        <tr class="font-bold">
+            <td>총 오퍼월 IOS+AOS</td>
+            <td>{{addComma ios_aos}}</td>
+        </tr>
         </tbody>
     </table>
 </script>

@@ -332,30 +332,28 @@
             <if test='txt_search != null and txt_search != ""'>
                 <choose>
                     <when test="newSearchType == 1">
-                        and (bas.mem_no = #{txt_search} or stobas.mem_no = #{txt_search} )
+                        and (bas.mem_no = #{txt_search})
                     </when>
                     <when test="newSearchType == 2">
-                        and (bas.mem_nick like concat('%', #{txt_search}, '%') or stobas.mem_nick like concat('%', #{txt_search}, '%'))
+                        and (bas.mem_nick like concat('%', #{txt_search}, '%'))
                     </when>
                     <when test="newSearchType == 3">
-                        and (bas.mem_name = #{txt_search} or stobas.mem_name = #{txt_search})
+                        and (bas.mem_name = #{txt_search})
                     </when>
                     <when test="newSearchType == 4">
-                        and (bas.mem_phone = #{txt_search} or stobas.mem_phone = #{txt_search})
+                        and (bas.mem_phone = #{txt_search})
                     </when>
                     <when test="newSearchType == 5">
-                        and (bas.mem_userid = #{txt_search} or stobas.mem_userid = #{txt_search})
+                        and (bas.mem_userid = #{txt_search})
                     </when>
                     <when test="newSearchType == 6">
-                        and (bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search})
-                            or stobas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search}))
+                        and (bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search}))
                     </when>
                     <when test="newSearchType == 7">
-                        and (bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
-                            or stobas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                        and (bas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search}))
                     </when>
                     <otherwise>
-                        and (bas.mem_no = #{txt_search} or stobas.mem_no = #{txt_search} )
+                        and (bas.mem_no = #{txt_search})
                     </otherwise>
                 </choose>
             </if>
@@ -376,71 +374,162 @@
         </where>
     </sql>
 
+    <sql id="storyCondition2">
+        <where>
+            <if test='txt_search != null and txt_search != ""'>
+                <choose>
+                    <when test="newSearchType == 1">
+                        and (stobas.mem_no = #{txt_search} )
+                    </when>
+                    <when test="newSearchType == 2">
+                        and (stobas.mem_nick like concat('%', #{txt_search}, '%'))
+                    </when>
+                    <when test="newSearchType == 3">
+                        and (stobas.mem_name = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 4">
+                        and (stobas.mem_phone = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 5">
+                        and (stobas.mem_userid = #{txt_search})
+                    </when>
+                    <when test="newSearchType == 6">
+                        and (stobas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{txt_search}))
+                    </when>
+                    <when test="newSearchType == 7">
+                        and (stobas.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{txt_search})
+                    </when>
+                    <otherwise>
+                        and (stobas.mem_no = #{txt_search} )
+                    </otherwise>
+                </choose>
+            </if>
+            <if test='start_sel != null and start_sel !=""'>
+                and sto.write_date <![CDATA[>=]]> DATE_FORMAT(#{start_sel}, '%Y.%m.%d 00:00:00')
+            </if>
+            <if test='end_sel != null and end_sel != ""'>
+                and sto.write_date <![CDATA[<=]]> DATE_FORMAT(#{end_sel}, '%Y.%m.%d 23:59:59')
+            </if>
+            <if test='broState != 0'>
+                <if test='broState == 1'>
+                    and bro.state != 4
+                </if>
+                <if test='broState == 2'>
+                    and bro.state = 4
+                </if>
+            </if>
+        </where>
+    </sql>
+
     <select id="selectStoryList" parameterType="com.dalbit.content.vo.BoardAdmStoryVo" resultType="com.dalbit.content.vo.BoardAdmStoryVo">
     /* Con_BoardAdm.xml - selectStoryList*/
-        select
-          a.*
-        from (
+        select *
+          from (
             select
-            sto.idx as storyIdx,
-            sto.room_no as room_no,
-            sto.status as status,
-            bas.mem_no     as dj_mem_no,
-            bas.mem_nick   as dj_mem_nick,
-            bas.mem_userid as dj_mem_userid,
-            bas.mem_sex    as dj_mem_sex,
-            bas.mem_birth_year as dj_birth_year,
-            bro.title      as title,
-            bro.state      as broState,
-            sto.mem_nick   as send_mem_nick,
-            sto.mem_userid as send_mem_userid,
-            sto.mem_sex    as send_mem_sex,
-            sto.writer_no as send_mem_no,
-            (select `inner` from rd_data.tb_member_basic where mem_no = sto.writer_no) as send_inner,
-            (select bas.mem_birth_year
-            from rd_data.tb_broadcast_room_story sto inner join rd_data.tb_member_basic bas on sto.writer_no = bas.mem_no
-            where bas.mem_no = send_mem_no group by bas.mem_no) as send_birth_year,
-            sto.write_date as send_date,
-            sto.contents   as story_content,
-            (select count(*) from rd_data.tb_broadcast_room_story where room_no = bro.room_no) as storyCnt,
-            (select count(*) from rd_data.tb_broadcast_room_story where writer_no = sto.writer_no) as sendStoryCnt,
-            @RNUM := @RNUM + 1 as rowNum
-        FROM rd_data.tb_broadcast_room_story sto
-        JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
-        JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
-        JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
-        , (select @RNUM := 0) r
-        <include refid="storyCondition"/>
-        <if test="searchType == 0">
-          order by sto.idx desc
-        </if>
-        <if test="searchType == 1">
-            order by storyCnt desc
-        </if>
-        <if test="searchType == 2">
-            order by sendStoryCnt desc
-        </if>
-        <if test="searchType == 3">
-          order by sto.idx asc
-        </if>
-        ) a
+              a.*, @RNUM := @RNUM + 1 as rowNum
+            from (
+                select
+                    sto.idx as storyIdx,
+                    sto.room_no as room_no,
+                    sto.status as status,
+                    bas.mem_no     as dj_mem_no,
+                    bas.mem_nick   as dj_mem_nick,
+                    bas.mem_userid as dj_mem_userid,
+                    bas.mem_sex    as dj_mem_sex,
+                    bas.mem_birth_year as dj_birth_year,
+                    bro.title      as title,
+                    bro.state      as broState,
+                    sto.mem_nick   as send_mem_nick,
+                    sto.mem_userid as send_mem_userid,
+                    sto.mem_sex    as send_mem_sex,
+                    sto.writer_no as send_mem_no,
+                    stobas.`inner` AS send_inner,
+                    stobas.mem_birth_year AS send_birth_year,
+                    sto.write_date as send_date,
+                    sto.contents   as story_content,
+                    (select count(*) from rd_data.tb_broadcast_room_story where room_no = bro.room_no) as storyCnt,
+                    (select count(*) from rd_data.tb_broadcast_room_story where writer_no = sto.writer_no) as sendStoryCnt
+                FROM rd_data.tb_broadcast_room_story sto
+                JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
+                JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
+                JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
+                <include refid="storyCondition"/>
+
+            union
+                select
+                    sto.idx as storyIdx,
+                    sto.room_no as room_no,
+                    sto.status as status,
+                    bas.mem_no as dj_mem_no,
+                    bas.mem_nick as dj_mem_nick,
+                    bas.mem_userid as dj_mem_userid,
+                    bas.mem_sex as dj_mem_sex,
+                    bas.mem_birth_year as dj_birth_year,
+                    bro.title as title,
+                    bro.state as broState,
+                    sto.mem_nick as send_mem_nick,
+                    sto.mem_userid as send_mem_userid,
+                    sto.mem_sex as send_mem_sex,
+                    sto.writer_no as send_mem_no,
+                    stobas.`inner` AS send_inner,
+                    stobas.mem_birth_year AS send_birth_year,
+                    sto.write_date as send_date,
+                    sto.contents as story_content,
+                    (select count(*) from rd_data.tb_broadcast_room_story where room_no = bro.room_no) as storyCnt,
+                    (select count(*) from rd_data.tb_broadcast_room_story where writer_no = sto.writer_no) as sendStoryCnt
+                FROM rd_data.tb_broadcast_room_story sto
+                JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
+                JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
+                JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
+                <include refid="storyCondition2"/>
+            ) a , (select @RNUM := 0) r
+            <if test="searchType == 0">
+                order by a.storyIdx desc
+            </if>
+            <if test="searchType == 1">
+                order by a.storyCnt desc
+            </if>
+            <if test="searchType == 2">
+                order by a.sendStoryCnt desc
+            </if>
+            <if test="searchType == 3">
+                order by a.storyIdx asc
+            </if>
+            ) a1
         where rowNum between #{searchStartNo, jdbcType=INTEGER} and #{searchEndNo, jdbcType=INTEGER}
+
     </select>
 
     <select id="selectStoryListCnt" parameterType="com.dalbit.content.vo.BoardAdmStoryVo" resultType="integer">
       /* Con_BoardAdm.xml - selectStoryListCnt*/
-      select
-        count(*)
+      select sum(cnt)
+      from (select
+        count(*) AS cnt
         FROM rd_data.tb_broadcast_room_story sto
         JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
         JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
         JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
         <include refid="storyCondition"/>
+        union
+      select
+        count(*) AS cnt
+        FROM rd_data.tb_broadcast_room_story sto
+        JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
+        JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
+        JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
+        <include refid="storyCondition2"/>
+        ) a
+
     </select>
 
     <select id="selectStoryListSummary" parameterType="com.dalbit.content.vo.BoardAdmStoryVo" resultType="com.dalbit.content.vo.BoardAdmStoryVo">
       /* Con_BoardAdm.xml - selectStoryListSummary*/
-      SELECT count(*) as totalCnt
+        select sum(a.totalCnt) AS totalCnt,
+               sum(a.maleCnt) AS maleCnt,
+               sum(a.femaleCnt) femaleCnt,
+               sum(a.noneCnt) AS noneCnt
+          from (
+        SELECT count(*) as totalCnt
               ,sum(if(bas.mem_sex = 'm',1,0)) as maleCnt
               ,sum(if(bas.mem_sex = 'f',1,0)) as femaleCnt
               ,sum(if(bas.mem_sex = 'n',1,0)) as noneCnt
@@ -449,6 +538,17 @@
         JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
         JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
         <include refid="storyCondition"/>
+        union
+        SELECT count(*) as totalCnt
+            ,sum(if(bas.mem_sex = 'm',1,0)) as maleCnt
+            ,sum(if(bas.mem_sex = 'f',1,0)) as femaleCnt
+            ,sum(if(bas.mem_sex = 'n',1,0)) as noneCnt
+        FROM rd_data.tb_broadcast_room_story sto
+        JOIN rd_data.tb_broadcast_room bro ON sto.room_no = bro.room_no
+        JOIN rd_data.tb_member_basic bas ON bro.mem_no = bas.mem_no
+        JOIN rd_data.tb_member_basic stobas ON sto.writer_no = stobas.mem_no
+        <include refid="storyCondition2"/>
+        ) a
     </select>
 
     <!--<select id="callStoryDelete" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.common.vo.ProcedureVo">-->
