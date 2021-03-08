@@ -159,11 +159,13 @@
    });
 
    function fn_adbrixAdd_success(dst_id, response){
-        if(response.message=="success"){
+        if(response.result=="success"){
             alert('애드브릭스 등록 성공');
         }else{
             alert('애드브릭스 등록 실패');
         }
+        $("#txt_jsonData").val('');
+        $("#div_gridData").empty();
    }
 
 
@@ -504,13 +506,12 @@
             // Plotly.newPlot('adbrix_lineArea', data, layout);
             /* 라인차트 [end] */
 
-            // var data = [trace1, trace2];
+
             var myPlot = document.getElementById('adbrix_lineArea');
             Plotly.newPlot(myPlot, data, layout);
             myPlot.on('plotly_afterplot', function(){
                 Plotly.d3.selectAll(".xaxislayer-above").selectAll('text')
                     .on("click", function(d) {
-                        // alert("Hello, I am " + d.x);
                         try{
                             adbrixMemo(year + "." +  $(this).text().substr(0,5));
                         } catch (e){
