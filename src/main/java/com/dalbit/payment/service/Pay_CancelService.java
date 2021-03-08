@@ -1,5 +1,6 @@
 package com.dalbit.payment.service;
 
+import com.checkpay.util.SecurityUtil;
 import com.dalbit.common.code.CancelPhoneCode;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
@@ -19,6 +20,7 @@ import com.dalbit.util.GsonUtil;
 import com.dalbit.util.OkHttpClientUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONObject;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -26,13 +28,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -654,6 +661,116 @@ public class Pay_CancelService {
         }catch (RestClientException | IOException e) {
             throw new GlobalException(Status.비즈니스로직오류, e);
         }
+        return result;
+    }
+
+    /**
+     * 간편결제(계좌) 결제 취소
+     */
+    public String payCancelSimple(Pay_CancelSimplePayVo payCancelSimplePayVo) throws NoSuchPaddingException, UnsupportedEncodingException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, GlobalException, ParseException {
+
+        //String ci = “asdjaslkdj21j3120mlqkwdj1092dj12dj12odjlkdj1”; //sms 본인인증 ci
+        String ID = DalbitUtil.getProperty("simple.service.id");
+        String API_ID = DalbitUtil.getProperty("simple.cancel.api.id");
+        String CRYPT_KEY = DalbitUtil.getProperty("simple.crypt.key");
+        String trx_dt = payCancelSimplePayVo.getOkdt().replace("-", "");    //거래일자
+        String trx_tm = payCancelSimplePayVo.getOktime().replace(":", "");  //거래시각
+
+        JSONObject param = new JSONObject();
+        param.put("ci", ""); //선택
+        param.put("order_tr_dt", SecurityUtil.null2void(trx_dt, ""));
+        param.put("order_tr_no", SecurityUtil.null2void(payCancelSimplePayVo.getTradeid(), ""));
+        param.put("amt", SecurityUtil.null2void(payCancelSimplePayVo.getPrdtprice(), ""));
+        param.put("proc_dv", "S"); //취소처리구분 C:쿠콘자체처리, S:제휴사자체처리
+        String EV = SecurityUtil.EncryptAesBase64(trx_dt + trx_tm + param.toString(), CRYPT_KEY, true);
+        String VV = SecurityUtil.getHmacSha256(param.toString(), CRYPT_KEY, true);
+        String url = DalbitUtil.getProperty("simple.dev.url")+ "/" + API_ID + "?ID=" + ID
+                + "&RQ_DTIME=" + trx_dt + trx_tm
+                + "&TNO=" + trx_dt + trx_tm
+                + "&EV=" + EV
+                + "&VV=" + VV
+                + "&EM=AES"
+                + "&VM=HmacSHA256";
+        HttpURLConnection con = null;
+        BufferedWriter bwriter = null;
+        DataInputStream in = null;
+        ByteArrayOutputStream bout = null;
+
+        try {
+            URL req = new URL(url);
+            con = (HttpURLConnection) req.openConnection();
+            con.setConnectTimeout(2 * 60 * 1000); // 2분
+
+            con.setDoOutput(true);
+            con.setDoInput(true);
+
+            bwriter = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
+            bwriter.flush();
+            log.info("LinkTestProc:response code ::" + con.getResponseCode());
+            log.info("LinkTestProc:response msg ::" + con.getResponseMessage());
+            in = new DataInputStream(con.getInputStream());
+            bout = new ByteArrayOutputStream();
+
+            while (true) {
+                byte[] buf = new byte[2048];
+                int n = in.read(buf);
+                if (n == -1) break;
+                bout.write(buf, 0, n);
+            }
+            bout.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new GlobalException(Status.비즈니스로직오류, e);
+        } finally {
+            try {
+                if (bwriter != null) bwriter.close();
+                if (in != null) in.close();
+                if (bout != null) bout.close();
+                if (con != null) con.disconnect();
+            } catch (Exception se) {
+
+            }
+        }
+        String result = "";
+        String respData = new String(bout.toByteArray());
+        JSONObject rtn = JSONObject.fromObject(respData);
+        log.info("rtn: {}", rtn);
+        Pay_CancelVo cancelVo = new Pay_CancelVo();
+        if(Status.결제취소성공.getMessageCode().equals(rtn.get("RC"))){
+            cancelVo.setOrder_id(payCancelSimplePayVo.getTradeid());
+            cancelVo.setCancel_dt(DalbitUtil.stringToDatePattern((String)rtn.get("RS_DTIME"), "yyyyMMddHHmmss", "yyyy-MM-dd HH:mm:ss"));
+            cancelVo.setFail_msg("");
+            cancelVo.setOp_name(MemberVo.getMyMemNo());
+            cancelVo.setCancel_state("y");
+
+            //결제취소 달 차감
+            P_CancelVo pCancelVo = new P_CancelVo();
+            pCancelVo.setMem_no(payCancelSimplePayVo.getMemno());
+            pCancelVo.setOrder_id(payCancelSimplePayVo.getTradeid());
+            HashMap resultMap = dalCancel(pCancelVo);
+
+            if(resultMap.get("status").equals(Status.달차감_성공)){
+                result =  gsonUtil.toJson(new JsonOutputVo(Status.결제취소성공));
+            }else {
+                result = gsonUtil.toJson(new JsonOutputVo((Status) resultMap.get("status")));
+            }
+        }else{
+            log.info("=====================================");
+            log.info("[간편결제] 취소코드: {}", DalbitUtil.isEmpty(rtn.get("RC")) ? "없음" : rtn.get("RC"));
+            log.info("[간편결제] 결과메시지: {}", DalbitUtil.isEmpty(rtn.get("RM")) ? "없음" : rtn.get("RM"));
+            log.info("=====================================");
+
+            cancelVo.setOrder_id(payCancelSimplePayVo.getTradeid());
+            cancelVo.setCancel_dt("");
+            cancelVo.setFail_msg((String) rtn.get("RM"));
+            cancelVo.setOp_name(MemberVo.getMyMemNo());
+            cancelVo.setCancel_state("f");
+
+            result = gsonUtil.toJson(new JsonOutputVo(Status.결제취소실패));
+        }
+        //취소 업데이트
+        payCancelDao.sendPayCancel(cancelVo);
+
         return result;
     }
 }

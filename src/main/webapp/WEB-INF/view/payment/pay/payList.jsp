@@ -204,6 +204,8 @@
                 restUrl='payletter'
             }else if(cancelData.paycd == 'kakaoMoney'){
                 restUrl='kakaoMoney'
+            }else if(cancelData.paycd == 'simple'){
+                restUrl='simple'
             }else {
                 alert("결제수단 오류 확인필요");
             }
@@ -216,6 +218,8 @@
                 , memno : cancelData.memno
                 , dalcnt : cancelData.dalcnt
                 , paycd : cancelData.paycd
+                , okdt : cancelData.okdt
+                , oktime : cancelData.oktime
             };
 
             util.getAjaxData("cancel", "/rest/payment/pay/cancel/"+restUrl, data, payCancelSuccess);

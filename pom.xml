@@ -16,7 +16,10 @@
 
     <properties>
         <spring-boot-version>2.2.1.RELEASE</spring-boot-version>
+        <project.lib.path>${project.basedir}/src/main/webapp/WEB-INF/lib</project.lib.path>
     </properties>
+
+
 
     <dependencies>
         <dependency>
@@ -302,6 +305,79 @@
             <artifactId>sshd-core</artifactId>
             <version>1.4.0</version>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- 로컬 jar 추가-->
+        <dependency>
+            <groupId>coocon</groupId>
+            <artifactId>coocon</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.lib.path}/encrypapi.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>simple</groupId>
+            <artifactId>simple1</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.lib.path}/checkpay-security-0.0.5.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>simple</groupId>
+            <artifactId>simple2</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.lib.path}/commons-beanutils-1.8.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>simple</groupId>
+            <artifactId>simple3</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.lib.path}/commons-codec-1.10.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>simple</groupId>
+            <artifactId>simple4</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.lib.path}/commons-collections-3.2.1.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>simple</groupId>
+            <artifactId>simple5</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.lib.path}/commons-lang-2.4.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>simple</groupId>
+            <artifactId>simple6</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.lib.path}/commons-logging-1.1.1.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>simple</groupId>
+            <artifactId>simple7</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.lib.path}/ezmorph-1.0.6.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>simple</groupId>
+            <artifactId>simple8</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.lib.path}/json-lib-2.4-jdk15.jar</systemPath>
         </dependency>
 
     </dependencies>

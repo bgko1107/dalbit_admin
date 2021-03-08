@@ -106,6 +106,8 @@ var payDataTableSource = {
                                 'data-memno="'+row.mem_no+'" ' +
                                 'data-dalcnt="'+row.dal_cnt+'" ' +
                                 'data-memnick="'+row.mem_nick+'" ' +
+                                'data-okdt="'+row.pay_ok_date+'" ' +
+                                'data-oktime="'+row.pay_ok_time+'" ' +
                                 'onclick="cancelClick($(this).data())"> 취소' +
                          '</button>'
                     '-'
