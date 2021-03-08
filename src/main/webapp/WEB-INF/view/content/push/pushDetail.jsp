@@ -591,6 +591,10 @@
             resultJson['send_url'] = $("#send_url").val();
         }
 
+        if(type == "52" ){
+            resultJson['image_type'] = "106";
+        }
+
         if(common.isEmpty(resultJson['slct_push'])){
             resultJson['slct_push'] = "9";
         }
