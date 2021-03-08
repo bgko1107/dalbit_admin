@@ -270,7 +270,7 @@
 
             var tmp_memoYn = "";
             if(response.data.detailList[i].memoYn == 1){
-                tmp_memoYn = ' <span style="color: #7030a0;font-size:20px;">●</span>';
+                tmp_memoYn = ' <span>🚩</span>';
             }
             if (toDay == "토") {
                 toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
@@ -364,7 +364,7 @@
 
                 var tmp_memoYn = "";
                 if(response.data.detailList[i].memoYn == 1){
-                    tmp_memoYn = ' <span style="color: #7030a0;font-size:20px;">●</span>';
+                    tmp_memoYn = ' <span>🚩</span>';
                 }
 
                 toDay = week[moment(response.data.detailList[i].the_date.replace(/-/gi, ".")).add('days', 0).day()];
@@ -551,13 +551,24 @@
 
     function adbrixMemoAdd(gubun){
 
-        var data = {
-            memoIdx: memoIdx
-            , gubun: gubun
-            , memo : $("#memo").val()
-            , startDate : memoDate
-        };
-        util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/adbrix/memo/edit", data, fn_adbrixMemoEdit_success);
+       var message = "";
+       if(gubun=="delete") {
+           message = "등록된 메모를 삭제하시겠습니까?";
+       }else if(gubun=="insert") {
+           message = "메모를 등록하시겠습니까?";
+       }else if(gubun=="update"){
+           message = "등록된 메모를 수정하시겠습니까?";
+       }
+
+       if(confirm(message)){
+           var data = {
+               memoIdx: memoIdx
+               , gubun: gubun
+               , memo : $("#memo").val()
+               , startDate : memoDate
+           };
+           util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/adbrix/memo/edit", data, fn_adbrixMemoEdit_success);
+       }
     }
 
     function fn_adbrixMemoEdit_success(dst_id, response){
