@@ -76,9 +76,13 @@ public class Ent_NewJoin2Service {
     public String callAdbrixAdd(P_StatVo pStatVo){
         ArrayList<HashMap<String, String>> list = new Gson().fromJson(pStatVo.getAdbrixExcelList(), ArrayList.class);
 
-        ent_NewJoin2Dao.callAdbrixAdd(list);
+        try {
+            ent_NewJoin2Dao.callAdbrixAdd(list);
+            return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+        }catch (Exception e){
+            return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
 
-        return gsonUtil.toJson(new JsonOutputVo(Status.조회, list));
     }
 
     /**

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="cfn" uri="/WEB-INF/tld/comFunction.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="principal" property="principal" />
 <style>
     .xaxislayer-above {
         cursor: pointer;
@@ -63,9 +68,11 @@
                 <textarea type="textarea" class="form-control" id="memo" name="memo" style="width: 100%; height: 150px;"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="bt_adbrixMemoDel" onclick="adbrixMemoAdd('delete');"><i class="fa fa-times-circle"></i> 삭제</button>
-                <button type="button" class="btn btn-default" id="bt_adbrixMemoAdd" onclick="adbrixMemoAdd('insert');"><i class="fa fa-times-circle"></i> 등록하기</button>
-                <button type="button" class="btn btn-default" id="bt_adbrixMemoUpd" onclick="adbrixMemoAdd('update');"><i class="fa fa-times-circle"></i> 수정하기</button>
+                <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이건준|', principal.getUserInfo().getName())}">
+                    <button type="button" class="btn btn-default" id="bt_adbrixMemoDel" onclick="adbrixMemoAdd('delete');"><i class="fa fa-times-circle"></i> 삭제</button>
+                    <button type="button" class="btn btn-default" id="bt_adbrixMemoAdd" onclick="adbrixMemoAdd('insert');"><i class="fa fa-times-circle"></i> 등록하기</button>
+                    <button type="button" class="btn btn-default" id="bt_adbrixMemoUpd" onclick="adbrixMemoAdd('update');"><i class="fa fa-times-circle"></i> 수정하기</button>
+                </c:if>
             </div>
         </div>
     </div>
@@ -152,11 +159,12 @@
    });
 
    function fn_adbrixAdd_success(dst_id, response){
-        if(response.message=="success"){
+        if(response.result=="success"){
             alert('애드브릭스 등록 성공');
         }else{
             alert('애드브릭스 등록 실패');
         }
+       renderNaturalJoin();
    }
 
 
@@ -232,6 +240,10 @@
                 });
             }
         });
+
+
+        $("#txt_jsonData").val('');
+        $("#div_gridData").empty();
     }
 
 
@@ -263,7 +275,7 @@
 
             var tmp_memoYn = "";
             if(response.data.detailList[i].memoYn == 1){
-                tmp_memoYn = ' <span style="color: #7030a0;font-size:20px;">●</span>';
+                tmp_memoYn = ' <span>🚩</span>';
             }
             if (toDay == "토") {
                 toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
@@ -357,7 +369,7 @@
 
                 var tmp_memoYn = "";
                 if(response.data.detailList[i].memoYn == 1){
-                    tmp_memoYn = ' <span style="color: #7030a0;font-size:20px;">●</span>';
+                    tmp_memoYn = ' <span>🚩</span>';
                 }
 
                 toDay = week[moment(response.data.detailList[i].the_date.replace(/-/gi, ".")).add('days', 0).day()];
@@ -497,13 +509,12 @@
             // Plotly.newPlot('adbrix_lineArea', data, layout);
             /* 라인차트 [end] */
 
-            // var data = [trace1, trace2];
+
             var myPlot = document.getElementById('adbrix_lineArea');
             Plotly.newPlot(myPlot, data, layout);
             myPlot.on('plotly_afterplot', function(){
                 Plotly.d3.selectAll(".xaxislayer-above").selectAll('text')
                     .on("click", function(d) {
-                        // alert("Hello, I am " + d.x);
                         try{
                             adbrixMemo(year + "." +  $(this).text().substr(0,5));
                         } catch (e){
@@ -544,13 +555,24 @@
 
     function adbrixMemoAdd(gubun){
 
-        var data = {
-            memoIdx: memoIdx
-            , gubun: gubun
-            , memo : $("#memo").val()
-            , startDate : memoDate
-        };
-        util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/adbrix/memo/edit", data, fn_adbrixMemoEdit_success);
+       var message = "";
+       if(gubun=="delete") {
+           message = "등록된 메모를 삭제하시겠습니까?";
+       }else if(gubun=="insert") {
+           message = "메모를 등록하시겠습니까?";
+       }else if(gubun=="update"){
+           message = "등록된 메모를 수정하시겠습니까?";
+       }
+
+       if(confirm(message)){
+           var data = {
+               memoIdx: memoIdx
+               , gubun: gubun
+               , memo : $("#memo").val()
+               , startDate : memoDate
+           };
+           util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/adbrix/memo/edit", data, fn_adbrixMemoEdit_success);
+       }
     }
 
     function fn_adbrixMemoEdit_success(dst_id, response){
@@ -574,10 +596,10 @@
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_adbrix_calendarData">
-    <div>전체가입자 : {{addComma total_joinCnt}}</div>
-    <div class="font-bold" style="color: #ff5600">자연가입자 : {{addComma natural_joinCnt}}</div>
-    <div>UAC : {{addComma uac}}</div>
-    <div>오퍼월(IOS+AOS) : {{addComma ios_aos}}</div>
+    <div class="font-bold" style="color: black;">전체가입자 : {{addComma total_joinCnt}}</div>
+    <div class="font-bold" style="color: #ff5600;">자연가입자 : {{addComma natural_joinCnt}}</div>
+    <div style="color: black;">UAC : {{addComma uac}}</div>
+    <div style="color: black;">오퍼월(IOS+AOS) : {{addComma ios_aos}}</div>
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_adbrix_totalTable">
