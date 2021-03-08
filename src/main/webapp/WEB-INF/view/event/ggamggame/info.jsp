@@ -37,6 +37,7 @@
 </div> <!-- //wrapper -->
 
 <script type="text/javascript" src="/js/dataTablesSource/event/ggamggameDataTableSource.js?${dummyData}"></script>
+<script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 
 <script type="text/javascript">
 

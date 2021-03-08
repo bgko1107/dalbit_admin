@@ -4,6 +4,7 @@ import com.dalbit.clip.dao.Cli_ClipStatusDao;
 import com.dalbit.clip.vo.procedure.*;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
+import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.event.dao.Eve_GGamGGamEDao;
 import com.dalbit.event.vo.GGamGGamEVo;
@@ -28,22 +29,25 @@ public class Eve_GGamGGamEService {
     Eve_GGamGGamEDao eve_GGamGGamEDao;
 
     /**
-     * 클립 성별 등록 시간/월간/연간
+     * 신기록 이벤트 목록
      */
     public String callNewRecordList(GGamGGamEVo gGamGGamEVo){
         ProcedureVo procedureVo = new ProcedureVo(gGamGGamEVo);
         ArrayList<GGamGGamEVo> detailList = eve_GGamGGamEDao.callNewRecordList(procedureVo);
         GGamGGamEVo totalInfo = new Gson().fromJson(procedureVo.getExt(), GGamGGamEVo.class);
 
-        if(Integer.parseInt(procedureVo.getRet()) <= 0){
-            return gsonUtil.toJson(new JsonOutputVo(Status.데이터없음));
-        }
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, detailList, new PagingVo(totalInfo.getTotalCnt(), gGamGGamEVo.getPageStart(), gGamGGamEVo.getPageCnt()), totalInfo));
+    }
 
-        var result = new HashMap<String, Object>();
-        result.put("totalInfo", totalInfo);
-        result.put("detailList", detailList);
+    /**
+     * 신기록 이벤트 상세정보
+     */
+    public String callNewRecordDetail(GGamGGamEVo gGamGGamEVo){
+        ProcedureVo procedureVo = new ProcedureVo(gGamGGamEVo);
+        eve_GGamGGamEDao.callNewRecordDetail(procedureVo);
+        GGamGGamEVo totalInfo = new Gson().fromJson(procedureVo.getExt(), GGamGGamEVo.class);
 
-        return gsonUtil.toJson(new JsonOutputVo(Status.조회, result));
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, totalInfo));
     }
 
 

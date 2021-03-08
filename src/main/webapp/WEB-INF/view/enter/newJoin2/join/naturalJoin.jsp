@@ -532,7 +532,6 @@
 
     function adbrixMemo(param){
         memoDate = param;
-        console.log(param);
         var data = {
             startDate: param
         };
@@ -542,7 +541,7 @@
     function fn_adbrixMemo_success(dst_id,response){
         $("#adbrixMemoModal").modal('show');
         if(!common.isEmpty(response.data)){
-            memoIdx = response.data.idx;
+            memoIdx = common.replaceHtml(response.data.idx);
             $("#memo").val(response.data.memo);
             $("#bt_adbrixMemoAdd").hide();
             $("#bt_adbrixMemoUpd").show();
@@ -568,7 +567,7 @@
             var data = {
                 memoIdx: memoIdx
                 , gubun: gubun
-                , memo : $("#memo").val()
+                , memo : common.replaceHtml($("#memo").val())
                 , startDate : memoDate
             };
             util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/adbrix/memo/edit", data, fn_adbrixMemoEdit_success);

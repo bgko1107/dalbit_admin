@@ -1,22 +1,27 @@
 package com.dalbit.event.vo;
 
+import com.dalbit.common.vo.SearchVo;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class GGamGGamEVo {
+public class GGamGGamEVo extends SearchVo {
 
     /* input */
-    private String memNo;
-    private String subjectType;
 
     /* output */
-    private int listenerCnt;
-    private int countPlay;
-    private int countGood;
-    private int countGift;
-    private int countByeol;
-    private int countDal;
+    private int idx;
+    private String event_name;
+    private int view_yn;
+    private String upd_date;
+    private String upd_op_name;
+
+    private String eventName;
+    private int viewYn;
+    private String regDate;
+    private String regOpName;
+    private String updDate;
+    private String updOpName;
 
 }
