@@ -68,13 +68,13 @@
 <!-- //보름달 완성 조건(DJ) -->
 
 <div class="modal fade" id="newRecordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" >
+    <div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <img id="imageViewer" class="thumbnail fullSize_background no-margin no-padding" style="border:0px; border-radius:0px; width:150px;height: 150px" src="" alt="" /></a>
+                <img id="imageViewer" class="thumbnail fullSize_background no-margin no-padding" style="max-width: 1000px;max-height: 1000px;" src="" alt="" /></a>
             </div>
             <div class="modal-footer">
             </div>
