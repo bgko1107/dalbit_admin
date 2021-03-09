@@ -3,9 +3,21 @@
 <mapper namespace="com.dalbit.member.dao.Mem_MemberDao" >
 
     <select id="getMemberInfo" parameterType="string" resultType="com.dalbit.member.vo.MemberVo">
-        select * from rd_data.tb_member_basic where mem_no=#{mem_no}
+        select a.mem_no,a.mem_id,a.mem_passwd,a.mem_phone,a.mem_nick,a.mem_userid,a.mem_name,a.mem_email,a.foreign_yn,a.mem_sex
+                ,a.mem_birth_year,a.mem_birth_month,a.mem_birth_day,a.mem_slct,a.mem_adid,a.mem_state,a.block_type,a.block_day,a.block_end_date
+                ,a.mem_join_date,a.join_path,a.os_type,a.location,a.ip,a.inner,b.day_badge,b.week_badge,b.month_badge,b.recomm_badge,b.newdj_badge
+                ,b.new_badge,b.specialdj_badge,b.admin_badge,b.shiningdj_badge,b.specialdj_cnt,b.image_profile
+          from rd_data.tb_member_basic a
+	 LEFT JOIN rd_data.tb_member_profile b ON a.mem_no = b.mem_no
+         where a.mem_no=#{mem_no}
         union
-        select * FROM rd_data.tb_member_withdrawal_bak WHERE mem_no=#{mem_no}
+        select a.mem_no,a.mem_id,a.mem_passwd,a.mem_phone,a.mem_nick,a.mem_userid,a.mem_name,a.mem_email,a.foreign_yn,a.mem_sex
+                ,a.mem_birth_year,a.mem_birth_month,a.mem_birth_day,a.mem_slct,a.mem_adid,a.mem_state,a.block_type,a.block_day,a.block_end_date
+                ,a.mem_join_date,a.join_path,a.os_type,a.location,a.ip,a.inner,b.day_badge,b.week_badge,b.month_badge,b.recomm_badge,b.newdj_badge
+                ,b.new_badge,b.specialdj_badge,b.admin_badge,b.shiningdj_badge,b.specialdj_cnt,b.image_profile
+          FROM rd_data.tb_member_withdrawal_bak a
+	 LEFT JOIN rd_data.tb_member_profile b ON a.mem_no = b.mem_no
+	     WHERE a.mem_no=#{mem_no}
         limit 1
     </select>
 

@@ -545,19 +545,19 @@
         var type = fnc_pushDetail.target.find("input[name=slct_push]:radio:checked").val()
         if(type == "1"){ //room_no
             resultJson['room_no'] = fnc_pushDetail.target.find("#input_targetLink").data("targetinfo");
-            resultJson['target_mem_no'] = fnc_pushDetail.target.find("#input_targetLink").data("targetMemNo");
+            // resultJson['target_mem_no'] = fnc_pushDetail.target.find("#input_targetLink").data("targetMemNo");
             resultJson['target_info'] = fnc_pushDetail.target.find("#input_targetLink").data("targetinfo");
 
         }else if(type == "31" || type == "36" || type == "38"){ //mem_no
-            resultJson['target_mem_no'] = fnc_pushDetail.target.find("#input_targetLink").data("targetinfo");
+            // resultJson['target_mem_no'] = fnc_pushDetail.target.find("#input_targetLink").data("targetinfo");
             resultJson['target_info'] = fnc_pushDetail.target.find("#input_targetLink").data("targetinfo");
 
         }else if(type == "5" || type == "6" || type == "7"){ //board_idx
             resultJson['board_idx'] = fnc_pushDetail.target.find("#input_targetLink").val();
             resultJson['target_info'] = fnc_pushDetail.target.find("#input_targetLink").val();
 
-        }else if(type == "2"){
-            resultJson['target_mem_no'] = '10000000000001';
+        // }else if(type == "2"){
+        //     resultJson['target_mem_no'] = '10000000000001';
 
         }else if(type == "50"){ //redirect_url
             var inputLink = {
@@ -567,7 +567,13 @@
 
             resultJson['redirect_url'] = inputLink.mobile;
             resultJson['target_info'] = JSON.stringify(inputLink);
+        }
 
+        // 최차장님이 운영에서 보낼때는 무조건 10000000000001 번호로 보내라고 함.
+        if(type == "52" ){  // 단, 출석체크 이벤트 일때만
+            resultJson['target_mem_no'] = '10000000000002';
+        }else{
+            resultJson['target_mem_no'] = '10000000000001';
         }
 
         // 발송상태

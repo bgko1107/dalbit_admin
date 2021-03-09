@@ -143,6 +143,15 @@ public class PushService {
                 }
             }
 
+            if(pPushInsertVo.getImage_type().equals("106")){
+                if(DalbitUtil.isEmpty(pPushInsertVo.getSend_url())){
+                    MemberVo memInfoOutVo = DalbitUtil.getMemInfo("10000000000002");
+                    if(!DalbitUtil.isEmpty(memInfoOutVo)) {
+                        pPushInsertVo.setSend_url(memInfoOutVo.getImage_profile());
+                    }
+                }
+            }
+
             if(DalbitUtil.isEmpty(pPushInsertVo.getPush_slct())){
                 if(pPushInsertVo.getIs_all().equals("7")){
                     pPushInsertVo.setPush_slct("96");   //어드민 운영자 메시지(타겟)
