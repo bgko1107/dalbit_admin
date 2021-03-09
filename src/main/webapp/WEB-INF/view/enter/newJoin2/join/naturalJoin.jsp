@@ -68,7 +68,7 @@
                 <textarea type="textarea" class="form-control" id="memo" name="memo" style="width: 100%; height: 150px;"></textarea>
             </div>
             <div class="modal-footer">
-                <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이건준|', principal.getUserInfo().getName())}">
+                <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이건준|양대기|박진|박희천|', principal.getUserInfo().getName())}">
                     <button type="button" class="btn btn-default" id="bt_adbrixMemoDel" onclick="adbrixMemoAdd('delete');"><i class="fa fa-times-circle"></i> 삭제</button>
                     <button type="button" class="btn btn-default" id="bt_adbrixMemoAdd" onclick="adbrixMemoAdd('insert');"><i class="fa fa-times-circle"></i> 등록하기</button>
                     <button type="button" class="btn btn-default" id="bt_adbrixMemoUpd" onclick="adbrixMemoAdd('update');"><i class="fa fa-times-circle"></i> 수정하기</button>
@@ -532,7 +532,6 @@
 
     function adbrixMemo(param){
         memoDate = param;
-        console.log(param);
         var data = {
             startDate: param
         };
@@ -542,7 +541,7 @@
     function fn_adbrixMemo_success(dst_id,response){
         $("#adbrixMemoModal").modal('show');
         if(!common.isEmpty(response.data)){
-            memoIdx = response.data.idx;
+            memoIdx = common.replaceHtml(response.data.idx);
             $("#memo").val(response.data.memo);
             $("#bt_adbrixMemoAdd").hide();
             $("#bt_adbrixMemoUpd").show();
@@ -568,7 +567,7 @@
             var data = {
                 memoIdx: memoIdx
                 , gubun: gubun
-                , memo : $("#memo").val()
+                , memo : common.replaceHtml($("#memo").val())
                 , startDate : memoDate
             };
             util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/adbrix/memo/edit", data, fn_adbrixMemoEdit_success);

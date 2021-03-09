@@ -13,4 +13,7 @@ public interface Eve_GGamGGamEDao {
     @Transactional(readOnly = true)
     ArrayList<GGamGGamEVo> callNewRecordList(ProcedureVo procedureVo);
 
+    @Transactional(readOnly = true)
+    ArrayList<GGamGGamEVo> callNewRecordDetail(ProcedureVo procedureVo);
+
 }

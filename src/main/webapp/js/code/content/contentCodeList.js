@@ -128,6 +128,7 @@ var push_slctPush2 = [
     // , new COMMON_CODE('44', '44', '랭킹 > FAN > 주간')
     , new COMMON_CODE('input', '50', '직접입력')
     , new COMMON_CODE('input', '51', '주간 클립 테이블')
+    , new COMMON_CODE('input', '52', '출석체크 이벤트')
 ];
 
 var push_slctPush3 = [

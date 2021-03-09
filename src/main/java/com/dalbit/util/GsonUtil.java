@@ -45,6 +45,10 @@ public class GsonUtil {
         return DalbitUtil.getSpclStrCnvr(getGsonBuilder().create().toJson(messageUtil.setJsonOutputVo(jsonOutputVo)));
     }
 
+    public String toJsonAdm(JsonOutputVo jsonOutputVo){
+        return DalbitUtil.escapeCharDecode(DalbitUtil.getSpclStrCnvr(convertJsonAdm(messageUtil.setJsonOutputVo(jsonOutputVo))));
+    }
+
     public static GsonBuilder getGsonBuilderAdm(){
         return new GsonBuilder()
                 .registerTypeAdapter(String.class, new StringAdapter())
