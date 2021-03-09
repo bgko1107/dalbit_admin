@@ -38,6 +38,14 @@
     var detailData;
     function fn_detail_success(dst_id, response, params) {
         response.data["rowNum"] = params.rowNum;
+        var image_url1 = response.data.image_url1;
+        var image_url2 = response.data.image_url2;
+        var image_url3 = response.data.image_url3;
+        isExistImage = false;
+        if(!common.isEmpty(image_url1) || !common.isEmpty(image_url2) || !common.isEmpty(image_url3)){
+            isExistImage = true;
+        }
+        response.data.isExistImage = isExistImage;
 
         var template = $('#tmp_declarationFrm').html();
         var templateScript = Handlebars.compile(template);
@@ -412,9 +420,7 @@
                 </tbody>
             </table>
 
-            {{#if image_url1}}
-            {{#if image_url2}}
-            {{#if image_url3}}
+            {{#if isExistImage}}
                 <div class="col-lg-12 mt10 no-padding" style="border:solid 1px #ddd">
                     <div class="widget">
                         <div class="widget-header">
@@ -433,8 +439,6 @@
                         </div>
                     </div>
                 </div>
-            {{/if}}
-            {{/if}}
             {{/if}}
 
             <div class="col-lg-12 mt10 no-padding">
