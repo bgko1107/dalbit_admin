@@ -570,7 +570,7 @@
         }
 
         // 최차장님이 운영에서 보낼때는 무조건 10000000000001 번호로 보내라고 함.
-        if(type == "52" ){  // 단, 출석체크 이벤트 일때만
+        if(type == "53" ){  // 단, 출석체크 이벤트 일때만
             resultJson['target_mem_no'] = '10000000000002';
         }else{
             resultJson['target_mem_no'] = '10000000000001';
@@ -597,7 +597,7 @@
             resultJson['send_url'] = $("#send_url").val();
         }
 
-        if(type == "52" ){
+        if(type == "53" ){
             resultJson['image_type'] = "106";
         }
 
