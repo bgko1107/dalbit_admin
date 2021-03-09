@@ -273,159 +273,185 @@
                     <col width="5%" />
                 </colgroup>
                 <tbody>
-                <tr class="align-middle">
-                    <th rowspan="2">No</th>
-                    <td rowspan="2">{{rowNum}}</td>
+                    <tr class="align-middle">
+                        <th rowspan="2">No</th>
+                        <td rowspan="2">{{rowNum}}</td>
 
-                    <th>신고사유</th>
-                    <td>{{{getCommonCodeLabel report_reason 'declaration_reason'}}}</td>
+                        <th>신고사유</th>
+                        <td>{{{getCommonCodeLabel report_reason 'declaration_reason'}}}</td>
 
-                    <th>Browser</th>
-                    <td>{{browser}}</td>
+                        <th>Browser</th>
+                        <td>{{browser}}</td>
 
-                    <th rowspan="2">접수일시</th>
-                    <td rowspan="2">{{reg_date}}</td>
+                        <th rowspan="2">접수일시</th>
+                        <td rowspan="2">{{reg_date}}</td>
 
-                    <th rowspan="2">처리일시</th>
-                    <td rowspan="2">
-                        {{op_date}}
-                        {{#equal op_date ''}}-{{/equal}}
-                    </td>
+                        <th rowspan="2">처리일시</th>
+                        <td rowspan="2">
+                            {{op_date}}
+                            {{#equal op_date ''}}-{{/equal}}
+                        </td>
 
-                    <th>처리상태</th>
-                    <%--<td>{{{getCommonCodeSelect status 'declaration_status'}}}</td>--%>
-                    {{^equal status '0'}}<td>처리완료</td>{{/equal}}
-                    {{#equal status '0'}}<td>미처리</td>{{/equal}}
-                </tr>
-                <tr>
+                        <th>처리상태</th>
+                        <%--<td>{{{getCommonCodeSelect status 'declaration_status'}}}</td>--%>
+                        {{^equal status '0'}}<td>처리완료</td>{{/equal}}
+                        {{#equal status '0'}}<td>미처리</td>{{/equal}}
+                    </tr>
+                    <tr>
 
-                    <th>플랫폼</th>
-                    <td>{{platform}}</td>
+                        <th>플랫폼</th>
+                        <td>{{platform}}</td>
 
-                    <th>IP Address</th>
-                    <td>{{ipAddress}}</td>
+                        <th>IP Address</th>
+                        <td>{{ipAddress}}</td>
 
-                    <th>처리자명</th>
-                    <td>
-                        {{op_name}}
-                        {{#equal op_name ''}}-{{/equal}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        <th>처리자명</th>
+                        <td>
+                            {{op_name}}
+                            {{#equal op_name ''}}-{{/equal}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <table class="table table-bordered table-dalbit">
-            <colgroup>
-                <col width="4%" />
-                <col width="5%" />
-                <col width="5%" />
-                <col width="6%" />
-                <col width="4%" />
-                <col width="5%" />
-                <col width="5%" />
-                <col width="6%" />
-                <col width="5%" />
-                <col width="5%" />
-                <col width="5%" />
-                <col width="5%" />
-            </colgroup>
-            <tbody>
-            <tr class="align-middle">
-                <th rowspan="1" colspan="4">신고자</th>
-                <th rowspan="1" colspan="4">대상자</th>
+            <table class="table table-bordered table-dalbit">
+                <colgroup>
+                    <col width="4%" />
+                    <col width="5%" />
+                    <col width="5%" />
+                    <col width="6%" />
+                    <col width="4%" />
+                    <col width="5%" />
+                    <col width="5%" />
+                    <col width="6%" />
+                    <col width="5%" />
+                    <col width="5%" />
+                    <col width="5%" />
+                    <col width="5%" />
+                </colgroup>
+                <tbody>
+                    <tr class="align-middle">
+                        <th rowspan="1" colspan="4">신고자</th>
+                        <th rowspan="1" colspan="4">대상자</th>
 
-                <th>알림</th>
-                <td colspan="3">{{{getCommonCodeRadio 0 'declaration_send'}}}</td>
+                        <th>알림</th>
+                        <td colspan="3">{{{getCommonCodeRadio 0 'declaration_send'}}}</td>
 
-            </tr>
+                    </tr>
 
-            <tr>
-                <td>{{mem_id}}</td>
-                <td>레벨 : {{level}}<br />등급 : {{grade}}</td>
-                <td>{{mem_nick}}</td>
-                <td>{{{sexIcon memSex mem_birth_year}}}</td>
+                    <tr>
+                        <td>{{mem_id}}</td>
+                        <td>레벨 : {{level}}<br />등급 : {{grade}}</td>
+                        <td>{{mem_nick}}</td>
+                        <td>{{{sexIcon memSex mem_birth_year}}}</td>
 
-                <td>
-                    {{reported_mem_id}}
-                    <input type="hidden" name="reported_mem_no" id="reported_mem_no" value="{{reported_mem_no}}" />
-                </td>
-                <td>레벨 : {{reported_level}}<br />등급 : {{reported_grade}}</td>
-                <td>{{reported_mem_nick}}</td>
-                <td>{{{sexIcon reported_memSex reported_mem_birth_year}}}</td>
+                        <td>
+                            {{reported_mem_id}}
+                            <input type="hidden" name="reported_mem_no" id="reported_mem_no" value="{{reported_mem_no}}" />
+                        </td>
+                        <td>레벨 : {{reported_level}}<br />등급 : {{reported_grade}}</td>
+                        <td>{{reported_mem_nick}}</td>
+                        <td>{{{sexIcon reported_memSex reported_mem_birth_year}}}</td>
 
-                <th>조치범위</th>
-                <td colspan="3">
-                    {{{getCommonCodeCheck 3 'block_scope' 'Y' 'block_scope'}}}
-                </td>
-            </tr>
+                        <th>조치범위</th>
+                        <td colspan="3">
+                            {{{getCommonCodeCheck 3 'block_scope' 'Y' 'block_scope'}}}
+                        </td>
+                    </tr>
 
-            <tr>
-                <th colspan="2">제재 조치</th>
-                <td colspan="10">
-                    {{{getCommonCodeRadio op_code 'declaration_opCode' 'Y' 'opCode'}}}
-                </td>
-            </tr>
+                    <tr>
+                        <th colspan="2">제재 조치</th>
+                        <td colspan="10">
+                            {{{getCommonCodeRadio op_code 'declaration_opCode' 'Y' 'opCode'}}}
+                        </td>
+                    </tr>
 
-            <tr>
-                <th colspan="2">누적 결제 수<br />/금액</th>
-                <td colspan="2">{{addComma payCount}}개 <br />{{addComma payAmount}}원</td>
+                    <tr>
+                        <th colspan="2">누적 결제 수<br />/금액</th>
+                        <td colspan="2">{{addComma payCount}}개 <br />{{addComma payAmount}}원</td>
 
-                <th colspan="2">누적 결제 수<br />/금액</th>
-                <td colspan="2">{{addComma reported_payCount}}개 <br />{{addComma reported_payAmount}}원</td>
+                        <th colspan="2">누적 결제 수<br />/금액</th>
+                        <td colspan="2">{{addComma reported_payCount}}개 <br />{{addComma reported_payAmount}}원</td>
 
 
-                <th {{#if room_no}}rowspan="5"{{else}}rowspan="4"{{/if}}>조치 선택</th>
-                <td {{#if room_no}}rowspan="5"{{else}}rowspan="4"{{/if}} colspan="3" id="message">
-                    {{{getCommonCodeCheck message 'declaration_Message'}}}
-                </td>
-            </tr>
-            <tr>
-                <th colspan="2">누적 선물 수<br />/금액</th>
-                <td colspan="2">{{addComma giftCount}}개 <br />{{addComma giftAmount}}원</td>
+                        <th {{#if room_no}}rowspan="5"{{else}}rowspan="4"{{/if}}>조치 선택</th>
+                        <td {{#if room_no}}rowspan="5"{{else}}rowspan="4"{{/if}} colspan="3" id="message">
+                            {{{getCommonCodeCheck message 'declaration_Message'}}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">누적 선물 수<br />/금액</th>
+                        <td colspan="2">{{addComma giftCount}}개 <br />{{addComma giftAmount}}원</td>
 
-                <th colspan="2">누적 선물 수<br />/금액</th>
-                <td colspan="2">{{addComma reported_giftCount}}개 <br />{{addComma reported_giftAmount}}원</td>
-            </tr>
-            <tr>
-                <th colspan="2">총 신고</th>
-                <td colspan="2">{{addComma report_cnt}}건</td>
+                        <th colspan="2">누적 선물 수<br />/금액</th>
+                        <td colspan="2">{{addComma reported_giftCount}}개 <br />{{addComma reported_giftAmount}}원</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">총 신고</th>
+                        <td colspan="2">{{addComma report_cnt}}건</td>
 
-                <th colspan="2">총 신고/조치</th>
-                <td colspan="2">{{addComma reported_cnt}}건<br />/{{addComma reported_ok_cnt}}건</td>
-            </tr>
+                        <th colspan="2">총 신고/조치</th>
+                        <td colspan="2">{{addComma reported_cnt}}건<br />/{{addComma reported_ok_cnt}}건</td>
+                    </tr>
 
-            {{#if room_no}}
-            <tr>
-                <th colspan="2">방송방</th>
-                <td colspan="6">{{{roomNoLink room_no room_no}}}</td>
-            </tr>
+                    {{#if room_no}}
+                    <tr>
+                        <th colspan="2">방송방</th>
+                        <td colspan="6">{{{roomNoLink room_no room_no}}}</td>
+                    </tr>
+                    {{/if}}
+
+                    <tr>
+                        <th colspan="2">신고 메시지</th>
+                        {{#if etc}}
+                            <td colspan="6">{{{replaceNewLineToBr etc}}}</td>
+                        {{else}}
+                            <td colspan="6">-</td>
+                        {{/if}}
+                    </tr>
+                </tbody>
+            </table>
+
+            {{#if image_url1}}
+            {{#if image_url2}}
+            {{#if image_url3}}
+                <div class="col-lg-12 mt10 no-padding" style="border:solid 1px #ddd">
+                    <div class="widget">
+                        <div class="widget-header">
+                            <h3><i class="fa fa-user"></i> 신고 이미지 </h3>
+                        </div>
+                        <div class="widget-content">
+                            {{#if image_url1}}
+                                <img src="{{renderImage image_url1}}" height="150px" style="border:1px solid gray" class="thumbnail fullSize_background pull-left mt10 ml10" />
+                            {{/if}}
+                            {{#if image_url2}}
+                                <img src="{{renderImage image_url2}}" height="150px" style="border:1px solid gray" class="thumbnail fullSize_background pull-left mt10 ml10" />
+                            {{/if}}
+                            {{#if image_url3}}
+                                <img src="{{renderImage image_url3}}" height="150px" style="border:1px solid gray" class="thumbnail fullSize_background pull-left mt10 ml10" />
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+            {{/if}}
             {{/if}}
 
-            <tr>
-                <th colspan="2">신고 메시지</th>
-                {{#if etc}}
-                    <td colspan="6">{{{replaceNewLineToBr etc}}}</td>
-                {{else}}
-                    <td colspan="6">-</td>
-                {{/if}}
-            </tr>
-
-            </tbody>
-        </table>
-
-            <%-- 에디터 --%>
-            <div class="widget" id="declaration_editor">
-                <input type="hidden" id ="notiMemo" name="notiMemo">
-                <div class="widget-header">
-                    <h3><i class="fa fa-user"></i> 신고 시 조치내용 </h3>
-                </div>
-                <div class="widget-content no-padding">
-                    {{#equal status '0'}}
-                        <div class="_editor" id="notiContents" name="notiContents">{{replaceHtml declaration_Message}}</div>
-                    {{/equal}}
-                    {{^equal status '0'}}
-                        <div class="_editor" id="notiContents" name="notiContents" style="white-space: pre-line;">{{{replaceHtml ../op_msg}}}</div>
-                    {{/equal}}
+            <div class="col-lg-12 mt10 no-padding">
+                <%-- 에디터 --%>
+                <div class="widget" id="declaration_editor">
+                    <input type="hidden" id ="notiMemo" name="notiMemo">
+                    <div class="widget-header">
+                        <h3><i class="fa fa-user"></i> 신고 시 조치내용 </h3>
+                    </div>
+                    <div class="widget-content no-padding">
+                        {{#equal status '0'}}
+                            <div class="_editor" id="notiContents" name="notiContents">{{replaceHtml declaration_Message}}</div>
+                        {{/equal}}
+                        {{^equal status '0'}}
+                            <div class="_editor" id="notiContents" name="notiContents" style="white-space: pre-line;">{{{replaceHtml ../op_msg}}}</div>
+                        {{/equal}}
+                    </div>
                 </div>
             </div>
         </div>
