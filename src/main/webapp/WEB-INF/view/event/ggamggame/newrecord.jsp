@@ -5,14 +5,14 @@
     <button type="button" class="btn btn-primary pull-right" onclick="newrecordAdd();"><i class="fa fa-search"></i>등록</button>
 </div>
 <div class="widget-content col-md-12 no-padding">
-    <table class="table table-sorting table-hover table-bordered datatable" id="table_newrecord_list">
+    <table class="table table-sorting table-hover table-bordered datatable no-margin" id="table_newrecord_list">
         <thead>
         </thead>
         <tbody>
         </tbody>
     </table>
 </div>
-<button type="button" class="btn btn-danger pull-left" id="newrecordDel" onclick="newrecordDel();">선택 삭제</button>
+<button type="button" class="btn btn-danger pull-left mb15" id="newrecordDel" onclick="newrecordDel();" >선택 삭제</button>
 
 <!-- 보름달 완성 조건(DJ) -->
 <div class="col-md-12 no-padding" id="detailInfo" style="display: none;">
@@ -263,7 +263,7 @@
 
 
 <script id="tmp_event_record_detail" type="text/x-handlebars-template">
-    <table id="event_record_detail" class="table table-sorting table-hover table-bordered">
+    <table id="event_record_detail" class="table table-sorting table-hover table-bordered no-margin">
         <colgroup>
             <col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
             <col width="5%"/><col width="5%"/><col width="5%"/>
