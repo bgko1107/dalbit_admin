@@ -6,7 +6,7 @@
     <div id="page-wrapper">
         <!-- serachBox -->
         <div class="col-lg-12 form-inline no-padding">
-            <div class="col-md-8 no-padding">
+            <div class="col-md-12 no-padding">
                 <div class="widget widget-table searchBoxArea">
                     <table>
                         <tr>

@@ -86,4 +86,17 @@ public class MemberVo{
     private String last_upd_date;
 
     private String room_no;
+
+    private String join_path;
+    private int day_badge;
+    private int week_badge;
+    private int month_badge;
+    private int recomm_badge;
+    private int newdj_badge;
+    private int new_badge;
+    private int specialdj_badge;
+    private int admin_badge;
+    private int shiningdj_badge;
+    private int specialdj_cnt;
+    private String image_profile;
 }

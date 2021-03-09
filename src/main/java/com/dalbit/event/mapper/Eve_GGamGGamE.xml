@@ -12,5 +12,15 @@
         call rd_admin.sp_admin_event_board_detail(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
+    <!-- 신기록 상세정보 수정 -->
+    <select id="callNewRecordEdit" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.event.vo.GGamGGamEVo">
+        call rd_admin.sp_admin_event_data_edit(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
+    <!-- 신기록 상세정보 삭제 -->
+    <select id="callNewRecordDelete" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.event.vo.GGamGGamEVo">
+        call rd_admin.sp_admin_event_board_delete(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+    </select>
+
 
 </mapper>
