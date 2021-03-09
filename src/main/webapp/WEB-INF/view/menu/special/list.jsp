@@ -155,3 +155,12 @@
     }
 
 </script>
+
+<script id="tmp_summary" type="text/x-handlebars-template">
+    {{#data}}
+    <tr>
+        <td>{{addComma approveDal}}건</td> <%-- 승인 달D --%>
+        <td style="color: #ff0000;">{{addComma requestDal}}건</td> <%-- 총 신청 달D--%>
+    </tr>
+    {{/data}}
+</script>
