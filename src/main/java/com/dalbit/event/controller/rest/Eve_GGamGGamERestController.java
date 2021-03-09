@@ -38,4 +38,22 @@ public class Eve_GGamGGamERestController {
         return result;
     }
 
+    /**
+     * 신기록 이벤트 상세 정보 수정
+     */
+    @PostMapping("newrecord/edit")
+    public String newRecordEdit(GGamGGamEVo gGamGGamEVo) {
+        String result = eve_GGamGGamEService.callNewRecordEdit(gGamGGamEVo);
+        return result;
+    }
+
+    /**
+     * 신기록 이벤트 상세 정보 삭제
+     */
+    @PostMapping("newrecord/delete")
+    public String newRecordDelete(GGamGGamEVo gGamGGamEVo) {
+        String result = eve_GGamGGamEService.callNewRecordDelete(gGamGGamEVo);
+        return result;
+    }
+
 }

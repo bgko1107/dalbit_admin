@@ -8,6 +8,7 @@ import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.ProcedureVo;
 import com.dalbit.event.dao.Eve_GGamGGamEDao;
 import com.dalbit.event.vo.GGamGGamEVo;
+import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
@@ -44,11 +45,46 @@ public class Eve_GGamGGamEService {
      */
     public String callNewRecordDetail(GGamGGamEVo gGamGGamEVo){
         ProcedureVo procedureVo = new ProcedureVo(gGamGGamEVo);
-        eve_GGamGGamEDao.callNewRecordDetail(procedureVo);
+        ArrayList<GGamGGamEVo> list = eve_GGamGGamEDao.callNewRecordDetail(procedureVo);
         GGamGGamEVo totalInfo = new Gson().fromJson(procedureVo.getExt(), GGamGGamEVo.class);
 
-        return gsonUtil.toJson(new JsonOutputVo(Status.조회, totalInfo));
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(0), totalInfo));
     }
+
+    /**
+     * 신기록 이벤트 상세정보 수정
+     */
+    public String callNewRecordEdit(GGamGGamEVo gGamGGamEVo){
+        gGamGGamEVo.setOpName(MemberVo.getMyMemNo());
+        ProcedureVo procedureVo = new ProcedureVo(gGamGGamEVo);
+
+        eve_GGamGGamEDao.callNewRecordEdit(procedureVo);
+        ProcedureVo outvo = new Gson().fromJson(procedureVo.getExt(), ProcedureVo.class);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+    }
+
+    /**
+     * 신기록 이벤트 상세정보 삭제
+     */
+    public String callNewRecordDelete(GGamGGamEVo gGamGGamEVo){
+        String[] idxList = gGamGGamEVo.getIdxList().split("@@");
+
+        for(int i=0; i<idxList.length;i++){
+            gGamGGamEVo.setIdx(Integer.parseInt(idxList[i]));
+            ProcedureVo procedureVo = new ProcedureVo(gGamGGamEVo);
+
+            try {
+                eve_GGamGGamEDao.callNewRecordDelete(procedureVo);
+            }catch (Exception e){
+                return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+            }
+        }
+        return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+
+    }
+
+
 
 
 

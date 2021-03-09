@@ -313,7 +313,6 @@ var banner_bannerType = [
     , new COMMON_CODE('rankPopup', '14', '랭킹팝업')
     , new COMMON_CODE('questionTop', '15', '1:1문의 TOP')
     , new COMMON_CODE('clipPlay', '16', '클립Play')
-    , new COMMON_CODE('room', '17', '방송방')
 ];
 
 var banner_bannerType_popup = [
@@ -339,7 +338,6 @@ var banner_bannerType_banner = [
     , new COMMON_CODE('clip', '10', '클립 Center')
     , new COMMON_CODE('questionTop', '15', '1:1문의 TOP')
     , new COMMON_CODE('clipPlay', '16', '클립Play')
-    , new COMMON_CODE('room', '17', '방송방')
 ];
 
 var banner_loginType = [
@@ -1012,3 +1010,30 @@ var game_history_sort = [
     , new COMMON_CODE('3', '3', '누적 청취자 적은 순으로')
     , new COMMON_CODE('4', '4', '받은 별 많은 순으로')
 ]
+
+var conEvent = [
+    new COMMON_CODE(null, 'conEvent', '게시구분')
+    , new COMMON_CODE('1', '1', '좋아요')
+    , new COMMON_CODE('2', '2', '누적 청취자')
+    , new COMMON_CODE('3', '3', '선물(별)')
+];
+
+var conGubun = [
+    new COMMON_CODE(null, 'conGubun', '게시구분')
+    , new COMMON_CODE('1', '1', 'DJ')
+    , new COMMON_CODE('2', '2', '청취자')
+];
+
+var conCondition = [
+    new COMMON_CODE(null, 'conCondition', '게시구분')
+    , new COMMON_CODE('1', '1', '첫 달성 조건')
+    , new COMMON_CODE('2', '2', '신기록 달성 조건')
+];
+
+var conReward = [
+    new COMMON_CODE(null, 'conReward', '게시구분')
+    , new COMMON_CODE('1', '1', '무료부스터')
+    , new COMMON_CODE('2', '2', '룰렛 응모권')
+    , new COMMON_CODE('3', '3', '방송시간 연장(30분)')
+];
+

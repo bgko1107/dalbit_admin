@@ -16,4 +16,7 @@ public interface Eve_GGamGGamEDao {
     @Transactional(readOnly = true)
     ArrayList<GGamGGamEVo> callNewRecordDetail(ProcedureVo procedureVo);
 
+    GGamGGamEVo callNewRecordEdit(ProcedureVo procedureVo);
+    GGamGGamEVo callNewRecordDelete(ProcedureVo procedureVo);
+
 }
