@@ -185,10 +185,10 @@
     function fn_newrecordEdit_success(dst_id, response){
         if(response.result =="success"){
             alert('신기록 이벤트 등록 성공');
+            newrecordList();
         }else{
-            alert('신기록 이벤트 등록 실패');
+            alert('구분, 달성 조건 설정, 혜택 설정이 중복되었습니다.');
         }
-        newrecordList();
     }
 
     function newrecordDel() {

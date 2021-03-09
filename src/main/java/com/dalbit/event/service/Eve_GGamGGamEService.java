@@ -61,6 +61,9 @@ public class Eve_GGamGGamEService {
         eve_GGamGGamEDao.callNewRecordEdit(procedureVo);
         ProcedureVo outvo = new Gson().fromJson(procedureVo.getExt(), ProcedureVo.class);
 
+        if(Integer.parseInt(procedureVo.getRet()) < 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
         return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
     }
 
