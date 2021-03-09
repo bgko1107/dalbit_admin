@@ -18,5 +18,7 @@ public class P_BehaviorDetailOutputVo extends BaseVo {
     private int conTime;
     private int runTime;
     private int viewYn;
+    private int slctType;
+    private int platform;
 
 }
