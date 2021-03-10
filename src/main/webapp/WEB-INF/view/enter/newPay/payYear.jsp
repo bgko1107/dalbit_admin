@@ -33,13 +33,14 @@
             <label class="font-bold" style="color: blue">※결제 수단 별</label>
             <table class="table table-bordered" style="font:message-box;">
                 <colgroup>
-                    <col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/>
-                    <col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/>
-                    <col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/>
-                    <col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/>
-                    <col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/>
-                    <col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/>
-                    <col width="2.9%"/><col width="2.9%"/><col width="2.9%"/><col width="2.9%"/>
+                    <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                    <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                    <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                    <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                    <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                    <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                    <col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/><col width="2%"/>
+                    <col width="2%"/><col width="2%"/>
                 </colgroup>
                 <thead>
                 <tr>
@@ -57,11 +58,12 @@
                     <th colspan="3" class="_stateTopTh">캐시비<i class="fa fa-forumbee"></i></th>
                     <th colspan="3" class="_stateTopTh">페이코<i class="fa fa-paypal"></i></th>
                     <th colspan="3" class="_stateTopTh">카카오페이<i class="fa fa-comment"></i></th>
+                    <th colspan="3" class="_stateTopTh">간편결제(계좌)<i class="fa fa-money"></i></th>
                 </tr>
                 <tr>
-                    <th class="_stateSubTh">건(비율)</th>
-                    <th class="_stateSubTh">수량(비율)</th>
-                    <th class="_stateSubTh">금액(비율)</th>
+                    <th class="_stateSubTh">건<br/>(비율)</th>
+                    <th class="_stateSubTh">수량<br/>(비율)</th>
+                    <th class="_stateSubTh">금액<br/>(비율)</th>
                     <th class="_stateSubTh">건</th>
                     <th class="_stateSubTh">수량</th>
                     <th class="_stateSubTh">금액</th>
@@ -86,6 +88,9 @@
                     <%--<th class="_stateSubTh">건</th>--%>
                     <%--<th class="_stateSubTh">수량</th>--%>
                     <%--<th class="_stateSubTh">금액</th>--%>
+                    <th class="_stateSubTh">건</th>
+                    <th class="_stateSubTh">수량</th>
+                    <th class="_stateSubTh">금액</th>
                     <th class="_stateSubTh">건</th>
                     <th class="_stateSubTh">수량</th>
                     <th class="_stateSubTh">금액</th>
@@ -435,6 +440,9 @@
         <td>{{addComma sum_kakaopayCnt}}</td>
         <td>{{addComma sum_kakaopayCmt}}</td>
         <td>{{vatMinus sum_kakaopayAmt}}</td>
+        <td>{{addComma sum_simpleCnt}}</td>
+        <td>{{addComma sum_simpleCmt}}</td>
+        <td>{{vatMinus sum_simpleAmt}}</td>
     </tr>
 </script>
 
@@ -484,6 +492,9 @@
         <td>{{addComma kakaopayCnt}}</td>
         <td>{{addComma kakaopayCmt}}</td>
         <td>{{vatMinus kakaopayAmt}}</td>
+        <td>{{addComma simpleCnt}}</td>
+        <td>{{addComma simpleCmt}}</td>
+        <td>{{vatMinus simpleAmt}}</td>
 
     </tr>
     {{else}}

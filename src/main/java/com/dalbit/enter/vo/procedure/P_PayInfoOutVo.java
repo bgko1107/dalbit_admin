@@ -48,6 +48,9 @@ public class P_PayInfoOutVo {
     private int kakaomoney_cnt;
     private int kakaomoney_amt;
     private int kakaomoney_cmt;
+    private int simple_cnt;
+    private int simple_amt;
+    private int simple_cmt;
 
     private int ra_cnt;
     private int ra_amt;
