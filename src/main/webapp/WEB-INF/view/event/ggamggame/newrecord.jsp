@@ -151,35 +151,94 @@
         var imageUrlList = "";
         var imageTimeList = "";
 
+        var isValid = true;
         $("#event_condition_tbody").find("._noTr").each(function () {
+
+            var conGubun = $(this).find('#conGubun').val();
+            if(common.isEmpty(conGubun)){
+                alert('구분을 선택해주세요.');
+                isValid = false;
+                return false;
+            }
             typeList += typeList == "" ? $(this).find('#conGubun').val() : "|" + $(this).find('#conGubun').val();
+
+            var conCondition = $(this).find('#conCondition').val();
+            if(common.isEmpty(conCondition)){
+                alert('달성 조건 설정을 선택해주세요.');
+                isValid = false;
+                return false;
+            }
             achieveTypeList += achieveTypeList == "" ? $(this).find('#conCondition').val() : "|" + $(this).find('#conCondition').val();
+
+            var txt_conSetting = $(this).find('#txt_conSetting').val();
+            if(common.isEmpty(txt_conSetting)){
+                alert('달성 세부 설정을 입력해주세요.');
+                isValid = false;
+                return false;
+            }
             achieveCntList += achieveCntList == "" ? $(this).find('#txt_conSetting').val() : "|" + $(this).find('#txt_conSetting').val();
+
+            var conReward = $(this).find('#conReward').val();
+            if(common.isEmpty(conReward)){
+                alert('혜택 설정을 선택해주세요.');
+                isValid = false;
+                return false;
+            }
             rewardTypeList += rewardTypeList == "" ? $(this).find('#conReward').val() : "|" + $(this).find('#conReward').val();
+
+            var txt_conRewardCnt = $(this).find('#txt_conRewardCnt').val();
+            if(common.isEmpty(txt_conRewardCnt)){
+                alert('수량을 입력해주세요.');
+                isValid = false;
+                return false;
+            }
             rewardCntList += rewardCntList == "" ? $(this).find('#txt_conRewardCnt').val() : "|" + $(this).find('#txt_conRewardCnt').val();
+
+            var txt_conContent = $(this).find('#txt_conContent').val();
+            if(common.isEmpty(txt_conContent)){
+                alert('문구를 입력해주세요.');
+                isValid = false;
+                return false;
+            }
             completeTextList += completeTextList == "" ? $(this).find('#txt_conContent').val() : "|" + $(this).find('#txt_conContent').val();
+
+            var txt_imageUrl = $(this).find('#txt_imageUrl').val();
+            if(common.isEmpty(txt_imageUrl)){
+                alert('이미지URL을 입력해주세요.');
+                isValid = false;
+                return false;
+            }
             imageUrlList += imageUrlList == "" ? $(this).find('#txt_imageUrl').val() : "|" + $(this).find('#txt_imageUrl').val();
+
+            var play_time = $(this).find('#play_time').val();
+            if(common.isEmpty(play_time)){
+                alert('플레이타임을 입력해주세요.');
+                isValid = false;
+                return false;
+            }
             imageTimeList += imageTimeList == "" ? $(this).find('#play_time').val() : "|" + $(this).find('#play_time').val();
         });
 
-        var data = {
-            idx : newRecordIdx
-            , eventName : $("#txt_title").val()
-            , eventNo : $("#conEvent").val()
-            , viewYn : $("#detail_viewYn").prop('checked') ? 1 : 0
-            , typeList : typeList
-            , achieveTypeList : achieveTypeList
-            , achieveCntList : achieveCntList
-            , rewardTypeList : rewardTypeList
-            , rewardCntList : rewardCntList
-            , completeTextList : completeTextList
-            , imageUrlList : imageUrlList
-            , imageTimeList : imageTimeList
-        };
+        if(isValid){
+            var data = {
+                idx : newRecordIdx
+                , eventName : $("#txt_title").val()
+                , eventNo : $("#conEvent").val()
+                , viewYn : $("#detail_viewYn").prop('checked') ? 1 : 0
+                , typeList : typeList
+                , achieveTypeList : achieveTypeList
+                , achieveCntList : achieveCntList
+                , rewardTypeList : rewardTypeList
+                , rewardCntList : rewardCntList
+                , completeTextList : completeTextList
+                , imageUrlList : imageUrlList
+                , imageTimeList : imageTimeList
+            };
 
-        console.log(data);
+            console.log(data);
 
-        util.getAjaxData("newrecord", "/rest/event/ggamggame/newrecord/edit", data, fn_newrecordEdit_success);
+            util.getAjaxData("newrecord", "/rest/event/ggamggame/newrecord/edit", data, fn_newrecordEdit_success);
+        }
     }
 
     function fn_newrecordEdit_success(dst_id, response){
@@ -307,7 +366,7 @@
             <input type="text" class="form-control" id="txt_conRewardCnt" style="width: 100%;" value="{{reward_cnt}}">
         </td>
         <td>
-            <input type="text" class="form-control" id="txt_conContent" style="width: 100%;" value="{{complete_text}}">
+            <textarea class="form-control" id="txt_conContent" style="width: 100%;" maxlength="200">{{{replaceTextarea complete_text}}}</textarea>
         </td>
         <td>
             <input type="text" class="form-control pull-left" id="txt_imageUrl" style="width: 80%;" value="{{image_url}}">
@@ -335,7 +394,7 @@
             <input type="text" class="form-control" id="txt_conRewardCnt" style="width: 100%;" value="{{reward_cnt}}">
         </td>
         <td>
-            <input type="text" class="form-control" id="txt_conContent" style="width: 100%;" value="{{complete_text}}">
+            <textarea class="form-control" id="txt_conContent" style="width: 100%;" maxlength="200">{{{replaceTextarea complete_text}}}</textarea>
         </td>
         <td>
             <input type="text" class="form-control pull-left" id="txt_imageUrl" style="width: 80%;" value="{{image_url}}">
