@@ -147,7 +147,7 @@ public class Ent_NewJoin2Service {
     public String callStateAdbrixMemo(P_StatVo pStatVo){
         P_JoinAdbirxOutVo outVo =  ent_NewJoin2Dao.callStateAdbrixMemo(pStatVo);
 
-        return gsonUtil.toJson(new JsonOutputVo(Status.조회, outVo));
+        return gsonUtil.toJsonAdm(new JsonOutputVo(Status.조회, outVo));
     }
 
 

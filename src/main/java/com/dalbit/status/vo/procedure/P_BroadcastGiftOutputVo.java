@@ -23,10 +23,10 @@ public class P_BroadcastGiftOutputVo extends BaseVo {
     private int guestGiftAmount;
     private int audioGiftCnt;
     private int audioGiftCmt;
-    private int audioGiftGiftAmount;
+    private int audioGiftAmount;
     private int vedioGiftCnt;
     private int vedioGiftCmt;
-    private int vedioGiftGiftAmount;
+    private int vedioGiftAmount;
     private int secretGiftCnt;
     private int secretGiftCmt;
     private int secretGiftAmount;

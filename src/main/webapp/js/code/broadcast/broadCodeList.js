@@ -279,15 +279,31 @@ var elseItem = [
 var behavior_target = [
     new COMMON_CODE(null, 'target', '노출대상')
     , new COMMON_CODE('1', '1', '청취자')
+    , new COMMON_CODE('2', '2', 'DJ')
     // 추후에 추가 될 수 있음
 ];
 
-var behavior_type = [
+var behavior_platform = [
+    new COMMON_CODE(null, 'platform', '플랫폼')
+    , new COMMON_CODE('-1', '-1', '전체')
+    , new COMMON_CODE('1', '1', '라디오')
+    , new COMMON_CODE('2', '2', '보이는 라디오')
+    // 추후에 추가 될 수 있음
+];
+
+var behavior_type_0 = [
     new COMMON_CODE(null, 'type', '타입')
     , new COMMON_CODE('1', '1', '선물함')
     , new COMMON_CODE('2', '2', '사연')
     , new COMMON_CODE('3', '3', '팬등록')
     , new COMMON_CODE('4', '4', '좋아요')
+    , new COMMON_CODE('5', '5', '결제창')
+];
+
+var behavior_type_1 = [
+    new COMMON_CODE(null, 'type', '타입')
+    , new COMMON_CODE('0', '0', '없음')
+    , new COMMON_CODE('6', '6', '종료')
 ];
 
 var behavior_viewYn = [

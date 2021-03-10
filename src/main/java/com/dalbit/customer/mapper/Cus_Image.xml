@@ -60,48 +60,44 @@
     </select>
 
     <select id="callCustomerImageProfileList" parameterType="com.dalbit.customer.vo.procedure.P_ImageProfileListInputVo" resultType="com.dalbit.customer.vo.procedure.P_ImageProfileListOutputVo">
-        select *
-        from (
-            select
-            @rownum := @rownum + 1 as rowNum,
-            a.*
-            FROM
-            (
-            <include refid="profile"/>
-            <where>
-                <if test='searchText != null and searchText != ""'>
-                    <choose>
-                        <when test="newSearchType == 1">
-                            and a.mem_no = #{searchText}
-                        </when>
-                        <when test="newSearchType == 2">
-                            and a.mem_nick like concat('%', #{searchText}, '%')
-                        </when>
-                        <when test="newSearchType == 3">
-                            and a.mem_name = #{searchText}
-                        </when>
-                        <when test="newSearchType == 4">
-                            and a.mem_phone = #{searchText}
-                        </when>
-                        <when test="newSearchType == 5">
-                            and a.mem_userid = #{searchText}
-                        </when>
-                        <when test="newSearchType == 6">
-                            and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
-                        </when>
-                        <otherwise>
-                            and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
-                        </otherwise>
-                    </choose>
-                </if>
-            </where>
-            ) AS a,
-            (select @rownum := 0) AS b
-            <trim prefix="ORDER BY">
-                a.last_upd_date desc
-            </trim>
-        ) b
-        where rowNum between #{searchStartNo, jdbcType=INTEGER} and #{searchEndNo, jdbcType=INTEGER}
+        /* Cus_Image.xml - callCustomerImageProfileList */
+        select
+        a.*
+        FROM
+        (
+        <include refid="profile"/>
+        <where>
+            <if test='searchText != null and searchText != ""'>
+                <choose>
+                    <when test="newSearchType == 1">
+                        and a.mem_no = #{searchText}
+                    </when>
+                    <when test="newSearchType == 2">
+                        and a.mem_nick like concat('%', #{searchText}, '%')
+                    </when>
+                    <when test="newSearchType == 3">
+                        and a.mem_name = #{searchText}
+                    </when>
+                    <when test="newSearchType == 4">
+                        and a.mem_phone = #{searchText}
+                    </when>
+                    <when test="newSearchType == 5">
+                        and a.mem_userid = #{searchText}
+                    </when>
+                    <when test="newSearchType == 6">
+                        and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE ip = #{searchText})
+                    </when>
+                    <otherwise>
+                        and a.mem_no in (SELECT distinct mem_no FROM rd_data.tb_member_session_history WHERE device_uuid = #{searchText})
+                    </otherwise>
+                </choose>
+            </if>
+        </where>
+        ) AS a
+        <trim prefix="ORDER BY">
+            a.last_upd_date desc
+        </trim>
+        limit #{searchStartLimitNo, jdbcType=INTEGER}, #{pageCnt, jdbcType=INTEGER}
     </select>
 
 

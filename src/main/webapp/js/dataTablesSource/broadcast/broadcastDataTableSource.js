@@ -92,8 +92,8 @@ var BroadcastDataTableSource = {
             {'title': '랭킹점수', 'data': 'total','width' : '45px','render': function (data){
                     return common.addComma(data) + "점";
                 }},
-            {'title': '누적 청취', 'data': 'totalListener','width' : '55px','render': function (data, type, row, meta) {
-                    return common.addComma(row.memTotalListener) + '명';
+            {'title': '누적 청취<br />(신규 팬)', 'data': 'totalListener','width' : '55px','render': function (data, type, row, meta) {
+                    return common.addComma(row.memTotalListener) + '명<br />' + '( '+ common.addComma(row.count_fan) +'명 )';
                 }},
             {'title': '<lable style="color:red">청취자</lable>', 'data': 'liveListener','color': 'red','width' : '40px','render': function (data, type, row, meta) {
                     return '<a href="javascript://" onclick="broadCastLivePopUp( ' + row.room_no + ', ' + 1 + ');" style="color:red">' + common.addComma(row.memLiveListener) + '명' + '</a>';
@@ -241,8 +241,8 @@ var BroadcastDataTableSource = {
             {'title': '진행시간', 'data': 'airTime','width' : '65px','render': function (data){
                     return common.timeStamp(data);
                 }},
-            {'title': '<lable style="color:red">누적<br/>청취자</lable>', 'data': 'totalListener','width' : '55px','render': function (data){
-                    return '<lable style="color:red">' + common.addComma(data) + ' 명</lable>';
+            {'title': '<lable style="color:red">누적청취</lable><br />(신규 팬)', 'data': 'totalListener','width' : '60px','render': function (data, type, row){
+                    return '<lable style="color:red">' + common.addComma(data) + ' 명</lable><br />'+ '( '+ common.addComma(row.count_fan) +'명 )';
                 }},
             {'title': '좋아요', 'data': 'goodCnt','width' : '40px','render': function (data){
                     var tmp = common.addComma(data);

@@ -253,8 +253,7 @@
         dtList_info_detail.useCheckBox(false);
         dtList_info_detail.useIndex(true);
         dtList_info_detail.setPageLength(50);
-        // dtList_info_detail.createDataTable(tmp_summary);
-        dtList_info_detail.createDataTable();
+        dtList_info_detail.createDataTable(tmp_summary);
 
         initDataTableTop_select_wallet()
     }

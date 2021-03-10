@@ -1240,6 +1240,9 @@ var MemberDataTableSource = {
             {'title': '사용/지급 일시', 'data': 'lastUpdDate', 'render': function (data, type, row, meta) {
                     return data;
                 }},
+            {'title': '사용/지급자', 'data': 'opName', 'render': function (data, type, row, meta) {
+                    return data;
+                }},
             /*{'title': '이미지', 'data': 'item_thumbnail','width':'50px','render' : function (data, type, row, meta) {
                     var imgurl = common.isEmpty(data) ? "https://image.dalbitlive.com/ani/thumbs/star_thumb.jpg" : data;
                     return '<img class="" src="'+ imgurl +'" width="50px" height="50px"/>';

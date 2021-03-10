@@ -19,10 +19,10 @@ public class P_BroadcastGiftOutVo extends BaseVo {
     private int sum_guestGiftAmount;
     private int sum_audioGiftCnt;
     private int sum_audioGiftCmt;
-    private int sum_audioGiftGiftAmount;
+    private int sum_audioGiftAmount;
     private int sum_vedioGiftCnt;
     private int sum_vedioGiftCmt;
-    private int sum_vedioGiftGiftAmount;
+    private int sum_vedioGiftAmount;
     private int sum_secretGiftCnt;
     private int sum_secretGiftCmt;
     private int sum_secretGiftAmount;
