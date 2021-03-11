@@ -53,4 +53,7 @@ public class P_PayWayOutVo {
     private int sum_kakaomoneyCnt;
     private int sum_kakaomoneyAmt;
     private int sum_kakaomoneyCmt;
+    private int sum_simpleCnt;
+    private int sum_simpleAmt;
+    private int sum_simpleCmt;
 }

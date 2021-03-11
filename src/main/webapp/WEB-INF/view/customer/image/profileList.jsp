@@ -145,6 +145,7 @@ var fnc_profileList = {};
 
     fnc_profileList.fn_select_success= function(dst_id, response, dst_params){
         // form 띄우기
+        response.param = dst_params;
         var template = $('#tmp_profileSelectFrm').html();
         var templateScript = Handlebars.compile(template);
         var context = response;
@@ -195,7 +196,7 @@ var fnc_profileList = {};
         <div class="item col-md-2 col-sm-6 mb15" style="padding-bottom: 35px;padding-right: 3px;padding-left: 3px; height: 376px">
         {{/dalbit_if}}
             <div>
-                <label>NO.{{indexDesc ../pagingVo.totalCnt user.rowNum}}</label>
+                <label>NO.{{indexDescWithoutRownum ../pagingVo.totalCnt ../param.pageStart ../param.pageCnt @index}}</label>
             </div>
             <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px;">
             <div class="thumbnail" src="{{user.image_profile.url}}?360x360">

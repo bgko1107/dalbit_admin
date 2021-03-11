@@ -799,17 +799,17 @@
     <tr class="font-bold _bgColor" data-bgColor="#d0cece">
         <td>총합</td>
         <td>{{addComma sum_djGiftCnt}}</td>
-        <td>{{addComma sum_djGiftCmt}}</td>
+        <td>{{addComma sum_djGiftAmount}}</td>
         <td>{{addComma sum_guestGiftCnt}}</td>
-        <td>{{addComma sum_guestGiftCmt}}</td>
+        <td>{{addComma sum_guestGiftAmount}}</td>
         <td>{{addComma sum_audioGiftCnt}}</td>
-        <td>{{addComma sum_audioGiftCmt}}</td>
+        <td>{{addComma sum_audioGiftAmount}}</td>
         <td>{{addComma sum_vedioGiftCnt}}</td>
-        <td>{{addComma sum_vedioGiftCmt}}</td>
+        <td>{{addComma sum_vedioGiftAmount}}</td>
         <td>{{addComma sum_secretGiftCnt}}</td>
-        <td>{{addComma sum_secretGiftCmt}}</td>
+        <td>{{addComma sum_secretGiftAmount}}</td>
         <td>{{addComma sum_totalGiftCnt}}</td>
-        <td>{{addComma sum_totalGiftCmt}}</td>
+        <td>{{addComma sum_totalGiftAmount}}</td>
     </tr>
 </script>
 
@@ -821,17 +821,17 @@
         {{data.hour}}시
         </td>
         <td>{{addComma djGiftCnt 'Y'}}</td>
-        <td>{{addComma djGiftCmt 'Y'}}</td>
+        <td>{{addComma djGiftAmount 'Y'}}</td>
         <td>{{addComma guestGiftCnt 'Y'}}</td>
-        <td>{{addComma guestGiftCmt 'Y'}}</td>
+        <td>{{addComma guestGiftAmount 'Y'}}</td>
         <td>{{addComma audioGiftCnt 'Y'}}</td>
-        <td>{{addComma audioGiftCmt 'Y'}}</td>
+        <td>{{addComma audioGiftAmount 'Y'}}</td>
         <td>{{addComma vedioGiftCnt 'Y'}}</td>
-        <td>{{addComma vedioGiftCmt 'Y'}}</td>
+        <td>{{addComma vedioGiftAmount 'Y'}}</td>
         <td>{{addComma secretGiftCnt 'Y'}}</td>
-        <td>{{addComma secretGiftCmt 'Y'}}</td>
+        <td>{{addComma secretGiftAmount 'Y'}}</td>
         <td>{{addComma totalGiftCnt 'Y'}}</td>
-        <td>{{addComma totalGiftCmt 'Y'}}</td>
+        <td>{{addComma totalGiftAmount 'Y'}}</td>
     </tr>
     {{else}}
     <tr>

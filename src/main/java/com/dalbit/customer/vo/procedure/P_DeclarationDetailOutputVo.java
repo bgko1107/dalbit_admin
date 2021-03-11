@@ -45,6 +45,9 @@ public class P_DeclarationDetailOutputVo extends BaseVo {
     private int reported_payAmount;
     private int reported_giftCount;
     private int reported_giftAmount;
+    private String image_url1;
+    private String image_url2;
+    private String image_url3;
     private int chatCount;
     private String room_no;
 

@@ -55,7 +55,7 @@ public class Cus_ImageService {
      * profile 리스트 조회
      */
     public String getMemberList(P_ImageProfileListInputVo pImageProfileListInputVo){
-        ProcedureVo procedureVo = new ProcedureVo(pImageProfileListInputVo);
+        //ProcedureVo procedureVo = new ProcedureVo(pImageProfileListInputVo);
         String result;
         try {
             int totalCnt = cusImageDao.callCustomerImageProfileListCnt(pImageProfileListInputVo);
