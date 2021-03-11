@@ -560,7 +560,7 @@
             <th>노출 대상</th>
             <td>{{{getCommonCodeRadio target "behavior_target" }}}</td>
             <th>플랫폼</th>
-            <td>{{{getCommonCodeRadio platform "behavior_platform" 'Y'}}}</td>
+            <td>{{{getCommonCodeRadio platform "behavior_platform" 'Y' 'platform'}}}</td>
             <th>등장 시간</th>
             <td>
                 <input type="text" class="form-control _trim" id="conTime" value="{{conTime}}" style="width: 50%;"/> 초
