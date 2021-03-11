@@ -1240,7 +1240,7 @@
                 {{/dalbit_if}}
 
                 {{#dalbit_if specialdj_badge '==' '1'}}
-                    {{{getBadge '#632BEB' '#632BEB' '' '스패셜DJ' '100px' '20px' 10 '15px' '15px'}}}
+                    {{{getBadge 'red' 'red' '' '스패셜DJ' '100px' '20px' 10 '15px' '15px'}}}
                 {{/dalbit_if}}
 
                 {{#dalbit_if specialdj_badge '==' '2'}}
