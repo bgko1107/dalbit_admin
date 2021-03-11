@@ -20,6 +20,18 @@ public class SpecialDjBestVo extends PagingVo {
     private String is_req;
     private int fan_air_time;
     private int air_time;
-    private int best_code;
-    private int best_data;
+    private int broad_cnt;
+    private int new_fan_cnt;
+
+    private int best_code1;
+    private int best_data1;
+    private boolean best_condition1;
+
+    private int best_code2;
+    private int best_data2;
+    private int best_condition2;
+
+    private int best_code3;
+    private int best_data3;
+    private int best_condition3;
 }

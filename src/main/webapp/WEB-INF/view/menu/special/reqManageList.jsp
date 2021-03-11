@@ -467,6 +467,11 @@
                             </div>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td colspan="4"></td>
+                    </tr>
+
                     <tr>
                         <th>자격요건1</th>
                         <td>
@@ -510,16 +515,46 @@
                             <input type="text" class="form-control" id="condition_data4" name="condition_data4" value="{{this.specialDjManageInfo.condition_data4}}" />
                         </td>
                     </tr>
+
                     <tr>
-                        <th>베스트 요건</th>
-                        <td colspan="3">
-                            <select class="form-control" name="best_code">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <th>베스트 요건 1</th>
+                        <td>
+                            <select class="form-control" name="best_code1" readonly="readonly">
                                 {{#each this.specialDjCondition}}
-                                    <option value="{{cd}}" {{#equal ../specialDjManageInfo.best_code cd}}selected{{/equal}}>{{cdNm}}</option>
+                                    <option value="{{cd}}" {{#equal 8 cd}}selected{{else}}disabled="disabled"{{/equal}}>{{cdNm}}</option>
                                 {{/each}}
                             </select>
-                            <input type="text" class="form-control" id="best_data" name="best_data" value="{{this.specialDjManageInfo.best_data}}" />
+                            <input type="text" class="form-control" id="best_data1" name="best_data1" value="{{this.specialDjManageInfo.best_data1}}" />
                         </td>
+                        <th>베스트 요건 2</th>
+                        <td>
+                            <select class="form-control" name="best_code2" readonly="readonly">
+                                {{#each this.specialDjCondition}}
+                                    <option value="{{cd}}" {{#equal 9 cd}}selected{{else}}disabled="disabled"{{/equal}}>{{cdNm}}</option>
+                                {{/each}}
+                            </select>
+                            <input type="text" class="form-control" id="best_data2" name="best_data2" value="{{this.specialDjManageInfo.best_data2}}" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>베스트 요건 3</th>
+                        <td colspan="3">
+                            <select class="form-control" name="best_code3" readonly="readonly">
+                                {{#each this.specialDjCondition}}
+                                    <option value="{{cd}}" {{#equal 10 cd}}selected{{else}}disabled="disabled"{{/equal}}>{{cdNm}}</option>
+                                {{/each}}
+                            </select>
+                            <input type="text" class="form-control" id="best_data3" name="best_data3" value="{{this.specialDjManageInfo.best_data3}}" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="4"></td>
                     </tr>
 
                     <tr>

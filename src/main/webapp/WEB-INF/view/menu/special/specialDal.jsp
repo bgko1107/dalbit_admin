@@ -75,7 +75,7 @@
         specialList();
     }
 
-    function getParam() {
+    function getParamSpecialDJ() {
         return data = {
             select_year : common.substr($("#startDate").val(),0,4)
             , select_month :  common.substr($("#startDate").val(),5,2)
@@ -89,12 +89,12 @@
     }
 
     function specialList() {
-        util.getAjaxData("special", "/rest/menu/special/dalList", getParam(), fn_dalList_success);
+        util.getAjaxData("special", "/rest/menu/special/dalList", getParamSpecialDJ(), fn_dalList_success);
     }
 
 
     var totalCnt;
-    function fn_dalList_success(dst_id, response) {
+    function fn_dalList_success(dst_id, response, param) {
         var template = $('#tmp_specialList').html();
         var templateScript = Handlebars.compile(template);
         var context = response.data;
