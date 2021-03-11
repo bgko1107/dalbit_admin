@@ -147,62 +147,6 @@ public class Mem_MemberService {
         mem_MemberDao.callMemberInfo(procedureVo);
         P_MemberInfoOutputVo memberInfo = new Gson().fromJson(procedureVo.getExt(), P_MemberInfoOutputVo.class);
 
-//        if(memberInfo.getMemState().equals("5") && memberInfo.getBlock_type() == 1){
-//            memberInfo.setMemState("6");
-//        }
-
-        P_MemberInfoOutputVo block = mem_MemberDao.callMemberBlock(pMemberInfoInputVo);
-        if(!DalbitUtil.isEmpty(block)) {
-            if (!DalbitUtil.isEmpty(block.getBlock_day()) && !DalbitUtil.isEmpty(block.getBlock_end_date())) {
-                memberInfo.setBlock_type(block.getBlock_type());
-                memberInfo.setBlock_day(block.getBlock_day());
-                memberInfo.setBlock_end_date(block.getBlock_end_date());
-            }
-        }
-
-        //본인인증 여부
-        P_MemberInfoOutputVo certification = mem_MemberDao.callMemberCertification(pMemberInfoInputVo);
-        if(!DalbitUtil.isEmpty(certification)){
-            //memberInfo.setCertification("통신사: " + certification.getComm_company() + " | 본인인증: Y");
-            memberInfo.setComm_company(certification.getComm_company().equals("KTF") ? "KT" : certification.getComm_company());
-            memberInfo.setAuth_yn("Yes");
-            memberInfo.setParents_agree_yn(certification.getParents_agree_yn());
-            memberInfo.setRecant_yn(certification.getRecant_yn());
-        }else{
-            //memberInfo.setCertification("본인인증: N");
-            memberInfo.setAuth_yn("No");
-        }
-
-        //본인인증 철회 데이터 체크
-        P_MemberInfoOutputVo certificationBak = mem_MemberDao.callMemberCertificationBak(pMemberInfoInputVo);
-        if(DalbitUtil.isEmpty(certificationBak)){
-            memberInfo.setCertificationBakYn("N");
-        }else{
-            memberInfo.setCertificationBakYn("Y");
-        }
-
-        P_MemberInfoOutputVo testId = mem_MemberDao.callMemberTestId(pMemberInfoInputVo);
-        if(!DalbitUtil.isEmpty(testId)) {
-            if (testId.getInner() == 1) {
-                memberInfo.setUserId(memberInfo.getUserId() + "_Test");
-            }
-        }
-
-        // 방송중인 방번호
-        P_MemberInfoOutputVo room = mem_MemberDao.callMemberRoom(pMemberInfoInputVo);
-        if(!DalbitUtil.isEmpty(room)) {
-            memberInfo.setRoom_no(room.getRoom_no());
-            memberInfo.setTitle(room.getTitle());
-            memberInfo.setType_media(room.getType_media());
-        }
-
-        // 청취중인 방번호
-        P_MemberInfoOutputVo listen = mem_MemberDao.callMemberRoomListen(pMemberInfoInputVo);
-        if(!DalbitUtil.isEmpty(listen)) {
-            memberInfo.setListen_room_no(listen.getListen_room_no());
-            memberInfo.setListen_title(listen.getListen_title());
-        }
-
         // 회원 배찌
         HashMap<P_MemberInfoOutputVo,String> djBadge = mem_MemberDao.callMemberInfo_badge(pMemberInfoInputVo.getMem_no());
         if(!DalbitUtil.isEmpty(djBadge)) {
@@ -229,16 +173,6 @@ public class Mem_MemberService {
             }
         }
         memberInfo.setLiveBadgeList(liveBadgeList);
-        memberInfo.setTotalDal(memberInfo.getDal() + memberInfo.getMoney());
-
-        //ip정보 및 device 정보
-        //recentLoginInfo
-        LoginHistoryVo loginHostory = mem_MemberDao.memberLoginHistory(pMemberInfoInputVo.getMem_no());
-        if(!DalbitUtil.isEmpty(loginHostory)){
-            memberInfo.setIp(loginHostory.getIp());
-            memberInfo.setDeviceUuid(loginHostory.getDevice_uuid());
-            memberInfo.setDeviceModel(loginHostory.getDevice_model());
-        }
 
         String result;
         if(Status.회원정보보기_성공.getMessageCode().equals(procedureVo.getRet())) {
