@@ -98,4 +98,28 @@ public class Mem_WalletRestController {
         return result;
 
     }
+
+
+    /**
+     * 내지갑 달 사용 목록 엑셀 다운로드
+     */
+    @PostMapping("dal/new/excel")
+    public String dalNewListExcel(HttpServletRequest request, HttpServletResponse response, Model model, P_WalletDalVo dalVo) throws GlobalException {
+        Model resultModel = mem_walletService.getWalletDalNewListExcel(dalVo, model);
+        excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
+
+
+    /**
+     * 내지갑 달 사용 목록 엑셀 다운로드
+     */
+    @PostMapping("byeol/new/excel")
+    public String byeolListNewExcel(HttpServletRequest request, HttpServletResponse response, Model model, P_WalletByeolVo byeolVo) throws GlobalException {
+        Model resultModel = mem_walletService.getWalletByeolNewListExcel(byeolVo, model);
+        excelService.renderMergedOutputModel(resultModel.asMap(), request, response);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.엑셀다운로드성공));
+    }
 }

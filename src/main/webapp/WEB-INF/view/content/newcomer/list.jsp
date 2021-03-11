@@ -90,6 +90,19 @@
 
     }
     function newcomerEdit() {
+        var title = $("#send_title").val();
+        if(common.isEmpty(title)){
+            alert('제목을 입력해 주십시오');
+            return;
+        }
+
+        var cont = $("#send_cont").val();
+        if(common.isEmpty(cont)){
+            alert('PUSH문구를 입력해 주십시오');
+            return;
+        }
+
+
         if(confirm('신입회원 PUSH를 저장 하시겠습니까?')) {
             var data = {
                 mem_no: $("#newcomer_mem_no").text()

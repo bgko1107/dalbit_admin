@@ -19,6 +19,8 @@ public class GGamGGamEVo extends SearchVo {
     private int view_yn;
     private String upd_date;
     private String upd_op_name;
+    private int eventType;
+    private int type;
 
     private int eventNo;
     private String eventName;
@@ -39,7 +41,6 @@ public class GGamGGamEVo extends SearchVo {
     private String imageUrlList;
     private String imageTimeList;
 
-    private String type;
     private String type_desc;
     private String achieve_type;
     private String achieve_desc;

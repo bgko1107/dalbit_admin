@@ -26,7 +26,8 @@
                 <tbody id="tableBody_detail">
                 </tbody>
             </table>
-            <button class="btn btn-default btn-sm print-btn pull-right mb10" type="button" id="walletExcelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
+            <button class="btn btn-default btn-sm print-btn pull-right mb10" type="button" id="walletExcelDownBtn" style="display: none;"><i class="fa fa-print"></i>Excel Down</button>
+            <button class="btn btn-default btn-sm print-btn pull-right mb10" type="button" id="newWalletExcelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
         </div>
     </div>
 
@@ -91,6 +92,9 @@
         dtList_info_detail.useIndex(true);
         dtList_info_detail.setPageLength(50);
         dtList_info_detail.createDataTable(tmp_summary);
+
+        $("#walletExcelDownBtn").show();
+        $("#newWalletExcelDownBtn").hide();
 
         initDataTableTop_select_wallet();
     }
@@ -184,11 +188,33 @@
         formData.append("walletDataType", $("#slctWalletDateType").find("select").val());
         formData.append("sDate", sDate);
         formData.append("eDate", eDate);
+        formData.append("searchStartNo", '0');
+        formData.append("searchStartLimitNo", '0');
 
         if(walletList_gubun == "dal" ){
             util.excelDownload($(this), "/rest/member/wallet/dal/excel", formData, fn_success_excel, fn_fail_excel)
         }else if(walletList_gubun == "byeol"){
             util.excelDownload($(this), "/rest/member/wallet/byeol/excel", formData, fn_success_excel, fn_fail_excel)
+        }
+    });
+
+    $('#newWalletExcelDownBtn').on('click', function(){
+        var formElement = document.querySelector("form");
+        var formData = new FormData(formElement);
+        formData.append("mem_no", memNo);
+        formData.append("walletType", walletType);
+        formData.append("slct_type", slct_type);
+        formData.append("slct_typeTxt", slct_typeTxt);
+        formData.append("walletDataType", $("#slctWalletDateType").find("select").val());
+        formData.append("sDate", sDate);
+        formData.append("eDate", eDate);
+
+        if(walletList_gubun == "dal" ){
+            formData.append("slctType", 0);
+            util.excelDownload($(this), "/rest/member/wallet/dal/new/excel", formData, fn_success_excel, fn_fail_excel)
+        }else if(walletList_gubun == "byeol"){
+            formData.append("slctType", 1);
+            util.excelDownload($(this), "/rest/member/wallet/byeol/new/excel", formData, fn_success_excel, fn_fail_excel)
         }
     });
 
@@ -255,6 +281,8 @@
         dtList_info_detail.setPageLength(50);
         dtList_info_detail.createDataTable(tmp_summary);
 
+        $("#newWalletExcelDownBtn").show();
+        $("#walletExcelDownBtn").hide();
         initDataTableTop_select_wallet()
     }
 

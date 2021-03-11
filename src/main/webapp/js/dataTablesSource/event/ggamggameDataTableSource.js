@@ -8,6 +8,9 @@ var ggamggameDataTableSource = {
             {'title': '이벤트 선택', 'data': 'event_no', 'render': function(data, type, row) {
                     return util.getCommonCodeLabel(data, conEvent);
                 }},
+            {'title': '기준', 'data': 'type', 'render': function(data, type, row) {
+                    return util.getCommonCodeLabel(data, conGubun);
+                }},
             {'title': '이벤트 제목', 'data': 'event_name', 'render': function(data, type, row, meta) {
                     return '<a href="javascript://" onclick="newrecordDetail(' + meta.row + ')">' + data + ' </a>';
                 }},
