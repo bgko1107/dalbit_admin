@@ -25,6 +25,9 @@ var levelDataTableSource = {
                     if(row.specialdj_badge == "1"){
                         tmp = tmp + '<div class="mb5"><span class ="label" style="background-color:red">' + "스페셜DJ" + '</span></div>';
                     }
+                    if(row.specialdj_badge == "2"){
+                        tmp = tmp + '<div class="mb5"><span class ="label" style="background-color:#632BEB">' + "베스트DJ" + '</span></div>';
+                    }
                     if(row.badge_value != "" && row.badge_value != null){
                         if(row.badge_value == 1){
                             tmp = tmp + '<div class="mb5"><span class ="label" style="background-color:#006ad9">' + "회장" + '</span></div>';

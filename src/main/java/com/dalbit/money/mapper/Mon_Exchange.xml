@@ -995,7 +995,7 @@
         from(
             select wallet.gold,
                 ifnull(case when profile.specialdj_badge = 0 then wallet.gold end,0) general,
-                ifnull(case when profile.specialdj_badge = 1 then wallet.gold end,0) special
+                ifnull(case when profile.specialdj_badge > 0 then wallet.gold end,0) special
             from rd_data.tb_member_basic basic
                 inner join rd_data.tb_member_profile profile on basic.mem_no = profile.mem_no
                 inner join rd_data.tb_member_wallet wallet on basic.mem_no = wallet.mem_no and 570 <![CDATA[<=]]> wallet.gold
@@ -1021,7 +1021,7 @@
         from(
             select wallet.gold,
                 ifnull(case when profile.specialdj_badge = 0 then wallet.gold end,0) general,
-                ifnull(case when profile.specialdj_badge = 1 then wallet.gold end,0) special
+                ifnull(case when profile.specialdj_badge > 0 then wallet.gold end,0) special
             from rd_data.tb_member_basic basic
                 inner join rd_data.tb_member_profile profile on basic.mem_no = profile.mem_no
                 inner join rd_data.tb_member_wallet wallet on basic.mem_no = wallet.mem_no and 570 <![CDATA[<=]]> wallet.gold
@@ -1049,7 +1049,7 @@
         from(
             select wallet.gold,
                 ifnull(case when profile.specialdj_badge = 0 then wallet.gold end,0) general,
-                ifnull(case when profile.specialdj_badge = 1 then wallet.gold end,0) special
+                ifnull(case when profile.specialdj_badge > 0 then wallet.gold end,0) special
             from rd_data.tb_member_basic basic
                 inner join rd_data.tb_member_profile profile on basic.mem_no = profile.mem_no
                 inner join rd_data.tb_member_wallet wallet on basic.mem_no = wallet.mem_no and 570 <![CDATA[<=]]> wallet.gold

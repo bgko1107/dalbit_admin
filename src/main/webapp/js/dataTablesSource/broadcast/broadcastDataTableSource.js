@@ -374,6 +374,9 @@ var BroadcastDataTableSource = {
                     if(row.specialdj_badge == "1"){
                         tmp = tmp + '<span class ="label" style="background-color:red">' + "스페셜DJ" + '</span>';
                     }
+                    if(row.specialdj_badge == "2"){
+                        tmp = tmp + '<span class ="label" style="background-color:#632BEB">' + "베스트DJ" + '</span>';
+                    }
                     if(row.new_badge == "1"){
                         tmp = tmp + '<span class ="label" style="background-color:#ffc000">' + "신입" + '</span><br/>';
                     }

@@ -92,6 +92,9 @@ var recommDataTableSource = {
                     if(row.specialdj_badge == "1"){
                         tmp += util.getMemberBadge("red", "red", null, "스페셜DJ", "100%", "20px", 10, "15px", "15px");
                     }
+                    if(row.specialdj_badge == "2"){
+                        tmp += util.getMemberBadge("#632BEB", "#632BEB", null, "베스트DJ", "100%", "20px", 10, "15px", "15px");
+                    }
                     if(row.shiningdj_badge == "1"){
                         tmp += util.getMemberBadge("pink", "pink", null, "샤이닝DJ", "100%", "20px", 10, "15px", "15px");
                     }

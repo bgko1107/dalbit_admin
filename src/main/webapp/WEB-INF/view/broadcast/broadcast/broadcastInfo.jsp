@@ -110,6 +110,7 @@
         if(response.data.recomm_badge == "1") tmp_badge = '<span class ="label" style="background-color:#d943c1">' + "추천" + '</span>';
         if(response.data.newdj_badge == "1") tmp_badge = tmp_badge + '<span class ="label" style="background-color:#d9c811">' + "신입" + '</span>';
         if(response.data.specialdj_badge == "1") tmp_badge = tmp_badge + '<span class ="label" style="background-color:red">' + "스페셜DJ" + '</span>';
+        if(response.data.specialdj_badge == "2") tmp_badge = tmp_badge + '<span class ="label" style="background-color:#632BEB">' + "베스트DJ" + '</span>';
         response.data["dj_badge"] = tmp_badge;
 
         var template = $('#tmp_broadcast_detailFrm').html();
