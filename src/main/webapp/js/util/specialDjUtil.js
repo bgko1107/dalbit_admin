@@ -30,10 +30,24 @@ specialDjUtil.getConditionData = function(code, value){
 
     }else if(code == 7){
         result = '{{value}}별';
+
+    }else if(code == 8){
+            result = '{{value}}시간';
+
+    }else if(code == 9){
+        result = '{{value}}일';
+
+    }else if(code == 10){
+        result = '{{value}}명';
+
     }else{
         result = value;
     }
 
-    return common.replace(result, '{{value}}', value);
+    return common.replace(result, '{{value}}', common.addComma(value));
+
+}
+
+specialDjUtil.conditionCheck = function(code, data, value){
 
 }

@@ -426,8 +426,12 @@
             , condition_data3
             , condition_code4
             , condition_data4
-            , best_code
-            , best_data
+            , best_code1
+            , best_data1
+            , best_code2
+            , best_data2
+            , best_code3
+            , best_data3
             , is_view
             , platform
             , pc_image_url
@@ -479,8 +483,12 @@
             , condition_data3
             , condition_code4
             , condition_data4
-            , best_code
-            , best_data
+            , best_code1
+            , best_data1
+            , best_code2
+            , best_data2
+            , best_code3
+            , best_data3
             , is_view
             , platform
             , reg_date
@@ -503,8 +511,12 @@
             , #{condition_data3}
             , #{condition_code4}
             , #{condition_data4}
-            , best_code
-            , best_data
+            , #{best_code1}
+            , #{best_data1}
+            , #{best_code2}
+            , #{best_data2}
+            , #{best_code3}
+            , #{best_data3}
             , #{is_view}
             , #{platform}
             , now()
@@ -530,8 +542,12 @@
             , condition_data3 = #{condition_data3}
             , condition_code4 = #{condition_code4}
             , condition_data4 = #{condition_data4}
-            , best_code = #{best_code}
-            , best_data = #{best_data}
+            , best_code1 = #{best_code1}
+            , best_data1 = #{best_data1}
+            , best_code2 = #{best_code2}
+            , best_data2 = #{best_data2}
+            , best_code3 = #{best_code3}
+            , best_data3 = #{best_data3}
             , is_view = #{is_view}
             , platform = #{platform}
             , last_upd_date = now()
@@ -602,9 +618,15 @@
             , condition_code4
             , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = condition_code4) condition_codeName4
             , condition_data4
-            , best_code
-            , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = best_code) best_codeName
-            , best_data
+            , best_code1
+            , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = best_code1) best_codeName1
+            , best_data1
+            , best_code2
+            , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = best_code2) best_codeName2
+            , best_data2
+            , best_code3
+            , (select code from rd_data.tbl_code_define where type = 'special_dj_condition' and `value` = best_code3) best_codeName3
+            , best_data3
             , pc_image_url
             , mobile_image_url
             , is_view

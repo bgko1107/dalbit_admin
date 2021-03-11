@@ -32,9 +32,15 @@ public class SpecialDjManageVo extends PagingVo {
     private String condition_code4;
     private String condition_codeName4;
     private int condition_data4;
-    private String best_code;
-    private String best_codeName;
-    private int best_data;
+    private String best_code1;
+    private String best_codeName1;
+    private int best_data1;
+    private String best_code2;
+    private String best_codeName2;
+    private int best_data2;
+    private String best_code3;
+    private String best_codeName3;
+    private int best_data3;
     private int is_view;
     private int platform;
     private String pc_image_url;

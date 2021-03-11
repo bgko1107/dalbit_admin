@@ -157,20 +157,18 @@ var specialDataTableSource = {
             {'title': '데이터<br />수집기간', 'data': '', 'render': function (data, type, row, meta) {
                     return moment(row.condition_start_date).format('YYYY.MM.DD') + ' ~<br />' + moment(row.condition_end_date).format('YYYY.MM.DD')
                 },'width':'100px'},
-            {'title': '지원요건 1', 'data': '', 'render': function (data, type, row, meta) {
-                    return row.condition_codeName1 + '<br />' + specialDjUtil.getConditionData(row.condition_code1, row.condition_data1)
-                },'width':'200px'},
-            {'title': '지원요건 2', 'data': '', 'render': function (data, type, row, meta) {
-                    return row.condition_codeName2 + '<br />' + specialDjUtil.getConditionData(row.condition_code2, row.condition_data2)
-                },'width':'200px'},
-            {'title': '지원요건 3', 'data': '', 'render': function (data, type, row, meta) {
-                    return row.condition_codeName3 + '<br />' + specialDjUtil.getConditionData(row.condition_code3, row.condition_data3)
-                },'width':'200px'},
-            {'title': '지원요건 4', 'data': '', 'render': function (data, type, row, meta) {
-                    return row.condition_codeName4 + '<br />' + specialDjUtil.getConditionData(row.condition_code4, row.condition_data4)
+            {'title': '스페셜 DJ 지원요건', 'data': '', 'render': function (data, type, row, meta) {
+                    var special_condition = row.condition_codeName1 == '' ? '' : row.condition_codeName1 + ' : ' + specialDjUtil.getConditionData(row.condition_code1, row.condition_data1) + '<br />';
+                    special_condition += row.condition_codeName2 == '' ? '' : row.condition_codeName2 + ' : ' + specialDjUtil.getConditionData(row.condition_code2, row.condition_data2) + '<br />';
+                    special_condition += row.condition_codeName3 == '' ? '' : row.condition_codeName3 + ' : ' + specialDjUtil.getConditionData(row.condition_code3, row.condition_data3) + '<br />';
+                    special_condition += row.condition_codeName4 == '' ? '' : row.condition_codeName4 + ' : ' + specialDjUtil.getConditionData(row.condition_code4, row.condition_data4)
+                    return special_condition;
                 },'width':'200px'},
             {'title': '베스트요건', 'data': '', 'render': function (data, type, row, meta) {
-                    return row.best_codeName + '<br />' + specialDjUtil.getConditionData(row.best_code, row.best_data)
+                    var best_condition = row.best_codeName1 == '' ? '' : row.best_codeName1 + ' : ' + specialDjUtil.getConditionData(row.best_code1, row.best_data1) + '<br />';
+                    best_condition += row.best_codeName2 == '' ? '' : row.best_codeName2 + ' : ' + specialDjUtil.getConditionData(row.best_code2, row.best_data2) + '<br />';
+                    best_condition += row.best_codeName3 == '' ? '' : row.best_codeName3 + ' : ' + specialDjUtil.getConditionData(row.best_code3, row.best_data3);
+                    return best_condition;
                 },'width':'200px'},
             {'title': '등록일', 'data': 'reg_date', 'render': function (data, type, row, meta) {
                     return moment(row.reg_date).format('YYYY.MM.DD HH:mm:ss')
@@ -207,20 +205,55 @@ var specialDataTableSource = {
                     return common.sexIcon(data, row.mem_birth_year, true);
                 },'width':'100px'},
             {'title': '누적 방송시간<br />(팬방송 제외)', 'data': 'air_time', 'render': function (data, type, row, meta) {
+                    var isBest = row.specialdj_badge == 2 || (row.specialdj_badge == 1 && 5 < row.specialdj_cnt);
+                    var value = Math.floor((row.air_time - row.fan_air_time) / 3600);
+                    if(isBest && row.best_data1 <= value){
+                        return common.setFontColor(common.timeStampDay(data-row.fan_air_time), 'blue');
+                    }
                     return common.timeStampDay(data-row.fan_air_time);
                 },'width':'200px'},
+
             {'title': '누적<br />팬 방송시간', 'data': 'fan_air_time', 'render': function (data, type, row, meta) {
                     return common.timeStampDay(data);
                 },'width':'200px'},
+
+            {'title': '방송 일수', 'data': 'broad_cnt','width':'200px', 'render' : function(data, type, row, meta){
+                    var isBest = row.specialdj_badge == 2 || (row.specialdj_badge == 1 && 5 < row.specialdj_cnt);
+                    if(isBest && row.best_data2 <= row.broad_cnt){
+                        return common.setFontColor(data + ' 일', 'blue');
+                    }
+                    return data + ' 일';
+
+                }},
+            {'title': '신규 팬<br />등록 수', 'data': 'new_fan_cnt','width':'200px', 'render' : function(data, type, row, meta){
+                    var isBest = row.specialdj_badge == 2 || (row.specialdj_badge == 1 && 5 < row.specialdj_cnt);
+                    if(isBest && row.best_data3 <= row.new_fan_cnt){
+                        return common.setFontColor(common.addComma(data) + ' 명', 'blue');
+                    }
+                    return common.addComma(data) + ' 명';
+                }},
             {'title': '일반 조건<br />신청 유무', 'data': 'is_req','width':'200px'},
             {'title': '베스트<br />가능여부', 'data': '', 'render': function (data, type, row, meta) {
+                    var isBest = row.specialdj_badge == 2 || (row.specialdj_badge == 1 && 5 < row.specialdj_cnt);
+                    if(isBest){
 
-                    if(row.specialdj_badge == 2 && row.best_data <= Math.floor(row.air_time / 3600)){
-                        return common.setFontColor('가능', 'blue');
-                    }
+                        var condition1 = false;
+                        var condition2 = false;
+                        var condition3 = false;
 
-                    if(row.specialdj_badge == 1 && 5 < row.specialdj_cnt && row.best_data <= Math.floor(row.air_time / 3600)){
-                        return common.setFontColor('가능', 'blue');
+                        if(row.best_data1 <= Math.floor((row.air_time - row.fan_air_time) / 3600)){
+                            condition1 = true;
+                        }
+                        if(row.best_data2 <= row.broad_cnt){
+                            condition2 = true;
+                        }
+                        if(row.best_data3 <= row.new_fan_cnt){
+                            condition3 = true;
+                        }
+                        if(condition1 && condition2 && condition3){
+                            return common.setFontColor('가능', 'blue');
+                        }
+
                     }
 
                     if(row.specialdj_badge < 2 && row.is_req == 'Y'){
