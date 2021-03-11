@@ -91,6 +91,7 @@
         $("#detailInfo").hide();
         var dtList_info_data = function (data) {
             data.searchText = $("#searchText").val();
+            data.searchType = 1;                        // 신기록
         };
         dtList_record = new DalbitDataTable($("#table_newrecord_list"), dtList_info_data, ggamggameDataTableSource.newrecordList);
         dtList_record.useCheckBox(true);
@@ -117,6 +118,7 @@
     }
     function newrecordDetail(idx){
         var data = dtList_record.getDataRow(idx);
+        data.eventType = 1;
         util.getAjaxData("newrecord", "/rest/event/ggamggame/newrecord/detail", data, fn_newrecordDetail_success);
     }
 
@@ -222,6 +224,8 @@
         if(isValid){
             var data = {
                 idx : newRecordIdx
+                , slctType : 1
+                , type :  $("#targetType").val()
                 , eventName : $("#txt_title").val()
                 , eventNo : $("#conEvent").val()
                 , viewYn : $("#detail_viewYn").prop('checked') ? 1 : 0
@@ -324,14 +328,16 @@
 <script id="tmp_event_record_detail" type="text/x-handlebars-template">
     <table id="event_record_detail" class="table table-sorting table-hover table-bordered no-margin">
         <colgroup>
-            <col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/><col width="5%"/>
-            <col width="5%"/><col width="5%"/><col width="5%"/>
+            <col width="3%"/><col width="3%"/><col width="3%"/><col width="3%"/><col width="3%"/>
+            <col width="15%"/><col width="3%"/><col width="3%"/>
         </colgroup>
         <tr>
             <th>이벤트 선택</th>
             <td>{{{getCommonCodeSelect eventNo 'conEvent'}}}</td>
+            <th>기준</th>
+            <td>{{{getCommonCodeSelect type 'conGubun' 'Y' 'targetType'}}}</td>
             <th>이벤트 제목</th>
-            <td colspan="3">
+            <td>
                 <input type="text" class="form-control" id="txt_title" style="width: 100%;" value="{{eventName}}">
             </td>
             <th>노출여부</th>
