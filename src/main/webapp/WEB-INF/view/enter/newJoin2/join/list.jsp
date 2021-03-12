@@ -86,9 +86,26 @@
 
         var excel = '<button class="btn btn-default btn-sm print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>';
         $("#memberList").find(".footer-right").append(excel);
+
+        /*=============엑셀==================*/
+        $('#excelDownBtn').on('click', function(){
+            var formElement = document.querySelector("form");
+            var formData = new FormData(formElement);
+            formData.append("searchText", tmp_searchText);
+            formData.append("testid", _testid);
+            formData.append("memWithdrawal", 0);
+            formData.append("sDate", tmp_sDate);
+            formData.append("eDate", tmp_eDate);
+            formData.append("memJoinDateSort", _memJoinDateSort);
+            formData.append("memNickSort", _memNickSort);
+            formData.append("memLoginIdSort", _memLoginIdSort);
+            formData.append("memIpSort", _memIpSort);
+            formData.append("memJoinPath", tmp_joinPath);
+
+            util.excelDownload($(this), "/rest/member/join/listExcel", formData);
+        });
     }
     function memberList(){
-        memWithdrawal = "0";
         $("#memberList").show();
         $("#withdrawalList").hide();
         getUserInfo();
@@ -103,24 +120,6 @@
 
         getUserInfo();
     };
-
-    /*=============엑셀==================*/
-    $('#excelDownBtn').on('click', function(){
-        var formElement = document.querySelector("form");
-        var formData = new FormData(formElement);
-        formData.append("searchText", tmp_searchText);
-        formData.append("testid", _testid);
-        formData.append("memWithdrawal", memWithdrawal);
-        formData.append("sDate", tmp_sDate);
-        formData.append("eDate", tmp_eDate);
-        formData.append("memJoinDateSort", _memJoinDateSort);
-        formData.append("memNickSort", _memNickSort);
-        formData.append("memLoginIdSort", _memLoginIdSort);
-        formData.append("memIpSort", _memIpSort);
-        formData.append("memJoinPath", tmp_joinPath);
-
-        util.excelDownload($(this), "/rest/member/join/listExcel", formData);
-    });
 
     /*==================================*/
 </script>
