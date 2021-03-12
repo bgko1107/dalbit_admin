@@ -130,7 +130,7 @@
                 target : 2
                 , viewYn : 0
                 , type : 0
-                , platform : 1
+                , platform : 'a'
             }
             var context = data;
             var html = templateScript(context);
@@ -511,7 +511,6 @@
             <th>결제 혜택(%)</th>
             <th>호출(액션)</th>
             <th>등장 시간</th>
-            <th>지속 시간</th>
             <th>게시 여부</th>
             <th>최종 수정 일시</th>
             <th>최종 수정자</th>
@@ -536,7 +535,6 @@
             <td>{{desc2}}</td>
             <td>{{{getCommonCodeLabel type "behavior_type_1"}}}</td>
             <td>{{conTime}}초</td>
-            <td>{{addComma running_time}}초</td>
             <td>{{{getCommonCodeLabel viewYn "behavior_viewYn"}}}</td>
             <td>{{convertToDate last_upd_date "YYYY-MM-DD HH:mm:ss"}}</td>
             <td>{{opName}}</td>
