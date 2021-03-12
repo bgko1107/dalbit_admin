@@ -337,7 +337,7 @@
                 (select ifnull(sum(gold), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS giftedRuby,
                 (select ifnull(sum(good), 0) from rd_data.tb_member_broadcast_broadcasting WHERE mem_no= dj.mem_no) AS likeCnt,
                 (select sum(booster) as boostCnt from rd_data.tb_member_broadcast_broadcasting a where mem_no= dj.mem_no) as boostCnt,
-                (select count(*) from rd_data.tb_member_report WHERE mem_no = dj.mem_no and op_code in (3,4,5,6) ) as reportCnt
+                (select count(*) from rd_data.tb_member_report WHERE reported_mem_no = dj.mem_no and op_code in (3,4,5,6) ) as reportCnt
             from rd_admin.tb_special_dj dj
             inner join rd_data.tb_member_basic basic on dj.mem_no = basic.mem_no
             inner join rd_data.tb_member_profile pro on dj.mem_no = pro.mem_no
