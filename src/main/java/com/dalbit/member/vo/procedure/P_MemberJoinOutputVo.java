@@ -37,6 +37,7 @@ public class P_MemberJoinOutputVo extends SearchVo {
     private int payCnt;
     private int inner;
     private int serviceDate;
+    private int koreaAge;
 
     //summary
     private int allCnt;
