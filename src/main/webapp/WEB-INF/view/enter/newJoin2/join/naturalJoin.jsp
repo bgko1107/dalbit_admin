@@ -23,7 +23,7 @@
         </div>
         <div id="container-fluid">
             <div class="widget-content col-md-10 no-padding">
-                <button class="btn btn-default btn-sm print-btn pull-right" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
+                <button class="btn btn-default btn-sm print-btn pull-right" type="button" id="adbrix_excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>
                 <div class="adbrix_calendar col-md-10 no-padding"></div>
                 <div class="col-md-2 no-padding" id="adbrix_totalTable"></div>
             </div>
@@ -579,7 +579,7 @@
         renderNaturalJoin();
     }
 
-    $(document).on('click', '#excelDownBtn', function (){
+    $(document).on('click', '#adbrix_excelDownBtn', function (){
         var formElement = document.querySelector("form");
         var formData = new FormData(formElement);
         formData.append("startDate", $("#startDate").val());

@@ -4,6 +4,7 @@
 
     <select id="callJoinList" parameterType="com.dalbit.member.vo.procedure.P_MemberJoinInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberJoinOutputVo">
         select @rownum := @rownum + 1 as rowNum, c.*
+              , (year(now()) - c.mem_birth_year + 1) AS koreaAge
           from ( select if(a.inner = 1 ,'Test',null) testId
                         ,a.*
                         , (select count(*) from rd_data.tb_member_broadcast_broadcasting where mem_no = a.mem_no) broadcastCnt
@@ -129,6 +130,7 @@
 
     <select id="callWithdrawalList" parameterType="com.dalbit.member.vo.procedure.P_MemberJoinInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberJoinOutputVo">
         select @rownum := @rownum + 1 as rowNum, c.*, TIMESTAMPDIFF(SECOND,mem_join_date,last_upd_date) AS serviceDate
+            , (year(now()) - c.mem_birth_year + 1) AS koreaAge
           from ( select if(a.inner = 1 ,'Test',null) testId
                         ,a.*
                         , (select count(*) from rd_data.tb_member_broadcast_broadcasting where mem_no = a.mem_no) broadcastCnt

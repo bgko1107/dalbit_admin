@@ -315,11 +315,26 @@
         $("#event_condition_tbody").find('._noTr').each(function (index) {
             $(this).attr("id", "row_" + (index + 1));
         });
+        recordFromObjectEvent();
     };
 
     function getImg(){
         $("#newRecordModal").modal('show');
         $("#imageViewer").attr('src',$("#txt_imageUrl").val());
+    }
+
+    function recordFromObjectEvent(){
+        $('select[name="conReward"]').on('change', function(){
+            var selectBox = $(this);
+            var val = selectBox.val();
+            var parents = selectBox.parents("tr").attr('id');
+            if(val == "99"){
+                $("#"+parents+"").find("#txt_conRewardCnt").attr("disabled",true).attr("readonly",false);
+                $("#"+parents+"").find("#txt_conRewardCnt").val('0');
+            }else{
+                $("#"+parents+"").find("#txt_conRewardCnt").attr("disabled",false).attr("readonly",false);
+            }
+        });
     }
 
 </script>

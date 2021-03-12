@@ -1035,5 +1035,6 @@ var conReward = [
     , new COMMON_CODE('1', '1', '무료부스터')
     , new COMMON_CODE('2', '2', '룰렛 응모권')
     , new COMMON_CODE('3', '3', '방송시간 연장(30분)')
+    , new COMMON_CODE('99', '99', '없음')
 ];
 

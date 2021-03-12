@@ -98,6 +98,28 @@
         var withdrawal_excel = '<button class="btn btn-default btn-sm print-btn pull-right" type="button" id="withdrawal_excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>';
         $("#withdrawalList").find(".footer-right").append(withdrawal_excel);
 
+
+        /*=============엑셀==================*/
+        $('#withdrawal_excelDownBtn').on('click', function(){
+            var formElement = document.querySelector("form");
+            var formData = new FormData(formElement);
+            formData.append("searchText", tmp_searchText);
+            formData.append("testid", _testid);
+            formData.append("memWithdrawal", 1);
+            formData.append("sDate", tmp_sDate);
+            formData.append("eDate", tmp_eDate);
+            formData.append("withdrawalDateSort", $("#withdrawalDateSort").find("select[name='withdrawalDateSort']").val());
+            formData.append("serviceDateSort", $("#serviceDateSort").find("select[name='serviceDateSort']").val());
+            formData.append("memJoinDateSort", $("#memJoinDateSort_withdrawal").find("select[name='memJoinDateSort']").val());
+            formData.append("memNickSort", $("#memNickSort_withdrawal").find("select[name='memNickSort']").val());
+            formData.append("memLoginIdSort", $("#memLoginIdSort_withdrawal").find("select[name='memLoginIdSort']").val());
+            formData.append("memIpSort", $("#memIpSort_withdrawal").find("select[name='memIpSort']").val());
+            formData.append("memJoinPath", tmp_joinPath);
+
+            util.excelDownload($(this), "/rest/member/join/withdrawalListExcel", formData);
+        });
+
+        /*==================================*/
     }
 
     // 가입 --------------------
@@ -112,27 +134,8 @@
         getUserInfo();
     }
 
-    /*=============엑셀==================*/
-    $('#excelDownBtn').on('click', function(){
-        var formElement = document.querySelector("form");
-        var formData = new FormData(formElement);
-        formData.append("searchText", tmp_searchText);
-        formData.append("testid", _testid);
-        formData.append("memWithdrawal", memWithdrawal);
-        formData.append("sDate", tmp_sDate);
-        formData.append("eDate", tmp_eDate);
-        formData.append("withdrawalDateSort", _withdrawalDateSort);
-        formData.append("serviceDateSort", _serviceDateSort);
-        formData.append("memJoinDateSort", _memJoinDateSort);
-        formData.append("memNickSort", _memNickSort);
-        formData.append("memLoginIdSort", _memLoginIdSort);
-        formData.append("memIpSort", _memIpSort);
-        formData.append("memJoinPath", tmp_joinPath);
 
-        util.excelDownload($(this), "/rest/member/join/listExcel", formData);
-    });
 
-    /*==================================*/
 </script>
 
 
