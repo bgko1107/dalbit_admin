@@ -531,8 +531,13 @@ public class Mon_ExchangeService {
 //            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getSocial_no()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))));
 
             // 세금 신고자, 세금신고자의 주민번호
-            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getPrevAccountName()) ? exchangeVo.getAccount_name() : exchangeVo.getPrevAccountName());
-            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getPrevSocialNo()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))));
+//            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getPrevAccountName()) ? exchangeVo.getAccount_name() : exchangeVo.getPrevAccountName());
+//            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getPrevSocialNo()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))));
+
+            // 신청당시 예금주, 예금주 주민번호로 다시 요청.... 2021-03-12
+            // 더는 변경 요청 안한다고 하는데...
+            hm.put("name", exchangeVo.getAccount_name());
+            hm.put("socialNo", DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))) );
 
             hm.put("accountName", DalbitUtil.isEmpty(exchangeVo.getAccount_name()) ? "" : exchangeVo.getAccount_name());
 
@@ -630,8 +635,13 @@ public class Mon_ExchangeService {
 //            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getSocial_no()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))));
 
             // 세금 신고자, 세금신고자의 주민번호
-            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getPrevAccountName()) ? exchangeVo.getAccount_name() : exchangeVo.getPrevAccountName());
-            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getPrevSocialNo()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))));
+//            hm.put("name", DalbitUtil.isEmpty(exchangeVo.getPrevAccountName()) ? exchangeVo.getAccount_name() : exchangeVo.getPrevAccountName());
+//            hm.put("socialNo", DalbitUtil.isEmpty(exchangeVo.getPrevSocialNo()) ? DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))) : DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getPrevSocialNo(), DalbitUtil.getProperty("social.secret.key"))));
+
+            // 신청당시 예금주, 예금주 주민번호로 다시 요청.... 2021-03-12
+            // 더는 변경 요청 안한다고 하는데...
+            hm.put("name", exchangeVo.getAccount_name());
+            hm.put("socialNo", DalbitUtil.convertJuminNo(AES.decrypt(exchangeVo.getSocial_no(), DalbitUtil.getProperty("social.secret.key"))) );
 
             hm.put("accountName", DalbitUtil.isEmpty(exchangeVo.getAccount_name()) ? "" : exchangeVo.getAccount_name());
 
