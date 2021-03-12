@@ -74,14 +74,6 @@
       call rd_data.sp_log_error_data(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
-    <select id="callMemberBadgeSelect" statementType="CALLABLE" parameterType="java.util.HashMap" resultType="com.dalbit.common.vo.FanBadgeVo">
-      call rd_data.sp_member_badge_select(#{mem_no, mode=IN, jdbcType=INTEGER}, #{type, mode=IN, jdbcType=INTEGER})
-    </select>
-
-    <select id="callLiveBadgeSelect" statementType="CALLABLE" parameterType="java.util.HashMap" resultType="com.dalbit.common.vo.FanBadgeVo">
-      call rd_data.sp_member_live_badge_icon(#{mem_no, mode=IN, jdbcType=INTEGER}, #{type, mode=IN, jdbcType=INTEGER})
-    </select>
-
     <update id="updateCodeDefine" parameterType="com.dalbit.common.vo.CodeListVo">
         <!-- Common.xml - updateCodeDefine -->
         update rd_data.tbl_code_define

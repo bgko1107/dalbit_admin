@@ -384,6 +384,9 @@ Handlebars.registerHelper('renderSlct', function(type, size){
 
 Handlebars.registerHelper("getBadgeList", function(value, divWidth, divHeight, radius, imgWidth, imgHeight){
     var tmp = "";
+    if(common.isEmpty(value)){
+        return '';
+    }
     for(var i=0;i<value.length;i++){
         tmp = tmp + util.getMemberBadge(value[i].startColor, value[i].endColor, value[i].icon, value[i].text, divWidth, divHeight, radius, imgWidth, imgHeight );
     }
