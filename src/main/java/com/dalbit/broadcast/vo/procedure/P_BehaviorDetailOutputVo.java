@@ -20,5 +20,6 @@ public class P_BehaviorDetailOutputVo extends BaseVo {
     private int viewYn;
     private int slctType;
     private int platform;
+    private String itemCode;
 
 }

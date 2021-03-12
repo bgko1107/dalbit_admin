@@ -22,5 +22,6 @@ public class P_BehaviorListAddUpdateVo extends BaseVo {
 
     private int slctType;
     private int platform;
+    private String itemCode;
 
 }

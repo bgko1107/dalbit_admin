@@ -231,6 +231,7 @@
                     , runTime : $('#runTime').val()
                     , desc1 : $('#desc1').val()
                     , desc2 : $('#desc2').val()
+                    , itemCode : $("#itemCode").val()
                 }
                 util.getAjaxData("applyBehaviorMsg", "/rest/broadcast/behavior/apply", data, function fn_applyBehaviorMsg_success(dst_id, response) {
                     alert(response.message);
@@ -249,14 +250,24 @@
             alert("등장 시간을 1초 이상 입력해주세요.")
             return false;
         }
-        if(common.isEmpty($('#desc1').val())) {
-            alert("webp url을 입력해주세요.")
-            return false;
+
+        var type = $('input:radio[name="type"]:checked').val();
+        if(type == 0){
+            if(common.isEmpty($('#itemCode').val())) {
+                alert("아이템 코드를 입력해주세요.");
+                return false;
+            }else{
+                $("#desc1").val('');
+            }
+        }else{
+            if(common.isEmpty($('#desc1').val())) {
+                alert("종료이미지를 입력해주세요.");
+                return false;
+            }else{
+                $("#itemCode").val('');
+            }
         }
-        if(common.isEmpty($('#runTime').val()) || $('#runTime').val() == 0) {
-            alert("지속 시간을 1초 이상 입력해주세요.")
-            return false;
-        }
+
         if(common.isEmpty($('#desc2').val())) {
             alert("결제혜택을 입력해주세요.")
             return false;
@@ -577,23 +588,19 @@
             <td>
                 <input type="text" class="form-control" id="desc2" value="{{desc2}}" maxlength="5" />
             </td>
-            <td colspan="4"></td>
+            <th>아이템 코드</th>
+            <td>
+                <input type="text" class="form-control" id="itemCode" value="{{itemCode}}" maxlength="10" />
+            </td>
         </tr>
         <tr class="align-middle">
-            <th>webp url</th>
+            <th>종료 이미지</th>
             <td colspan="3">
                 <input type="text" class="form-control" id="desc1" value="{{desc1}}" maxlength="200" style="width:80%" />
                 <button type="button" class="btn btn-default btn-sm _previewBtn">미리보기</button>
             </td>
-
-            <th>지속 시간</th>
-            <td>
-                <input type="text" class="form-control _trim" id="runTime" value="{{runTime}}" style="width: 50%;"/> 초
-            </td>
-        </tr>
-        <tr>
             <th>미리보기</th>
-            <td colspan="5" class="_previewArea"></td>
+            <td class="_previewArea"></td>
         </tr>
         </tbody>
     </table>
