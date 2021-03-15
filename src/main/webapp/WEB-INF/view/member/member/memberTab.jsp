@@ -133,8 +133,6 @@
     var dtList_info_detail;
     var dtList_top_info;
 
-    console.log('ddddddddddddddddddd - memberTab.jsp')
-
     function tab_click(tmp){
         if(tmp == "tab_broadcast"){
             $("#tab_broadDetail").click();

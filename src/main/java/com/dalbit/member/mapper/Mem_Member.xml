@@ -782,51 +782,6 @@
         where mem_no = #{memNo}
     </delete>
 
-    <select id="getMemberAccumData" parameterType="com.dalbit.member.vo.procedure.P_MemberInfoInputVo" resultType="com.dalbit.member.vo.procedure.P_MemberAccumOutputVo">
-        /* M_Member.xml - getMemberAccumData */
-        select *
-          from ( select count(*) as payCnt
-                    , round(sum(pay.pay_amt)) as payAmt
-                    , sum((select count(*) from rd_data.tb_payment_succ where order_id = pay.order_id and cancel_state='y')) as payCanCnt
-                    , round(sum((select pay_amt from rd_data.tb_payment_succ where order_id = pay.order_id and cancel_state='y'))) as payCanAmt
-                  from rd_data.tb_payment_succ pay
-                 where pay.mem_no = #{mem_no} and pay.pay_yn='y') a
-              , ( select count(*) as brodCnt
-                    ,sum(airtime) broadTime
-                    ,sum(gold) AS byeolCnt
-                    ,sum(listener) as listenerCnt
-                    ,sum(good) as goodCnt
-                    ,sum(booster) as boostCnt
-                   from rd_data.tb_member_broadcast_broadcasting
-                  where mem_no=#{mem_no}) b
-             , ( select count(*) as listenCnt
-                    , sum(listentime) as listenTime
-                    , sum(gift_ruby) as dalCnt
-                    from rd_data.tb_member_broadcast_listening
-                   where mem_no=#{mem_no}) c
-               , ( select sum(ruby) as sendDal
-                    from rd_data.tb_member_broadcast_item a
-                   where mem_no=#{mem_no} and item_type ='3') d
-               , ( select sum(ruby) as giftedDal
-                     from rd_data.tb_member_broadcast_item a
-                    where gifted_mem_no=#{mem_no} and item_type ='3') e
-               , ( select count(*) as exchangeCnt
-                        , sum(cash_real) as exchangeAmt
-                     from rd_data.tb_member_exchange where mem_no=#{mem_no} and state ='1') f
-               , ( select count(*) as exchangeCancelCnt
-                        , sum(cash_real) as exchangeCancelAmt
-                     from rd_data.tb_member_exchange where mem_no=#{mem_no} and state ='2') g
-               , ( select count(*) as changeCnt
-                        , sum(ruby) as changeByeol
-                     from rd_data.tb_member_wallet_ruby where mem_no=#{mem_no} and type=6) h
-               , (select count(*) as clipCnt
-                        ,sum(count_byeol) as clipByeol
-                        ,sum(count_play) as clipPlay
-                        ,sum(count_good) as clipGood
-                    from rd_data.tb_cast_room where mem_no=#{mem_no}) i
-
-    </select>
-
     <insert id="insertAuth" parameterType="com.dalbit.member.vo.procedure.P_AuthVo">
         /* M_Member.xml - insertAuth */
         insert into rd_data.tb_member_certification(
