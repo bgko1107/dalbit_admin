@@ -151,7 +151,7 @@
             var html = templateScript(context);
             $('#behaviorDetail').html(html);
 
-            $('._previewBtn').click();
+            $('._image_previewBtn').click();
         });
     });
 
@@ -227,10 +227,9 @@
                     , target : $('input:radio[name="target"]:checked').val()
                     , viewYn : $('input:radio[name="viewYn"]:checked').val()
                     , type : $('input:radio[name="type"]:checked').val()
-                    , conTime : $('#conTime').val()
+                    , conTime : $('input:radio[name="type"]:checked').val() == 6 ? -1 : $('#conTime').val()
                     , runTime : $('#runTime').val()
                     , desc1 : $('#desc1').val()
-                    , desc2 : $('#desc2').val()
                     , itemCode : $("#itemCode").val()
                 }
                 util.getAjaxData("applyBehaviorMsg", "/rest/broadcast/behavior/apply", data, function fn_applyBehaviorMsg_success(dst_id, response) {
@@ -266,11 +265,6 @@
             }else{
                 $("#itemCode").val('');
             }
-        }
-
-        if(common.isEmpty($('#desc2').val())) {
-            alert("결제혜택을 입력해주세요.")
-            return false;
         }
         return true;
     }
@@ -333,14 +327,30 @@
         $('#listArea').html(html);
     }
 
-    $(document).on('click', '._previewBtn', function(){
-        var webpUrl = $("#desc1").val();
-        var html = '<img src="'+webpUrl+'" width="100%" height="auto" style="border:1px solid gray" class="thumbnail fullSize_background" />';
-        $('._previewArea').html(html);
+    $(document).on('click', '._image_previewBtn', function(){
+        var imageUrl = $("#desc1").val();
+        if(common.isEmpty(imageUrl)){
+            return false;
+        }
+        var html = '<img src="'+imageUrl+'" width="100%" height="auto" style="border:1px solid gray" class="thumbnail fullSize_background" />';
+        $('._image_previewArea').html(html);
     });
 
     $(document).on('change', '#search_platform', function(){
         getBehaviorList()
+    });
+
+    $(document).on('click', '._item_previewBtn', function(){
+        var data = {
+            item_code : $("#itemCode").val()
+        }
+        util.getAjaxData('selectItemDetail', "/rest/content/item/gift/detail",data, function (dist_id, response, param){
+            console.log(dist_id);
+            var itemWebpUrl = response.data.webp_image;
+            var html = '<img src="'+itemWebpUrl+'" width="100%" height="auto" style="border:1px solid gray" class="thumbnail fullSize_background" />';
+            $('._item_previewArea').html(html);
+        });
+
     });
 </script>
 
@@ -508,7 +518,6 @@
             <th>No</th>
             <th>노출 대상</th>
             <th>방송방 유형</th>
-            <th>결제 혜택(%)</th>
             <th>호출(액션)</th>
             <th>등장 시간</th>
             <th>게시 여부</th>
@@ -532,7 +541,6 @@
                 </a>
             </td>
             <td>{{{getCommonCodeLabel platform "behavior_platform" 'N' 'platform'}}}</td>
-            <td>{{desc2}}</td>
             <td>{{{getCommonCodeLabel type "behavior_type_1"}}}</td>
             <td>{{conTime}}초</td>
             <td>{{{getCommonCodeLabel viewYn "behavior_viewYn"}}}</td>
@@ -582,23 +590,26 @@
             <td colspan="3">{{{getCommonCodeRadio type "behavior_type_1"}}}</td>
         </tr>
         <tr class="align-middle">
-            <th>결제 혜택(%)</th>
-            <td>
-                <input type="text" class="form-control" id="desc2" value="{{desc2}}" maxlength="5" />
-            </td>
             <th>아이템 코드</th>
-            <td>
-                <input type="text" class="form-control" id="itemCode" value="{{itemCode}}" maxlength="10" />
+            <td colspan="3">
+                <input type="text" class="form-control" id="itemCode" value="{{itemCode}}" maxlength="10" style="width:100px;" />
+                <button type="button" class="btn btn-default btn-sm _item_previewBtn">미리보기</button>
+            </td>
+            <th>미리보기</th>
+            <td class="_item_previewArea">
+                {{^equal itemWebpUrl ''}}
+                    <img src="{{../itemWebpUrl}}" width="100%" height="auto" style="border:1px solid gray" class="thumbnail fullSize_background" />
+                {{/equal}}
             </td>
         </tr>
         <tr class="align-middle">
             <th>종료 이미지</th>
             <td colspan="3">
                 <input type="text" class="form-control" id="desc1" value="{{desc1}}" maxlength="200" style="width:80%" />
-                <button type="button" class="btn btn-default btn-sm _previewBtn">미리보기</button>
+                <button type="button" class="btn btn-default btn-sm _image_previewBtn">미리보기</button>
             </td>
             <th>미리보기</th>
-            <td class="_previewArea"></td>
+            <td class="_image_previewArea"></td>
         </tr>
         </tbody>
     </table>

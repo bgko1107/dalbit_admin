@@ -13,6 +13,6 @@ public class P_BehaviorListInputVo extends PagingVo{
     private int slctType;
     private String searchText;
     private int pageNo;
-    private int searchPlatform;
+    private String searchPlatform;
 
 }
