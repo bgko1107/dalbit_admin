@@ -44,4 +44,5 @@ public class P_MailboxListVo extends SearchVo {
     private int giftCnt;
     private int dalCnt;
     private int byeolCnt;
+    private int mailbox_onoff;
 }

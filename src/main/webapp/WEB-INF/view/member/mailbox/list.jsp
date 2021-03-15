@@ -20,6 +20,10 @@
                     </td>
                 </tr>
             </table>
+
+            <div style="margin-top: 20px;">
+                우체통 상태 : <span id="mailbox_status">조회중..</span>
+            </div>
         </div>
         <span class="col-md-5 pull-right no-padding" id="mailbox_summaryArea"></span>
         <div class="widget-content">
@@ -61,6 +65,9 @@
         var data  = json.summary;
         var html = templateScript(data);
         $("#mailbox_summaryArea").html(html);
+
+        var mailbox_status = json.summary.mailbox_onoff;
+        $("#mailbox_status").html(util.renderOnOff(mailbox_status));
         ui.paintColor();
     }
 
