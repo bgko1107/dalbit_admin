@@ -95,9 +95,13 @@
 
     var totalCnt;
     function fn_dalList_success(dst_id, response, param) {
+
+        response.pagingVo.pageNo = specialDjPagingInfo.pageNo;
+        response.pagingVo.pageCnt = specialDjPagingInfo.pageCnt;
+
         var template = $('#tmp_specialList').html();
         var templateScript = Handlebars.compile(template);
-        var context = response.data;
+        var context = response;
         var html = templateScript(context);
 
         $('#special_tableBody').html(html);
@@ -208,11 +212,12 @@
 </script>
 
 <script id="tmp_specialList" type="text/x-handlebars-template">
-    {{#each this as |data|}}
+    {{#each this.data as |data|}}
     <tr {{#dalbit_if inner '==' 1}} class="_noTr bg-testMember" {{else}} class="_noTr" {{/dalbit_if}} id="row_{{order}}">
         <td class=" dt-body-center"><input type="checkbox"/></td>
         <td class="_noTd">
             <input type="hidden" name="sortNo" value="{{sortNo}}"/>
+            {{rowNumDesc ../pagingVo/totalCnt @index ../pagingVo/pageNo ../pagingVo/pageCnt}}
         </td>
         <td>{{addComma specialdj_cnt}}</td>
         <td>{{addComma best_cnt}}</td>

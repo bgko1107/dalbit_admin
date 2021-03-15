@@ -16,12 +16,16 @@ var BroadcastDataTableSource = {
                 }},
             {'title': '주제<br/>제목', 'data': 'title','width' : '150px', 'render': function (data, type, row, meta) {
                     var tmp_mediaType = "";
-                    if(row.mediaType == "a"){
-                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
+                    if(!common.isEmpty(row.mediaType)){
+                        if(row.mediaType == "a"){
+                            tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        }else{
+                            tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        }
+                        return tmp_mediaType + ' ' + row.subject_name + '<br/>' + util.roomNoLink(data, row.room_no);
                     }else{
-                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        return "";
                     }
-                    return tmp_mediaType + ' ' + row.subject_name + '<br/>' + util.roomNoLink(data, row.room_no);
                 }},
             {'title': '방송방', 'data': 'backgroundImage', 'width' : '50px', 'render' : function(data, type, row){
                     return '<img class="thumbnail fullSize_background" src="'+ PHOTO_SERVER_URL + data +'" width="65px" height="65px" />';
@@ -137,13 +141,14 @@ var BroadcastDataTableSource = {
 
             {'title': '입장/<br/>강제종료', 'data': '','width' : '55px','render': function (data, type, row, meta) {
                     var tmp = '';
-                    if(row.mediaType == "a"){
-                        tmp += '<button type="button" id="bt_broadcastGo" class="btn btn-default btn-xs _openPlayerPop" style="width: 60px;margin-bottom: 1px" data-roomno="' + row.room_no + '" >입장</button><br/>';
-                    }else{
-                        tmp += '<button type="button" id="bt_broadcastGoVideo" class="btn btn-default btn-xs _openVideoPlayerPop" style="width: 60px;margin-bottom: 1px" data-roomno="' + row.room_no + '" >입장</button><br/>';
+                    if(!common.isEmpty(row.mediaType)){
+                        if(row.mediaType == "a"){
+                            tmp += '<button type="button" id="bt_broadcastGo" class="btn btn-default btn-xs _openPlayerPop" style="width: 60px;margin-bottom: 1px" data-roomno="' + row.room_no + '" >입장</button><br/>';
+                        }else{
+                            tmp += '<button type="button" id="bt_broadcastGoVideo" class="btn btn-default btn-xs _openVideoPlayerPop" style="width: 60px;margin-bottom: 1px" data-roomno="' + row.room_no + '" >입장</button><br/>';
+                        }
+                        tmp += '<button type="button" class="btn btn-danger btn-xs" onclick="forcedEnd($(this).data());" data-memno= "' + row.dj_mem_no + '" data-roomno="' + row.room_no + '" >강제종료</button>';
                     }
-                    tmp += '<button type="button" class="btn btn-danger btn-xs" onclick="forcedEnd($(this).data());" data-memno= "' + row.dj_mem_no + '" data-roomno="' + row.room_no + '" >강제종료</button>';
-
                     return tmp;
                 }},
             {'title': '방송<br/>연장', 'data': 'extend_time_count','width' : '25px','render': function (data){
@@ -178,12 +183,16 @@ var BroadcastDataTableSource = {
             {'title': '주제', 'data': 'subject_name','width' : '65px'},
             {'title': '제목', 'data': 'title','width' : '150px', 'render': function (data, type, row, meta) {
                     var tmp_mediaType = "";
-                    if(row.mediaType == "a"){
-                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
+                    if(!common.isEmpty(row.mediaType)) {
+                        if (row.mediaType == "a") {
+                            tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        } else {
+                            tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        }
+                        return tmp_mediaType + ' ' + util.roomNoLink(data, row.room_no);
                     }else{
-                        tmp_mediaType += '<img class="mediaType" id="mediaType" name="mediaType" data-mediaType="' + row.mediaType + '" src="https://image.dalbitlive.com/svg/ico_live_video_b.svg" alt="your image" style="width: 33px;height: 33px" />';
+                        return "";
                     }
-                    return tmp_mediaType + ' ' + util.roomNoLink(data, row.room_no);
                 }},
             {'title': '배경', 'data': 'backgroundImage', 'width' : '50px', 'render' : function(data, type, row){
                     return '<img class="thumbnail fullSize_background" src="'+ PHOTO_SERVER_URL + data +'" width="65px" height="65px" />';

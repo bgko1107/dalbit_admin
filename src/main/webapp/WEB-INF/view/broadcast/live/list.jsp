@@ -626,9 +626,11 @@
         $('#list_info > tbody > tr').each(function(){
             var td = $(this).children();
             var td_3 = td.eq(3);
-            if(!common.isEmpty(td_3.find('#mediaType').data().mediatype)){
-                if(td_3.find('#mediaType').data().mediatype == "v"){
-                    td_3.css("background-color", "#fbe5d6");
+            if(!common.isEmpty(td_3)){
+                if(!common.isEmpty(td_3.find('#mediaType').data().mediatype)){
+                    if(td_3.find('#mediaType').data().mediatype == "v"){
+                        td_3.css("background-color", "#fbe5d6");
+                    }
                 }
             }
         });

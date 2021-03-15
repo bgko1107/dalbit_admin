@@ -323,6 +323,7 @@
                 basic.mem_id,
                 basic.mem_userid,
                 basic.mem_nick,
+                basic.mem_sex,
                 basic.mem_birth_year,
                 basic.mem_birth_month,
                 basic.mem_birth_day,

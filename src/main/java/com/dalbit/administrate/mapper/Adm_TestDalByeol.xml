@@ -251,7 +251,7 @@
                         secret,
                         '' AS cont
                       FROM rd_data.tb_member_broadcast_item
-                      WHERE mem_no = #{mem_no} AND item_type in ('1','2','3','4','7')
+                      WHERE mem_no = #{mem_no} AND item_type in ('1','2','3','4','7','11')
                         <if test='sDate != null and sDate != ""'>
                         and DATE_FORMAT(last_upd_date, '%Y.%m.%d') <![CDATA[>=]]> #{sDate}
                         and DATE_FORMAT(last_upd_date, '%Y.%m.%d') <![CDATA[<=]]> #{eDate}
@@ -327,7 +327,7 @@
                 last_upd_date        AS giftDate,
                 item_code
               FROM rd_data.tb_member_broadcast_item
-              WHERE mem_no = #{mem_no} AND item_type in ('1','2','3','4','7')
+              WHERE mem_no = #{mem_no} AND item_type in ('1','2','3','4','7','11')
               <if test='sDate != null and sDate != ""'>
                 and DATE_FORMAT(last_upd_date, '%Y.%m.%d') <![CDATA[>=]]> #{sDate} and DATE_FORMAT(last_upd_date, '%Y.%m.%d') <![CDATA[<=]]> #{eDate}
               </if>
@@ -412,7 +412,7 @@
                             0                     AS secret,
                             use_contents          AS cont
                           FROM rd_data.tb_member_wallet_gold
-                         WHERE mem_no = #{mem_no} and type in ('1','3')
+                         WHERE mem_no = #{mem_no} and type in ('1','3','11')
                           <if test='sDate != null and sDate != ""'>
                            and DATE_FORMAT(last_upd_date, '%Y.%m.%d') <![CDATA[>=]]> #{sDate} and DATE_FORMAT(last_upd_date, '%Y.%m.%d') <![CDATA[<=]]> #{eDate}
                           </if>
@@ -449,7 +449,7 @@
                           '10000000000000'      AS mem_no,
                           last_upd_date         AS giftDate
                         FROM rd_data.tb_member_wallet_gold
-                       WHERE mem_no = #{mem_no} and type in ('1','3')
+                       WHERE mem_no = #{mem_no} and type in ('1','3','11')
                         <if test='sDate != null and sDate != ""'>
                          and DATE_FORMAT(last_upd_date, '%Y.%m.%d') <![CDATA[>=]]> #{sDate} and DATE_FORMAT(last_upd_date, '%Y.%m.%d') <![CDATA[<=]]> #{eDate}
                         </if>

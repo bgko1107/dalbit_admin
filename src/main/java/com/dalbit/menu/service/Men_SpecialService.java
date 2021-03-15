@@ -269,12 +269,12 @@ public class Men_SpecialService {
         specialVo.setTotalCnt(getSpecialListCnt);
         List<SpecialVo> list = menSpecialDao.getSpecialList(specialVo);
 
-        for(int i=0;i<list.size();i++) {
-            MemberVo outVo = mem_MemberDao.getMemberInfo(list.get(i).getMem_no());
-            if(!DalbitUtil.isEmpty(outVo)) {
-                list.get(i).setMem_sex(outVo.getMem_sex());
-            }
-        }
+//        for(int i=0;i<list.size();i++) {
+//            MemberVo outVo = mem_MemberDao.getMemberInfo(list.get(i).getMem_no());
+//            if(!DalbitUtil.isEmpty(outVo)) {
+//                list.get(i).setMem_sex(outVo.getMem_sex());
+//            }
+//        }
 
         String result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(specialVo.getTotalCnt(), specialVo.getPageStart(), specialVo.getPageCnt())));
 
