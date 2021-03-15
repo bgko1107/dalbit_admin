@@ -35,9 +35,6 @@ public class Mem_MemberRestController {
      */
     @PostMapping("list")
     public String list(P_MemberListInputVo pMemberListInputVo){
-        if(DalbitUtil.isEmpty(pMemberListInputVo.getMemWithdrawal())){
-            pMemberListInputVo.setMemWithdrawal("0");
-        }
         String result = mem_MemberService.getMemberList(pMemberListInputVo);
         return result;
     }

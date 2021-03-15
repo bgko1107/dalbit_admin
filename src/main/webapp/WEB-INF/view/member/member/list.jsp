@@ -73,15 +73,19 @@
 
 <script>
     var tabType = common.isEmpty(<%=in_tabType%>) ? 1 : <%=in_tabType%>;
+    var dtList_info;
+    var dtList_info2;
 
     $(document).ready(function() {
 
         if(tabType == 1){
             $("#tab_memberList").click();
             ui.checkBoxInit('tb_memberList');
+
         }else if(tabType == 2){
             $("#tab_withdrawalList").click();
             ui.checkBoxInit('tb_withdrawalList');
+
         }
 
         $('input[id="txt_search"]').keydown(function() {
@@ -107,33 +111,40 @@
     //         $("#searchType").addClass("hide");
     //     }
     // });
-    var dtList_info;
-    var dtList_info_data = function ( data ) {
-        data.searchType = -1;          // 검색구분
-        data.searchText = $('#txt_search').val();                        // 검색명
-        data.memWithdrawal = memWithdrawal;
-        data.newSearchType = $("#searchMember").val();
-        // data.pageCnt = 10;
-    };
-    dtList_info = new DalbitDataTable($("#tb_memberList"), dtList_info_data, MemberDataTableSource.userInfo);
-    dtList_info.useCheckBox(true);
-    dtList_info.useIndex(true);
-    dtList_info.useInitReload(false);
-    dtList_info.createDataTable();
 
-    var dtList_info2;
-    var dtList_info_data2 = function ( data ) {
-        data.searchType = -1;          // 검색구분
-        data.searchText = $('#txt_search').val();                        // 검색명
-        data.memWithdrawal = memWithdrawal;
-        data.newSearchType = $("#searchMember").val();
-        // data.pageCnt = 10;
-    };
-    dtList_info2 = new DalbitDataTable($("#tb_withdrawalList"), dtList_info_data2, MemberDataTableSource.userInfo);
-    dtList_info2.useCheckBox(true);
-    dtList_info2.useIndex(true);
-    dtList_info2.useInitReload(false);
-    dtList_info2.createDataTable();
+    function renderMemberList(){
+
+        var dtList_info_data = function ( data ) {
+            data.searchType = -1;          // 검색구분
+            data.searchText = $('#txt_search').val();                        // 검색명
+            data.memWithdrawal = memWithdrawal;
+            data.newSearchType = $("#searchMember").val();
+            // data.pageCnt = 10;
+        };
+        dtList_info = new DalbitDataTable($("#tb_memberList"), dtList_info_data, MemberDataTableSource.userInfo);
+        dtList_info.useCheckBox(true);
+        dtList_info.useIndex(true);
+        dtList_info.useInitReload(false);
+        dtList_info.createDataTable();
+    }
+
+    function renderMemberWithdrawalList(){
+        var dtList_info_data2 = function ( data ) {
+            data.searchType = -1;          // 검색구분
+            data.searchText = $('#txt_search').val();                        // 검색명
+            data.memWithdrawal = memWithdrawal;
+            data.newSearchType = $("#searchMember").val();
+            // data.pageCnt = 10;
+        };
+        dtList_info2 = new DalbitDataTable($("#tb_withdrawalList"), dtList_info_data2, MemberDataTableSource.userInfo);
+        dtList_info2.useCheckBox(true);
+        dtList_info2.useIndex(true);
+        dtList_info2.useInitReload(false);
+        dtList_info2.createDataTable();
+    }
+
+
+
 
     var excel = '<button class="btn btn-default btn-sm print-btn pull-right mr10" type="button" id="excelDownBtn"><i class="fa fa-print"></i>Excel Down</button>';
     $("#div_memberList").append(excel);
@@ -163,9 +174,11 @@
     }
     function memberList(){
         memWithdrawal = "0";
+        renderMemberList();
     }
     function withdrawalList(){
         memWithdrawal = "1";
+        renderMemberWithdrawalList();
     }
 
     $(document).on('click', '#tb_memberList .dt-body-center input[type="checkbox"]', function(){
@@ -186,7 +199,6 @@
 
 
     function getMemNo_info(index){
-        console.log(dtList_info.getDataRow(index));
         tmp_bt = "";
         $('#tabList_top').addClass("show");
         var obj = new Object();

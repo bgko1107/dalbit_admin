@@ -67,10 +67,40 @@ public class P_MemberInfoOutputVo extends SearchVo {
 
     private int clipListenCnt;      //청취 클립 건수 (비중복)
     private int clipPlayCnt;         // 클립 재생 횟수
-    private int clipCnt;         // 클립 등록건수
-    private int boostCnt;         // 부스터 아이템 보유 갯수
     private int couponCnt;         // 응모권 갯수
     private int fanrankOnOffCnt;   // 팬랭킹 미반영 횟수
+
+    private int payCnt;
+    private int payAmt;
+    private int payCanCnt;
+    private int payCanAmt;
+
+    private int brodCnt;
+    private int broadTime;
+    private int byeolCnt;
+    private int listenerCnt;
+    private int goodCnt;
+    private int boostCnt;
+
+    private int listenCnt;
+    private int listenTime;
+    private int dalCnt;
+
+    private int sendDal;
+
+    private int exchangeCnt;
+    private int exchangeAmt;
+
+    private int exchangeCancelCnt;
+    private int exchangeCancelAmt;
+
+    private int changeCnt;
+    private int changeByeol;
+
+    private int clipCnt;
+    private int clipByeol;
+    private int clipPlay;
+    private int clipGood;
 
     private String certification;
     private String comm_company;

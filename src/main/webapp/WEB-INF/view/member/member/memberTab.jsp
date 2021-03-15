@@ -129,11 +129,11 @@
 <script type="text/javascript" src="/js/message/member/memberMessage.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/broadcast/broadCodeList.js?${dummyData}"></script>
 
-<script>
-    $(document).ready(function() {
-    });
+<script type="text/javascript">
     var dtList_info_detail;
     var dtList_top_info;
+
+    console.log('ddddddddddddddddddd - memberTab.jsp')
 
     function tab_click(tmp){
         if(tmp == "tab_broadcast"){

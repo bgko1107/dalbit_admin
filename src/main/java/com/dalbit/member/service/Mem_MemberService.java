@@ -88,6 +88,15 @@ public class Mem_MemberService {
      * 회원 목록
      */
     public String getMemberList(P_MemberListInputVo pMemberListInputVo){
+
+        if(DalbitUtil.isEmpty(pMemberListInputVo.getSearchText())){
+            return gsonUtil.toJson(new JsonOutputVo(Status.회원정보보기_데이터없음));
+        }
+
+        if(DalbitUtil.isEmpty(pMemberListInputVo.getMemWithdrawal())){
+            pMemberListInputVo.setMemWithdrawal("0");
+        }
+
         ProcedureVo procedureVo = new ProcedureVo(pMemberListInputVo);
         ArrayList<P_MemberListOutputVo> memberList = mem_MemberDao.callMemberList(procedureVo);
 

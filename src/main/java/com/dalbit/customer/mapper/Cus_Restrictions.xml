@@ -339,9 +339,9 @@
         rd_data.tb_member_broadcast_listening AS listen
         LEFT JOIN rd_data.tb_member_basic AS basic ON  listen.mem_no = basic.mem_no
         LEFT JOIN rd_data.tb_member_basic AS dj ON  listen.dj_mem_no = dj.mem_no
-        LEFT JOIN rd_data.tb_member_basic AS basicx ON  listen.mem_no = basicx.mem_no
-        LEFT JOIN rd_data.tb_member_basic AS djx ON  listen.dj_mem_no = djx.mem_no
-        LEFT JOIN rd_data.tb_broadcast_room AS room ON  listen.room_no = room.room_no
+        LEFT JOIN rd_data.tb_member_withdrawal_bak AS basicx ON  listen.mem_no = basicx.mem_no
+        LEFT JOIN rd_data.tb_member_withdrawal_bak AS djx ON  listen.dj_mem_no = djx.mem_no
+        /*LEFT JOIN rd_data.tb_broadcast_room AS room ON  listen.room_no = room.room_no*/
         LEFT JOIN rd_data.tb_member_connect_state AS cst ON listen.mem_no = cst.mem_no
         LEFT JOIN rd_data.tb_member_connect_state AS cstd ON listen.dj_mem_no = cstd.mem_no
         <where>
@@ -394,16 +394,19 @@
         ,cstd.last_device_uuid AS dj_device_uuid
         FROM
         (SELECT room_no,mem_no,last_upd_date,dj_mem_no,forced FROM rd_data.tb_member_broadcast_listening
-          WHERE forced = 'Y' AND last_upd_date BETWEEN DATE_FORMAT(#{startDate}, '%Y-%m-%d 00:00:00') AND DATE_FORMAT(#{endDate}, '%Y-%m-%d 23:59:59') GROUP BY 1,2) AS listen
+        WHERE forced = 'Y' AND last_upd_date BETWEEN DATE_FORMAT(#{startDate}, '%Y-%m-%d 00:00:00') AND DATE_FORMAT(#{endDate}, '%Y-%m-%d 23:59:59') GROUP BY 1,2) AS listen
         LEFT JOIN rd_data.tb_member_basic AS basic ON  listen.mem_no = basic.mem_no
         LEFT JOIN rd_data.tb_member_basic AS dj ON  listen.dj_mem_no = dj.mem_no
-        LEFT JOIN rd_data.tb_member_basic AS basicx ON  listen.mem_no = basicx.mem_no
-        LEFT JOIN rd_data.tb_member_basic AS djx ON  listen.dj_mem_no = djx.mem_no
+        LEFT JOIN rd_data.tb_member_withdrawal_bak AS basicx ON  listen.mem_no = basicx.mem_no
+        LEFT JOIN rd_data.tb_member_withdrawal_bak AS djx ON  listen.dj_mem_no = djx.mem_no
         LEFT JOIN rd_data.tb_broadcast_room AS room ON  listen.room_no = room.room_no
         LEFT JOIN rd_data.tb_member_connect_state AS cst ON listen.mem_no = cst.mem_no
         LEFT JOIN rd_data.tb_member_connect_state AS cstd ON listen.dj_mem_no = cstd.mem_no
         <where>
             listen.forced = 'Y'
+            <if test="startDate != '-1'">
+                AND listen.last_upd_date BETWEEN DATE_FORMAT(#{startDate}, '%Y-%m-%d 00:00:00') AND DATE_FORMAT(#{endDate}, '%Y-%m-%d 23:59:59')
+            </if>
         </where>
         <!--GROUP BY listen.room_no, listen.mem_no-->
         <!--ORDER BY listen.last_upd_date DESC-->
