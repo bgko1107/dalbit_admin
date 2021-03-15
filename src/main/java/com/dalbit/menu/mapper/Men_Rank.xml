@@ -306,14 +306,14 @@
                 , mem.mem_birth_day
                 , mem.inner
                 , (select sum(ifnull(money,0)) from rd_data.tb_member_wallet where mem_no = mem.mem_no) as money
-                , (select ifnull(sum(ifnull(gold, 0)), 0) from rd_data.tb_member_broadcast_item item where item.gifted_mem_no = mem.mem_no and item_type = 1) as byeol
+                <!--, (select ifnull(sum(ifnull(gold, 0)), 0) from rd_data.tb_member_broadcast_item item where item.gifted_mem_no = mem.mem_no and item_type = 1) as byeol-->
                 , dj.booster_point as boostCnt
                 , (dj.booster_point * 10) as boostByeol
-                , (select count(if(gifted_mem_no!=0, gifted_mem_no, null)) from rd_data.tb_member_broadcast_item where mem_no = mem.mem_no) as gifted_mem_no
-                , (select count(if(mem_no!=0, mem_no, null)) from rd_data.tb_member_broadcast_broadcasting where mem_no = mem.mem_no) as airCount
-                , (select min(start_date) from rd_data.tb_member_broadcast_broadcasting where mem_no = mem.mem_no) as start_date
+                <!--, (select count(if(gifted_mem_no!=0, gifted_mem_no, null)) from rd_data.tb_member_broadcast_item where mem_no = mem.mem_no) as gifted_mem_no-->
+                <!--, (select count(if(mem_no!=0, mem_no, null)) from rd_data.tb_member_broadcast_broadcasting where mem_no = mem.mem_no) as airCount-->
+                <!--, (select min(start_date) from rd_data.tb_member_broadcast_broadcasting where mem_no = mem.mem_no) as start_date-->
                 <if test='liveCnt != 0'>
-                    , @liveTime := ifnull((select TIMESTAMPDIFF( SECOND, start_date, NOW() ) from rd_data.tb_broadcast_room_live_list where mem_no = dj.mem_no), 0) as liveTime
+                    <!--, @liveTime := ifnull((select TIMESTAMPDIFF( SECOND, start_date, NOW() ) from rd_data.tb_broadcast_room_live_list where mem_no = dj.mem_no), 0) as liveTime-->
                     , ROUND((dj.broadcast_point + @liveTime )) AS airTime
                 </if>
                 <if test='liveCnt == 0'>
@@ -446,13 +446,13 @@
                         , mem.mem_birth_day
                         , mem.inner
                         , (select sum(ifnull(money,0)) from rd_data.tb_member_wallet where mem_no = mem.mem_no) as money
-                        , (select ifnull(sum(ifnull(gold, 0)), 0) from rd_data.tb_member_broadcast_item item where item.mem_no = mem.mem_no and item_type = 1) as byeol
+                        <!--, (select ifnull(sum(ifnull(gold, 0)), 0) from rd_data.tb_member_broadcast_item item where item.mem_no = mem.mem_no and item_type = 1) as byeol-->
                         , fan.good_point as goodCnt
                         , fan.booster_point as boostCnt
                         , (fan.booster_point * 20) as boostDal
-                        , (select count(if(gifted_mem_no!=0, gifted_mem_no, null)) from rd_data.tb_member_broadcast_item where mem_no = mem.mem_no) as gifted_mem_no
-                        , (select count(if(mem_no!=0, mem_no, null)) from rd_data.tb_member_broadcast_broadcasting where mem_no = mem.mem_no) as airCount
-                        , (select min(start_date) from rd_data.tb_member_broadcast_broadcasting where mem_no = mem.mem_no) as start_date
+                        <!--, (select count(if(gifted_mem_no!=0, gifted_mem_no, null)) from rd_data.tb_member_broadcast_item where mem_no = mem.mem_no) as gifted_mem_no-->
+                        <!--, (select count(if(mem_no!=0, mem_no, null)) from rd_data.tb_member_broadcast_broadcasting where mem_no = mem.mem_no) as airCount-->
+                        <!--, (select min(start_date) from rd_data.tb_member_broadcast_broadcasting where mem_no = mem.mem_no) as start_date-->
                         , fan.listen_point as airTime
                         , CAST(fan.fan_point AS INT) AS rankPoint
                         , fan.gift_point as itemCnt
