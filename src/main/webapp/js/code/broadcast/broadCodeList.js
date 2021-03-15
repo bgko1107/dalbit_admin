@@ -1,6 +1,7 @@
 var subject_type = [
     new COMMON_CODE(null, 'subject_type', '방송 주제')
-    , new COMMON_CODE('00', '00', '일상')
+    , new COMMON_CODE('00', '00', '전체')
+    //, new COMMON_CODE('00', '00', '일상')
     , new COMMON_CODE('01', '01', '수다/챗')
     , new COMMON_CODE('02', '02', '노래/연주')
     , new COMMON_CODE('03', '03', '노래방')
