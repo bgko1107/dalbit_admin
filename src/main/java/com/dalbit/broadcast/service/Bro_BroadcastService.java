@@ -72,53 +72,6 @@ public class Bro_BroadcastService {
         ArrayList<P_BroadcastListOutputVo> broadList = bro_BroadcastDao.callBroadcastList(procedureVo);
         P_BroadcastListOutputVo summary = new Gson().fromJson(procedureVo.getExt(), P_BroadcastListOutputVo.class);
 
-        ArrayList<P_BroadcastListOutputVo> djTypeCntList = bro_BroadcastDao.callBroadcastListDjType(pBroadcastListInputVo);
-        if(!DalbitUtil.isEmpty(djTypeCntList)) {
-            summary.setNormalDjCnt(djTypeCntList.get(0).getNormalDjCnt());
-            summary.setNewDjCnt(djTypeCntList.get(0).getNewDjCnt());
-            summary.setSpecialDjCnt(djTypeCntList.get(0).getSpecialDjCnt());
-            summary.setNewCnt(djTypeCntList.get(0).getNewCnt());
-        }
-
-        // 오늘 년도
-        String year = DalbitUtil.getDate("yyyy");
-
-        for(int i=0;i < broadList.size(); i++){
-
-//            fanBadgeList   주간/일간 탑DJ/팽 1,2,3
-            //DB부하로 인해 주석처리
-            /*HashMap fanBadgeMap = new HashMap();
-            fanBadgeMap.put("mem_no", broadList.get(i).getDj_mem_no());
-            fanBadgeMap.put("type", -1);
-            List fanBadgeList = commonDao.callMemberBadgeSelect(fanBadgeMap);
-            broadList.get(i).setFanBadgeList(fanBadgeList);*/
-
-//            liveBadgeList    실시간1,2,3 / 회장,부회장,사장,부장,팀장
-            //DB부하로 인해 주석처리
-            /*HashMap liveBadgeMap = new HashMap();
-            liveBadgeMap.put("mem_no", broadList.get(i).getDj_mem_no());
-            liveBadgeMap.put("type", -1);
-            List liveBadgeList = commonDao.callLiveBadgeSelect(liveBadgeMap);
-            for(int j = (liveBadgeList.size() -1); j > -1; j--){
-                if(DalbitUtil.isEmpty(((FanBadgeVo)liveBadgeList.get(j)).getIcon())){
-                    liveBadgeList.remove(j);
-                }
-            }*/
-            broadList.get(i).setLiveBadgeList(null);
-
-            if(DalbitUtil.isEmpty(broadList.get(i).getDj_nickname())){
-                MemberVo memInfoOutVo = mem_MemberDao.getMemberInfo(broadList.get(i).getDj_mem_no());
-                if(!DalbitUtil.isEmpty(memInfoOutVo)) {
-                    broadList.get(i).setDj_userid(memInfoOutVo.getMem_id());
-                    broadList.get(i).setDj_nickname("탈퇴회원");
-                    broadList.get(i).setDj_birth_year(memInfoOutVo.getMem_birth_year());
-                    broadList.get(i).setDj_birth_month(memInfoOutVo.getMem_birth_month());
-                    broadList.get(i).setDj_birth_day(memInfoOutVo.getMem_birth_day());
-                    broadList.get(i).setDj_korean_age(Integer.toString(Integer.parseInt(year) - Integer.parseInt(memInfoOutVo.getMem_birth_year()) + 1));
-                }
-            }
-        }
-
         String result;
         if(broadList.size() > 0) {
             result = gsonUtil.toJson(new JsonOutputVo(Status.방송기록보기성공, broadList, new PagingVo(procedureVo.getRet()),summary));
@@ -238,24 +191,6 @@ public class Bro_BroadcastService {
         bro_BroadcastDao.callBroadcastInfo(procedureVo);
 
         P_BroadcastDetailOutputVo broadcastDetail = new Gson().fromJson(procedureVo.getExt(), P_BroadcastDetailOutputVo.class);
-
-        if(DalbitUtil.isEmpty(broadcastDetail.getDj_userId())){
-            HashMap<P_BroadcastDetailOutputVo,String> withdrawal= bro_BroadcastDao.callBroadcastInfo_withdrawal(broadcastDetail.getDj_mem_no());
-            if(!DalbitUtil.isEmpty(withdrawal)) {
-                broadcastDetail.setDj_userId(withdrawal.get("dj_userId"));
-                broadcastDetail.setDj_nickName(withdrawal.get("dj_nickName"));
-                broadcastDetail.setDj_memSex(withdrawal.get("dj_memSex"));
-            }
-        }
-
-        // 회원 배찌
-        HashMap<P_MemberInfoOutputVo,String> djBadge = mem_MemberDao.callMemberInfo_badge(broadcastDetail.getDj_mem_no());
-        if(!DalbitUtil.isEmpty(djBadge)) {
-            broadcastDetail.setRecomm_badge(String.valueOf(djBadge.get("recomm_badge")) );
-            broadcastDetail.setNewdj_badge(String.valueOf(djBadge.get("newdj_badge")));
-            broadcastDetail.setSpecialdj_badge(String.valueOf(djBadge.get("specialdj_badge")));
-        }
-
 
         String result;
         if(Status.방송방상세조회_성공.getMessageCode().equals(procedureVo.getRet())) {

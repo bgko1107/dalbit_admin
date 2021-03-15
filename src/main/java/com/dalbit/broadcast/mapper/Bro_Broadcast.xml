@@ -7,26 +7,6 @@
         call rd_admin.sp_admin_broadcast_room_search(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
-    <select id="callBroadcastList_all" parameterType="com.dalbit.broadcast.vo.procedure.P_BroadcastListInputVo" resultType="com.dalbit.broadcast.vo.procedure.P_BroadcastListOutputVo">
-        SELECT count(*) as totalBroadCastCnt
-               ,SUM(case when os_type = 1 then 1 else 0 end) as totalAosCnt
-               ,SUM(case when os_type = 2 then 1 else 0 end) as totalIosCnt
-               ,SUM(case when os_type = 3 then 1 else 0 end) as totalPcCnt
-          from rd_data.tb_broadcast_room
-          <if test="room_liveType == 1">
-            where state != 4
-          </if>
-          <if test="room_liveType == 2">
-            where state=4
-              and DATE_FORMAT(start_date, '%Y-%m-%d %H:%i:%s') >= #{startDate}
-          </if>
-          <!--<if test="endDate != null">-->
-              <!--and DATE_FORMAT(start_date, '%Y-%m-%d') >= #{startDate} and DATE_FORMAT(start_date, '%Y-%m-%d')  <![CDATA[<=]]>  #{endDate}-->
-          <!--</if>-->
-          <!--<if test="endDate == null">-->
-          <!--</if>-->
-    </select>
-
     <select id="callBroadcastInfo" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.broadcast.vo.procedure.P_BroadcastDetailOutputVo">
         call rd_admin.sp_admin_broadcast_info_detail(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
@@ -38,14 +18,6 @@
 
     <select id="callBroadcastEdit" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.common.vo.ProcedureVo">
         call rd_admin.sp_admin_broadcast_room_edit(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
-    </select>
-
-    <select id="callBroadcastInfo_withdrawal" parameterType="String" resultType="java.util.HashMap">
-        select mem_userid as dj_userId,
-                mem_nick as dj_nickName,
-                mem_sex as dj_memSex
-          from rd_data.tb_member_withdrawal_bak
-         where mem_no = #{mem_no}
     </select>
 
     <update id="callBroadcastMemberExit" parameterType="com.dalbit.broadcast.vo.procedure.P_BroadcastEditInputVo">
@@ -121,27 +93,6 @@
             DESC limit 500
         ) AS a
         ORDER BY chatIdx ASC;
-    </select>
-
-    <select id="callBroadcastListDjType" parameterType="com.dalbit.broadcast.vo.procedure.P_BroadcastListInputVo" resultType="com.dalbit.broadcast.vo.procedure.P_BroadcastListOutputVo">
-        select ifnull(SUM(case when recomm_badge = 1 then 1 else 0 end),0) as recommDjCnt
-               , ifnull(SUM(case when newdj_badge = 0 then 1 else 0 end),0) as normalDjCnt
-               , ifnull(SUM(case when newdj_badge = 1 then 1 else 0 end),0) as newDjCnt
-               , ifnull(SUM(case when specialdj_badge > 0 then 1 else 0 end),0) as specialDjCnt
-               , (select count(*) from rd_data.tb_member_profile where mem_no in (select mem_no from rd_data.tb_broadcast_room_member where state = 0 and auth <![CDATA[<]]> 3) and new_badge ='1') as newCnt
-         from rd_data.tb_member_profile a join rd_data.tb_broadcast_room b on a.mem_no = b.mem_no
-        <if test="room_liveType == 1">
-            and b.state != 4
-        </if>
-        <if test="room_liveType == 2">
-            and b.state=4
-        </if>
-        <if test="endDate != null">
-            and b.start_date >= #{startDate} and b.start_date  <![CDATA[<=]]>  #{endDate}
-        </if>
-        <if test="endDate == null">
-            and b.start_date >= #{startDate}
-        </if>
     </select>
 
     <insert id="callBroadCastEditHistoryAdd" parameterType="com.dalbit.broadcast.vo.procedure.P_BroadcastEditInputVo">
