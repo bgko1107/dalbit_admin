@@ -35,6 +35,7 @@
     var report;
     var memberInfo_responseDate;
     var withdrawal;
+
     function info_sel_success(dst_id, response) {
         if(response.result == "fail"){
             alert("회원정보 없음");
@@ -108,6 +109,23 @@
         }else{
             getAdminMemoList("bt_adminMemoList", "운영자메모");
         }
+
+        var template = $('#tmp_memberAccumData').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response.data;
+        var html = templateScript(context);
+        $("#memberAccumData").html(html);
+
+        var template = $('#tmp_memberAccumData2').html();
+        var templateScript = Handlebars.compile(template);
+        var goodTotal = response.data.goodCnt + response.data.boostCnt * 10
+        response.data.goodTotal = goodTotal;
+        var context = response.data;
+        var html = templateScript(context);
+        $("#memberAccumData2").html(html);
+
+        ui.paintColor();
+        ui.tableHeightSet();
     }
 
     function init(){
@@ -237,10 +255,10 @@
         });
 
         // 버튼 끝
-        var data = {
+        /*var data = {
             mem_no : memNo,
         };
-        util.getAjaxData("info", "/rest/member/member/accumData", data, info_accumData_success, fn_fail);
+        util.getAjaxData("info", "/rest/member/member/accumData", data, info_accumData_success, fn_fail);*/
     }
 
     function info_accumData_success(dst_id, response){
@@ -1021,7 +1039,7 @@
                 프로필<br>이미지
                 {{#equal memWithdrawal '0'}}
                 <br><button type="button" id="bt_img" class="btn btn-default btn-sm no-margin" style="margin-left: 10px" data-memno="{{mem_no}}" data-nickname="{{nickName}}">초기화</button>
-                <br><button type="button" id="bt_profileImg_editHistory" class="btn btn-default btn-sm">상세</button>
+                <br><button type="button" id="bt_profileImg_editHistory" class="btn btn-default btn-sm mt5">상세</button>
                 {{/equal}}
             </th>
             <td rowspan="5">
@@ -1194,11 +1212,12 @@
             <th>보유달</th>
             <td colspan="6" style="text-align: left;">
                 <span class="col-md-5 no-padding">
-                    <span class="font-bold">{{addComma totalDal}}</span> 달 (구매 : {{addComma money}} 달 / 무료 : {{addComma dal}} 달)
+                    <span class="font-bold">{{addComma totalDal}} 달</span><br />
+                    (구매 : {{addComma money}} 달 / 무료 : {{addComma dal}} 달)
                 </span>
                 <c:if test="${insertYn eq 'Y'}">
                     {{#equal memWithdrawal '0'}}
-                    <span class="col-md-7 no-padding" id="sp_dalPointEdit">
+                        <span class="col-md-7 no-padding" id="sp_dalPointEdit">
                             <select id="dalPlusMinus" name="dalPlusMinus" class="form-control searchType">
                                 <option value="1">+</option>
                                 <option value="2">-</option>

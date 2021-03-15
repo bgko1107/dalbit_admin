@@ -18,7 +18,7 @@
 
     $(document).ready(function() {
         $("#searchTarget").html(util.getCommonCodeSelect(-1, restrictions_searchTarget));
-        getRes_forcedList(targetMemNo);
+        //getRes_forcedList(targetMemNo);
     });
 
     $(document).on('change', '#searchTarget', function() {          // 경고/정지회원 회원상태 select

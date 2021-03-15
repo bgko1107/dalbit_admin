@@ -88,6 +88,15 @@ public class Mem_MemberService {
      * 회원 목록
      */
     public String getMemberList(P_MemberListInputVo pMemberListInputVo){
+
+        if(DalbitUtil.isEmpty(pMemberListInputVo.getSearchText())){
+            return gsonUtil.toJson(new JsonOutputVo(Status.회원정보보기_데이터없음));
+        }
+
+        if(DalbitUtil.isEmpty(pMemberListInputVo.getMemWithdrawal())){
+            pMemberListInputVo.setMemWithdrawal("0");
+        }
+
         ProcedureVo procedureVo = new ProcedureVo(pMemberListInputVo);
         ArrayList<P_MemberListOutputVo> memberList = mem_MemberDao.callMemberList(procedureVo);
 
@@ -913,16 +922,6 @@ public class Mem_MemberService {
 
         return gsonUtil.toJson(new JsonOutputVo(Status.수정));
     }
-
-    /**
-     * 회원 상세정보 누적 통계 정보
-     */
-    public String getMemberAccumData(P_MemberInfoInputVo pMemberInfoInputVo) {
-        P_MemberAccumOutputVo memberAccumOutputVo = mem_MemberDao.getMemberAccumData(pMemberInfoInputVo);
-
-        return gsonUtil.toJson(new JsonOutputVo(Status.조회, memberAccumOutputVo));
-    }
-
 
     /**
      * 수동 본인인증 추가

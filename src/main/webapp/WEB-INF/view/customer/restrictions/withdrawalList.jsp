@@ -18,7 +18,7 @@
     var targetMemNo = "";
     $(document).ready(function() {
         $("#searchOpCode").html(util.getCommonCodeSelect(-1, restrictions_searchOpCode));
-        getRes_withdrawalList(targetMemNo);
+        //getRes_withdrawalList(targetMemNo);
     });
 
     $(document).on('click', '#bt_state_withdrawalList', function() {           // 상태 정상으로 변경

@@ -35,9 +35,6 @@ public class Mem_MemberRestController {
      */
     @PostMapping("list")
     public String list(P_MemberListInputVo pMemberListInputVo){
-        if(DalbitUtil.isEmpty(pMemberListInputVo.getMemWithdrawal())){
-            pMemberListInputVo.setMemWithdrawal("0");
-        }
         String result = mem_MemberService.getMemberList(pMemberListInputVo);
         return result;
     }
@@ -286,15 +283,6 @@ public class Mem_MemberRestController {
     @PostMapping("rollback/cert")
     public String rollbackCert(P_MemberParentsAgreeInputVo pMemberParentsAgreeInputVo){
         return mem_MemberService.rollbackCert(pMemberParentsAgreeInputVo);
-    }
-
-    /**
-     * 회원 상세정보 누적 통계 정보
-     */
-    @PostMapping("accumData")
-    public String getMemberAccumData(P_MemberInfoInputVo pMemberInfoInputVo){
-        String result = mem_MemberService.getMemberAccumData(pMemberInfoInputVo);
-        return result;
     }
 
     /**
