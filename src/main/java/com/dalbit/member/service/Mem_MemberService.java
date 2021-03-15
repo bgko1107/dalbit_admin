@@ -9,6 +9,7 @@ import com.dalbit.common.code.Code;
 import com.dalbit.common.code.ErrorStatus;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.dao.CommonDao;
+import com.dalbit.common.service.CommonMemberService;
 import com.dalbit.common.service.SmsService;
 import com.dalbit.common.vo.*;
 import com.dalbit.content.service.PushService;
@@ -70,6 +71,9 @@ public class Mem_MemberService {
     Bro_BroadcastService bro_broadcastService;
     @Autowired
     CommonDao commonDao;
+
+    @Autowired
+    CommonMemberService commonMemberService;
 
     @Autowired
     SocketRestUtil socketRestUtil;
@@ -147,7 +151,7 @@ public class Mem_MemberService {
         mem_MemberDao.callMemberInfo(procedureVo);
         P_MemberInfoOutputVo memberInfo = new Gson().fromJson(procedureVo.getExt(), P_MemberInfoOutputVo.class);
 
-        // 회원 배찌
+        // 회원 뱃지
         HashMap<P_MemberInfoOutputVo,String> djBadge = mem_MemberDao.callMemberInfo_badge(pMemberInfoInputVo.getMem_no());
         if(!DalbitUtil.isEmpty(djBadge)) {
             memberInfo.setRecomm_badge(String.valueOf(djBadge.get("recomm_badge")) );
@@ -155,24 +159,11 @@ public class Mem_MemberService {
             memberInfo.setSpecialdj_badge(String.valueOf(djBadge.get("specialdj_badge")));
         }
 
-        //            fanBadgeList   주간/일간 탑DJ/팽 1,2,3
-        HashMap fanBadgeMap = new HashMap();
-        fanBadgeMap.put("mem_no", pMemberInfoInputVo.getMem_no());
-        fanBadgeMap.put("type", -1);
-        List fanBadgeList = commonDao.callMemberBadgeSelect(fanBadgeMap);
-        memberInfo.setFanBadgeList(fanBadgeList);
-
-//            liveBadgeList    실시간1,2,3 / 회장,부회장,사장,부장,팀장
-        HashMap liveBadgeMap = new HashMap();
-        liveBadgeMap.put("mem_no", pMemberInfoInputVo.getMem_no());
-        liveBadgeMap.put("type", -1);
-        List liveBadgeList = commonDao.callLiveBadgeSelect(liveBadgeMap);
-        for (int j = (liveBadgeList.size() - 1); j > -1; j--) {
-            if (DalbitUtil.isEmpty(((FanBadgeVo) liveBadgeList.get(j)).getIcon())) {
-                liveBadgeList.remove(j);
-            }
+        List badgeList = commonMemberService.selectMemberBadgeList(pMemberInfoInputVo.getMem_no());
+        if(!DalbitUtil.isEmpty(badgeList)){
+            memberInfo.setLiveBadgeList(badgeList);
         }
-        memberInfo.setLiveBadgeList(liveBadgeList);
+
 
         String result;
         if(Status.회원정보보기_성공.getMessageCode().equals(procedureVo.getRet())) {

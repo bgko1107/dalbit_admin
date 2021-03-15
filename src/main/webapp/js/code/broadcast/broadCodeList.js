@@ -285,9 +285,9 @@ var behavior_target = [
 
 var behavior_platform = [
     new COMMON_CODE(null, 'platform', '플랫폼')
-    , new COMMON_CODE('-1', '-1', '전체')
-    , new COMMON_CODE('1', '1', '라디오')
-    , new COMMON_CODE('2', '2', '보이는 라디오')
+    , new COMMON_CODE('all', 'all', '전체')
+    , new COMMON_CODE('a', 'a', '라디오')
+    , new COMMON_CODE('v', 'v', '보이는 라디오')
     // 추후에 추가 될 수 있음
 ];
 
