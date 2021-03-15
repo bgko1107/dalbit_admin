@@ -258,7 +258,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-8 no-padding">
+        <%--<div class="col-md-8 no-padding">
             <span class="font-bold">◈방송 주제 별</span>
             <table class="table table-bordered _tableHeight" data-height="23px">
                 <colgroup>
@@ -283,7 +283,7 @@
                 </thead>
                 <tbody id="typeDayTableBody"></tbody>
             </table>
-        </div>
+        </div>--%>
     </div>
 </div>
 <div class="widget-footer">
@@ -326,7 +326,7 @@
 
         util.getAjaxData("memberList", "/rest/status/broadcast/info/platform", data, fn_platformDayList_success);
 
-        util.getAjaxData("type", "/rest/status/newBroadcast/info/type", data, fn_typeDay_success);
+        //util.getAjaxData("type", "/rest/status/newBroadcast/info/type", data, fn_typeDay_success);
     }
 
     function fn_day_success(data, response){
