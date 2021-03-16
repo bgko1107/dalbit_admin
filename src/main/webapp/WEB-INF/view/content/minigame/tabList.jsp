@@ -5,8 +5,9 @@
 
 
 <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist" id="tablist_con">
-    <li class="active"><a href="#miniGame" role="tab" data-toggle="tab" id="tab_miniGame">미니게임 관리</a></li>
-    <li><a href="#gameHistory" role="tab" data-toggle="tab" id="tab_gameHistory">게임 진행내역</a></li>
+    <li class="active"><a href="#miniGame" role="tab" data-toggle="tab" id="tab_miniGame">미니게임 관리(일간)</a></li>
+    <li><a href="#gameHistory" role="tab" data-toggle="tab" id="tab_gameHistory">게임 진행내역(일간)</a></li>
+    <li><a href="#gameHistory" role="tab" data-toggle="tab" id="tab_gameHistory_month">게임 진행내역(월간)</a></li>
 </ul>
 <div class="tab-content no-padding">
     <div class="tab-pane fade in active" id="miniGame"><jsp:include page="minigame.jsp"/></div>
@@ -26,6 +27,10 @@
 
             $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
             slctType = 0;
+        }else if(tabId == "tab_gameHistory_month"){
+
+            $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
+            slctType = 1;
         }
         dateType();
     });
@@ -39,7 +44,7 @@
     $('#bt_search').on('click', function() {
         if(tabId == "tab_miniGame"){
             miniGameList();
-        }else if(tabId == "tab_gameHistory"){
+        }else if("/tab_gameHistory/tab_gameHistory_month/".includes('/'+tabId+'/')){
             gameHistory();
         }
     });
