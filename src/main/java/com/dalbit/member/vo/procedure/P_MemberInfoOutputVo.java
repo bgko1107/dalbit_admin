@@ -69,6 +69,7 @@ public class P_MemberInfoOutputVo extends SearchVo {
     private int clipPlayCnt;         // 클립 재생 횟수
     private int couponCnt;         // 응모권 갯수
     private int fanrankOnOffCnt;   // 팬랭킹 미반영 횟수
+    private int boostItemCnt;       //부스터 아이템 갯수
 
     private int payCnt;
     private int payAmt;

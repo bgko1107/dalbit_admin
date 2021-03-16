@@ -1302,7 +1302,7 @@
             <th>부스터</th>
             <td colspan="3" style="text-align: left">
                 <span class="col-md-3 no-padding" style="text-align: left">
-                    {{addComma boostCnt}} 개
+                    {{addComma boostItemCnt}} 개
                 </span>
                 <c:if test="${insertYn eq 'Y'}">
                     <span class="col-md-9 no-padding" id="">
