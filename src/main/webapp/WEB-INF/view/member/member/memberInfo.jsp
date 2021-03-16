@@ -46,7 +46,7 @@
         memNo = response.data.mem_no;
 
         if (response.data.memState == 3)
-            response.data["block"] = " / 정지기간: " + response.data.block_day + " / 정지종료일: " + response.data.blockEndDateFormat;
+            response.data["block"] = " / 정지기간: " + response.data.block_day + " / 정지종료일: " + response.data.block_end_date;
 
         if (response.data.memState == 4){
             response.data["memWithdrawal"] = "1";

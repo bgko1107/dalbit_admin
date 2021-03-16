@@ -110,7 +110,7 @@ public class P_MemberInfoOutputVo extends SearchVo {
     private String recant_yn;
     private int block_type;
     private String block_day;
-    private Date block_end_date;
+    private String block_end_date;
     private String blockEndDateFormat;
     private int inner;
 
@@ -142,8 +142,8 @@ public class P_MemberInfoOutputVo extends SearchVo {
     private int leader_yn;
 
 
-    public void setBlock_end_date(Date block_end_date){
+    /*public void setBlock_end_date(Date block_end_date){
         this.block_end_date = block_end_date;
         this.blockEndDateFormat = DalbitUtil.convertDateFormat(block_end_date, "yyyy.MM.dd HH:mm:ss");
-    }
+    }*/
 }
