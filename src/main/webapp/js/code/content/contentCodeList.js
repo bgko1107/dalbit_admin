@@ -177,7 +177,7 @@ var push_push_slct = [
     ,new COMMON_CODE('11','11','방송 시작')
     ,new COMMON_CODE('12','12','DJ 레벨 업')
     ,new COMMON_CODE('13','13','신규 캐스트 등록, 좋아요')
-    ,new COMMON_CODE('14','14','방송 시작 10분 후(팬이 아닌 상태로 방송방에 1회 입장한 사용자에게 수신)')
+    // ,new COMMON_CODE('14','14','방송 시작 10분 후(팬이 아닌 상태로 방송방에 1회 입장한 사용자에게 수신)')
     ,new COMMON_CODE('15','15','선물 수신')
     ,new COMMON_CODE('16','16','팬 등록(최초 1회만 푸시알림)')
     ,new COMMON_CODE('17','17','팬 보드 신규 글 등록')
