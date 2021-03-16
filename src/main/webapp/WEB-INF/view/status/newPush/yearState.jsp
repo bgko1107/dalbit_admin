@@ -5,7 +5,7 @@
 <div class="widget widget-table" id="div_yearScroll">
     <div class="widget-content">
         <span>
-            · 푸시 성공 수신거부, 거부비율 건에 대한 수치 현황입니다.<br/>
+            · 푸시 성공 실패, 실패비율 건에 대한 수치 현황입니다.<br/>
             · 푸시 초기화 매달 초 00시 이고, 30분 단위 리로드됩니다.
         </span><br/>
         <button type="button" class="btn btn-success btn-ms pull-left" id="bt_tableSw" onclick="yearTableSwich();">전체보기</button>
@@ -365,7 +365,7 @@
 <script type="text/x-handlebars-template" id="tmp_tableYearStateBody_simpleTotal">
     <tr class="font-bold">
         <td class="_bgColor" data-bgcolor="#bfbfbf">총합</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">성공수치</span><br/>(수신거부)<br/>(거부비율%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">성공수치</span><br/>(발송실패)<br/>(실패비율%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p25Succ}}</span><br/>({{addComma p25Fail}})<br/>({{average p25Fail p25Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p15Succ}}</span><br/>({{addComma p15Fail}})<br/>({{average p15Fail p15Succ}}%)</td>
@@ -414,7 +414,7 @@
 <script type="text/x-handlebars-template" id="tmp_tableYearStateBody_detailTotal">
     <tr class="font-bold">
         <td class="_bgColor" data-bgcolor="#bfbfbf">총합</td>
-        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">성공수치</span><br/>(수신거부)<br/>(거부비율%)</td>
+        <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">성공수치</span><br/>(발송실패)<br/>(실패비율%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p11Succ}}</span><br/>({{addComma p11Fail}})<br/>({{average p11Fail p11Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p18Succ}}</span><br/>({{addComma p18Fail}})<br/>({{average p18Fail p18Succ}}%)</td>
         <td class="_bgColor" data-bgcolor="#f2f2f2"><span class="_fontColor" data-fontcolor="#ca6927">{{addComma p24Succ}}</span><br/>({{addComma p24Fail}})<br/>({{average p24Fail p24Succ}}%)</td>
