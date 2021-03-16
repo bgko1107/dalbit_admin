@@ -226,7 +226,7 @@
                 , fan.view_yn
                 , fan.depth
                 , ifnull(fan.opName,'') as opName
-                , (select count(*) from rd_data.tb_member_fanboard WHERE mem_no =  fan.mem_no and `status` = 1 AND board_no = fan.board_no AND depth = 2 ) as replyCnt
+                , (select count(*) from rd_data.tb_member_fanboard WHERE mem_no =  fan.mem_no AND board_no = fan.board_no AND depth = 2 ) as replyCnt
                 , @RNUM := @RNUM +1 as rowNum
             from rd_data.tb_member_fanboard fan
                 inner join (select @RNUM := 0) r
@@ -321,7 +321,7 @@
               a.last_upd_date AS writeDate,
               a.view_yn,
               depth
-         from (select idx, board_no, contents, writer_no, `status`, last_upd_date, depth,view_yn from rd_data.tb_member_fanboard where mem_no = #{mem_no} and board_no = #{board_no} and `status` = 1) as a
+         from (select idx, board_no, contents, writer_no, `status`, last_upd_date, depth,view_yn from rd_data.tb_member_fanboard where mem_no = #{mem_no} and board_no = #{board_no}) as a
           left outer join rd_data.tb_member_basic bas on a.writer_no = bas.mem_no
           left outer join rd_data.tb_member_withdrawal_bak bak on a.writer_no = bak.mem_no
           order by writeDate desc
@@ -704,7 +704,7 @@
                 </when>
                 <otherwise>
                     and ((castMem.mem_no = #{searchText} or castMem.mem_nick like concat('%', #{searchText}, '%'))
-                       or writerMem.(mem_no = #{searchText} or writerMem.mem_nick like concat('%', #{searchText}, '%')))
+                       or (writerMem.mem_no = #{searchText} or writerMem.mem_nick like concat('%', #{searchText}, '%')))
                 </otherwise>
             </choose>
         </if>
