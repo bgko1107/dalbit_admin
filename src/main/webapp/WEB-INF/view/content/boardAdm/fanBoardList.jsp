@@ -105,7 +105,7 @@
             </div>
             <div class="modal-body">
                 <div class="col-md-12 no-padding" id="div_fanboard" style="margin-bottom: 7px"></div><br/>
-                <div class="col-md-12 no-padding" id="div_reply"></div>
+                <div class="col-md-12 no-padding" id="div_fanboardReply"></div>
             </div>
         </div>
     </div>
@@ -206,7 +206,7 @@
         // $('#fanBoardTable_summary').html(html);
     }
 
-    $(document).on('click', '._selectReply', function() {
+    $(document).on('click', '._selectFanReply', function() {
         // if($(this).data('status') == 2) {
         //     alert('삭제된 댓글입니다');
         // } else
@@ -217,12 +217,12 @@
               'mem_no' : $(this).data('mem_no')
               , 'board_no' : $(this).data('board_no')
             };
-            util.getAjaxData("selectReply", "/rest/content/boardAdm/selectReply", data, fn_success_selectReply);
+            util.getAjaxData("selectReply", "/rest/content/boardAdm/selectReply", data, fn_success_selectFanReply);
         }
     });
 
-    function fn_success_selectReply(dst_id, response) {
-        $('#div_reply').empty();
+    function fn_success_selectFanReply(dst_id, response) {
+        $('#div_fanboardReply').empty();
         $('#div_fanboard').empty();
         for(var i=0 ; i<response.data.length; i++){
             var tmp = '<div class="col-md-12 no-padding" style="margin-bottom: 10px;">';
@@ -240,10 +240,11 @@
             tmp +=      '<lable id="contents' + i + '"></label><br>';
             tmp +=     '</div>';
             tmp +=     '</div>';
+
             if(response.data[i].depth == "1"){          // fanboard
                 $('#div_fanboard').append(tmp + "<br/>");
             }else{                                      // reply
-                $('#div_reply').append(tmp);
+                $('#div_fanboardReply').append(tmp + "<br/>");
                 $('#image_section' + i).attr('style', "width: 40px;height: 40px");
             }
 
@@ -253,6 +254,8 @@
             $('#contents' + i).text(response.data[i].contents);
             $('#image_section' + i).prop("src" ,common.profileImage(PHOTO_SERVER_URL,response.data[i].profileImage,memSex));
 
+            console.log( $('#div_fanboard').html());
+            console.log( $('#div_fanboardReply').html());
             $('#fanboardModal').modal("show");
         }
     }
@@ -408,7 +411,7 @@
                         삭제
                     {{/dalbit_if}}
                 </td>
-                <td>{{replyCnt}}<a href="javascript://" class="_selectReply" data-status="{{status}}" data-board_no="{{board_no}}" data-reply="{{replyCnt}}" data-mem_no="{{star_mem_no}}">[댓글]</a></td>
+                <td>{{replyCnt}}<a href="javascript://" class="_selectFanReply" data-status="{{status}}" data-board_no="{{board_no}}" data-reply="{{replyCnt}}" data-mem_no="{{star_mem_no}}">[댓글]</a></td>
                 <td><a href="javascript://" class="_deleteFanBoard" data-idx="{{idx}}" data-status="{{status}}">[삭제]</a></td>
             </tr>
         {{else}}

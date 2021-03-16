@@ -104,8 +104,8 @@
             'pageStart': clipPagingInfo.pageNo
             , 'pageCnt' : clipPagingInfo.pageCnt
             , 'searchText' : txt_search
-            , 'sDate' : $("#startDate").val()
-            , 'eDate' : $("#endDate").val()
+            , 'sDate' : common.isEmpty($("#startDate").val()) ? '1900.01.01' : $("#startDate").val()
+            , 'eDate' : common.isEmpty($("#endDate").val()) ? '2999.12.31' : $("#endDate").val()
             , 'searchType' : 0
             , 'status' : Number($("#clipReplayStatus option:selected").val())
             , 'newSearchType' : $("#searchMember").val()
