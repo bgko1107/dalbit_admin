@@ -93,6 +93,12 @@
             $('#gameHistory_paginate').show();
         }
 
+        $('#div_minigameHistorySummury').show();
+        var template = $('#tmp_historyTableBody').html();
+        var templateScript = Handlebars.compile(template);
+        var context = response.summary;
+        var html = templateScript(context);
+        $('#historyTableBody').html(html);
     }
 
     function handlebarsPaging(targetId, pagingInfo) {
@@ -118,7 +124,7 @@
             <td>{{{getCommonCodeLabel state 'room_state'}}}</td>
             <td>{{start_date}}</td>
             <td>{{end_date}}</td>
-            <td>{{#dalbit_if pay_yn '==' 1}} ON {{else}} OFF {{/dalbit_if}}</td>
+            <td>{{{renderOnOff pay_yn}}}</td>
             <td>{{addComma go_cnt}}</td>
         </tr>
     {{else}}

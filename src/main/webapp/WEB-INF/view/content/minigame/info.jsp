@@ -42,6 +42,23 @@
                     </table>
                 </div>
             </div>
+            <div class="col-md-4 no-padding" id="div_minigameHistorySummury" style="display: none">
+                <table class="table table-bordered _tableHeight" data-height="23px">
+                    <colgroup>
+                        <col width="20%"/><col width="20%"/><col width="20%"/><col width="20%"/><col width="20%"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="_bgColor" data-bgcolor="#bfbfbf">게임 진행 횟수<br/>(참여인원)</th>
+                        <th class="_bgColor" data-bgColor="#bfbfbf">달(소진)</th>
+                        <th class="_bgColor" data-bgColor="#f8cbad">유료</th>
+                        <th class="_bgColor" data-bgColor="#b4c7e7">무료</th>
+                        <th class="_bgColor" data-bgcolor="#bfbfbf">등록건수(총합)</th>
+                    </tr>
+                    </thead>
+                    <tbody id="historyTableBody"></tbody>
+                </table>
+            </div>
         </div>
         <!-- //serachBox -->
         <!-- tab -->
@@ -93,4 +110,14 @@
         $("#preview").remove();
     });
 
+</script>
+
+<script id="tmp_historyTableBody" type="text/x-handlebars-template">
+    <tr>
+        <td>{{addComma totalGoCnt}}</td>
+        <td>{{addComma totalPayAmt}}</td>
+        <td>{{addComma payCnt}}</td>
+        <td>{{addComma freeCnt}}</td>
+        <td>{{addComma totalCnt}}</td>
+    </tr>
 </script>

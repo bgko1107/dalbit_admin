@@ -119,6 +119,7 @@
         var context = response.data.miniInfo;
         var html = templateScript(context);
         $('#tb_miniGameInfo').html(html);
+        $('#div_minigameHistorySummury').hide();
     }
 
     //상세 조회
