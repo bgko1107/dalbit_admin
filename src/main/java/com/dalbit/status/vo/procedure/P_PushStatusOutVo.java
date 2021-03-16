@@ -61,6 +61,8 @@ public class P_PushStatusOutVo {
     private int p34Fail;
     private int p35Succ;
     private int p35Fail;
+    private int p49Succ;
+    private int p49Fail;
     private int p51Succ;
     private int p51Fail;
     private int p52Succ;

@@ -191,7 +191,8 @@ var push_push_slct = [
     ,new COMMON_CODE('31','31','클립 좋아요')
     ,new COMMON_CODE('32','32','클립 댓글')
     ,new COMMON_CODE('33','33','클립 선물')
-    ,new COMMON_CODE('51','51','서비스 공지(가입 후 3,7일 간, 미접속)')
+    ,new COMMON_CODE('49','49','서비스 공지(가입 후 3일 간, 미접속)')
+    ,new COMMON_CODE('51','51','서비스 공지(가입 후 7일 간, 미접속)')
     ,new COMMON_CODE('52','52','이벤트 알림')
     ,new COMMON_CODE('53','53','운영자 메시지(긴급공지)')
     ,new COMMON_CODE('54','54','운영자 메시지(사용자 경고)')
@@ -249,7 +250,8 @@ var status_detail_push_type = [
     ,new COMMON_CODE('35','35','선물 대상')
     ,new COMMON_CODE('20','20','DJ/FAN')
     ,new COMMON_CODE('19','19','생일 축하')
-    ,new COMMON_CODE('51','51','공지 가입>15일 간 미접속')
+    ,new COMMON_CODE('49','49','공지 가입>3일 간 미접속')
+    ,new COMMON_CODE('51','51','공지 가입>7일 간 미접속')
     ,new COMMON_CODE('52','52','이벤트 알림')
     ,new COMMON_CODE('60','60','1:1 문의 답변')
     ,new COMMON_CODE('62','62','완료')
@@ -1036,5 +1038,27 @@ var conReward = [
     , new COMMON_CODE('2', '2', '룰렛 응모권')
     , new COMMON_CODE('3', '3', '방송시간 연장(30분)')
     , new COMMON_CODE('99', '99', '없음')
+];
+
+var questReward = [
+    new COMMON_CODE(null, 'questReward', '퀘스트보상목록')
+    , new COMMON_CODE('1', '1', '달')
+    , new COMMON_CODE('2', '2', 'EXP')
+    , new COMMON_CODE('3', '3', '별')
+    , new COMMON_CODE('4', '4', '부스터 사용권')
+    , new COMMON_CODE('5', '5', '룰렛 응모권')
+];
+
+
+var questName = [
+    new COMMON_CODE(null, 'questName', '퀘스트명')
+    , new COMMON_CODE('1', '1', '팬등록 하기')
+    , new COMMON_CODE('2', '2', '우체통으로 메시지 보내기')
+    , new COMMON_CODE('3', '3', 'DJ 방송 1분 이상 듣고 좋아요 누르기')
+    , new COMMON_CODE('4', '4', '클립 1분 이상 듣기')
+    , new COMMON_CODE('5', '5', '방송방 또는 클립 링크 공유하기')
+    , new COMMON_CODE('6', '6', '신입 DJ 방송 10분 이상 듣기')
+    , new COMMON_CODE('7', '7', '보이는 라디오 10분 이상 듣기')
+    , new COMMON_CODE('8', '8', 'DJ에게 선물하기')
 ];
 
