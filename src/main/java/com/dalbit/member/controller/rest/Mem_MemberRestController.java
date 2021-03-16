@@ -286,15 +286,6 @@ public class Mem_MemberRestController {
     }
 
     /**
-     * 회원 상세정보 누적 통계 정보
-     */
-    @PostMapping("accumData")
-    public String getMemberAccumData(P_MemberInfoInputVo pMemberInfoInputVo){
-        String result = mem_MemberService.getMemberAccumData(pMemberInfoInputVo);
-        return result;
-    }
-
-    /**
      * 수동 본인인증 추가
      */
     @PostMapping("auth")

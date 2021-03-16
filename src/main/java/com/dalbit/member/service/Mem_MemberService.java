@@ -924,16 +924,6 @@ public class Mem_MemberService {
     }
 
     /**
-     * 회원 상세정보 누적 통계 정보
-     */
-    public String getMemberAccumData(P_MemberInfoInputVo pMemberInfoInputVo) {
-        P_MemberAccumOutputVo memberAccumOutputVo = mem_MemberDao.getMemberAccumData(pMemberInfoInputVo);
-
-        return gsonUtil.toJson(new JsonOutputVo(Status.조회, memberAccumOutputVo));
-    }
-
-
-    /**
      * 수동 본인인증 추가
      */
     public String insertAuth(P_AuthVo pAuthVo) {

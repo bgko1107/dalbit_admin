@@ -28,8 +28,6 @@
 <script type="text/javascript" src="/js/util/memberUtil.js"></script>
 <script type="text/javascript">
 
-    console.log('ddddddddddddddddddd - memberInfo.jsp')
-
     $("#gender").html(util.getCommonCodeRadio(2, gender, "Y"));
 
     var memWithdrawal = "0";

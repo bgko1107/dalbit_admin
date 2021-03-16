@@ -156,9 +156,6 @@ public interface Mem_MemberDao {
     int moveCertInfo(P_MemberParentsAgreeInputVo pMemberParentsAgreeInputVo);
     int moveRollbackCertInfo(P_MemberParentsAgreeInputVo pMemberParentsAgreeInputVo);
 
-    @Transactional(readOnly = true)
-    P_MemberAccumOutputVo getMemberAccumData(P_MemberInfoInputVo pMemberInfoInputVo);
-
     int insertAuth(P_AuthVo pAuthVo);
 
     P_MemberItemVo boostItemChange(ProcedureVo procedureVo);
