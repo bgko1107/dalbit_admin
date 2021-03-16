@@ -205,6 +205,8 @@ var push_push_slct = [
     ,new COMMON_CODE('61','61','운영자 선물 알림')
     ,new COMMON_CODE('62','62','환전 완료')
     ,new COMMON_CODE('63','63','환전 불가')
+    ,new COMMON_CODE('65','65','미출석 PUSH')
+    ,new COMMON_CODE('66','66','신입 추천DJ PUSH')
     ,new COMMON_CODE('92','92','어드민 운영자 메시지(회원 + 비회원)')
     ,new COMMON_CODE('93','93','어드민 운영자 메시지(회원)')
     ,new COMMON_CODE('94','94','어드민 운영자 메시지(비회원)')
