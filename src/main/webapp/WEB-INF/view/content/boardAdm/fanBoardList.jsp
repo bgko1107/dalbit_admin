@@ -252,7 +252,7 @@
             $('#userId' + i).text(response.data[i].userId);
             $('#writeDateFormat' + i).text(response.data[i].writeDateFormat);
             $('#contents' + i).text(response.data[i].contents);
-            $('#image_section' + i).prop("src" ,common.profileImage(PHOTO_SERVER_URL,response.data[i].profileImage,memSex));
+            $('#image_section' + i).prop("src" ,common.profileImage(PHOTO_SERVER_URL,response.data[i].profileImage,response.data[i].memSex));
 
             console.log( $('#div_fanboard').html());
             console.log( $('#div_fanboardReply').html());
