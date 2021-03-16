@@ -3,8 +3,7 @@
 <c:set var="dummyData"><%= java.lang.Math.round(java.lang.Math.random() * 1000000) %></c:set>
 
 <div class="col-lg-12 no-padding mt10">
-    <span id="gameTypeArea"></span>
-    <span id="gameHistorySortArea"></span>
+    <span id="gameHistorySortArea" onchange="gameHistory();"></span>
     <div class="col-lg-12 no-padding mt5">
         <div class="widget-content ">
             <div class="dataTables_paginate paging_full_numbers" id="gameHistory_paginate_top"></div>
