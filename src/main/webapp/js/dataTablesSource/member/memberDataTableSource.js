@@ -1476,4 +1476,37 @@ var MemberDataTableSource = {
             }
         }
     },
+
+    'recordList': {
+        'url': '/rest/member/ggamggame/newrecord/list'
+        , 'columns': [
+            // {'title': '플랫폼', 'data': 'title'},
+            {'title': '방송 제목', 'data': 'title', 'render': function (data, type, row, meta) {
+                    return util.roomNoLink(data, row.room_no);
+            }},
+            {'title': '구분', 'data': 'event_no', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, conEvent);
+                }},
+            {'title': '기록 정보', 'data': 'achieve_type', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, conGubun);
+                }},
+            {'title': '달성', 'data': 'achieve_cnt', 'render': function (data, type, row, meta) {
+                    return common.addComma(data);
+                }},
+            {'title': '받은보상', 'data': 'reward_type', 'render': function (data, type, row, meta) {
+                    return util.getCommonCodeLabel(data, conReward);
+                }},
+            {'title': '보상수량', 'data': 'reward_cnt', 'render': function (data, type, row, meta) {
+                    return common.addComma(data);
+                }},
+            {'title': '방송일시', 'data': 'start_date', 'render': function (data, type, row, meta) {
+                    return common.substr(data, 0, 19);
+                }},
+        ]
+        ,'createdRow' : function( row, data, dataIndex ) {
+            if (data.inner == 1) {    // 테스트계정 row 색상 표시
+                $(row).addClass("bg-testMember");
+            }
+        }
+    },
 }

@@ -5,7 +5,7 @@
         <div class="widget-content">
             <div class="pull-right pt5" style="display: none;">
                 <label><input type="text" class="form-control" name="searchText" id="searchText" placeholder="검색할 정보를 입력하세요"></label>
-                <button type="button" class="btn btn-success" id="bt_search">검색</button>
+                <button type="button" class="btn btn-success" id="bt_roomEditSearch">검색</button>
             </div>
             <table id="list_info_detail" class="table table-sorting table-hover table-bordered datatable">
                 <thead id="tableTop_detail">
@@ -22,11 +22,11 @@
 
     $("#roomEditHistory").find("#searchText").keydown(function() {
         if (event.keyCode === 13) {
-            $("#roomEditHistory").find("#bt_search").click();
+            $("#roomEditHistory").find("#bt_roomEditSearch").click();
         };
     });
 
-    $("#roomEditHistory").find("#bt_search").on("click", function(){
+    $("#roomEditHistory").find("#bt_roomEditSearch").on("click", function(){
         dtList_info_detail.reload();
     });
 

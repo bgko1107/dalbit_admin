@@ -25,6 +25,7 @@
             <li><a href="#edit" role="tab" data-toggle="tab" id="tab_edit" onclick="tab_click(this.id);">수정내역</a></li>
             <li><a href="#levelDetail" role="tab" data-toggle="tab" id="tab_levelDetail" onclick="tab_click(this.id);">레벨</a></li>
             <li><a href="#rouletteList" role="tab" data-toggle="tab" id="tab_rouletteList" onclick="tab_click(this.id);">룰렛이벤트</a></li>
+            <li><a href="#ggamggameEvent" role="tab" data-toggle="tab" id="tab_ggamggameEvent" onclick="tab_click(this.id);">깜깜이</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade in active " id="infoDetail"><jsp:include page="memberInfo.jsp"/></div>     <!-- 상세 -->
@@ -119,6 +120,14 @@
             </div>
             <div class="tab-pane fade" id="levelDetail"><jsp:include page="../level/list.jsp"/></div>     <!-- 레벨 -->
             <div class="tab-pane fade" id="rouletteList"><jsp:include page="../roulette/list.jsp"/></div>     <!-- 레벨 -->
+            <div class="tab-pane fade" id="ggamggameEvent">
+                <ul class="nav nav-tabs nav-tabs-custom-colored" role="tablist">
+                    <li class="active"><a href="#newrecord" role="tab" data-toggle="tab" id="tab_newrecord" onclick="tab_click(this.id);">신기록</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="newrecord"><jsp:include page="../ggamggameEvent/list.jsp"/></div>     <!-- 수정내역 -->
+                </div>
+            </div>     <!-- 레벨 -->
         </div>
     </div>
 </div>
@@ -238,6 +247,8 @@
             getHistory_rouletteList(tmp);
         }else if(tmp == "tab_mailbox"){
             getMailbox(tmp);
+        }else if(tmp == "tab_ggamggameEvent" || tmp == "tab_newrecord"){
+            newRecord();
          }
     }
 

@@ -324,7 +324,7 @@
          from (select idx, board_no, contents, writer_no, `status`, last_upd_date, depth,view_yn from rd_data.tb_member_fanboard where mem_no = #{mem_no} and board_no = #{board_no}) as a
           left outer join rd_data.tb_member_basic bas on a.writer_no = bas.mem_no
           left outer join rd_data.tb_member_withdrawal_bak bak on a.writer_no = bak.mem_no
-          order by writeDate desc
+          order by writeDate ASC
     </select>
 
     <sql id="storyCondition">
