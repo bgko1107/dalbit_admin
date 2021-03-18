@@ -1045,8 +1045,8 @@ var conReward = [
 var questReward = [
     new COMMON_CODE(null, 'questReward', '퀘스트보상목록')
     , new COMMON_CODE('1', '1', '달')
-    , new COMMON_CODE('2', '2', 'EXP')
-    , new COMMON_CODE('3', '3', '별')
+    , new COMMON_CODE('2', '2', '별')
+    , new COMMON_CODE('3', '3', 'EXP')
     , new COMMON_CODE('4', '4', '부스터 사용권')
     , new COMMON_CODE('5', '5', '룰렛 응모권')
 ];
@@ -1062,5 +1062,11 @@ var questName = [
     , new COMMON_CODE('6', '6', '신입 DJ 방송 10분 이상 듣기')
     , new COMMON_CODE('7', '7', '보이는 라디오 10분 이상 듣기')
     , new COMMON_CODE('8', '8', 'DJ에게 선물하기')
+    , new COMMON_CODE('9', '9', '출석체크 보너스 선물 받기')
+    , new COMMON_CODE('10', '10', '룰렛 돌리기')
+    , new COMMON_CODE('11', '11', '팬보드 남기기')
+    , new COMMON_CODE('12', '12', '스페셜 DJ 방송 10분 이상 듣기')
+    , new COMMON_CODE('13', '13', '클립 좋아요 누르기')
+    , new COMMON_CODE('14', '14', '틀립 댓글 남기기')
 ];
 
