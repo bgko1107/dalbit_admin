@@ -20,30 +20,30 @@
         call rd_admin.sp_admin_stat_member_join_withdrawal_adbrix(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
-    <select id="callStateAdbrixMemo" parameterType="com.dalbit.enter.vo.procedure.P_StatVo" resultType="com.dalbit.enter.vo.procedure.P_JoinAdbirxOutVo">
+    <select id="callStateMemo" parameterType="com.dalbit.enter.vo.procedure.P_StatVo" resultType="com.dalbit.enter.vo.procedure.P_NewJoin2OutDetailVo">
           select idx,the_date,memo,op_name,last_upd_date
-            from rd_admin.tb_admin_op_memo_adbrix
-           where the_date=#{startDate}
+            from rd_admin.tb_admin_op_memo_stat
+           where the_date=#{startDate} and `type` = #{type}
     </select>
 
-
-    <insert id="adbrixMemoAdd" parameterType="com.dalbit.enter.vo.procedure.P_StatVo">
+    <insert id="memoAdd" parameterType="com.dalbit.enter.vo.procedure.P_StatVo">
         /* Ent_NewJoin2.xml - adbrixMemoAdd */
-        insert into rd_admin.tb_admin_op_memo_adbrix (the_date, memo, op_name, last_upd_date)
-              values ( #{startDate}, #{memo}, #{op_name}, now());
+        insert into rd_admin.tb_admin_op_memo_stat (the_date, `type` , memo, op_name, last_upd_date)
+              values ( #{startDate},#{type}, #{memo}, #{op_name}, now());
     </insert>
 
-    <update id="adbrixMemoUpd" parameterType="com.dalbit.enter.vo.procedure.P_StatVo">
+    <update id="memoUpd" parameterType="com.dalbit.enter.vo.procedure.P_StatVo">
         /* Ent_NewJoin2.xml - adbrixMemoUpd */
-        update rd_admin.tb_admin_op_memo_adbrix
+        update rd_admin.tb_admin_op_memo_stat
            set memo = #{memo}
              , op_name = #{op_name}
              , last_upd_date = now()
          where idx = #{memoIdx}
     </update>
 
-    <delete id="adbrixMemoDel" parameterType="com.dalbit.enter.vo.procedure.P_StatVo">
+    <delete id="memoDel" parameterType="com.dalbit.enter.vo.procedure.P_StatVo">
         /* Ent_NewJoin2.xml - adbrixMemoDel */
-        delete from rd_admin.tb_admin_op_memo_adbrix where idx = #{memoIdx}
+        delete from rd_admin.tb_admin_op_memo_stat where idx = #{memoIdx}
     </delete>
+
 </mapper>

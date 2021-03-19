@@ -77,4 +77,10 @@ public class P_NewJoin2OutDetailVo {
     private int return_fcnt;
     private int return_ncnt;
 
+    private String idx;
+    private String memo;
+    private String op_name;
+    private String last_upd_date;
+    private int memoYn;
+
 }

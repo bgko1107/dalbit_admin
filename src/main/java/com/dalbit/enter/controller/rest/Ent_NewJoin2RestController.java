@@ -95,4 +95,22 @@ public class Ent_NewJoin2RestController {
         String result = ent_NewJoin2Service.adbrixMemoEdit(pStatVo);
         return result;
     }
+
+
+
+    @PostMapping("/info/state/memo")
+    public String stateMemo(P_StatVo pStatVo){
+        String result = ent_NewJoin2Service.callStateMemo(pStatVo);
+        return result;
+    }
+
+
+    @PostMapping("/info/state/memo/edit")
+    public String memoEdit(P_StatVo pStatVo){
+
+        String result = ent_NewJoin2Service.memoEdit(pStatVo);
+        return result;
+    }
+
+
 }

@@ -19,10 +19,17 @@ public interface Ent_NewJoin2Dao {
     @Transactional(readOnly = true)
     ArrayList<P_JoinAdbirxOutVo> callStateAdbrix(ProcedureVo procedureVo);
 
-    @Transactional(readOnly = true)
-    P_JoinAdbirxOutVo callStateAdbrixMemo(P_StatVo pStatVo);
+//    @Transactional(readOnly = true)
+//    P_JoinAdbirxOutVo callStateAdbrixMemo(P_StatVo pStatVo);
+//
+//    int adbrixMemoAdd(P_StatVo pStatVo);
+//    int adbrixMemoUpd(P_StatVo pStatVo);
+//    int adbrixMemoDel(P_StatVo pStatVo);
 
-    int adbrixMemoAdd(P_StatVo pStatVo);
-    int adbrixMemoUpd(P_StatVo pStatVo);
-    int adbrixMemoDel(P_StatVo pStatVo);
+    @Transactional(readOnly = true)
+    P_NewJoin2OutDetailVo callStateMemo(P_StatVo pStatVo);
+
+    int memoAdd(P_StatVo pStatVo);
+    int memoUpd(P_StatVo pStatVo);
+    int memoDel(P_StatVo pStatVo);
 }

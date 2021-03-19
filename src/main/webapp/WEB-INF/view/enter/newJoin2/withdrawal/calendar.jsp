@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="cfn" uri="/WEB-INF/tld/comFunction.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="principal" property="principal" />
+
+<style>
+    .xaxislayer-above {
+        cursor: pointer;
+        pointer-events: all;
+    }
+</style>
+
 <div class="wrapper">
     <div id="page-wrapper">
         <div class="col-md-12 no-padding">
@@ -20,6 +32,28 @@
 </div>
 <!-- /wrapper -->
 
+<!-- 메모 Modal -->
+<div class="modal fade" id="withdrawalMemoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px;display: table;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <lable>⊙ 메모</lable>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <textarea type="textarea" class="form-control" id="withdrawalMemo" name="withdrawalMemo" style="width: 100%; height: 150px;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이건준|양대기|박진|박희천|', principal.getUserInfo().getName())}">
+                    <button type="button" class="btn btn-default" id="bt_withdrawalMemoDel" onclick="withdrawalMemoAdd('delete');"><i class="fa fa-times-circle"></i> 삭제</button>
+                    <button type="button" class="btn btn-default" id="bt_withdrawalMemoAdd" onclick="withdrawalMemoAdd('insert');"><i class="fa fa-times-circle"></i> 등록하기</button>
+                    <button type="button" class="btn btn-default" id="bt_withdrawalMemoUpd" onclick="withdrawalMemoAdd('update');"><i class="fa fa-times-circle"></i> 수정하기</button>
+                </c:if>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal 끝 -->
 
 <!-- Javascript -->
 <script src="/template/js/plugins/fullcalendar/fullcalendar.js"></script>
@@ -174,13 +208,18 @@
             response.data.detailList[i].month = response.data.detailList[i].the_date.substr(5, 2);
             month = response.data.detailList[i].month;
 
+            var tmp_memoYn = "";
+            if(response.data.detailList[i].memoYn == 1){
+                tmp_memoYn = ' <span>🚩</span>';
+            }
+
             toDay = week[moment(response.data.detailList[i].the_date.replace(/-/gi, ".")).add('days', 0).day()];
             if (toDay == "토") {
-                toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>';
+                toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
             } else if (toDay == "일") {
-                toDay = '<span class="_fontColor" data-fontColor="red" style="color:red">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>';
+                toDay = '<span class="_fontColor" data-fontColor="red" style="color:red">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
             } else {
-                toDay = response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")";
+                toDay = response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + tmp_memoYn;
             }
             response.data.detailList[i].date = toDay;
 
@@ -262,13 +301,18 @@
             response.data.detailList[i].month = response.data.detailList[i].the_date.substr(5, 2);
             month = response.data.detailList[i].month;
 
+            var tmp_memoYn = "";
+            if(response.data.detailList[i].memoYn == 1){
+                tmp_memoYn = ' <span>🚩</span>';
+            }
+
             toDay = week[moment(response.data.detailList[i].the_date.replace(/-/gi, ".")).add('days', 0).day()];
             if (toDay == "토") {
-                toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>';
+                toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
             } else if (toDay == "일") {
-                toDay = '<span class="_fontColor" data-fontColor="red" style="color:red">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>';
+                toDay = '<span class="_fontColor" data-fontColor="red" style="color:red">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
             } else {
-                toDay = response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")";
+                toDay = response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + tmp_memoYn;
             }
             response.data.detailList[i].date = toDay;
 
@@ -333,8 +377,10 @@
             // width: 1300,
             yaxis: {
                 range: [0, 100],
-                autorange: true
+                autorange: true,
+                fixedrange: true
             },
+            xaxis : {fixedrange: true},
             legend: {
                 y: 0.5,
                 traceorder: 'reversed',
@@ -344,10 +390,74 @@
             }
         };
 
-        Plotly.newPlot('lineArea', data, layout);
+        // Plotly.newPlot('lineArea', data, layout);
         /* 라인차트 [end] */
+
+        var myPlot = document.getElementById('lineArea');
+        Plotly.newPlot(myPlot, data, layout);
+        myPlot.on('plotly_afterplot', function(){
+            Plotly.d3.selectAll(".xaxislayer-above").selectAll('text')
+                .on("click", function(d) {
+                    try{
+                        withdrawalMemo(year + "." +  $(this).text().substr(0,5));
+                    } catch (e){
+                    }
+                });
+        });
+
         setSummary(response.data);
 
+    }
+
+    function withdrawalMemo(param){
+        memoDate = param;
+        var data = {
+            startDate: param
+            , type : "withdrawal"
+        };
+        util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/memo", data, fn_withdrawalMemo_success);
+    }
+
+    function fn_withdrawalMemo_success(dst_id,response){
+        $("#withdrawalMemoModal").modal('show');
+        if(!common.isEmpty(response.data)){
+            memoIdx = common.replaceHtml(response.data.idx);
+            $("#withdrawalMemo").val(response.data.memo);
+            $("#bt_withdrawalMemoAdd").hide();
+            $("#bt_withdrawalMemoUpd").show();
+        }else{
+            $("#withdrawalMemo").val("");
+            $("#bt_withdrawalMemoAdd").show();
+            $("#bt_withdrawalMemoUpd").hide();
+        }
+    }
+
+    function withdrawalMemoAdd(gubun){
+
+        var message = "";
+        if(gubun=="delete") {
+            message = "등록된 메모를 삭제하시겠습니까?";
+        }else if(gubun=="insert") {
+            message = "메모를 등록하시겠습니까?";
+        }else if(gubun=="update"){
+            message = "등록된 메모를 수정하시겠습니까?";
+        }
+
+        if(confirm(message)){
+            var data = {
+                memoIdx: memoIdx
+                , gubun: gubun
+                , memo : common.replaceHtml($("#withdrawalMemo").val())
+                , startDate : memoDate
+                , type : "withdrawal"
+            };
+            util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/memo/edit", data, fn_withdrawalMemoEdit_success);
+        }
+    }
+
+    function fn_withdrawalMemoEdit_success(dst_id, response){
+        $("#withdrawalMemoModal").modal('hide');
+        renderCalendar();
     }
 
 </script>

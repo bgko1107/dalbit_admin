@@ -21,6 +21,7 @@ public class P_StatVo {
     private String gubun;
     private String memo;
     private String op_name;
+    private String type;
 
 
     private String beforeStartDate;

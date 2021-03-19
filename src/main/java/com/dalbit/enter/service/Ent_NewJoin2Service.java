@@ -145,23 +145,45 @@ public class Ent_NewJoin2Service {
      * @return
      */
     public String callStateAdbrixMemo(P_StatVo pStatVo){
-        P_JoinAdbirxOutVo outVo =  ent_NewJoin2Dao.callStateAdbrixMemo(pStatVo);
-
+        pStatVo.setType("adbrix");
+        P_NewJoin2OutDetailVo outVo =  ent_NewJoin2Dao.callStateMemo(pStatVo);
         return gsonUtil.toJsonAdm(new JsonOutputVo(Status.조회, outVo));
     }
 
-
     public String adbrixMemoEdit(P_StatVo pStatVo){
         pStatVo.setOp_name(MemberVo.getMyMemNo());
+        pStatVo.setType("adbrix");
 
         if(pStatVo.getGubun().equals("insert")){
-            ent_NewJoin2Dao.adbrixMemoAdd(pStatVo);
+            ent_NewJoin2Dao.memoAdd(pStatVo);
         }else if(pStatVo.getGubun().equals("update")){
-            ent_NewJoin2Dao.adbrixMemoUpd(pStatVo);
+            ent_NewJoin2Dao.memoUpd(pStatVo);
         }else if(pStatVo.getGubun().equals("delete")){
-            ent_NewJoin2Dao.adbrixMemoDel(pStatVo);
+            ent_NewJoin2Dao.memoDel(pStatVo);
         }
+        return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+    }
 
+
+    /**
+     * 가입/탈퇴 메모
+     * @param pStatVo
+     * @return
+     */
+    public String callStateMemo(P_StatVo pStatVo){
+        P_NewJoin2OutDetailVo outVo =  ent_NewJoin2Dao.callStateMemo(pStatVo);
+        return gsonUtil.toJsonAdm(new JsonOutputVo(Status.조회, outVo));
+    }
+
+    public String memoEdit(P_StatVo pStatVo){
+        pStatVo.setOp_name(MemberVo.getMyMemNo());
+        if(pStatVo.getGubun().equals("insert")){
+            ent_NewJoin2Dao.memoAdd(pStatVo);
+        }else if(pStatVo.getGubun().equals("update")){
+            ent_NewJoin2Dao.memoUpd(pStatVo);
+        }else if(pStatVo.getGubun().equals("delete")){
+            ent_NewJoin2Dao.memoDel(pStatVo);
+        }
         return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
     }
 

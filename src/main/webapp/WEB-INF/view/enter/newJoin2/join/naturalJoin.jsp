@@ -85,8 +85,7 @@
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <script type="text/javascript">
 
-    var memoIdx;
-    var memoDate;
+
     function adbrixAddClick(){
         $("#txt_jsonData").val('');
         $("#div_gridData").empty();

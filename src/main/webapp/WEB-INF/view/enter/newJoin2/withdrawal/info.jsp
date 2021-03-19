@@ -92,6 +92,9 @@
 
     // setTimeDate(dateTime);
 
+    var memoIdx;
+    var memoDate;
+
     var slctType = 1;
 
     var tabType = <%=in_tabType%>;

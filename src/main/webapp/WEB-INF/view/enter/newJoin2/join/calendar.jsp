@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="cfn" uri="/WEB-INF/tld/comFunction.tld" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="principal" property="principal" />
+
+<style>
+.xaxislayer-above {
+    cursor: pointer;
+    pointer-events: all;
+}
+</style>
+
 <div class="wrapper">
     <div id="page-wrapper">
         <div class="col-md-12 no-padding">
@@ -19,6 +31,30 @@
     </div>
 </div>
 <!-- /wrapper -->
+
+
+<!-- 메모 Modal -->
+<div class="modal fade" id="joinMemoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px;display: table;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <lable>⊙ 메모</lable>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <textarea type="textarea" class="form-control" id="joinMemo" name="joinMemo" style="width: 100%; height: 150px;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <c:if test="${fn:contains('|이재은|이형원|고병권|이재호|양효진|이건준|양대기|박진|박희천|', principal.getUserInfo().getName())}">
+                    <button type="button" class="btn btn-default" id="bt_joinMemoDel" onclick="joinMemoAdd('delete');"><i class="fa fa-times-circle"></i> 삭제</button>
+                    <button type="button" class="btn btn-default" id="bt_joinMemoAdd" onclick="joinMemoAdd('insert');"><i class="fa fa-times-circle"></i> 등록하기</button>
+                    <button type="button" class="btn btn-default" id="bt_joinMemoUpd" onclick="joinMemoAdd('update');"><i class="fa fa-times-circle"></i> 수정하기</button>
+                </c:if>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal 끝 -->
 
 
 <!-- Javascript -->
@@ -185,14 +221,20 @@
             response.data.detailList[i].month = response.data.detailList[i].the_date.substr(5, 2);
             month = response.data.detailList[i].month;
 
+            var tmp_memoYn = "";
+            if(response.data.detailList[i].memoYn == 1){
+                tmp_memoYn = ' <span>🚩</span>';
+            }
+
             toDay = week[moment(response.data.detailList[i].the_date.replace(/-/gi, ".")).add('days', 0).day()];
             if (toDay == "토") {
-                toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>';
+                toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
             } else if (toDay == "일") {
-                toDay = '<span class="_fontColor" data-fontColor="red" style="color:red">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>';
+                toDay = '<span class="_fontColor" data-fontColor="red" style="color:red">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
             } else {
-                toDay = response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")";
+                toDay = response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + tmp_memoYn;
             }
+
             response.data.detailList[i].date = toDay;
 
             day.unshift(toDay);
@@ -225,8 +267,10 @@
             // width: 1300,
             yaxis: {
                 range: [0, 100],
-                autorange: true
+                autorange: true,
+                fixedrange: true
             },
+            xaxis : {fixedrange: true},
             barmode: 'stack'
         };
 
@@ -276,14 +320,20 @@
                 response.data.detailList[i].month = response.data.detailList[i].the_date.substr(5, 2);
                 month = response.data.detailList[i].month;
 
+                var tmp_memoYn = "";
+                if(response.data.detailList[i].memoYn == 1){
+                    tmp_memoYn = ' <span>🚩</span>';
+                }
+
                 toDay = week[moment(response.data.detailList[i].the_date.replace(/-/gi, ".")).add('days', 0).day()];
                 if (toDay == "토") {
-                    toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>';
+                    toDay = '<span class="_fontColor" data-fontColor="blue" style="color:blue">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
                 } else if (toDay == "일") {
-                    toDay = '<span class="_fontColor" data-fontColor="red" style="color:red">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>';
+                    toDay = '<span class="_fontColor" data-fontColor="red" style="color:red">' + response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + '</span>' + tmp_memoYn;
                 } else {
-                    toDay = response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")";
+                    toDay = response.data.detailList[i].the_date.substr(5).replace(/-/gi, ".") + "(" + toDay + ")" + tmp_memoYn;
                 }
+
                 response.data.detailList[i].date = toDay;
 
                 day.unshift(toDay);
@@ -395,8 +445,10 @@
                 // width: 1300,
                 yaxis: {
                     range: [0, 100],
-                    autorange: true
+                    autorange: true,
+                    fixedrange: true
                 },
+                xaxis : {fixedrange: true},
                 legend: {
                     y: 0.5,
                     traceorder: 'reversed',
@@ -406,13 +458,77 @@
                 }
             };
 
-            Plotly.newPlot('lineArea', data, layout);
+            // Plotly.newPlot('lineArea', data, layout);
             /* 라인차트 [end] */
+
+            var myPlot = document.getElementById('lineArea');
+            Plotly.newPlot(myPlot, data, layout);
+            myPlot.on('plotly_afterplot', function(){
+                Plotly.d3.selectAll(".xaxislayer-above").selectAll('text')
+                    .on("click", function(d) {
+                        try{
+                            joinMemo(year + "." +  $(this).text().substr(0,5));
+                        } catch (e){
+                        }
+                    });
+            });
+
 
             setSummary(response.data);
         }else{
             $("#lineArea").empty();
         }
+    }
+
+    function joinMemo(param){
+        memoDate = param;
+        var data = {
+            startDate: param
+            , type : "join"
+        };
+        util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/memo", data, fn_joinMemo_success);
+    }
+
+    function fn_joinMemo_success(dst_id,response){
+        $("#joinMemoModal").modal('show');
+        if(!common.isEmpty(response.data)){
+            memoIdx = common.replaceHtml(response.data.idx);
+            $("#joinMemo").val(response.data.memo);
+            $("#bt_joinMemoAdd").hide();
+            $("#bt_joinMemoUpd").show();
+        }else{
+            $("#joinMemo").val("");
+            $("#bt_joinMemoAdd").show();
+            $("#bt_joinMemoUpd").hide();
+        }
+    }
+
+    function joinMemoAdd(gubun){
+
+        var message = "";
+        if(gubun=="delete") {
+            message = "등록된 메모를 삭제하시겠습니까?";
+        }else if(gubun=="insert") {
+            message = "메모를 등록하시겠습니까?";
+        }else if(gubun=="update"){
+            message = "등록된 메모를 수정하시겠습니까?";
+        }
+
+        if(confirm(message)){
+            var data = {
+                memoIdx: memoIdx
+                , gubun: gubun
+                , memo : common.replaceHtml($("#joinMemo").val())
+                , startDate : memoDate
+                , type : "join"
+            };
+            util.getAjaxData("memo", "/rest/enter/newjoin2/info/state/memo/edit", data, fn_joinMemoEdit_success);
+        }
+    }
+
+    function fn_joinMemoEdit_success(dst_id, response){
+        $("#joinMemoModal").modal('hide');
+        renderCalendar();
     }
 
 </script>
@@ -422,8 +538,8 @@
     <div class="font-bold" style="color: black;">가입 누적 : {{addComma accum_total_join_cnt}}</div>
     <div class="{{upAndDownClass total_inc_join_cnt}}" style="color: black;">전월 대비 :
         <span {{#dalbit_if total_inc_join_cnt '>' 0 }} style="color: red" {{/dalbit_if}}
-              {{#dalbit_if total_inc_join_cnt '<' 0 }} style="color: blue" {{/dalbit_if}} >
-            <i class="fa {{upAndDownIcon total_inc_join_cnt}}"></i> <span>{{addComma total_inc_join_cnt}}</span>
+        {{#dalbit_if total_inc_join_cnt '<' 0 }} style="color: blue" {{/dalbit_if}} >
+        <i class="fa {{upAndDownIcon total_inc_join_cnt}}"></i> <span>{{addComma total_inc_join_cnt}}</span>
         </span>
     </div>
     <div class="font-bold" style="color: black;">탈퇴 총계 : {{addComma total_out_cnt}} <br/> (탈퇴 비율 : {{average total_out_cnt total_join_cnt 0}}%)</div>
@@ -435,30 +551,30 @@
             <col width="33%"/><col width="33%"/><col width="33%"/>
         </colgroup>
         <tbody>
-            <tr>
-                <th>구분</th>
-                <th>가입수</th>
-                <th>탈퇴수</th>
-            </tr>
-            <tr class="font-bold" style="color: #ff5600">
-                <td>총합</td>
-                <td>{{addComma sum_total_join_cnt}}</td>
-                <td>{{addComma sum_total_out_cnt}}</td>
-            </tr>
-            <tr>
-                <td>일평균</td>
-                <td>{{division befor_accum_total_join_cnt cnt 0}}</td>
-                <td>{{division befor_accum_total_out_cnt cnt 0}}</td>
-            </tr>
-            <tr>
-                <td>전월 대비</td>
-                <td class="{{upAndDownClass sum_total_inc_join_cnt}}"><i class="fa {{upAndDownIcon sum_total_inc_join_cnt}}"></i> <span>{{addComma sum_total_inc_join_cnt}}</span></td>
-                <td class="{{upAndDownClass sum_total_inc_out_cnt}}"><i class="fa {{upAndDownIcon sum_total_inc_out_cnt}}"></i> <span>{{addComma sum_total_inc_out_cnt}}</span></td>
-            </tr>
-            <tr>
-                <td colspan="2">가입 대비 탈퇴 비율</td>
-                <td>{{average sum_total_out_cnt sum_total_join_cnt 0}}%</td>
-            </tr>
+        <tr>
+            <th>구분</th>
+            <th>가입수</th>
+            <th>탈퇴수</th>
+        </tr>
+        <tr class="font-bold" style="color: #ff5600">
+            <td>총합</td>
+            <td>{{addComma sum_total_join_cnt}}</td>
+            <td>{{addComma sum_total_out_cnt}}</td>
+        </tr>
+        <tr>
+            <td>일평균</td>
+            <td>{{division befor_accum_total_join_cnt cnt 0}}</td>
+            <td>{{division befor_accum_total_out_cnt cnt 0}}</td>
+        </tr>
+        <tr>
+            <td>전월 대비</td>
+            <td class="{{upAndDownClass sum_total_inc_join_cnt}}"><i class="fa {{upAndDownIcon sum_total_inc_join_cnt}}"></i> <span>{{addComma sum_total_inc_join_cnt}}</span></td>
+            <td class="{{upAndDownClass sum_total_inc_out_cnt}}"><i class="fa {{upAndDownIcon sum_total_inc_out_cnt}}"></i> <span>{{addComma sum_total_inc_out_cnt}}</span></td>
+        </tr>
+        <tr>
+            <td colspan="2">가입 대비 탈퇴 비율</td>
+            <td>{{average sum_total_out_cnt sum_total_join_cnt 0}}%</td>
+        </tr>
         </tbody>
     </table>
 </script>
