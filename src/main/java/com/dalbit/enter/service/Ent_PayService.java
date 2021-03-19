@@ -955,9 +955,10 @@ public class Ent_PayService {
                 ,"선수금"
                 ,"미지급"
                 ,"매출액"
+                ,"충당부채"
         };
         int[] headerWidths = {3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000
-                , 3000};
+                , 3000, 3000};
 
         List<Object[]> bodies = new ArrayList<>();
 
@@ -974,13 +975,29 @@ public class Ent_PayService {
             hm.put("mem9",  totalInfo.getFirstAmt());
             hm.put("mem10",  totalInfo.getUnpaidAmt());
             hm.put("mem11",  totalInfo.getSalesAmt());
+            hm.put("mem12",  totalInfo.getFreeSalesAmt());
             bodies.add(hm.values().toArray());
         }
         for(int i = 0; i < list.size(); i++){
+            String slctType = "";
+            if(list.get(i).getSlctType()== 1){
+                slctType = "방송-음성";
+            }else if(list.get(i).getSlctType()== 2){
+                slctType = "방송-영상";
+            }else if(list.get(i).getSlctType()== 3){
+                slctType = "부스터-음성";
+            }else if(list.get(i).getSlctType()== 4){
+                slctType = "부스터-영상";
+            }else if(list.get(i).getSlctType()== 5){
+                slctType = "클립";
+            }else if(list.get(i).getSlctType()== 6){
+                slctType = "우체통";
+            }
+
             HashMap hm = new LinkedHashMap();
             hm.put("mem1",  list.get(i).getMem_no());
             hm.put("mem2",  list.get(i).getNickName());
-            hm.put("mem3",  (list.get(i).getSlctType() == 1 ? "방송" : (list.get(i).getSlctType() == 2 ) ? "클립" : "우체통"));
+            hm.put("mem3",  slctType);
             hm.put("mem4",  (list.get(i).getMemType().equals("0")) ? "일반" : "스페셜");
             hm.put("mem5",  list.get(i).getPayDal());
             hm.put("mem6",  list.get(i).getFreeDal());
@@ -989,6 +1006,7 @@ public class Ent_PayService {
             hm.put("mem9",  list.get(i).getFirstAmt());
             hm.put("mem10",  list.get(i).getUnpaidAmt());
             hm.put("mem11",  list.get(i).getSalesAmt());
+            hm.put("mem12",  list.get(i).getFreeSalesAmt());
             bodies.add(hm.values().toArray());
         }
         ExcelVo vo = new ExcelVo(headers, headerWidths, bodies);
