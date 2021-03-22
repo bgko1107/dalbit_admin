@@ -18,5 +18,10 @@ public class MailboxController {
         return "mailbox/mailbox/info";
     }
 
+    @GetMapping("/mailbox/video/info")
+    public String videoInfo() {
+        return "mailbox/video/info";
+    }
+
 
 }
