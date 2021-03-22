@@ -225,6 +225,7 @@
         formData.append("searchType", -1);
         formData.append("searchText", tmp_searchText);
         formData.append("memWithdrawal", memWithdrawal);
+        formData.append("newSearchType", $("#searchMember").val());
         util.excelDownload($(this), "/rest/member/member/listExcel", formData, fn_success_excel, fn_fail_excel)
     });
 
