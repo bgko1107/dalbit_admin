@@ -681,7 +681,7 @@ public class Pay_CancelService {
         param.put("order_tr_dt", SecurityUtil.null2void(trx_dt, ""));
         param.put("order_tr_no", SecurityUtil.null2void(payCancelSimplePayVo.getTradeid(), ""));
         param.put("amt", SecurityUtil.null2void(payCancelSimplePayVo.getPrdtprice(), ""));
-        param.put("proc_dv", "S"); //취소처리구분 C:쿠콘자체처리, S:제휴사자체처리
+        param.put("proc_dv", "C"); //취소처리구분 C:쿠콘자체처리, S:제휴사자체처리
         String EV = SecurityUtil.EncryptAesBase64(trx_dt + trx_tm + param.toString(), CRYPT_KEY, true);
         String VV = SecurityUtil.getHmacSha256(param.toString(), CRYPT_KEY, true);
         String url = DalbitUtil.getProperty("simple.pay.url")+ "/" + API_ID + "?ID=" + ID
