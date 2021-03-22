@@ -1054,6 +1054,7 @@ var questReward = [
 
 var questName = [
     new COMMON_CODE(null, 'questName', '퀘스트명')
+    , new COMMON_CODE('-1', '-1', '전체')
     , new COMMON_CODE('1', '1', '팬등록 하기')
     , new COMMON_CODE('2', '2', '우체통으로 메시지 보내기')
     , new COMMON_CODE('3', '3', 'DJ 방송 1분 이상 듣고 좋아요 누르기')
@@ -1067,6 +1068,6 @@ var questName = [
     , new COMMON_CODE('11', '11', '팬보드 남기기')
     , new COMMON_CODE('12', '12', '스페셜 DJ 방송 10분 이상 듣기')
     , new COMMON_CODE('13', '13', '클립 좋아요 누르기')
-    , new COMMON_CODE('14', '14', '틀립 댓글 남기기')
+    , new COMMON_CODE('14', '14', '클립 댓글 남기기')
 ];
 

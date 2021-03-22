@@ -22,4 +22,34 @@ var questDataTableSource = {
                 }},
         ]
     },
+
+    'questMember': {
+        'url': '/rest/event/quest/member'
+        , 'columns': [
+            {'title': '프로필사진', 'data': 'imageProfile', 'render': function(data, type, row) {
+                    return '<img class="thumbnail fullSize_background" src="'+ common.profileImage(PHOTO_SERVER_URL,data,row.memSex) +'" width="65px" height="65px" />';
+                }},
+            {'title': '회원번호', 'data': 'memNo', 'render': function(data, type, row) {
+                    return util.memNoLink(data, data);
+                }},
+            {'title': 'UserID', 'data': 'memUserid', 'render': function(data, type, row) {
+                    return data;
+                }},
+            {'title': '닉네임', 'data': 'memNick', 'render': function(data, type, row) {
+                    return data;
+                }},
+            {'title': '퀘스트', 'data': 'questName', 'render': function(data, type, row) {
+                    return data;
+                }},
+            {'title': '참여자일시', 'data': 'lastUpdDate', 'render': function(data, type, row) {
+                    return data;
+                }},
+            {'title': '달', 'data': 'rewardDal', 'render': function(data, type, row) {
+                    return data;
+                }},
+            {'title': '경험치', 'data': 'rewardExp', 'render': function(data, type, row) {
+                    return data;
+                }},
+        ]
+    },
 };

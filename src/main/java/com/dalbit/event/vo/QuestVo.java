@@ -23,6 +23,7 @@ public class QuestVo extends SearchVo {
     private int rewardCnt;
     private int viewYn;
     private String imageReward;
+    private String imagePopup;
     private String regDate;
     private String lastUpdDate;
     private int rewardType;
@@ -37,6 +38,7 @@ public class QuestVo extends SearchVo {
     private String goalCntList;
     private String rewardTypeCntList;
     private String imageRewardList;
+    private String imagePopupList;
     private String viewYnList;
     private String quest_type;
 
@@ -46,5 +48,25 @@ public class QuestVo extends SearchVo {
     private String rewardBoosterList;
     private String rewardCouponList;
 
+
+    //memberList output
+    private int idx;
+    private String memNo;
+    private String memNick;
+    private String memId;
+    private String memUserid;
+    private String memPhone;
+    private String memSex;
+    private String memBirthYear;
+    private String questName;
+    private String imageProfile;
+
+
+    // summary
+    private int totalDal;
+    private int totalExp;
+    private int totalByeol;
+    private int totalBooster;
+    private int totalCoupon;
 
 }

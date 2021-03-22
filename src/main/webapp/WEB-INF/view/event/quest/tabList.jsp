@@ -9,7 +9,7 @@
 <div class="tab-content no-padding">
     <div class="tab-pane fade in active" id="quest"><jsp:include page="quest.jsp"/></div>
     <div class="tab-pane fade" id="questStat"><jsp:include page="questStat.jsp"/></div>
-    <%--<div class="tab-pane fade" id="questMember"><jsp:include page="questMember.jsp"/></div>--%>
+    <div class="tab-pane fade" id="questMember"><jsp:include page="questMember.jsp"/></div>
 </div>
 
 
@@ -19,6 +19,7 @@
         tabId = $(this).prop('id');
 
         $("#div_searchForm").hide();
+        $("#searchMemberArea").empty();
 
         if(tabId == "tab_newrecord"){
             $('#bt_search').click();
@@ -28,6 +29,7 @@
             dateType();
         }else if(tabId == "tab_questMember"){
             $("#div_searchForm").show();
+            $("#searchMemberArea").html(util.getCommonCodeSelect(1, searchMember));
             slctType = 1;
             dateType();
         }
@@ -39,7 +41,7 @@
             questList();
         }else if(tabId == "tab_questStat" ){
             questStat();
-        }else if(tabId == "tab_questStat" ){
+        }else if(tabId == "tab_questMember" ){
             questMember();
         }
     });

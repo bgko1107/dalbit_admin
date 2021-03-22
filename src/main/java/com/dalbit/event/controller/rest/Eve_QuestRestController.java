@@ -47,4 +47,13 @@ public class Eve_QuestRestController {
         return result;
     }
 
+    /**
+     * 퀘스트 이벤트 참여자 목록
+     */
+    @PostMapping("member")
+    public String member(QuestVo questVo) {
+        String result = eve_QuestService.callMember(questVo);
+        return result;
+    }
+
 }

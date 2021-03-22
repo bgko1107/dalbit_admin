@@ -31,10 +31,11 @@
                         <col width="4%"/>
                         <col width="9%"/>
                         <col width="4%"/>
-                        <col width="4%"/>
+                        <col width="3%"/>
                         <col width="7%"/>
-                        <col width="20%"/>
-                        <col width="5%"/>
+                        <col width="10%"/>
+                        <col width="10%"/>
+                        <col width="2%"/>
                     </colgroup>
                     <thead>
                     <tr>
@@ -46,6 +47,7 @@
                         <th>한달목표</th>
                         <th>보상</th>
                         <th>보상이미지</th>
+                        <th>팝업이미지</th>
                         <th>노출여부</th>
                     </tr>
                     </thead>
@@ -85,17 +87,17 @@
 
     var questIdx = 0;
 
-    var dtList_record;
+    var dtList_quest;
     function questList() {
 
         $("#detailInfo").hide();
         var dtList_info_data = function (data) {
         };
-        dtList_record = new DalbitDataTable($("#table_quest_list"), dtList_info_data, questDataTableSource.questList);
-        dtList_record.useCheckBox(true);
-        dtList_record.useIndex(true);
-        dtList_record.setPageLength(50);
-        dtList_record.createDataTable();
+        dtList_quest = new DalbitDataTable($("#table_quest_list"), dtList_info_data, questDataTableSource.questList);
+        dtList_quest.useCheckBox(true);
+        dtList_quest.useIndex(true);
+        dtList_quest.setPageLength(50);
+        dtList_quest.createDataTable();
     }
 
     function questAdd(){
@@ -116,7 +118,7 @@
         recordFromObjectEvent();
     }
     function questDetail(idx){
-        var data = dtList_record.getDataRow(idx);
+        var data = dtList_quest.getDataRow(idx);
         util.getAjaxData("quest", "/rest/event/quest/detail", data, fn_questDetail_success);
     }
 
@@ -171,6 +173,7 @@
         var rewardBoosterList = "";
         var rewardCouponList = "";
         var imageRewardList = "";
+        var imagePopupList = "";
         var viewYnList = "";
 
         var isValid = true;
@@ -192,7 +195,7 @@
             isValid = false;
             return false;
         }
-        if(common.isEmpty($("#txt_imageReward").val())){
+        if(common.isEmpty($("#imageReward").val())){
             alert('보너스 선물 이미지를 입력해주세요.');
             isValid = false;
             return false;
@@ -204,6 +207,8 @@
             questNameList += questNameList == "" ? $(this).find("#questName option:checked").text() : "|" + $(this).find("#questName option:checked").text();
             questNoList += questNoList == "" ? $(this).find('#questName').val() : "|" + $(this).find('#questName').val();
             questOrderList += questDetailIdx == 1 ? questDetailIdx : "|" + questDetailIdx;
+
+
             var questDesc = $(this).find('#questDesc').val();
             if(common.isEmpty(questDesc)){
                 alert('퀘스트 상세 내용을 입력해주세요.');
@@ -247,6 +252,14 @@
                 return false;
             }
             imageRewardList += imageRewardList == "" ? $(this).find('#imageReward').val() : "|" + $(this).find('#imageReward').val();
+
+            var imagePopup = $(this).find('#imagePopup').val();
+            if(common.isEmpty(imagePopup)){
+                alert('팝업 이미지를 입력해 주세요.');
+                isValid = false;
+                return false;
+            }
+            imagePopupList += imagePopupList == "" ? $(this).find('#imagePopup').val() : "|" + $(this).find('#imagePopup').val();
 
             viewYnList += $(this).find(".onoffswitch-checkbox").prop('checked') ?  "|" + 1 :  "|" + 0;
 
@@ -298,7 +311,7 @@
                 , rewardExp : rewardExp
                 , rewardBooster : rewardBooster
                 , rewardCoupon : rewardCoupon
-                , imageReward : $("#txt_imageReward").val()
+                , imageReward : $("#imageReward").val()
                 , goalCnt : questDetailIdx          // 이벤트 수
 
                 // 목록
@@ -314,6 +327,7 @@
                 , rewardBoosterList : rewardBoosterList.substr(1)
                 , rewardCouponList : rewardCouponList.substr(1)
                 , imageRewardList : imageRewardList
+                , imagePopupList : imagePopupList
                 , viewYnList : viewYnList.substr(1)
             };
 
@@ -334,7 +348,7 @@
 
     function questDel() {
 
-        var checkDatas = dtList_record.getCheckedData();
+        var checkDatas = dtList_quest.getCheckedData();
 
         if(checkDatas.length == 0){
             alert('삭제할 퀘스트 이벤트를 Check 하세요.');
@@ -432,18 +446,13 @@
     };
 
     function getImg(gubun){
-        console.log("------------------------------------------");
-        console.log(gubun);
         $("#questModal").modal('show');
         var imageUrl = "";
         if(gubun == 1){
-            imageUrl = $("#txt_imageReward").val();
+            imageUrl = $("#imageReward").val();
         }else{
             imageUrl = gubun;
         }
-
-        console.log("------------------------------------------");
-        console.log(imageUrl);
 
         $("#imageViewer").attr('src',imageUrl);
 
@@ -453,6 +462,11 @@
         $(".rewardImageUrlPreviewButton").on('click', function(){
             var parents = $(this).parents("tr").attr('id');
             getImg($("#"+parents+"").find("#imageReward").val());
+        });
+
+        $(".rewardImagePopupUrlPreviewButton").on('click', function(){
+            var parents = $(this).parents("tr").attr('id');
+            getImg($("#"+parents+"").find("#imagePopup").val());
         });
 
         $('.monthDate').datepicker({
@@ -497,12 +511,12 @@
             <th>보너스 선물</th>
             <td>
                 {{#each this.rewardTypeList as |data|}}
-                    {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardTypeId}}}
-                    <input type="text" class="form-control" id="{{rewardTypeCntId}}" style="width: 100px;" value="{{rewardTypeCnt}}">
+                {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardTypeId}}}
+                <input type="text" class="form-control" id="{{rewardTypeCntId}}" style="width: 100px;" value="{{rewardTypeCnt}}">
                 {{/each}}
             </td>
             <td>
-                <input type="text" class="form-control pull-left" id="txt_imageReward" style="width: 80%;" value="{{imageReward}}">
+                <input type="text" class="form-control pull-left" id="imageReward" style="width: 80%;" value="{{imageReward}}">
                 <input type="button" class="pull-right btn-default" value="미리보기" onclick="getImg(1);" style="margin-top: 3px;">
             </td>
             <th>노출여부</th>
@@ -531,20 +545,24 @@
             <button type="button" class="btn btn-danger _up"><i class="toggle-icon fa fa-angle-up"></i></button>
         </td>
         <td>
-            {{{getCommonCodeSelect 0 'questName' 'N' 'questName'}}}
+            {{{getCommonCodeSelect 0 'questName' 'Y' 'questName'}}}
         </td>
-        <td><input type="text" class="form-control" id="questNameDetail" style="width: 100%;" value="{{questNameDetail}}"></td>
-        <td><input type="text" class="form-control" id="todayMax" style="width: 100%;" value="{{todayMax}}"></td>
-        <td><input type="text" class="form-control" id="monthMax" style="width: 100%;" value="{{monthMax}}"></td>
+        <td><input type="text" class="form-control" id="questDesc" style="width: 100%;" value="{{questDesc}}"></td>
+        <td><input type="text" class="form-control" id="dayCnt" style="width: 100%;" value="{{dayCnt}}"></td>
+        <td><input type="text" class="form-control" id="goalCnt" style="width: 100%;" value="{{goalCnt}}"></td>
         <td>
-            {{{getCommonCodeSelect 0 'questReward' 'N' 'selQuestReward'}}}
-            <input type="text" class="form-control" id="txtQuestReward" style="width: 55px;" value="{{txtQuestReward}}">
+            {{{getCommonCodeSelect rewardType 'questReward' 'N' 'selQuestReward'}}}
+            <input type="text" class="form-control" id="rewardTypeCnt" style="width: 55px;" value="{{rewardTypeCnt}}">
         </td>
         <td>
-            <input type="text" class="form-control pull-left" id="txt_imageUrl" style="width: 80%;" value="{{image_url}}">
+            <input type="text" class="form-control pull-left" id="imageReward" style="width: 70%;" value="{{imageReward}}">
             <input type="button" class="pull-right btn-default rewardImageUrlPreviewButton" value="미리보기" style="margin-top: 3px;">
         </td>
-        <td>{{{getOnOffSwitch viewYn 'viewYn'}}}</td>
+        <td>
+            <input type="text" class="form-control pull-left" id="imagePopup" style="width: 70%;" value="{{imagePopup}}">
+            <input type="button" class="pull-right btn-default rewardImagePopupUrlPreviewButton" value="미리보기" style="margin-top: 3px;">
+        </td>
+        <td>{{{getOnOffSwitch viewYn orderNo}}}</td>
     </tr>
 </script>
 
@@ -559,7 +577,7 @@
             <button type="button" class="btn btn-danger _up"><i class="toggle-icon fa fa-angle-up"></i></button>
         </td>
         <td>
-            {{{getCommonCodeSelect questNo 'questName' 'N' 'questName'}}}
+            {{{getCommonCodeSelect questNo 'questName' 'Y' 'questName'}}}
         </td>
         <td><input type="text" class="form-control" id="questDesc" style="width: 100%;" value="{{questDesc}}"></td>
         <td><input type="text" class="form-control" id="dayCnt" style="width: 100%;" value="{{dayCnt}}"></td>
@@ -569,8 +587,12 @@
             <input type="text" class="form-control" id="rewardTypeCnt" style="width: 55px;" value="{{rewardTypeCnt}}">
         </td>
         <td>
-            <input type="text" class="form-control pull-left" id="imageReward" style="width: 80%;" value="{{imageReward}}">
+            <input type="text" class="form-control pull-left" id="imageReward" style="width: 70%;" value="{{imageReward}}">
             <input type="button" class="pull-right btn-default rewardImageUrlPreviewButton" value="미리보기" style="margin-top: 3px;">
+        </td>
+        <td>
+            <input type="text" class="form-control pull-left" id="imagePopup" style="width: 70%;" value="{{imagePopup}}">
+            <input type="button" class="pull-right btn-default rewardImagePopupUrlPreviewButton" value="미리보기" style="margin-top: 3px;">
         </td>
         <td>{{{getOnOffSwitch viewYn orderNo}}}</td>
     </tr>

@@ -18,6 +18,6 @@ public interface Eve_QuestDao {
 
     QuestVo callEdit(ProcedureVo procedureVo);
 
-    QuestVo callNewRecordDelete(ProcedureVo procedureVo);
-
+    @Transactional(readOnly = true)
+    ArrayList<QuestVo> callMember(ProcedureVo procedureVo);
 }

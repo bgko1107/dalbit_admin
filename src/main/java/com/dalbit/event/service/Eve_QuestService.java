@@ -26,7 +26,7 @@ public class Eve_QuestService {
     Eve_QuestDao eve_QuestDao;
 
     /**
-     * 신기록 이벤트 목록
+     * 퀘스트 이벤트 목록
      */
     public String callList(QuestVo QuestVo){
         ProcedureVo procedureVo = new ProcedureVo(QuestVo);
@@ -61,6 +61,17 @@ public class Eve_QuestService {
             return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
         }
         return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+    }
+
+    /**
+     * 퀘스트 참여자 목록
+     */
+    public String callMember(QuestVo QuestVo){
+        ProcedureVo procedureVo = new ProcedureVo(QuestVo);
+        ArrayList<QuestVo> detailList = eve_QuestDao.callMember(procedureVo);
+        QuestVo totalInfo = new Gson().fromJson(procedureVo.getExt(), QuestVo.class);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, detailList, new PagingVo(totalInfo.getTotalCnt(), QuestVo.getPageStart(), QuestVo.getPageCnt()), totalInfo));
     }
 
 }
