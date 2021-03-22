@@ -96,7 +96,6 @@
         dtList_record.useIndex(true);
         dtList_record.setPageLength(50);
         dtList_record.createDataTable();
-
     }
 
     function questAdd(){
@@ -433,15 +432,19 @@
     };
 
     function getImg(gubun){
+        console.log("------------------------------------------");
+        console.log(gubun);
         $("#questModal").modal('show');
         var imageUrl = "";
-        if(gubun == "1"){
-            imageUrl = $("#txt_bonusImageUrl1").val();
-        }else if(gubun == "2"){
-            imageUrl = $("#txt_bonusImageUrl2").val();
+        if(gubun == 1){
+            imageUrl = $("#txt_imageReward").val();
         }else{
             imageUrl = gubun;
         }
+
+        console.log("------------------------------------------");
+        console.log(imageUrl);
+
         $("#imageViewer").attr('src',imageUrl);
 
     }
@@ -449,10 +452,10 @@
     function recordFromObjectEvent(){
         $(".rewardImageUrlPreviewButton").on('click', function(){
             var parents = $(this).parents("tr").attr('id');
-            getImg($("#"+parents+"").find("#txt_imageUrl").val());
+            getImg($("#"+parents+"").find("#imageReward").val());
         });
 
-        $('#monthDate').datepicker({
+        $('.monthDate').datepicker({
             minViewMode: 'months',
             format: 'yyyy-mm',
             keyboardNavigation: false,
@@ -488,7 +491,7 @@
                     <label for="monthDate" class="input-group-addon">
                         <span><i class="fa fa-calendar"></i></span>
                     </label>
-                    <input id="monthDate" type="text" class="form-control" style="width: 196px;"/>
+                    <input id="monthDate" type="text" class="form-control monthDate" style="width: 196px;" value="{{questDate}}"/>
                 </div>
             </td>
             <th>보너스 선물</th>
@@ -500,7 +503,7 @@
             </td>
             <td>
                 <input type="text" class="form-control pull-left" id="txt_imageReward" style="width: 80%;" value="{{imageReward}}">
-                <input type="button" class="pull-right btn-default" value="미리보기" onclick="getImg('1');" style="margin-top: 3px;">
+                <input type="button" class="pull-right btn-default" value="미리보기" onclick="getImg(1);" style="margin-top: 3px;">
             </td>
             <th>노출여부</th>
             <td>{{{getOnOffSwitch viewYn 'show_yn'}}}</td>
