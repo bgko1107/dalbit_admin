@@ -80,7 +80,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate"></div>
+                <div class="dataTables_paginate paging_full_numbers" id="login_list_info_paginate"></div>
             </div>
         </div>
     </div>
@@ -250,11 +250,6 @@
             $("#list_info_paginate").show();
         }
 
-    }
-
-    function handlebarsPaging(targetId, pagingInfo){
-        loginHistoryPagingInfo = pagingInfo;
-        getLoginHistoryList();
     }
 
 </script>

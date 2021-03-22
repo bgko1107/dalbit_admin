@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="row col-lg-12 mt15 no-padding">
-        <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate_top"></div>
+        <div class="dataTables_paginate paging_full_numbers" id="change_list_info_paginate_top"></div>
         <table id="list_info" class="table table-sorting table-hover table-bordered">
             <thead id="tableTop">
             <tr>
@@ -74,7 +74,7 @@
             </thead>
             <tbody id="tableBody"></tbody>
         </table>
-        <div class="dataTables_paginate paging_full_numbers" id="list_info_paginate"></div>
+        <div class="dataTables_paginate paging_full_numbers" id="change_list_info_paginate"></div>
     </div>
 </div>
 <script>
@@ -86,7 +86,8 @@
     });
 
     function getHistory_changeDetail() {     // 상세보기
-        getList();
+        itemPagingInfo.pageNo = 1;
+        getChangeList();
     }
 
     function getParameter(){
@@ -105,7 +106,7 @@
         };
     }
 
-    function getList(){
+    function getChangeList(){
         util.getAjaxData("select", "/rest/money/item/list", getParameter(), fn_succ_list);
     }
 
@@ -119,8 +120,8 @@
         itemPagingInfo.totalCnt = response.data.totalInfo.totalCnt;
 
         if(response.data.detailList.length > 0){
-            util.renderPagingNavigation("list_info_paginate_top", itemPagingInfo);
-            util.renderPagingNavigation("list_info_paginate", itemPagingInfo);
+            util.renderPagingNavigation("change_list_info_paginate_top", itemPagingInfo);
+            util.renderPagingNavigation("change_list_info_paginate", itemPagingInfo);
         }
 
         $("#changeAutoSetting").val(response.data.setting.auto_change);
@@ -144,7 +145,7 @@
 
     function handlebarsPaging(targetId, pagingInfo){
         itemPagingInfo = pagingInfo;
-        getList();
+        getChangeList();
     }
 
     $('#excelDownBtn').on('click', function(){
