@@ -511,8 +511,13 @@
             <th>보너스 선물</th>
             <td>
                 {{#each this.rewardTypeList as |data|}}
-                {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardTypeId}}}
-                <input type="text" class="form-control" id="{{rewardTypeCntId}}" style="width: 100px;" value="{{rewardTypeCnt}}">
+                    {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardTypeId}}}
+                    <input type="text" class="form-control" id="{{rewardTypeCntId}}" style="width: 100px;" value="{{rewardTypeCnt}}">
+                {{else}}
+                    {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardType1}}}
+                    <input type="text" class="form-control" id="rewardTypeCnt1" style="width: 100px;" value="{{rewardTypeCnt}}">
+                    {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardType2}}}
+                    <input type="text" class="form-control" id="rewardTypeCnt2" style="width: 100px;" value="{{rewardTypeCnt}}">
                 {{/each}}
             </td>
             <td>
