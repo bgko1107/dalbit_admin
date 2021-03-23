@@ -26,6 +26,7 @@
             <li><a href="#levelDetail" role="tab" data-toggle="tab" id="tab_levelDetail" onclick="tab_click(this.id);">레벨</a></li>
             <li><a href="#rouletteList" role="tab" data-toggle="tab" id="tab_rouletteList" onclick="tab_click(this.id);">룰렛이벤트</a></li>
             <li><a href="#ggamggameEvent" role="tab" data-toggle="tab" id="tab_ggamggameEvent" onclick="tab_click(this.id);">깜깜이</a></li>
+            <li><a href="#questEvent" role="tab" data-toggle="tab" id="tab_questEvent" onclick="tab_click(this.id);">퀘스트</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade in active " id="infoDetail"><jsp:include page="memberInfo.jsp"/></div>     <!-- 상세 -->
@@ -128,6 +129,39 @@
                     <div class="tab-pane fade active in" id="newrecord"><jsp:include page="../ggamggameEvent/list.jsp"/></div>     <!-- 수정내역 -->
                 </div>
             </div>     <!-- 레벨 -->
+            <div class="tab-pane fade" id="questEvent"><jsp:include page="../quest/list.jsp"/></div>         <!-- 퀘스트 -->
+        </div>
+    </div>
+</div>
+
+
+<jsp:include page="../../searchArea/daySearchFunction.jsp"/>
+<div id="div_searchDate" style="display: none">
+    <div class="col-lg-12 no-padding" id="searchDate">
+        <div class="widget widget-table searchBoxArea ">
+            <table>
+                <tr>
+                    <th rowspan="2" style="background-color:#4472c4;color:#e9ee17;width: 70px">
+                        <i class="fa fa-search"></i><br/>검색
+                    </th>
+                    <th id="th_bottonList">
+                        <div>
+                            <div id="div_monthButton"><jsp:include page="../../searchArea/monthSearchArea.jsp"/></div>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <td style="text-align: left">
+                        <input id="monthDate" type="text" class="form-control"/>
+                        <input name="startDate" id="startDate" style="width: 100px">
+                        <input name="endDate" id="endDate" style="width: 100px">
+                        <button type="button" class="btn btn-success" id="bt_search">검색</button>
+                        <a href="javascript://" class="_prevSearch">[이전]</a>
+                        <a href="javascript://" class="_todaySearch">[오늘]</a>
+                        <a href="javascript://" class="_nextSearch">[다음]</a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
@@ -143,6 +177,11 @@
     var dtList_top_info;
 
     function tab_click(tmp){
+
+        $("#searchDate").hide();
+        $("#ggamggameDate").empty();
+
+
         if(tmp == "tab_broadcast"){
             $("#tab_broadDetail").click();
         }else if(tmp == "tab_broadDetail"){
@@ -249,12 +288,12 @@
             getMailbox(tmp);
         }else if(tmp == "tab_ggamggameEvent" || tmp == "tab_newrecord"){
             newRecord();
+        }else if(tmp == "tab_questEvent"){
+            questList();
          }
     }
 
     function handlebarsPaging(targetId, pagingInfo) {
-        console.log("----------------------------------------");
-        console.log(targetId);
         if(targetId == "notice_paginate_top" || targetId == "notice_paginate") {
             noticePagingInfo = pagingInfo;
             noticeList(pagingInfo.pageNo);
