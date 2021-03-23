@@ -792,13 +792,13 @@
                 <th colspan="8">배너 이미지</th>
             </tr>
             <tr class="_show_popup_image">
-                <th>PC<br />(1618px x 000px)</th>
+                <th>PC 이미지</th>
                 <td colspan="3">
                     <input type="text" class="_trim" id="banner-pc_img_url" name="pc_img_url" style="width:70%" value="{{pc_img_url}}" >
                     <input type="button" value="미리보기" onclick="getImg('banner-pc_img_url')">
                 </td>
 
-                <th>Mobile<br />(1618px x 000px)</th>
+                <th>Mobile 이미지</th>
                 <td colspan="3">
                     <input type="text" class="_trim" id="banner-mobile_img_url" name="mobile_img_url" style="width:70%" value="{{mobile_img_url}}" >
                     <input type="button" value="미리보기" onclick="getImg('banner-mobile_img_url')">

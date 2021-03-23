@@ -240,16 +240,16 @@ public class DeclarationService {
                     }
                 }
 
-                // 신고 대상자가 방송 중인지
-                var pMemberReportVo = new P_MemberReportVo();
-                pMemberReportVo.setMem_no(pDeclarationOperateVo.getReported_mem_no());
-                
-                int broadCastingCheck = mem_MemberDao.callMemberBroadCasting_check(pMemberReportVo);
-                // 신고 대상자가 청취 중인지
-                int listeningCheck = mem_MemberDao.callMemberListening_check(pMemberReportVo);
-
                 // 경고를 제외한 정지, 탈퇴 시 방송강제종료, 청취강제종료 후 처리 되도록
                 if(pDeclarationOperateVo.getOpCode() > 2) {
+
+                    // 신고 대상자가 방송 중인지
+                    var pMemberReportVo = new P_MemberReportVo();
+                    pMemberReportVo.setMem_no(pDeclarationOperateVo.getReported_mem_no());
+
+                    int broadCastingCheck = mem_MemberDao.callMemberBroadCasting_check(pMemberReportVo);
+                    // 신고 대상자가 청취 중인지
+                    int listeningCheck = mem_MemberDao.callMemberListening_check(pMemberReportVo);
 
                     if(broadCastingCheck > 0) {
                         //방송 강제 종료 처리

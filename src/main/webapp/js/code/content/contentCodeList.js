@@ -317,6 +317,8 @@ var banner_bannerType = [
     , new COMMON_CODE('rankPopup', '14', '랭킹팝업')
     , new COMMON_CODE('questionTop', '15', '1:1문의 TOP')
     , new COMMON_CODE('clipPlay', '16', '클립Play')
+    , new COMMON_CODE('broadAudio', '17', '방송방(오디오)')
+    , new COMMON_CODE('broadVidio', '18', '방송방(영상)')
 ];
 
 var banner_bannerType_popup = [
@@ -342,6 +344,8 @@ var banner_bannerType_banner = [
     , new COMMON_CODE('clip', '10', '클립 Center')
     , new COMMON_CODE('questionTop', '15', '1:1문의 TOP')
     , new COMMON_CODE('clipPlay', '16', '클립Play')
+    , new COMMON_CODE('broadAudio', '17', '방송방(오디오)')
+    , new COMMON_CODE('broadVidio', '18', '방송방(영상)')
 ];
 
 var banner_loginType = [
