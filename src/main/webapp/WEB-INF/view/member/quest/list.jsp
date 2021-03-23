@@ -127,7 +127,7 @@
         <td>{{reward}}</td>
         <td>{{goalCnt}}</td>
         <td>{{successCnt}}</td>
-        <td>{{rewardYn}}</td>
+        <td>{{#dalbit_if rewardYn '==' 1}} Y {{else}} N {{/dalbit_if}}</td>
     </tr>
     {{else}}
     <tr>
