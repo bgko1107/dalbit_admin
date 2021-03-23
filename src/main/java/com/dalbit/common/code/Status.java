@@ -890,6 +890,10 @@ public enum Status {
     미니게임_등록_성공("0", "minigame.detail.add.success", "미니게임 등록 성공 시"),
     미니게임_등록_데이터없음("-1", "minigame.detail.add.data.err", "등록 데이터가 없을 시"),
     미니게임_등록_에러("C006", "minigame.detail.add.error", "미니게임 등록 에러 발생 시"),
+
+    //1:1영상대화 설정 수정
+    영상대화설정_수정_성공("0", "video.setting.update.success", "영상대화 설정 수정 성공 시"),
+    영상대화설정_수정_에러("C006", "video.setting.update.error", "영상대화 설정 에러 발생 시"),
     ;
 
     final private String RESULT_SUCCESS = "success";
