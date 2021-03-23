@@ -29,8 +29,12 @@ public class Mem_QuestRestController {
      */
     @PostMapping("list")
     public String list(P_QuestVo pQuestVo){
-        return mem_QuestService.callQuestlist(pQuestVo);
+        return mem_QuestService.callQuestList(pQuestVo);
+    }
 
+    @PostMapping("detail/list")
+    public String detailList(P_QuestVo pQuestVo){
+        return mem_QuestService.callQuestDetailList(pQuestVo);
     }
 
 }

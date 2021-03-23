@@ -153,8 +153,8 @@
                 <tr>
                     <td style="text-align: left">
                         <input id="monthDate" type="text" class="form-control"/>
-                        <input name="startDate" id="startDate" style="width: 100px">
-                        <input name="endDate" id="endDate" style="width: 100px">
+                        <input class="hide" name="startDate" id="startDate" style="width: 100px">
+                        <input class="hide" name="endDate" id="endDate" style="width: 100px">
                         <button type="button" class="btn btn-success" id="bt_search">검색</button>
                         <a href="javascript://" class="_prevSearch">[이전]</a>
                         <a href="javascript://" class="_todaySearch">[오늘]</a>

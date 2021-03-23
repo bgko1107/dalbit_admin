@@ -23,10 +23,10 @@ public class Mem_QuestService {
     @Autowired
     GsonUtil gsonUtil;
 
-    public String callQuestlist(P_QuestVo pQuestVo){
+    public String callQuestList(P_QuestVo pQuestVo){
 
         ProcedureVo procedureVo = new ProcedureVo(pQuestVo);
-        ArrayList<P_QuestVo> list = mem_QuestDao.callQuestlist(procedureVo);
+        ArrayList<P_QuestVo> list = mem_QuestDao.callQuestList(procedureVo);
         P_QuestVo outVo = new Gson().fromJson(procedureVo.getExt(), P_QuestVo.class);
 
         if(list.size() < 1){
@@ -40,6 +40,13 @@ public class Mem_QuestService {
             result = gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
         }
         return result;
+    }
+
+    public String callQuestDetailList(P_QuestVo pQuestVo){
+        ProcedureVo procedureVo = new ProcedureVo(pQuestVo);
+        ArrayList<P_QuestVo> list = mem_QuestDao.callQuestList(procedureVo);
+        P_QuestVo outVo = new Gson().fromJson(procedureVo.getExt(), P_QuestVo.class);
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(0), outVo));
     }
 
 

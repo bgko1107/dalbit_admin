@@ -11,6 +11,6 @@ import java.util.ArrayList;
 public interface Mem_QuestDao {
 
     @Transactional(readOnly = true)
-    ArrayList<P_QuestVo> callQuestlist(ProcedureVo procedureVo);
+    ArrayList<P_QuestVo> callQuestList(ProcedureVo procedureVo);
 
 }
