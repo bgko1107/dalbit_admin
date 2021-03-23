@@ -440,6 +440,7 @@
 
         $("#reward_tbody").find('._noTr').each(function (index) {
             $(this).attr("id", "row_" + (index + 1));
+            $(this).find("#td_viewYn").html(util.getOnOffSwitch(0, (index + 1)));
         });
 
         recordFromObjectEvent();
@@ -567,7 +568,7 @@
             <input type="text" class="form-control pull-left" id="imagePopup" style="width: 70%;" value="{{imagePopup}}">
             <input type="button" class="pull-right btn-default rewardImagePopupUrlPreviewButton" value="미리보기" style="margin-top: 3px;">
         </td>
-        <td>{{{getOnOffSwitch viewYn orderNo}}}</td>
+        <td id="td_viewYn"></td>
     </tr>
 </script>
 
