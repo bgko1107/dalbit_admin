@@ -155,7 +155,7 @@
         var html = templateScript(data);
         $("#reward_tbody").html(html);
 
-        $("#monthDate").val(response.summary.questDate);
+        $(".monthDate").val(response.summary.questDate);
 
         resetNo();
     }
@@ -304,7 +304,7 @@
 
             var data = {
                 // 메인
-                questDate : $("#monthDate").val()
+                questDate : $(".monthDate").val()
                 , viewYn : $("#detail_show_yn").prop('checked') ? 1 : 0
                 , rewardDal : rewardDal
                 , rewardByeol : rewardByeol
@@ -514,9 +514,9 @@
                     {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardTypeId}}}
                     <input type="text" class="form-control" id="{{rewardTypeCntId}}" style="width: 100px;" value="{{rewardTypeCnt}}">
                 {{else}}
-                    {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardType1}}}
+                    {{{getCommonCodeSelect rewardType 'questReward' 'N' 'rewardType1'}}}
                     <input type="text" class="form-control" id="rewardTypeCnt1" style="width: 100px;" value="{{rewardTypeCnt}}">
-                    {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardType2}}}
+                    {{{getCommonCodeSelect rewardType 'questReward' 'N' 'rewardType2'}}}
                     <input type="text" class="form-control" id="rewardTypeCnt2" style="width: 100px;" value="{{rewardTypeCnt}}">
                 {{/each}}
             </td>
