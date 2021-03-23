@@ -30,6 +30,7 @@ public class QuestVo extends SearchVo {
     private int rewardTypeCnt;
     private String rewardTypeList;
 
+    private String questDateList;
     private String questNameList;
     private String questNoList;
     private String questOrderList;

@@ -355,12 +355,12 @@
             return;
         }
         if(confirm('선택한 퀘스트 이벤트를 삭제 하시겠습니까?')){
-            var idxList = "";
+            var questDateList = "";
             for(var i=0;i<checkDatas.length;i++){
-                idxList += checkDatas[i].idx + "@@";
+                questDateList += checkDatas[i].questDate + "|";
             }
             var data = {
-                idxList : idxList
+                questDateList : questDateList
             };
 
             util.getAjaxData("quest", "/rest/event/quest/delete", data, function(dst_id, response){

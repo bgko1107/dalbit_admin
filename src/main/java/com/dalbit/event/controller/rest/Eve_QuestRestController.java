@@ -48,6 +48,15 @@ public class Eve_QuestRestController {
     }
 
     /**
+     * 퀘스트 이벤트 상세 정보 삭제
+     */
+    @PostMapping("delete")
+    public String delete(QuestVo questVo) {
+        String result = eve_QuestService.callDelete(questVo);
+        return result;
+    }
+
+    /**
      * 퀘스트 이벤트 참여자 목록
      */
     @PostMapping("member")

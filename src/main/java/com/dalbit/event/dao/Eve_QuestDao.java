@@ -17,6 +17,7 @@ public interface Eve_QuestDao {
     ArrayList<QuestVo> callDetail(ProcedureVo procedureVo);
 
     QuestVo callEdit(ProcedureVo procedureVo);
+    QuestVo callDelete(ProcedureVo procedureVo);
 
     @Transactional(readOnly = true)
     ArrayList<QuestVo> callMember(ProcedureVo procedureVo);

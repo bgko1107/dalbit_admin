@@ -64,6 +64,21 @@ public class Eve_QuestService {
     }
 
     /**
+     * 퀘스트 이벤트 상세정보 삭제
+     */
+    public String callDelete(QuestVo QuestVo){
+        QuestVo.setOpName(MemberVo.getMyMemNo());
+        ProcedureVo procedureVo = new ProcedureVo(QuestVo);
+
+        eve_QuestDao.callDelete(procedureVo);
+
+        if(Integer.parseInt(procedureVo.getRet()) < 0){
+            return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+        return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+    }
+
+    /**
      * 퀘스트 참여자 목록
      */
     public String callMember(QuestVo QuestVo){
