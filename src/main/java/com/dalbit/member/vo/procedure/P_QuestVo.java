@@ -33,6 +33,7 @@ public class P_QuestVo extends SearchVo {
     private String itemName;
     private int itemCnt;
     private int dal;
+    private int listentime;
 
 }
 

@@ -122,7 +122,13 @@
     {{#each this as |data|}}
     <tr>
         <td>{{rowNumDesc ../length @index}}</td>
-        <td><a href="javascript://" data-questNo="{{questNo}}" onclick="questNoDetailList($(this).data());">{{questName}}</a></td>
+        <td>
+            {{#dalbit_if questNo '==' 99}}
+                {{questName}}
+            {{else}}
+                <a href="javascript://" data-questNo="{{questNo}}" onclick="questNoDetailList($(this).data());">{{questName}}</a>
+            {{/dalbit_if}}
+        </td>
         <td>{{questDesc}}</td>
         <td>{{reward}}</td>
         <td>{{goalCnt}}</td>
@@ -303,7 +309,7 @@
             <td>{{rowNumDesc ../length @index}}</td>
             <td>{{{memNoLink memNo memNo}}} <br/> {{memNick}}</td>
             <td>{{{roomNoLink title linkIdx}}}</td>
-            <td>{{lastUpdDate}}</td>
+            <td>{{timestamp listentime}}</td>
         </tr>
         {{else}}
         <tr>
