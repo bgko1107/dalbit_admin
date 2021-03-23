@@ -405,7 +405,7 @@
         {{#equal report_idx ""}}
         <tr>
             <th>신고 메시지</th>
-            <td>{{../adminMemo}}</td>
+            <td>{{{replaceHtml ../adminMemo}}}</td>
         </tr>
         {{/equal}}
         </tbody>

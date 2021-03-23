@@ -7,7 +7,7 @@
     <div class="container">
 
         <div class="clearfix">
-            <a href="#" class="pull-left toggle-sidebar-collapse"><i class="fa fa-bars"></i></a>
+            <a href="javascript://" class="pull-left toggle-sidebar-collapse" style="margin-top:5px;"><i class="fa fa-bars"></i></a>
             <!-- logo -->
             <div class="pull-left left">
                 <a href="/index.html"><img src="https://image.dalbitlive.com/images/api/logo_real.png" alt="달빛라이브 관리자" style="width:120px;"></a>
