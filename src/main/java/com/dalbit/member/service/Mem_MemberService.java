@@ -724,6 +724,7 @@ public class Mem_MemberService {
         pMemberReportVo.setType_noti(32);
         pMemberReportVo.setNotiContents("운영자가 선물을 보냈습니다.");
         pMemberReportVo.setNotimemo("운영자가 선물을 보냈습니다.");
+        pMemberReportVo.setTargetMemNo(DalbitUtil.getProperty("admin.memNo"));
         mem_MemberDao.callMemberNotification_Add(pMemberReportVo);
 
         if(pMemberEditorVo.getAddDalCnt() > 0){
@@ -778,6 +779,7 @@ public class Mem_MemberService {
         pMemberReportVo.setType_noti(32);
         pMemberReportVo.setNotiContents("운영자가 선물을 보냈습니다.");
         pMemberReportVo.setNotimemo("운영자가 선물을 보냈습니다.");
+        pMemberReportVo.setTargetMemNo(DalbitUtil.getProperty("admin.memNo"));
         mem_MemberDao.callMemberNotification_Add(pMemberReportVo);
 
         if(pMemberEditorVo.getAddByeolCnt() > 0){
