@@ -3,8 +3,8 @@
 <mapper namespace="com.dalbit.member.dao.Mem_GGamGGamEDao" >
 
     <select id="callNewRecodHistory" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_MemberGGamGGamEVo">
-    /* Mem_GGamGGamE.xml - callNewRecodHistory */
-    call rd_admin.sp_admin_event_reward_history(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
+        /* Mem_GGamGGamE.xml - callNewRecodHistory */
+        call rd_admin.sp_admin_event_reward_history(#{data, mode=IN, jdbcType=VARCHAR}, #{ret, mode=OUT, jdbcType=INTEGER}, #{ext, mode=OUT, jdbcType=VARCHAR})
     </select>
 
 </mapper>

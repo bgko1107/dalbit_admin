@@ -35,6 +35,8 @@ public class P_MemberBroadcastOutputVo extends SearchVo {
     private int complete_moon;
     private String complete_date; //보름달 완료일시
     private String type_media;
+    private int continue_event_type;
+    private String continue_event_date;
 
     //summary
     private int totalListenCnt;

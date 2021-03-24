@@ -1,40 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="col-lg-12 no-padding">
-    <!-- serachBox -->
-    <div class="col-lg-12 no-padding">
-        <div class="widget widget-table searchBoxArea">
-            <table>
-                <tr>
-                    <th rowspan="2" style="background-color:#4472c4;color:#e9ee17;width: 70px">
-                        <i class="fa fa-search"></i><br/>검색
-                        <jsp:include page="../../searchArea/daySearchFunction.jsp"/>
-                    </th>
-                    <th id="th_bottonList">
-                        <div>
-                            <div id="div_monthButton"><jsp:include page="../../searchArea/monthSearchArea.jsp"/></div>
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <td style="text-align: left">
-                        <input id="monthDate" type="text" class="form-control"/>
-                        <input class="hide" name="startDate" id="startDate" style="width: 100px">
-                        <input class="hide" name="endDate" id="endDate" style="width: 100px">
-                        <%--<input name="startDate" id="startDate" style="width: 100px">--%>
-                        <%--<input name="endDate" id="endDate" style="width: 100px">--%>
-
-                        <button type="button" class="btn btn-success" id="bt_search">검색</button>
-
-                        <a href="javascript://" class="_prevSearch">[이전]</a>
-                        <a href="javascript://" class="_todaySearch">[오늘]</a>
-                        <a href="javascript://" class="_nextSearch">[다음]</a>
-                    </td>
-                </tr>
-            </table>
-        </div>
+    <span class="col-lg-8 no-padding" id="ggamggameDate"></span>
+    <div class="col-lg-4 no-padding">
+        <span id="ggamggameTopArea"></span>
     </div>
-
     <div class="col-lg-12 no-padding">
         <div class="widget widget-table">
             <div class="widget-content">
@@ -50,15 +20,20 @@
 </div>
 <script>
     $(document).ready(function() {
+    });
+
+    function newRecord(){
+        $("#ggamggameDate").html($('#searchDate').html());
+        $("#searchDate").show();
+
         slctType = 1;
+        dateType();
+
         $("#bt_search").on("click", function(){
             getHistory_newrecord();
         });
-    });
+        getHistory_newrecord();
 
-
-    function newRecord(){
-        dateType();
     }
 
     function getHistory_newrecord() {     // 상세보기
@@ -71,7 +46,36 @@
         dtList_info_detail.useCheckBox(false);
         dtList_info_detail.useIndex(true);
         dtList_info_detail.setPageLength(50);
-        dtList_info_detail.createDataTable();
+        dtList_info_detail.createDataTable(getGgamggameTop);
     }
 
+    function getGgamggameTop(response){
+
+        var template = $("#tmp_ggamggameTop").html();
+        var templateScript = Handlebars.compile(template);
+        var data = response.summary;
+        var html = templateScript(data);
+        $("#ggamggameTopArea").html(html);
+
+    }
+
+</script>
+
+
+
+<script id="tmp_ggamggameTop" type="text/x-handlebars-template">
+    <table class="table table-bordered table-summary pull-right no-margin" style="width: 100%">
+        <thead>
+        <tr>
+            <th class="_bgColor" data-bgcolor="#8faadc">좋아요</th>
+            <th class="_bgColor" data-bgcolor="#8faadc">누적 청취자</th>
+            <th class="_bgColor" data-bgcolor="#8faadc">받은 별</th>
+        </tr>
+        </thead>
+        <tbody>
+            <td>{{addComma topGoodCnt}}</td>
+            <td>{{addComma topListenerCnt}}</td>
+            <td>{{addComma topByeolCnt}}</td>
+        </tbody>
+    </table>
 </script>
