@@ -311,7 +311,8 @@
                 , rewardExp : rewardExp
                 , rewardBooster : rewardBooster
                 , rewardCoupon : rewardCoupon
-                , imageReward : $("#imageReward").val()
+                , imageReward1 : $("#imageReward1").val()
+                , imageReward2 : $("#imageReward2").val()
                 , goalCnt : questDetailIdx          // 이벤트 수
 
                 // 목록
@@ -446,11 +447,13 @@
         recordFromObjectEvent();
     };
 
-    function getImg(gubun){
+    function getImg(gubun) {
         $("#questModal").modal('show');
         var imageUrl = "";
-        if(gubun == 1){
+        if (gubun == 1) {
             imageUrl = $("#imageReward").val();
+        } else if(gubun == 2){
+            imageUrl = $("#imageReward2").val();
         }else{
             imageUrl = gubun;
         }
@@ -496,8 +499,8 @@
 <script id="tmp_reward_detail" type="text/x-handlebars-template">
     <table id="reward_detail" class="table table-sorting table-hover table-bordered no-margin">
         <colgroup>
-            <col width="5%"/><col width="5%"/><col width="5%"/><col width="20%"/>
-            <col width="15%"/><col width="5%"/><col width="5%"/>
+            <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
+            <col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/><col width="10%"/>
         </colgroup>
         <tr>
             <th>퀘스트 기간</th>
@@ -509,8 +512,18 @@
                     <input id="monthDate" type="text" class="form-control monthDate" style="width: 196px;" value="{{questDate}}"/>
                 </div>
             </td>
+            <th>등록자</th>
+            <td>{{opName}}</td>
+            <th>등록일</th>
+            <td>{{regDate}}</td>
+            <th>노출여부</th>
+            <td>{{{getOnOffSwitch viewYn 'show_yn'}}}</td>
+            <th>수정일</th>
+            <td>{{lastUpdDate}}</td>
+        </tr>
+        <tr>
             <th>보너스 선물</th>
-            <td>
+            <td colspan="3">
                 {{#each this.rewardTypeList as |data|}}
                     {{{getCommonCodeSelect rewardType 'questReward' 'N' rewardTypeId}}}
                     <input type="text" class="form-control" id="{{rewardTypeCntId}}" style="width: 100px;" value="{{rewardTypeCnt}}">
@@ -521,21 +534,14 @@
                     <input type="text" class="form-control" id="rewardTypeCnt2" style="width: 100px;" value="{{rewardTypeCnt}}">
                 {{/each}}
             </td>
-            <td>
-                <input type="text" class="form-control pull-left" id="imageReward" style="width: 80%;" value="{{imageReward}}">
+            <td colspan="3">
+                <input type="text" class="form-control pull-left" id="imageReward1" style="width: 80%;" value="{{imageReward1}}">
                 <input type="button" class="pull-right btn-default" value="미리보기" onclick="getImg(1);" style="margin-top: 3px;">
             </td>
-            <th>노출여부</th>
-            <td>{{{getOnOffSwitch viewYn 'show_yn'}}}</td>
-        </tr>
-        <tr>
-            <th>등록자</th>
-            <td>{{opName}}</td>
-            <th>등록일</th>
-            <td>{{regDate}}</td>
-            <td></td>
-            <th>수정일</th>
-            <td>{{lastUpdDate}}</td>
+            <td colspan="3">
+                <input type="text" class="form-control pull-left" id="imageReward2" style="width: 80%;" value="{{imageReward2}}">
+                <input type="button" class="pull-right btn-default" value="미리보기" onclick="getImg(2);" style="margin-top: 3px;">
+            </td>
         </tr>
     </table>
 </script>

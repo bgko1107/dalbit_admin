@@ -23,6 +23,8 @@ public class QuestVo extends SearchVo {
     private int rewardCnt;
     private int viewYn;
     private String imageReward;
+    private String imageReward1;        // 보너스 보상 이미지 1
+    private String imageReward2;        // 보너스 보상 이미지 2
     private String imagePopup;
     private String regDate;
     private String lastUpdDate;
