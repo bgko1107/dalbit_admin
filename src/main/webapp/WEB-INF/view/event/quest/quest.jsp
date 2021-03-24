@@ -451,7 +451,7 @@
         $("#questModal").modal('show');
         var imageUrl = "";
         if (gubun == 1) {
-            imageUrl = $("#imageReward").val();
+            imageUrl = $("#imageReward1").val();
         } else if(gubun == 2){
             imageUrl = $("#imageReward2").val();
         }else{
