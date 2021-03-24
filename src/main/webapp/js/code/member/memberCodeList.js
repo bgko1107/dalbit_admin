@@ -351,4 +351,5 @@ var member_roulette_coupon_type = [
     , new COMMON_CODE('2', '2', '보름달')
     , new COMMON_CODE('3', '3', '구매/결제')
     , new COMMON_CODE('4', '4', '스페셜DJ')
+    , new COMMON_CODE('5', '5', '신기록')
 ]

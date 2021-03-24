@@ -191,13 +191,13 @@ var MemberDataTableSource = {
             {'title': '입장제한', 'data': 'type_entry','width' : '65px', 'render': function (data) {
                     return util.getCommonCodeLabel(data, entryType);
                 }},
-            {'title': '주제', 'data': 'subject_type', 'width':'100px','render' : function(data){
-                    return util.getCommonCodeLabel(data, subject_type);
-                }},
+            // {'title': '주제', 'data': 'subject_type', 'width':'100px','render' : function(data){
+            //         return util.getCommonCodeLabel(data, subject_type);
+            //     }},
             {'title': '제목', 'data': 'title', 'width':'250px', 'render': function (data, type, row, meta) {
                     return util.roomNoLink(data, row.room_no);
                 }},
-            {'title': '구분', 'data': 'type_media', 'width':'120px', 'render': function (data, type, row, meta) {
+            {'title': '구분', 'data': 'type_media', 'width':'60px', 'render': function (data, type, row, meta) {
                     if(data == "a"){
                         return '<img src="https://image.dalbitlive.com/svg/ico_live_audio.svg" alt="your image" style="width: 33px;height: 33px" />';
                     }else if(data == "v"){
@@ -206,28 +206,28 @@ var MemberDataTableSource = {
                 }},
             {'title': '시작시간', 'data': 'startDateFormat', 'width':'120px'},
             {'title': '종료시간', 'data': 'endDateFormat', 'width':'120px'},
-            {'title': '진행시간', 'data': 'airtime', 'width':'100px','render' : function(data){
+            {'title': '진행시간', 'data': 'airtime', 'width':'60px','render' : function(data){
                     return common.timeStamp(data);
                 }},
-            {'title': '청취 수', 'data': 'listenCnt', 'width':'80px', 'render': function (data) {
+            {'title': '청취 수', 'data': 'listenCnt', 'width':'55px', 'render': function (data) {
                     return common.addComma(data);
                 }},
-            {'title': '청취자', 'data': 'listenerCnt', 'width':'80px', 'render': function (data) {
+            {'title': '청취자', 'data': 'listenerCnt', 'width':'55px', 'render': function (data) {
                     return common.addComma(data);
                 }},
-            {'title': '매니저', 'data': 'managerCnt', 'width':'80px', 'render': function (data) {
+            {'title': '매니저', 'data': 'managerCnt', 'width':'55px', 'render': function (data) {
                     return common.addComma(data);
                 }},
-            {'title': '선물 건', 'data': 'giftCnt', 'width':'80px', 'render': function (data) {
+            {'title': '선물 건', 'data': 'giftCnt', 'width':'60px', 'render': function (data) {
                     return common.addComma(data);
                 }},
-            {'title': '받은 별', 'data': 'byeolCnt', 'width':'80px', 'render': function (data) {
+            {'title': '받은 별', 'data': 'byeolCnt', 'width':'60px', 'render': function (data) {
                     return common.addComma(data);
                 }},
-            {'title': '좋아요', 'data': 'goodCnt', 'width':'80px', 'render': function (data) {
+            {'title': '좋아요', 'data': 'goodCnt', 'width':'60px', 'render': function (data) {
                     return common.addComma(data);
                 }},
-            {'title': '부스터', 'data': 'boosterCnt', 'width':'80px', 'render': function (data) {
+            {'title': '부스터', 'data': 'boosterCnt', 'width':'60px', 'render': function (data) {
                     return common.addComma(data);
                 }},
             {'title': '보름달', 'data': 'complete_moon', 'width':'80px', 'render': function (data, type, row) {
@@ -236,6 +236,16 @@ var MemberDataTableSource = {
                         moonName = '(슈퍼문)<br />';
                     }
                     return 0 < data ? moonName + common.convertToDate(row.complete_date) : row.step + "단계";
+                }},
+            {'title': '구분', 'data': 'continue_event_type', 'width':'60px', 'render': function (data) {
+                    var tmp = "";
+                    if(data == 1){
+                        tmp = "신기록";
+                    }
+                    return tmp;
+                }},
+            {'title': '지급일시', 'data': 'continue_event_date', 'width':'120px', 'render': function (data) {
+                    return common.substr(data,0,19);
                 }},
         ]
         ,'comments': 'ㆍ회원이 방송을 진행하고, 청취한 기록을 확인할 수 있습니다.'

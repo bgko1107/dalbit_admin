@@ -24,6 +24,11 @@ public class P_MemberGGamGGamEVo extends SearchVo {
     private String reward_cnt;
     private String start_date;
 
+    /* top */
+    private int topGoodCnt;
+    private int topListenerCnt;
+    private int topByeolCnt;
+
 
 }
 
