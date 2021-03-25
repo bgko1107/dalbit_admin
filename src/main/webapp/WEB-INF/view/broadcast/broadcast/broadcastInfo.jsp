@@ -460,8 +460,13 @@
     <div class="col-lg-12 no-padding">
         <label style="height: 30px;"> ㆍ라이브 중인 방송 정보를 확인하고, 부득이한 상황시 방송 컨트롤 할 수 있습니다.</label>
         {{#equal broadcastState 'ON'}}
-            <button type="button" id="bt_broadcastGo" class="btn btn-default btn-sm pull-right _openPlayerPop" data-roomno="{{../room_no}}" >방송방 입장하기</button>
+            {{#equal ../type_media 'a'}}
+                <button type="button" id="bt_broadcastGo" class="btn btn-default btn-sm pull-right _openPlayerPop" data-roomno="{{../room_no}}" >방송방 입장하기</button>
+            {{else}}
+                <button type="button" id="bt_broadcastGoVideo" class="btn btn-default btn-sm pull-right _openVideoPlayerPop" data-roomno="{{../room_no}}">방송방 입장하기</button>
+            {{/equal}}
             <button type="button" class="btn btn-danger btn-sm pull-right _openAdminMessagePop mr5" data-roomno="{{../room_no}}" data-djmemno="{{../dj_mem_no}}">방송방 메시지 발송</button>
+
         {{/equal}}
     </div>
     <table class="table table-bordered table-dalbit" style="margin-bottom: 0px;">
