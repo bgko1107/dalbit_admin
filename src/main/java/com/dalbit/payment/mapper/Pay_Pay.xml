@@ -116,7 +116,7 @@
                     </choose>
                 </if>
                 <if test="slctType == 1">
-                    and b.mem_no = #{searchText}
+                    and ( b.mem_no = #{searchText} or c.mem_no = #{searchText} )
                 </if>
             </if>
 
