@@ -119,7 +119,7 @@
     }
     function questDetail(idx){
         var data = dtList_quest.getDataRow(idx);
-        util.getAjaxData("quest", "/rest/event/quest/detail", data, fn_questDetail_success);
+        util.getAjaxData("quest", "/rest/content/event/quest/detail", data, fn_questDetail_success);
     }
 
     function fn_questDetail_success(dst_id, response, param){
@@ -334,7 +334,7 @@
 
             console.log(data);
 
-            util.getAjaxData("quest", "/rest/event/quest/edit", data, fn_questEdit_success);
+            util.getAjaxData("quest", "/rest/content/event/quest/edit", data, fn_questEdit_success);
         }
     }
 
@@ -364,7 +364,7 @@
                 questDateList : questDateList
             };
 
-            util.getAjaxData("quest", "/rest/event/quest/delete", data, function(dst_id, response){
+            util.getAjaxData("quest", "/rest/content/event/quest/delete", data, function(dst_id, response){
                 questList();
             });
         }
@@ -410,7 +410,7 @@
     //         questNoList : questNoList
     //     };
     //
-    //     util.getAjaxData("quest", "/rest/event/quest/order/update", data, function(dst_id, response){
+    //     util.getAjaxData("quest", "/rest/content/event/quest/order/update", data, function(dst_id, response){
     //         questList();
     //     });
     // }

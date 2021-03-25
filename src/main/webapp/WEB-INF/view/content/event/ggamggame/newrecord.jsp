@@ -119,7 +119,7 @@
     function newrecordDetail(idx){
         var data = dtList_record.getDataRow(idx);
         data.eventType = 1;
-        util.getAjaxData("newrecord", "/rest/event/ggamggame/newrecord/detail", data, fn_newrecordDetail_success);
+        util.getAjaxData("newrecord", "/rest/content/event/ggamggame/newrecord/detail", data, fn_newrecordDetail_success);
     }
 
     function fn_newrecordDetail_success(dst_id, response, param){
@@ -241,7 +241,7 @@
 
             console.log(data);
 
-            util.getAjaxData("newrecord", "/rest/event/ggamggame/newrecord/edit", data, fn_newrecordEdit_success);
+            util.getAjaxData("newrecord", "/rest/content/event/ggamggame/newrecord/edit", data, fn_newrecordEdit_success);
         }
     }
 
@@ -271,7 +271,7 @@
                 idxList : idxList
             };
 
-            util.getAjaxData("newrecord", "/rest/event/ggamggame/newrecord/delete", data, function(dst_id, response){
+            util.getAjaxData("newrecord", "/rest/content/event/ggamggame/newrecord/delete", data, function(dst_id, response){
                 newrecordList();
             });
         }

@@ -1,7 +1,7 @@
-package com.dalbit.event.controller.rest;
+package com.dalbit.content.controller.rest;
 
-import com.dalbit.event.service.Eve_QuestService;
-import com.dalbit.event.vo.QuestVo;
+import com.dalbit.content.service.Eve_QuestService;
+import com.dalbit.content.vo.QuestVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("rest/event/quest")
+@RequestMapping("rest/content/event/quest")
 public class Eve_QuestRestController {
 
     @Autowired

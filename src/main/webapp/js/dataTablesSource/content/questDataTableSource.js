@@ -1,6 +1,6 @@
 var questDataTableSource = {
     'questList': {
-        'url': '/rest/event/quest/list'
+        'url': '/rest/content/event/quest/list'
         , 'columns': [
             {'title': '이벤트상태', 'data': 'viewYn', 'render': function(data, type, row) {
                     return data == 1 ? '진행중' : '종료';
@@ -24,7 +24,7 @@ var questDataTableSource = {
     },
 
     'questMember': {
-        'url': '/rest/event/quest/member'
+        'url': '/rest/content/event/quest/member'
         , 'columns': [
             {'title': '프로필사진', 'data': 'imageProfile', 'render': function(data, type, row) {
                     return '<img class="thumbnail fullSize_background" src="'+ common.profileImage(PHOTO_SERVER_URL,data,row.memSex) +'" width="65px" height="65px" />';

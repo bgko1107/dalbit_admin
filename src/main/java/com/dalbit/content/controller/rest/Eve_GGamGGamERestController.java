@@ -1,7 +1,7 @@
-package com.dalbit.event.controller.rest;
+package com.dalbit.content.controller.rest;
 
-import com.dalbit.event.service.Eve_GGamGGamEService;
-import com.dalbit.event.vo.GGamGGamEVo;
+import com.dalbit.content.service.Eve_GGamGGamEService;
+import com.dalbit.content.vo.GGamGGamEVo;
 import com.dalbit.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("rest/event/ggamggame")
+@RequestMapping("rest/content/event/ggamggame")
 public class Eve_GGamGGamERestController {
 
     @Autowired

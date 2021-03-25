@@ -266,4 +266,14 @@ public class ContentController {
     @GetMapping("/event/champion/rank")
     public String championRank() {return "content/event/champion/rank";}
 
+    @GetMapping("/event/ggamggame/info")
+    public String GGamGGamEList() {
+        return "content/event/ggamggame/info";
+    }
+
+    @GetMapping("/event/quest/info")
+    public String questList() {
+        return "content/event/quest/info";
+    }
+
 }

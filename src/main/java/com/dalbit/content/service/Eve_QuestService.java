@@ -1,11 +1,11 @@
-package com.dalbit.event.service;
+package com.dalbit.content.service;
 
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.event.dao.Eve_QuestDao;
-import com.dalbit.event.vo.QuestVo;
+import com.dalbit.content.dao.Eve_QuestDao;
+import com.dalbit.content.vo.QuestVo;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.Gson;

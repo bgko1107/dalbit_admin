@@ -1,7 +1,7 @@
-package com.dalbit.event.dao;
+package com.dalbit.content.dao;
 
 import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.event.vo.QuestVo;
+import com.dalbit.content.vo.QuestVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

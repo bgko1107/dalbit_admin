@@ -1,6 +1,6 @@
 var ggamggameDataTableSource = {
     'newrecordList': {
-        'url': '/rest/event/ggamggame/newrecord/list'
+        'url': '/rest/content/event/ggamggame/newrecord/list'
         , 'columns': [
             {'title': '이벤트상태', 'data': 'view_yn', 'render': function(data, type, row) {
                     return data == 1 ? '진행중' : '종료';

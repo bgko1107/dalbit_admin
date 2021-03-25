@@ -1,23 +1,19 @@
-package com.dalbit.event.service;
+package com.dalbit.content.service;
 
-import com.dalbit.clip.dao.Cli_ClipStatusDao;
-import com.dalbit.clip.vo.procedure.*;
 import com.dalbit.common.code.Status;
 import com.dalbit.common.vo.JsonOutputVo;
 import com.dalbit.common.vo.PagingVo;
 import com.dalbit.common.vo.ProcedureVo;
-import com.dalbit.event.dao.Eve_GGamGGamEDao;
-import com.dalbit.event.vo.GGamGGamEVo;
+import com.dalbit.content.dao.Eve_GGamGGamEDao;
+import com.dalbit.content.vo.GGamGGamEVo;
 import com.dalbit.member.vo.MemberVo;
 import com.dalbit.util.GsonUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @Slf4j
 @Service

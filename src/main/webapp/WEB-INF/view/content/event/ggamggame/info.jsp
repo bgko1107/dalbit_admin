@@ -14,7 +14,7 @@
                                 <i class="fa fa-search"></i><br/>검색
                             </th>
                             <th id="th_bottonList">
-                                <jsp:include page="../../searchArea/daySearchFunction.jsp"/>
+                                <jsp:include page="/WEB-INF/view/searchArea/daySearchFunction.jsp"/>
                             </th>
                         </tr>
                         <tr>
@@ -36,7 +36,7 @@
     </div> <!-- //page-wrapper -->
 </div> <!-- //wrapper -->
 
-<script type="text/javascript" src="/js/dataTablesSource/event/ggamggameDataTableSource.js?${dummyData}"></script>
+<script type="text/javascript" src="/js/dataTablesSource/content/ggamggameDataTableSource.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 
 <script type="text/javascript">

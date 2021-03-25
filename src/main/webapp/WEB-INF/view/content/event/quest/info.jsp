@@ -15,11 +15,11 @@
                                 <tr>
                                     <th rowspan="2" style="background-color:#4472c4;color:#e9ee17;width: 70px">
                                         <i class="fa fa-search"></i><br/>검색
-                                        <jsp:include page="../../searchArea/daySearchFunction.jsp"/>
+                                        <%@ include file="/WEB-INF/view/searchArea/daySearchFunction.jsp"%>
                                     </th>
                                     <th id="th_bottonList">
                                         <div>
-                                            <div id="div_monthButton"><jsp:include page="../../searchArea/monthSearchArea.jsp"/></div>
+                                            <div id="div_monthButton"><%@ include file="/WEB-INF/view/searchArea/monthSearchArea.jsp"%></div>
                                         </div>
                                     </th>
                                 </tr>
@@ -57,7 +57,7 @@
     </div> <!-- //page-wrapper -->
 </div> <!-- //wrapper-->
 
-<script type="text/javascript" src="/js/dataTablesSource/event/questDataTableSource.js?${dummyData}"></script>
+<script type="text/javascript" src="/js/dataTablesSource/content/questDataTableSource.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/content/contentCodeList.js?${dummyData}"></script>
 
 <script type="text/javascript">

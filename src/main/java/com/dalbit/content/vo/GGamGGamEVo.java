@@ -1,4 +1,4 @@
-package com.dalbit.event.vo;
+package com.dalbit.content.vo;
 
 import com.dalbit.common.vo.SearchVo;
 import lombok.Getter;
