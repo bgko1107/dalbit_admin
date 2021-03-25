@@ -46,16 +46,16 @@ public class Mem_ListenService {
         ArrayList<P_MemberListenOutputVo> listenList = mem_ListenDao.callListenHistory(procedureVo);
         P_MemberListenOutputVo summary = new Gson().fromJson(procedureVo.getExt(), P_MemberListenOutputVo.class);
 
-        for(int i=0;i<listenList.size();i++) {
-            MemberVo outVo = mem_MemberDao.getMemberInfo(listenList.get(i).getDj_mem_no());
-            if(!DalbitUtil.isEmpty(outVo)) {
-                listenList.get(i).setDj_mem_sex(outVo.getMem_sex());
-                listenList.get(i).setDj_birth_year(outVo.getMem_birth_year());
-                listenList.get(i).setDj_birth_month(outVo.getMem_birth_month());
-                listenList.get(i).setDj_birth_day(outVo.getMem_birth_day());
-                listenList.get(i).setInner(outVo.getInner());
-            }
-        }
+//        for(int i=0;i<listenList.size();i++) {
+//            MemberVo outVo = mem_MemberDao.getMemberInfo(listenList.get(i).getDj_mem_no());
+//            if(!DalbitUtil.isEmpty(outVo)) {
+//                listenList.get(i).setDj_mem_sex(outVo.getMem_sex());
+//                listenList.get(i).setDj_birth_year(outVo.getMem_birth_year());
+//                listenList.get(i).setDj_birth_month(outVo.getMem_birth_month());
+//                listenList.get(i).setDj_birth_day(outVo.getMem_birth_day());
+//                listenList.get(i).setInner(outVo.getInner());
+//            }
+//        }
 
         String result;
         if(Integer.parseInt(procedureVo.getRet()) > 0) {
