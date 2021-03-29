@@ -6,10 +6,17 @@ import com.dalbit.common.service.SmsService;
 import com.dalbit.socket.service.SocketService;
 import com.dalbit.util.JwtUtil;
 import com.dalbit.util.RestApiUtil;
+import io.jsonwebtoken.lang.Collections;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 
 @Slf4j
 @SpringBootTest
@@ -254,4 +261,27 @@ public class SampleVoTest {
 //            }
 //        }
 //    }
+
+
+    @Test
+    public void solution() {
+        int[] array = {1, 5, 2, 6, 3, 7, 4};
+        int[][] commands = {{2, 5, 3}, {4, 4, 1}, {1, 7, 3}};
+        
+        solution(array, commands);
+    }
+
+    public void solution(int[] array, int[][] commands) {
+        int[] answer = new int[3];
+
+        for(int i=0 ; i<commands.length;i++){
+            ArrayList list = new ArrayList();
+            for(int j= commands[i][0]-1; j<commands[i][1];j++) {     //[2, 5, 3]
+                list.add(array[j]);
+            }
+            list.sort(null);
+            answer[i] = (int) list.get(commands[i][2]-1);
+        }
+        System.out.print(answer);
+    }
 }

@@ -14,6 +14,22 @@
             <option value="0">등록</option>
             <option value="1">해제</option>
         </select>
+
+        <select id="fanStarDateSlct" name="fanStarDateSlct" class="form-control searchType" style="width: 120px;" onchange="fanStarDateSlctChange();">
+            <option value="0">전체(기간검색)</option>
+            <option value="1">기간검색</option>
+        </select>
+
+        <div class="input-group date mr5" id="rangeFanStarDatepicker" style="display: none">
+            <label for="displayFanStarDate" class="input-group-addon">
+                <span><i class="fa fa-calendar"></i></span>
+            </label>
+            <input type="text" name="displayDate" id="displayFanStarDate" class="form-control" />
+        </div>
+
+        <input class="hide" name="startfanStarDate" id="startFanStarDate">
+        <input class="hide" name="endfanStarDate" id="endFanStarDate" />
+
         <label><input type="text" class="form-control" id="txt_starFanSearch"></label>
         <button type="submit" class="btn btn-success" id="bt_starFanSearch">검색</button>
         <div class="tab-pane fade in active" id="mystar">
@@ -91,6 +107,18 @@
             }
         });
         <!-- 버튼 끝 -->
+
+        $("#displayFanStarDate").statsDaterangepicker(
+            function(start, end, t1) {
+                $("#startFanStarDate").val(start.format('YYYY.MM.DD'));
+                $("#endFanStarDate").val(end.format('YYYY.MM.DD'));
+            }
+        );
+
+        var dateTime = new Date();
+        dateTime = moment(dateTime).format("YYYY.MM.DD");
+        $("#startFanStarDate").val(dateTime);
+        $("#endFanStarDate").val(dateTime);
     });
 
     function getHistory_mystarDetail(tmp) {     // 상세보기
@@ -99,6 +127,9 @@
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
             data.state = $("#fanStarSetting").val();
+            data.startDate = $("#startFanStarDate").val();
+            data.endDate = $("#endFanStarDate").val();
+            data.fanStarDateSlct = $("#fanStarDateSlct").val();
         }
         dtList_info_detail = new DalbitDataTable($("#mystar").find("#list_mystar"), dtList_info_detail_data, MemberDataTableSource.mystar);
         dtList_info_detail.useCheckBox(false);
@@ -116,6 +147,9 @@
             data.mem_no = memNo;
             data.searchText = $("#txt_starFanSearch").val();
             data.state = $("#fanStarSetting").val();
+            data.startDate = $("#startFanStarDate").val();
+            data.endDate = $("#endFanStarDate").val();
+            data.fanStarDateSlct = $("#fanStarDateSlct").val();
         };
         dtList_info_detail2 = new DalbitDataTable($("#myfan").find("#list_myfan"), dtList_info_detail_data, MemberDataTableSource.myfan);
         dtList_info_detail2.useCheckBox(false);
@@ -132,6 +166,9 @@
             data.searchText = $("#txt_starFanSearch").val();
             data.slctType = 0;
             data.state = $("#fanStarSetting").val();
+            data.startDate = $("#startFanStarDate").val();
+            data.endDate = $("#endFanStarDate").val();
+            data.fanStarDateSlct = $("#fanStarDateSlct").val();
         };
         dtList_info_detail3 = new DalbitDataTable($("#mynotice").find("#table"), dtList_info_detail_data, MemberDataTableSource.myNotice);
         dtList_info_detail3.useCheckBox(false);
@@ -164,6 +201,15 @@
         console.log(mystarTabId);
         $('#bt_starFanSearch').click();
     }
+
+    function fanStarDateSlctChange(){
+        if($("#fanStarDateSlct").val() == 0){
+            $("#rangeFanStarDatepicker").hide();
+        }else{
+            $("#rangeFanStarDatepicker").show();
+        }
+    }
+
 
 </script>
 

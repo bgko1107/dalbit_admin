@@ -41,6 +41,9 @@
                 and mem_no_fan in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
                 and mem_no_star not in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
             </if>
+            <if test='fanStarDateSlct == 1'>
+                and a.last_upd_date between concat(#{startDate},' 00:00:00') and concat(#{endDate},' 23:59:59')
+            </if>
            group BY a.mem_no_fan , mem_no_star
            ) as a
           order by totalItemCnt desc, last_upd_date desc
@@ -65,6 +68,9 @@
                     and mem_no_fan in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
                     and mem_no_star not in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_fan = #{mem_no})
                 </if>
+                <if test='fanStarDateSlct == 1'>
+                    and a.last_upd_date between concat(#{startDate},' 00:00:00') and concat(#{endDate},' 23:59:59')
+                </if>
                group BY a.mem_no_fan , mem_no_star
            ) as a
 
@@ -75,6 +81,9 @@
           From rd_data.tb_member_fanstar a
           join rd_data.tb_member_basic b on a.mem_no_star = b.mem_no
          where a.mem_no_fan = #{mem_no} and b.mem_state != 5
+          <if test='fanStarDateSlct == 1'>
+           and a.reg_date between concat(#{startDate},' 00:00:00') and concat(#{endDate},' 23:59:59')
+          </if>
     </select>
 
     <!--<select id="callMyfanHistory" statementType="CALLABLE" parameterType="com.dalbit.common.vo.ProcedureVo" resultType="com.dalbit.member.vo.procedure.P_MemberMystarOutputVo">-->
@@ -116,6 +125,9 @@
                 and mem_no_star in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
                 and mem_no_fan not in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
             </if>
+            <if test='fanStarDateSlct == 1'>
+                and a.last_upd_date between concat(#{startDate},' 00:00:00') and concat(#{endDate},' 23:59:59')
+            </if>
            group BY a.mem_no_fan , mem_no_star
            ) as a
           order by totalItemCnt desc, last_upd_date desc
@@ -139,6 +151,9 @@
                     and mem_no_star in (select mem_no_star from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
                     and mem_no_fan not in (select mem_no_fan from rd_data.tb_member_fanstar where mem_no_star = #{mem_no})
                 </if>
+                <if test='fanStarDateSlct == 1'>
+                    and a.last_upd_date between concat(#{startDate},' 00:00:00') and concat(#{endDate},' 23:59:59')
+                </if>
                   group BY a.mem_no_fan , mem_no_star
                ) as a
     </select>
@@ -148,5 +163,8 @@
           From rd_data.tb_member_fanstar a
           join rd_data.tb_member_basic b on a.mem_no_fan = b.mem_no
          where a.mem_no_star = #{mem_no} and b.mem_state != 5
+          <if test='fanStarDateSlct == 1'>
+           and a.reg_date between concat(#{startDate},' 00:00:00') and concat(#{endDate},' 23:59:59')
+          </if>
     </select>
 </mapper>
