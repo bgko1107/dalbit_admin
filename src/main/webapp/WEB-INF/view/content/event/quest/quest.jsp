@@ -195,7 +195,12 @@
             isValid = false;
             return false;
         }
-        if(common.isEmpty($("#imageReward").val())){
+        if(common.isEmpty($("#imageReward1").val())){
+            alert('보너스 선물 이미지를 입력해주세요.');
+            isValid = false;
+            return false;
+        }
+        if(common.isEmpty($("#imageReward2").val())){
             alert('보너스 선물 이미지를 입력해주세요.');
             isValid = false;
             return false;
@@ -205,6 +210,16 @@
         $("#reward_tbody").find("._noTr").each(function () {
             ++questDetailIdx;
             questNameList += questNameList == "" ? $(this).find("#questName option:checked").text() : "|" + $(this).find("#questName option:checked").text();
+
+            console.log(questNoList);
+            console.log($(this).find('#questName').val());
+            console.log(questNoList.indexOf($(this).find('#questName').val()));
+            if(questNoList.indexOf($(this).find('#questName').val()) > -1){
+                alert('동일한 퀘스트가 있습니다.');
+                isValid = false;
+                return false;
+            }
+
             questNoList += questNoList == "" ? $(this).find('#questName').val() : "|" + $(this).find('#questName').val();
             questOrderList += questDetailIdx == 1 ? questDetailIdx : "|" + questDetailIdx;
 
