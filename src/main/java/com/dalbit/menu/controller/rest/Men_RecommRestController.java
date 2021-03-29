@@ -51,6 +51,7 @@ public class Men_RecommRestController {
         return result;
     }
 
+
     /**
      * 추천 DJ 삭제
      */
@@ -69,5 +70,36 @@ public class Men_RecommRestController {
         String result = men_RecommService.callRecommFanList(recommVo);
         return result;
     }
+
+    // 리뉴얼 추천DJ ----
+
+    /**
+     * 추천 DJ 목록
+     */
+    @PostMapping("dj/list")
+    public String DJlist(RecommVo recommVo){
+        String result = men_RecommService.callRecommDJlist(recommVo);
+        return result;
+    }
+    /**
+     * 추천 DJ 정보
+     */
+    @PostMapping("dj/detail")
+    public String DJdetail(RecommVo recommVo){
+        String result = men_RecommService.callRecommDJdetail(recommVo);
+        return result;
+    }
+
+    /**
+     * 추천 DJ 등록/수정
+     */
+    @PostMapping("dj/edit")
+    public String djEdit(RecommVo recommVo){
+        String result = men_RecommService.callRecommDjEdit(recommVo);
+        return result;
+    }
+
+
+
 
 }

@@ -32,6 +32,12 @@ var ageType = [
     , new COMMON_CODE('4', '4', '40대이상')
 ];
 
+var broadcastType = [
+    new COMMON_CODE(null, 'broadcastType', '방송타입')
+    , new COMMON_CODE('a', 'a', '라디오')
+    , new COMMON_CODE('v', 'v', '영상')
+];
+
 /** =------ special ---------- */
 var special_state = [
     new COMMON_CODE(null, 'stateType', '상태구분')

@@ -79,6 +79,12 @@ public class MenuController {
         return "menu/recomm/list";
     }
 
+    @RequestMapping("/recommDJ/info")
+    public String recommDJList(){
+        return "menu/recommDJ/info";
+    }
+
+
     @RequestMapping("/recomm/popup/recommendFanList")
     public String recommendFanList(){
         return "menu/recomm/popup/recommendFanList";

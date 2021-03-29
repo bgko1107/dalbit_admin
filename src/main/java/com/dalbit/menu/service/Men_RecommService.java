@@ -93,4 +93,47 @@ public class Men_RecommService {
         String result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(procedureVo.getRet())));
         return result;
     }
+
+
+
+    // 리뉴얼 추천 DJ ----------------------
+    /**
+     * 추천 DJ 목록
+     */
+    public String callRecommDJlist(RecommVo recommVo) {
+        ProcedureVo procedureVo = new ProcedureVo(recommVo);
+        List<RecommVo> list = men_RecommDao.callRecommDJlist(procedureVo);
+        RecommVo summary = new Gson().fromJson(procedureVo.getExt(), RecommVo.class);
+        String result = gsonUtil.toJson(new JsonOutputVo(Status.조회, list, new PagingVo(procedureVo.getRet()),summary));
+        return result;
+    }
+
+
+    /**
+     * 추천 DJ 정보
+     */
+    public String callRecommDJdetail(RecommVo recommVo) {
+        ProcedureVo procedureVo = new ProcedureVo(recommVo);
+        men_RecommDao.callRecommDJdetail(procedureVo);
+        RecommVo outVo = new Gson().fromJson(procedureVo.getExt(), RecommVo.class);
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, outVo));
+    }
+
+    /**
+     * 추천 DJ 등록/수정
+     */
+    public String callRecommDjEdit(RecommVo recommVo) {
+        recommVo.setOpName(MemberVo.getMyMemNo());
+        try {
+            ProcedureVo procedureVo = new ProcedureVo(recommVo);
+            men_RecommDao.callRecommDjEdit(procedureVo);
+            return gsonUtil.toJson(new JsonOutputVo(Status.처리완료));
+        }catch(Exception e){
+            return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
+        }
+    }
 }
+
+
+
+
