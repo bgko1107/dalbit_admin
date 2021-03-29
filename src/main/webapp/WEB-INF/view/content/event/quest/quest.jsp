@@ -211,9 +211,6 @@
             ++questDetailIdx;
             questNameList += questNameList == "" ? $(this).find("#questName option:checked").text() : "|" + $(this).find("#questName option:checked").text();
 
-            console.log(questNoList);
-            console.log($(this).find('#questName').val());
-            console.log(questNoList.indexOf($(this).find('#questName').val()));
             if(questNoList.indexOf($(this).find('#questName').val()) > -1){
                 alert('동일한 퀘스트가 있습니다.');
                 isValid = false;

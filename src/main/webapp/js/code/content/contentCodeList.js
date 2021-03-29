@@ -1064,7 +1064,7 @@ var questName = [
     , new COMMON_CODE('3', '3', 'DJ 방송 1분 이상 듣고 좋아요 누르기')
     , new COMMON_CODE('4', '4', '클립 1분 이상 듣기')
     , new COMMON_CODE('5', '5', '방송방 또는 클립 링크 공유하기')
-    , new COMMON_CODE('6', '6', '신입 DJ 방송 10분 이상 듣기')
+    , new COMMON_CODE('6', '6', '신입배지 DJ 방송 10분 이상 듣기')
     , new COMMON_CODE('7', '7', '보이는 라디오 10분 이상 듣기')
     , new COMMON_CODE('8', '8', 'DJ에게 선물하기')
     , new COMMON_CODE('9', '9', '출석체크 보너스 선물 받기')
