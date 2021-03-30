@@ -22,4 +22,7 @@ public class Mon_ExchangeSummaryOutputVo {
     private long cancel_amt;
     private long now_byeol;
     private long now_amt;
+    private long byeol;
+    private long silver;
+
 }

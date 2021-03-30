@@ -1195,8 +1195,8 @@
         <td>{{data.account_name}}</td>
         <td>{{addComma data.cash_basic}}원</td>
         {{#dalbit_if ../selectTab '==' 1}}<td>{{addComma data.benefit}}원</td>{{/dalbit_if}}
-        <td>{{addComma data.cash_real}}원</td>
-        <td><a href="javascript://" id="totalCashReal" data-idx="{{idx}}" data-account_name="{{account_name}}">{{addComma data.totalCashReal}}원</a></td>
+        <td><a href="javascript://" id="totalCashReal" data-idx="{{idx}}" data-account_name="{{account_name}}">{{addComma data.cash_real}}원</a></td>
+        <td>{{addComma data.totalCashReal}}원</td>
         <td>{{addComma data.gold_old}}별</td>
         <td>{{addComma data.byeol}}별</td>
         <td>{{addComma data.mod_gold}}별</td>

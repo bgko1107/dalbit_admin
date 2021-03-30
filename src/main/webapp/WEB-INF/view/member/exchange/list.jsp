@@ -33,6 +33,26 @@
     </div>
 </div>
 
+<div class="modal fade" id="exchangeDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 300px;display: table;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modal_accountName"></span>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span id="modal_realcash"></span><br/>
+                <span id="modal_nomal"></span><br/>
+                <span id="modal_special"></span><br/>
+                <span id="modal_tax"></span><br/>
+                <span id="modal_fees"></span>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="/js/code/money/exchangeCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/handlebars/moneyHelper.js?${dummyData}"></script>
 
@@ -269,18 +289,41 @@
         util.getAjaxData("imageUpload","/rest/money/exchange/image/upload", data, fn_opdateUpdate_complete);
     }
 
+    $(document).on('click','#totalCashReal', function(){
+        var data = {
+            idx : $(this).data('idx')
+            , account_name : $(this).data('account_name')
+        };
+        util.getAjaxData("exchangeDetail","/rest/money/exchange/cash/real/detail", data, fn_exchangeDetail_success);
+    });
+
+    function fn_exchangeDetail_success(dst_id, response, param){
+        $("#modal_accountName").html('<span>회원명 : ' + param.account_name + '</span>' );
+
+        $("#modal_realcash").html('<span>환전 신청 별 : ' + common.addComma(response.data.byeol) + '</span> <span class="pull-right"> ' + common.addComma(response.data.cash_real) + '</span>'  );
+        $("#modal_nomal").html('<span>일반 : ' + + common.addComma(response.data.gold) + '</span> <span class="pull-right"> ' + common.addComma(response.data.goldAmt) + '</span>' );
+        $("#modal_special").html('<span>스패셜 : ' + + common.addComma(response.data.silver) + '</span> <span class="pull-right"> ' + common.addComma(Number(response.data.silverAmt) + Number(response.data.benefit)) + '</span>' );
+        $("#modal_tax").html('<span>원천징수세액</span> <span class="pull-right">' + common.addComma(Number(response.data.income_tax) + Number(response.data.resident_tax)) +' </span>' );
+        $("#modal_fees").html('<span>수수료</span> <span class="pull-right">' + common.addComma(response.data.transfer_fee) +' </span>' );
+
+        $("#exchangeDetailModal").modal('show');
+    }
+
 </script>
 
 <script id="tmp_exchangeSummary" type="text/x-handlebars-template">
     <table class="table table-bordered table-summary pull-right" style="margin-right: 0px;width: 100%">
         <tr>
             <th rowspan="2" class="_bgColor" data-bgcolor="#d9d9d9">구분</th>
+            <th colspan="2" class="_bgColor" data-bgcolor="#d9d9d9">회원구분</th>
             <th colspan="3" class="_bgColor" data-bgcolor="#b4c7e7">승인 완료</th>
             <th colspan="3" class="_bgColor" data-bgcolor="#d9d9d9">승인 취소</th>
             <th colspan="3" class="_bgColor" data-bgcolor="#d9d9d9">미처리</th>
             <th colspan="2" class="_bgColor" data-bgcolor="#b4c7e7">현재 보유 별</th>
         </tr>
         <tr>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">일반</th>
+            <th class="_bgColor" data-bgcolor="#f2f2f2">스페셜DJ</th>
             <th class="_bgColor" data-bgcolor="#dae3f3">건</th>
             <th class="_bgColor" data-bgcolor="#dae3f3">별</th>
             <th class="_bgColor" data-bgcolor="#dae3f3">금액</th>
@@ -295,6 +338,8 @@
         </tr>
         <tr>
             <th class="_bgColor" data-bgcolor="#f2f2f2">총합</th>
+            <td>{{addComma byeol}} 별</td>
+            <td>{{addComma silver}} 별</td>
             <td>{{addComma confirm_cnt}} 건</td>
             <td>{{addComma confirm_byeol}} 별</td>
             <td>{{addComma confirm_amt}} 원</td>

@@ -822,8 +822,8 @@ var MemberDataTableSource = {
             {'title': '스페셜DJ<br/>혜택', 'data': 'benefit', 'render': function(data) {
                     return common.addComma(data) + "원";
                 }},
-            {'title': '실수령액', 'data': 'cash_real', 'render': function(data) {
-                    return common.addComma(data) + "원";
+            {'title': '실수령액', 'data': 'cash_real', 'render': function(data, type, row) {
+                    return '<a href="javascript://" id="totalCashReal" data-idx="' + row.idx + '" data-account_name="' + row.account_name + '">' + common.addComma(data) + '원</a>';
                 }},
             {'title': '환전 누적금액', 'data': 'totalCashReal', 'render': function(data) {
                     return common.addComma(data) + "원";
