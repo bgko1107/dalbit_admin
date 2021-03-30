@@ -1092,4 +1092,19 @@
             , last_upd_date = now()
          where idx = #{idx}
     </update>
+
+    <select id="cashRealDetail" parameterType="com.dalbit.money.vo.Mon_ExchangeInputVo" resultType="com.dalbit.money.vo.Mon_ExchangeOutputVo">
+        SELECT byeol
+               , gold
+               , ( gold * 60 ) AS goldAmt
+               , silver
+               , ( silver * 60 ) AS silverAmt
+               , income_tax
+               , resident_tax
+               , transfer_fee
+               , benefit
+               , cash_real
+          FROM rd_data.tb_member_exchange
+         WHERE idx=#{idx};
+    </select>
 </mapper>

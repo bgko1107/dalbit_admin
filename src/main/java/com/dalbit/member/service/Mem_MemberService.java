@@ -750,15 +750,17 @@ public class Mem_MemberService {
     /**
      * 별 추가
      */
-    public String getMemberByeolAdd(P_MemberEditorVo pMemberEditorVo){
+    public String  getMemberByeolAdd(P_MemberEditorVo pMemberEditorVo){
         pMemberEditorVo.setOpName(MemberVo.getMyMemNo());
+
+        /*
         // 가지고 있는 Byeol
         int beforByeolCnt = mem_MemberDao.callMemberBeforByeolCnt(pMemberEditorVo);
         int afterByeolCnt = beforByeolCnt + pMemberEditorVo.getAddByeolCnt();
         // 달 set
         pMemberEditorVo.setBeforByeolCnt(beforByeolCnt);
         pMemberEditorVo.setAfterByeolCnt(afterByeolCnt);
-        pMemberEditorVo.setUse_contents(pMemberEditorVo.getAddByeolCnt() + " - " + pMemberEditorVo.getPointEditStroy());
+        pMemberEditorVo.setUse_contents();
         // 달 추가
         mem_MemberDao.callMemberAddByeol(pMemberEditorVo);
         // 달 추가 로그
@@ -771,6 +773,17 @@ public class Mem_MemberService {
         pMemberEditorVo.setType(1);
 
         mem_MemberDao.callMemberEditHistoryAdd(pMemberEditorVo);
+        */
+
+        pMemberEditorVo.setUseContents(pMemberEditorVo.getAddByeolCnt() + " - " + pMemberEditorVo.getPointEditStroy());
+        int beforByeolCnt = mem_MemberDao.callMemberBeforByeolCnt(pMemberEditorVo);
+        int afterByeolCnt = beforByeolCnt + pMemberEditorVo.getAddByeolCnt();
+        pMemberEditorVo.setAddContents("별수 변경 : " + DalbitUtil.comma(beforByeolCnt) + " >> " + DalbitUtil.comma(pMemberEditorVo.getAddByeolCnt())
+                + " 변경 >> " + DalbitUtil.comma(afterByeolCnt) + " | " + pMemberEditorVo.getPointEditStroy());
+        ProcedureVo procedureVo = new ProcedureVo(pMemberEditorVo);
+        mem_MemberDao.callMemberEditor(procedureVo);
+
+
         //notice
         P_MemberReportVo pMemberReportVo = new P_MemberReportVo();
         pMemberReportVo.setReported_mem_no(pMemberEditorVo.getMem_no());

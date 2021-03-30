@@ -144,6 +144,27 @@
 
 <form name="excelForm" id="excelForm"></form>
 
+
+<div class="modal fade" id="exchangeDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 300px;display: table;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modal_accountName"></span>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span id="modal_realcash"></span><br/>
+                <span id="modal_nomal"></span><br/>
+                <span id="modal_special"></span><br/>
+                <span id="modal_tax"></span><br/>
+                <span id="modal_fees"></span>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="/js/lib/jquery.table2excel.js"></script>
 <script type="text/javascript" src="/js/code/money/exchangeCodeList.js?${dummyData}"></script>
 <script type="text/javascript" src="/js/code/member/memberCodeList.js?${dummyData}"></script>
@@ -887,6 +908,26 @@
         $("#bt_search").click();
     }
 
+    $(document).on('click','#totalCashReal', function(){
+        var data = {
+            idx : $(this).data('idx')
+            , account_name : $(this).data('account_name')
+        };
+        util.getAjaxData("exchangeDetail","/rest/money/exchange/cash/real/detail", data, fn_exchangeDetail_success);
+    });
+
+    function fn_exchangeDetail_success(dst_id, response, param){
+        $("#modal_accountName").html('<span>회원명 : ' + param.account_name + '</span>' );
+
+        $("#modal_realcash").html('<span>환전 신청 별 : ' + common.addComma(response.data.byeol) + '</span> <span class="pull-right"> ' + common.addComma(response.data.cash_real) + '</span>'  );
+        $("#modal_nomal").html('<span>일반 : ' + + common.addComma(response.data.gold) + '</span> <span class="pull-right"> ' + common.addComma(response.data.goldAmt) + '</span>' );
+        $("#modal_special").html('<span>스패셜 : ' + + common.addComma(response.data.silver) + '</span> <span class="pull-right"> ' + common.addComma(Number(response.data.silverAmt) + Number(response.data.benefit)) + '</span>' );
+        $("#modal_tax").html('<span>원천징수세액</span> <span class="pull-right">' + common.addComma(Number(response.data.income_tax) + Number(response.data.resident_tax)) +' </span>' );
+        $("#modal_fees").html('<span>수수료</span> <span class="pull-right">' + common.addComma(response.data.transfer_fee) +' </span>' );
+
+        $("#exchangeDetailModal").modal('show');
+    }
+
 
 </script>
 
@@ -1155,7 +1196,7 @@
         <td>{{addComma data.cash_basic}}원</td>
         {{#dalbit_if ../selectTab '==' 1}}<td>{{addComma data.benefit}}원</td>{{/dalbit_if}}
         <td>{{addComma data.cash_real}}원</td>
-        <td>{{addComma data.totalCashReal}}원</td>
+        <td><a href="javascript://" id="totalCashReal" data-idx="{{idx}}" data-account_name="{{account_name}}">{{addComma data.totalCashReal}}원</a></td>
         <td>{{addComma data.gold_old}}별</td>
         <td>{{addComma data.byeol}}별</td>
         <td>{{addComma data.mod_gold}}별</td>

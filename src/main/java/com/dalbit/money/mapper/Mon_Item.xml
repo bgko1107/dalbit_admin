@@ -16,14 +16,15 @@
                 ,(select `level` From rd_data.tb_member_level where mem_no = a.mem_no) as mem_level
                 ,(select count(*) from rd_data.tb_member_wallet_ruby where mem_no=a.mem_no and type=6) as changeCnt
                 ,(select count(*) from rd_data.tb_member_wallet_ruby where mem_no=a.mem_no and type=31) as changeAutoCnt
-                ,b.gold as gold
-                ,a.ruby as ruby
-                ,a.ruby_old as ruby_old
-                ,b.gold_old as gold_old
-                ,a.ruby_new as ruby_new
-                ,b.gold_new as gold_new
+                ,b.gold + b.silver as gold
+                ,a.ruby + a.money  as ruby
+                ,a.ruby_old + a.money_old  as ruby_old
+                ,b.gold_old + b.silver_old as gold_old
+                ,a.ruby_new +_a.money_new  as ruby_new
+                ,b.gold_new + b.silver_new   as gold_new
                 ,a.type
-           from rd_data.tb_member_wallet_ruby a join rd_data.tb_member_wallet_gold b on a.mem_no = b.mem_no
+           from rd_data.tb_member_wallet_ruby a
+           join rd_data.tb_member_wallet_gold b on a.mem_no = b.mem_no
           inner join rd_data.tb_member_basic c on a.mem_no = c.mem_no
                 ,(select @rownum := #{pageStart}) r
           where a.type in (6,31) and b.type in (1,31)

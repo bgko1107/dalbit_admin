@@ -37,16 +37,16 @@
         select @rownum := @rownum + 1 as rowNum, a.*
           from (select '1' as `type`
                         , (select emp_name from rd_admin.tb_admin_test_account a where a.mem_no = ruby.mem_no) as emp_name
-                        , if(ruby <![CDATA[>]]> 0,ruby,0) as send
-                        , if(ruby <![CDATA[<]]> 0,ruby,0) as recv
-                        , if(ruby <![CDATA[>]]> 0,ruby,0) as dalSend
-                        , if(ruby <![CDATA[<]]> 0,ruby,0) as dalRecv
+                        , if((ruby + money) <![CDATA[>]]> 0,(ruby + money),0) as send
+                        , if((ruby + money) <![CDATA[<]]> 0,(ruby + money),0) as recv
+                        , if((ruby + money) <![CDATA[>]]> 0,(ruby + money),0) as dalSend
+                        , if((ruby + money) <![CDATA[<]]> 0,(ruby + money),0) as dalRecv
                         , 0 AS byeolSend
                         , 0 AS byeolRecv
                         , op_name
                         , mem_no as memNo
-                        , (select ruby From rd_data.tb_member_wallet a where a.mem_no = ruby.mem_no) as dal
-                        , (select gold From rd_data.tb_member_wallet a where a.mem_no = ruby.mem_no) as byeol
+                        , (select (ruby + money) From rd_data.tb_member_wallet a where a.mem_no = ruby.mem_no) as dal
+                        , (select (gold + silver) From rd_data.tb_member_wallet a where a.mem_no = ruby.mem_no) as byeol
                         , (select last_upd_date From rd_data.tb_member_wallet a where a.mem_no = ruby.mem_no) as lastUpdDate
                         , last_upd_date
                   from rd_data.tb_member_wallet_ruby ruby
@@ -61,16 +61,16 @@
            union
                select '2' as `type`
                     , (select emp_name from rd_admin.tb_admin_test_account a where a.mem_no = gold.mem_no) as emp_name
-                    , if(gold <![CDATA[>]]> 0,gold,0) as send
-                    , if(gold <![CDATA[<]]> 0,gold,0) as recv
+                    , if((gold + silver) <![CDATA[>]]> 0,(gold + silver),0) as send
+                    , if((gold + silver) <![CDATA[<]]> 0,(gold + silver),0) as recv
                     , 0 as dalSend
                     , 0 as dalRecv
-                    , if(gold <![CDATA[>]]> 0,gold,0) as byeolSend
-                    , if(gold <![CDATA[<]]> 0,gold,0) as byeolRecv
+                    , if((gold + silver) <![CDATA[>]]> 0,(gold + silver),0) as byeolSend
+                    , if((gold + silver) <![CDATA[<]]> 0,(gold + silver),0) as byeolRecv
                     , op_name
                     , mem_no as memNo
-                    , (select ruby From rd_data.tb_member_wallet a where a.mem_no = gold.mem_no) as dal
-                    , (select gold From rd_data.tb_member_wallet a where a.mem_no = gold.mem_no) as byeol
+                    , (select (ruby + money) From rd_data.tb_member_wallet a where a.mem_no = gold.mem_no) as dal
+                    , (select (gold + silver) From rd_data.tb_member_wallet a where a.mem_no = gold.mem_no) as byeol
                     , last_upd_date
                     , (select last_upd_date From rd_data.tb_member_wallet a where a.mem_no = gold.mem_no) as lastUpdDate
               from rd_data.tb_member_wallet_gold gold
@@ -401,7 +401,7 @@
                    FROM (SELECT
                             '2' AS `type`,
                             `type`                AS gubun,
-                            (gold_new - gold_old) AS gold,
+                            (gold + silver)       AS gold,
                             ''                    AS room_no,
                             '10000000000000'      AS mem_no,
                             0                     AS `level`,

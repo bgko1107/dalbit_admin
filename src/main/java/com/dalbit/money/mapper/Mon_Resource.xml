@@ -46,7 +46,7 @@
                   , ifnull(base.mem_sex,withdrawal.mem_sex) as memSex
                   , ifnull(base.mem_birth_year,withdrawal.mem_birth_year) as memBirthYear
                   , ifnull(base.inner,withdrawal.inner) as `inner`
-                  , b.gold as byeolCnt
+                  , b.gold + b.silver as byeolCnt
                   , a.last_upd_date as lastUpdDate
                 <if test='type == "3" or type == "3-1"'>
                   , a.ruby + a.money as dalCnt
@@ -363,9 +363,9 @@
             </if>
         <if test='type == "5" or type == "9-1" or type == "9" or type == "8" or type == "10" or type == "3" or type == "3-1" or type == "15"'>
             , b.last_upd_date as lastUpdDate
-            , b.gold as byeolCnt
+            , b.gold + b.silver as byeolCnt
             <if test='type == "3" or type == "3-1"'>
-                , b.gold_new as newByeolCnt
+                , b.gold_new + b.silver_new as newByeolCnt
             </if>
         from rd_data.tb_member_wallet_gold b
         </if>
@@ -379,22 +379,22 @@
         </if>
         <if test='type == "9-1"'>
             where b.type='4'
-              and gold <![CDATA[>]]> 0
+              and (gold + silver) <![CDATA[>]]> 0
         </if>
         <if test='type == "9"'>
             where b.type='23'
         </if>
         <if test='type == "8"'>
             where b.type='6'
-              and gold <![CDATA[>]]> 0
+              and (gold + silver) <![CDATA[>]]> 0
         </if>
         <if test='type == "10"'>
             where b.type='7'
-              and gold <![CDATA[>]]> 0
+              and (gold + silver) <![CDATA[>]]> 0
         </if>
         <if test='type == "15"'>
             where (b.type='7' or b.type='6')
-            and gold <![CDATA[<]]> 0
+            and (gold + silver) <![CDATA[<]]> 0
         </if>
         <if test='type == "3"'>
             where b.type in ('1' , '31')

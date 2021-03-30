@@ -121,4 +121,10 @@ public class Mon_ExchangeRestController {
         String result = monExchangeService.imageUpload(monExchangeOutputVo);
         return result;
     }
+
+    @PostMapping("cash/real/detail")
+    public String cashRealDetail(Mon_ExchangeInputVo monExchangeInputVo){
+        String result = monExchangeService.cashRealDetail(monExchangeInputVo);
+        return result;
+    }
 }

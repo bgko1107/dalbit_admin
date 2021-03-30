@@ -776,4 +776,12 @@ public class Mon_ExchangeService {
             return gsonUtil.toJson(new JsonOutputVo(Status.비즈니스로직오류));
         }
     }
+
+
+    /* 환전 접수서류 변경 */
+    public String cashRealDetail(Mon_ExchangeInputVo monExchangeInputVo){
+        Mon_ExchangeOutputVo output = monExchangeDao.cashRealDetail(monExchangeInputVo);
+
+        return gsonUtil.toJson(new JsonOutputVo(Status.조회, output));
+    }
 }

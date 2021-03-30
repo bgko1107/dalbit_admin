@@ -170,14 +170,14 @@
 
     <select id="getCharge" parameterType="string" resultType="com.dalbit.administrate.vo.TestIdListVo">
         select '달' as `type`
-               ,ruby as charge
+               ,(ruby + money) as charge
                ,DATE_FORMAT(last_upd_date, '%Y-%m-%d %H:%i:%s') as chargeDate
                ,op_name as lastOpName
           from rd_data.tb_member_wallet_ruby
          where mem_no=#{mem_no} and `type` in (1,7) and op_name is not null
         union
         select '별' as `type`
-               ,gold as charge
+               ,(gold + silver) as charge
                ,DATE_FORMAT(last_upd_date, '%Y-%m-%d %H:%i:%s') as chargeDate
                ,op_name as lastOpName
           from rd_data.tb_member_wallet_gold

@@ -66,4 +66,8 @@ public interface Mon_ExchangeDao {
     int opdateUpdate(Mon_ExchangeOutputVo monExchangeOutputVo);
 
     int imageUpload(Mon_ExchangeOutputVo monExchangeOutputVo);
+
+    @Transactional(readOnly = true)
+    Mon_ExchangeOutputVo cashRealDetail(Mon_ExchangeInputVo monExchangeInputVo);
+
 }

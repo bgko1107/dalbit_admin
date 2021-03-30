@@ -134,7 +134,7 @@
                         ,'https://image.dalbitlive.com/ani/thumbs/moon_thumb.jpg' as image
                         ,'달' as itemNm
                         ,'dal' as itemType
-                        , ruby as cnt
+                        , (ruby + money) as cnt
                         , last_upd_date as lastUpdDate
                         , '받은 달' as `type`
                    from rd_data.tb_member_wallet_ruby as a
@@ -150,7 +150,7 @@
                     ,'https://image.dalbitlive.com/ani/thumbs/star_thumb.jpg' as image
                     ,'별' as itemNm
                     ,'byeol' as itemType
-                    , gold as cnt
+                    , (gold + silver) as cnt
                     , last_upd_date as lastUpdDate
                     , '받은 별' as `type`
                 from rd_data.tb_member_wallet_gold as a
@@ -219,7 +219,7 @@
                       ,'https://image.dalbitlive.com/ani/thumbs/star_thumb.jpg' as image
                       ,'별' as itemNm
                       ,'byeol' as itemType
-                      , gold as cnt
+                      , (gold + silver) as cnt
                       , last_upd_date as lastUpdDate
                       , '보낸 별' as `type`
                       from rd_data.tb_member_wallet_gold as a
@@ -244,7 +244,7 @@
                             ,'https://image.dalbitlive.com/ani/thumbs/moon_thumb.jpg' as image
                             ,'달' as itemNm
                             ,'dal' as itemType
-                            , ruby as cnt
+                            , (ruby + money) as cnt
                             , last_upd_date as lastUpdDate
                             , '받은 달' as `type`
                        from rd_data.tb_member_wallet_ruby as a
@@ -260,7 +260,7 @@
                         ,'https://image.dalbitlive.com/ani/thumbs/star_thumb.jpg' as image
                         ,'별' as itemNm
                         ,'byeol' as itemType
-                        , gold as cnt
+                        , (gold + silver) as cnt
                         , last_upd_date as lastUpdDate
                         , '받은 별' as `type`
                     from rd_data.tb_member_wallet_gold as a
@@ -320,13 +320,13 @@
     </select>
 
     <select id="callChargeHistory_allDalGiftCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberChargeInputVo" resultType="integer">
-        select ifnull(sum(ruby),0) as allDalGiftCnt from rd_data.tb_member_wallet_ruby where mem_no=#{mem_no} and `type` in (4)
+        select ifnull(sum((ruby + money)),0) as allDalGiftCnt from rd_data.tb_member_wallet_ruby where mem_no=#{mem_no} and `type` in (4)
     </select>
     <select id="callChargeHistory_allDalReceivedCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberChargeInputVo" resultType="integer">
-        select ifnull(sum(ruby),0) as allDalReceivedCnt from rd_data.tb_member_wallet_ruby where mem_no=#{mem_no} and `type` in (7)
+        select ifnull(sum((ruby + money),0) as allDalReceivedCnt from rd_data.tb_member_wallet_ruby where mem_no=#{mem_no} and `type` in (7)
     </select>
     <select id="callChargeHistory_allByeolReceivedCnt" parameterType="com.dalbit.member.vo.procedure.P_MemberChargeInputVo" resultType="integer">
-        select ifnull(sum(gold),0) as allByeolReceivedCnt from rd_data.tb_member_wallet_gold where mem_no=#{mem_no} and `type` in (7)
+        select ifnull(sum((gold + silver)),0) as allByeolReceivedCnt from rd_data.tb_member_wallet_gold where mem_no=#{mem_no} and `type` in (7)
     </select>
 
 </mapper>

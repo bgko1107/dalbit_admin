@@ -22,12 +22,16 @@ public class Mon_ExchangeOutputVo{
     private String mem_phone;
     private int idx;
     private int byeol;
+    private int silver;
     private int cash_basic;
     private int income_tax;
     private int resident_tax;
     private int transfer_fee;
     private int benefit;
     private int cash_real;
+    private int gold;
+    private int goldAmt;
+    private int silverAmt;
     private String account_name;
     private String bank_code;
     private String bank_name;
@@ -49,7 +53,6 @@ public class Mon_ExchangeOutputVo{
     private String op_date;
     private String reg_date;
     private String last_upd_date;
-    private int gold;
     private int exchangeCnt;
     private int totalCashBasic;
     private int totalCashReal;
