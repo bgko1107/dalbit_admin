@@ -1211,13 +1211,13 @@
             <%--</td>--%>
             <th>보유달</th>
             <td colspan="6" style="text-align: left;">
-                <span class="col-md-5 no-padding">
+                <span class="col-md-6 no-padding">
                     <span class="font-bold">{{addComma totalDal}} 달</span><br />
                     (구매 : {{addComma money}} 달 / 무료 : {{addComma dal}} 달)
                 </span>
                 <c:if test="${insertYn eq 'Y'}">
                     {{#equal memWithdrawal '0'}}
-                        <span class="col-md-7 no-padding" id="sp_dalPointEdit">
+                        <span class="col-md-6 no-padding" id="sp_dalPointEdit">
                             <select id="dalPlusMinus" name="dalPlusMinus" class="form-control searchType">
                                 <option value="1">+</option>
                                 <option value="2">-</option>
@@ -1269,12 +1269,13 @@
             </td>
             <th>보유별</th>
             <td colspan="6" style="text-align: left">
-                <span class="col-md-3 no-padding">
-                    {{addComma byeol}} 별
+                <span class="col-md-6 no-padding">
+                    <span class="font-bold">{{addComma totalByeol}} 별</span><br />
+                    (스페셜:{{addComma silver}} 별 / 일반 : {{addComma byeol}} 별)
                 </span>
                 <c:if test="${insertYn eq 'Y'}">
                     {{#equal memWithdrawal '0'}}
-                    <span class="col-md-7 no-padding pull-right" id="sp_byeolPointEdit">
+                    <span class="col-md-6 no-padding pull-right" id="sp_byeolPointEdit">
                             <select id="byeolPlusMinus" name="byeolPlusMinus" class="form-control searchType">
                                 <option value="1">+</option>
                                 <option value="2">-</option>

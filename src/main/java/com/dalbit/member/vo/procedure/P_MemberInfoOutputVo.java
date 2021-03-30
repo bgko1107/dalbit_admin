@@ -41,6 +41,8 @@ public class P_MemberInfoOutputVo extends SearchVo {
     private int money;
     private int totalDal;
     private int byeol;
+    private int silver;
+    private int totalByeol;
     private int managerICnt;
     private int managerMeCnt;
     private int blackICnt;

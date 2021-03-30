@@ -778,7 +778,7 @@ public class Mon_ExchangeService {
     }
 
 
-    /* 환전 접수서류 변경 */
+    /* 실수령액 상세보기 */
     public String cashRealDetail(Mon_ExchangeInputVo monExchangeInputVo){
         Mon_ExchangeOutputVo output = monExchangeDao.cashRealDetail(monExchangeInputVo);
 
