@@ -1,0 +1,8 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¢õû÷8Àªí¹†/
+r	java:S116"XRename this field "mem_ListenDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(çÂÜó8Àªí¹†/
+w	java:S116"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š†”Ÿÿÿÿÿÿ8Àªí¹†/
+y	java:S116"ZRename this field "bro_ListenerDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼ôÚÝþÿÿÿÿ8Àªí¹†/
+M
+java:S1135"2Complete the task associated to this TODO comment.(ç¨×—8Àªí¹†/
+U	java:S125"<This block of commented-out lines of code should be removed.(³øÎB8Àªí¹†/

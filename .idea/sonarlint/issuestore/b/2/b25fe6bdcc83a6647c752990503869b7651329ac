@@ -1,0 +1,35 @@
+
+k	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚8°Âíé…/
+p	java:S116"QRename this field "mem_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯µ˜Áøÿÿÿÿ8°Âíé…/
+t	java:S116"URename this field "mem_passwd" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Úó šûÿÿÿÿ8°Âíé…/
+s	java:S116"TRename this field "mem_phone" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šÔ™œÿÿÿÿÿ8°Âíé…/
+m	java:S116"SRename this field "mem_nick" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞÕÍ®8°Âíé…/
+t	java:S116"URename this field "mem_userid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ†èÕøÿÿÿÿ8°Âíé…/
+r	java:S116"SRename this field "mem_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾´ç™øÿÿÿÿ8°Âíé…/
+s	java:S116"TRename this field "mem_email" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(È„·øÿÿÿÿ8°Âíé…/
+o	java:S116"URename this field "foreign_yn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·éÀ÷8°Âíé…/
+k	java:S116"RRename this field "mem_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò€àc8°Âíé…/
+x	java:S116"YRename this field "mem_birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ãªßÿÿÿÿÿ8°Âíé…/
+y	java:S116"ZRename this field "mem_birth_month" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ıÙé¯ÿÿÿÿÿ8°Âíé…/
+w	java:S116"XRename this field "mem_birth_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞŠã¨üÿÿÿÿ8°Âíé…/
+r	java:S116"SRename this field "mem_slct" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•Ÿ–Ìøÿÿÿÿ8°Âíé…/
+l	java:S116"SRename this field "mem_adid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äª´&8°Âíé…/
+s	java:S116"TRename this field "mem_state" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÀâÁºùÿÿÿÿ8°Âíé…/
+n	java:S116"TRename this field "block_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Êæåû8°Âíé…/
+x	java:S116"YRename this field "block_end_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂŠîüÿÿÿÿ8°Âíé…/
+w	java:S116"XRename this field "mem_join_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê–Ğğÿÿÿÿÿ8°Âíé…/
+l	java:S116"RRename this field "os_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şæ“›8°Âíé…/
+w	java:S116"XRename this field "last_upd_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®‰Ÿºúÿÿÿÿ8°Âíé…/
+q	java:S116"RRename this field "room_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á¾Ç¿úÿÿÿÿ8°Âíé…/
+n	java:S116"TRename this field "join_path" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²ˆåÃ8°Âíé…/
+s	java:S116"TRename this field "day_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…Î‰úÿÿÿÿ8°Âíé…/
+n	java:S116"URename this field "week_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŠÑÕd8°Âíé…/
+u	java:S116"VRename this field "month_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÚÁº¿úÿÿÿÿ8°Âíé…/
+q	java:S116"WRename this field "recomm_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯Ì­ö8°Âíé…/
+p	java:S116"VRename this field "newdj_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ö½½8°Âíé…/
+s	java:S116"TRename this field "new_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µÉ—‹ÿÿÿÿÿ8°Âíé…/
+t	java:S116"ZRename this field "specialdj_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”±ò—8°Âíé…/
+p	java:S116"VRename this field "admin_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(í¹¤»8°Âíé…/
+t	java:S116"ZRename this field "shiningdj_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€Æ¾8°Âíé…/
+w	java:S116"XRename this field "specialdj_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šı¹Æüÿÿÿÿ8°Âíé…/
+r	java:S116"XRename this field "image_profile" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô¢í8°Âíé…/

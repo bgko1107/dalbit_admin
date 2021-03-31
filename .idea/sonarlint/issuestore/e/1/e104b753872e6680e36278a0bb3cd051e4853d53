@@ -1,0 +1,13 @@
+
+q	java:S116"RRename this field "room_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á¾Ç¿úÿÿÿÿ8Ç“ºõ/
+m	java:S116"SRename this field "item_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿéê8Ç“ºõ/
+k	java:S116"RRename this field "mem_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò€àc8Ç“ºõ/
+x	java:S116"YRename this field "item_thumbnail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„Ñÿÿÿÿÿ8Ç“ºõ/
+s	java:S116"TRename this field "item_code" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹ë¹£øÿÿÿÿ8Ç“ºõ/
+l	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(À÷Ø„ıÿÿÿÿ8Ç“ºõ/
+x	java:S116"YRename this field "mem_birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ãªßÿÿÿÿÿ8Ç“ºõ/
+k	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚8Ç“ºõ/
+m	java:S116"SRename this field "ruby_old" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Üï•Á8Ç“ºõ/
+s	java:S116"TRename this field "item_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ¨öşÿÿÿÿ8Ç“ºõ/
+r	java:S116"SRename this field "ruby_new" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼â¾Áşÿÿÿÿ8Ç“ºõ/
+w	java:S116"XRename this field "last_upd_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®‰Ÿºúÿÿÿÿ8Ç“ºõ/

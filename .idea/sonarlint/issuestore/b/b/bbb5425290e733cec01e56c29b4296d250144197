@@ -1,0 +1,8 @@
+
+`	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(äÍë¶
+r
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(»ŠãØ
+D
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
+k	java:S116"XRename this field "mem_NoticeDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èéÀº
+s	java:S116"[Rename this field "bro_BroadcastDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÇåªøÿÿÿÿ

@@ -1,0 +1,4 @@
+
+`	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÔÁ„µ
+f	java:S116"SRename this field "desc_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶£…É
+p	java:S116"XRename this field "last_upd_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®‰Ÿºúÿÿÿÿ

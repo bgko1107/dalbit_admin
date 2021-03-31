@@ -1,0 +1,45 @@
+
+a
+java:S1192"FDefine a constant instead of duplicating this literal "#,##0" 3 times.(½†šø8„ìè¯/
+b
+java:S1192"GDefine a constant instead of duplicating this literal "8859_1" 4 times.(¥à—¨8„ìè¯/
+a
+java:S1192"FDefine a constant instead of duplicating this literal "UTF-8" 7 times.(†§ú×8„ìè¯/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(öÆ€¼şÿÿÿÿ8„ìè¯/
+C
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8„ìè¯/
+C
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8„ìè¯/
+C
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8„ìè¯/
+T
+java:S1143"4Remove this throw statement from this finally block.(‡¼Ş×ùÿÿÿÿ8„ìè¯/
+]
+java:S1163"=Refactor this code to not throw exceptions in finally blocks.(‡¼Ş×ùÿÿÿÿ8„ìè¯/
+z
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(í…Ò‰8„ìè¯/
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(Ë—Šˆ8„ìè¯/
+Y
+java:S4719">Replace charset name argument with StandardCharsets.ISO_8859_1(¥à—¨8„ìè¯/
+T
+java:S4719"9Replace charset name argument with StandardCharsets.UTF_8(¥à—¨8„ìè¯/
+Y
+java:S4719">Replace charset name argument with StandardCharsets.ISO_8859_1(¥à—¨8„ìè¯/
+T
+java:S4719"9Replace charset name argument with StandardCharsets.UTF_8(¥à—¨8„ìè¯/
+Y
+java:S4719">Replace charset name argument with StandardCharsets.ISO_8859_1(¥à—¨8„ìè¯/
+T
+java:S4719"9Replace charset name argument with StandardCharsets.UTF_8(¥à—¨8„ìè¯/
+Y
+java:S4719">Replace charset name argument with StandardCharsets.ISO_8859_1(¥à—¨8„ìè¯/
+T
+java:S4719"9Replace charset name argument with StandardCharsets.UTF_8(¥à—¨8„ìè¯/
+9
+java:S2153"Remove the boxing to "Double".(À÷Ç¤8„ìè¯/
+;
+java:S2129" Remove this "Double" constructor(À÷Ç¤8„ìè¯/
+@
+java:S2129" Remove this "Double" constructor(¢òºÏşÿÿÿÿ8„ìè¯/

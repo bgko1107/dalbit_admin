@@ -1,0 +1,50 @@
+
+h	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(âÎ‚G8š‰š‹ˆ/
+m	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚8š‰š‹ˆ/
+r	java:S116"QRename this field "mem_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯µ˜Áøÿÿÿÿ8š‰š‹ˆ/
+v	java:S116"URename this field "mem_userid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ†èÕøÿÿÿÿ8š‰š‹ˆ/
+t	java:S116"SRename this field "mem_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾´ç™øÿÿÿÿ8š‰š‹ˆ/
+o	java:S116"SRename this field "mem_nick" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞÕÍ®8š‰š‹ˆ/
+m	java:S116"RRename this field "mem_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò€àc8š‰š‹ˆ/
+z	java:S116"YRename this field "mem_birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ãªßÿÿÿÿÿ8š‰š‹ˆ/
+{	java:S116"ZRename this field "mem_birth_month" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ıÙé¯ÿÿÿÿÿ8š‰š‹ˆ/
+y	java:S116"XRename this field "mem_birth_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞŠã¨üÿÿÿÿ8š‰š‹ˆ/
+t	java:S116"XRename this field "image_profile" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô¢í8š‰š‹ˆ/
+p	java:S116"TRename this field "mem_state" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”½ÜÚ8š‰š‹ˆ/
+u	java:S116"TRename this field "mem_phone" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šÔ™œÿÿÿÿÿ8š‰š‹ˆ/
+q	java:S116"URename this field "cash_basic" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ä¨ÑÂ8š‰š‹ˆ/
+q	java:S116"URename this field "income_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶şé¯8š‰š‹ˆ/
+x	java:S116"WRename this field "resident_tax" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õú…Šşÿÿÿÿ8š‰š‹ˆ/
+x	java:S116"WRename this field "transfer_fee" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ‘±ïûÿÿÿÿ8š‰š‹ˆ/
+u	java:S116"TRename this field "cash_real" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’ïÿÿÿÿÿ8š‰š‹ˆ/
+x	java:S116#"WRename this field "account_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒ¯ù¾şÿÿÿÿ8š‰š‹ˆ/
+u	java:S116$"TRename this field "bank_code" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¯ô³şÿÿÿÿ8š‰š‹ˆ/
+u	java:S116%"TRename this field "bank_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å«ôÇüÿÿÿÿ8š‰š‹ˆ/
+v	java:S116&"URename this field "account_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â¦”¿ıÿÿÿÿ8š‰š‹ˆ/
+u	java:S116'"TRename this field "social_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶şş¾üÿÿÿÿ8š‰š‹ˆ/
+o	java:S116("SRename this field "phone_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–±Œ¨8š‰š‹ˆ/
+p	java:S116)"TRename this field "address_1" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Éğ­Ö8š‰š‹ˆ/
+p	java:S116*"TRename this field "address_2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ë¹ 8š‰š‹ˆ/
+p	java:S116+"TRename this field "add_file1" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªúĞÖ8š‰š‹ˆ/
+u	java:S116,"TRename this field "add_file2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(á•Ìˆüÿÿÿÿ8š‰š‹ˆ/
+u	java:S116-"TRename this field "add_file3" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³¹ßÍøÿÿÿÿ8š‰š‹ˆ/
+w	java:S116."VRename this field "terms_agree" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰÷ôÀùÿÿÿÿ8š‰š‹ˆ/
+n	java:S116/"RRename this field "os_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ĞğÑ˜8š‰š‹ˆ/
+m	java:S1163"QRename this field "op_msg" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½¶é8š‰š‹ˆ/
+s	java:S1164"RRename this field "op_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âŠ§óüÿÿÿÿ8š‰š‹ˆ/
+s	java:S1165"RRename this field "op_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤çÖùÿÿÿÿ8š‰š‹ˆ/
+o	java:S1166"SRename this field "reg_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼¥û´8š‰š‹ˆ/
+y	java:S1167"XRename this field "last_upd_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®‰Ÿºúÿÿÿÿ8š‰š‹ˆ/
+r	java:S116;"VRename this field "last_reject" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şªñç8š‰š‹ˆ/
+p	java:S116<"TRename this field "recant_yn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜¤ÆÑ8š‰š‹ˆ/
+o	java:S116>"SRename this field "gold_old" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İ¡ñ›8š‰š‹ˆ/
+t	java:S116?"SRename this field "mod_gold" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î¬…üÿÿÿÿ8š‰š‹ˆ/
+y	java:S116@"XRename this field "last_reg_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÔÚ­ãÿÿÿÿÿ8š‰š‹ˆ/
+{	java:S116A"ZRename this field "reapply_exchage" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üãı˜ùÿÿÿÿ8š‰š‹ˆ/
+v	java:S116F"URename this field "send_title" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Èé•áıÿÿÿÿ8š‰š‹ˆ/
+u	java:S116G"TRename this field "send_cont" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…‡Ù·şÿÿÿÿ8š‰š‹ˆ/
+u	java:S116H"TRename this field "send_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(á×çØúÿÿÿÿ8š‰š‹ˆ/
+z	java:S116J"YRename this field "testid_history" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æº½ıÿÿÿÿ8š‰š‹ˆ/
+|	java:S116R"[Rename this field "before_add_file1" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³˜©¹øÿÿÿÿ8š‰š‹ˆ/
+w	java:S116S"[Rename this field "before_add_file2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄÃ¿û8š‰š‹ˆ/
+w	java:S116T"[Rename this field "before_add_file3" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²Œ¾«8š‰š‹ˆ/

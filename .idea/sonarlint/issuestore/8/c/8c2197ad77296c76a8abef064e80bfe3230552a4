@@ -1,0 +1,13 @@
+
+n	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(áÁ¬Şúÿÿÿÿ8Ëƒš‹ˆ/
+u	java:S116"TRename this field "ready_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ì€Æÿÿÿÿÿ8Ëƒš‹ˆ/
+w	java:S116"VRename this field "ready_byeol" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ã¢ùÿÿÿÿ8Ëƒš‹ˆ/
+u	java:S116"TRename this field "ready_amt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚‰ô¨ûÿÿÿÿ8Ëƒš‹ˆ/
+r	java:S116"VRename this field "confirm_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ïı²„8Ëƒš‹ˆ/
+t	java:S116"XRename this field "confirm_byeol" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µˆû8Ëƒš‹ˆ/
+w	java:S116"VRename this field "confirm_amt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒ¿Áúÿÿÿÿ8Ëƒš‹ˆ/
+v	java:S116"URename this field "cancel_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–Ùß¸şÿÿÿÿ8Ëƒš‹ˆ/
+s	java:S116"WRename this field "cancel_byeol" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ê‚«ü8Ëƒš‹ˆ/
+p	java:S116"URename this field "cancel_amt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í¾ÍP8Ëƒš‹ˆ/
+p	java:S116"TRename this field "now_byeol" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï®é»8Ëƒš‹ˆ/
+n	java:S116"RRename this field "now_amt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(É¾§8Ëƒš‹ˆ/

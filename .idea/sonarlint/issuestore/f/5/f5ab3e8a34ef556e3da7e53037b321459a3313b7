@@ -1,0 +1,22 @@
+
+q	java:S116"RRename this field "game_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(çûÈÔüÿÿÿÿ8ùçÛÄƒ/
+n	java:S116"TRename this field "game_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ıÛÔó8ùçÛÄƒ/
+m	java:S116"TRename this field "image_url" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ê¾ål8ùçÛÄƒ/
+s	java:S116"TRename this field "game_desc" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûæòìøÿÿÿÿ8ùçÛÄƒ/
+k	java:S116"RRename this field "view_yn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š€ì8ùçÛÄƒ/
+q	java:S116"RRename this field "op_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âŠ§óüÿÿÿÿ8ùçÛÄƒ/
+m	java:S116"SRename this field "reg_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼¥û´8ùçÛÄƒ/
+w	java:S116"XRename this field "last_upd_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®‰Ÿºúÿÿÿÿ8ùçÛÄƒ/
+l	java:S116"RRename this field "os_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şæ“›8ùçÛÄƒ/
+k	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚8ùçÛÄƒ/
+m	java:S116"SRename this field "mem_nick" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞÕÍ®8ùçÛÄƒ/
+k	java:S116"RRename this field "mem_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò€àc8ùçÛÄƒ/
+x	java:S116"YRename this field "mem_birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ãªßÿÿÿÿÿ8ùçÛÄƒ/
+q	java:S116"RRename this field "room_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á¾Ç¿úÿÿÿÿ8ùçÛÄƒ/
+t	java:S116"URename this field "start_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘™ãøÿÿÿÿ8ùçÛÄƒ/
+r	java:S116"SRename this field "end_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë÷ªøÿÿÿÿ8ùçÛÄƒ/
+k	java:S116"QRename this field "pay_yn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù·ß8ùçÛÄƒ/
+k	java:S116"QRename this field "go_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚Á¼8ùçÛÄƒ/
+q	java:S116"RRename this field "pay_amt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚í¯æûÿÿÿÿ8ùçÛÄƒ/
+w	java:S116"XRename this field "edit_contents" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹İ¦†ıÿÿÿÿ8ùçÛÄƒ/
+s	java:S116"TRename this field "edit_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ø°Áƒúÿÿÿÿ8ùçÛÄƒ/

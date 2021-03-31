@@ -1,0 +1,9 @@
+
+v	java:S116"^Rename this field "sta_NewBroadcastDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½ÈŸİıÿÿÿÿ
+e	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(œ˜ı–ùÿÿÿÿ
+R
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(ÎøÛÒ
+d
+java:S1192"KDefine a constant instead of duplicating this literal "detailList" 4 times.(Ù¹ğÁıÿÿÿÿ
+c
+java:S1192"JDefine a constant instead of duplicating this literal "totalInfo" 4 times.(º˜Å›øÿÿÿÿ

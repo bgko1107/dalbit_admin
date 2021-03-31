@@ -1,0 +1,41 @@
+
+e	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(°ò¡†şÿÿÿÿ
+d	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚
+m	java:S116"URename this field "mem_userid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğ†èÕøÿÿÿÿ
+f	java:S116"SRename this field "mem_nick" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞÕÍ®
+d	java:S116"RRename this field "mem_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò€àc
+q	java:S116"YRename this field "mem_birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ãªßÿÿÿÿÿ
+r	java:S116"ZRename this field "mem_birth_month" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ıÙé¯ÿÿÿÿÿ
+p	java:S116"XRename this field "mem_birth_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞŠã¨üÿÿÿÿ
+r	java:S116"ZRename this field "reported_mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı»æøüÿÿÿÿ
+m	java:S116"ZRename this field "reported_userid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢ğØñ
+k	java:S116"XRename this field "reported_nick" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­Á¬Ó
+s	java:S116"[Rename this field "reported_mem_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜„«†şÿÿÿÿ
+z	java:S116"bRename this field "reported_mem_birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹ÿüÕıÿÿÿÿ
+{	java:S116"cRename this field "reported_mem_birth_month" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©Ëûÿÿÿÿ
+t	java:S116"aRename this field "reported_mem_birth_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ßÇßÎ
+j	java:S116"RRename this field "room_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á¾Ç¿úÿÿÿÿ
+e	java:S116"RRename this field "op_code" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ô–ú
+n	java:S116"VRename this field "device_uuid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£Âòùÿÿÿÿ
+g	java:S116"TRename this field "image_idx" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ãËñÇ
+q	java:S116"YRename this field "reported_inner" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Âñ¾ôşÿÿÿÿ
+j	java:S116"XRename this field "upload_mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(º‰™
+n	java:S116"VRename this field "upload_nick" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€©ÒÏÿÿÿÿÿ
+p	java:S116"XRename this field "upload_userid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äı¼ùÿÿÿÿ
+j	java:S116"WRename this field "upload_phone" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•Æöç
+m	java:S116"URename this field "upload_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰Ïâûÿÿÿÿ
+h	java:S116"URename this field "upload_age" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—¼øÑ
+j	java:S116"WRename this field "upload_level" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(® …¶
+o	java:S116"WRename this field "upload_grade" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚ú÷–ÿÿÿÿÿ
+p	java:S116"XRename this field "report_mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©ìòùÿÿÿÿ
+i	java:S116"VRename this field "report_nick" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈÇ²ˆ
+k	java:S116"XRename this field "report_userid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ¼×
+j	java:S116"WRename this field "report_phone" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ß˜º¹
+m	java:S116"URename this field "report_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¹¤ãûÿÿÿÿ
+h	java:S116"URename this field "report_age" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ËóïÑ
+j	java:S116"WRename this field "report_level" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÄãÃ
+j	java:S116"WRename this field "report_grade" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢Øµ¸
+m	java:S116"URename this field "image_url1" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“Û¶Œüÿÿÿÿ
+m	java:S116"URename this field "image_url2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á ¢øûÿÿÿÿ
+h	java:S116"URename this field "image_url3" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÍÔ¦Ö
+l	java:S116"TRename this field "image_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚²‚¹ùÿÿÿÿ

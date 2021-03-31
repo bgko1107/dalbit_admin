@@ -1,0 +1,26 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(î»Ñ8äÈ”Îƒ/
+o	java:S116"URename this field "maleAlim_s" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·àÑ8äÈ”Îƒ/
+q	java:S116"WRename this field "femaleAlim_s" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊÂ‰•8äÈ”Îƒ/
+t	java:S116"URename this field "noneAlim_s" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(áŒ¡¤ÿÿÿÿÿ8äÈ”Îƒ/
+u	java:S116"VRename this field "totalAlim_s" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(úüÀøúÿÿÿÿ8äÈ”Îƒ/
+t	java:S116"URename this field "maleAlim_v" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•§šÓúÿÿÿÿ8äÈ”Îƒ/
+v	java:S116"WRename this field "femaleAlim_v" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŒöæÎûÿÿÿÿ8äÈ”Îƒ/
+t	java:S116"URename this field "noneAlim_v" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ª…³µÿÿÿÿÿ8äÈ”Îƒ/
+o	java:S116"VRename this field "totalAlim_v" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µ¿İF8äÈ”Îƒ/
+t	java:S116"URename this field "maleAlim_n" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëÆçÎûÿÿÿÿ8äÈ”Îƒ/
+v	java:S116"WRename this field "femaleAlim_n" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(á°Ïãÿÿÿÿÿ8äÈ”Îƒ/
+t	java:S116"URename this field "noneAlim_n" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«Ú–¯şÿÿÿÿ8äÈ”Îƒ/
+u	java:S116"VRename this field "totalAlim_n" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ñâìªûÿÿÿÿ8äÈ”Îƒ/
+u	java:S116"VRename this field "bmaleAlim_s" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ü›Ìúÿÿÿÿ8äÈ”Îƒ/
+w	java:S116"XRename this field "bfemaleAlim_s" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡†ñĞÿÿÿÿÿ8äÈ”Îƒ/
+o	java:S116"VRename this field "bnoneAlim_s" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•ˆÁi8äÈ”Îƒ/
+v	java:S116"WRename this field "btotalAlim_s" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñÃğÉıÿÿÿÿ8äÈ”Îƒ/
+p	java:S116"VRename this field "bmaleAlim_v" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒÓÁ¦8äÈ”Îƒ/
+w	java:S116"XRename this field "bfemaleAlim_v" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óºÛÑüÿÿÿÿ8äÈ”Îƒ/
+p	java:S116"VRename this field "bnoneAlim_v" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Áî•–8äÈ”Îƒ/
+v	java:S116"WRename this field "btotalAlim_v" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Øú¶Ëúÿÿÿÿ8äÈ”Îƒ/
+p	java:S116"VRename this field "bmaleAlim_n" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÎØ«î8äÈ”Îƒ/
+w	java:S116"XRename this field "bfemaleAlim_n" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•—ıÍşÿÿÿÿ8äÈ”Îƒ/
+u	java:S116"VRename this field "bnoneAlim_n" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿»œüÿÿÿÿ8äÈ”Îƒ/
+v	java:S116"WRename this field "btotalAlim_n" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²Üé´şÿÿÿÿ8äÈ”Îƒ/

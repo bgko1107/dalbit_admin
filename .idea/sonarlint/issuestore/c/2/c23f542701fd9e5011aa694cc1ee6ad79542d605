@@ -1,0 +1,7 @@
+
+l	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÁøİÄúÿÿÿÿ8İÙŸ¨‚/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(îÎ‡şÿÿÿÿ8İÙŸ¨‚/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(º˜ëÈ8İÙŸ¨‚/
+p	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(””Ü‹şÿÿÿÿ8İÙŸ¨‚/
+t	java:S116"ZRename this field "con_NewcomerDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£¨ƒì8İÙŸ¨‚/

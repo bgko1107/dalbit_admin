@@ -1,0 +1,46 @@
+
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8‚„ÌÚ‡/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8‚„ÌÚ‡/
+f
+java:S1192"FDefine a constant instead of duplicating this literal "mem10" 3 times.(Í”¬àúÿÿÿÿ8‚„ÌÚ‡/
+“
+java:S1192"xDefine a constant instead of duplicating this literal "ë“±ë¡í•œ 1:1ë¬¸ì˜ì— ë‹µë³€ì´ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤." 3 times.(ÉÄ“¦8‚„ÌÚ‡/
+J
+java:S1066"/Merge this if statement with the enclosing one.(ÓÎ¹Í8‚„ÌÚ‡/
+l	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(œí…øÿÿÿÿ8‚„ÌÚ‡/
+<
+java:S1643"Use a StringBuilder instead.(Ã…Óìüÿÿÿÿ8‚„ÌÚ‡/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(¢š†“üÿÿÿÿ8‚„ÌÚ‡/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»„óá8‚„ÌÚ‡/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(úçĞ»8‚„ÌÚ‡/
+y	java:S116"ZRename this field "cus_questionDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(êåŒşÿÿÿÿ8‚„ÌÚ‡/
+p	java:S116"WRename this field "ADMIN_MEM_NO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–äS8‚„ÌÚ‡/
+
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(Êìˆÿÿÿÿÿ8‚„ÌÚ‡/
+r
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 59 to the 15 allowed.(Ëõ›İÿÿÿÿÿ8‚„ÌÚ‡/
+T
+java:S4719"9Replace charset name argument with StandardCharsets.UTF_8(‹äç”8‚„ÌÚ‡/
+c
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(Íıè´8‚„ÌÚ‡/
+c
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ïÊ ã8‚„ÌÚ‡/
+h
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(£¿Öûÿÿÿÿ8‚„ÌÚ‡/
+c
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(”ùÖ8‚„ÌÚ‡/
+b
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(®Ü¨+8‚„ÌÚ‡/
+h
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(ì½•®şÿÿÿÿ8‚„ÌÚ‡/
+b
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(¤Èöh8‚„ÌÚ‡/
+X	java:S106"9Replace this use of System.out or System.err by a logger.(· ‘ıÿÿÿÿ8‚„ÌÚ‡/
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.(ßâÌ½8‚„ÌÚ‡/
+[	java:S125"<This block of commented-out lines of code should be removed.(€ıåÜûÿÿÿÿ8‚„ÌÚ‡/
+V	java:S125"<This block of commented-out lines of code should be removed.(„ËÀ­8‚„ÌÚ‡/
+V	java:S125"<This block of commented-out lines of code should be removed.(ã½Şë8‚„ÌÚ‡/

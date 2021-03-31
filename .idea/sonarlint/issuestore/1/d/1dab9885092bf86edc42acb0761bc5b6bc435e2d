@@ -1,0 +1,13 @@
+
+U
+java:S1128":Remove this unused import 'com.dalbit.common.vo.PagingVo'.(û8ñóÅè‡/
+k	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚8ñóÅè‡/
+s	java:S116"YRename this field "last_broadcast" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Í¨Öü8ñóÅè‡/
+m	java:S116"SRename this field "reg_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼¥û´8ñóÅè‡/
+r	java:S116"SRename this field "upd_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ö°æüÿÿÿÿ8ñóÅè‡/
+p	java:S116"VRename this field "reg_op_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯¨åŒ8ñóÅè‡/
+u	java:S116"VRename this field "upd_op_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ãíêÄøÿÿÿÿ8ñóÅè‡/
+t	java:S116"URename this field "mem_no_fan" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–Ûôèúÿÿÿÿ8ñóÅè‡/
+x	java:S116"YRename this field "mem_birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ãªßÿÿÿÿÿ8ñóÅè‡/
+n	java:S116"URename this field "reg_opName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ¹§$8ñóÅè‡/
+t	java:S116"URename this field "upd_opName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(áÊ¦­ıÿÿÿÿ8ñóÅè‡/

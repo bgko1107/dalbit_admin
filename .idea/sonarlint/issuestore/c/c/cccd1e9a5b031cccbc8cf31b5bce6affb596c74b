@@ -1,0 +1,7 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÑŠƒóøÿÿÿÿ
+T
+java:S1155 ">Use isEmpty() to check whether the collection is empty or not.(ÆòŒ™
+Y
+java:S1155%">Use isEmpty() to check whether the collection is empty or not.(É€°Îøÿÿÿÿ
+q	java:S116"WRename this field "mem_QuestDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôÉ¸Æûÿÿÿÿ

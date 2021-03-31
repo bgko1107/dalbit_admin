@@ -1,0 +1,5 @@
+
+n	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ßıç·üÿÿÿÿ8Î™‹ˆ/
+u	java:S116"ZRename this field "mem_ExchangeDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…ê•18Î™‹ˆ/
+y	java:S116%"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š†”Ÿÿÿÿÿÿ8Î™‹ˆ/
+j	java:S1006"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñÁ„à8Î™‹ˆ/

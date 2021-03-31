@@ -1,0 +1,5 @@
+
+l	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¬êº„üÿÿÿÿ8ò–ºõ/
+k	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚8ò–ºõ/
+s	java:S116"TRename this field "slct_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘Å²Íÿÿÿÿÿ8ò–ºõ/
+v	java:S116"WRename this field "slct_typeTxt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë÷—îùÿÿÿÿ8ò–ºõ/

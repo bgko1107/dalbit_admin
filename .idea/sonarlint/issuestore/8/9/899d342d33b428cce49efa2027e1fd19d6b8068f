@@ -1,0 +1,15 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(øÈŞô8óÏ¿/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Ëƒü›úÿÿÿÿ8óÏ¿/
+x
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(±´×u8óÏ¿/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ÏÙ†—ûÿÿÿÿ8óÏ¿/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ª•¡8óÏ¿/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Üæ§ƒùÿÿÿÿ8óÏ¿/
+j
+java:S1128"ORemove this unused import 'org.springframework.context.annotation.Description'.(çÁæ¹8óÏ¿/
+}	java:S116"cRename this field "con_rouletteEventService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼–øÿ8óÏ¿/

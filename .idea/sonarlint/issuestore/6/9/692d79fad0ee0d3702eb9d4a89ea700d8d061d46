@@ -1,0 +1,6 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ùÂ²8ë•ÌÚ‡/
+w	java:S116"XRename this field "mem_MystarDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù¯…İşÿÿÿÿ8ë•ÌÚ‡/
+w	java:S116"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š†”Ÿÿÿÿÿÿ8ë•ÌÚ‡/
+V	java:S125"<This block of commented-out lines of code should be removed.(Şš»Ø8ë•ÌÚ‡/
+[	java:S125"<This block of commented-out lines of code should be removed.(àŸ¿×ÿÿÿÿÿ8ë•ÌÚ‡/

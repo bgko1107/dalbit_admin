@@ -1,0 +1,54 @@
+
+l	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(é½ØÔøÿÿÿÿ8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¢ô“èşÿÿÿÿ8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Ò§—úÿÿÿÿ8éÁä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ŒÏÿ¨8éÁä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Ò«¶³8éÁä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ìÚßò8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Ï½ªíıÿÿÿÿ8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(°” ’ıÿÿÿÿ8éÁä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(„ã›×8éÁä‡ˆ/
+x
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(€Òñ!8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Ùñ™áÿÿÿÿÿ8éÁä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(‡ïµş8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ø¦ÂÒúÿÿÿÿ8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(‡å„Åûÿÿÿÿ8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ÓŞœ·ûÿÿÿÿ8éÁä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(–ô‡Ë8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ïí¯ûÿÿÿÿ8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(È‡âıÿÿÿÿ8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¢Ê¸˜ûÿÿÿÿ8éÁä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Ü¾¸í8éÁä‡ˆ/
+x
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(İ²Ä>8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(³±÷œşÿÿÿÿ8éÁä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(­‹”şÿÿÿÿ8éÁä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ÚÁÆÂ8éÁä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(²ÎåÒ8éÁä‡ˆ/
+{	java:S116"\Rename this field "mem_MemberService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£ƒâŸşÿÿÿÿ8éÁä‡ˆ/
+m	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ØúÌüÿÿÿÿ8éÁä‡ˆ/
+m	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ª†·áúÿÿÿÿ8éÁä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(˜„‡şÿÿÿÿ8éÁä‡ˆ/

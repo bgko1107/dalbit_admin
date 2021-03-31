@@ -1,0 +1,88 @@
+
+
+java:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(§ªΐϊÿÿÿÿ8†Ίνι…/
+
+java:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(ªϊό8†Ίνι…/
+O
+java:S3740"/Provide the parametrized type for this generic.(όιϊϊÿÿÿÿ8†Ίνι…/
+O
+java:S3740"/Provide the parametrized type for this generic.(¥”γυωÿÿÿÿ8†Ίνι…/
+O
+java:S3740"/Provide the parametrized type for this generic.(Χ²‡›όÿÿÿÿ8†Ίνι…/
+O
+java:S3740"/Provide the parametrized type for this generic.(Χ²‡›όÿÿÿÿ8†Ίνι…/
+O
+java:S3740"/Provide the parametrized type for this generic.(§ªΐϊÿÿÿÿ8†Ίνι…/
+O
+java:S3740"/Provide the parametrized type for this generic.(Χ²‡›όÿÿÿÿ8†Ίνι…/
+O
+java:S3740"/Provide the parametrized type for this generic.(Χ²‡›όÿÿÿÿ8†Ίνι…/
+J
+java:S3740"/Provide the parametrized type for this generic.(ªϊό8†Ίνι…/
+O
+java:S3740"/Provide the parametrized type for this generic.(Χ²‡›όÿÿÿÿ8†Ίνι…/
+O
+java:S3740"/Provide the parametrized type for this generic.(Χ²‡›όÿÿÿÿ8†Ίνι…/
+J
+java:S3740"/Provide the parametrized type for this generic.(½½§€8†Ίνι…/
+~
+java:S1192"cDefine a constant instead of duplicating this literal "[NOTI λ°μ†΅ μ‹¤ν¨ - PUSH λ°μ†΅]" 3 times.(·τ“―8†Ίνι…/
+J
+java:S1066"/Merge this if statement with the enclosing one.(€φώί8†Ίνι…/
+I
+java:S1066"/Merge this if statement with the enclosing one.(—ο8†Ίνι…/
+O
+java:S1066"/Merge this if statement with the enclosing one.(­‹±Κώÿÿÿÿ8†Ίνι…/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(ρ¶Ψ ωÿÿÿÿ8†Ίνι…/
+p	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(΅Β³Òψÿÿÿÿ8†Ίνι…/
+p	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ΛΤΗΑώÿÿÿÿ8†Ίνι…/
+C
+java:S1148"#Use a logger to log this exception.(€ΙΤ…ύÿÿÿÿ8†Ίνι…/
+C
+java:S1148"#Use a logger to log this exception.(€ΙΤ…ύÿÿÿÿ8†Ίνι…/
+C
+java:S1148"#Use a logger to log this exception.(€ΙΤ…ύÿÿÿÿ8†Ίνι…/
+C
+java:S1148"#Use a logger to log this exception.(€ΙΤ…ύÿÿÿÿ8†Ίνι…/
+C
+java:S1148"#Use a logger to log this exception.(€ΙΤ…ύÿÿÿÿ8†Ίνι…/
+c
+java:S2583"CChange this condition so that it does not always evaluate to "true"(ήΣ©Οώÿÿÿÿ8†Ίνι…/
+u	java:S116"[Rename this field "SERVER_PHOTO_URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µ΄Ο8†Ίνι…/
+p	java:S116"WRename this field "ADMIN_MEM_NO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–δS8†Ίνι…/
+{	java:S116"\Rename this field "PUSH_LOGO_IMG_101" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­έοτωÿÿÿÿ8†Ίνι…/
+v	java:S116"\Rename this field "PUSH_LOGO_IMG_102" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(γΗφΖ8†Ίνι…/
+{	java:S116"\Rename this field "PUSH_LOGO_IMG_103" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ζμ‰ψÿÿÿÿ8†Ίνι…/
+€
+java:S2229"`"callContentsPushAdd's" @Transactional requirement is incompatible with the one for this method.(Σϊκ¦ψÿÿÿÿ8†Ίνι…/
+_
+java:S1854"?Remove this useless assignment to local variable "procedureVo".(ΖΘªξϊÿÿÿÿ8†Ίνι…/
+Z
+java:S1854"?Remove this useless assignment to local variable "procedureVo".(Γζτ8†Ίνι…/
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(•Ήζ€8†Ίνι…/
+_
+java:S1854"?Remove this useless assignment to local variable "procedureVo".(΄ξάϊÿÿÿÿ8†Ίνι…/
+Z
+java:S1854"?Remove this useless assignment to local variable "procedureVo".(ΞƒΦ8†Ίνι…/
+r
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 87 to the 15 allowed.(§ªΐϊÿÿÿÿ8†Ίνι…/
+M
+java:S1135"2Complete the task associated to this TODO comment.(σΒί8†Ίνι…/
+P
+java:S1481"0Remove this unused "procedureVo" local variable.(ΖΘªξϊÿÿÿÿ8†Ίνι…/
+K
+java:S1481"0Remove this unused "procedureVo" local variable.(Γζτ8†Ίνι…/
+P
+java:S1481"0Remove this unused "procedureVo" local variable.(΄ξάϊÿÿÿÿ8†Ίνι…/
+K
+java:S1481"0Remove this unused "procedureVo" local variable.(ΞƒΦ8†Ίνι…/
+M
+java:S1481"2Remove this unused "rejectNotiCnt" local variable.(©Σ’τ8†Ίνι…/
+[	java:S125"<This block of commented-out lines of code should be removed.(©Ί›‰ϋÿÿÿÿ8†Ίνι…/
+V	java:S125"<This block of commented-out lines of code should be removed.(ίέ΄³8†Ίνι…/
+V	java:S125"<This block of commented-out lines of code should be removed.(΅Υ±8†Ίνι…/
+V	java:S125"<This block of commented-out lines of code should be removed.(ίέ΄³8†Ίνι…/
+V	java:S125"<This block of commented-out lines of code should be removed.(΅Υ±8†Ίνι…/
+V	java:S125"<This block of commented-out lines of code should be removed.(¦θ¬Η8†Ίνι…/

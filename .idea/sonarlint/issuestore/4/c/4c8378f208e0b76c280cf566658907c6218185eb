@@ -1,0 +1,176 @@
+
+‹
+java:S1319"kThe type of the "map" object should be an interface such as "Map" rather than the implementation "HashMap".(Æ¿–©şÿÿÿÿ8ĞÔ›®/
+…
+java:S1319"kThe type of the "map" object should be an interface such as "Map" rather than the implementation "HashMap".(œ÷åh8ĞÔ›®/
+†
+java:S1319"kThe type of the "map" object should be an interface such as "Map" rather than the implementation "HashMap".(«»îï8ĞÔ›®/
+‹
+java:S1319"kThe type of the "map" object should be an interface such as "Map" rather than the implementation "HashMap".(Ùá¥ºüÿÿÿÿ8ĞÔ›®/
+–
+java:S1319"{The type of the "cookieStringList" object should be an interface such as "List" rather than the implementation "ArrayList".(ïôı8ĞÔ›®/
+ˆ
+java:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(˜Ù À8ĞÔ›®/
+O
+java:S3740"/Provide the parametrized type for this generic.(Å‚÷üÿÿÿÿ8ĞÔ›®/
+O
+java:S3740"/Provide the parametrized type for this generic.(Æ¿–©şÿÿÿÿ8ĞÔ›®/
+I
+java:S3740"/Provide the parametrized type for this generic.(œ÷åh8ĞÔ›®/
+J
+java:S3740"/Provide the parametrized type for this generic.(«»îï8ĞÔ›®/
+O
+java:S3740"/Provide the parametrized type for this generic.(Ùá¥ºüÿÿÿÿ8ĞÔ›®/
+O
+java:S3740"/Provide the parametrized type for this generic.(î„Ñìûÿÿÿÿ8ĞÔ›®/
+o
+java:S1192"ODefine a constant instead of duplicating this literal "yyyyMMddHHmmss" 3 times.(²¾ããşÿÿÿÿ8ĞÔ›®/
+c
+java:S1192"HDefine a constant instead of duplicating this literal "Firefox" 3 times.(¤ÃÕ8ĞÔ›®/
+]
+java:S2184"BCast one of the operands of this division operation to a "double".(Á¡ÄÚ8ĞÔ›®/
+\
+java:S2184"BCast one of the operands of this division operation to a "double".(ç£ºw8ĞÔ›®/
+]
+java:S2184"BCast one of the operands of this division operation to a "double".(Ÿ²””8ĞÔ›®/
+7
+java:S1643"Use a StringBuilder instead.(¯ÿ›µ8ĞÔ›®/
+Y
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(Æ•™î8ĞÔ›®/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±šÖô8ĞÔ›®/
+p	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ûæø¶üÿÿÿÿ8ĞÔ›®/
+j	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µ‡â28ĞÔ›®/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Üíô8ĞÔ›®/
+p	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€“áÔıÿÿÿÿ8ĞÔ›®/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ÿ˜¾8ĞÔ›®/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢‹Å¢8ĞÔ›®/
+W
+java:S2589"7Remove this expression which always evaluates to "true"(äÏûÿÿÿÿ8ĞÔ›®/
+R
+java:S2589"7Remove this expression which always evaluates to "true"(¸ïøº8ĞÔ›®/
+|
+java:S1488"\Immediately return this expression instead of assigning it to the temporary variable "name".(áÄ†ıÿÿÿÿ8ĞÔ›®/
+v
+java:S1488"[Immediately return this expression instead of assigning it to the temporary variable "str".(©à•ö8ĞÔ›®/
+
+java:S1488"dImmediately return this expression instead of assigning it to the temporary variable "memInfoOutVo".(­¸‹‡8ĞÔ›®/
+}
+java:S1488"]Immediately return this expression instead of assigning it to the temporary variable "total".(µ¶›Üøÿÿÿÿ8ĞÔ›®/
+{
+java:S1488"`Immediately return this expression instead of assigning it to the temporary variable "appr_dtm".(Üíô8ĞÔ›®/
+\
+java:S1128"ARemove this unused import 'com.dalbit.exception.GlobalException'.(íí¸º8ĞÔ›®/
+u
+java:S1128"URemove this unused import 'com.dalbit.broadcast.vo.procedure.P_BroadcastEditInputVo'.(ñøíøÿÿÿÿÿ8ĞÔ›®/
+P
+java:S1128"0Remove this unused import 'okhttp3.RequestBody'.(ıÂÂöûÿÿÿÿ8ĞÔ›®/
+H
+java:S1128"-Remove this unused import 'okhttp3.FormBody'.(°íş8ĞÔ›®/
+l
+java:S1128"LRemove this unused import 'com.dalbit.member.vo.procedure.P_MemberReportVo'.(‡Ö©°üÿÿÿÿ8ĞÔ›®/
+l
+java:S1128"QRemove this unused import 'com.dalbit.broadcast.vo.procedure.P_GuestListInputVo'.(üœÅ“8ĞÔ›®/
+s
+java:S1128"SRemove this unused import 'com.dalbit.broadcast.vo.procedure.P_ListenForceLeaveVo'.(Æ²Ôúÿÿÿÿ8ĞÔ›®/
+P
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8ĞÔ›®/
+w
+java:S1450"]Remove the "SERVER_API_URL" field and declare it as a local variable in the relevant methods.(ûj8ĞÔ›®/
+u
+java:S1450"ZRemove the "adm_MenuDao" field and declare it as a local variable in the relevant methods.(‰¾ó²8ĞÔ›®/
+v
+java:S1450"VRemove the "jwtUtil" field and declare it as a local variable in the relevant methods.(‚ïâûşÿÿÿÿ8ĞÔ›®/
+¡
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(½‹½ıøÿÿÿÿ8ĞÔ›®/
+x
+java:S3008"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(÷¤Ø‘øÿÿÿÿ8ĞÔ›®/
+q
+java:S3008"VRename this field "adm_MenuDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰¾ó²8ĞÔ›®/
+s
+java:S3008"YRename this field "SERVER_API_URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûj8ĞÔ›®/
+}	java:S116"^Rename this field "activeMem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ò¸†Ìùÿÿÿÿ8ĞÔ›®/
+w	java:S116"]Rename this field "active_adm_MenuDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ¬ê§8ĞÔ›®/
+x	java:S116"YRename this field "active_jwtUtil" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×‘ÓÅüÿÿÿÿ8ĞÔ›®/
+z	java:S116"`Rename this field "active_SERVER_API_URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(…ÉÂë8ĞÔ›®/
+z
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(Ÿı¿¯8ĞÔ›®/
+
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(¸ø°óûÿÿÿÿ8ĞÔ›®/
+z
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(í…Ò‰8ĞÔ›®/
+z
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(Ÿı¿¯8ĞÔ›®/
+
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(ùü™‹ÿÿÿÿÿ8ĞÔ›®/
+z
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(‰Ã¿Ÿ8ĞÔ›®/
+Q
+java:S2696"6Make the enclosing method "static" or remove this set.(»®Ôë8ĞÔ›®/
+V
+java:S2696"6Make the enclosing method "static" or remove this set.(¢·¬úÿÿÿÿ8ĞÔ›®/
+Q
+java:S2696"6Make the enclosing method "static" or remove this set.(™å­¥8ĞÔ›®/
+Q
+java:S2696"6Make the enclosing method "static" or remove this set.(·Öã¼8ĞÔ›®/
+Q
+java:S2696"6Make the enclosing method "static" or remove this set.(È‚î8ĞÔ›®/
+V
+java:S2696"6Make the enclosing method "static" or remove this set.(şŒ—ùøÿÿÿÿ8ĞÔ›®/
+U
+java:S2209"5Change this instance-reference to a static reference.(şŒ—ùøÿÿÿÿ8ĞÔ›®/
+r
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(Õ±İÿÿÿÿÿ8ĞÔ›®/
+D
+java:S2140")Use "java.util.Random.nextInt()" instead.(ÔÏ¯8ĞÔ›®/
+C
+java:S2140")Use "java.util.Random.nextInt()" instead.(ÀÙÆ8ĞÔ›®/
+D
+java:S2140")Use "java.util.Random.nextInt()" instead.(®è‚‘8ĞÔ›®/
+I
+java:S2140")Use "java.util.Random.nextInt()" instead.(°Äúÿÿÿÿ8ĞÔ›®/
+9
+java:S2119"Save and re-use this "Random".(–áÍÈ8ĞÔ›®/
+D
+java:S1125")Remove the literal "false" boolean value.(Æ•™î8ĞÔ›®/
+I
+java:S1125")Remove the literal "false" boolean value.(·‚÷®øÿÿÿÿ8ĞÔ›®/
+`
+java:S2147"ECombine this catch with the one at line 206, which has the same body.(”ı¾8ĞÔ›®/
+‰
+java:S1130"iRemove the declaration of thrown exception 'java.lang.NullPointerException' which is a runtime exception.(½ãÆ‹şÿÿÿÿ8ĞÔ›®/
+‰
+java:S1130"iRemove the declaration of thrown exception 'java.lang.NullPointerException' which is a runtime exception.(ï—İßúÿÿÿÿ8ĞÔ›®/
+„
+java:S1130"iRemove the declaration of thrown exception 'java.lang.NullPointerException' which is a runtime exception.(º†ü8ĞÔ›®/
+‰
+java:S1130"iRemove the declaration of thrown exception 'java.lang.NullPointerException' which is a runtime exception.(ÑÎÏ¯üÿÿÿÿ8ĞÔ›®/
+„
+java:S1130"iRemove the declaration of thrown exception 'java.lang.NullPointerException' which is a runtime exception.(›ïç8ĞÔ›®/
+G
+java:S1905"'Remove this unnecessary cast to "char".(«âÒúüÿÿÿÿ8ĞÔ›®/
+s
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(»ğ¿-8ĞÔ›®/
+s
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(»ğ¿-8ĞÔ›®/
+L
+java:S1602",Remove useless curly braces around statement(áîŸæúÿÿÿÿ8ĞÔ›®/
+I
+java:S2140")Use "java.util.Random.nextInt()" instead.(ñÙ§êÿÿÿÿÿ8ÑÔ›®/
+h
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(Ø„ãÏıÿÿÿÿ8ÑÔ›®/
+c
+java:S3986"HMake sure that Week Year "YYYY" is expected here instead of Year "yyyy".(§Øú8ÑÔ›®/
+A
+java:S2185"&Remove this silly call to "Math.floor"(Á¡ÄÚ8ÑÔ›®/
+@
+java:S2185"&Remove this silly call to "Math.floor"(ç£ºw8ÑÔ›®/
+A
+java:S2185"&Remove this silly call to "Math.floor"(Ÿ²””8ÑÔ›®/
+J
+java:S1068"/Remove this unused "adm_MenuDao" private field.(‰¾ó²8ÑÔ›®/
+K
+java:S1068"+Remove this unused "jwtUtil" private field.(‚ïâûşÿÿÿÿ8ÑÔ›®/
+L
+java:S1068"2Remove this unused "SERVER_API_URL" private field.(ûj8ÑÔ›®/
+V	java:S125"<This block of commented-out lines of code should be removed.(‚Œïô8ÑÔ›®/
+[	java:S125"<This block of commented-out lines of code should be removed.(Ê„Şíùÿÿÿÿ8ÑÔ›®/

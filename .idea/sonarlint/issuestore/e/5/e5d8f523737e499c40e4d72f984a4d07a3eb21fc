@@ -1,0 +1,8 @@
+
+e	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¾¶úûûÿÿÿÿ
+j	java:S116"RRename this field "view_on" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’¸—Íüÿÿÿÿ
+m	java:S116"URename this field "terms_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Þû¶ûýÿÿÿÿ
+i	java:S116"VRename this field "terms_title" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ö×¤Ë
+p	java:S116"XRename this field "terms_content" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìßÃÃúÿÿÿÿ
+j	java:S116"RRename this field "op_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âŠ§óüÿÿÿÿ
+j	java:S116"WRename this field "last_op_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ØÝýˆ

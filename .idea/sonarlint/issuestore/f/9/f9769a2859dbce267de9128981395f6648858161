@@ -1,0 +1,12 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(òåç¦8È€Ëþÿ.
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹‘ûü8È€Ëþÿ.
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰­—†8È€Ëþÿ.
+x
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(þŠû8È€Ëþÿ.
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¦ºµ®8È€Ëþÿ.
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(€ª¯›ûÿÿÿÿ8È€Ëþÿ.
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(”¼¹¶úÿÿÿÿ8È€Ëþÿ.

@@ -1,0 +1,69 @@
+
+z
+java:S1192"gDefine a constant instead of duplicating this literal "=====================================" 16 times.(ÜÒ¯ 
+A	java:S108")Either remove or fill this block of code.(ş¡Àıÿÿÿÿ
+\
+java:S1192"HDefine a constant instead of duplicating this literal "actDate" 4 times.(úâ‰„
+O	java:S125"<This block of commented-out lines of code should be removed.(€º¸ü
+d	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ö®ÑË
+T	java:S125"<This block of commented-out lines of code should be removed.(”Êïßıÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(â¿¦šúÿÿÿÿ
+k
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(›èïÿÿÿÿÿ
+d	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İ¿Š
+i	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ß©Ÿÿÿÿÿÿ
+d	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾ë´
+O	java:S125"<This block of commented-out lines of code should be removed.(µ®ùŠ
+H
+java:S3740"/Provide the parametrized type for this generic.(â¿¦šúÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(³î¢¢ùÿÿÿÿ
+p	java:S116"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š†”Ÿÿÿÿÿÿ
+a
+java:S1192"HDefine a constant instead of duplicating this literal "status" 25 times.(Ûåñùÿÿÿÿ
+T	java:S125"<This block of commented-out lines of code should be removed.(¨ñ§×ıÿÿÿÿ
+i	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Å“ãªúÿÿÿÿ
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+i	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€‹—õúÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(â¿¦šúÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(³î¢¢ùÿÿÿÿ
+f
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(È´¦
+C
+java:S2093"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+]
+java:S1192"IDefine a constant instead of duplicating this literal "resultCd" 8 times.(Ö Úõ
+†
+java:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(¨‘¹¬ûÿÿÿÿ
+i	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›«Æùşÿÿÿÿ
+x
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(ñ¡‚²ùÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(â¿¦šúÿÿÿÿ
+i	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«¶‡“şÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(â¿¦šúÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(¨‘¹¬ûÿÿÿÿ
+c
+java:S1192"JDefine a constant instead of duplicating this literal "resultMsg" 8 times.(¦û°éşÿÿÿÿ
+`	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(·ı£
+d	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š¤ÿï
+H
+java:S3740"/Provide the parametrized type for this generic.(â¿¦šúÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(â¿¦šúÿÿÿÿ
+a
+java:S1192"HDefine a constant instead of duplicating this literal "tradeId" 8 times.(ÅÓ…úÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(â¿¦šúÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(â¿¦šúÿÿÿÿ
+a
+java:S1192"MDefine a constant instead of duplicating this literal "pay.site.url" 5 times.(üêˆ¹
+R
+java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ8ŸÒ»„/

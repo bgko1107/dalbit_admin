@@ -1,0 +1,80 @@
+
+R
+java:S3740€"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8è™š‹ˆ/
+R
+java:S3740€"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8è™š‹ˆ/
+R
+java:S3740«"/Provide the parametrized type for this generic.(×¶ÏÒøÿÿÿÿ8è™š‹ˆ/
+R
+java:S3740Ÿ"/Provide the parametrized type for this generic.(Ú¯«ìûÿÿÿÿ8è™š‹ˆ/
+R
+java:S3740Ø"/Provide the parametrized type for this generic.(¦Óè©ıÿÿÿÿ8è™š‹ˆ/
+M
+java:S3740™"/Provide the parametrized type for this generic.(ÿÎ™Ä8è™š‹ˆ/
+M
+java:S3740™"/Provide the parametrized type for this generic.(ÿÎ™Ä8è™š‹ˆ/
+M
+java:S3740¨"/Provide the parametrized type for this generic.(ÿÎ™Ä8è™š‹ˆ/
+M
+java:S3740¨"/Provide the parametrized type for this generic.(ÿÎ™Ä8è™š‹ˆ/
+R
+java:S3740á"/Provide the parametrized type for this generic.(Ú¯«ìûÿÿÿÿ8è™š‹ˆ/
+f
+java:S1192—"IDefine a constant instead of duplicating this literal "ctrlRole" 4 times.(áø?8è™š‹ˆ/
+d
+java:S1192¦"FDefine a constant instead of duplicating this literal "image" 3 times.(ü´âú8è™š‹ˆ/
+ƒ
+java:S1192¶"eDefine a constant instead of duplicating this literal "ë‹¬ë¹› ë¼ì´ë¸Œ ìš´ì˜ì ë©”ì‹œì§€" 4 times.(–ÅŸ8è™š‹ˆ/
+‹
+java:S1192Õ"hDefine a constant instead of duplicating this literal "ìš´ì˜ìê°€ ì„ ë¬¼ì„ ë³´ëƒˆìŠµë‹ˆë‹¤." 6 times.(š¸Éúüÿÿÿÿ8è™š‹ˆ/
+o
+java:S1192¦"QDefine a constant instead of duplicating this literal "server.photo.url" 4 times.(ü´âú8è™š‹ˆ/
+M
+java:S1066Ô"/Merge this if statement with the enclosing one.(‘×ßÊ8è™š‹ˆ/
+n	java:S101)"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ŸúãŸşÿÿÿÿ8è™š‹ˆ/
+a
+java:S1155Û">Use isEmpty() to check whether the collection is empty or not.(¹Û¨Åÿÿÿÿÿ8è™š‹ˆ/
+a
+java:S1155ì">Use isEmpty() to check whether the collection is empty or not.(¹Û¨Åÿÿÿÿÿ8è™š‹ˆ/
+a
+java:S1155ÿ">Use isEmpty() to check whether the collection is empty or not.(¹Û¨Åÿÿÿÿÿ8è™š‹ˆ/
+s	java:S117¢"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡…Ïîøÿÿÿÿ8è™š‹ˆ/
+s	java:S117ò"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(é×ù‘şÿÿÿÿ8è™š‹ˆ/
+n	java:S117ö"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨˜Ë¢8è™š‹ˆ/
+n	java:S117¶"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¥¢û‘8è™š‹ˆ/
+F
+java:S1148Å"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8è™š‹ˆ/
+y	java:S116,"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š†”Ÿÿÿÿÿÿ8è™š‹ˆ/
+|	java:S116."[Rename this field "bro_BroadcastDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÇåªøÿÿÿÿ8è™š‹ˆ/
+r	java:S116="WRename this field "ADMIN_MEM_NO" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(–äS8è™š‹ˆ/
+x	java:S116B"\Rename this field "mem_ListenService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÕúÈñ8è™š‹ˆ/
+{	java:S116D"_Rename this field "mem_BroadcastService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(µÂ‹„8è™š‹ˆ/
+{	java:S116G"_Rename this field "bro_broadcastService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(îøëÇ8è™š‹ˆ/
+o
+java:S3776u"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(ÇÂ¶8è™š‹ˆ/
+ƒ
+java:S2175¦"eA "HashMap<P_MemberInfoOutputVo, String>" cannot contain a "String" in a "P_MemberInfoOutputVo" type.(­ìË³8è™š‹ˆ/
+ˆ
+java:S2175§"eA "HashMap<P_MemberInfoOutputVo, String>" cannot contain a "String" in a "P_MemberInfoOutputVo" type.(ô½û™ûÿÿÿÿ8è™š‹ˆ/
+ˆ
+java:S2175¨"eA "HashMap<P_MemberInfoOutputVo, String>" cannot contain a "String" in a "P_MemberInfoOutputVo" type.(Ğªúÿÿÿÿ8è™š‹ˆ/
+p
+java:S3776‹"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ÖÖÈ¤8è™š‹ˆ/
+u
+java:S3776‘"RRefactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.(ä©àüÿÿÿÿ8è™š‹ˆ/
+g
+java:S3358í"DExtract this nested ternary operation into an independent statement.(ı±ò¯úÿÿÿÿ8è™š‹ˆ/
+b
+java:S3358³"DExtract this nested ternary operation into an independent statement.(ØÙæİ8è™š‹ˆ/
+p
+java:S3776²"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(‹ŠÊÎ8è™š‹ˆ/
+L
+java:S1481º".Remove this unused "profileSw" local variable.(Ü„±â8è™š‹ˆ/
+X	java:S125™"<This block of commented-out lines of code should be removed.(ŒÉJ8è™š‹ˆ/
+^	java:S125±"<This block of commented-out lines of code should be removed.(¹›ÿÿÿÿÿ8è™š‹ˆ/
+^	java:S125´"<This block of commented-out lines of code should be removed.(…§ı¹ıÿÿÿÿ8è™š‹ˆ/
+^	java:S125¶"<This block of commented-out lines of code should be removed.(¼ù£Ãşÿÿÿÿ8è™š‹ˆ/
+Y	java:S125¸"<This block of commented-out lines of code should be removed.(ÀÏˆş8è™š‹ˆ/
+^	java:S125ö"<This block of commented-out lines of code should be removed.(ºùñøÿÿÿÿ8è™š‹ˆ/
+Y	java:S125–"<This block of commented-out lines of code should be removed.(ÒºÑ™8è™š‹ˆ/
+Y	java:S125"<This block of commented-out lines of code should be removed.(ô÷­ç8è™š‹ˆ/

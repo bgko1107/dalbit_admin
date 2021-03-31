@@ -1,0 +1,23 @@
+
+l	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ØÆÁøÿÿÿÿ8 º”Îƒ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Öªùúÿÿÿÿ8 º”Îƒ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(®ı˜8 º”Îƒ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¦æ·§8 º”Îƒ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Œ§Üª8 º”Îƒ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ğ‹ƒäÿÿÿÿÿ8 º”Îƒ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Š®†§úÿÿÿÿ8 º”Îƒ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¿Ô†úÿÿÿÿ8 º”Îƒ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¦œµË8 º”Îƒ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(äˆ³Ÿüÿÿÿÿ8 º”Îƒ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(‚Í ıÿÿÿÿ8 º”Îƒ/
+y	java:S116"ZRename this field "sta_PushService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(î·šÔüÿÿÿÿ8 º”Îƒ/

@@ -1,0 +1,10 @@
+
+`	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(êğ‡¾
+r
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ÍüŠ
+r
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¨şúö
+‘
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(’Ê­ç
+‘
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(Û“‘ª

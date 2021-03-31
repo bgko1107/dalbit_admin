@@ -1,0 +1,58 @@
+
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8†’¢ ƒ/
+v	java:S116"WRename this field "WOWZA_PREFIX" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ñ¬»Íùÿÿÿÿ8†’¢ ƒ/
+z	java:S116"[Rename this field "bro_BroadcastDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÇåªøÿÿÿÿ8†’¢ ƒ/
+J
+java:S1481"0Remove this unused "procedureVo" local variable.(ß€Ó(8†’¢ ƒ/
+J
+java:S3740"/Provide the parametrized type for this generic.(ò‰á8†’¢ ƒ/
+Y
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(—¢¡½8†’¢ ƒ/
+V	java:S125"<This block of commented-out lines of code should be removed.(òè—8†’¢ ƒ/
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ì¬øé8†’¢ ƒ/
+J
+java:S3740"/Provide the parametrized type for this generic.(ò‰á8†’¢ ƒ/
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(÷®´Œ8†’¢ ƒ/
+|	java:S116"]Rename this field "WOWZA_AUDIO_SERVER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆüô¨ÿÿÿÿÿ8†’¢ ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8†’¢ ƒ/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(Ä¤öóÿÿÿÿÿ8†’¢ ƒ/
+V	java:S125"<This block of commented-out lines of code should be removed.(ÿ´ò–8†’¢ ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8†’¢ ƒ/
+C
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8†’¢ ƒ/
+Y
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(»ûü8†’¢ ƒ/
+v	java:S116"WRename this field "WOWZA_SUFFIX" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÊÏúÿÿÿÿ8†’¢ ƒ/
+Y
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(ªÌÙË8†’¢ ƒ/
+x	java:S116"^Rename this field "WOWZA_AUDIO_WSS_URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Úéàº8†’¢ ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8†’¢ ƒ/
+r
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(ØÆ™Äùÿÿÿÿ8†’¢ ƒ/
+Y
+java:S1854"?Remove this useless assignment to local variable "procedureVo".(ß€Ó(8†’¢ ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(Ú¯«ìûÿÿÿÿ8†’¢ ƒ/
+J
+java:S3740"/Provide the parametrized type for this generic.(¡‹¤8†’¢ ƒ/
+g
+java:S1192"GDefine a constant instead of duplicating this literal "roomNo" 3 times.(İ¯³§ıÿÿÿÿ8†’¢ ƒ/
+C
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8†’¢ ƒ/
+w	java:S116"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š†”Ÿÿÿÿÿÿ8†’¢ ƒ/
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 45 to the 15 allowed.(Ë—âº8†’¢ ƒ/
+r
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ı Î¢ÿÿÿÿÿ8†’¢ ƒ/
+V	java:S125"<This block of commented-out lines of code should be removed.(·Û–Ç8†’¢ ƒ/
+V	java:S125"<This block of commented-out lines of code should be removed.(ÀÌÔ¡8†’¢ ƒ/
+p
+java:S1128"PRemove this unused import 'com.dalbit.member.vo.procedure.P_MemberInfoOutputVo'.(§ÙÖûÿÿÿÿ8ùÔ¥ ƒ/
+Y
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(É˜©“8†’¢ ƒ/

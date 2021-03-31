@@ -1,0 +1,99 @@
+
+h
+java:S1192"HDefine a constant instead of duplicating this literal "address" 6 times.(™¨¹ùÿÿÿÿ8‰¿ä‡ˆ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(ÓÛ“¿øÿÿÿÿ8‰¿ä‡ˆ/
+V	java:S125"<This block of commented-out lines of code should be removed.(ó Åæ8‰¿ä‡ˆ/
+i
+java:S1192"IDefine a constant instead of duplicating this literal "socialNo" 6 times.(¸á‹îÿÿÿÿÿ8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(ªœñüÿÿÿÿ8‰¿ä‡ˆ/
+g
+java:S1192"LDefine a constant instead of duplicating this literal "accountName" 6 times.(õÁíÎ8‰¿ä‡ˆ/
+I
+java:S3740"/Provide the parametrized type for this generic.(ÁŞT8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(«èàåşÿÿÿÿ8‰¿ä‡ˆ/
+I
+java:S3740"/Provide the parametrized type for this generic.(ÁŞT8‰¿ä‡ˆ/
+d
+java:S1192"IDefine a constant instead of duplicating this literal "bankName" 6 times.(×Õä8‰¿ä‡ˆ/
+p	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¶•Óúÿÿÿÿ8‰¿ä‡ˆ/
+p	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(À÷ø¸şÿÿÿÿ8‰¿ä‡ˆ/
+o	java:S116"URename this field "pay_PayDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂÓğâ8‰¿ä‡ˆ/
+h
+java:S1192"MDefine a constant instead of duplicating this literal "resident_tax" 6 times.(ï¼ö†8‰¿ä‡ˆ/
+I
+java:S3740"/Provide the parametrized type for this generic.(ÁŞT8‰¿ä‡ˆ/
+L
+java:S1172",Remove this unused method parameter "model".(Ìˆú®şÿÿÿÿ8‰¿ä‡ˆ/
+V	java:S125"<This block of commented-out lines of code should be removed.(×ë˜ë8‰¿ä‡ˆ/
+R
+java:S1135"2Complete the task associated to this TODO comment.(¼´¯àÿÿÿÿÿ8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(‹ı¸ÿÿÿÿÿ8‰¿ä‡ˆ/
+l
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.( ´¸78‰¿ä‡ˆ/
+V	java:S125"<This block of commented-out lines of code should be removed.(æÕƒ±8‰¿ä‡ˆ/
+e
+java:S1192"JDefine a constant instead of duplicating this literal "accountNo" 6 times.(ŞÊˆƒ8‰¿ä‡ˆ/
+h
+java:S1192"HDefine a constant instead of duplicating this literal "phoneNo" 6 times.(ÙŒ’Äüÿÿÿÿ8‰¿ä‡ˆ/
+p	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‰Îœøÿÿÿÿ8‰¿ä‡ˆ/
+F
+java:S1172",Remove this unused method parameter "model".( ´¸78‰¿ä‡ˆ/
+w	java:S116"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š†”Ÿÿÿÿÿÿ8‰¿ä‡ˆ/
+j
+java:S1192"JDefine a constant instead of duplicating this literal "cashBasic" 6 times.(ÆÒÖöşÿÿÿÿ8‰¿ä‡ˆ/
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 82 to the 15 allowed.(íÏ±É8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(–ğÙ‡üÿÿÿÿ8‰¿ä‡ˆ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8‰¿ä‡ˆ/
+j	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢Ós8‰¿ä‡ˆ/
+I
+java:S3740"/Provide the parametrized type for this generic.(ÁŞT8‰¿ä‡ˆ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(ñáÚ»üÿÿÿÿ8‰¿ä‡ˆ/
+I
+java:S3740"/Provide the parametrized type for this generic.(ÁŞT8‰¿ä‡ˆ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8‰¿ä‡ˆ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8‰¿ä‡ˆ/
+d
+java:S1192"IDefine a constant instead of duplicating this literal "reg_date" 4 times.(âë¹×8‰¿ä‡ˆ/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(Œ¹«£ûÿÿÿÿ8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(«èàåşÿÿÿÿ8‰¿ä‡ˆ/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(Œ¹«£ûÿÿÿÿ8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(¦ôéÎúÿÿÿÿ8‰¿ä‡ˆ/
+U	java:S125"<This block of commented-out lines of code should be removed.(½˜¥8‰¿ä‡ˆ/
+m
+java:S1192"MDefine a constant instead of duplicating this literal "transfer_fee" 6 times.(áÊ•¢ûÿÿÿÿ8‰¿ä‡ˆ/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×À¼Ì8‰¿ä‡ˆ/
+h
+java:S1192"MDefine a constant instead of duplicating this literal "exchangeCash" 6 times.(Àúé¬8‰¿ä‡ˆ/
+
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(’ÚÓúÿÿÿÿ8‰¿ä‡ˆ/
+c
+java:S1192"HDefine a constant instead of duplicating this literal "benefit" 6 times.(¸şÀŸ8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(«èàåşÿÿÿÿ8‰¿ä‡ˆ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8‰¿ä‡ˆ/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(“Åü8‰¿ä‡ˆ/
+I
+java:S3740"/Provide the parametrized type for this generic.(ÁŞT8‰¿ä‡ˆ/
+r
+java:S1192"RDefine a constant instead of duplicating this literal "social.secret.key" 7 times.(¸á‹îÿÿÿÿÿ8‰¿ä‡ˆ/
+f
+java:S1192"KDefine a constant instead of duplicating this literal "income_tax" 6 times.(Çº±¶8‰¿ä‡ˆ/
+l	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÄÎÑøÿÿÿÿ8‰¿ä‡ˆ/
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(€ê„8‰¿ä‡ˆ/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(Œ¹«£ûÿÿÿÿ8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(á½€‘şÿÿÿÿ8‰¿ä‡ˆ/
+c
+java:S1192"HDefine a constant instead of duplicating this literal "cashSum" 6 times.(Ê ÎÛ8‰¿ä‡ˆ/
+[	java:S125"<This block of commented-out lines of code should be removed.(ñáÚ»üÿÿÿÿ8‰¿ä‡ˆ/

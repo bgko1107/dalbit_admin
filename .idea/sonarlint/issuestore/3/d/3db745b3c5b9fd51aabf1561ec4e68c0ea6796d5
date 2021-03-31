@@ -1,0 +1,42 @@
+
+O
+java:S3740"/Provide the parametrized type for this generic.(èšîÿÿÿÿÿ8•™ß¹…/
+J
+java:S3740"/Provide the parametrized type for this generic.(ÿÎ™Ä8•™ß¹…/
+J
+java:S3740"/Provide the parametrized type for this generic.(ÿÎ™Ä8•™ß¹…/
+l	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(·ùíüÿÿÿÿ8•™ß¹…/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(É€°Îøÿÿÿÿ8•™ß¹…/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(É€°Îøÿÿÿÿ8•™ß¹…/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(É€°Îøÿÿÿÿ8•™ß¹…/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(É€°Îøÿÿÿÿ8•™ß¹…/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(É€°Îøÿÿÿÿ8•™ß¹…/
+^
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(É€°Îøÿÿÿÿ8•™ß¹…/
+x
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Éâ•8•™ß¹…/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Ğ¹œùÿÿÿÿ8•™ß¹…/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(§Œê¦8•™ß¹…/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ÎÅÎ•üÿÿÿÿ8•™ß¹…/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ğÇäµûÿÿÿÿ8•™ß¹…/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ç¼èœ8•™ß¹…/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ò½“šüÿÿÿÿ8•™ß¹…/
+r	java:S116"XRename this field "mem_NoticeDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(èéÀº8•™ß¹…/
+z	java:S116"[Rename this field "bro_BroadcastDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œÇåªøÿÿÿÿ8•™ß¹…/
+w	java:S116"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š†”Ÿÿÿÿÿÿ8•™ß¹…/
+L
+java:S1602",Remove useless curly braces around statement(ù†Ñ°ıÿÿÿÿ8•™ß¹…/
+V	java:S125"<This block of commented-out lines of code should be removed.(“¿°”8•™ß¹…/
+V	java:S125"<This block of commented-out lines of code should be removed.(™½èû8•™ß¹…/
+[	java:S125"<This block of commented-out lines of code should be removed.(·‡®‰úÿÿÿÿ8•™ß¹…/

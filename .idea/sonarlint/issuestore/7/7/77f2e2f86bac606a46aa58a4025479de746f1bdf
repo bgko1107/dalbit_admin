@@ -1,0 +1,11 @@
+
+e	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(î¬À•øÿÿÿÿ
+w
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ªõÉ¥ûÿÿÿÿ
+w
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(öşİÅşÿÿÿÿ
+w
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(—¢¢úÿÿÿÿ
+w
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(÷Ğ–ùÿÿÿÿ
+z	java:S116"bRename this field "sta_NewBroadcastService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°Öäèûÿÿÿÿ

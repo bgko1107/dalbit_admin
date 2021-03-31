@@ -1,0 +1,36 @@
+
+Q
+java:S3740<"/Provide the parametrized type for this generic.(‚¼Ó«üÿÿÿÿ8ôå™‹ˆ/
+L
+java:S3740="/Provide the parametrized type for this generic.(Äö¥³8ôå™‹ˆ/
+i	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¦Ù‹ò8ôå™‹ˆ/
+~	java:S116"]Rename this field "profileImage_reset" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ù¬Œ–úÿÿÿÿ8ôå™‹ˆ/
+m	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚8ôå™‹ˆ/
+m	java:S116"RRename this field "mem_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò€àc8ôå™‹ˆ/
+t	java:S116:"XRename this field "last_upd_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÙÉ£†8ôå™‹ˆ/
+y	java:S116@"XRename this field "op_code_2_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÍßÊ‘øÿÿÿÿ8ôå™‹ˆ/
+s	java:S116A"XRename this field "op_code_3_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘‡ıM8ôå™‹ˆ/
+y	java:S116B"XRename this field "op_code_4_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡Ù—½ûÿÿÿÿ8ôå™‹ˆ/
+y	java:S116C"XRename this field "op_code_5_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÀÎ‹©ûÿÿÿÿ8ôå™‹ˆ/
+y	java:S116D"XRename this field "op_code_6_cnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å¡êåüÿÿÿÿ8ôå™‹ˆ/
+s	java:S116m"WRename this field "comm_company" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘¥ê‡8ôå™‹ˆ/
+n	java:S116n"RRename this field "auth_yn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(æšÛË8ôå™‹ˆ/
+w	java:S116o"[Rename this field "parents_agree_yn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§şÒÛ8ôå™‹ˆ/
+p	java:S116p"TRename this field "recant_yn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(˜¤ÆÑ8ôå™‹ˆ/
+q	java:S116q"URename this field "block_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚Ä©œ8ôå™‹ˆ/
+p	java:S116r"TRename this field "block_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Êæåû8ôå™‹ˆ/
+z	java:S116s"YRename this field "block_end_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂŠîüÿÿÿÿ8ôå™‹ˆ/
+s	java:S116{"RRename this field "room_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á¾Ç¿úÿÿÿÿ8ôå™‹ˆ/
+q	java:S116~"URename this field "type_media" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹ùØ8ôå™‹ˆ/
+v	java:S116"YRename this field "listen_room_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(†š¢”8ôå™‹ˆ/
+y	java:S116‚"WRename this field "listen_title" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ì­›ùÿÿÿÿ8ôå™‹ˆ/
+t	java:S116…"WRename this field "recomm_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×³‚÷8ôå™‹ˆ/
+x	java:S116†"VRename this field "newdj_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òËí¸üÿÿÿÿ8ôå™‹ˆ/
+|	java:S116‡"ZRename this field "specialdj_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢ÂÚùÿÿÿÿ8ôå™‹ˆ/
+v	java:S116ˆ"TRename this field "new_badge" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(·„Ù¯ûÿÿÿÿ8ôå™‹ˆ/
+q	java:S116"TRename this field "leader_yn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İ›8ôå™‹ˆ/
+P
+java:S1948<".Make "fanBadgeList" transient or serializable.(‚¼Ó«üÿÿÿÿ8ôå™‹ˆ/
+L
+java:S1948="/Make "liveBadgeList" transient or serializable.(Äö¥³8ôå™‹ˆ/
+^	java:S125“"<This block of commented-out lines of code should be removed.(¼ìíüÿÿÿÿ8ôå™‹ˆ/

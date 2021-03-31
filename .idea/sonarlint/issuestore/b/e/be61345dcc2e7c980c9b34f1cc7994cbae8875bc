@@ -1,0 +1,15 @@
+
+`	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¤ÜÔ£
+i	java:S116"VRename this field "search_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”’óÓ
+j	java:S116"WRename this field "search_month" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê“èó
+m	java:S116"URename this field "search_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(îµ§ûÿÿÿÿ
+n	java:S116"VRename this field "search_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«õäÑøÿÿÿÿ
+k	java:S116"XRename this field "exchange_sort" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒæÿÕ
+j	java:S116"WRename this field "search_value" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­À€ä
+o	java:S116"WRename this field "search_state" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(»İå€ÿÿÿÿÿ
+p	java:S116"XRename this field "search_testId" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(› úÿûÿÿÿÿ
+o	java:S116"\Rename this field "search_exchangeYn" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒÎÇö
+i	java:S116"VRename this field "last_reject" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şªñç
+k	java:S116"SRename this field "end_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°š®œşÿÿÿÿ
+l	java:S116"TRename this field "end_month" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤ª½Öøÿÿÿÿ
+e	java:S116"RRename this field "end_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÈıÚı

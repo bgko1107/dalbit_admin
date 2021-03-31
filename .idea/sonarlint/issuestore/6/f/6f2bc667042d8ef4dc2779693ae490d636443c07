@@ -1,0 +1,8 @@
+
+q	java:S116"RRename this field "op_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âŠ§óüÿÿÿÿ8ï¡ı€/
+q	java:S116"RRename this field "ios_aos" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éÌ¥ışÿÿÿÿ8ï¡ı€/
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ŠôªÔ8ï¡ı€/
+w	java:S116"XRename this field "last_upd_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®‰Ÿºúÿÿÿÿ8ï¡ı€/
+t	java:S116"ZRename this field "natural_joinCnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÌÃëÖ8ï¡ı€/
+r	java:S116"SRename this field "the_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(úÄâöüÿÿÿÿ8ï¡ı€/
+w	java:S116"XRename this field "total_joinCnt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼§Ş©şÿÿÿÿ8ï¡ı€/

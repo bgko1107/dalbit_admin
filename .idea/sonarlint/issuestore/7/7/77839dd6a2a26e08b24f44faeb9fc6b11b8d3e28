@@ -1,0 +1,7 @@
+
+p	java:S114"QRename this interface name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Ö¬¨íÿÿÿÿÿ8Í˜ÌÚ‡/
+m	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ª·Éÿÿÿÿÿ8Í˜ÌÚ‡/
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Éßå€8Í˜ÌÚ‡/
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ã‘…Í8Í˜ÌÚ‡/
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õäÙ¢8Í˜ÌÚ‡/
+[	java:S125"<This block of commented-out lines of code should be removed.(šÇºûÿÿÿÿ8Í˜ÌÚ‡/

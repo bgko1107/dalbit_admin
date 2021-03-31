@@ -1,0 +1,9 @@
+
+w
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ê¢˜éÿÿÿÿÿ
+e	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÄŸÁ€øÿÿÿÿ
+T	java:S125"<This block of commented-out lines of code should be removed.(Ä‰ÑÔùÿÿÿÿ
+m	java:S116"ZRename this field "mem_GiftService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ûÒ­¥
+r
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(û½ý½
+T	java:S125"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ

@@ -1,0 +1,13 @@
+
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íñ¯ÿ8ÎÔÇô/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íñ¯ÿ8ÎÔÇô/
+x	java:S116"YRename this field "JWT_SECRET_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(å™‰¤úÿÿÿÿ8ÎÔÇô/
+q	java:S116"WRename this field "JWT_DURATION" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤Òû…8ÎÔÇô/
+w	java:S116"XRename this field "JWT_SEPARATOR" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¾ğ••øÿÿÿÿ8ÎÔÇô/
+A
+java:S1170"!Make this final field static too.(¾ğ••øÿÿÿÿ8ÎÔÇô/
+\
+java:S2130"AUse "Boolean.parseBoolean" for this string-to-boolean conversion.(¹Çâí8ÎÔÇô/
+R
+java:S2130"8Use "Long.parseLong" for this string-to-long conversion.(À¬ªt8ÎÔÇô/
+V	java:S125"<This block of commented-out lines of code should be removed.(†€éˆ8ÎÔÇô/

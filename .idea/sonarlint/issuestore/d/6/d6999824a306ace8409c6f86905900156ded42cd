@@ -1,0 +1,10 @@
+
+`	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÓßçÀ
+d	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚
+m	java:S116"URename this field "mem_userid" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ð†èÕøÿÿÿÿ
+f	java:S116"SRename this field "mem_nick" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÞÕÍ®
+d	java:S116"RRename this field "mem_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò€àc
+q	java:S116"YRename this field "mem_birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ãªßÿÿÿÿÿ
+r	java:S116"ZRename this field "mem_birth_month" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ýÙé¯ÿÿÿÿÿ
+p	java:S116"XRename this field "mem_birth_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÞŠã¨üÿÿÿÿ
+T	java:S125"<This block of commented-out lines of code should be removed.(Õ¡ÿÿÿÿÿÿ

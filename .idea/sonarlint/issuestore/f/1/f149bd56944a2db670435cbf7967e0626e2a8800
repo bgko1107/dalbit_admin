@@ -1,0 +1,22 @@
+
+†
+java:S1319"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(‹·äóÿÿÿÿÿ
+H
+java:S3740"/Provide the parametrized type for this generic.(‹·äóÿÿÿÿÿ
+C
+java:S3740"/Provide the parametrized type for this generic.(ÿÎ™Ä
+C
+java:S3740"/Provide the parametrized type for this generic.(ÿÎ™Ä
+<
+java:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+h	java:S116"VRename this field "JENKINS_URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢½‰{
+s	java:S116"aRename this field "JENKINS_JOB_IMAGE_NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íÈØ3
+t	java:S116"\Rename this field "JENKINS_USER_NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(úÐ½ðúÿÿÿÿ
+r	java:S116"_Rename this field "JENKINS_REST_API_KEY" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ãëæ·
+R
+java:S4719"9Replace charset name argument with StandardCharsets.UTF_8(ÕÌµ…ùÿÿÿÿ
+L
+java:S2647"3Use a more secure method than basic authentication.(ß¨ðŠùÿÿÿÿ
+M
+java:S4719"9Replace charset name argument with StandardCharsets.UTF_8(ºéÂ«
+Q	java:S106"9Replace this use of System.out or System.err by a logger.(ñ—¸½úÿÿÿÿ

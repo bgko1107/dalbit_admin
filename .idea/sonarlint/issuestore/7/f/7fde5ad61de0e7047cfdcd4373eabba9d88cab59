@@ -1,0 +1,42 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Íº“8¡˜ä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¥›¾Äúÿÿÿÿ8¡˜ä‡ˆ/
+x
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ÅÒĞW8¡˜ä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(‰‡¦œüÿÿÿÿ8¡˜ä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(â±–ü8¡˜ä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(áÃ™‡8¡˜ä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(êÏîøÿÿÿÿ8¡˜ä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ÓŒ€º8¡˜ä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Ç¤·8¡˜ä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(É²ıØûÿÿÿÿ8¡˜ä‡ˆ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(µ»óúÿÿÿÿ8¡˜ä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(îÂ¤²8¡˜ä‡ˆ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(ù—™é8¡˜ä‡ˆ/
+
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(È‚Ìäşÿÿÿÿ8¡˜ä‡ˆ/
+
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(˜ƒÊÖøÿÿÿÿ8¡˜ä‡ˆ/
+˜
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(ïà‰ä8¡˜ä‡ˆ/
+
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(§É¿×ÿÿÿÿÿ8¡˜ä‡ˆ/
+
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(¥«¬ıÿÿÿÿ8¡˜ä‡ˆ/
+˜
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(ÙÌ²¢8¡˜ä‡ˆ/
+
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(ï‰Éøıÿÿÿÿ8¡˜ä‡ˆ/
+˜
+java:S1130"}Remove the declaration of thrown exception 'com.dalbit.exception.GlobalException', as it cannot be thrown from method's body.(—µÒ™8¡˜ä‡ˆ/

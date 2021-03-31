@@ -1,0 +1,45 @@
+
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".( õ¡†8ÀğŠ¦ƒ/
+H
+java:S1125"(Remove the literal "true" boolean value.(ş¦¼Èÿÿÿÿÿ8ÀğŠ¦ƒ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¯®Ô¥8ÀğŠ¦ƒ/
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ÏşäŒ8ÀğŠ¦ƒ/
+V	java:S125"<This block of commented-out lines of code should be removed.(ÇÀù8ÀğŠ¦ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8ÀğŠ¦ƒ/
+V	java:S125"<This block of commented-out lines of code should be removed.(ŞÿÙñ8ÀğŠ¦ƒ/
+r
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed.(ø¡Ñäıÿÿÿÿ8ÀğŠ¦ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(æèğøÿÿÿÿ8ÀğŠ¦ƒ/
+x
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(Ö½¹C8ÀğŠ¦ƒ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(„¤Ï«8ÀğŠ¦ƒ/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(â¢ŸÇ8ÀğŠ¦ƒ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(î³Ù“8ÀğŠ¦ƒ/
+w	java:S116"XRename this field "mem_MemberDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š†”Ÿÿÿÿÿÿ8ÀğŠ¦ƒ/
+H
+java:S1125"(Remove the literal "true" boolean value.(ÀÕâÇùÿÿÿÿ8ÀğŠ¦ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8ÀğŠ¦ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8ÀğŠ¦ƒ/
+~
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(â²÷¬ıÿÿÿÿ8ÀğŠ¦ƒ/
+G
+java:S1602",Remove useless curly braces around statement(ÇÓÉÊ8ÀğŠ¦ƒ/
+V	java:S125"<This block of commented-out lines of code should be removed.(Èÿ´õ8ÀğŠ¦ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(ŠÔ–¯ÿÿÿÿÿ8ÀğŠ¦ƒ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(¯®Ô¥8ÀğŠ¦ƒ/
+J
+java:S3740"/Provide the parametrized type for this generic.(×¢Ê8ÀğŠ¦ƒ/
+y
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "result".(„¤Ï«8ÀğŠ¦ƒ/
+O
+java:S3740"/Provide the parametrized type for this generic.(æèğøÿÿÿÿ8ÀğŠ¦ƒ/

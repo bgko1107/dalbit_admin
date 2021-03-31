@@ -1,0 +1,14 @@
+
+`	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(æ÷×í
+k	java:S116"SRename this field "ruby_new" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼â¾Áşÿÿÿÿ
+f	java:S116"SRename this field "ruby_old" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Üï•Á
+j	java:S116"RRename this field "room_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á¾Ç¿úÿÿÿÿ
+d	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚
+l	java:S116"TRename this field "item_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Õ¨öşÿÿÿÿ
+d	java:S116"RRename this field "mem_sex" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ò€àc
+q	java:S116"YRename this field "mem_birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±ãªßÿÿÿÿÿ
+r	java:S116"ZRename this field "mem_birth_month" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ıÙé¯ÿÿÿÿÿ
+p	java:S116"XRename this field "mem_birth_day" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŞŠã¨üÿÿÿÿ
+q	java:S116"YRename this field "item_thumbnail" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„Ñÿÿÿÿÿ
+T	java:S125"<This block of commented-out lines of code should be removed.(çûã’üÿÿÿÿ
+O	java:S125"<This block of commented-out lines of code should be removed.(ĞÍâÊ

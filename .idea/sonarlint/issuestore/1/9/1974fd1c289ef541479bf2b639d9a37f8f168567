@@ -1,0 +1,7 @@
+
+e	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ŞõËĞşÿÿÿÿ
+d	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚
+u	java:S116"]Rename this field "reset_profileImage" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı™¢Úşÿÿÿÿ
+r	java:S116"ZRename this field "before_socialId" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ç´ˆúÿÿÿÿ
+j	java:S116"RRename this field "room_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á¾Ç¿úÿÿÿÿ
+j	java:S116"WRename this field "use_contents" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë½µ

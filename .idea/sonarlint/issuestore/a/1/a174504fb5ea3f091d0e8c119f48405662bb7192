@@ -1,0 +1,7 @@
+
+d
+java:S1192"KDefine a constant instead of duplicating this literal "detailList" 6 times.(Ù¹ðÁýÿÿÿÿ
+c
+java:S1192"JDefine a constant instead of duplicating this literal "totalInfo" 6 times.(º˜Å›øÿÿÿÿ
+e	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(”½Š¨þÿÿÿÿ
+r	java:S116"ZRename this field "mon_ResourceDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ë¤¦±üÿÿÿÿ

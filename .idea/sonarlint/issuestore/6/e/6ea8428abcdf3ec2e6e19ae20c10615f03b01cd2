@@ -1,0 +1,7 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¶éº¹ıÿÿÿÿ
+a
+java:S1128"KRemove this unused import 'com.dalbit.member.service.Mem_GGamGGamEService'.(ÆÆÚ…
+e
+java:S1128"ORemove this unused import 'com.dalbit.member.vo.procedure.P_MemberGGamGGamEVo'.(ÍÜä¦
+p	java:S116"[Rename this field "mem_QuestService" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô‰İ

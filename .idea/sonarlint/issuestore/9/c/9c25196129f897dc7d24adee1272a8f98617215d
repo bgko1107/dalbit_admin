@@ -1,0 +1,8 @@
+
+T	java:S125"<This block of commented-out lines of code should be removed.(ÒªÕëıÿÿÿÿ
+c
+java:S1192"JDefine a constant instead of duplicating this literal "totalInfo" 9 times.(º˜Å›øÿÿÿÿ
+d
+java:S1192"KDefine a constant instead of duplicating this literal "detailList" 9 times.(Ù¹ğÁıÿÿÿÿ
+e	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¼âòµüÿÿÿÿ
+s	java:S116"[Rename this field "sta_BroadcastDao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İÌïøÿÿÿÿ

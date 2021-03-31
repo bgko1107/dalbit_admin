@@ -1,0 +1,18 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(µ¿¥ã8öÔ«‡ˆ/
+p	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªé–âûÿÿÿÿ8öÔ«‡ˆ/
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(á²«8öÔ«‡ˆ/
+q	java:S116"RRename this field "room_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á¾Ç¿úÿÿÿÿ8öÔ«‡ˆ/
+k	java:S116"QRename this field "mem_no" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šüú‚8öÔ«‡ˆ/
+q	java:S116"WRename this field "subject_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(±†ƒÈ8öÔ«‡ˆ/
+o	java:S116"URename this field "type_entry" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äá—«8öÔ«‡ˆ/
+n	java:S116"URename this field "start_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°ı³W8öÔ«‡ˆ/
+r	java:S116"SRename this field "end_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½¸Ç¢ÿÿÿÿÿ8öÔ«‡ˆ/
+l	java:S116"RRename this field "os_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ĞğÑ˜8öÔ«‡ˆ/
+w	java:S116"XRename this field "complete_moon" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ç˜³˜øÿÿÿÿ8öÔ«‡ˆ/
+q	java:S116"XRename this field "complete_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´ñÌo8öÔ«‡ˆ/
+o	java:S116"URename this field "type_media" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹ùØ8öÔ«‡ˆ/
+}	java:S116"^Rename this field "continue_event_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šòËÎıÿÿÿÿ8öÔ«‡ˆ/
+x	java:S116"^Rename this field "continue_event_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ıØ¬µ8öÔ«‡ˆ/
+m	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªé–âûÿÿÿÿ8öÔ«‡ˆ/
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(á²«8öÔ«‡ˆ/
