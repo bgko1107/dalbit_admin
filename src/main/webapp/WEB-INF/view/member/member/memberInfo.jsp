@@ -1011,6 +1011,7 @@
                 + "&memSex=" + encodeURIComponent(memberInfo_responseDate.memSex)
         ;
         util.windowOpen(report,"1000","800","프로필목록");
+        //d
     })
 
 
